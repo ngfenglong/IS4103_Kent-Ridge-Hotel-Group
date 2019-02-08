@@ -21,20 +21,23 @@ public class RoomInventory implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long roomInventoryID;
+    private String inventoryName;
+    private int qty;
+    
 
-    public Long getId() {
-        return id;
+    public Long getroomInventoryId() {
+        return roomInventoryID;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setRoomInventoryId(Long roomInventoryID) {
+        this.roomInventoryID = roomInventoryID;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (roomInventoryID != null ? roomInventoryID.hashCode() : 0);
         return hash;
     }
 
@@ -45,7 +48,7 @@ public class RoomInventory implements Serializable {
             return false;
         }
         RoomInventory other = (RoomInventory) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.roomInventoryID == null && other.roomInventoryID != null) || (this.roomInventoryID != null && !this.roomInventoryID.equals(other.roomInventoryID))) {
             return false;
         }
         return true;
@@ -53,7 +56,35 @@ public class RoomInventory implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.RoomInventory[ id=" + id + " ]";
+        return "entity.RoomInventory[ id=" + roomInventoryID + " ]";
+    }
+    
+    /**
+     * @return the inventoryName
+     */
+    public String getInventoryName() {
+        return inventoryName;
+    }
+
+    /**
+     * @param inventoryName the inventoryName to set
+     */
+    public void setInventoryName(String inventoryName) {
+        this.inventoryName = inventoryName;
+    }
+
+    /**
+     * @return the qty
+     */
+    public int getQty() {
+        return qty;
+    }
+
+    /**
+     * @param qty the qty to set
+     */
+    public void setQty(int qty) {
+        this.qty = qty;
     }
     
 }
