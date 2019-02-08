@@ -6,35 +6,39 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-/**
- *
- * @author fengl
- */
 @Entity
 public class Logging implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-    public Long getId() {
-        return id;
+    private Long loggingID;
+    private String loggingType;
+    private String loggingName;
+    
+    @Temporal(TemporalType.DATE)
+    private Date loggingDateTime;
+    private String operatorName;
+    
+    public Long getLoggingId() {
+        return loggingID;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setLoggingId(Long loggingID) {
+        this.loggingID = loggingID;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (loggingID != null ? loggingID.hashCode() : 0);
         return hash;
     }
 
@@ -45,7 +49,7 @@ public class Logging implements Serializable {
             return false;
         }
         Logging other = (Logging) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.loggingID == null && other.loggingID != null) || (this.loggingID != null && !this.loggingID.equals(other.loggingID))) {
             return false;
         }
         return true;
@@ -53,7 +57,63 @@ public class Logging implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Logging[ id=" + id + " ]";
+        return "entity.Logging[ id=" + loggingID + " ]";
     }
     
+     /**
+     * @return the loggingType
+     */
+    public String getLoggingType() {
+        return loggingType;
+    }
+
+    /**
+     * @param loggingType the loggingType to set
+     */
+    public void setLoggingType(String loggingType) {
+        this.loggingType = loggingType;
+    }
+
+    /**
+     * @return the loggingName
+     */
+    public String getLoggingName() {
+        return loggingName;
+    }
+
+    /**
+     * @param loggingName the loggingName to set
+     */
+    public void setLoggingName(String loggingName) {
+        this.loggingName = loggingName;
+    }
+
+    /**
+     * @return the loggingDateTime
+     */
+    public Date getLoggingDateTime() {
+        return loggingDateTime;
+    }
+
+    /**
+     * @param loggingDateTime the loggingDateTime to set
+     */
+    public void setLoggingDateTime(Date loggingDateTime) {
+        this.loggingDateTime = loggingDateTime;
+    }
+
+    /**
+     * @return the operatorName
+     */
+    public String getOperatorName() {
+        return operatorName;
+    }
+
+    /**
+     * @param operatorName the operatorName to set
+     */
+    public void setOperatorName(String operatorName) {
+        this.operatorName = operatorName;
+    }
+
 }
