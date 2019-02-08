@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package entity;
 
 import java.io.Serializable;
@@ -11,30 +6,29 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-/**
- *
- * @author fengl
- */
+
 @Entity
 public class StaffType implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-    public Long getId() {
-        return id;
+    private Long staffTypeID;
+    private String staffTypeName;
+    
+    
+    public Long getStaffTypeId() {
+        return staffTypeID;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setStaffTypeId(Long staffTypeID) {
+        this.staffTypeID = staffTypeID;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (staffTypeID != null ? staffTypeID.hashCode() : 0);
         return hash;
     }
 
@@ -45,7 +39,7 @@ public class StaffType implements Serializable {
             return false;
         }
         StaffType other = (StaffType) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.staffTypeID == null && other.staffTypeID != null) || (this.staffTypeID != null && !this.staffTypeID.equals(other.staffTypeID))) {
             return false;
         }
         return true;
@@ -53,7 +47,20 @@ public class StaffType implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.StaffType[ id=" + id + " ]";
+        return "entity.StaffType[ id=" + staffTypeID + " ]";
     }
     
+    /**
+     * @return the staffTypeName
+     */
+    public String getStaffTypeName() {
+        return staffTypeName;
+    }
+
+    /**
+     * @param staffTypeName the staffTypeName to set
+     */
+    public void setStaffTypeName(String staffTypeName) {
+        this.staffTypeName = staffTypeName;
+    }
 }
