@@ -17,24 +17,25 @@ import javax.persistence.Id;
  */
 @Entity
 public class RoomFacility implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long roomFacilityID;
+    private String roomFacilityCategory;
+    private String roomFacilityName;
 
-    public Long getId() {
-        return id;
+    public Long getRoomFacilityId() {
+        return roomFacilityID;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setRoomFacilityId(Long roomFacilityID) {
+        this.roomFacilityID = roomFacilityID;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (roomFacilityID != null ? roomFacilityID.hashCode() : 0);
         return hash;
     }
 
@@ -45,7 +46,7 @@ public class RoomFacility implements Serializable {
             return false;
         }
         RoomFacility other = (RoomFacility) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.roomFacilityID == null && other.roomFacilityID != null) || (this.roomFacilityID != null && !this.roomFacilityID.equals(other.roomFacilityID))) {
             return false;
         }
         return true;
@@ -53,7 +54,36 @@ public class RoomFacility implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.RoomFacility[ id=" + id + " ]";
+        return "entity.RoomFacility[ id=" + roomFacilityID + " ]";
+    }
+    
+    
+    /**
+     * @return the roomFacilityCategory
+     */
+    public String getRoomFacilityCategory() {
+        return roomFacilityCategory;
+    }
+
+    /**
+     * @param roomFacilityCategory the roomFacilityCategory to set
+     */
+    public void setRoomFacilityCategory(String roomFacilityCategory) {
+        this.roomFacilityCategory = roomFacilityCategory;
+    }
+
+    /**
+     * @return the roomFacilityName
+     */
+    public String getRoomFacilityName() {
+        return roomFacilityName;
+    }
+
+    /**
+     * @param roomFacilityName the roomFacilityName to set
+     */
+    public void setRoomFacilityName(String roomFacilityName) {
+        this.roomFacilityName = roomFacilityName;
     }
     
 }
