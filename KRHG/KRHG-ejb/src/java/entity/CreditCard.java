@@ -6,10 +6,13 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -21,20 +24,25 @@ public class CreditCard implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long creditCardID;
+    private String cardNum;
+    private String vvc;
+    
+    @Temporal(TemporalType.DATE)
+    private Date expiryDate;
 
-    public Long getId() {
-        return id;
+    public Long getCreditCardId() {
+        return creditCardID;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setCreditCardId(Long creditCardID) {
+        this.creditCardID = creditCardID;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (creditCardID != null ? creditCardID.hashCode() : 0);
         return hash;
     }
 
@@ -45,7 +53,7 @@ public class CreditCard implements Serializable {
             return false;
         }
         CreditCard other = (CreditCard) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.creditCardID == null && other.creditCardID != null) || (this.creditCardID != null && !this.creditCardID.equals(other.creditCardID))) {
             return false;
         }
         return true;
@@ -53,7 +61,49 @@ public class CreditCard implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.CreditCard[ id=" + id + " ]";
+        return "entity.CreditCard[ id=" + creditCardID + " ]";
     }
     
+    
+    /**
+     * @return the cardNum
+     */
+    public String getCardNum() {
+        return cardNum;
+    }
+
+    /**
+     * @param cardNum the cardNum to set
+     */
+    public void setCardNum(String cardNum) {
+        this.cardNum = cardNum;
+    }
+
+    /**
+     * @return the vvc
+     */
+    public String getVvc() {
+        return vvc;
+    }
+
+    /**
+     * @param vvc the vvc to set
+     */
+    public void setVvc(String vvc) {
+        this.vvc = vvc;
+    }
+
+    /**
+     * @return the expiryDate
+     */
+    public Date getExpiryDate() {
+        return expiryDate;
+    }
+
+    /**
+     * @param expiryDate the expiryDate to set
+     */
+    public void setExpiryDate(Date expiryDate) {
+        this.expiryDate = expiryDate;
+    }
 }
