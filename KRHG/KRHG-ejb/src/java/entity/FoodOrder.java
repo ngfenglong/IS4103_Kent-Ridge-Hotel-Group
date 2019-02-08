@@ -11,30 +11,29 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-/**
- *
- * @author fengl
- */
 @Entity
 public class FoodOrder implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-    public Long getId() {
-        return id;
+    private Long foodOrderID;
+    private FoodMenu foodOrdered;
+    private Double totalPrice;
+    private String specialRequest;
+    private int qty;
+    
+    public Long getFoodOrderId() {
+        return foodOrderID;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long foodOrderID) {
+        this.foodOrderID = foodOrderID;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (foodOrderID != null ? foodOrderID.hashCode() : 0);
         return hash;
     }
 
@@ -45,7 +44,7 @@ public class FoodOrder implements Serializable {
             return false;
         }
         FoodOrder other = (FoodOrder) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.foodOrderID == null && other.foodOrderID != null) || (this.foodOrderID != null && !this.foodOrderID.equals(other.foodOrderID))) {
             return false;
         }
         return true;
@@ -53,7 +52,63 @@ public class FoodOrder implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.FoodOrder[ id=" + id + " ]";
+        return "entity.FoodOrder[ id=" + foodOrderID + " ]";
     }
     
+    /**
+     * @return the foodOrdered
+     */
+    public FoodMenu getFoodOrdered() {
+        return foodOrdered;
+    }
+
+    /**
+     * @param foodOrdered the foodOrdered to set
+     */
+    public void setFoodOrdered(FoodMenu foodOrdered) {
+        this.foodOrdered = foodOrdered;
+    }
+
+    /**
+     * @return the totalPrice
+     */
+    public Double getTotalPrice() {
+        return totalPrice;
+    }
+
+    /**
+     * @param totalPrice the totalPrice to set
+     */
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    /**
+     * @return the specialRequest
+     */
+    public String getSpecialRequest() {
+        return specialRequest;
+    }
+
+    /**
+     * @param specialRequest the specialRequest to set
+     */
+    public void setSpecialRequest(String specialRequest) {
+        this.specialRequest = specialRequest;
+    }
+
+    /**
+     * @return the qty
+     */
+    public int getQty() {
+        return qty;
+    }
+
+    /**
+     * @param qty the qty to set
+     */
+    public void setQty(int qty) {
+        this.qty = qty;
+    }
+
 }

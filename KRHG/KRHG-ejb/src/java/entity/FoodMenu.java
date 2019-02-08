@@ -11,30 +11,29 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-/**
- *
- * @author fengl
- */
 @Entity
 public class FoodMenu implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-    public Long getId() {
-        return id;
+    private Long menuID;
+    private String menuName;
+    private String menuDescription;
+    private Boolean availability;
+    private Double unitPrice;
+    public Long getMenuId() {
+        return menuID;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setMenuId(Long menuID) {
+        this.menuID = menuID;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (menuID != null ? menuID.hashCode() : 0);
         return hash;
     }
 
@@ -45,7 +44,7 @@ public class FoodMenu implements Serializable {
             return false;
         }
         FoodMenu other = (FoodMenu) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.menuID == null && other.menuID != null) || (this.menuID != null && !this.menuID.equals(other.menuID))) {
             return false;
         }
         return true;
@@ -53,7 +52,7 @@ public class FoodMenu implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.FoodMenu[ id=" + id + " ]";
+        return "entity.FoodMenu[ id=" + menuID + " ]";
     }
     
 }

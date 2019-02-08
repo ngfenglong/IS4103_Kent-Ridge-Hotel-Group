@@ -14,10 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-/**
- *
- * @author fengl
- */
 @Entity
 public class CreditCard implements Serializable {
 
