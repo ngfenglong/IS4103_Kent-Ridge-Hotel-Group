@@ -6,10 +6,13 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -21,20 +24,24 @@ public class CleaningSchedule implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long cleaningScheduleID;
+    
+    @Temporal(TemporalType.DATE)
+    private Date dateOfCleaning;
+    private Room room;
 
     public Long getId() {
-        return id;
+        return cleaningScheduleID;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long cleaningScheduleID) {
+        this.cleaningScheduleID = cleaningScheduleID;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (cleaningScheduleID != null ? cleaningScheduleID.hashCode() : 0);
         return hash;
     }
 
@@ -45,7 +52,7 @@ public class CleaningSchedule implements Serializable {
             return false;
         }
         CleaningSchedule other = (CleaningSchedule) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.cleaningScheduleID == null && other.cleaningScheduleID != null) || (this.cleaningScheduleID != null && !this.cleaningScheduleID.equals(other.cleaningScheduleID))) {
             return false;
         }
         return true;
@@ -53,7 +60,34 @@ public class CleaningSchedule implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.CleaningSchedule[ id=" + id + " ]";
+        return "entity.CleaningSchedule[ id=" + cleaningScheduleID + " ]";
     }
     
+    /**
+     * @return the dateOfCleaning
+     */
+    public Date getDateOfCleaning() {
+        return dateOfCleaning;
+    }
+
+    /**
+     * @param dateOfCleaning the dateOfCleaning to set
+     */
+    public void setDateOfCleaning(Date dateOfCleaning) {
+        this.dateOfCleaning = dateOfCleaning;
+    }
+
+    /**
+     * @return the room
+     */
+    public Room getRoom() {
+        return room;
+    }
+
+    /**
+     * @param room the room to set
+     */
+    public void setRoom(Room room) {
+        this.room = room;
+    }
 }
