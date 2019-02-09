@@ -6,46 +6,43 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-/**
- *
- * @author fengl
- */
 @Entity
-public class FunctionRoomBooking implements Serializable {
+public class PaymentTransaction implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long transactionID;
 
-    public Long getId() {
-        return id;
+    public Long getFunctionRoomBookingId() {
+        return transactionID;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setFunctionRoomBookingId(Long transactionID) {
+        this.transactionID = transactionID;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (transactionID != null ? transactionID.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof FunctionRoomBooking)) {
+        if (!(object instanceof PaymentTransaction)) {
             return false;
         }
-        FunctionRoomBooking other = (FunctionRoomBooking) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        PaymentTransaction other = (PaymentTransaction) object;
+        if ((this.transactionID == null && other.transactionID != null) || (this.transactionID != null && !this.transactionID.equals(other.transactionID))) {
             return false;
         }
         return true;
@@ -53,7 +50,7 @@ public class FunctionRoomBooking implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.FunctionRoomBooking[ id=" + id + " ]";
+        return "entity.PaymentTransaction[ transactionID=" + transactionID + " ]";
     }
     
 }
