@@ -47,7 +47,7 @@ public class StaffType implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.StaffType[ id=" + staffTypeID + " ]";
+        return "entity.StaffType[ staffTypeID=" + staffTypeID + " ]";
     }
     
     /**

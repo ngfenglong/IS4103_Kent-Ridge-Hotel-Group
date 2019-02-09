@@ -56,7 +56,7 @@ public class CleaningSchedule implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.CleaningSchedule[ id=" + cleaningScheduleID + " ]";
+        return "entity.CleaningSchedule[ cleaningScheduleID=" + cleaningScheduleID + " ]";
     }
     
     /**

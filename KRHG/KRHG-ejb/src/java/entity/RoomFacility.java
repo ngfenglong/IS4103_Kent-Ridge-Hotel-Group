@@ -50,7 +50,7 @@ public class RoomFacility implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.RoomFacility[ id=" + roomFacilityID + " ]";
+        return "entity.RoomFacility[ roomFacilityID=" + roomFacilityID + " ]";
     }
     
     

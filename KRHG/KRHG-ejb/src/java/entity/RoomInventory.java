@@ -56,7 +56,7 @@ public class RoomInventory implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.RoomInventory[ id=" + roomInventoryID + " ]";
+        return "entity.RoomInventory[ roomInventoryID=" + roomInventoryID + " ]";
     }
     
     /**

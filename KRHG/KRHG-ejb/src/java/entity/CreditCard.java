@@ -22,7 +22,7 @@ public class CreditCard implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long creditCardID;
     private String cardNum;
-    private String vvc;
+    private String cvv;
     
     @Temporal(TemporalType.DATE)
     private Date expiryDate;
@@ -57,7 +57,7 @@ public class CreditCard implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.CreditCard[ id=" + creditCardID + " ]";
+        return "entity.CreditCard[ creditCardID=" + creditCardID + " ]";
     }
     
     
@@ -76,17 +76,17 @@ public class CreditCard implements Serializable {
     }
 
     /**
-     * @return the vvc
+     * @return the cvv
      */
-    public String getVvc() {
-        return vvc;
+    public String getCvv() {
+        return cvv;
     }
 
     /**
-     * @param vvc the vvc to set
+     * @param cvv the cvv to set
      */
-    public void setVvc(String vvc) {
-        this.vvc = vvc;
+    public void setCvv(String cvv) {
+        this.cvv = cvv;
     }
 
     /**

@@ -17,7 +17,7 @@ public class FoodOrder implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long foodOrderID;
-    private FoodMenu foodOrdered;
+    private FoodMenuItem foodOrdered;
     private Double totalPrice;
     private String specialRequest;
     private int qty;
@@ -52,20 +52,20 @@ public class FoodOrder implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.FoodOrder[ id=" + foodOrderID + " ]";
+        return "entity.FoodOrder[ foodOrderID=" + foodOrderID + " ]";
     }
     
     /**
      * @return the foodOrdered
      */
-    public FoodMenu getFoodOrdered() {
+    public FoodMenuItem getFoodOrdered() {
         return foodOrdered;
     }
 
     /**
      * @param foodOrdered the foodOrdered to set
      */
-    public void setFoodOrdered(FoodMenu foodOrdered) {
+    public void setFoodOrdered(FoodMenuItem foodOrdered) {
         this.foodOrdered = foodOrdered;
     }
 

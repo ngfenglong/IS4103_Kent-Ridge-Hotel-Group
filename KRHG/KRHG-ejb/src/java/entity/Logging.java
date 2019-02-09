@@ -57,7 +57,7 @@ public class Logging implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Logging[ id=" + loggingID + " ]";
+        return "entity.Logging[ loggingID=" + loggingID + " ]";
     }
     
      /**
