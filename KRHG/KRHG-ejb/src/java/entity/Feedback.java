@@ -6,10 +6,13 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -17,24 +20,28 @@ import javax.persistence.Id;
  */
 @Entity
 public class Feedback implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long feedBackID;
+    private String feedBackTitle;
+    private String feedBackFrom;
+    private String feedBackMsg;
+    @Temporal(TemporalType.DATE)
+    private Date feedBackDate;
 
-    public Long getId() {
-        return id;
+    public Long getFeedBackId() {
+        return feedBackID;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setFeedBackId(Long feedBackID) {
+        this.feedBackID = feedBackID;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (feedBackID != null ? feedBackID.hashCode() : 0);
         return hash;
     }
 
@@ -45,7 +52,7 @@ public class Feedback implements Serializable {
             return false;
         }
         Feedback other = (Feedback) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.feedBackID == null && other.feedBackID != null) || (this.feedBackID != null && !this.feedBackID.equals(other.feedBackID))) {
             return false;
         }
         return true;
@@ -53,7 +60,63 @@ public class Feedback implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Feedback[ id=" + id + " ]";
+        return "entity.Feedback[ feedBackID=" + feedBackID + " ]";
     }
     
+    
+    /**
+     * @return the feedBackTitle
+     */
+    public String getFeedBackTitle() {
+        return feedBackTitle;
+    }
+
+    /**
+     * @param feedBackTitle the feedBackTitle to set
+     */
+    public void setFeedBackTitle(String feedBackTitle) {
+        this.feedBackTitle = feedBackTitle;
+    }
+
+    /**
+     * @return the feedBackFrom
+     */
+    public String getFeedBackFrom() {
+        return feedBackFrom;
+    }
+
+    /**
+     * @param feedBackFrom the feedBackFrom to set
+     */
+    public void setFeedBackFrom(String feedBackFrom) {
+        this.feedBackFrom = feedBackFrom;
+    }
+
+    /**
+     * @return the feedBackMsg
+     */
+    public String getFeedBackMsg() {
+        return feedBackMsg;
+    }
+
+    /**
+     * @param feedBackMsg the feedBackMsg to set
+     */
+    public void setFeedBackMsg(String feedBackMsg) {
+        this.feedBackMsg = feedBackMsg;
+    }
+
+    /**
+     * @return the feedBackDate
+     */
+    public Date getFeedBackDate() {
+        return feedBackDate;
+    }
+
+    /**
+     * @param feedBackDate the feedBackDate to set
+     */
+    public void setFeedBackDate(Date feedBackDate) {
+        this.feedBackDate = feedBackDate;
+    }
 }
