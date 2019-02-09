@@ -6,6 +6,7 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,20 +22,27 @@ public class Hotel implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long hotelID;
+    private String hotelName;
+    private String hotelCodeName;
+    private String hotelAddress;
+    private ArrayList<HotelFacility> hotelFacilities;
+    private int hotelStar;
+    private String hotelContact;
+    private ArrayList<Room> rooms;
 
-    public Long getId() {
-        return id;
+    public Long getHotelId() {
+        return hotelID;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setHotelId(Long hotelID) {
+        this.hotelID = hotelID;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (hotelID != null ? hotelID.hashCode() : 0);
         return hash;
     }
 
@@ -45,7 +53,7 @@ public class Hotel implements Serializable {
             return false;
         }
         Hotel other = (Hotel) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.hotelID == null && other.hotelID != null) || (this.hotelID != null && !this.hotelID.equals(other.hotelID))) {
             return false;
         }
         return true;
@@ -53,7 +61,7 @@ public class Hotel implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Hotel[ id=" + id + " ]";
+        return "entity.Hotel[ hotelID=" + hotelID + " ]";
     }
     
 }
