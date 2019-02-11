@@ -20,6 +20,7 @@ public class FrontDeskManagedBean {
      * Creates a new instance of FrontDeskManagedBean
      */
     private String customerName;
+    private String customerRoom;
 
     public FrontDeskManagedBean() {
     }
@@ -32,7 +33,23 @@ public class FrontDeskManagedBean {
         this.customerName = CustomerName;
     }
 
-    public void search() {
+    public String getCustomerRoom() {
+        return customerRoom;
+    }
+
+    public void setCustomerRoom(String customerRoom) {
+        this.customerRoom = customerRoom;
+    }
+
+    public void searchCustomerForCheckin() {
+
+    }
+
+    public void searchRoomForCheckout() {
+
+    }
+
+    public void searchCustomer() {
 
     }
 

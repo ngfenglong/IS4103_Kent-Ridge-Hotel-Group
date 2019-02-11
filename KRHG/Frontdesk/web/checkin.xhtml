@@ -59,17 +59,16 @@
                             <div class="col">
                                 <div class="home_content text-center">
                                     <div class="home_title">Search Customer</div>
-                                   
-                                        <h:form>
 
-                                        
-                                            <h:inputText value="#{frontDeskManagedBean.customerName}" id="customer" a:placeholder="Enter Customer name">
-                                            </h:inputText>
-                                            <h:commandButton value="Search" type="submit" action="#{frontDeskManagedBean.search()}" />
+                                    <h:form>
+
+                                        <h:inputText value="#{frontDeskManagedBean.customerName}" id="customer" a:placeholder="Enter Customer name">
+                                        </h:inputText>
+                                        <h:commandButton value="Search" type="submit" action="#{frontDeskManagedBean.searchCustomerForCheckin()}" />
 
 
-                                        </h:form>
-                                    
+                                    </h:form>
+
                                 </div>
                             </div>
                         </div>
