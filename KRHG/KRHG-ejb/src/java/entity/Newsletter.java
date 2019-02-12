@@ -6,10 +6,13 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -21,20 +24,24 @@ public class Newsletter implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long newsletterID;
+    @Temporal(TemporalType.DATE)
+    private Date newsletterDate;
+    private Staff sentBy;
+    private String newsletterFile;
 
-    public Long getId() {
-        return id;
+    public Long getNewsletterID() {
+        return newsletterID;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long newsletterID) {
+        this.newsletterID = newsletterID;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (newsletterID != null ? newsletterID.hashCode() : 0);
         return hash;
     }
 
@@ -45,7 +52,7 @@ public class Newsletter implements Serializable {
             return false;
         }
         Newsletter other = (Newsletter) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.newsletterID == null && other.newsletterID != null) || (this.newsletterID != null && !this.newsletterID.equals(other.newsletterID))) {
             return false;
         }
         return true;
@@ -53,7 +60,31 @@ public class Newsletter implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Newsletter[ id=" + id + " ]";
+        return "entity.Newsletter[ newsletterID=" + newsletterID + " ]";
+    }
+
+    public Date getNewsletterDate() {
+        return newsletterDate;
+    }
+
+    public void setNewsletterDate(Date newsletterDate) {
+        this.newsletterDate = newsletterDate;
+    }
+
+    public Staff getSentBy() {
+        return sentBy;
+    }
+
+    public void setSentBy(Staff sentBy) {
+        this.sentBy = sentBy;
+    }
+
+    public String getNewsletterFile() {
+        return newsletterFile;
+    }
+
+    public void setNewsletterFile(String newsletterFile) {
+        this.newsletterFile = newsletterFile;
     }
     
 }
