@@ -6,10 +6,13 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -21,20 +24,28 @@ public class MaintainenceOrder implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long requestID;
+    private Room room;
+    private RoomFacility facility;
+    @Temporal(TemporalType.DATE)
+    private Date DateReported;
+    private Date dateResolved;
+    private boolean isResolved;
+    private String status;
+            
 
-    public Long getId() {
-        return id;
+    public Long getRequestID() {
+        return requestID;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setRequestID(Long requestID) {
+        this.requestID = requestID;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (requestID != null ? requestID.hashCode() : 0);
         return hash;
     }
 
@@ -45,7 +56,7 @@ public class MaintainenceOrder implements Serializable {
             return false;
         }
         MaintainenceOrder other = (MaintainenceOrder) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.requestID == null && other.requestID != null) || (this.requestID != null && !this.requestID.equals(other.requestID))) {
             return false;
         }
         return true;
@@ -53,7 +64,55 @@ public class MaintainenceOrder implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.MaintainenceOrder[ id=" + id + " ]";
+        return "entity.MaintainenceOrder[ requestID=" + requestID + " ]";
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
+    public RoomFacility getFacility() {
+        return facility;
+    }
+
+    public void setFacility(RoomFacility facility) {
+        this.facility = facility;
+    }
+
+    public Date getDateReported() {
+        return DateReported;
+    }
+
+    public void setDateReported(Date DateReported) {
+        this.DateReported = DateReported;
+    }
+
+    public Date getDateResolved() {
+        return dateResolved;
+    }
+
+    public void setDateResolved(Date dateResolved) {
+        this.dateResolved = dateResolved;
+    }
+
+    public boolean isIsResolved() {
+        return isResolved;
+    }
+
+    public void setIsResolved(boolean isResolved) {
+        this.isResolved = isResolved;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
     
 }
