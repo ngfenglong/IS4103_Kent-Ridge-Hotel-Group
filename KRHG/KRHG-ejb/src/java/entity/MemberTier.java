@@ -21,20 +21,22 @@ public class MemberTier implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long tierID;
+    private String tierName;
+    private int tierPoints;
 
-    public Long getId() {
-        return id;
+    public Long getTierID() {
+        return tierID;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setTierID(Long tierID) {
+        this.tierID = tierID;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (tierID != null ? tierID.hashCode() : 0);
         return hash;
     }
 
@@ -45,7 +47,7 @@ public class MemberTier implements Serializable {
             return false;
         }
         MemberTier other = (MemberTier) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.tierID == null && other.tierID != null) || (this.tierID != null && !this.tierID.equals(other.tierID))) {
             return false;
         }
         return true;
@@ -53,7 +55,23 @@ public class MemberTier implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.MemberTier[ id=" + id + " ]";
+        return "entity.MemberTier[ tierID=" + tierID + " ]";
+    }
+
+    public String getTierName() {
+        return tierName;
+    }
+
+    public void setTierName(String tierName) {
+        this.tierName = tierName;
+    }
+
+    public int getTierPoints() {
+        return tierPoints;
+    }
+
+    public void setTierPoints(int tierPoints) {
+        this.tierPoints = tierPoints;
     }
     
 }
