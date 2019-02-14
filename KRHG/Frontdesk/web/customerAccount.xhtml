@@ -61,25 +61,35 @@
                                 <div class="home_content text-center">
                                     <div class="home_title">Search Customer</div>
 
-                                    <h:form>
+                                    <!--<h:form>
+   
+                                           <h:inputText value="#{frontDeskManagedBean.customerName}" id="customer" a:placeholder="Enter Customer name">
+                                           </h:inputText>
+                                           <h:commandButton value="Search" type="submit" action="#{frontDeskManagedBean.searchCustomer()}" />
+   
+   
+                                       </h:form> -->
+                                    <form>
 
-                                        <h:inputText value="#{frontDeskManagedBean.customerName}" id="customer" a:placeholder="Enter Customer name">
-                                        </h:inputText>
-                                        <h:commandButton value="Search" type="submit" action="#{frontDeskManagedBean.searchCustomer()}" />
+                                        <input type="text" name="name" id="customerName"></input>
+                                        <input type="submit" value="Search"></input>
 
+                                    </form>
 
-                                    </h:form>
+                                    <div>
 
+                                        <div id="resultbox">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+
             </div>
-
-
         </div>
-
         <script src="js/jquery-3.3.1.min.js"></script>
         <script src="styles/bootstrap-4.1.2/popper.js"></script>
         <script src="styles/bootstrap-4.1.2/bootstrap.min.js"></script>

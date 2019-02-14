@@ -61,23 +61,34 @@
                                 <div class="home_content text-center">
                                     <div class="home_title">Search room</div>
 
-                                    <h:form>
+                                    <!--     <h:form>
+     
+                                             <h:inputText value="#{frontDeskManagedBean.customerRoom}" id="customer" a:placeholder="Enter Customer name">
+                                             </h:inputText>
+                                             <h:commandButton value="Search" type="submit" action="#{frontDeskManagedBean.searchRoomForCheckout()}" />
+     
+     
+                                         </h:form>
+                                    -->
+                                    <form>
 
-                                        <h:inputText value="#{frontDeskManagedBean.customerRoom}" id="customer" a:placeholder="Enter Customer name">
-                                        </h:inputText>
-                                        <h:commandButton value="Search" type="submit" action="#{frontDeskManagedBean.searchRoomForCheckout()}" />
+                                        <input type="text" name="name" id="room"></input>
+                                        <input type="submit" value="Search"></input>
 
+                                    </form>
 
-                                    </h:form>
+                                    <div>
 
+                                        <div id="resultbox">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
-
-
 
 
         </div>
