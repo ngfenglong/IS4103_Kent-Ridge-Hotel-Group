@@ -26,11 +26,11 @@ public class CleaningSchedule implements Serializable {
     private Date dateOfCleaning;
     private Room room;
 
-    public Long getId() {
+    public Long getCleaningScheduleID() {
         return cleaningScheduleID;
     }
 
-    public void setId(Long cleaningScheduleID) {
+    public void setCleaningScheduleID(Long cleaningScheduleID) {
         this.cleaningScheduleID = cleaningScheduleID;
     }
 
