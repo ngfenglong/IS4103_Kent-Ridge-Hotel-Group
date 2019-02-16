@@ -15,9 +15,10 @@ import javax.persistence.Query;
 
 @Stateless
 public class RoomSession implements RoomSessionLocal {
+
     @PersistenceContext
     private EntityManager em;
-    
+
     @Override
     public List<Room> getAllRooms() {
         Query q;
@@ -43,7 +44,7 @@ public class RoomSession implements RoomSessionLocal {
         q.setParameter("roomName", roomName.toLowerCase());
 
         if (!q.getResultList().isEmpty()) {
-            return (Room) q.getResultList().get(0);
+            return (Room)q.getResultList().get(0);
         } else {
             throw new NoResultException("Room not found.");
         }
@@ -51,32 +52,101 @@ public class RoomSession implements RoomSessionLocal {
 
     @Override
     public List<Room> getRoomByType(String roomType, String roomHotel) throws NoResultException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Query q;
+        if (roomHotel.isEmpty()) {
+            q = em.createQuery("SELECT r FROM Room r WHERE "
+                    + "LOWER(r.roomType) = :roomType");
+            q.setParameter("roomType", roomType.toLowerCase());
+
+            if (!q.getResultList().isEmpty()) {
+                return q.getResultList();
+            } else {
+                throw new NoResultException("Room not found.");
+            }
+        } else {
+            q = em.createQuery("SELECT r FROM Room r WHERE "
+                    + "LOWER(r.roomHotel) = :roomHotel AND" 
+                    + "LOWER(r.roomType) = :roomType");
+            q.setParameter("roomHotel", roomHotel.toLowerCase());
+            q.setParameter("roomType", roomType.toLowerCase());
+
+            if (!q.getResultList().isEmpty()) {
+                return q.getResultList();
+            } else {
+                throw new NoResultException("Room not found.");
+            }
+        }
     }
 
     @Override
     public List<Room> getRoomByPax(String roomPax, String roomHotel) throws NoResultException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Query q;
+        if (roomHotel.isEmpty()) {
+            q = em.createQuery("SELECT r FROM Room r WHERE "
+                    + "LOWER(r.roomPax) = :roomPax");
+            q.setParameter("roomPax", roomPax.toLowerCase());
+
+            if (!q.getResultList().isEmpty()) {
+                return q.getResultList();
+            } else {
+                throw new NoResultException("Room not found.");
+            }
+        } else {
+            q = em.createQuery("SELECT r FROM Room r WHERE "
+                    + "LOWER(r.roomHotel) = :roomHotel AND" 
+                    + "LOWER(r.roomPax) = :roomPax");
+            q.setParameter("roomHotel", roomHotel.toLowerCase());
+            q.setParameter("roomPax", roomPax.toLowerCase());
+
+            if (!q.getResultList().isEmpty()) {
+                return q.getResultList();
+            } else {
+                throw new NoResultException("Room not found.");
+            }
+        }
     }
 
     @Override
     public List<Room> getRoomByHotel(String roomHotel) throws NoResultException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Query q;
+        q = em.createQuery("SELECT r FROM Room r WHERE "
+                + "LOWER(r.roomHote) = :roomHotel");
+        q.setParameter("roomHotel", roomHotel.toLowerCase());
+
+        if (!q.getResultList().isEmpty()) {
+            return q.getResultList();
+        } else {
+            throw new NoResultException("Room not found.");
+        }
     }
 
     @Override
     public void deleteRoom(Long rID) throws NoResultException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Room r = em.find(Room.class, rID);
+        if (r != null) {
+            em.remove(r);
+        } else {
+            throw new NoResultException("Room not found");
+        }
     }
 
     @Override
     public void createRoom(Room r) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        em.persist(r);
     }
 
     @Override
     public void updateRoom(Room r) throws NoResultException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      Room oldR = em.find(Room.class, r.getRoomID());
+        if (oldR != null) {
+            oldR.setRoomName(r.getRoomName());
+            oldR.setRoomType(r.getRoomType());
+            oldR.setRoomPax(r.getRoomPax());
+            oldR.setRoomFacilities(r.getRoomFacilities());
+            oldR.setStatus(r.getStatus());
+        } else {
+            throw new NoResultException("Room Not found");
+        }
     }
 
 }
