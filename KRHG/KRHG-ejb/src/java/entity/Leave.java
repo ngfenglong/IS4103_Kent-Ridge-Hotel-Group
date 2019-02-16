@@ -37,7 +37,7 @@ public class Leave implements Serializable {
         return leaveID;
     }
 
-    public void setId(Long leaveID) {
+    public void setLeaveID(Long leaveID) {
         this.leaveID = leaveID;
     }
 

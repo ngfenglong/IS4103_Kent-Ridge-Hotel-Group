@@ -27,11 +27,11 @@ public class CreditCard implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date expiryDate;
 
-    public Long getCreditCardId() {
+    public Long getCreditCardID() {
         return creditCardID;
     }
 
-    public void setCreditCardId(Long creditCardID) {
+    public void setCreditCardID(Long creditCardID) {
         this.creditCardID = creditCardID;
     }
 

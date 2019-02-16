@@ -31,11 +31,11 @@ public class Hotel implements Serializable {
     private String hotelContact;
     private ArrayList<Room> rooms;
 
-    public Long getHotelId() {
+    public Long getHotelID() {
         return hotelID;
     }
 
-    public void setHotelId(Long hotelID) {
+    public void setHotelID(Long hotelID) {
         this.hotelID = hotelID;
     }
 

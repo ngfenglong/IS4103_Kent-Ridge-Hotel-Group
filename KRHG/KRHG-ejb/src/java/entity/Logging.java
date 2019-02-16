@@ -27,11 +27,11 @@ public class Logging implements Serializable {
     private Date loggingDateTime;
     private String operatorName;
     
-    public Long getLoggingId() {
+    public Long getLoggingID() {
         return loggingID;
     }
 
-    public void setLoggingId(Long loggingID) {
+    public void setLoggingID(Long loggingID) {
         this.loggingID = loggingID;
     }
 
