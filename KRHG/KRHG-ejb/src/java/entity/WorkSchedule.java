@@ -31,11 +31,11 @@ public class WorkSchedule implements Serializable {
     private Staff approver;
     private Staff allocatedTo;
 
-    public Long getWorkScheduleId() {
+    public Long getWorkScheduleID() {
         return workScheduleID;
     }
 
-    public void setWorkScheduleId(Long workScheduleID) {
+    public void setWorkScheduleID(Long workScheduleID) {
         this.workScheduleID = workScheduleID;
     }
 

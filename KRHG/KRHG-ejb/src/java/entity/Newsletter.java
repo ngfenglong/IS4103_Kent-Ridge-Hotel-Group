@@ -30,11 +30,11 @@ public class Newsletter implements Serializable {
     private Staff sentBy;
     private String newsletterFile;
 
-    public Long getNewsletterID() {
+    public Long getNewsLetterID() {
         return newsletterID;
     }
 
-    public void setId(Long newsletterID) {
+    public void setNewsLetterID(Long newsletterID) {
         this.newsletterID = newsletterID;
     }
 

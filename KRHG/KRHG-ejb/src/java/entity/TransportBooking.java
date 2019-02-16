@@ -30,11 +30,11 @@ public class TransportBooking implements Serializable {
     private Date transportDateTime;
     private PaymentTransaction paymentTransaction;
 
-    public Long getTransportBookingId() {
+    public Long getTransportBookingID() {
         return transportBookingID;
     }
 
-    public void setTransportBookingId(Long transportBookingID) {
+    public void setTransportBookingID(Long transportBookingID) {
         this.transportBookingID = transportBookingID;
     }
 

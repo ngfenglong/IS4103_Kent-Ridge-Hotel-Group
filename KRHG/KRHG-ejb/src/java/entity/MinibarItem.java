@@ -31,7 +31,7 @@ public class MinibarItem implements Serializable {
         return minibarItemID;
     }
 
-    public void setId(Long minibarItemID) {
+    public void setMiniBarItemID(Long minibarItemID) {
         this.minibarItemID = minibarItemID;
     }
 
