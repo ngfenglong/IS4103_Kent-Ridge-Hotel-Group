@@ -42,7 +42,7 @@ public class Hotel implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (hotelID != null ? hotelID.hashCode() : 0);
+        hash += (getHotelID() != null ? getHotelID().hashCode() : 0);
         return hash;
     }
 
@@ -53,7 +53,7 @@ public class Hotel implements Serializable {
             return false;
         }
         Hotel other = (Hotel) object;
-        if ((this.hotelID == null && other.hotelID != null) || (this.hotelID != null && !this.hotelID.equals(other.hotelID))) {
+        if ((this.getHotelID() == null && other.getHotelID() != null) || (this.getHotelID() != null && !this.hotelID.equals(other.hotelID))) {
             return false;
         }
         return true;
@@ -61,7 +61,105 @@ public class Hotel implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Hotel[ hotelID=" + hotelID + " ]";
+        return "entity.Hotel[ hotelID=" + getHotelID() + " ]";
+    }
+
+    /**
+     * @return the hotelName
+     */
+    public String getHotelName() {
+        return hotelName;
+    }
+
+    /**
+     * @param hotelName the hotelName to set
+     */
+    public void setHotelName(String hotelName) {
+        this.hotelName = hotelName;
+    }
+
+    /**
+     * @return the hotelCodeName
+     */
+    public String getHotelCodeName() {
+        return hotelCodeName;
+    }
+
+    /**
+     * @param hotelCodeName the hotelCodeName to set
+     */
+    public void setHotelCodeName(String hotelCodeName) {
+        this.hotelCodeName = hotelCodeName;
+    }
+
+    /**
+     * @return the hotelAddress
+     */
+    public String getHotelAddress() {
+        return hotelAddress;
+    }
+
+    /**
+     * @param hotelAddress the hotelAddress to set
+     */
+    public void setHotelAddress(String hotelAddress) {
+        this.hotelAddress = hotelAddress;
+    }
+
+    /**
+     * @return the hotelFacilities
+     */
+    public ArrayList<HotelFacility> getHotelFacilities() {
+        return hotelFacilities;
+    }
+
+    /**
+     * @param hotelFacilities the hotelFacilities to set
+     */
+    public void setHotelFacilities(ArrayList<HotelFacility> hotelFacilities) {
+        this.hotelFacilities = hotelFacilities;
+    }
+
+    /**
+     * @return the hotelStar
+     */
+    public int getHotelStar() {
+        return hotelStar;
+    }
+
+    /**
+     * @param hotelStar the hotelStar to set
+     */
+    public void setHotelStar(int hotelStar) {
+        this.hotelStar = hotelStar;
+    }
+
+    /**
+     * @return the hotelContact
+     */
+    public String getHotelContact() {
+        return hotelContact;
+    }
+
+    /**
+     * @param hotelContact the hotelContact to set
+     */
+    public void setHotelContact(String hotelContact) {
+        this.hotelContact = hotelContact;
+    }
+
+    /**
+     * @return the rooms
+     */
+    public ArrayList<Room> getRooms() {
+        return rooms;
+    }
+
+    /**
+     * @param rooms the rooms to set
+     */
+    public void setRooms(ArrayList<Room> rooms) {
+        this.rooms = rooms;
     }
     
 }
