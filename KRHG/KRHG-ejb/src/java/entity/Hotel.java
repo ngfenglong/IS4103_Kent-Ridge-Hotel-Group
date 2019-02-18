@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -26,11 +27,12 @@ public class Hotel implements Serializable {
     private String hotelName;
     private String hotelCodeName;
     private String hotelAddress;
-    private ArrayList<HotelFacility> hotelFacilities;
     private int hotelStar;
     private String hotelContact;
+    @OneToMany
     private ArrayList<Room> rooms;
-
+    @OneToMany
+    private ArrayList<HotelFacility> hotelFacilities;
     public Long getHotelID() {
         return hotelID;
     }

@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -28,9 +29,10 @@ public class HouseKeepingOrder implements Serializable {
     private Room room;
     private String status;
     @Temporal(TemporalType.DATE)
-    
     private Date orderDateTime;
+    @Temporal(TemporalType.DATE)
     private Date completeDateTime;
+    @OneToOne
     private Staff houseKeeper;
     private String specialRequest;
 
@@ -114,5 +116,5 @@ public class HouseKeepingOrder implements Serializable {
     public void setSpecialRequest(String specialRequest) {
         this.specialRequest = specialRequest;
     }
-    
+
 }

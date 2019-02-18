@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -35,6 +36,8 @@ public class LostAndFoundReport implements Serializable {
     private Boolean isResolved;
     private ArrayList<String> keywords;
     private String itemImage;
+    @OneToOne
+    private Staff reportedBy;
 
     public Long getReportID() {
         return reportID;
@@ -180,4 +183,14 @@ public class LostAndFoundReport implements Serializable {
     public void setItemImage(String itemImage) {
         this.itemImage = itemImage;
     }
+
+    public Staff getReportedBy() {
+        return reportedBy;
+    }
+
+    public void setReportedBy(Staff reportedBy) {
+        this.reportedBy = reportedBy;
+    }
+    
+    
 }

@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -25,13 +27,18 @@ public class PaymentTransaction implements Serializable {
     private double totalPrice;
     private double initialPayment;
     private double finalPayment;
-    private CreditCard creditCard;
     private String paymentType;
+    @OneToOne
+    private CreditCard creditCard;
+    @OneToOne
     private Customer payer;
     @Temporal(TemporalType.DATE)
     private Date transactionDateTime;
+    @OneToMany
     private ArrayList<RoomBooking> roomsBooked;
+    @OneToOne
     private FunctionRoomBooking functionRoomBooked;
+    @OneToOne
     private TransportBooking transportBooked;
 
     public Long getTransactionID() {

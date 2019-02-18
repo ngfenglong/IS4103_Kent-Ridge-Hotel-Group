@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -24,6 +25,7 @@ public class FunctionRoomBooking implements Serializable {
     private Date bookedFrom;
     @Temporal(TemporalType.DATE)
     private Date bookedTo;
+    @OneToOne
     private PaymentTransaction paymentTransaction;
 
     public Long getFunctionRoomBookingID() {

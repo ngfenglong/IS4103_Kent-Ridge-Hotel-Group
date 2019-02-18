@@ -11,9 +11,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Room implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,8 +24,11 @@ public class Room implements Serializable {
     private String roomType;
     private String roomPax;
     private String roomHotel;
-    private ArrayList<RoomFacility> roomFacilities;
     private String status;
+    @OneToMany
+    private ArrayList<RoomFacility> roomFacilities;
+    @OneToMany
+    private ArrayList<MinibarItem> miniBarItems;
 
     public Long getRoomID() {
         return roomID;
@@ -57,8 +62,7 @@ public class Room implements Serializable {
     public String toString() {
         return "entity.Room[ roomID=" + roomID + " ]";
     }
-    
-    
+
     /**
      * @return the roomName
      */
@@ -142,5 +146,5 @@ public class Room implements Serializable {
     public void setStatus(String status) {
         this.status = status;
     }
-    
+
 }

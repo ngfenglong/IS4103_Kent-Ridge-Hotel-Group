@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -32,13 +34,17 @@ public class RoomBooking implements Serializable {
     private Date bookOutDate;
     private String status;
     private double price;
+    @OneToOne
     private Room bookedRoom;
-    private Customer bookedBy;
+    @OneToOne
+    private Customer boFokedBy;
     private boolean hasTransport;
-    private Date tranportTime;
     @Temporal(TemporalType.DATE)
+    private Date tranportTime;
     private String pickUpLocation;
+    @OneToMany
     private ArrayList<HolidaySurcharge> holidaySurcharges;
+    @OneToMany
     private ArrayList<ExtraSurcharge> extraSurcharge;
 
     public Long getRoomBookingID() {
@@ -136,8 +142,6 @@ public class RoomBooking implements Serializable {
     public void setExtraSurcharge(ArrayList<ExtraSurcharge> extraSurcharge) {
         this.extraSurcharge = extraSurcharge;
     }
-    
-    
 
     @Override
     public int hashCode() {

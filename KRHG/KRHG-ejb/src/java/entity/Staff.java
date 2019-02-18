@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
 /**
@@ -38,15 +40,19 @@ public class Staff implements Serializable {
     private String hotelGroup;
     private String jobTitle;
     private String department;
-    private Staff managerInCharge;
     private int entitledLeaves;
-    private ArrayList<Leave> appliedLeave;
     private boolean accountStatus;
-    private ArrayList<StaffType> accountRights;
     private String nokName;
     private String nokAddress;
     private String nokPhoneNumber;
-    
+    @OneToOne
+    private Staff managerInCharge;
+    @OneToMany
+    private ArrayList<Leave> appliedLeave;
+    @OneToMany
+    private ArrayList<StaffType> accountRights;
+    @OneToOne
+    private WorkSchedule workSchedule;
 
     public Long getStaffID() {
         return staffID;
@@ -360,5 +366,13 @@ public class Staff implements Serializable {
     public void setNokPhoneNumber(String nokPhoneNumber) {
         this.nokPhoneNumber = nokPhoneNumber;
     }
-    
+
+    public WorkSchedule getWorkSchedule() {
+        return workSchedule;
+    }
+
+    public void setWorkSchedule(WorkSchedule workSchedule) {
+        this.workSchedule = workSchedule;
+    }
+
 }
