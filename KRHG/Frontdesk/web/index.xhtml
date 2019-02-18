@@ -6,7 +6,10 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       >
     <h:head>
-        <title>Kent Ridge Hotel Group</title>
+
+        <title>Kent Ridge Hotel- Frontdesk</title>
+        <!-- Tell the browser to be responsive to screen width -->
+
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="description" content="IS4103"/>
@@ -20,124 +23,44 @@
         <link href="plugins/colorbox/colorbox.css" rel="stylesheet" type="text/css"> </link>
         <link rel="stylesheet" type="text/css" href="styles/main_styles.css"> </link>
         <link rel="stylesheet" type="text/css" href="styles/responsive.css"> </link>
+        <link rel="stylesheet" type="text/css" href="plugins/nav/nav.css"> </link>
     </h:head>
-    <h:body>
-
+    <h:body class="hold-transition sidebar-mini">
         <div class="super_container">
 
-            <!-- Header -->
-
-            <header class="header">
-                <div class="header_content d-flex flex-row align-items-center justify-content-start">
-                    <div class="logo"><a href="#">KRHG</a></div>
-                    <div class="ml-auto d-flex flex-row align-items-center justify-content-start">
-                        <nav class="main_nav">
-                            <ul class="d-flex flex-row align-items-start justify-content-start">
-                                <li class="active"><a href="index.xhtml">Home</a></li>
-                                <li><a href="checkin.xhtml">Check in</a></li>
-                                <li><a href="checkout.xhtml">Check out</a></li>
-                                <li><a href="customerAccount.xhtml">Customer account</a></li>
-                                <li><a href="payment.xhtml">Payment</a></li>
-                            </ul>
-                        </nav>
-                   
-
-                        <!-- Hamburger Menu -->
-                        <div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>
-                    </div>
-                </div>
-            </header>
-
-         
-
-            <div class="home">
-                <div class="home_slider_container">
-                    <div class="owl-carousel owl-theme home_slider">
-
-                        <!-- Slide -->
-                        <div class="slide">
-                            <div class="background_image" style="background-image:url(images/index_1.jpg)"></div>
-                            <div class="home_container">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="home_content text-center">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Slide -->
-                        <div class="slide">
-                            <div class="background_image" style="background-image:url(images/index_2.jpg)"></div>
-                            <div class="home_container">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="home_content text-center">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Slide -->
-                        <div class="slide">
-                            <div class="background_image" style="background-image:url(images/index_3.jpg)"></div>
-                            <div class="home_container">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="home_content text-center">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Slide -->
-                        <div class="slide">
-                            <div class="background_image" style="background-image:url(images/index_4.jpg)"></div>
-                            <div class="home_container">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="home_content text-center">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Slide -->
-                        <div class="slide">
-                            <div class="background_image" style="background-image:url(images/index_5.jpg)"></div>
-                            <div class="home_container">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="home_content text-center">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <!-- Home Slider Dots -->
-                
-
-                </div>
+            <div id="mySidenav" class="sidenav">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <a href="checkin.xhtml">Check in</a>
+                <a href="checkout.xhtml">Check out</a>
+                <a href="customerAccount.xhtml">Accounts</a>
+                <a href="#">Requests</a>
+                <a href="#">Maintenance</a>
+                <a href="#">Lost and Found</a>
             </div>
+            <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+                  <div class="home">
+                <div class="background_image" style="background-color:grey"></div>
+                <div class="home_container">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="home_content text-center">
+                                    <div class="home_title">Welcome to front desk</div>
 
 
+                                    <div>
+
+                                        <div id="resultbox">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
         </div>
 
         <script src="js/jquery-3.3.1.min.js"></script>
@@ -155,5 +78,12 @@
         <script src="plugins/jquery-datepicker/jquery-ui.js"></script>
         <script src="plugins/colorbox/jquery.colorbox-min.js"></script>
         <script src="js/custom.js"></script>
+        <script>   function openNav() {
+                    document.getElementById("mySidenav").style.width = "250px";
+                }
+
+                function closeNav() {
+                    document.getElementById("mySidenav").style.width = "0";
+                }</script>
     </h:body>
 </html>
