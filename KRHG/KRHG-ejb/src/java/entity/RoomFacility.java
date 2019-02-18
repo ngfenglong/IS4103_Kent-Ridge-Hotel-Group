@@ -20,11 +20,11 @@ public class RoomFacility implements Serializable {
     private String roomFacilityCategory;
     private String roomFacilityName;
 
-    public Long getRoomFacilityId() {
+    public Long getRoomFacilityID() {
         return roomFacilityID;
     }
 
-    public void setRoomFacilityId(Long roomFacilityID) {
+    public void setRoomFacilityID(Long roomFacilityID) {
         this.roomFacilityID = roomFacilityID;
     }
 

@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -25,11 +26,14 @@ public class LaundryOrder implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long laundryOrderID;
+    @OneToOne
     private Room room;
     @Temporal(TemporalType.DATE)
     private Date orderDateTime;
     private String status;
+    @Temporal(TemporalType.DATE)
     private Date completeDateTime;
+    @OneToOne
     private Staff houseKeeper;
     private String specialRequest;
     private int qty;
@@ -122,5 +126,5 @@ public class LaundryOrder implements Serializable {
     public void setQty(int qty) {
         this.qty = qty;
     }
-    
+
 }

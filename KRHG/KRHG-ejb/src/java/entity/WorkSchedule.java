@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -28,14 +29,16 @@ public class WorkSchedule implements Serializable {
     private Date workScheduleDate;
     private int workScheduleSlot;
     private String approvedStatus;
+    @OneToOne
     private Staff approver;
+    @OneToOne
     private Staff allocatedTo;
 
-    public Long getWorkScheduleId() {
+    public Long getWorkScheduleID() {
         return workScheduleID;
     }
 
-    public void setWorkScheduleId(Long workScheduleID) {
+    public void setWorkScheduleID(Long workScheduleID) {
         this.workScheduleID = workScheduleID;
     }
 

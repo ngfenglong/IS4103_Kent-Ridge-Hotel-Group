@@ -13,6 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -33,8 +35,10 @@ public class Customer implements Serializable {
     private ArrayList<RoomBooking> bookingHistories;
     private String email;
     private String mobileNum;
+    @Temporal(TemporalType.DATE)
     private Date dateJoined; 
     private String passportNum;
+    private boolean accountStatus;
     
     public Long getCustomerID() {
         return customerID;
@@ -106,6 +110,14 @@ public class Customer implements Serializable {
 
     public void setPassportNum(String passportNum) {
         this.passportNum = passportNum;
+    }
+
+    public boolean isAccountStatus() {
+        return accountStatus;
+    }
+
+    public void setAccountStatus(boolean accountStatus) {
+        this.accountStatus = accountStatus;
     }
 
 

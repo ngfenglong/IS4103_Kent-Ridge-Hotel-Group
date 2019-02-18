@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -25,19 +26,22 @@ public class Leave implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long leaveID;
+    @OneToOne
     private Staff createdBy;
     @Temporal (TemporalType.DATE)
     private Date startDate;
+    @Temporal (TemporalType.DATE)
     private Date endDate;
     private int numOfDays;
     private boolean approveStatus;
+    @OneToOne
     private Staff approvedBy;
 
     public Long getLeaveID() {
         return leaveID;
     }
 
-    public void setId(Long leaveID) {
+    public void setLeaveID(Long leaveID) {
         this.leaveID = leaveID;
     }
 

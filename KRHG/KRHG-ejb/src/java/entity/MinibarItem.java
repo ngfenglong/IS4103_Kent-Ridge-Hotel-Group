@@ -25,13 +25,13 @@ public class MinibarItem implements Serializable {
     private String itemName;
     private int qty;
     private double price;
-    private Room room;
+    
 
     public Long getMinibarItemID() {
         return minibarItemID;
     }
 
-    public void setId(Long minibarItemID) {
+    public void setMiniBarItemID(Long minibarItemID) {
         this.minibarItemID = minibarItemID;
     }
 
@@ -84,12 +84,4 @@ public class MinibarItem implements Serializable {
         this.price = price;
     }
 
-    public Room getRoom() {
-        return room;
-    }
-
-    public void setRoom(Room room) {
-        this.room = room;
-    }
-    
 }

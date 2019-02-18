@@ -26,11 +26,11 @@ public class RoomInventory implements Serializable {
     private int qty;
     
 
-    public Long getroomInventoryId() {
+    public Long getroomInventoryID() {
         return roomInventoryID;
     }
 
-    public void setRoomInventoryId(Long roomInventoryID) {
+    public void setRoomInventoryID(Long roomInventoryID) {
         this.roomInventoryID = roomInventoryID;
     }
 

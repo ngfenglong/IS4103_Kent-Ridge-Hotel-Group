@@ -21,11 +21,11 @@ public class MailingList implements Serializable {
     private String listName;
     private ArrayList<String> listToSend;
 
-    public Long getListId() {
+    public Long getListID() {
         return listID;
     }
 
-    public void setListId(Long listID) {
+    public void setListID(Long listID) {
         this.listID = listID;
     }
 

@@ -17,11 +17,11 @@ public class StaffType implements Serializable {
     private String staffTypeName;
     
     
-    public Long getStaffTypeId() {
+    public Long getStaffTypeID() {
         return staffTypeID;
     }
 
-    public void setStaffTypeId(Long staffTypeID) {
+    public void setStaffTypeID(Long staffTypeID) {
         this.staffTypeID = staffTypeID;
     }
 

@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -26,9 +27,11 @@ public class MaintainenceOrder implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long requestID;
     private Room room;
+    @OneToOne
     private RoomFacility facility;
     @Temporal(TemporalType.DATE)
-    private Date DateReported;
+    private Date dateReported;
+    @Temporal(TemporalType.DATE)
     private Date dateResolved;
     private boolean isResolved;
     private String status;
@@ -84,11 +87,11 @@ public class MaintainenceOrder implements Serializable {
     }
 
     public Date getDateReported() {
-        return DateReported;
+        return dateReported;
     }
 
-    public void setDateReported(Date DateReported) {
-        this.DateReported = DateReported;
+    public void setDateReported(Date dateReported) {
+        this.dateReported = dateReported;
     }
 
     public Date getDateResolved() {

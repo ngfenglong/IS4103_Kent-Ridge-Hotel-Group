@@ -28,13 +28,13 @@ public class TransportBooking implements Serializable {
     private Date bookedDateTime;
     @Temporal(TemporalType.DATE)
     private Date transportDateTime;
-    private PaymentTransaction paymentTransaction;
 
-    public Long getTransportBookingId() {
+
+    public Long getTransportBookingID() {
         return transportBookingID;
     }
 
-    public void setTransportBookingId(Long transportBookingID) {
+    public void setTransportBookingID(Long transportBookingID) {
         this.transportBookingID = transportBookingID;
     }
 
@@ -92,18 +92,5 @@ public class TransportBooking implements Serializable {
         this.transportDateTime = transportDateTime;
     }
 
-    /**
-     * @return the paymentTransaction
-     */
-    public PaymentTransaction getPaymentTransaction() {
-        return paymentTransaction;
-    }
-
-    /**
-     * @param paymentTransaction the paymentTransaction to set
-     */
-    public void setPaymentTransaction(PaymentTransaction paymentTransaction) {
-        this.paymentTransaction = paymentTransaction;
-    }
 
 }
