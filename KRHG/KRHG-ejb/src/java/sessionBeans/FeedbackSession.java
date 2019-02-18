@@ -6,6 +6,7 @@
 package sessionBeans;
 
 import entity.Feedback;
+import error.NoResultException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -31,7 +32,7 @@ public class FeedbackSession implements FeedbackSessionLocal {
     }
 
     @Override
-    public Feedback getFeedbackByID(Long fID) {
+    public Feedback getFeedbackByID(Long fID) throws NoResultException  {
         Feedback f = em.find(Feedback.class, fID);
 
         if (f != null) {
@@ -44,7 +45,7 @@ public class FeedbackSession implements FeedbackSessionLocal {
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
     @Override
-    public void deleteFeedback(Long fID) {
+    public void deleteFeedback(Long fID) throws NoResultException  {
         Feedback f = em.find(Feedback.class, fID);
 
         if (f != null) {

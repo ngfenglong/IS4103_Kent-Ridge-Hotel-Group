@@ -6,10 +6,14 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -21,20 +25,124 @@ public class RoomBooking implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long roomBookingID;
+    @Temporal(TemporalType.DATE)
+    private Date bookInDate;
+    @Temporal(TemporalType.DATE)
+    private Date bookOutDate;
+    private String status;
+    private double price;
+    private Room bookedRoom;
+    private Customer bookedBy;
+    private boolean hasTransport;
+    private Date tranportTime;
+    @Temporal(TemporalType.DATE)
+    private String pickUpLocation;
+    private ArrayList<HolidaySurcharge> holidaySurcharges;
+    private ArrayList<ExtraSurcharge> extraSurcharge;
 
-    public Long getId() {
-        return id;
+    public Long getRoomBookingID() {
+        return roomBookingID;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setRoomBookingID(Long roomBookingID) {
+        this.roomBookingID = roomBookingID;
     }
+
+    public Date getBookInDate() {
+        return bookInDate;
+    }
+
+    public void setBookInDate(Date bookInDate) {
+        this.bookInDate = bookInDate;
+    }
+
+    public Date getBookOutDate() {
+        return bookOutDate;
+    }
+
+    public void setBookOutDate(Date bookOutDate) {
+        this.bookOutDate = bookOutDate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public Room getBookedRoom() {
+        return bookedRoom;
+    }
+
+    public void setBookedRoom(Room bookedRoom) {
+        this.bookedRoom = bookedRoom;
+    }
+
+    public Customer getBookedBy() {
+        return bookedBy;
+    }
+
+    public void setBookedBy(Customer bookedBy) {
+        this.bookedBy = bookedBy;
+    }
+
+    public boolean isHasTransport() {
+        return hasTransport;
+    }
+
+    public void setHasTransport(boolean hasTransport) {
+        this.hasTransport = hasTransport;
+    }
+
+    public Date getTranportTime() {
+        return tranportTime;
+    }
+
+    public void setTranportTime(Date tranportTime) {
+        this.tranportTime = tranportTime;
+    }
+
+    public String getPickUpLocation() {
+        return pickUpLocation;
+    }
+
+    public void setPickUpLocation(String pickUpLocation) {
+        this.pickUpLocation = pickUpLocation;
+    }
+
+    public ArrayList<HolidaySurcharge> getHolidaySurcharges() {
+        return holidaySurcharges;
+    }
+
+    public void setHolidaySurcharges(ArrayList<HolidaySurcharge> holidaySurcharges) {
+        this.holidaySurcharges = holidaySurcharges;
+    }
+
+    public ArrayList<ExtraSurcharge> getExtraSurcharge() {
+        return extraSurcharge;
+    }
+
+    public void setExtraSurcharge(ArrayList<ExtraSurcharge> extraSurcharge) {
+        this.extraSurcharge = extraSurcharge;
+    }
+    
+    
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (roomBookingID != null ? roomBookingID.hashCode() : 0);
         return hash;
     }
 
@@ -45,7 +153,7 @@ public class RoomBooking implements Serializable {
             return false;
         }
         RoomBooking other = (RoomBooking) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.roomBookingID == null && other.roomBookingID != null) || (this.roomBookingID != null && !this.roomBookingID.equals(other.roomBookingID))) {
             return false;
         }
         return true;
@@ -53,7 +161,7 @@ public class RoomBooking implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.RoomBooking[ id=" + id + " ]";
+        return "entity.RoomBooking[ roomBookingID=" + roomBookingID + " ]";
     }
-    
+
 }

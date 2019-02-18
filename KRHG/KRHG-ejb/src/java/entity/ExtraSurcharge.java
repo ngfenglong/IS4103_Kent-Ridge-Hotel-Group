@@ -6,10 +6,14 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -21,20 +25,67 @@ public class ExtraSurcharge implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long surchargeID;
+    private String surchargeName;
+    @Temporal(TemporalType.DATE)
+    private Date surchargeFrom;
+    @Temporal(TemporalType.DATE)
+    private Date SurchargeTo;
+    private ArrayList<String> daysToChange;
+    private double surchargePrice;
 
-    public Long getId() {
-        return id;
+    public Long getSurchargeID() {
+        return surchargeID;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setSurchargeID(Long surchargeID) {
+        this.surchargeID = surchargeID;
+    }
+
+    public String getSurchargeName() {
+        return surchargeName;
+    }
+
+    public void setSurchargeName(String surchargeName) {
+        this.surchargeName = surchargeName;
+    }
+
+    public Date getSurchargeFrom() {
+        return surchargeFrom;
+    }
+
+    public void setSurchargeFrom(Date surchargeFrom) {
+        this.surchargeFrom = surchargeFrom;
+    }
+
+    public Date getSurchargeTo() {
+        return SurchargeTo;
+    }
+
+    public void setSurchargeTo(Date SurchargeTo) {
+        this.SurchargeTo = SurchargeTo;
+    }
+
+    public ArrayList<String> getDaysToChange() {
+        return daysToChange;
+    }
+
+    public void setDaysToChange(ArrayList<String> daysToChange) {
+        this.daysToChange = daysToChange;
+    }
+
+    public double getSurchargePrice() {
+        return surchargePrice;
+    }
+
+    public void setSurchargePrice(double surchargePrice) {
+        this.surchargePrice = surchargePrice;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (surchargeID != null ? surchargeID.hashCode() : 0);
         return hash;
     }
 
@@ -45,7 +96,7 @@ public class ExtraSurcharge implements Serializable {
             return false;
         }
         ExtraSurcharge other = (ExtraSurcharge) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.surchargeID == null && other.surchargeID != null) || (this.surchargeID != null && !this.surchargeID.equals(other.surchargeID))) {
             return false;
         }
         return true;
@@ -53,7 +104,7 @@ public class ExtraSurcharge implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.ExtraSurcharge[ id=" + id + " ]";
+        return "entity.ExtraSurcharge[ surchargeID=" + surchargeID + " ]";
     }
-    
+
 }

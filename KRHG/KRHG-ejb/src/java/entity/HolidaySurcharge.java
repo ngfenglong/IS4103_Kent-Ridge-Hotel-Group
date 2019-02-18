@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -24,6 +26,7 @@ public class HolidaySurcharge implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long holidaySurchargeID;
     private String holidayName;
+    @Temporal(TemporalType.DATE)
     private Date holidayDate;
     private double holidaySurchargePrice;
     

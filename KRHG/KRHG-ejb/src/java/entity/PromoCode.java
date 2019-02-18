@@ -6,10 +6,13 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -21,20 +24,70 @@ public class PromoCode implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long promoCodeID;
+    private String promoCode;
+    @Temporal(TemporalType.DATE)
+    private Date startDate;
+    @Temporal(TemporalType.DATE)
+    private Date endDate;
+    private String status;
+    private double discount;
 
-    public Long getId() {
-        return id;
+    public Long getPromoCodeID() {
+        return promoCodeID;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setPromoCodeID(Long promoCodeID) {
+        this.promoCodeID = promoCodeID;
     }
 
+    public String getPromoCode() {
+        return promoCode;
+    }
+
+    public void setPromoCode(String promoCode) {
+        this.promoCode = promoCode;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public double getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(double discount) {
+        this.discount = discount;
+    }
+
+    
+    
+    
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (promoCodeID != null ? promoCodeID.hashCode() : 0);
         return hash;
     }
 
@@ -45,7 +98,7 @@ public class PromoCode implements Serializable {
             return false;
         }
         PromoCode other = (PromoCode) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.promoCodeID == null && other.promoCodeID != null) || (this.promoCodeID != null && !this.promoCodeID.equals(other.promoCodeID))) {
             return false;
         }
         return true;
@@ -53,7 +106,7 @@ public class PromoCode implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.PromoCode[ id=" + id + " ]";
+        return "entity.PromoCode[ promoCodeID=" + promoCodeID + " ]";
     }
-    
+
 }

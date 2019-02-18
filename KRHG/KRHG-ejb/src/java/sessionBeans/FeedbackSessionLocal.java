@@ -6,6 +6,7 @@
 package sessionBeans;
 
 import entity.Feedback;
+import error.NoResultException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Local;
@@ -17,7 +18,7 @@ import javax.ejb.Local;
 @Local
 public interface FeedbackSessionLocal {
     public List<Feedback> getAllFeedbacks();
-    public Feedback getFeedbackByID(Long fID);
-    public void deleteFeedback(Long fID);
+    public Feedback getFeedbackByID(Long fID) throws NoResultException ;
+    public void deleteFeedback(Long fID) throws NoResultException ;
     public void createFeedback(Feedback f);
 }
