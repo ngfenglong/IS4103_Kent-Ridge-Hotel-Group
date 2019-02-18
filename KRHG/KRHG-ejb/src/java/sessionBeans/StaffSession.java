@@ -65,10 +65,10 @@ public class StaffSession implements StaffSessionLocal {
     public void createStaff(Staff s) {
         em.persist(s);
     }
-    
+
     @Override
     public void deactivateStaff(Staff s) throws NoResultException {
-      Staff oldS = em.find(Staff.class, s.getStaffID());
+        Staff oldS = em.find(Staff.class, s.getStaffID());
         if (oldS != null) {
             oldS.setAccountStatus(false);
         } else {
@@ -78,7 +78,7 @@ public class StaffSession implements StaffSessionLocal {
 
     @Override
     public void updateStaff(Staff s) throws NoResultException {
-      Staff oldS = em.find(Staff.class, s.getStaffID());
+        Staff oldS = em.find(Staff.class, s.getStaffID());
         if (oldS != null) {
             oldS.setName(s.getName());
             oldS.setUserName(s.getUserName());
@@ -95,10 +95,34 @@ public class StaffSession implements StaffSessionLocal {
             oldS.setAccountRights(s.getAccountRights());
             oldS.setNokName(s.getNokName());
             oldS.setNokAddress(s.getNokAddress());
-            oldS.setNokPhoneNumber(s.getNokPhoneNumber());            
+            oldS.setNokPhoneNumber(s.getNokPhoneNumber());
         } else {
             throw new NoResultException("Hotel Not found");
         }
-    }       
+    }
+
+    @Override
+    public boolean Login(Staff s) {
+        Query q = em.createQuery("SELECT s FROM Staff s WHERE "
+                + "LOWER(s.userName) = :userName");
+        q.setParameter("userName", s.getUserName().toLowerCase());
+
+        if (!q.getResultList().isEmpty()) {
+            Staff checkStaff = (Staff) q.getResultList().get(0);
+            if (checkStaff.getPassword().equals(s.getPassword())) {
+                return true;
+            }
+            return false;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public void changePasword(Staff s, String newPass) {
+        Staff staff = em.find(Staff.class, s.getStaffID());
+        staff.setPassword(newPass);
+        em.flush();
+    }
 
 }

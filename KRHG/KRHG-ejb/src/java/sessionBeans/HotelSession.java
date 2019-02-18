@@ -6,8 +6,11 @@
 package sessionBeans;
 
 import entity.Hotel;
+import entity.HotelFacility;
 import error.NoResultException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -77,5 +80,27 @@ public class HotelSession implements HotelSessionLocal {
             throw new NoResultException("Hotel Not found");
         }
     }    
+
+    @Override
+    public void removeHotelFacility(Long hID, HotelFacility hf) {
+          Hotel h = em.find(Hotel.class, hID);
+//        try {
+//            h.removeHotelFacility(hf);
+//            em.flush();
+//        } catch (NoResultException ex) {
+//            Logger.getLogger(CustomerSession.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+    }
+
+    @Override
+    public void addHotelFacility(Long hID, HotelFacility hf) {
+      Hotel h = em.find(Hotel.class, hID);
+//        try {
+//            h.addHotelFacility(hf);
+//            em.flush();
+//        } catch (NoResultException ex) {
+//            Logger.getLogger(CustomerSession.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+    }
 
 }

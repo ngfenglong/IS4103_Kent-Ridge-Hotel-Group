@@ -24,4 +24,8 @@ public interface StaffSessionLocal {
     public void deactivateStaff(Staff s) throws NoResultException;
     public void updateStaff(Staff s) throws NoResultException;   
     
+    
+    //Logging in
+    public boolean Login(Staff s);
+    public void changePasword(Staff s, String newPass);
 }

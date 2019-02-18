@@ -25,4 +25,13 @@ public interface CustomerSessionLocal {
     public void deleteCustomer(Long cID) throws NoResultException;
     public void createCustomer(Customer c); 
     public void updateCustomer(Customer c) throws NoResultException;
+    
+    
+    //Logging in
+    public boolean Login(Customer c);
+    public void changePasword(Customer c, String newPass);
+    public boolean forgetPassword(Customer c);
+    public void deactivateAccount(Long cId) throws NoResultException;
+    public void activateAccount(Long cId) throws NoResultException;
+    
 }

@@ -38,6 +38,7 @@ public class Customer implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date dateJoined; 
     private String passportNum;
+    private boolean accountStatus;
     
     public Long getCustomerID() {
         return customerID;
@@ -109,6 +110,14 @@ public class Customer implements Serializable {
 
     public void setPassportNum(String passportNum) {
         this.passportNum = passportNum;
+    }
+
+    public boolean isAccountStatus() {
+        return accountStatus;
+    }
+
+    public void setAccountStatus(boolean accountStatus) {
+        this.accountStatus = accountStatus;
     }
 
 

@@ -6,6 +6,7 @@
 package sessionBeans;
 
 import entity.Hotel;
+import entity.HotelFacility;
 import error.NoResultException;
 import java.util.List;
 import javax.ejb.Local;
@@ -22,4 +23,6 @@ public interface HotelSessionLocal {
     public void deleteHotel(Long hID) throws NoResultException;
     public void createHotel(Hotel h);
     public void updateHotel(Hotel h) throws NoResultException;
+    public void removeHotelFacility(Long hID, HotelFacility hf);
+    public void addHotelFacility(Long hID, HotelFacility hf);
 }
