@@ -22,11 +22,11 @@ public class FoodOrder implements Serializable {
     private String specialRequest;
     private int qty;
     
-    public Long getFoodOrderId() {
+    public Long getFoodOrderID() {
         return foodOrderID;
     }
 
-    public void setId(Long foodOrderID) {
+    public void setFoodOrderID(Long foodOrderID) {
         this.foodOrderID = foodOrderID;
     }
 

@@ -30,11 +30,11 @@ public class Feedback implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date feedBackDate;
 
-    public Long getFeedBackId() {
+    public Long getFeedBackID() {
         return feedBackID;
     }
 
-    public void setFeedBackId(Long feedBackID) {
+    public void setFeedBackID(Long feedBackID) {
         this.feedBackID = feedBackID;
     }
 

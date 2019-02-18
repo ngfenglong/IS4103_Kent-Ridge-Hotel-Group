@@ -20,11 +20,11 @@ public class PaymentTransaction implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long transactionID;
 
-    public Long getFunctionRoomBookingId() {
+    public Long getFunctionRoomBookingID() {
         return transactionID;
     }
 
-    public void setFunctionRoomBookingId(Long transactionID) {
+    public void setFunctionRoomBookingID(Long transactionID) {
         this.transactionID = transactionID;
     }
 

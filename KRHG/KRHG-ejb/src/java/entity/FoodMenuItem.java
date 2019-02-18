@@ -21,11 +21,11 @@ public class FoodMenuItem implements Serializable {
     private String FoodMenuItemDescription;
     private Boolean availability;
     private Double unitPrice;
-    public Long getFoodMenuItemId() {
+    public Long getFoodMenuItemID() {
         return FoodMenuItemID;
     }
 
-    public void setFoodMenuItemId(Long FoodMenuItemID) {
+    public void setFoodMenuItemID(Long FoodMenuItemID) {
         this.FoodMenuItemID = FoodMenuItemID;
     }
     

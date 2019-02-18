@@ -26,11 +26,11 @@ public class FunctionRoomBooking implements Serializable {
     private Date bookedTo;
     private PaymentTransaction paymentTransaction;
 
-    public Long getFunctionRoomBookingId() {
+    public Long getFunctionRoomBookingID() {
         return functionRoomBookingID;
     }
 
-    public void setFunctionRoomBookingId(Long functionRoomBookingID) {
+    public void setFunctionRoomBookingID(Long functionRoomBookingID) {
         this.functionRoomBookingID = functionRoomBookingID;
     }
 

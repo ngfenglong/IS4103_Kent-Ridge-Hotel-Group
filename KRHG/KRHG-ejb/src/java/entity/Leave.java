@@ -6,10 +6,13 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -21,20 +24,27 @@ public class Leave implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long leaveID;
+    private Staff createdBy;
+    @Temporal (TemporalType.DATE)
+    private Date startDate;
+    private Date endDate;
+    private int numOfDays;
+    private boolean approveStatus;
+    private Staff approvedBy;
 
-    public Long getId() {
-        return id;
+    public Long getLeaveID() {
+        return leaveID;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setLeaveID(Long leaveID) {
+        this.leaveID = leaveID;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (leaveID != null ? leaveID.hashCode() : 0);
         return hash;
     }
 
@@ -45,7 +55,7 @@ public class Leave implements Serializable {
             return false;
         }
         Leave other = (Leave) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.leaveID == null && other.leaveID != null) || (this.leaveID != null && !this.leaveID.equals(other.leaveID))) {
             return false;
         }
         return true;
@@ -53,7 +63,55 @@ public class Leave implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Leave[ id=" + id + " ]";
+        return "entity.Leave[ leaveID=" + leaveID + " ]";
+    }
+
+    public Staff getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(Staff createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public int getNumOfDays() {
+        return numOfDays;
+    }
+
+    public void setNumOfDays(int numOfDays) {
+        this.numOfDays = numOfDays;
+    }
+
+    public boolean isApproveStatus() {
+        return approveStatus;
+    }
+
+    public void setApproveStatus(boolean approveStatus) {
+        this.approveStatus = approveStatus;
+    }
+
+    public Staff getApprovedBy() {
+        return approvedBy;
+    }
+
+    public void setApprovedBy(Staff approvedBy) {
+        this.approvedBy = approvedBy;
     }
     
 }

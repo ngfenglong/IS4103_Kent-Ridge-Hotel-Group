@@ -21,20 +21,24 @@ public class MinibarItem implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long minibarItemID;
+    private String itemName;
+    private int qty;
+    private double price;
+    private Room room;
 
-    public Long getId() {
-        return id;
+    public Long getMinibarItemID() {
+        return minibarItemID;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setMiniBarItemID(Long minibarItemID) {
+        this.minibarItemID = minibarItemID;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (minibarItemID != null ? minibarItemID.hashCode() : 0);
         return hash;
     }
 
@@ -45,7 +49,7 @@ public class MinibarItem implements Serializable {
             return false;
         }
         MinibarItem other = (MinibarItem) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.minibarItemID == null && other.minibarItemID != null) || (this.minibarItemID != null && !this.minibarItemID.equals(other.minibarItemID))) {
             return false;
         }
         return true;
@@ -53,7 +57,39 @@ public class MinibarItem implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.MinibarItem[ id=" + id + " ]";
+        return "entity.MinibarItem[ minibarItemID=" + minibarItemID + " ]";
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
+    public int getQty() {
+        return qty;
+    }
+
+    public void setQty(int qty) {
+        this.qty = qty;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
     }
     
 }

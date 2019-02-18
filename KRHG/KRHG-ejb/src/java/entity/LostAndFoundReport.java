@@ -36,11 +36,11 @@ public class LostAndFoundReport implements Serializable {
     private ArrayList<String> keywords;
     private String itemImage;
 
-    public Long getReportId() {
+    public Long getReportID() {
         return reportID;
     }
 
-    public void setReportId(Long reportID) {
+    public void setReportID(Long reportID) {
         this.reportID = reportID;
     }
 
