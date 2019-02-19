@@ -21,4 +21,5 @@ public interface FeedbackSessionLocal {
     public Feedback getFeedbackByID(Long fID) throws NoResultException ;
     public void deleteFeedback(Long fID) throws NoResultException ;
     public void createFeedback(Feedback f);
+    public void updateFeedback(Feedback f) throws NoResultException ;
 }
