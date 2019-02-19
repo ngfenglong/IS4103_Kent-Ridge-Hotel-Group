@@ -5,6 +5,7 @@
  */
 package entity;
 
+import error.NoResultException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,18 +29,18 @@ public class PaymentTransaction implements Serializable {
     private double initialPayment;
     private double finalPayment;
     private String paymentType;
+    @Temporal(TemporalType.DATE)
+    private Date transactionDateTime;
     @OneToOne
     private CreditCard creditCard;
     @OneToOne
     private Customer payer;
-    @Temporal(TemporalType.DATE)
-    private Date transactionDateTime;
-    @OneToMany
-    private ArrayList<RoomBooking> roomsBooked;
     @OneToOne
     private FunctionRoomBooking functionRoomBooked;
     @OneToOne
     private TransportBooking transportBooked;
+    @OneToMany
+    private ArrayList<RoomBooking> roomsBooked;
 
     public Long getTransactionID() {
         return transactionID;
@@ -129,6 +130,23 @@ public class PaymentTransaction implements Serializable {
         this.transportBooked = transportBooked;
     }
 
+     public void addRoomBooking(RoomBooking roomBooking) throws NoResultException {
+        if (roomBooking != null && !this.getRoomsBooked().contains(roomBooking)) {
+            this.getRoomsBooked().add(roomBooking);
+        } else {
+            throw new NoResultException("Roombooking already added to Payment Transaction");
+        }
+    }
+
+    public void removeRoomBooking(RoomBooking roomBooking) throws NoResultException {
+        if (roomBooking != null && this.getRoomsBooked().contains(roomBooking)) {
+            this.getRoomsBooked().remove(roomBooking);
+        } else {
+            throw new NoResultException("Roombooking has not been added to Payment Transaction");
+        }
+    }
+
+    
     @Override
     public int hashCode() {
         int hash = 0;

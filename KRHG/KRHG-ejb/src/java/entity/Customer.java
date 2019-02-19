@@ -5,6 +5,7 @@
  */
 package entity;
 
+import error.NoResultException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,7 +24,6 @@ import javax.persistence.TemporalType;
 @Entity
 public class Customer implements Serializable {
 
-    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,15 +31,16 @@ public class Customer implements Serializable {
     private String nric;
     private String password;
     private int points;
-    @OneToMany
+    @OneToMany(mappedBy = "bookedBy")
     private ArrayList<RoomBooking> bookingHistories;
+    private ArrayList<RoomBooking> currentBookings;
     private String email;
     private String mobileNum;
     @Temporal(TemporalType.DATE)
-    private Date dateJoined; 
+    private Date dateJoined;
     private String passportNum;
     private boolean accountStatus;
-    
+
     public Long getCustomerID() {
         return customerID;
     }
@@ -47,7 +48,7 @@ public class Customer implements Serializable {
     public void setCustomerID(Long customerID) {
         this.customerID = customerID;
     }
-    
+
     public String getNric() {
         return nric;
     }
@@ -76,10 +77,17 @@ public class Customer implements Serializable {
         return bookingHistories;
     }
 
-    public void setBookingHistories(ArrayList<RoomBooking> bookingHistories) {
+    public void setBookingHistories(ArrayList<RoomBooking> currentBookings) {
         this.bookingHistories = bookingHistories;
     }
 
+    public ArrayList<RoomBooking> getCurrentBookings() {
+        return currentBookings;
+    }
+
+    public void setCurrentBookings(ArrayList<RoomBooking> currentBookings) {
+        this.currentBookings = currentBookings;
+    }
     public String getEmail() {
         return email;
     }
@@ -120,7 +128,6 @@ public class Customer implements Serializable {
         this.accountStatus = accountStatus;
     }
 
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -145,5 +152,20 @@ public class Customer implements Serializable {
     public String toString() {
         return "entity.Customer[ customerID=" + customerID + " ]";
     }
-    
+
+    public void removeRoomBooking(RoomBooking roomBooking) throws NoResultException {
+        if (roomBooking != null && this.getBookingHistories().contains(roomBooking)) {
+            this.getBookingHistories().remove(roomBooking);
+        } else {
+            throw new NoResultException("Room booking has not been added");
+        }
+    }
+
+    public void addRoomBooking(RoomBooking roomBooking) throws NoResultException {
+        if (roomBooking != null && !this.getBookingHistories().contains(roomBooking)) {
+            this.getBookingHistories().add(roomBooking);
+        } else {
+            throw new NoResultException("Room booking has already been done");
+        }
+    }
 }

@@ -33,5 +33,13 @@ public interface CustomerSessionLocal {
     public boolean forgetPassword(Customer c);
     public void deactivateAccount(Long cId) throws NoResultException;
     public void activateAccount(Long cId) throws NoResultException;
+    public void checkProfile(Customer c);
+    public void updateProfile(Customer c);
+    public void checkPoints(Customer c);
+    public void checkPastBookings(Customer c) throws NoResultException;
+    public void viewCurrentBookings(Customer c) throws NoResultException;
+    public void cancelBookings(Customer c) throws NoResultException;
+    public void signOut(Customer c);
+    public void submitFeedback(Customer c);
     
 }

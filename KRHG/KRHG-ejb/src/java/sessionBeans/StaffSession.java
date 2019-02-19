@@ -7,7 +7,9 @@ package sessionBeans;
 
 import entity.Hotel;
 import entity.Staff;
+import entity.StaffType;
 import error.NoResultException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -123,6 +125,29 @@ public class StaffSession implements StaffSessionLocal {
         Staff staff = em.find(Staff.class, s.getStaffID());
         staff.setPassword(newPass);
         em.flush();
+    }
+
+    @Override
+    public boolean LoginWithType(Staff s, String type) {
+    Query q = em.createQuery("SELECT s FROM Staff s WHERE "
+                + "LOWER(s.userName) = :userName");
+        q.setParameter("userName", s.getUserName().toLowerCase());
+
+        if (!q.getResultList().isEmpty()) {
+            Staff checkStaff = (Staff) q.getResultList().get(0);
+            if (checkStaff.getPassword().equals(s.getPassword())) {
+               ArrayList<StaffType> accountRights = checkStaff.getAccountRights();
+               for(StaffType st: accountRights) {
+                   if(st.getStaffTypeName().equals(type)){
+                       return true;
+                   }
+               }
+                return false;
+            }
+            return false;
+        } else {
+            return false;
+        }
     }
 
 }

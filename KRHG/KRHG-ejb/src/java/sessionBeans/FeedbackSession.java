@@ -60,4 +60,20 @@ public class FeedbackSession implements FeedbackSessionLocal {
         em.persist(f);
     }
 
+    @Override
+    public void updateFeedback(Feedback f) throws NoResultException {
+        Feedback oldF = em.find(Feedback.class, f.getFeedBackID());
+        if (oldF !=null) {
+            oldF.setFeedBackTitle(f.getFeedBackTitle());
+            oldF.setFeedBackFrom(f.getFeedBackFrom());
+            oldF.setFeedBackMsg(f.getFeedBackMsg());
+        }
+        if (f != null) {
+            em.remove(f);
+        } else {
+            throw new NoResultException("Not found");
+        }
+    }
+        
+
 }

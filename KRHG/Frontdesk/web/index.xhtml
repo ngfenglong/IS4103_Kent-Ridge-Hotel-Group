@@ -25,43 +25,27 @@
         <link rel="stylesheet" type="text/css" href="styles/responsive.css"> </link>
         <link rel="stylesheet" type="text/css" href="plugins/nav/nav.css"> </link>
     </h:head>
-    <h:body class="hold-transition sidebar-mini">
+    <h:body>
         <div class="super_container">
 
-            <div id="mySidenav" class="sidenav">
-                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                <a href="index.xhtml">Home</a>
-                <a href="checkin.xhtml">Check in</a>
-                <a href="checkout.xhtml">Check out</a>
-                <a href="customerAccount.xhtml">Accounts</a>
-                <a href="#">Requests</a>
-                <a href="#">Maintenance</a>
-                <a href="#">Lost and Found</a>
+            <div class="tab">
+                <button class="tablinks active" onclick="goto('index.xhtml')" >Home</button>
+                <button class="tablinks" onclick="goto('checkin.xhtml')" >Check in</button>
+                <button class="tablinks" onclick="goto('checkout.xhtml')" >Check out</button>
+                <button class="tablinks" onclick="goto('CustomerAccount.xhtml')">Accounts</button>
+                <button class="tablinks" >Requests</button>
+                <button class="tablinks" >Maintenance</button>
+                <button class="tablinks" >Lost and Found</button>
             </div>
-            <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
-            <div class="home">
-                <div class="background_image" style="background-color:grey"></div>
-                <div class="home_container">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col">
-                                <div class="home_content text-center">
-                                    <div class="home_title">Welcome to front desk</div>
+            <div class="container">
 
+                <div class="text-center">
+                    <div class="home_title">Welcome to front desk</div>
 
-                                    <div>
-
-                                        <div id="resultbox">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
-
             </div>
+
         </div>
 
         <script src="js/jquery-3.3.1.min.js"></script>
@@ -79,12 +63,10 @@
         <script src="plugins/jquery-datepicker/jquery-ui.js"></script>
         <script src="plugins/colorbox/jquery.colorbox-min.js"></script>
         <script src="js/custom.js"></script>
-        <script>   function openNav() {
-                    document.getElementById("mySidenav").style.width = "250px";
-                }
-
-                function closeNav() {
-                    document.getElementById("mySidenav").style.width = "0";
-                }</script>
+        <script>
+                    function goto(link) {
+                        location.replace(link);
+                    }
+        </script>
     </h:body>
 </html>

@@ -5,6 +5,7 @@
  */
 package entity;
 
+import error.NoResultException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -95,14 +96,6 @@ public class RoomBooking implements Serializable {
         this.bookedRoom = bookedRoom;
     }
 
-    public Customer getBookedBy() {
-        return bookedBy;
-    }
-
-    public void setBookedBy(Customer bookedBy) {
-        this.bookedBy = bookedBy;
-    }
-
     public boolean isHasTransport() {
         return hasTransport;
     }
@@ -141,6 +134,38 @@ public class RoomBooking implements Serializable {
 
     public void setExtraSurcharge(ArrayList<ExtraSurcharge> extraSurcharge) {
         this.extraSurcharge = extraSurcharge;
+    }
+
+    public void addHolidaySurcharge(HolidaySurcharge holidaySurcharge) throws NoResultException {
+        if (holidaySurcharge != null && !this.getHolidaySurcharges().contains(holidaySurcharge)) {
+            this.getHolidaySurcharges().add(holidaySurcharge);
+        } else {
+            throw new NoResultException("Holiday Surhcarge already added to Room Booking");
+        }
+    }
+
+    public void removeHolidaySurcharge(HolidaySurcharge holidaySurcharge) throws NoResultException {
+        if (holidaySurcharge != null && this.getHolidaySurcharges().contains(holidaySurcharge)) {
+            this.getHolidaySurcharges().remove(holidaySurcharge);
+        } else {
+            throw new NoResultException("Holiday Surcharge has not been added to Room Booking");
+        }
+    }
+
+    public void addExtraSurcharge(ExtraSurcharge extraSurcharge) throws NoResultException {
+        if (extraSurcharge != null && !this.getExtraSurcharge().contains(extraSurcharge)) {
+            this.getExtraSurcharge().add(extraSurcharge);
+        } else {
+            throw new NoResultException("Extra Surcharge is already added to Room Booking");
+        }
+    }
+
+    public void removeExtraSurcharge(ExtraSurcharge extraSurcharge) throws NoResultException {
+        if (extraSurcharge != null && this.getExtraSurcharge().contains(extraSurcharge)) {
+            this.getExtraSurcharge().remove(extraSurcharge);
+        } else {
+            throw new NoResultException("Extra Surcharge has not been added to Room Booking");
+        }
     }
 
     @Override
