@@ -1,0 +1,30 @@
+/*!
+ * Start Bootstrap - The Big Picture (https://startbootstrap.com/template-overviews/the-big-picture)
+ * Copyright 2013-2019 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-the-big-picture/blob/master/LICENSE)
+ */
+body {
+  background: url('../images/black-wallpaper-10.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+  font-family: 'News Cycle', sans-serif;
+}
+
+div.polaroid {
+  width: 90%;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-bottom: 25px;
+}
+
+div.polaroidcontainer {
+  text-align: center;
+  padding: 10px 20px;
+  background-color: #2B2B2B;
+  font-family: 'Poiret One', cursive;
+  font-weight: 600;
+  font-size: 150%;
+  color: white;
+}
