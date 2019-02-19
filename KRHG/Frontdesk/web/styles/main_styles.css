@@ -30,7 +30,10 @@
 /*********************************
 2. Body and some general stuff
 *********************************/
+html{
+    height:100%;
 
+}
 *
 {
 	margin: 0;
@@ -231,7 +234,9 @@ section
 .super_container
 {
 	width: 100%;
-	overflow: hidden;
+	overflow: auto;
+      
+        height:100%;
 }
 .prlx_parent
 {
@@ -611,7 +616,7 @@ section
 {
 	font-size: 110px;
 	font-weight: 600;
-	color: #ffffff;
+	color: black;
 	line-height: 1.2;
 }
 .booking_form_container

@@ -8,7 +8,7 @@
       >
     <h:head>
 
-        <title>Customer Account</title>
+        <title>Customer Check in</title>
         <!-- Tell the browser to be responsive to screen width -->
 
         <meta charset="utf-8"/>
@@ -26,61 +26,49 @@
         <link rel="stylesheet" type="text/css" href="styles/responsive.css"> </link>
         <link rel="stylesheet" type="text/css" href="plugins/nav/nav.css"> </link>
     </h:head>
-    <h:body class="hold-transition sidebar-mini">
+    <h:body>
         <div class="super_container">
 
-            <div id="mySidenav" class="sidenav">
-                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                <a href="index.xhtml">Home</a>
-                <a href="checkin.xhtml">Check in</a>
-                <a href="checkout.xhtml">Check out</a>
-                <a href="customerAccount.xhtml">Accounts</a>
-                <a href="#">Requests</a>
-                <a href="#">Maintenance</a>
-                <a href="#">Lost and Found</a>
+            <div class="tab">
+                <button class="tablinks "  >Home</button>
+                <button class="tablinks active" >Check in</button>
+                <button class="tablinks" >Check out</button>
+                <button class="tablinks" >Accounts</button>
+                <button class="tablinks" >Requests</button>
+                <button class="tablinks" >Maintenance</button>
+                <button class="tablinks" >Lost and Found</button>
             </div>
-            <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
-            <div class="home">
-                <div class="background_image" style="background-color:grey"></div>
-                <div class="home_container">
-                    <div class="container">
-                        <div class="nav">
-                            <a href="#">Manage </a>|
-                            <a href="#">Create</a>
+            <div class="container">
+
+                <div class="text-center">
+                    <div class="insideNav">
+                        <a href="checkin.xhtml">Online Customer</a> | <a href="walkin.xhtml">Walk in Customer</a>
+                    </div>
+                    <div class="content">
+                        <h:form>
+
+                            <h:inputText value="#{frontDeskManagedBean.customerName}" id="customer" a:placeholder="Enter Customer name">
+                            </h:inputText>
+                            <h:commandButton value="Search" type="submit" action="#{frontDeskManagedBean.searchCustomerForCheckin()}" />
+
+
+                        </h:form>
+                        <form>
+                            Enter customer name:
+                            <input type="text" name="name" id="customerName"></input>
+                            <input type="submit" value="Search"></input>
+
+                        </form>
+
+
+
+                        <div id="resultbox">
                         </div>
-                        <div class="row">
-                            <div class="col">
-                                    <div class="home_content text-center">
-                                    <div class="home_title">Search Customer</div>
 
-                                    <!--<h:form>
-   
-                                           <h:inputText value="#{frontDeskManagedBean.customerName}" id="customer" a:placeholder="Enter Customer name">
-                                           </h:inputText>
-                                           <h:commandButton value="Search" type="submit" action="#{frontDeskManagedBean.searchCustomer()}" />
-   
-   
-                                       </h:form> -->
-                                    <form>
-
-                                        <input type="text" name="name" id="customerName"></input>
-                                        <input type="submit" value="Search"></input>
-
-                                    </form>
-
-                                    <div>
-
-                                        <div id="resultbox">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
-
-
             </div>
+
         </div>
 
         <script src="js/jquery-3.3.1.min.js"></script>
@@ -98,12 +86,6 @@
         <script src="plugins/jquery-datepicker/jquery-ui.js"></script>
         <script src="plugins/colorbox/jquery.colorbox-min.js"></script>
         <script src="js/custom.js"></script>
-        <script>   function openNav() {
-                    document.getElementById("mySidenav").style.width = "250px";
-                }
 
-                function closeNav() {
-                    document.getElementById("mySidenav").style.width = "0";
-                }</script>
     </h:body>
 </html>

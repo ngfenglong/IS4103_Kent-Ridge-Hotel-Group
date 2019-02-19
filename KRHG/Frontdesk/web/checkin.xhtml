@@ -7,7 +7,10 @@
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       >
     <h:head>
+
         <title>Customer Check in</title>
+        <!-- Tell the browser to be responsive to screen width -->
+
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="description" content="IS4103"/>
@@ -21,74 +24,50 @@
         <link href="plugins/colorbox/colorbox.css" rel="stylesheet" type="text/css"> </link>
         <link rel="stylesheet" type="text/css" href="styles/main_styles.css"> </link>
         <link rel="stylesheet" type="text/css" href="styles/responsive.css"> </link>
+        <link rel="stylesheet" type="text/css" href="plugins/nav/nav.css"> </link>
     </h:head>
     <h:body>
-
         <div class="super_container">
 
-            <!-- Header -->
-
-            <header class="header">
-                <div class="header_content d-flex flex-row align-items-center justify-content-start">
-                    <div class="logo"><a href="#">KRHG</a></div>
-                    <div class="ml-auto d-flex flex-row align-items-center justify-content-start">
-                        <nav class="main_nav">
-                            <ul class="d-flex flex-row align-items-start justify-content-start">
-                                <li><a href="index.xhtml">Home</a></li>
-                                <li  class="active"><a href="checkin.xhtml">Check in</a></li>
-                                <li><a href="checkout.xhtml">Check out</a></li>
-                                <li><a href="customerAccount.xhtml">Customer account</a></li>
-                                <li><a href="payment.xhtml">Payment</a></li>
-                            </ul>
-                        </nav>
-
-
-                        <!-- Hamburger Menu -->
-                        <div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>
-                    </div>
-                </div>
-            </header>
-
-
-
-            <div class="home">
-                <div class="background_image" style="background-image:url(images/about.jpg)"></div>
-                <div class="home_container">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col">
-                                <div class="home_content text-center">
-                                    <div class="home_title">Search Customer</div>
-
-                                    <h:form>
-
-                                        <h:inputText value="#{frontDeskManagedBean.customerName}" id="customer" a:placeholder="Enter Customer name">
-                                        </h:inputText>
-                                        <h:commandButton value="Search" type="submit" action="#{frontDeskManagedBean.searchCustomerForCheckin()}" />
-
-
-                                    </h:form>
-                                    <form>
-
-                                        <input type="text" name="name" id="customerName"></input>
-                                        <input type="submit" value="Search"></input>
-
-                                    </form>
-
-                                    <div>
-
-                                        <div id="resultbox">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
+            <div class="tab">
+                <button class="tablinks "  >Home</button>
+                <button class="tablinks active" >Check in</button>
+                <button class="tablinks" >Check out</button>
+                <button class="tablinks" >Accounts</button>
+                <button class="tablinks" >Requests</button>
+                <button class="tablinks" >Maintenance</button>
+                <button class="tablinks" >Lost and Found</button>
             </div>
+            <div class="container">
+
+                <div class="text-center">
+                    <div class="insideNav">
+                        <a href="checkin.xhtml">Online Customer</a> | <a href="walkin.xhtml">Walk in Customer</a>
+                    </div>
+                    <div class="content">
+                        <!--<h:form>
+
+                            <h:inputText value="#{frontDeskManagedBean.customerName}" id="customer" a:placeholder="Enter Customer name">
+                            </h:inputText>
+                            <h:commandButton value="Search" type="submit" action="#{frontDeskManagedBean.searchCustomerForCheckin()}" />
+
+
+                        </h:form> -->
+                        <form>
+                            Enter customer name:
+                            <input type="text" name="name" id="customerName"></input>
+                            <input type="submit" value="Search"></input>
+
+                        </form>
+
+
+
+                    </div>
+                </div>
+            </div>
+
         </div>
+
         <script src="js/jquery-3.3.1.min.js"></script>
         <script src="styles/bootstrap-4.1.2/popper.js"></script>
         <script src="styles/bootstrap-4.1.2/bootstrap.min.js"></script>
@@ -104,5 +83,6 @@
         <script src="plugins/jquery-datepicker/jquery-ui.js"></script>
         <script src="plugins/colorbox/jquery.colorbox-min.js"></script>
         <script src="js/custom.js"></script>
+
     </h:body>
 </html>
