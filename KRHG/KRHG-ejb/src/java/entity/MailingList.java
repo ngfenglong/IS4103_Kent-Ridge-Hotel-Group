@@ -5,6 +5,7 @@
  */
 package entity;
 
+import error.NoResultException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.persistence.Entity;
@@ -14,6 +15,7 @@ import javax.persistence.Id;
 
 @Entity
 public class MailingList implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -53,7 +55,7 @@ public class MailingList implements Serializable {
     public String toString() {
         return "entity.MailingList[ listID=" + listID + " ]";
     }
- 
+
     /**
      * @return the listName
      */
@@ -81,5 +83,20 @@ public class MailingList implements Serializable {
     public void setListToSend(ArrayList<String> listToSend) {
         this.listToSend = listToSend;
     }
-    
+
+    public void addList(String newEntry) throws NoResultException {
+        if (newEntry.equals("") && !this.getListToSend().contains(newEntry)) {
+            this.getListToSend().add(newEntry);
+        } else {
+            throw new NoResultException("Entry already added to Hotel");
+        }
+    }
+
+    public void removeList(String newEntry) throws NoResultException {
+        if (newEntry.equals("") && this.getListToSend().contains(newEntry)) {
+            this.getListToSend().remove(newEntry);
+        } else {
+            throw new NoResultException("Entry has not been added to MailingList");
+        }
+    }
 }

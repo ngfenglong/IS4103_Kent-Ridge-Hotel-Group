@@ -219,7 +219,7 @@ public class CustomerSession implements CustomerSessionLocal {
       public static void sendEmail(String recipient, String subject, String msg) {
 
         String username = "automessage.kentridgehotelgroup@gmail.com";
-        String password = "Fenglong1234";
+        String password = "krhg1234";
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -249,5 +249,75 @@ public class CustomerSession implements CustomerSessionLocal {
             throw new RuntimeException(e);
         }
     }
+
+    
+    public void checkProfile(Customer c) {
+        c.getPoints();
+        c.getBookingHistories();
+        c.getEmail();
+        c.getMobileNum();
+        c.getDateJoined();
+        c.getNric();
+        c.getPassportNum();
+    }
+
+    
+    public void updateProfile(Customer c) {
+            c.setPoints(c.getPoints());
+            c.setBookingHistories(c.getBookingHistories());
+            c.setEmail(c.getEmail());
+            c.setMobileNum(c.getMobileNum());
+    }
+
+    
+    public void checkPoints(Customer c) {
+        c.getPoints();
+    }
+
+    
+    public void checkPastBookings(Customer c) throws NoResultException{
+        if (!c.getBookingHistories().isEmpty()) {
+        c.getBookingHistories();
+        }
+        
+        else {
+            throw new NoResultException("No prior bookings were made.");
+        }
+    }
+
+    
+    public void viewCurrentBookings(Customer c) throws NoResultException{
+        if (!c.getCurrentBookings().isEmpty()) {
+        c.getCurrentBookings();
+        }
+
+        else {
+            throw new NoResultException("No bookings have been made.");
+        }
+        }
+
+    
+    public void cancelBookings(Customer c) throws NoResultException{
+        if (!c.getCurrentBookings().isEmpty()) {
+        c.getCurrentBookings();
+        //modify currentbookings to remove selected bookings
+        }
+        
+        else {
+            throw new NoResultException("No bookings found.");
+        }
+        
+    }
+
+    //incomplete
+    public void signOut(Customer c) {
+        
+    }
+
+    //incomplete
+    public void submitFeedback(Customer c) {
+        
+    }
+
 
 }

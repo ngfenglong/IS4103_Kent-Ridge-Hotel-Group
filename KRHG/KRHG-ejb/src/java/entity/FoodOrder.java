@@ -10,7 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class FoodOrder implements Serializable {
@@ -18,7 +18,7 @@ public class FoodOrder implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long foodOrderID;
-    @OneToMany
+    @OneToOne
     private FoodMenuItem foodOrdered;
     private Double totalPrice;
     private String specialRequest;

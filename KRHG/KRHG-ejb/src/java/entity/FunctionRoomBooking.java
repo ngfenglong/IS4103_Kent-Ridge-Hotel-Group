@@ -25,8 +25,7 @@ public class FunctionRoomBooking implements Serializable {
     private Date bookedFrom;
     @Temporal(TemporalType.DATE)
     private Date bookedTo;
-    @OneToOne
-    private PaymentTransaction paymentTransaction;
+
 
     public Long getFunctionRoomBookingID() {
         return functionRoomBookingID;
@@ -87,20 +86,6 @@ public class FunctionRoomBooking implements Serializable {
      */
     public void setBookedTo(Date bookedTo) {
         this.bookedTo = bookedTo;
-    }
-
-    /**
-     * @return the paymentTransaction
-     */
-    public PaymentTransaction getPaymentTransaction() {
-        return paymentTransaction;
-    }
-
-    /**
-     * @param paymentTransaction the paymentTransaction to set
-     */
-    public void setPaymentTransaction(PaymentTransaction paymentTransaction) {
-        this.paymentTransaction = paymentTransaction;
     }
 
 }
