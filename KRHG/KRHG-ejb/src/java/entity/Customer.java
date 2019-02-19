@@ -33,6 +33,7 @@ public class Customer implements Serializable {
     private int points;
     @OneToMany(mappedBy = "bookedBy")
     private ArrayList<RoomBooking> bookingHistories;
+    private ArrayList<RoomBooking> currentBookings;
     private String email;
     private String mobileNum;
     @Temporal(TemporalType.DATE)
@@ -76,10 +77,17 @@ public class Customer implements Serializable {
         return bookingHistories;
     }
 
-    public void setBookingHistories(ArrayList<RoomBooking> bookingHistories) {
+    public void setBookingHistories(ArrayList<RoomBooking> currentBookings) {
         this.bookingHistories = bookingHistories;
     }
 
+    public ArrayList<RoomBooking> getCurrentBookings() {
+        return currentBookings;
+    }
+
+    public void setCurrentBookings(ArrayList<RoomBooking> currentBookings) {
+        this.currentBookings = currentBookings;
+    }
     public String getEmail() {
         return email;
     }
