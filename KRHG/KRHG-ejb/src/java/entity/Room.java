@@ -5,6 +5,7 @@
  */
 package entity;
 
+import error.NoResultException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.persistence.Entity;
@@ -29,6 +30,8 @@ public class Room implements Serializable {
     private ArrayList<RoomFacility> roomFacilities;
     @OneToMany
     private ArrayList<MinibarItem> miniBarItems;
+    @OneToMany(mappedBy = "room")
+    private ArrayList<CleaningSchedule> cleaningSchedules;
 
     public Long getRoomID() {
         return roomID;
@@ -145,6 +148,38 @@ public class Room implements Serializable {
      */
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public ArrayList<MinibarItem> getMiniBarItems() {
+        return miniBarItems;
+    }
+
+    public void setMiniBarItems(ArrayList<MinibarItem> miniBarItems) {
+        this.miniBarItems = miniBarItems;
+    }
+
+    public ArrayList<CleaningSchedule> getCleaningSchedules() {
+        return cleaningSchedules;
+    }
+
+    public void setCleaningSchedules(ArrayList<CleaningSchedule> cleaningSchedules) {
+        this.cleaningSchedules = cleaningSchedules;
+    }
+
+    public void addCleaningSchedule(CleaningSchedule cleaningSchedule) throws NoResultException {
+        if (cleaningSchedule != null && !this.getCleaningSchedules().contains(cleaningSchedule)) {
+            this.getCleaningSchedules().add(cleaningSchedule);
+        } else {
+            throw new NoResultException("Cleaning schedule already added to Room");
+        }
+    }
+
+    public void removeCleaningSchedule(CleaningSchedule cleaningSchedule) throws NoResultException {
+        if (cleaningSchedule != null && this.getCleaningSchedules().contains(cleaningSchedule)) {
+            this.getCleaningSchedules().remove(cleaningSchedule);
+        } else {
+            throw new NoResultException("Cleaning schedule has not been added to Room");
+        }
     }
 
 }

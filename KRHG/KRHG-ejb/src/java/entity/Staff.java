@@ -5,6 +5,7 @@
  */
 package entity;
 
+import error.NoResultException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -374,5 +375,20 @@ public class Staff implements Serializable {
     public void setWorkSchedule(WorkSchedule workSchedule) {
         this.workSchedule = workSchedule;
     }
+    
+    public void addAccountRights(StaffType staffType) throws NoResultException {
+        if (staffType != null && !this.getAccountRights().contains(staffType)) {
+            this.getAccountRights().add(staffType);
+        } else {
+            throw new NoResultException("Staff type is already added to Staff");
+        }
+    }
 
+    public void removeCleaningSchedule(StaffType staffType) throws NoResultException {
+        if (staffType != null && this.getAccountRights().contains(staffType)) {
+            this.getAccountRights().remove(staffType);
+        } else {
+            throw new NoResultException("Staff type has not been added to Staff");
+        }
+    }
 }

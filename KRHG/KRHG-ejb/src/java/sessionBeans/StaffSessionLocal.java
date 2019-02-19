@@ -27,5 +27,6 @@ public interface StaffSessionLocal {
     
     //Logging in
     public boolean Login(Staff s);
+    public boolean LoginWithType(Staff s, String type);
     public void changePasword(Staff s, String newPass);
 }

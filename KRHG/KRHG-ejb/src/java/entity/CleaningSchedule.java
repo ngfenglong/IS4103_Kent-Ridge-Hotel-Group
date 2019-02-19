@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -24,6 +25,7 @@ public class CleaningSchedule implements Serializable {
     
     @Temporal(TemporalType.DATE)
     private Date dateOfCleaning;
+    @OneToOne
     private Room room;
 
     public Long getCleaningScheduleID() {

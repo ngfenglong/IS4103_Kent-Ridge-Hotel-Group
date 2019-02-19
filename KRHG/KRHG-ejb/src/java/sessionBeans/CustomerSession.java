@@ -219,7 +219,7 @@ public class CustomerSession implements CustomerSessionLocal {
       public static void sendEmail(String recipient, String subject, String msg) {
 
         String username = "automessage.kentridgehotelgroup@gmail.com";
-        String password = "Fenglong1234";
+        String password = "krhg1234";
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -249,5 +249,6 @@ public class CustomerSession implements CustomerSessionLocal {
             throw new RuntimeException(e);
         }
     }
+
 
 }

@@ -5,6 +5,7 @@
  */
 package entity;
 
+import error.NoResultException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.persistence.Entity;
@@ -27,16 +28,15 @@ public class Hotel implements Serializable {
     private String hotelName;
     private String hotelCodeName;
     private String hotelAddress;
-
- private ArrayList<HotelFacility> hotelFacilities;
-
-
     private int hotelStar;
     private String hotelContact;
+    @OneToMany
+    private ArrayList<Feedback> feedbacks;
     @OneToMany
     private ArrayList<Room> rooms;
     @OneToMany
     private ArrayList<HotelFacility> hotelFacilities;
+
     public Long getHotelID() {
         return hotelID;
     }
@@ -166,6 +166,62 @@ public class Hotel implements Serializable {
      */
     public void setRooms(ArrayList<Room> rooms) {
         this.rooms = rooms;
+    }
+
+       public ArrayList<Feedback> getFeedbacks() {
+        return feedbacks;
+    }
+
+    public void setFeedbacks(ArrayList<Feedback> feedbacks) {
+        this.feedbacks = feedbacks;
+    }
+
+    public void addHotelFacility(HotelFacility hotelFacility) throws NoResultException {
+        if (hotelFacility != null && !this.getHotelFacilities().contains(hotelFacility)) {
+            this.getHotelFacilities().add(hotelFacility);
+        } else {
+            throw new NoResultException("HotelFacility already added to Hotel");
+        }
+    }
+
+    public void removeHotelFacility(HotelFacility hotelFacility) throws NoResultException {
+        if (hotelFacility != null && this.getHotelFacilities().contains(hotelFacility)) {
+            this.getHotelFacilities().remove(hotelFacility);
+        } else {
+            throw new NoResultException("HotelFacility has not been added to Hotel");
+        }
+    }
+
+    public void addFeedback(Feedback feedback) throws NoResultException {
+        if (feedback != null && !this.getFeedbacks().contains(feedback)) {
+            this.getFeedbacks().add(feedback);
+        } else {
+            throw new NoResultException("HotelFacility already added to Hotel");
+        }
+    }
+
+    public void removeFeedback(Feedback feedback) throws NoResultException {
+        if (feedback != null && this.getFeedbacks().contains(feedback)) {
+            this.getFeedbacks().remove(feedback);
+        } else {
+            throw new NoResultException("HotelFacility has not been added to Hotel");
+        }
+    }
+
+    public void addRoom(Room room) throws NoResultException {
+        if (room != null && !this.getRooms().contains(room)) {
+            this.getRooms().add(room);
+        } else {
+            throw new NoResultException("Room already added to Hotel");
+        }
+    }
+
+    public void removeRoom(Room room) throws NoResultException {
+        if (room != null && this.getRooms().contains(room)) {
+            this.getRooms().remove(room);
+        } else {
+            throw new NoResultException("Room has not been added to Hotel");
+        }
     }
     
 }
