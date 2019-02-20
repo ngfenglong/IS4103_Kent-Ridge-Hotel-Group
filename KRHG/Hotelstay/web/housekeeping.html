@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Hotel Stay Management System</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/css?family=News+Cycle|Poiret+One|Abel" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Bootstrap core CSS -->
+    <link href="./resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="./resources/styles/the-big-picture.css" rel="stylesheet">
+
+    <script type="text/javascript">
+        function startTime() {
+            var today = new Date();
+            var h = today.getHours();
+            var m = today.getMinutes();
+            var s = today.getSeconds();
+            // add a zero in front of numbers<10
+            m = checkTime(m);
+            s = checkTime(s);
+            document.getElementById('txt').innerHTML = h + ":" + m;
+            document.getElementById('timeinput').
+                t = setTimeout('startTime()', 500);
+        }
+        function checkTime(i) {
+            if (i < 10) {
+                i = "0" + i;
+            }
+            return i;
+        }
+    </script>
+
+
+
+</head>
+
+<body onload=determinePage()>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-bottom" style="background-color: transparent">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html"><i class="fa fa-home"
+                                style="font-size:80px; margin-bottom:10%"></i></a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <section id="section1">
+        <div class="row">
+            <h1
+                style="margin-left:40px; margin-top: 30px; color: #fff;font-size: 400%; font-weight: 400; font-family: 'Abel', sans-serif;">
+                Housekeeping</h1>
+        </div>
+        <div class="container">
+
+            <div class="row" style="margin-top: 7%;">
+                <div class="col-lg-12">
+                    <p style="color: #fff; text-align: center; font-size: 200%; margin-bottom: 2%">What time would you
+                        like us to drop by?</p>
+                    <input type="text" id="time" class="timepicker"
+                        style="color:white; width: 40%; height: 50%; font-size:500%; text-align: center; border-radius:2px;  margin-left: 30%;">
+                    <p style="color: #fff; text-align: center; font-size: 150%; margin-top: 1%">Please note that you are
+                        only able to select time from now to 11:59PM.</p>
+                    <button onclick="onClickNext(1)">Next ></button>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <section style="display: none;" id="section2">
+        <div class="row">
+            <h1
+                style="margin-left:40px; margin-top: 30px; color: #fff;font-size: 400%; font-weight: 400; font-family: 'Abel', sans-serif;">
+                Room Service</h1>
+        </div>
+        <div class="container">
+
+            <div class="row" style="margin-top: 7%;">
+                <div class="col-lg-12">
+                    <p style="color: #fff; text-align: center; font-size: 200%; margin-bottom: 2%">Any special requests?
+                    </p>
+                    <form action="#">
+                        <p>
+                            <label style="margin-right: 30px; margin-left:20%; ">
+                                <input class="check" type="checkbox" value="Extra Towels" />
+                                <span style="font-size: 200%; color: white;">Extra Towels</span>
+                            </label>
+                            <label style="margin-right: 30px">
+                                <input class="check" type="checkbox" value="More Shower Amenities" />
+                                <span style="font-size: 200%; color: white;">More Shower Amenities</span>
+                            </label>
+                            <label style="margin-right: 30px">
+                                <input class="check" type="checkbox" value="Restock Minibar"/>
+                                <span style="font-size: 200%; color: white;">Restock Minibar</span>
+                            </label>
+                        </p>
+
+                        <div class="input-field col s12">
+                            <textarea id="otherrequests" style="color:white; font-size:150%"
+                                class="materialize-textarea" data-length="120"></textarea>
+                            <label for="otherrequests" style="font-size: 140%; font-weight:300;">Other Requests</label>
+                        </div>
+
+
+                    </form>
+                    <button onclick="onClickNext(2)">Submit></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section style="display: none;" id="section3">
+        <div class="row">
+            <h1
+                style="margin-left:40px; margin-top: 30px; color: #fff;font-size: 400%; font-weight: 400; font-family: 'Abel', sans-serif;">
+                Room Service</h1>
+        </div>
+        <div class="container">
+
+            <div class="row" style="margin-top: 7%;">
+                <div class="col-lg-12">
+                    <p style="color: #fff; text-align: center; font-size: 200%; margin-bottom: 2%">Your housekeeping
+                        request has been confirmed.</p>
+                    <p style="color: #fff; text-align: center; font-size: 180%; margin-bottom: 2%">The details are as
+                        follows:</p>
+                    <p id="printtime" style="font-size: 200%; color:white; text-align: center">hi</p>
+                    <p id="checkrequests1" style="font-size: 150%; color:grey; text-align: center"></p>
+                    <p id="checkrequests2" style="font-size: 150%; color:grey; text-align: center"></p>
+                    <p id="checkrequests3" style="font-size: 150%; color:grey; text-align: center"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="./resources/jquery/jquery.min.js"></script>
+    <script src="./resources/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script type="text/javascript">
+        var timepicked;
+        document.addEventListener('DOMContentLoaded', function () {
+            var time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            document.getElementById('time').value = time;
+            var elems = document.querySelectorAll('.timepicker');
+            var instances = M.Timepicker.init(elems, {
+                defaultTime: 'now',
+                autoClose: true,
+                onCloseEnd: function () {
+                    timepicked = instances[0].time + instances[0].amOrPm;
+                    document.getElementById("time").blur();
+                    console.log("time2", instances[0], timepicked);
+                }
+            });
+            var a = M.Timepicker.getInstance(elems);
+            console.log("time", instances[0]);
+        });
+        function loadtime() {
+            document.getElementById("printtime").innerHTML = timepicked;
+            console.log("hello", timepicked);
+            console.log(document.getElementById("printtime"));
+        }
+
+        function loadrequests() {
+            var checkedValue = null;
+            var inputElements = document.getElementsByClassName('check');
+            console.log(document.getElementsByClassName('check'));
+            for (var i = 0; inputElements[i]; ++i) {
+                console.log("inhere");
+                if (inputElements[i].checked) {
+                    
+                    if(i==0){
+                        document.getElementById("checkrequests1").innerHTML = inputElements[i].value;
+                    } else if (i==1){
+                        document.getElementById("checkrequests2").innerHTML = inputElements[i].value;
+                    } else {
+                        document.getElementById("checkrequests3").innerHTML = inputElements[i].value;
+                    }
+
+                    checkedValue = "hi";
+                }
+            }
+
+                if(checkedValue == null){
+                    document.getElementById("checkrequests1").innerHTML = "No Special Requests";
+                }
+            }
+
+        function determinePage(){
+            
+        }
+            
+
+
+        
+    </script>
+    <script>
+            function onClickNext(page) {
+                if (page == 1) {
+                    document.getElementById("section1").style.display = "none";
+                    document.getElementById("section2").style.display = "initial";
+                } else if (page == 2) {
+                    document.getElementById("section2").style.display = "none";
+                    document.getElementById("section3").style.display = "initial";
+                    loadtime();
+                    loadrequests();
+                    console.log("pg2", page);
+                }
+            }
+    </script>
+
+
+</body>
+
+</html>

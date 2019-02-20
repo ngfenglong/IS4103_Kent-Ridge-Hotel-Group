@@ -28,3 +28,14 @@ div.polaroidcontainer {
   font-size: 150%;
   color: white;
 }
+
+button {
+  background-color: #2B2B2B;
+  color:white;
+  border:none;
+  margin-left: 45%;
+  font-size:200%;
+  font-family: 'Poiret One', cursive;
+  font-weight: 300;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
