@@ -33,6 +33,7 @@ public class Customer implements Serializable {
     private int points;
     @OneToMany(mappedBy = "bookedBy")
     private ArrayList<RoomBooking> bookingHistories;
+    @OneToMany
     private ArrayList<RoomBooking> currentBookings;
     private String email;
     private String mobileNum;

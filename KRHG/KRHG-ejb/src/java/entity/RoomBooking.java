@@ -34,12 +34,12 @@ public class RoomBooking implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date bookOutDate;
     private String status;
+    private boolean hasTransport;
     private double price;
     @OneToOne
     private Room bookedRoom;
     @OneToOne
-    private Customer boFokedBy;
-    private boolean hasTransport;
+    private Customer bookedBy;
     @Temporal(TemporalType.DATE)
     private Date tranportTime;
     private String pickUpLocation;
@@ -134,6 +134,14 @@ public class RoomBooking implements Serializable {
 
     public void setExtraSurcharge(ArrayList<ExtraSurcharge> extraSurcharge) {
         this.extraSurcharge = extraSurcharge;
+    }
+
+    public Customer getBookedBy() {
+        return bookedBy;
+    }
+
+    public void setBookedBy(Customer bookedBy) {
+        this.bookedBy = bookedBy;
     }
 
     public void addHolidaySurcharge(HolidaySurcharge holidaySurcharge) throws NoResultException {

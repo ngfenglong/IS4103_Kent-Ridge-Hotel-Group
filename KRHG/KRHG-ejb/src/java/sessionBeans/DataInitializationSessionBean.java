@@ -20,7 +20,7 @@ import javax.persistence.PersistenceContext;
 @Startup
 public class DataInitializationSessionBean {
 
-    @PersistenceContext(unitName = "FeelinTrippy-ejbPU")
+    @PersistenceContext(unitName = "KRHG-ejbPU")
     private EntityManager em;
 
     public DataInitializationSessionBean() {
