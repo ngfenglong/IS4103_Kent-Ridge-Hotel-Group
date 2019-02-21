@@ -83,12 +83,20 @@ public class HotelSession implements HotelSessionLocal {
 
     @Override
     public void removeHotelFacility(Long hID, HotelFacility hf) {
+<<<<<<< Updated upstream
         Hotel h = em.find(Hotel.class, hID);
+=======
+          Hotel h = em.find(Hotel.class, hID);
+>>>>>>> Stashed changes
         try {
             h.removeHotelFacility(hf);
             em.flush();
         } catch (NoResultException ex) {
+<<<<<<< Updated upstream
             Logger.getLogger(HotelSession.class.getName()).log(Level.SEVERE, null, ex);
+=======
+            Logger.getLogger(CustomerSession.class.getName()).log(Level.SEVERE, null, ex);
+>>>>>>> Stashed changes
         }
     }
 
@@ -99,7 +107,11 @@ public class HotelSession implements HotelSessionLocal {
             h.addHotelFacility(hf);
             em.flush();
         } catch (NoResultException ex) {
+<<<<<<< Updated upstream
             Logger.getLogger(HotelSession.class.getName()).log(Level.SEVERE, null, ex);
+=======
+            Logger.getLogger(CustomerSession.class.getName()).log(Level.SEVERE, null, ex);
+>>>>>>> Stashed changes
         }
     }
 

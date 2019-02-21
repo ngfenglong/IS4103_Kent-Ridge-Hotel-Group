@@ -182,6 +182,7 @@ public class Room implements Serializable {
         }
     }
 
+<<<<<<< Updated upstream
     public void addMinibarItem(MinibarItem minibarItem) throws NoResultException {
         if (minibarItem != null && !this.getMiniBarItems().contains(minibarItem)) {
             this.getMiniBarItems().add(minibarItem);
@@ -214,4 +215,6 @@ public class Room implements Serializable {
         }
     }
 
+=======
+>>>>>>> Stashed changes
 }

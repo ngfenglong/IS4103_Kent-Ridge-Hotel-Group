@@ -168,7 +168,11 @@ public class Hotel implements Serializable {
         this.rooms = rooms;
     }
 
+<<<<<<< Updated upstream
        public ArrayList<Feedback> getFeedbacks() {
+=======
+    public ArrayList<Feedback> getFeedbacks() {
+>>>>>>> Stashed changes
         return feedbacks;
     }
 
@@ -202,7 +206,11 @@ public class Hotel implements Serializable {
 
     public void removeFeedback(Feedback feedback) throws NoResultException {
         if (feedback != null && this.getFeedbacks().contains(feedback)) {
+<<<<<<< Updated upstream
             this.getFeedbacks().remove(feedback);
+=======
+            this.getHotelFacilities().remove(feedback);
+>>>>>>> Stashed changes
         } else {
             throw new NoResultException("HotelFacility has not been added to Hotel");
         }
@@ -223,5 +231,9 @@ public class Hotel implements Serializable {
             throw new NoResultException("Room has not been added to Hotel");
         }
     }
+<<<<<<< Updated upstream
     
+=======
+
+>>>>>>> Stashed changes
 }

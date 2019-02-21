@@ -136,6 +136,7 @@ public class RoomBooking implements Serializable {
         this.extraSurcharge = extraSurcharge;
     }
 
+<<<<<<< Updated upstream
     public Customer getBookedBy() {
         return bookedBy;
     }
@@ -144,6 +145,8 @@ public class RoomBooking implements Serializable {
         this.bookedBy = bookedBy;
     }
 
+=======
+>>>>>>> Stashed changes
     public void addHolidaySurcharge(HolidaySurcharge holidaySurcharge) throws NoResultException {
         if (holidaySurcharge != null && !this.getHolidaySurcharges().contains(holidaySurcharge)) {
             this.getHolidaySurcharges().add(holidaySurcharge);

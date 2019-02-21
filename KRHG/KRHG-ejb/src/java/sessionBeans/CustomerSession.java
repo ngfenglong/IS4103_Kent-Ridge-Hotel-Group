@@ -250,6 +250,7 @@ public class CustomerSession implements CustomerSessionLocal {
         }
     }
 
+<<<<<<< Updated upstream
     
     public void checkProfile(Customer c) {
         c.getPoints();
@@ -319,5 +320,7 @@ public class CustomerSession implements CustomerSessionLocal {
         
     }
 
+=======
+>>>>>>> Stashed changes
 
 }
