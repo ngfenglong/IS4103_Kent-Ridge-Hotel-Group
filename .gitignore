@@ -12,4 +12,9 @@
 /KRHG/Frontdesk/dist/
 /KRHG/Hotelstay/nbproject/private/
 /KRHG/Hotelstay/build/
+<<<<<<< Updated upstream
 /KRHG/Kiosk/nbproject/private/
+=======
+/KRHG/Frontdesk-war/nbproject/private/
+/KRHG/Kiosk-war/nbproject/private/
+>>>>>>> Stashed changes
