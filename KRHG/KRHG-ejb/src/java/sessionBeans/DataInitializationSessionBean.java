@@ -26,9 +26,5 @@ public class DataInitializationSessionBean {
     public DataInitializationSessionBean() {
     }
 
-    public void persist(Object object) {
-        em.persist(object);
-    }
-
 
 }
