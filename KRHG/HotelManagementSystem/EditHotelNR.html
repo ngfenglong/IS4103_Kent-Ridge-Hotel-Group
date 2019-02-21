@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+
+<h2>Kent Ridge North Rooms</h2>
+
+<input type="button" value="Back" onclick="window.location.href='EditHotelN.html'" />
+
+
+<table>
+  <tr>
+    <th>Room Types</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </tr>
+  <tr>
+    <td>Suite</td>
+    <td><input type="button" value="Edit" onclick="window.location.href='EditHotelNR1.html'" /></td>
+    <td><input id="delete" type="button" value="Delete" onclick="DeleteRoom();" /></td>
+  </tr>
+</table>
+
+<input type="button" value="Add" onclick="window.location.href='AddRoom.html'" />
+
+
+</body>
+</html>
