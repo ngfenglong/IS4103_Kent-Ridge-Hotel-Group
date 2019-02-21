@@ -83,12 +83,12 @@ public class HotelSession implements HotelSessionLocal {
 
     @Override
     public void removeHotelFacility(Long hID, HotelFacility hf) {
-          Hotel h = em.find(Hotel.class, hID);
+        Hotel h = em.find(Hotel.class, hID);
         try {
             h.removeHotelFacility(hf);
             em.flush();
         } catch (NoResultException ex) {
-            Logger.getLogger(CustomerSession.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HotelSession.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -99,7 +99,7 @@ public class HotelSession implements HotelSessionLocal {
             h.addHotelFacility(hf);
             em.flush();
         } catch (NoResultException ex) {
-            Logger.getLogger(CustomerSession.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HotelSession.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

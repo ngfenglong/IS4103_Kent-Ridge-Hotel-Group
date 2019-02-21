@@ -49,7 +49,7 @@ public class Staff implements Serializable {
     @OneToOne
     private Staff managerInCharge;
     @OneToMany
-    private ArrayList<Leave> appliedLeave;
+    private ArrayList<AnnualLeave> appliedLeave;
     @OneToMany
     private ArrayList<StaffType> accountRights;
     @OneToOne
@@ -287,14 +287,14 @@ public class Staff implements Serializable {
     /**
      * @return the appliedLeave
      */
-    public ArrayList<Leave> getAppliedLeave() {
+    public ArrayList<AnnualLeave> getAppliedLeave() {
         return appliedLeave;
     }
 
     /**
      * @param appliedLeave the appliedLeave to set
      */
-    public void setAppliedLeave(ArrayList<Leave> appliedLeave) {
+    public void setAppliedLeave(ArrayList<AnnualLeave> appliedLeave) {
         this.appliedLeave = appliedLeave;
     }
 

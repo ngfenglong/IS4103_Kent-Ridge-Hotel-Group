@@ -5,7 +5,10 @@
  */
 package sessionBeans;
 
+import entity.CleaningSchedule;
+import entity.MinibarItem;
 import entity.Room;
+import entity.RoomFacility;
 import error.NoResultException;
 import java.util.List;
 import javax.ejb.Local;
@@ -21,4 +24,10 @@ public interface RoomSessionLocal {
     public void deleteRoom(Long rID) throws NoResultException;
     public void createRoom(Room r); 
     public void updateRoom(Room r) throws NoResultException;
+    public void addRoomFacility(Long rID, RoomFacility rf);
+    public void removeRoomFacility(Long rID, RoomFacility rf);
+    public void addCleaningSchedule(Long rID, CleaningSchedule cs);
+    public void removeCleaningSchedule(Long rID, CleaningSchedule cs);
+    public void addMinibarItem(Long rID, MinibarItem mi);
+    public void removeMinibarItem(Long rID, MinibarItem mi);
 }

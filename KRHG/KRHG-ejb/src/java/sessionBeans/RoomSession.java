@@ -5,9 +5,15 @@
  */
 package sessionBeans;
 
+import entity.CleaningSchedule;
+import entity.Hotel;
+import entity.MinibarItem;
 import entity.Room;
+import entity.RoomFacility;
 import error.NoResultException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -44,7 +50,7 @@ public class RoomSession implements RoomSessionLocal {
         q.setParameter("roomName", roomName.toLowerCase());
 
         if (!q.getResultList().isEmpty()) {
-            return (Room)q.getResultList().get(0);
+            return (Room) q.getResultList().get(0);
         } else {
             throw new NoResultException("Room not found.");
         }
@@ -65,7 +71,7 @@ public class RoomSession implements RoomSessionLocal {
             }
         } else {
             q = em.createQuery("SELECT r FROM Room r WHERE "
-                    + "LOWER(r.roomHotel) = :roomHotel AND" 
+                    + "LOWER(r.roomHotel) = :roomHotel AND"
                     + "LOWER(r.roomType) = :roomType");
             q.setParameter("roomHotel", roomHotel.toLowerCase());
             q.setParameter("roomType", roomType.toLowerCase());
@@ -93,7 +99,7 @@ public class RoomSession implements RoomSessionLocal {
             }
         } else {
             q = em.createQuery("SELECT r FROM Room r WHERE "
-                    + "LOWER(r.roomHotel) = :roomHotel AND" 
+                    + "LOWER(r.roomHotel) = :roomHotel AND"
                     + "LOWER(r.roomPax) = :roomPax");
             q.setParameter("roomHotel", roomHotel.toLowerCase());
             q.setParameter("roomPax", roomPax.toLowerCase());
@@ -137,7 +143,7 @@ public class RoomSession implements RoomSessionLocal {
 
     @Override
     public void updateRoom(Room r) throws NoResultException {
-      Room oldR = em.find(Room.class, r.getRoomID());
+        Room oldR = em.find(Room.class, r.getRoomID());
         if (oldR != null) {
             oldR.setRoomName(r.getRoomName());
             oldR.setRoomType(r.getRoomType());
@@ -146,6 +152,72 @@ public class RoomSession implements RoomSessionLocal {
             oldR.setStatus(r.getStatus());
         } else {
             throw new NoResultException("Room Not found");
+        }
+    }
+
+    @Override
+    public void addRoomFacility(Long rID, RoomFacility rf) {
+        Room r = em.find(Room.class, rID);
+        try {
+            r.addRoomFacility(rf);
+            em.flush();
+        } catch (NoResultException ex) {
+            Logger.getLogger(RoomSession.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public void removeRoomFacility(Long rID, RoomFacility rf) {
+        Room r = em.find(Room.class, rID);
+        try {
+            r.removeRoomFacility(rf);
+            em.flush();
+        } catch (NoResultException ex) {
+            Logger.getLogger(RoomSession.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public void addCleaningSchedule(Long rID, CleaningSchedule cs) {
+        Room r = em.find(Room.class, rID);
+        try {
+            r.addCleaningSchedule(cs);
+            em.flush();
+        } catch (NoResultException ex) {
+            Logger.getLogger(RoomSession.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public void removeCleaningSchedule(Long rID, CleaningSchedule cs) {
+        Room r = em.find(Room.class, rID);
+        try {
+            r.removeCleaningSchedule(cs);
+            em.flush();
+        } catch (NoResultException ex) {
+            Logger.getLogger(RoomSession.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public void addMinibarItem(Long rID, MinibarItem mi) {
+        Room r = em.find(Room.class, rID);
+        try {
+            r.addMinibarItem(mi);
+            em.flush();
+        } catch (NoResultException ex) {
+            Logger.getLogger(RoomSession.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public void removeMinibarItem(Long rID, MinibarItem mi) {
+        Room r = em.find(Room.class, rID);
+        try {
+            r.removeMinibarItem(mi);
+            em.flush();
+        } catch (NoResultException ex) {
+            Logger.getLogger(RoomSession.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

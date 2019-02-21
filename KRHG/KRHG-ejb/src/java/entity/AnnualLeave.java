@@ -20,46 +20,46 @@ import javax.persistence.TemporalType;
  * @author fengl
  */
 @Entity
-public class Leave implements Serializable {
+public class AnnualLeave implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long leaveID;
-    @OneToOne
-    private Staff createdBy;
-    @Temporal (TemporalType.DATE)
+    private Long annualLeaveID;
+    @Temporal(TemporalType.DATE)
     private Date startDate;
-    @Temporal (TemporalType.DATE)
+    @Temporal(TemporalType.DATE)
     private Date endDate;
     private int numOfDays;
     private boolean approveStatus;
     @OneToOne
     private Staff approvedBy;
+    @OneToOne
+    private Staff createdBy;
 
-    public Long getLeaveID() {
-        return leaveID;
+    public Long getAnnualLeaveID() {
+        return annualLeaveID;
     }
 
-    public void setLeaveID(Long leaveID) {
-        this.leaveID = leaveID;
+    public void setAnnualLeaveID(Long annualLeaveID) {
+        this.annualLeaveID = annualLeaveID;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (leaveID != null ? leaveID.hashCode() : 0);
+        hash += (annualLeaveID != null ? annualLeaveID.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Leave)) {
+        if (!(object instanceof AnnualLeave)) {
             return false;
         }
-        Leave other = (Leave) object;
-        if ((this.leaveID == null && other.leaveID != null) || (this.leaveID != null && !this.leaveID.equals(other.leaveID))) {
+        AnnualLeave other = (AnnualLeave) object;
+        if ((this.annualLeaveID == null && other.annualLeaveID != null) || (this.annualLeaveID != null && !this.annualLeaveID.equals(other.annualLeaveID))) {
             return false;
         }
         return true;
@@ -67,7 +67,7 @@ public class Leave implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Leave[ leaveID=" + leaveID + " ]";
+        return "entity.Leave[ annualLeaveID=" + annualLeaveID + " ]";
     }
 
     public Staff getCreatedBy() {
@@ -117,5 +117,5 @@ public class Leave implements Serializable {
     public void setApprovedBy(Staff approvedBy) {
         this.approvedBy = approvedBy;
     }
-    
+
 }

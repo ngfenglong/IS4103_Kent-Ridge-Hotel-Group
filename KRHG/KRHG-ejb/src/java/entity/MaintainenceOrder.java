@@ -35,6 +35,7 @@ public class MaintainenceOrder implements Serializable {
     private Date dateResolved;
     private boolean isResolved;
     private String status;
+    private String description;
             
 
     public Long getRequestID() {
@@ -116,6 +117,14 @@ public class MaintainenceOrder implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
     
 }

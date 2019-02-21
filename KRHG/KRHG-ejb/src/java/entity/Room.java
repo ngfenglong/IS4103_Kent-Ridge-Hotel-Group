@@ -182,4 +182,36 @@ public class Room implements Serializable {
         }
     }
 
+    public void addMinibarItem(MinibarItem minibarItem) throws NoResultException {
+        if (minibarItem != null && !this.getMiniBarItems().contains(minibarItem)) {
+            this.getMiniBarItems().add(minibarItem);
+        } else {
+            throw new NoResultException("Minibar Item already added to Room");
+        }
+    }
+
+    public void removeMinibarItem(MinibarItem minibarItem) throws NoResultException {
+        if (minibarItem != null && this.getMiniBarItems().contains(minibarItem)) {
+            this.getMiniBarItems().remove(minibarItem);
+        } else {
+            throw new NoResultException("Minibar Item has not been added to Room");
+        }
+    }
+
+    public void addRoomFacility(RoomFacility roomFacility) throws NoResultException {
+        if (roomFacility != null && !this.getRoomFacilities().contains(roomFacility)) {
+            this.getRoomFacilities().add(roomFacility);
+        } else {
+            throw new NoResultException("Room Facility is already added to Room");
+        }
+    }
+
+    public void removeRoomFacility(RoomFacility roomFacility) throws NoResultException {
+        if (roomFacility != null && this.getRoomFacilities().contains(roomFacility)) {
+            this.getRoomFacilities().remove(roomFacility);
+        } else {
+            throw new NoResultException("Room Facility has not been added to Room");
+        }
+    }
+
 }
