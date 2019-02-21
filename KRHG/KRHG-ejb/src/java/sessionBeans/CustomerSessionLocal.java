@@ -10,10 +10,6 @@ import error.NoResultException;
 import java.util.List;
 import javax.ejb.Local;
 
-/**
- *
- * @author dk349
- */
 @Local
 public interface CustomerSessionLocal {
     public List<Customer> getAllCustomers();
