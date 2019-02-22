@@ -34,10 +34,7 @@ public class HotelFacilityBooking implements Serializable {
     private HotelFacility bookedHotelFacility;
     @OneToOne
     private Customer bookedBy;
-    @OneToMany
-    private ArrayList<HolidaySurcharge> holidaySurcharges;
-    @OneToMany
-    private ArrayList<ExtraSurcharge> extraSurcharge;
+
 
     public Long getHotelFacilityBookingID() {
         return hotelFacilityBookingID;
@@ -157,31 +154,5 @@ public class HotelFacilityBooking implements Serializable {
         this.bookedBy = bookedBy;
     }
 
-    /**
-     * @return the holidaySurcharges
-     */
-    public ArrayList<HolidaySurcharge> getHolidaySurcharges() {
-        return holidaySurcharges;
-    }
 
-    /**
-     * @param holidaySurcharges the holidaySurcharges to set
-     */
-    public void setHolidaySurcharges(ArrayList<HolidaySurcharge> holidaySurcharges) {
-        this.holidaySurcharges = holidaySurcharges;
-    }
-
-    /**
-     * @return the extraSurcharge
-     */
-    public ArrayList<ExtraSurcharge> getExtraSurcharge() {
-        return extraSurcharge;
-    }
-
-    /**
-     * @param extraSurcharge the extraSurcharge to set
-     */
-    public void setExtraSurcharge(ArrayList<ExtraSurcharge> extraSurcharge) {
-        this.extraSurcharge = extraSurcharge;
-    }
 }

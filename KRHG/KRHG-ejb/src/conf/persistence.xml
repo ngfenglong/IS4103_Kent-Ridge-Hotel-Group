@@ -33,6 +33,7 @@
     <class>entity.StaffType</class>
     <class>entity.TransportBooking</class>
     <class>entity.WorkSchedule</class>
+    <class>entity.HotelFacilityBooking</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
