@@ -12,7 +12,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -27,8 +26,6 @@ public class Room implements Serializable {
     private String roomPax;
     private String roomHotel;
     private String status;
-    @ManyToOne
-    private Hotel hotel;
     @OneToMany
     private ArrayList<RoomFacility> roomFacilities;
     @OneToMany
@@ -167,14 +164,6 @@ public class Room implements Serializable {
 
     public void setCleaningSchedules(ArrayList<CleaningSchedule> cleaningSchedules) {
         this.cleaningSchedules = cleaningSchedules;
-    }
-
-    public Hotel getHotel() {
-        return hotel;
-    }
-
-    public void setHotel(Hotel hotel) {
-        this.hotel = hotel;
     }
 
     public void addCleaningSchedule(CleaningSchedule cleaningSchedule) throws NoResultException {
