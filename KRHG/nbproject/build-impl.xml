@@ -201,11 +201,6 @@ exists or setup the property manually. For example like this:
                 <isset property="build.deploy.on.save"/>
             </not>
         </condition>
-
-        <ant antfile="${project.Admin-1}/build.xml" inheritall="false" target="dist-ear">
-            <property location="${build.dir}" name="dist.ear.dir"/>
-            <property name="deploy.on.save" value="${build.deploy.on.save}"/>
-        </ant>
         <ant antfile="${project.Frontdesk}/build.xml" inheritall="false" target="dist-ear">
             <property location="${build.dir}" name="dist.ear.dir"/>
             <property name="deploy.on.save" value="${build.deploy.on.save}"/>
@@ -243,7 +238,6 @@ exists or setup the property manually. For example like this:
         <copyfiles files="${reference.Frontdesk.dist-ear}" todir="${build.dir}//"/>
         <copyfiles files="${reference.Hotelstay.dist-ear}" todir="${build.dir}//"/>
         <copyfiles files="${reference.Kiosk-war.dist-ear}" todir="${build.dir}//"/>
-        <copyfiles files="${reference.Admin-1.dist-ear}" todir="${build.dir}//"/>
     </target>
     <target name="post-compile">
         <!-- Empty placeholder for easier customization. -->
@@ -320,7 +314,6 @@ exists or setup the property manually. For example like this:
     </target>
     <target name="-run-deploy-am" unless="no.deps">
         <!-- Task to deploy to the Access Manager runtime. -->
-        <ant antfile="${project.Admin-1}/build.xml" inheritall="false" target="-run-deploy-am"/>
         <ant antfile="${project.Frontdesk}/build.xml" inheritall="false" target="-run-deploy-am"/>
         <ant antfile="${project.Hotelstay}/build.xml" inheritall="false" target="-run-deploy-am"/>
         <ant antfile="${project.KRHG-ejb}/build.xml" inheritall="false" target="-run-deploy-am"/>
@@ -650,10 +643,6 @@ exists or setup the property manually. For example like this:
                 <isset property="build.deploy.on.save"/>
             </not>
         </condition>
-        <ant antfile="${project.Admin-1}/build.xml" inheritall="false" target="clean-ear">
-            <property location="${build.dir}" name="dist.ear.dir"/>
-            <property name="deploy.on.save" value="${build.deploy.on.save}"/>
-        </ant>
         <ant antfile="${project.Frontdesk}/build.xml" inheritall="false" target="clean-ear">
             <property location="${build.dir}" name="dist.ear.dir"/>
             <property name="deploy.on.save" value="${build.deploy.on.save}"/>

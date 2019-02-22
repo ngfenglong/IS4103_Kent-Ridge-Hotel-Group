@@ -8,14 +8,10 @@ package entity;
 import error.NoResultException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 
 /**
@@ -34,28 +30,12 @@ public class Hotel implements Serializable {
     private String hotelAddress;
     private int hotelStar;
     private String hotelContact;
-
-    @OneToMany(mappedBy = "hotel")
-    private List<Room> rooms;
-    @OneToMany(mappedBy = "hotel")
-    private List<HotelFacility> hotelFacilities;
-    @OneToMany(mappedBy = "hotel")
-    private List<Feedback> feedbacks;
-
-    public Hotel() {
-        rooms = new ArrayList<>();
-        hotelFacilities = new ArrayList<>();
-        feedbacks = new ArrayList<>();
-    }
-
-    public Hotel(String hotelName, String hotelCodeName, String hotelAddress, int hotelStar, String hotelContact) {
-        this();
-        this.hotelName = hotelName;
-        this.hotelCodeName = hotelCodeName;
-        this.hotelAddress = hotelAddress;
-        this.hotelStar = hotelStar;
-        this.hotelContact = hotelContact;
-    }
+    @OneToMany
+    private ArrayList<Feedback> feedbacks;
+    @OneToMany
+    private ArrayList<Room> rooms;
+    @OneToMany
+    private ArrayList<HotelFacility> hotelFacilities;
 
     public Long getHotelID() {
         return hotelID;
@@ -135,14 +115,14 @@ public class Hotel implements Serializable {
     /**
      * @return the hotelFacilities
      */
-    public List<HotelFacility> getHotelFacilities() {
+    public ArrayList<HotelFacility> getHotelFacilities() {
         return hotelFacilities;
     }
 
     /**
      * @param hotelFacilities the hotelFacilities to set
      */
-    public void setHotelFacilities(List<HotelFacility> hotelFacilities) {
+    public void setHotelFacilities(ArrayList<HotelFacility> hotelFacilities) {
         this.hotelFacilities = hotelFacilities;
     }
 
@@ -177,22 +157,22 @@ public class Hotel implements Serializable {
     /**
      * @return the rooms
      */
-    public List<Room> getRooms() {
+    public ArrayList<Room> getRooms() {
         return rooms;
     }
 
     /**
      * @param rooms the rooms to set
      */
-    public void setRooms(List<Room> rooms) {
+    public void setRooms(ArrayList<Room> rooms) {
         this.rooms = rooms;
     }
 
-    public List<Feedback> getFeedbacks() {
+       public ArrayList<Feedback> getFeedbacks() {
         return feedbacks;
     }
 
-    public void setFeedbacks(List<Feedback> feedbacks) {
+    public void setFeedbacks(ArrayList<Feedback> feedbacks) {
         this.feedbacks = feedbacks;
     }
 
@@ -243,5 +223,5 @@ public class Hotel implements Serializable {
             throw new NoResultException("Room has not been added to Hotel");
         }
     }
-
+    
 }

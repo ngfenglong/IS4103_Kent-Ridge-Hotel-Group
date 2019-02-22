@@ -8,11 +8,9 @@ package entity;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -31,11 +29,6 @@ public class Feedback implements Serializable {
     private String feedBackMsg;
     @Temporal(TemporalType.DATE)
     private Date feedBackDate;
-    @ManyToOne (fetch = FetchType.LAZY)
-    private Hotel hotel;
-
-    public Feedback() {
-    }
 
     public Long getFeedBackID() {
         return feedBackID;
@@ -126,14 +119,4 @@ public class Feedback implements Serializable {
     public void setFeedBackDate(Date feedBackDate) {
         this.feedBackDate = feedBackDate;
     }
-
-    public Hotel getHotel() {
-        return hotel;
-    }
-
-    public void setHotel(Hotel hotel) {
-        this.hotel = hotel;
-    }
-    
-    
 }

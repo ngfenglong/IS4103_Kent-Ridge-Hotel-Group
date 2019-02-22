@@ -10,7 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 /**
  *
@@ -26,7 +25,6 @@ public class HotelFacility implements Serializable {
     private String hotelFacilityName;
     private String hotelFacilityDescription;
     private String hotelFacilityImage;
-    private Hotel hotel;
 
     @Override
     public int hashCode() {
@@ -108,15 +106,5 @@ public class HotelFacility implements Serializable {
     public void setHotelFacilityImage(String hotelFacilityImage) {
         this.hotelFacilityImage = hotelFacilityImage;
     }
-
-    public Hotel getHotel() {
-        return hotel;
-    }
-
-    public void setHotel(Hotel hotel) {
-        this.hotel = hotel;
-    }
-
-    
     
 }
