@@ -26,3 +26,41 @@
 /KRHG/KRHG-war/build/
 /KRHG/KRHG-war/dist/
 /KRHG/KRHG-war/nbproject/private/
+
+
+# Compiled Class File
+*.class
+
+# Log File
+*.log
+
+# BlueJ Files
+*.ctxt
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Ant Specific
+dist/
+build/
+
+# Netbeans Specific
+core
+nbproject/*
+
+# Java specific
+*.class
+
+# General Swap/Backup Files
+*.so
+*.log
+*.out
+*~
+*.swp
+*.DS_Store
+*.lock
