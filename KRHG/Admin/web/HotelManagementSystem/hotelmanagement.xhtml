@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta charset="utf-8" />
+        <style>
+            table {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            td, th {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+            }
+
+            tr:nth-child(even) {
+                background-color: #dddddd;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <h:form id="form1">
+            <h2>Hotels</h2>
+            #{hotelManagedBean.testing}
+            <h:commandButton class="btn btn-secondary" value="Edit"/>
+            <input type="button" value="Back" onclick="window.location.href = 'adminhome.xhtml'" />
+
+            <h:dataTable value = "#{hotelManagedBean.allHotels}" var = "hotel">
+
+                <h:column>    				
+                    <f:facet name = "header">Hotel Name</f:facet>    				
+                        #{hotel.hotelName}
+                </h:column>
+
+                <h:column>
+                    <f:facet name = "header">Hotel Code</f:facet>
+                        #{hotel.hotelCodeName}
+                </h:column>
+
+                <h:column>
+                    <f:facet name = "header">Stars</f:facet>
+                        #{hotel.hotelStar}
+                </h:column>
+
+                <h:column>
+                    <f:facet name = "header">Contact Number</f:facet>
+                        #{hotel.hotelContact}
+                </h:column>
+            </h:dataTable>
+            <table>
+                <tr>
+                    <th>Hotel Name</th>
+                    <th>Hotel Code</th>
+                    <th>Stars</th>
+                    <th>Contact Number</th>
+                    <th>Rooms</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+
+                <c:forEach var="o" items="#{hotelManagedBean.getAllHotels()}" >
+                    <tr>
+                        <td>#{o.hotelName}</td>
+                        <td>#{o.hotelCodeName}</td>
+                        <td>#{o.hotelStar}</td>
+                        <td>#{o.hotelContact}</td>
+                        <td>#{o.rooms.size()}</td>
+                        <td><h:commandButton class="btn btn-secondary" value="Edit"/></td>
+                        <td>><h:commandButton class="btn btn-secondary" value="Delete"/></td>
+                    </tr>
+
+                </c:forEach>
+
+                <!--            <tr>
+                                <td>Kent Ridge North</td>
+                                <td><input type="button" value="Edit" onclick="window.location.href = 'EditHotelN.html'" /></td>
+                                <td><input id="delete" type="button" value="Delete" onclick="DeleteHotel();" /></td>
+                            </tr>
+                            <tr>
+                                <td>Kent Ridge North East</td>
+                                <td><input type="button" value="Edit" onclick="window.location.href = 'EditHotelNE.html'" /></td>
+                                <td><input id="delete" type="button" value="Delete" onclick="DeleteHotel();" /></td>
+                            </tr>
+                            <tr>
+                                <td>Kent Ridge East</td>
+                                <td><input type="button" value="Edit" onclick="window.location.href = 'EditHotelE.html'" /></td>
+                                <td><input id="delete" type="button" value="Delete" onclick="DeleteHotel();" /></td>
+                            </tr>
+                            <tr>
+                                <td>Kent Ridge South East</td>
+                                <td><input type="button" value="Edit" onclick="window.location.href = 'EditHotelSE.html'" /></td>
+                                <td><input id="delete" type="button" value="Delete" onclick="DeleteHotel();" /></td>
+                            </tr>
+                            <tr>
+                                <td>Kent Ridge South</td>
+                                <td><input type="button" value="Edit" onclick="window.location.href = 'EditHotelS.html'" /></td>
+                                <td><input id="delete" type="button" value="Delete" onclick="DeleteHotel();" /></td>      </tr>
+                            <tr>
+                                <td>Kent Ridge South West</td>
+                                <td><input type="button" value="Edit" onclick="window.location.href = 'EditHotelSW.html'" /></td>
+                                <td><input id="delete" type="button" value="Delete" onclick="DeleteHotel();" /></td>
+                            </tr>
+                            <tr>
+                                <td>Kent Ridge West</td>
+                                <td><input type="button" value="Edit" onclick="window.location.href = 'EditHotelW.html'" /></td>
+                                <td><input id="delete" type="button" value="Delete" onclick="DeleteHotel();" /></td>
+                            </tr>
+                            <tr>
+                                <td>Kent Ridge North West</td>
+                                <td><input type="button" value="Edit" onclick="window.location.href = 'EditHotelNW.html'" /></td>
+                                <td><input id="delete" type="button" value="Delete" onclick="DeleteHotel();" /></td>
+                            </tr>
+                            <tr>
+                                <td>Kent Ridge Central</td>
+                                <td><input type="button" value="Edit" onclick="window.location.href = 'EditHotelC.html'" /></td>
+                                <td><input id="delete" type="button" value="Delete" onclick="DeleteHotel();" /></td>
+                            </tr>
+                            <tr>
+                                <td>Kent Ridge Grand</td>
+                                <td><input type="button" value="Edit" onclick="window.location.href = 'EditHotelG.html'" /></td>
+                                <td><input id="delete" type="button" value="Delete" onclick="DeleteHotel();" /></td>
+                            </tr>-->
+            </table>
+
+            <input type="button" value="Add Hotel" onclick="window.location.href = 'AddHotel.html'" />
+        </h:form>
+    </h:body>
+</html>
