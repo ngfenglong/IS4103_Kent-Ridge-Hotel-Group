@@ -23,7 +23,7 @@ public interface BookingSessionLocal {
     public List<RoomBooking> getRoomBookingByEmail(String email, Date bookInDate, Date bookOutDate, String status) throws NoResultException;
     public List<RoomBooking> getRoomBookingByDate(Date bookInDate, Date bookOutDate, String status) throws NoResultException;
     public void updateRoomBooking (RoomBooking roomBooking) throws NoResultException;
-    public void deleteRoomBooking (RoomBooking roomBooking);
+    public void deleteRoomBooking (Long roomBookingID) throws NoResultException;
     public void createRoomBooking (RoomBooking roomBooking);
     
     public List<HotelFacilityBooking> getAllHotelFacilityBooking() throws NoResultException;
@@ -31,6 +31,6 @@ public interface BookingSessionLocal {
     public List<HotelFacilityBooking> getHotelFacilityBookingByEmail(String email, Date startDate, Date endDate, String status) throws NoResultException;
     public List<HotelFacilityBooking> getHotelFacilityBookingByDate(Date bookInDate, Date bookOutDate, String status) throws NoResultException;
     public void updateHotelFacilityBooking (HotelFacilityBooking hotelFacilityBooking) throws NoResultException;
-    public void deleteHotelFacilityBooking (HotelFacilityBooking hotelFacilityBooking);
+    public void deleteHotelFacilityBooking (Long hotelFacilityBookingID) throws NoResultException;
     public void createHotelFacilityBooking (HotelFacilityBooking hotelFacilityBooking);       
 }
