@@ -106,6 +106,9 @@ and open the template in the editor.
                             <td>
                                 Passport no
                             </td>
+                            <td>
+                                Room type
+                            </td>
 
                         </tr>
                         <tr>
@@ -124,11 +127,13 @@ and open the template in the editor.
                             <td>
                                 A0123567
                             </td>
-
+                            <td>
+                                Standard
+                            </td>
                         </tr>
                         <tr>
                             <td>
-                                <button onclick="checkin()">Check in</button>
+                                <button onclick="checkout()">Check out</button>
                             </td>
                         </tr>
                     </table>
@@ -186,6 +191,9 @@ and open the template in the editor.
                                     })();
                                     function checkin() {
                                         window.alert("Check in successfully with room asign");
+                                    }
+                                    function checkout() {
+                                        window.alert("Check out successfully ");
                                     }
                                     function goto(link) {
                                         window.location.replace(link);
