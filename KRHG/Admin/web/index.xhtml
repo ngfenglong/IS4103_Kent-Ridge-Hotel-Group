@@ -6,89 +6,206 @@ and open the template in the editor.
 -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
+
     <head>
-        <title>Backend</title>
-        <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-
-        <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700" rel="stylesheet"/>
-        <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i" rel="stylesheet"/>
-
-        <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css"/>
-        <link rel="stylesheet" href="css/animate.css"/>
-
-        <link rel="stylesheet" href="css/owl.carousel.min.css"/>
-        <link rel="stylesheet" href="css/owl.theme.default.min.css"/>
-        <link rel="stylesheet" href="css/magnific-popup.css"/>
-
-        <link rel="stylesheet" href="css/aos.css"/>
-
-        <link rel="stylesheet" href="css/ionicons.min.css"/>
-
-        <link rel="stylesheet" href="css/bootstrap-datepicker.css"/>
-        <link rel="stylesheet" href="css/jquery.timepicker.css"/>
-
-
-        <link rel="stylesheet" href="css/flaticon.css"/>
-        <link rel="stylesheet" href="css/icomoon.css"/>
-        <link rel="stylesheet" href="css/style.css"/>
+        <meta charset="UTF-8" ></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+        <title>Kent Ridge Hotel- Front Desk</title>
+        <meta name="description" content="Blueprint: A basic template for a responsive multi-level menu" ></meta>
+        <meta name="keywords" content="blueprint, template, html, css, menu, responsive, mobile-friendly" ></meta>
+        <meta name="author" content="Codrops" ></meta>
+        <link rel="shortcut icon" href="favicon.ico"></link>
+        <!-- food icons -->
+        <link rel="stylesheet" type="text/css" href="css/organicfoodicons.css" ></link>
+        <!-- demo styles -->
+        <link rel="stylesheet" type="text/css" href="css/demo.css" ></link>
+        <!-- menu styles -->
+        <link rel="stylesheet" type="text/css" href="css/component.css" ></link>
+        <script src="js/modernizr-custom.js"></script>
     </head>
+
     <body>
-        <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-            <div class="container">
-                <a class="navbar-brand" href="index.html">KRHG</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="oi oi-menu"></span> Menu
-                </button>
+        <!-- Main container -->
+        <div class="container">
+            <!-- Blueprint header -->
+            <header class="bp-header cf">
+                <div class="dummy-logo">
+                  
+                    
+                    <h2 class="dummy-heading">KRHG</h2>
+                </div>
+                <div class="bp-header__main">
+                    <h1 class="bp-header__title">Admin Home Page</h1>
+                    <nav class="bp-nav">
+                        <a class="bp-nav__item bp-icon bp-icon--prev" href="http://tympanus.net/Blueprints/PageStackNavigation/" data-info="Log out"><span>Log out</span></a>
+                        <a class="bp-nav__item bp-icon bp-icon--next" href="index.xhtml" data-info="Home"><span>Home</span></a>
 
-                <div class="collapse navbar-collapse" id="ftco-nav">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active"><a href="index.xhtml" class="nav-link">Home</a></li>
-                        <li class="nav-item"><a href="adminhome.xhtml" class="nav-link">Admin</a></li>
-                        <li class="nav-item"><a href="login/loginB.xhtml" class="nav-link">Sales &amp; Marketing</a></li>
-                        <!--<li class="nav-item"><a href="hotels.xhtml" class="nav-link">Front Desk</a></li>-->
+                    </nav>
+                </div>
+            </header>
+            <button class="action action--open" aria-label="Open Menu"><span class="icon icon--menu"></span></button>
+            <nav id="ml-menu" class="menu">
+                <button class="action action--close" aria-label="Close Menu"><span class="icon icon--cross"></span></button>
+                <div class="menu__wrap">
+                    <ul data-menu="main" class="menu__level" tabindex="-1" role="menu" aria-label="All">
+                        <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1" aria-owns="submenu-1" href="#">Hotel Management System</a></li>
+                        <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-2" aria-owns="submenu-1" href="#">Staff Management System</a></li>
+                        <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-3" aria-owns="submenu-1" href="#">Leave and Rooster System</a></li>
+
                     </ul>
+
+
+                    <!-- Submenu 1 -->
+                    <ul data-menu="submenu-1" id="submenu-1" class="menu__level" tabindex="-1" role="menu" aria-label="Vegetables">
+                    <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('AddHotel.xhtml')">Add Hotel</a></li>
+                    <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1-1" aria-owns="submenu-1-1" href="#">Kent Ridge Grand</a></li>
+                    <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1-2" aria-owns="submenu-1-2" href="#">Kent Ridge Central</a></li>
+                    <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1-3" aria-owns="submenu-1-3" href="#">Kent Ridge North</a></li>
+                    <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1-4" aria-owns="submenu-1-4" href="#">Kent Ridge North East</a></li>
+                    <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1-5" aria-owns="submenu-1-5" href="#">Kent Ridge East</a></li>
+                    <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1-6" aria-owns="submenu-1-6" href="#">Kent Ridge South East</a></li>
+                    <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1-7" aria-owns="submenu-1-7" href="#">Kent Ridge South</a></li>
+                    <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1-8" aria-owns="submenu-1-8" href="#">Kent Ridge South West</a></li>
+                    <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1-9" aria-owns="submenu-1-9" href="#">Kent Ridge West</a></li>
+                    <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1-10" aria-owns="submenu-1-10" href="#">Kent Ridge North West</a></li>
+
+                    </ul>
+                 
+                    <!-- Submenu 1-1 -->
+                    <ul data-menu="submenu-1-1" id="submenu-1-1" class="menu__level" tabindex="-1" role="menu" aria-label="Vegetables">
+                    <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('KRGF.xhtml')">Facility</a></li>
+                    <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('KRGR.xhtml')">Room</a></li>
+                    
+                    </ul>   
+                    
+                    <!-- Submenu 1-2 -->
+                    <ul data-menu="submenu-1-2" id="submenu-1-2" class="menu__level" tabindex="-1" role="menu" aria-label="Vegetables">
+                        <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('KRCF.xhtml')">Facility</a></li>
+                        <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('KRCR.xhtml')">Room</a></li>
+                        
+                    </ul>  
+
+                    <!-- Submenu 1-3 -->
+                    <ul data-menu="submenu-1-3" id="submenu-1-3" class="menu__level" tabindex="-1" role="menu" aria-label="Vegetables">
+                        <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('KRNF.xhtml')">Facility</a></li>
+                        <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('KRNR.xhtml')">Room</a></li>
+                        
+                    </ul>  
+
+                    <!-- Submenu 1-4 -->
+                    <ul data-menu="submenu-1-4" id="submenu-1-4" class="menu__level" tabindex="-1" role="menu" aria-label="Vegetables">
+                        <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('KRNEF.xhtml')">Facility</a></li>
+                        <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('KRNER.xhtml')">Room</a></li>
+                        
+                    </ul>
+                    
+                    <!-- Submenu 1-5 -->
+                    <ul data-menu="submenu-1-5" id="submenu-1-5" class="menu__level" tabindex="-1" role="menu" aria-label="Vegetables">
+                        <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('KREF.xhtml')">Facility</a></li>
+                        <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('KRER.xhtml')">Room</a></li>
+                        
+                    </ul>
+                    
+                    <!-- Submenu 1-6 -->
+                    <ul data-menu="submenu-1-6" id="submenu-1-6" class="menu__level" tabindex="-1" role="menu" aria-label="Vegetables">
+                        <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('KRSEF.xhtml')">Facility</a></li>
+                        <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('KRSER.xhtml')">Room</a></li>
+                        
+                    </ul>  
+
+                    <!-- Submenu 1-7 -->
+                    <ul data-menu="submenu-1-7" id="submenu-1-7" class="menu__level" tabindex="-1" role="menu" aria-label="Vegetables">
+                        <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('KRSF.xhtml')">Facility</a></li>
+                        <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('KRSR.xhtml')">Room</a></li>
+                        
+                    </ul>  
+
+                    <!-- Submenu 1-8 -->
+                    <ul data-menu="submenu-1-8" id="submenu-1-8" class="menu__level" tabindex="-1" role="menu" aria-label="Vegetables">
+                        <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('KRSWF.xhtml')">Facility</a></li>
+                        <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('KRSWR.xhtml')">Room</a></li>
+                        
+                    </ul>
+                    
+                    <!-- Submenu 1-9 -->
+                    <ul data-menu="submenu-1-9" id="submenu-1-9" class="menu__level" tabindex="-1" role="menu" aria-label="Vegetables">
+                        <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('KRWF.xhtml')">Facility</a></li>
+                        <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('KRWR.xhtml')">Room</a></li>
+                        
+                    </ul>
+                    
+                    <!-- Submenu 1-10 -->
+                    <ul data-menu="submenu-1-10" id="submenu-1-10" class="menu__level" tabindex="-1" role="menu" aria-label="Vegetables">
+                        <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('KRNWF.xhtml')">Facility</a></li>
+                        <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('KRNWR.xhtml')">Room</a></li>
+                        
+                    </ul>  
+
+                        
+                    
+                  
                 </div>
+            </nav>
+            <div class="content">
+                <p class="info">Please choose a category</p>
+                <!-- Ajax loaded content here -->
             </div>
-        </nav>
-        <!-- END nav -->
-
-        <section class="home-slider owl-carousel">
-            <div class="slider-item" style="background-image:url(images/bg_1.jpg);">
-                <div class="overlay"></div>
-                <div class="container">
-                    <div class="row no-gutters slider-text align-items-center justify-content-center">
-                        <div class="col-md-12 ftco-animate text-center">
-                            <div class="text mb-5 pb-3">
-                                <h1 class="mb-3">Backend</h1>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>  
-
-        <!-- loader -->
-        <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
-
-
-        <script src="js/jquery.min.js"></script>
-        <script src="js/jquery-migrate-3.0.1.min.js"></script>
-        <script src="js/popper.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/jquery.easing.1.3.js"></script>
-        <script src="js/jquery.waypoints.min.js"></script>
-        <script src="js/jquery.stellar.min.js"></script>
-        <script src="js/owl.carousel.min.js"></script>
-        <script src="js/jquery.magnific-popup.min.js"></script>
-        <script src="js/aos.js"></script>
-        <script src="js/jquery.animateNumber.min.js"></script>
-        <script src="js/bootstrap-datepicker.js"></script>
-        <script src="js/jquery.timepicker.min.js"></script>
-        <script src="js/scrollax.min.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&amp;sensor=false"></script>
-        <script src="js/google-map.js"></script>
+        </div>
+        <!-- /view -->
+        <script src="js/classie.js"></script>
+        <script src="js/dummydata.js"></script>
         <script src="js/main.js"></script>
+        <script>
+            (function () {
+                var menuEl = document.getElementById('ml-menu'),
+                        mlmenu = new MLMenu(menuEl, {
+                            // breadcrumbsCtrl : true, // show breadcrumbs
+                            // initialBreadcrumb : 'all', // initial breadcrumb text
+                            backCtrl: false, // show back button
+                            // itemsDelayInterval : 60, // delay between each menu item sliding animation
+                            onItemClick: loadDummyData // callback: item that doesn´t have a submenu gets clicked - onItemClick([event], [inner HTML of the clicked item])
+                        });
 
+                // mobile menu toggle
+                var openMenuCtrl = document.querySelector('.action--open'),
+                        closeMenuCtrl = document.querySelector('.action--close');
+
+                openMenuCtrl.addEventListener('click', openMenu);
+                closeMenuCtrl.addEventListener('click', closeMenu);
+
+                function openMenu() {
+                    classie.add(menuEl, 'menu--open');
+                    closeMenuCtrl.focus();
+                }
+
+                function closeMenu() {
+                    classie.remove(menuEl, 'menu--open');
+                    openMenuCtrl.focus();
+                }
+
+                // simulate grid content loading
+                var gridWrapper = document.querySelector('.content');
+
+                function loadDummyData(ev, itemName) {
+                    ev.preventDefault();
+
+                    closeMenu();
+                    gridWrapper.innerHTML = '';
+                    classie.add(gridWrapper, 'content--loading');
+                    setTimeout(function () {
+                        classie.remove(gridWrapper, 'content--loading');
+                        gridWrapper.innerHTML = '<ul class="products">' + dummyData[itemName] + '</ul>';
+                    }, 700);
+                }
+                function goto(link) {
+                    window.location.replace(link);
+                }
+            })();
+            function goto(link){
+                window.location.replace(link);
+            }
+        </script>
     </body>
+
 </html>

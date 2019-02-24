@@ -1,352 +1,387 @@
- AOS.init({
- 	duration: 800,
- 	easing: 'slide'
- });
+/**
+ * main.js
+ * http://www.codrops.com
+ *
+ * Licensed under the MIT license.
+ * http://www.opensource.org/licenses/mit-license.php
+ * 
+ * Copyright 2015, Codrops
+ * http://www.codrops.com
+ */
 
-(function($) {
+;(function(window) {
 
-	"use strict";
+	'use strict';
 
-	var isMobile = {
-		Android: function() {
-			return navigator.userAgent.match(/Android/i);
-		},
-			BlackBerry: function() {
-			return navigator.userAgent.match(/BlackBerry/i);
-		},
-			iOS: function() {
-			return navigator.userAgent.match(/iPhone|iPad|iPod/i);
-		},
-			Opera: function() {
-			return navigator.userAgent.match(/Opera Mini/i);
-		},
-			Windows: function() {
-			return navigator.userAgent.match(/IEMobile/i);
-		},
-			any: function() {
-			return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+	var support = { animations : Modernizr.cssanimations },
+		animEndEventNames = { 'WebkitAnimation' : 'webkitAnimationEnd', 'OAnimation' : 'oAnimationEnd', 'msAnimation' : 'MSAnimationEnd', 'animation' : 'animationend' },
+		animEndEventName = animEndEventNames[ Modernizr.prefixed( 'animation' ) ],
+		onEndAnimation = function( el, callback ) {
+			var onEndCallbackFn = function( ev ) {
+				if( support.animations ) {
+					if( ev.target != this ) return;
+					this.removeEventListener( animEndEventName, onEndCallbackFn );
+				}
+				if( callback && typeof callback === 'function' ) { callback.call(); }
+			};
+			if( support.animations ) {
+				el.addEventListener( animEndEventName, onEndCallbackFn );
+			}
+			else {
+				onEndCallbackFn();
+			}
+		};
+
+	function extend( a, b ) {
+		for( var key in b ) { 
+			if( b.hasOwnProperty( key ) ) {
+				a[key] = b[key];
+			}
 		}
-	};
-
-
-	$(window).stellar({
-    responsive: true,
-    parallaxBackgrounds: true,
-    parallaxElements: true,
-    horizontalScrolling: false,
-    hideDistantElements: false,
-    scrollProperty: 'scroll'
-  });
-
-
-	var fullHeight = function() {
-
-		$('.js-fullheight').css('height', $(window).height());
-		$(window).resize(function(){
-			$('.js-fullheight').css('height', $(window).height());
-		});
-
-	};
-	fullHeight();
-
-	// loader
-	var loader = function() {
-		setTimeout(function() { 
-			if($('#ftco-loader').length > 0) {
-				$('#ftco-loader').removeClass('show');
-			}
-		}, 1);
-	};
-	loader();
-
-	// Scrollax
-   $.Scrollax();
-
-	var carousel = function() {
-		$('.home-slider').owlCarousel({
-	    loop:true,
-	    autoplay: true,
-	    margin:0,
-	    animateOut: 'fadeOut',
-	    animateIn: 'fadeIn',
-	    nav:false,
-	    dots: false,
-	    autoplayHoverPause: false,
-	    items: 1,
-	    navText : ["<span class='ion-md-arrow-back'></span>","<span class='ion-chevron-right'></span>"],
-	    responsive:{
-	      0:{
-	        items:1
-	      },
-	      600:{
-	        items:1
-	      },
-	      1000:{
-	        items:1
-	      }
-	    }
-		});
-		$('.carousel-testimony').owlCarousel({
-			autoplay: true,
-			loop: true,
-			items:1,
-			margin: 0,
-			stagePadding: 0,
-			nav: false,
-			navText: ['<span class="ion-ios-arrow-back">', '<span class="ion-ios-arrow-forward">'],
-			responsive:{
-				0:{
-					items: 1
-				},
-				600:{
-					items: 1
-				},
-				1000:{
-					items: 1
-				}
-			}
-		});
-
-		$('.single-slider').owlCarousel({
-			animateOut: 'fadeOut',
-	    animateIn: 'fadeIn',
-			autoplay: true,
-			loop: true,
-			items:1,
-			margin: 0,
-			stagePadding: 0,
-			nav: true,
-			dots: true,
-			navText: ['<span class="ion-ios-arrow-back">', '<span class="ion-ios-arrow-forward">'],
-			responsive:{
-				0:{
-					items: 1
-				},
-				600:{
-					items: 1
-				},
-				1000:{
-					items: 1
-				}
-			}
-		});
-
-	};
-	carousel();
-
-	$('nav .dropdown').hover(function(){
-		var $this = $(this);
-		// 	 timer;
-		// clearTimeout(timer);
-		$this.addClass('show');
-		$this.find('> a').attr('aria-expanded', true);
-		// $this.find('.dropdown-menu').addClass('animated-fast fadeInUp show');
-		$this.find('.dropdown-menu').addClass('show');
-	}, function(){
-		var $this = $(this);
-			// timer;
-		// timer = setTimeout(function(){
-			$this.removeClass('show');
-			$this.find('> a').attr('aria-expanded', false);
-			// $this.find('.dropdown-menu').removeClass('animated-fast fadeInUp show');
-			$this.find('.dropdown-menu').removeClass('show');
-		// }, 100);
-	});
-
-
-	$('#dropdown04').on('show.bs.dropdown', function () {
-	  console.log('show');
-	});
-
-	// scroll
-	var scrollWindow = function() {
-		$(window).scroll(function(){
-			var $w = $(this),
-					st = $w.scrollTop(),
-					navbar = $('.ftco_navbar'),
-					sd = $('.js-scroll-wrap');
-
-			if (st > 150) {
-				if ( !navbar.hasClass('scrolled') ) {
-					navbar.addClass('scrolled');	
-				}
-			} 
-			if (st < 150) {
-				if ( navbar.hasClass('scrolled') ) {
-					navbar.removeClass('scrolled sleep');
-				}
-			} 
-			if ( st > 350 ) {
-				if ( !navbar.hasClass('awake') ) {
-					navbar.addClass('awake');	
-				}
-				
-				if(sd.length > 0) {
-					sd.addClass('sleep');
-				}
-			}
-			if ( st < 350 ) {
-				if ( navbar.hasClass('awake') ) {
-					navbar.removeClass('awake');
-					navbar.addClass('sleep');
-				}
-				if(sd.length > 0) {
-					sd.removeClass('sleep');
-				}
-			}
-		});
-	};
-	scrollWindow();
-
-	var isMobile = {
-		Android: function() {
-			return navigator.userAgent.match(/Android/i);
-		},
-			BlackBerry: function() {
-			return navigator.userAgent.match(/BlackBerry/i);
-		},
-			iOS: function() {
-			return navigator.userAgent.match(/iPhone|iPad|iPod/i);
-		},
-			Opera: function() {
-			return navigator.userAgent.match(/Opera Mini/i);
-		},
-			Windows: function() {
-			return navigator.userAgent.match(/IEMobile/i);
-		},
-			any: function() {
-			return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
-		}
-	};
-
-	
-	var counter = function() {
-		
-		$('#section-counter').waypoint( function( direction ) {
-
-			if( direction === 'down' && !$(this.element).hasClass('ftco-animated') ) {
-
-				var comma_separator_number_step = $.animateNumber.numberStepFactories.separator(',')
-				$('.number').each(function(){
-					var $this = $(this),
-						num = $this.data('number');
-						console.log(num);
-					$this.animateNumber(
-					  {
-					    number: num,
-					    numberStep: comma_separator_number_step
-					  }, 7000
-					);
-				});
-				
-			}
-
-		} , { offset: '95%' } );
-
+		return a;
 	}
-	counter();
 
-	var contentWayPoint = function() {
-		var i = 0;
-		$('.ftco-animate').waypoint( function( direction ) {
+	function MLMenu(el, options) {
+		this.el = el;
+		this.options = extend( {}, this.options );
+		extend( this.options, options );
+		
+		// the menus (<ul>´s)
+		this.menus = [].slice.call(this.el.querySelectorAll('.menu__level'));
 
-			if( direction === 'down' && !$(this.element).hasClass('ftco-animated') ) {
-				
-				i++;
+		// index of current menu
+		// Each level is actually a different menu so 0 is root, 1 is sub-1, 2 sub-2, etc.
+		this.current_menu = 0;
 
-				$(this.element).addClass('item-animate');
-				setTimeout(function(){
+		/* Determine what current menu actually is */
+		var current_menu;
+		this.menus.forEach(function(menuEl, pos) {
+			var items = menuEl.querySelectorAll('.menu__item');
+			items.forEach(function(itemEl, iPos) {
+				var currentLink = itemEl.querySelector('.menu__link--current');
+				if (currentLink) {
+					// This is the actual menu__level that should have current
+					current_menu = pos;
+				}
+			});
+		});
 
-					$('body .ftco-animate.item-animate').each(function(k){
-						var el = $(this);
-						setTimeout( function () {
-							var effect = el.data('animate-effect');
-							if ( effect === 'fadeIn') {
-								el.addClass('fadeIn ftco-animated');
-							} else if ( effect === 'fadeInLeft') {
-								el.addClass('fadeInLeft ftco-animated');
-							} else if ( effect === 'fadeInRight') {
-								el.addClass('fadeInRight ftco-animated');
-							} else {
-								el.addClass('fadeInUp ftco-animated');
-							}
-							el.removeClass('item-animate');
-						},  k * 50, 'easeInOutExpo' );
-					});
-					
-				}, 100);
-				
+		if (current_menu) {
+			this.current_menu = current_menu;	
+		}
+
+		this._init();
+	}
+
+	MLMenu.prototype.options = {
+		// show breadcrumbs
+		breadcrumbsCtrl : true,
+		// initial breadcrumb text
+		initialBreadcrumb : 'all',
+		// show back button
+		backCtrl : true,
+		// delay between each menu item sliding animation
+		itemsDelayInterval : 60,
+		// direction 
+		direction : 'r2l',
+		// callback: item that doesn´t have a submenu gets clicked
+		// onItemClick([event], [inner HTML of the clicked item])
+		onItemClick : function(ev, itemName) { return false; }
+	};
+
+	MLMenu.prototype._init = function() {
+		// iterate the existing menus and create an array of menus, 
+		// more specifically an array of objects where each one holds the info of each menu element and its menu items
+		this.menusArr = [];
+		this.breadCrumbs = false;
+		var self = this;
+		var submenus = [];
+
+		/* Loops over root level menu items */
+		this.menus.forEach(function(menuEl, pos) {
+			var menu = {menuEl : menuEl, menuItems : [].slice.call(menuEl.querySelectorAll('.menu__item'))};
+			
+			self.menusArr.push(menu);
+
+			// set current menu class
+			if( pos === self.current_menu ) {
+				classie.add(menuEl, 'menu__level--current');
 			}
 
-		} , { offset: '95%' } );
-	};
-	contentWayPoint();
-
-
-	// navigation
-	var OnePageNav = function() {
-		$(".smoothscroll[href^='#'], #ftco-nav ul li a[href^='#']").on('click', function(e) {
-		 	e.preventDefault();
-
-		 	var hash = this.hash,
-		 			navToggler = $('.navbar-toggler');
-		 	$('html, body').animate({
-		    scrollTop: $(hash).offset().top
-		  }, 700, 'easeInOutExpo', function(){
-		    window.location.hash = hash;
-		  });
-
-
-		  if ( navToggler.is(':visible') ) {
-		  	navToggler.click();
-		  }
+			var menu_x = menuEl.getAttribute('data-menu');
+			var links = menuEl.querySelectorAll('.menu__link');
+			links.forEach(function(linkEl, lPos) {
+				var submenu = linkEl.getAttribute('data-submenu');
+				if (submenu) {
+					var pushMe = {"menu":submenu, "name": linkEl.innerHTML };
+					if (submenus[pos]) {
+						submenus[pos].push(pushMe);
+					} else {
+						submenus[pos] = []
+						submenus[pos].push(pushMe);
+					}
+				}
+			});
 		});
-		$('body').on('activate.bs.scrollspy', function () {
-		  console.log('nice');
-		})
+
+		/* For each MENU, find their parent MENU */		
+		this.menus.forEach(function(menuEl, pos) {
+			var menu_x = menuEl.getAttribute('data-menu');
+			submenus.forEach(function(subMenuEl, menu_root) {
+				subMenuEl.forEach(function(subMenuItem, subPos) {
+					if (subMenuItem.menu == menu_x) {
+						self.menusArr[pos].backIdx = menu_root;
+						self.menusArr[pos].name = subMenuItem.name;
+					}
+				});
+			});
+		});
+
+		// create breadcrumbs
+		if( self.options.breadcrumbsCtrl ) {
+			this.breadcrumbsCtrl = document.createElement('nav');
+			this.breadcrumbsCtrl.className = 'menu__breadcrumbs';
+			this.breadcrumbsCtrl.setAttribute('aria-label', 'You are here');
+			this.el.insertBefore(this.breadcrumbsCtrl, this.el.firstChild);
+			// add initial breadcrumb
+			this._addBreadcrumb(0);
+			
+			// Need to add breadcrumbs for all parents of current submenu
+			if (self.menusArr[self.current_menu].backIdx != 0 && self.current_menu != 0) {
+				this._crawlCrumbs(self.menusArr[self.current_menu].backIdx, self.menusArr);
+				this.breadCrumbs = true;
+			}
+
+			// Create current submenu breadcrumb
+			if (self.current_menu != 0) {
+				this._addBreadcrumb(self.current_menu);
+				this.breadCrumbs = true;
+			}
+		}
+
+		// create back button
+		if (this.options.backCtrl) {
+			this.backCtrl = document.createElement('button');
+			if (this.breadCrumbs) {
+				this.backCtrl.className = 'menu__back';	
+			} else {
+				this.backCtrl.className = 'menu__back menu__back--hidden';
+			}
+			this.backCtrl.setAttribute('aria-label', 'Go back');
+			this.backCtrl.innerHTML = '<span class="icon icon--arrow-left"></span>';
+			this.el.insertBefore(this.backCtrl, this.el.firstChild);
+		}
+
+		// event binding
+		this._initEvents();
 	};
-	OnePageNav();
 
+	MLMenu.prototype._initEvents = function() {
+		var self = this;
 
-	// magnific popup
-	$('.image-popup').magnificPopup({
-    type: 'image',
-    closeOnContentClick: true,
-    closeBtnInside: false,
-    fixedContentPos: true,
-    mainClass: 'mfp-no-margins mfp-with-zoom', // class to remove default margin from left and right side
-     gallery: {
-      enabled: true,
-      navigateByImgClick: true,
-      preload: [0,1] // Will preload 0 - before current, and 1 after the current image
-    },
-    image: {
-      verticalFit: true
-    },
-    zoom: {
-      enabled: true,
-      duration: 300 // don't foget to change the duration also in CSS
-    }
-  });
+		for(var i = 0, len = this.menusArr.length; i < len; ++i) {
+			this.menusArr[i].menuItems.forEach(function(item, pos) {
+				item.querySelector('a').addEventListener('click', function(ev) { 
+					var submenu = ev.target.getAttribute('data-submenu'),
+						itemName = ev.target.innerHTML,
+						subMenuEl = self.el.querySelector('ul[data-menu="' + submenu + '"]');
 
-  $('.popup-youtube, .popup-vimeo, .popup-gmaps').magnificPopup({
-    disableOn: 700,
-    type: 'iframe',
-    mainClass: 'mfp-fade',
-    removalDelay: 160,
-    preloader: false,
+					// check if there's a sub menu for this item
+					if( submenu && subMenuEl ) {
+						ev.preventDefault();
+						// open it
+						self._openSubMenu(subMenuEl, pos, itemName);
+					}
+					else {
+						// add class current
+						var currentlink = self.el.querySelector('.menu__link--current');
+						if( currentlink ) {
+							classie.remove(self.el.querySelector('.menu__link--current'), 'menu__link--current');
+						}
+						classie.add(ev.target, 'menu__link--current');
+						
+						// callback
+						self.options.onItemClick(ev, itemName);
+					}
+				});
+			});
+		}
+		
+		// back navigation
+		if( this.options.backCtrl ) {
+			this.backCtrl.addEventListener('click', function() {
+				self._back();
+			});
+		}
+	};
 
-    fixedContentPos: false
-  });
+	MLMenu.prototype._openSubMenu = function(subMenuEl, clickPosition, subMenuName) {
+		if( this.isAnimating ) {
+			return false;
+		}
+		this.isAnimating = true;
+		
+		// save "parent" menu index for back navigation
+		this.menusArr[this.menus.indexOf(subMenuEl)].backIdx = this.current_menu;
+		// save "parent" menu´s name
+		this.menusArr[this.menus.indexOf(subMenuEl)].name = subMenuName;
+		// current menu slides out
+		this._menuOut(clickPosition);
+		// next menu (submenu) slides in
+		this._menuIn(subMenuEl, clickPosition);
+	};
 
+	MLMenu.prototype._back = function() {
+		if( this.isAnimating ) {
+			return false;
+		}
+		this.isAnimating = true;
 
-  $('.checkin_date, .checkout_date').datepicker({
-	  'format': 'm/d/yyyy',
-	  'autoclose': true
-	});
+		// current menu slides out
+		this._menuOut();
+		// next menu (previous menu) slides in
+		var backMenu = this.menusArr[this.menusArr[this.current_menu].backIdx].menuEl;
+		this._menuIn(backMenu);
 
+		// remove last breadcrumb
+		if( this.options.breadcrumbsCtrl ) {
+			this.breadcrumbsCtrl.removeChild(this.breadcrumbsCtrl.lastElementChild);
+		}
+	};
 
+	MLMenu.prototype._menuOut = function(clickPosition) {
+		// the current menu
+		var self = this,
+			currentMenu = this.menusArr[this.current_menu].menuEl,
+			isBackNavigation = typeof clickPosition == 'undefined' ? true : false;
 
+		// slide out current menu items - first, set the delays for the items
+		this.menusArr[this.current_menu].menuItems.forEach(function(item, pos) {
+			item.style.WebkitAnimationDelay = item.style.animationDelay = isBackNavigation ? parseInt(pos * self.options.itemsDelayInterval) + 'ms' : parseInt(Math.abs(clickPosition - pos) * self.options.itemsDelayInterval) + 'ms';
+		});
+		// animation class
+		if( this.options.direction === 'r2l' ) {
+			classie.add(currentMenu, !isBackNavigation ? 'animate-outToLeft' : 'animate-outToRight');
+		}
+		else {
+			classie.add(currentMenu, isBackNavigation ? 'animate-outToLeft' : 'animate-outToRight');	
+		}
+	};
 
-})(jQuery);
+	MLMenu.prototype._menuIn = function(nextMenuEl, clickPosition) {
+		var self = this,
+			// the current menu
+			currentMenu = this.menusArr[this.current_menu].menuEl,
+			isBackNavigation = typeof clickPosition == 'undefined' ? true : false,
+			// index of the nextMenuEl
+			nextMenuIdx = this.menus.indexOf(nextMenuEl),
 
+			nextMenu = this.menusArr[nextMenuIdx],
+			nextMenuEl = nextMenu.menuEl,
+			nextMenuItems = nextMenu.menuItems,
+			nextMenuItemsTotal = nextMenuItems.length;
+
+		// slide in next menu items - first, set the delays for the items
+		nextMenuItems.forEach(function(item, pos) {
+			item.style.WebkitAnimationDelay = item.style.animationDelay = isBackNavigation ? parseInt(pos * self.options.itemsDelayInterval) + 'ms' : parseInt(Math.abs(clickPosition - pos) * self.options.itemsDelayInterval) + 'ms';
+
+			// we need to reset the classes once the last item animates in
+			// the "last item" is the farthest from the clicked item
+			// let's calculate the index of the farthest item
+			var farthestIdx = clickPosition <= nextMenuItemsTotal/2 || isBackNavigation ? nextMenuItemsTotal - 1 : 0;
+
+			if( pos === farthestIdx ) {
+				onEndAnimation(item, function() {
+					// reset classes
+					if( self.options.direction === 'r2l' ) {
+						classie.remove(currentMenu, !isBackNavigation ? 'animate-outToLeft' : 'animate-outToRight');
+						classie.remove(nextMenuEl, !isBackNavigation ? 'animate-inFromRight' : 'animate-inFromLeft');
+					}
+					else {
+						classie.remove(currentMenu, isBackNavigation ? 'animate-outToLeft' : 'animate-outToRight');
+						classie.remove(nextMenuEl, isBackNavigation ? 'animate-inFromRight' : 'animate-inFromLeft');
+					}
+					classie.remove(currentMenu, 'menu__level--current');
+					classie.add(nextMenuEl, 'menu__level--current');
+
+					//reset current
+					self.current_menu = nextMenuIdx;
+
+					// control back button and breadcrumbs navigation elements
+					if( !isBackNavigation ) {
+						// show back button
+						if( self.options.backCtrl ) {
+							classie.remove(self.backCtrl, 'menu__back--hidden');
+						}
+						
+						// add breadcrumb
+						self._addBreadcrumb(nextMenuIdx);
+					}
+					else if( self.current_menu === 0 && self.options.backCtrl ) {
+						// hide back button
+						classie.add(self.backCtrl, 'menu__back--hidden');
+					}
+
+					// we can navigate again..
+					self.isAnimating = false;
+
+					// focus retention
+					nextMenuEl.focus();
+				});
+			}
+		});
+
+		// animation class
+		if( this.options.direction === 'r2l' ) {
+			classie.add(nextMenuEl, !isBackNavigation ? 'animate-inFromRight' : 'animate-inFromLeft');
+		}
+		else {
+			classie.add(nextMenuEl, isBackNavigation ? 'animate-inFromRight' : 'animate-inFromLeft');
+		}
+	};
+
+	MLMenu.prototype._addBreadcrumb = function(idx) {
+		if( !this.options.breadcrumbsCtrl ) {
+			return false;
+		}
+
+		var bc = document.createElement('a');
+		bc.href = '#'; // make it focusable
+		bc.innerHTML = idx ? this.menusArr[idx].name : this.options.initialBreadcrumb;
+		this.breadcrumbsCtrl.appendChild(bc);
+
+		var self = this;
+		bc.addEventListener('click', function(ev) {
+			ev.preventDefault();
+
+			// do nothing if this breadcrumb is the last one in the list of breadcrumbs
+			if( !bc.nextSibling || self.isAnimating ) {
+				return false;
+			}
+			self.isAnimating = true;
+			
+			// current menu slides out
+			self._menuOut();
+			// next menu slides in
+			var nextMenu = self.menusArr[idx].menuEl;
+			self._menuIn(nextMenu);
+
+			// remove breadcrumbs that are ahead
+			var siblingNode;
+			while (siblingNode = bc.nextSibling) {
+				self.breadcrumbsCtrl.removeChild(siblingNode);
+			}
+		});
+	};
+
+	MLMenu.prototype._crawlCrumbs = function(currentMenu, menuArray) {
+		if (menuArray[currentMenu].backIdx != 0) {
+			this._crawlCrumbs(menuArray[currentMenu].backIdx, menuArray);
+		}
+		// create breadcrumb
+		this._addBreadcrumb(currentMenu);
+	}
+
+	window.MLMenu = MLMenu;
+
+})(window);

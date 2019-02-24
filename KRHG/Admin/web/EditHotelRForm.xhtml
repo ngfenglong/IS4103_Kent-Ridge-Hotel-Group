@@ -11,7 +11,7 @@ and open the template in the editor.
         <meta charset="UTF-8" ></meta>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"></meta>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
-        <title>Kent Ridge Hotel- Front Desk</title>
+        <title>Edit Room</title>
         <meta name="description" content="Blueprint: A basic template for a responsive multi-level menu" ></meta>
         <meta name="keywords" content="blueprint, template, html, css, menu, responsive, mobile-friendly" ></meta>
         <meta name="author" content="Codrops" ></meta>
@@ -32,10 +32,10 @@ and open the template in the editor.
             <header class="bp-header cf">
                 <div class="dummy-logo">
                     <div class="dummy-icon foodicon foodicon--coconut"></div>
-                    <h2 class="dummy-heading">User name</h2>
+                    <h2 class="dummy-heading">KRHG</h2>
                 </div>
                 <div class="bp-header__main">
-                    <h1 class="bp-header__title">Welcome To Kent Ridge Hotel Front Desk</h1>
+                    <h1 class="bp-header__title">Edit Room</h1>
                     <nav class="bp-nav">
                         <a class="bp-nav__item bp-icon bp-icon--prev" href="http://tympanus.net/Blueprints/PageStackNavigation/" data-info="Log out"><span>Log out</span></a>
                         <a class="bp-nav__item bp-icon bp-icon--next" href="index.xhtml" data-info="Home"><span>Home</span></a>
@@ -47,34 +47,6 @@ and open the template in the editor.
             <nav id="ml-menu" class="menu">
                 <button class="action action--close" aria-label="Close Menu"><span class="icon icon--cross"></span></button>
                 <div class="menu__wrap">
-                    <ul data-menu="main" class="menu__level" tabindex="-1" role="menu" aria-label="All">
-                        <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1" aria-owns="submenu-1" href="#">Check in</a></li>
-                        <li class="menu__item" role="menuitem"><a class="menu__link"  onclick="goto('checkout.xhtml')" >Check Out</a></li>
-                        <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-3" aria-owns="submenu-3" href="#">Accounts</a></li>
-                        <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-4" aria-owns="submenu-4" href="#">Request</a></li>
-                    </ul>
-                    <!-- Submenu 1 -->
-                    <ul data-menu="submenu-1" id="submenu-1" class="menu__level" tabindex="-1" role="menu" aria-label="Vegetables">
-                        <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('checkin.xhtml')">Existing Booking</a></li>
-                        <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('walkin.xhtml')">Walk-in</a></li>
-
-                    </ul>
-
-
-                    <!-- Submenu 3 -->
-                    <ul data-menu="submenu-3" id="submenu-3" class="menu__level" tabindex="-1" role="menu" aria-label="Grains">
-                        <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('customerAccount.xhtml')">Create Account</a></li>
-                        <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('manageAccount.xhtml')">Manage Account</a></li>
-
-                    </ul>
-
-                    <!-- Submenu 4 -->
-                    <ul data-menu="submenu-4" id="submenu-4" class="menu__level" tabindex="-1" role="menu" aria-label="Mylk &amp; Drinks">
-                        <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('lostAndFound.xhtml')">Lost and Found</a></li>
-                        <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('roomService.xhtml')">Room Service</a></li>
-                        <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('maintenance.xhtml')">Maintenance</a></li>
-
-                    </ul>
 
                 </div>
             </nav>
@@ -82,11 +54,14 @@ and open the template in the editor.
 
 
                 <form class="info">
-                    Search Check out Room<br/>
-                    <input type="text" name="room">
-                    </input>
-                    <input type="submit" value="Search">
-                    </input>
+                    Edit Room <br/>
+                    Room Name: <input tyoe="text" name="name" placeholder="Enter Room Name"></input><br/>
+                    Room Type: <input tyoe="text" name="type" placeholder="Enter Room Type"></input><br/>
+                    Room Pax: <input tyoe="text" name="pax" placeholder="Enter Room Type"></input><br/>
+                    Room Facilities: <input type="text" name="amenities" placeholder="Enter Room Facilities"></input><br/>
+                    Room MiniBar: <input tyoe="text" name="minibarItems" placeholder="Enter Items"></input><br/>
+                    <input type="submit" value="Edit Room">
+                </input>
                 </form>
 
             </div>
