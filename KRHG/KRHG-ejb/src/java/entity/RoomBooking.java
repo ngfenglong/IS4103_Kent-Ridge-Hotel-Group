@@ -41,7 +41,7 @@ public class RoomBooking implements Serializable {
     @OneToOne
     private Customer bookedBy;
     @Temporal(TemporalType.DATE)
-    private Date tranportTime;
+    private Date transportTime;
     private String pickUpLocation;
 
 
@@ -93,7 +93,7 @@ public class RoomBooking implements Serializable {
         this.bookedRoom = bookedRoom;
     }
 
-    public boolean isHasTransport() {
+    public boolean getHasTransport() {
         return hasTransport;
     }
 
@@ -101,12 +101,12 @@ public class RoomBooking implements Serializable {
         this.hasTransport = hasTransport;
     }
 
-    public Date getTranportTime() {
-        return tranportTime;
+    public Date getTransportTime() {
+        return transportTime;
     }
 
-    public void setTranportTime(Date tranportTime) {
-        this.tranportTime = tranportTime;
+    public void setTransportTime(Date transportTime) {
+        this.transportTime = transportTime;
     }
 
     public String getPickUpLocation() {
