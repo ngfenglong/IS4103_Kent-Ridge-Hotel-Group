@@ -1,162 +1,157 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 
+    <head>
+        <meta charset="UTF-8" ></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+        <title>Kent Ridge Hotel- Front Desk</title>
+        <meta name="description" content="Blueprint: A basic template for a responsive multi-level menu" ></meta>
+        <meta name="keywords" content="blueprint, template, html, css, menu, responsive, mobile-friendly" ></meta>
+        <meta name="author" content="Codrops" ></meta>
+        <link rel="shortcut icon" href="favicon.ico"></link>
+        <!-- food icons -->
+        <link rel="stylesheet" type="text/css" href="css/organicfoodicons.css" ></link>
+        <!-- demo styles -->
+        <link rel="stylesheet" type="text/css" href="css/demo.css" ></link>
+        <!-- menu styles -->
+        <link rel="stylesheet" type="text/css" href="css/component.css" ></link>
+        <script src="js/modernizr-custom.js"></script>
+    </head>
 
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      >
-    <h:head>
-        <title>Lost and Found Reports</title>
-        <meta charset="utf-8"/>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-        <meta name="description" content="IS4103"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <link rel="stylesheet" type="text/css" href="styles/bootstrap-4.1.2/bootstrap.min.css"> </link>
-        <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> </link>
-        <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.3.4/owl.carousel.css"> </link>
-        <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.3.4/owl.theme.default.css"> </link>
-        <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.3.4/animate.css"> </link>
-        <link href="plugins/jquery-datepicker/jquery-ui.css" rel="stylesheet" type="text/css"> </link>
-        <link href="plugins/colorbox/colorbox.css" rel="stylesheet" type="text/css"> </link>
-        <link rel="stylesheet" type="text/css" href="styles/main_styles.css"> </link>
-        <link rel="stylesheet" type="text/css" href="styles/responsive.css"> </link>
-    </h:head>
-    <h:body>
+    <body>
+        <!-- Main container -->
+        <div class="container">
+            <!-- Blueprint header -->
+            <header class="bp-header cf">
+                <div class="dummy-logo">
+                    <div class="dummy-icon foodicon foodicon--coconut"></div>
+                    <h2 class="dummy-heading">User name</h2>
+                </div>
+                <div class="bp-header__main">
+                    <h1 class="bp-header__title">Welcome To Kent Ridge Hotel Front Desk</h1>
+                    <nav class="bp-nav">
+                        <a class="bp-nav__item bp-icon bp-icon--prev" href="http://tympanus.net/Blueprints/PageStackNavigation/" data-info="Log out"><span>Log out</span></a>
+                        <a class="bp-nav__item bp-icon bp-icon--next" href="index.xhtml" data-info="Home"><span>Home</span></a>
 
-        <div class="super_container">
-
-            <!-- Header -->
-
-            <header class="header">
-                <div class="header_content d-flex flex-row align-items-center justify-content-start">
-                    <div class="logo"><a href="#">KRHG</a></div>
-                    <div class="ml-auto d-flex flex-row align-items-center justify-content-start">
-                        <nav class="main_nav">
-                            <ul class="d-flex flex-row align-items-start justify-content-start">
-                                <li><a href="index.xhtml">Home</a></li>
-                                <li><a href="checkin.xhtml">Check in</a></li>
-                                <li><a href="checkout.xhtml">Check out</a></li>
-                                <li><a href="customerAccount.xhtml">Customer account</a></li>
-                                <li><a href="payment.xhtml">Payment</a></li>
-                                <li><a href="requests.xhtml">Service Requests</a></li>
-                                <li><a href="maintenance.xhtml">Maintenance</a></li>
-                                <li class="active"><a href="lostAndFound.xhtml">Lost and Found</a></li>
-                            </ul>
-                        </nav>
-                   
-
-                        <!-- Hamburger Menu -->
-                        <div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>
-                    </div>
+                    </nav>
                 </div>
             </header>
+            <button class="action action--open" aria-label="Open Menu"><span class="icon icon--menu"></span></button>
+            <nav id="ml-menu" class="menu">
+                <button class="action action--close" aria-label="Close Menu"><span class="icon icon--cross"></span></button>
+                <div class="menu__wrap">
+                    <ul data-menu="main" class="menu__level" tabindex="-1" role="menu" aria-label="All">
+                        <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1" aria-owns="submenu-1" href="#">Check in</a></li>
+                        <li class="menu__item" role="menuitem"><a class="menu__link"  onclick="goto('checkout.xhtml')" >Check Out</a></li>
+                        <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-3" aria-owns="submenu-3" href="#">Accounts</a></li>
+                        <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-4" aria-owns="submenu-4" href="#">Request</a></li>
+                    </ul>
+                    <!-- Submenu 1 -->
+                    <ul data-menu="submenu-1" id="submenu-1" class="menu__level" tabindex="-1" role="menu" aria-label="Vegetables">
+                        <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('checkin.xhtml')">Existing Booking</a></li>
+                        <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('walkin.xhtml')">Walk-in</a></li>
 
-         
+                    </ul>
 
-            <div class="home">
-                <div class="home_slider_container">
-                    <div class="owl-carousel owl-theme home_slider">
 
-                        <!-- Slide -->
-                        <div class="slide">
-                            <div class="background_image" style="background-image:url(images/index_1.jpg)"></div>
-                            <div class="home_container">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="home_content text-center">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <!-- Submenu 3 -->
+                    <ul data-menu="submenu-3" id="submenu-3" class="menu__level" tabindex="-1" role="menu" aria-label="Grains">
+                        <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('customerAccount.xhtml')">Create Account</a></li>
+                        <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('manageAccount.xhtml')">Manage Account</a></li>
 
-                        <!-- Slide -->
-                        <div class="slide">
-                            <div class="background_image" style="background-image:url(images/index_2.jpg)"></div>
-                            <div class="home_container">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="home_content text-center">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    </ul>
 
-                        <!-- Slide -->
-                        <div class="slide">
-                            <div class="background_image" style="background-image:url(images/index_3.jpg)"></div>
-                            <div class="home_container">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="home_content text-center">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <!-- Submenu 4 -->
+                    <ul data-menu="submenu-4" id="submenu-4" class="menu__level" tabindex="-1" role="menu" aria-label="Mylk &amp; Drinks">
+                        <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('lostAndFound.xhtml')">Lost and Found</a></li>
+                        <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('roomService.xhtml')">Room Service</a></li>
+                        <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('maintenance.xhtml')">Maintenance</a></li>
 
-                        <!-- Slide -->
-                        <div class="slide">
-                            <div class="background_image" style="background-image:url(images/index_4.jpg)"></div>
-                            <div class="home_container">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="home_content text-center">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Slide -->
-                        <div class="slide">
-                            <div class="background_image" style="background-image:url(images/index_5.jpg)"></div>
-                            <div class="home_container">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="home_content text-center">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <!-- Home Slider Dots -->
-                
+                    </ul>
 
                 </div>
+            </nav>
+            <div class="content" >
+
+
+
+                <h4>List of reported Lost and Found</h4>
+                <table>
+                    <tr><th>Name</th><th>Item Name</th><th>Description</th><th></th></tr>
+                    <tr><td>Ng Feng long</td><td>Water bottle</td><td>black </td><button>Claim</button></tr>
+                    <tr><td>Stanley Loh</td><td>Water bottle</td><td>Red </td><button>Claim</button></tr>
+
+
+
+
+                </table>
+
+
+                <a href='createLostAndFound.xhtml'>Make a report</a>
             </div>
-
-
         </div>
+        <!-- /view -->
+        <script src="js/classie.js"></script>
+        <script src="js/dummydata.js"></script>
+        <script src="js/main.js"></script>
+        <script>
+                            (function () {
+                                var menuEl = document.getElementById('ml-menu'),
+                                        mlmenu = new MLMenu(menuEl, {
+                                            // breadcrumbsCtrl : true, // show breadcrumbs
+                                            // initialBreadcrumb : 'all', // initial breadcrumb text
+                                            backCtrl: false, // show back button
+                                            // itemsDelayInterval : 60, // delay between each menu item sliding animation
+                                            onItemClick: loadDummyData // callback: item that doesn´t have a submenu gets clicked - onItemClick([event], [inner HTML of the clicked item])
+                                        });
 
-        <script src="js/jquery-3.3.1.min.js"></script>
-        <script src="styles/bootstrap-4.1.2/popper.js"></script>
-        <script src="styles/bootstrap-4.1.2/bootstrap.min.js"></script>
-        <script src="plugins/greensock/TweenMax.min.js"></script>
-        <script src="plugins/greensock/TimelineMax.min.js"></script>
-        <script src="plugins/scrollmagic/ScrollMagic.min.js"></script>
-        <script src="plugins/greensock/animation.gsap.min.js"></script>
-        <script src="plugins/greensock/ScrollToPlugin.min.js"></script>
-        <script src="plugins/OwlCarousel2-2.3.4/owl.carousel.js"></script>
-        <script src="plugins/easing/easing.js"></script>
-        <script src="plugins/progressbar/progressbar.min.js"></script>
-        <script src="plugins/parallax-js-master/parallax.min.js"></script>
-        <script src="plugins/jquery-datepicker/jquery-ui.js"></script>
-        <script src="plugins/colorbox/jquery.colorbox-min.js"></script>
-        <script src="js/custom.js"></script>
-    </h:body>
+                                // mobile menu toggle
+                                var openMenuCtrl = document.querySelector('.action--open'),
+                                        closeMenuCtrl = document.querySelector('.action--close');
+
+                                openMenuCtrl.addEventListener('click', openMenu);
+                                closeMenuCtrl.addEventListener('click', closeMenu);
+
+                                function openMenu() {
+                                    classie.add(menuEl, 'menu--open');
+                                    closeMenuCtrl.focus();
+                                }
+
+                                function closeMenu() {
+                                    classie.remove(menuEl, 'menu--open');
+                                    openMenuCtrl.focus();
+                                }
+
+                                // simulate grid content loading
+                                var gridWrapper = document.querySelector('.content');
+
+                                function loadDummyData(ev, itemName) {
+                                    ev.preventDefault();
+
+                                    closeMenu();
+                                    gridWrapper.innerHTML = '';
+                                    classie.add(gridWrapper, 'content--loading');
+                                    setTimeout(function () {
+                                        classie.remove(gridWrapper, 'content--loading');
+                                        gridWrapper.innerHTML = '<ul class="products">' + dummyData[itemName] + '</ul>';
+                                    }, 700);
+                                }
+                                function goto(link) {
+                                    window.location.replace(link);
+                                }
+                            })();
+                            function goto(link) {
+                                window.location.replace(link);
+                            }
+
+        </script>
+    </body>
+
 </html>

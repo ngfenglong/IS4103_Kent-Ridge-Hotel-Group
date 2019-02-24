@@ -81,13 +81,27 @@ and open the template in the editor.
             <div class="content" >
 
 
-                <form class="info">
-                    Search Check out Room<br/>
-                    <input type="text" name="room">
-                    </input>
-                    <input type="submit" value="Search">
+
+                <h2>Create Lost and Found</h2>
+
+                <form class="form-margin">
+
+                    <br/>
+                    Item:
+                    <input type="text" name="itemName"></input><br/>
+                    <br/>
+
+                    Contact Details:
+                    <input type="text" name="Contact"></input><br/>
+                    Report Type:
+                    <input type="text" name="report Type"></input><br/>
+                    Description:
+                    <textarea name="Description"></textarea><br/>
+                    <br/>
+                    <input type="submit"  value="Submit">
                     </input>
                 </form>
+
 
             </div>
         </div>
@@ -144,6 +158,7 @@ and open the template in the editor.
                             function goto(link) {
                                 window.location.replace(link);
                             }
+
         </script>
     </body>
 
