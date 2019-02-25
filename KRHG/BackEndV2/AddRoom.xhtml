@@ -55,15 +55,78 @@ and open the template in the editor.
             <div class="content" >
 
 
-                <form class="info">
-                    Add Room <br/>
-                    Room Name: <input tyoe="text" name="name" placeholder="Enter Room Name"></input><br/>
-                    Room Type: <input tyoe="text" name="type" placeholder="Enter Room Type"></input><br/>
-                    Room Pax: <input tyoe="text" name="pax" placeholder="Enter Room Type"></input><br/>
-                    Room Facilities: <input type="text" name="amenities" placeholder="Enter Room Facilities"></input><br/>
-                    Room MiniBar: <input tyoe="text" name="minibarItems" placeholder="Enter Items"></input><br/>
+                <form class="info"><h2>Add Room</h2>
+
+                    <table>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td>Room Name:</td>
+                        <td><input tyoe="text" name="name" placeholder="Enter Room Name"></input><br/></td>
+                        </tr>
+                    <tr>
+                        <td>Room Type:</td>
+                        <td><input tyoe="text" name="name" placeholder="Enter Room Type"></input><br/></td>
+                    </tr>  
+                    <tr>
+                        <td>Room Pax:</td>
+                        <td><input tyoe="text" name="name" placeholder="Enter Room Pax"></input><br/></td>
+                    </tr>                                            
+                    </table>
+
+                    <h2>Room Facilities</h2>
+                    <table>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td>Wifi <input type="checkbox" value="">Option 1</input></td> <!---read from data base the list of room facilities-->
+                            <td>Bath Tub <input type="checkbox" value="">Option 1</input></td>
+                            <td>Television <input type="checkbox" value="">Option 1</input></td>
+                        </tr>
+                        <tr>
+                            <td>Kettle <input type="checkbox" value="">Option 1</input></td>
+                            <td>Curtain <input type="checkbox" value="">Option 1</input></td>
+                            <td>Wifi <input type="checkbox" value="">Option 1</input></td>
+                        </tr>
+                        <tr>
+                            <td>Wifi <input type="checkbox" value="">Option 1</input></td>
+                            <td>Wifi <input type="checkbox" value="">Option 1</input></td>
+                            <td>Wifi <input type="checkbox" value="">Option 1</input></td>
+                        </tr>
+                    </table>
+
+                    <h2>Room MiniBar</h2>
+                    <table>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td>Beer<input type="checkbox" value="">Option 1</input></td> <!---read from data base the list of minibar items-->
+                            <td>Beer<input type="checkbox" value="">Option 1</input></td> <!---read from data base the list of minibar items-->
+                            <td>Beer<input type="checkbox" value="">Option 1</input></td> <!---read from data base the list of minibar items-->
+                        </tr>
+                        <tr>
+                            <td>Beer<input type="checkbox" value="">Option 1</input></td> <!---read from data base the list of minibar items-->
+                            <td>Beer<input type="checkbox" value="">Option 1</input></td> <!---read from data base the list of minibar items-->
+                            <td>Beer<input type="checkbox" value="">Option 1</input></td> <!---read from data base the list of minibar items-->
+                        </tr>
+                        <tr>
+                            <td>Beer<input type="checkbox" value="">Option 1</input></td> <!---read from data base the list of minibar items-->
+                            <td>Beer<input type="checkbox" value="">Option 1</input></td> <!---read from data base the list of minibar items-->
+                            <td>Beer<input type="checkbox" value="">Option 1</input></td> <!---read from data base the list of minibar items-->
+                        </tr>
+                    </table>                    
+
                     <input type="submit" value="Add Room">
                     </input>
+
                 </form>
 
             </div>
@@ -125,3 +188,4 @@ and open the template in the editor.
     </body>
 
 </html>
+
