@@ -39,6 +39,7 @@ and open the template in the editor.
                     <nav class="bp-nav">
                         <a class="bp-nav__item bp-icon bp-icon--prev" href="MainPage.xhtml" data-info="Log out"><span>Log out</span></a>
                         <a class="bp-nav__item bp-icon bp-icon--next" href="index.xhtml" data-info="Home"><span>Home</span></a>
+                        <a class="bp-nav__item bp-icon bp-icon--about" href="Profile.xhtml" data-info="Profile"><span>Profile</span></a>
 
                     </nav>
                 </div>
@@ -49,7 +50,7 @@ and open the template in the editor.
                 <div class="menu__wrap">
                     <ul data-menu="main" class="menu__level" tabindex="-1" role="menu" aria-label="All">
                         <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1" aria-owns="submenu-1" href="#">Hotel Management System</a></li>
-                        <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('staff.xhtml')">Staff Management System</a></li>
+                        <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-2" aria-owns="submenu-2" href="#">Staff Management System</a></li>
                         <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-3" aria-owns="submenu-1" href="#">Leave and Rooster System</a></li>
 
                     </ul>
@@ -140,6 +141,23 @@ and open the template in the editor.
                         <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('KRNWR.xhtml')">Room</a></li>
                         
                     </ul>  
+
+                    <!-- Submenu 2 -->
+                    <ul data-menu="submenu-2" id="submenu-2" class="menu__level" tabindex="-1" role="menu" aria-label="Vegetables">
+                            <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('AddStaff.xhtml')">Add Staff</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('AdminStaff.xhtml')">Admin</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('SalesStaff.xhtml')">Sales and Marketing</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('KRGS.xhtml')">Kent Ridge Grand</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('KRCS.xhtml')">Kent Ridge Central</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('KRNS.xhtml')">Kent Ridge North</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('KRNES.xhtml')">Kent Ridge North East</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('KRES.xhtml')">Kent Ridge East</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('KRSES.xhtml')">Kent Ridge South East</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('KRSS.xhtml')">Kent Ridge South</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('KRSWS.xhtml')">Kent Ridge South West</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('KRWS.xhtml')">Kent Ridge West</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('KRNWS.xhtml')">Kent Ridge North West</a></li>
+                    </ul>        
 
                         
                     
