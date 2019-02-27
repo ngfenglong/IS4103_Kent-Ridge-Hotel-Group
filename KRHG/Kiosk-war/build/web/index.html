@@ -1,84 +1,135 @@
-<!DOCTYPE html>
 <html lang="en">
+
 <head>
-<title>About us</title>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="description" content="IS 4103">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="styles/bootstrap-4.1.2/bootstrap.min.css">
-<link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.3.4/owl.carousel.css">
-<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.3.4/owl.theme.default.css">
-<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.3.4/animate.css">
-<link href="plugins/jquery-datepicker/jquery-ui.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="styles/about.css">
-<link rel="stylesheet" type="text/css" href="styles/about_responsive.css">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Hotel Stay Management System</title>
+
+    <link href="https://fonts.googleapis.com/css?family=News+Cycle|Poiret+One" rel="stylesheet">
+
+    <!-- Bootstrap core CSS -->
+    <link href="./resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="./resources/styles/the-big-picture.css" rel="stylesheet">
+
+    <script type="text/javascript">
+        function startTime() {
+            var today = new Date();
+            var h = today.getHours();
+            var m = today.getMinutes();
+            var s = today.getSeconds();
+            // add a zero in front of numbers<10
+            m = checkTime(m);
+            s = checkTime(s);
+            document.getElementById('txt').innerHTML = h + ":" + m;
+            t = setTimeout('startTime()', 500);
+        }
+        function checkTime(i) {
+            if (i < 10) {
+                i = "0" + i;
+            }
+            return i;
+        }
+    </script>
+
 </head>
-<body>
 
-<div class="super_container">
-	
-	<!-- Header -->
+<body onload="startTime()">
 
-	<header class="header">
-		<div class="header_content d-flex flex-row align-items-center justify-content-start">
-			
-			<div class="ml-auto d-flex flex-row align-items-center justify-content-start">
-				<nav class="main_nav">
-					<ul class="d-flex flex-row align-items-start justify-content-start">
-						<li><a href="checkin.xhtml">Self Check In</a></li>
-						<li><a href="checkout.xhtml">Self Check Out</a></li>
-						<li><a href="payment.xhtml">Payment</a></li>
-						
-					</ul>
-				</nav>
-				<!-- Hamburger Menu -->
-				<div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>
-			</div>
-		</div>
-	</header>
+    <!-- Navigation -->
+    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-bottom">
+            <div class="container">
+                <a class="navbar-brand" href="#">Start Bootstrap</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">Home
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav> -->
 
-	<!-- Menu -->
+    <!-- Page Content -->
+    <section>
+        <div class="container">
+            <div class="row" style="margin-top: 8%;margin-left: 2%;">
+                <div class="col-lg-12">
+                    <div id="txt" style="color: #fff; text-align: center; font-size: 500%; font-weight: 600;"></div>
+                    <p style="color: #fff; text-align: center; font-size: 200%; margin-bottom: 5%">Hello John, how can we help you today?
+                    </p>
+                </div>
+                <div class="col-lg-3">
+                    <a href="roomservice.html" style="text-decoration: none">
+                        <div class="polaroid">
+                            <img src="./resources/images/roomservice.jpg" alt="5 Terre" style="width:100%">
+                            <div class="polaroidcontainer">
+                                <p>Room Service</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
 
-	<!-- Home -->
+                <div class="col-lg-3">
+                        <a href="housekeeping.html" style="text-decoration: none">
+                    <div class="polaroid">
+                        <img src="./resources/images/housekeeping.jpg" style="width:100%">
+                        <div class="polaroidcontainer">
+                            <p>Housekeeping</p>
+                        </div>
+                    </div>
+                    </a>
+                </div>
 
-	<div class="home">
-		<div class="background_image" style="background-image:url(images/about.jpg)"></div>
-		<div class="home_container">
-			<div class="container">
-				<div class="row">
-					<div class="col">
-						<div class="home_content text-center">
-							<div class="home_title">Welcome to Kent Ridge Hotel</div>
-							<div class="booking_form_container">
-								
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                <div class="col-lg-3">
+                        <a href="laundry.html" style="text-decoration: none">
+                    <div class="polaroid">
+                        <img src="./resources/images/laundry.jpg" style="width:100%">
+                        <div class="polaroidcontainer">
+                            <p>Laundry</p>
+                        </div>
+                    </div>
+                    </a>
+                </div>
 
-	
+                <div class="col-lg-3">
+                        <a href="menu2.html" style="text-decoration: none">
+                    <div class="polaroid">
+                        <img src="./resources/images/others.jpg" style="width:100%">
+                        <div class="polaroidcontainer">
+                            <p>Others</p>
+                        </div>
+                    </div>
+                    </a>
+                </div>
 
-	
-</div>
+            </div>
+        </div>
+    </section>
 
-<script src="js/jquery-3.3.1.min.js"></script>
-<script src="styles/bootstrap-4.1.2/popper.js"></script>
-<script src="styles/bootstrap-4.1.2/bootstrap.min.js"></script>
-<script src="plugins/greensock/TweenMax.min.js"></script>
-<script src="plugins/greensock/TimelineMax.min.js"></script>
-<script src="plugins/scrollmagic/ScrollMagic.min.js"></script>
-<script src="plugins/greensock/animation.gsap.min.js"></script>
-<script src="plugins/greensock/ScrollToPlugin.min.js"></script>
-<script src="plugins/OwlCarousel2-2.3.4/owl.carousel.js"></script>
-<script src="plugins/easing/easing.js"></script>
-<script src="plugins/progressbar/progressbar.min.js"></script>
-<script src="plugins/parallax-js-master/parallax.min.js"></script>
-<script src="plugins/jquery-datepicker/jquery-ui.js"></script>
-<script src="js/about.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script src="./resources/jquery/jquery.min.js"></script>
+    <script src="./resources/bootstrap/js/bootstrap.bundle.js"></script>
+
 </body>
+
 </html>
