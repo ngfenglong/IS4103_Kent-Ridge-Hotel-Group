@@ -79,16 +79,39 @@ and open the template in the editor.
                 </div>
             </nav>
             <div class="content" >
-                <h3>Mains</h3>
-                <table>
-                    <tr>
-                        <td>
-                            Food item
-                            
-                        </td>
-                    </tr>
+                <div class='foodcontainer'>
+                    <form>
+                        Room: <input type="text" name="room" ></input><br/>
+                        <div class='foodmenu'>
+                            <li class='fooditem' id='maindish'>
+                                <a href='#maindish' class='btn'><i class="fa fa-user"></i>Mains</a>
+                                <div class='small-menu'>
+                                    <ol>Chicken rice <button>Add to cart</button></ol>
+                                    <ol>Noodles <button>Add to cart</button></ol>
 
-                </table>
+                                </div>
+                            </li>
+                            <li class='fooditem' id='Dessert'>
+                                <a href='#Dessert' class='btn'><i class="fa fa-user"></i>Dessert</a>
+                                <div class='small-menu'>
+                                    <ol>Ice cream <button>Add to cart</button></ol>
+                                    <ol>Ice kachang <button>Add to cart</button></ol>
+
+                                </div>
+                            </li>
+                            <li class='fooditem' id='drinks'>
+                                <a href='#drinks' class='btn'><i class="fa fa-user"></i>Drinks</a>
+                                <div class='small-menu'>
+                                    <ol>Beer <button>Add to cart</button></ol>
+                                    <ol>ICe lemon Tea <button>Add to cart</button></ol>
+
+                                </div>
+                            </li>
+
+
+                        </div>
+                    </form>
+                </div>
 
             </div>
         </div>
