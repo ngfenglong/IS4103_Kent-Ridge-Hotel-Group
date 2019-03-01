@@ -5,10 +5,12 @@
         <group>
             <file>file:/D:/Zell/project/School/Uni/IS4103%20Information%20Systems%20Capstone%20Project/Project/Kent%20Ridge%20Hotel%20Group/KRHG/KRHG-ejb/src/java/entity/HolidaySurcharge.java</file>
             <file>file:/D:/Zell/project/School/Uni/IS4103%20Information%20Systems%20Capstone%20Project/Project/Kent%20Ridge%20Hotel%20Group/KRHG/KRHG-ejb/src/java/entity/Room.java</file>
+            <file>file:/D:/Zell/project/School/Uni/IS4103%20Information%20Systems%20Capstone%20Project/Project/Kent%20Ridge%20Hotel%20Group/KRHG/KRHG-ejb/src/java/sessionBeans/CustomerSession.java</file>
             <file>file:/D:/Zell/project/School/Uni/IS4103%20Information%20Systems%20Capstone%20Project/Project/Kent%20Ridge%20Hotel%20Group/KRHG/KRHG-ejb/src/java/entity/Hotel.java</file>
             <file>file:/D:/Zell/project/School/Uni/IS4103%20Information%20Systems%20Capstone%20Project/Project/Kent%20Ridge%20Hotel%20Group/KRHG/KRHG-ejb/src/java/entity/HotelFacility.java</file>
             <file>file:/D:/Zell/project/School/Uni/IS4103%20Information%20Systems%20Capstone%20Project/Project/Kent%20Ridge%20Hotel%20Group/KRHG/KRHG-ejb/src/java/sessionBeans/DataInitializationSessionBean.java</file>
             <file>file:/D:/Zell/project/School/Uni/IS4103%20Information%20Systems%20Capstone%20Project/Project/Kent%20Ridge%20Hotel%20Group/KRHG/KRHG-ejb/src/java/entity/Feedback.java</file>
+            <file>file:/D:/Zell/project/School/Uni/IS4103%20Information%20Systems%20Capstone%20Project/Project/Kent%20Ridge%20Hotel%20Group/KRHG/KRHG-ejb/src/java/sessionBeans/CustomerSessionLocal.java</file>
         </group>
     </open-files>
 </project-private>

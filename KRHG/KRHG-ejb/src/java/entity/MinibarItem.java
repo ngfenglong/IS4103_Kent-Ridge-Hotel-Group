@@ -25,6 +25,17 @@ public class MinibarItem implements Serializable {
     private String itemName;
     private int qty;
     private double price;
+
+    public MinibarItem(){
+        
+    }
+    
+    public MinibarItem(String itemName, int qty, double price) {
+        this();
+        this.itemName = itemName;
+        this.qty = qty;
+        this.price = price;
+    }
     
 
     public Long getMinibarItemID() {

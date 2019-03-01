@@ -129,24 +129,38 @@ public class StaffSession implements StaffSessionLocal {
 
     @Override
     public boolean LoginWithType(Staff s, String type) {
-    Query q = em.createQuery("SELECT s FROM Staff s WHERE "
+        Query q = em.createQuery("SELECT s FROM Staff s WHERE "
                 + "LOWER(s.userName) = :userName");
         q.setParameter("userName", s.getUserName().toLowerCase());
 
         if (!q.getResultList().isEmpty()) {
             Staff checkStaff = (Staff) q.getResultList().get(0);
             if (checkStaff.getPassword().equals(s.getPassword())) {
-               ArrayList<StaffType> accountRights = checkStaff.getAccountRights();
-               for(StaffType st: accountRights) {
-                   if(st.getStaffTypeName().equals(type)){
-                       return true;
-                   }
-               }
+                List<StaffType> accountRights = checkStaff.getAccountRights();
+                for (StaffType st : accountRights) {
+                    if (st.getStaffTypeName().equals(type)) {
+                        return true;
+                    }
+                }
                 return false;
             }
             return false;
         } else {
             return false;
+        }
+    }
+
+    @Override
+    public Staff getStaffByUsename(String username) throws NoResultException {
+        Query q;
+        q = em.createQuery("SELECT s FROM Staff s WHERE "
+                + "LOWER(s.userName) = :userName");
+        q.setParameter("userName", username.toLowerCase());
+
+        if (!q.getResultList().isEmpty()) {
+            return (Staff) q.getResultList().get(0);
+        } else {
+            throw new NoResultException("Staff not found.");
         }
     }
 

@@ -5,7 +5,11 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"> 
 
     <head>
         <meta charset="UTF-8" ></meta>
@@ -17,8 +21,10 @@ and open the template in the editor.
         <meta name="author" content="Codrops" ></meta>
         <link rel="shortcut icon" href="favicon.ico"></link>
         <!-- food icons -->
+        <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" ></link>
         <link rel="stylesheet" type="text/css" href="css/organicfoodicons.css" ></link>
         <!-- demo styles -->
+        <link rel="stylesheet" type="text/css" href="styles/bootstrap-4.1.2/bootstrap.min.css"/>
         <link rel="stylesheet" type="text/css" href="css/demo.css" ></link>
         <!-- menu styles -->
         <link rel="stylesheet" type="text/css" href="css/component.css" ></link>
@@ -37,7 +43,7 @@ and open the template in the editor.
                 <div class="bp-header__main">
                     <h1 class="bp-header__title">Add Room</h1>
                     <nav class="bp-nav">
-                        <a class="bp-nav__item bp-icon bp-icon--prev" href="http://tympanus.net/Blueprints/PageStackNavigation/" data-info="Log out"><span>Log out</span></a>
+                        <a class="bp-nav__item bp-icon bp-icon--prev" href="MainPage.xhtml" data-info="Log out"><span>Log out</span></a>
                         <a class="bp-nav__item bp-icon bp-icon--next" href="index.xhtml" data-info="Home"><span>Home</span></a>
 
                     </nav>
@@ -53,19 +59,60 @@ and open the template in the editor.
                 </div>
             </nav>
             <div class="content" >
+                <div class="form-container" >
+
+                    <h:form>
+                        <h2>Add Room</h2>
+                        <div class="form-group">
+                            <h:inputText class="form-control" value="#{hotelManagedBean.roomName}" id="roomName" a:placeholder="ROOM NAME" required="true"></h:inputText>
+                        </div>
+                        <div class="form-group">
+                            <h:inputText class="form-control" value="#{hotelManagedBean.roomNumber}" id="roomNumber" a:placeholder="ROOM NUMBER" required="true"></h:inputText>
+                        </div>
+                        <div class="form-group">
+                            <h6>Pax Qty: </h6>
+                            <h:selectOneMenu value="#{hotelManagedBean.roomPax}">
+                                <f:selectItem itemValue="1" itemLabel="1" />
+                                <f:selectItem itemValue="2" itemLabel="2" />
+                                <f:selectItem itemValue="3" itemLabel="3" />
+                                <f:selectItem itemValue="4" itemLabel="4" />
+                                <f:selectItem itemValue="5" itemLabel="5" />
+                                <f:selectItem itemValue="6" itemLabel="6" />
+                                <f:selectItem itemValue="7" itemLabel="7" />
+                                <f:selectItem itemValue="8" itemLabel="8" />
+                                <f:selectItem itemValue="9" itemLabel="9" />
+                                <f:selectItem itemValue="10" itemLabel="10" />
+                            </h:selectOneMenu><br/>
+                        </div>
+                        <div class="form-group">
+                            <h6>Room Type: </h6>
+                            <h:selectOneMenu value="#{hotelManagedBean.roomType}">
+                                <f:selectItem itemValue="Standard" itemLabel="Standard" />
+                                <f:selectItem itemValue="Deluxe" itemLabel="Deluxe" />
+                                <f:selectItem itemValue="Premium" itemLabel="Premium" />
+                                <f:selectItem itemValue="Suite" itemLabel="Suite" />
+                                <f:selectItem itemValue="Penthouse" itemLabel="Penthouse" />
+                            </h:selectOneMenu><br/>
+                        </div>
+
+                        <h:selectManyCheckbox value = "#{hotelManagedBean.roomFacilities}"> 
+                            <c:forEach items="${hotelManagedBean.roomFacilityList}" var="r">
+                                <f:selectItem itemValue = "#{r.roomFacilityName}" itemLabel = "#{r.roomFacilityName}" /> 
+                            </c:forEach>
+                        </h:selectManyCheckbox>
 
 
-                <form class="info">
-                    Add Room <br/>
-                    Room Name: <input tyoe="text" name="name" placeholder="Enter Room Name"></input><br/>
-                    Room Type: <input tyoe="text" name="type" placeholder="Enter Room Type"></input><br/>
-                    Room Pax: <input tyoe="text" name="pax" placeholder="Enter Room Type"></input><br/>
-                    Room Facilities: <input type="text" name="amenities" placeholder="Enter Room Facilities"></input><br/>
-                    Room MiniBar: <input tyoe="text" name="minibarItems" placeholder="Enter Items"></input><br/>
-                    <input type="submit" value="Add Room">
-                    </input>
-                </form>
+                        <h:selectManyCheckbox value = "#{hotelManagedBean.minibarItems}"> 
+                            <c:forEach items="${hotelManagedBean.minibarItemList}" var="m">
+                                <f:selectItem itemValue = "#{m.itemName}" itemLabel = "#{m.itemName}" /> 
+                            </c:forEach>
+                        </h:selectManyCheckbox>
+                        <h:commandButton class="btn" value="Add Room" action="#{hotelManagedBean.addRoom()}"></h:commandButton>
 
+
+                    </h:form>
+
+                </div>
             </div>
         </div>
         <!-- /view -->
@@ -73,54 +120,54 @@ and open the template in the editor.
         <script src="js/dummydata.js"></script>
         <script src="js/main.js"></script>
         <script>
-                            (function () {
-                                var menuEl = document.getElementById('ml-menu'),
-                                        mlmenu = new MLMenu(menuEl, {
-                                            // breadcrumbsCtrl : true, // show breadcrumbs
-                                            // initialBreadcrumb : 'all', // initial breadcrumb text
-                                            backCtrl: false, // show back button
-                                            // itemsDelayInterval : 60, // delay between each menu item sliding animation
-                                            onItemClick: loadDummyData // callback: item that doesn´t have a submenu gets clicked - onItemClick([event], [inner HTML of the clicked item])
-                                        });
+            (function () {
+                var menuEl = document.getElementById('ml-menu'),
+                        mlmenu = new MLMenu(menuEl, {
+                            // breadcrumbsCtrl : true, // show breadcrumbs
+                            // initialBreadcrumb : 'all', // initial breadcrumb text
+                            backCtrl: false, // show back button
+                            // itemsDelayInterval : 60, // delay between each menu item sliding animation
+                            onItemClick: loadDummyData // callback: item that doesn´t have a submenu gets clicked - onItemClick([event], [inner HTML of the clicked item])
+                        });
 
-                                // mobile menu toggle
-                                var openMenuCtrl = document.querySelector('.action--open'),
-                                        closeMenuCtrl = document.querySelector('.action--close');
+                // mobile menu toggle
+                var openMenuCtrl = document.querySelector('.action--open'),
+                        closeMenuCtrl = document.querySelector('.action--close');
 
-                                openMenuCtrl.addEventListener('click', openMenu);
-                                closeMenuCtrl.addEventListener('click', closeMenu);
+                openMenuCtrl.addEventListener('click', openMenu);
+                closeMenuCtrl.addEventListener('click', closeMenu);
 
-                                function openMenu() {
-                                    classie.add(menuEl, 'menu--open');
-                                    closeMenuCtrl.focus();
-                                }
+                function openMenu() {
+                    classie.add(menuEl, 'menu--open');
+                    closeMenuCtrl.focus();
+                }
 
-                                function closeMenu() {
-                                    classie.remove(menuEl, 'menu--open');
-                                    openMenuCtrl.focus();
-                                }
+                function closeMenu() {
+                    classie.remove(menuEl, 'menu--open');
+                    openMenuCtrl.focus();
+                }
 
-                                // simulate grid content loading
-                                var gridWrapper = document.querySelector('.content');
+                // simulate grid content loading
+                var gridWrapper = document.querySelector('.content');
 
-                                function loadDummyData(ev, itemName) {
-                                    ev.preventDefault();
+                function loadDummyData(ev, itemName) {
+                    ev.preventDefault();
 
-                                    closeMenu();
-                                    gridWrapper.innerHTML = '';
-                                    classie.add(gridWrapper, 'content--loading');
-                                    setTimeout(function () {
-                                        classie.remove(gridWrapper, 'content--loading');
-                                        gridWrapper.innerHTML = '<ul class="products">' + dummyData[itemName] + '</ul>';
-                                    }, 700);
-                                }
-                                function goto(link) {
-                                    window.location.replace(link);
-                                }
-                            })();
-                            function goto(link) {
-                                window.location.replace(link);
-                            }
+                    closeMenu();
+                    gridWrapper.innerHTML = '';
+                    classie.add(gridWrapper, 'content--loading');
+                    setTimeout(function () {
+                        classie.remove(gridWrapper, 'content--loading');
+                        gridWrapper.innerHTML = '<ul class="products">' + dummyData[itemName] + '</ul>';
+                    }, 700);
+                }
+                function goto(link) {
+                    window.location.replace(link);
+                }
+            })();
+            function goto(link) {
+                window.location.replace(link);
+            }
         </script>
     </body>
 

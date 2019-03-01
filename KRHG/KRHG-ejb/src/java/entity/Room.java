@@ -8,6 +8,7 @@ package entity;
 import error.NoResultException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,18 +24,34 @@ public class Room implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long roomID;
     private String roomName;
+    private String roomNumber;
     private String roomType;
-    private String roomPax;
-    private String roomHotel;
+    private int roomPax;
     private String status;
     @ManyToOne
     private Hotel hotel;
     @OneToMany
-    private ArrayList<RoomFacility> roomFacilities;
+    private List<RoomFacility> roomFacilities;
     @OneToMany
-    private ArrayList<MinibarItem> miniBarItems;
+    private List<MinibarItem> miniBarItems;
     @OneToMany(mappedBy = "room")
-    private ArrayList<CleaningSchedule> cleaningSchedules;
+    private List<CleaningSchedule> cleaningSchedules;
+
+    public Room() {
+        this.roomFacilities = new ArrayList<RoomFacility>();
+        this.miniBarItems = new ArrayList<MinibarItem>();
+        this.cleaningSchedules = new ArrayList<CleaningSchedule>();
+    }
+
+    public Room(String roomName, String roomNumber, String roomType, int roomPax, String status, Hotel hotel) {
+        this();
+        this.roomName = roomName;
+        this.roomNumber = roomNumber;
+        this.roomType = roomType;
+        this.roomPax = roomPax;
+        this.status = status;
+        this.hotel = hotel;
+    }
 
     public Long getRoomID() {
         return roomID;
@@ -70,20 +87,6 @@ public class Room implements Serializable {
     }
 
     /**
-     * @return the roomName
-     */
-    public String getRoomName() {
-        return roomName;
-    }
-
-    /**
-     * @param roomName the roomName to set
-     */
-    public void setRoomName(String roomName) {
-        this.roomName = roomName;
-    }
-
-    /**
      * @return the roomType
      */
     public String getRoomType() {
@@ -100,42 +103,42 @@ public class Room implements Serializable {
     /**
      * @return the roomPax
      */
-    public String getRoomPax() {
+    public int getRoomPax() {
         return roomPax;
     }
 
     /**
      * @param roomPax the roomPax to set
      */
-    public void setRoomPax(String roomPax) {
+    public void setRoomPax(int roomPax) {
         this.roomPax = roomPax;
     }
 
     /**
      * @return the roomHotel
      */
-    public String getRoomHotel() {
-        return roomHotel;
+    public String getRoomNumber() {
+        return roomNumber;
     }
 
     /**
      * @param roomHotel the roomHotel to set
      */
-    public void setRoomHotel(String roomHotel) {
-        this.roomHotel = roomHotel;
+    public void setRoomNumber(String roomNumber) {
+        this.roomNumber = roomNumber;
     }
 
     /**
      * @return the roomFacilities
      */
-    public ArrayList<RoomFacility> getRoomFacilities() {
+    public List<RoomFacility> getRoomFacilities() {
         return roomFacilities;
     }
 
     /**
      * @param roomFacilities the roomFacilities to set
      */
-    public void setRoomFacilities(ArrayList<RoomFacility> roomFacilities) {
+    public void setRoomFacilities(List<RoomFacility> roomFacilities) {
         this.roomFacilities = roomFacilities;
     }
 
@@ -153,19 +156,27 @@ public class Room implements Serializable {
         this.status = status;
     }
 
-    public ArrayList<MinibarItem> getMiniBarItems() {
+    public String getRoomName() {
+        return roomName;
+    }
+
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
+    }
+
+    public List<MinibarItem> getMiniBarItems() {
         return miniBarItems;
     }
 
-    public void setMiniBarItems(ArrayList<MinibarItem> miniBarItems) {
+    public void setMiniBarItems(List<MinibarItem> miniBarItems) {
         this.miniBarItems = miniBarItems;
     }
 
-    public ArrayList<CleaningSchedule> getCleaningSchedules() {
+    public List<CleaningSchedule> getCleaningSchedules() {
         return cleaningSchedules;
     }
 
-    public void setCleaningSchedules(ArrayList<CleaningSchedule> cleaningSchedules) {
+    public void setCleaningSchedules(List<CleaningSchedule> cleaningSchedules) {
         this.cleaningSchedules = cleaningSchedules;
     }
 

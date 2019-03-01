@@ -13,12 +13,24 @@ import javax.persistence.Id;
 
 @Entity
 public class RoomFacility implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long roomFacilityID;
-    private String roomFacilityCategory;
     private String roomFacilityName;
+    private String roomFacilityCategory;
+
+    public RoomFacility() {
+
+    }
+
+    public RoomFacility(String roomFacilityName, String roomFacilityCategory) {
+        this();
+        this.roomFacilityName = roomFacilityName;
+        this.roomFacilityCategory = roomFacilityCategory;
+
+    }
 
     public Long getRoomFacilityID() {
         return roomFacilityID;
@@ -52,8 +64,7 @@ public class RoomFacility implements Serializable {
     public String toString() {
         return "entity.RoomFacility[ roomFacilityID=" + roomFacilityID + " ]";
     }
-    
-    
+
     /**
      * @return the roomFacilityCategory
      */
@@ -81,5 +92,5 @@ public class RoomFacility implements Serializable {
     public void setRoomFacilityName(String roomFacilityName) {
         this.roomFacilityName = roomFacilityName;
     }
-    
+
 }

@@ -7,6 +7,7 @@ package sessionBeans;
 
 import entity.Hotel;
 import entity.HotelFacility;
+import entity.Room;
 import error.NoResultException;
 import java.util.List;
 import java.util.logging.Level;
@@ -62,7 +63,7 @@ public class HotelSession implements HotelSessionLocal {
             throw new NoResultException("Hotel not found");
         }
     }
-    
+
     @Override
     public void createHotel(Hotel h) {
         em.persist(h);
@@ -70,7 +71,7 @@ public class HotelSession implements HotelSessionLocal {
 
     @Override
     public void updateHotel(Hotel h) throws NoResultException {
-      Hotel oldH = em.find(Hotel.class, h.getHotelID());
+        Hotel oldH = em.find(Hotel.class, h.getHotelID());
         if (oldH != null) {
             oldH.setHotelName(h.getHotelName());
             oldH.setHotelAddress(h.getHotelAddress());
@@ -79,7 +80,7 @@ public class HotelSession implements HotelSessionLocal {
         } else {
             throw new NoResultException("Hotel Not found");
         }
-    }    
+    }
 
     @Override
     public void removeHotelFacility(Long hID, HotelFacility hf) {
@@ -94,9 +95,31 @@ public class HotelSession implements HotelSessionLocal {
 
     @Override
     public void addHotelFacility(Long hID, HotelFacility hf) {
-      Hotel h = em.find(Hotel.class, hID);
+        Hotel h = em.find(Hotel.class, hID);
         try {
             h.addHotelFacility(hf);
+            em.flush();
+        } catch (NoResultException ex) {
+            Logger.getLogger(HotelSession.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public void removeRoom(Long hID, Room r) {
+        Hotel h = em.find(Hotel.class, hID);
+        try {
+            h.removeRoom(r);
+            em.flush();
+        } catch (NoResultException ex) {
+            Logger.getLogger(HotelSession.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public void addRoom(Long hID, Room r) {
+        Hotel h = em.find(Hotel.class, hID);
+        try {
+            h.addRoom(r);
             em.flush();
         } catch (NoResultException ex) {
             Logger.getLogger(HotelSession.class.getName()).log(Level.SEVERE, null, ex);

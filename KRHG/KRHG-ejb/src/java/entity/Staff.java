@@ -9,6 +9,7 @@ import error.NoResultException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -49,12 +50,47 @@ public class Staff implements Serializable {
     @OneToOne
     private Staff managerInCharge;
     @OneToMany
-    private ArrayList<AnnualLeave> appliedLeave;
+    private List<AnnualLeave> appliedLeave;
     @OneToMany
-    private ArrayList<StaffType> accountRights;
+    private List<StaffType> accountRights;
     @OneToOne
     private WorkSchedule workSchedule;
 
+    
+    public Staff(){
+        appliedLeave = new ArrayList<AnnualLeave>();
+        accountRights = new ArrayList<StaffType>();
+    }
+    
+    public Staff(String userName, String password){
+        this();
+        this.userName = userName;
+        this.password = password;
+    }
+
+    public Staff(String name, String userName, String password, String email, String phoneNumber, String gender, String nric, String address, Date joinDate, String hotelGroup, String jobTitle, String department, int entitledLeaves, boolean accountStatus, String nokName, String nokAddress, String nokPhoneNumber) {
+        this();
+        this.name = name;
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.gender = gender;
+        this.nric = nric;
+        this.address = address;
+        this.joinDate = joinDate;
+        this.hotelGroup = hotelGroup;
+        this.jobTitle = jobTitle;
+        this.department = department;
+        this.entitledLeaves = entitledLeaves;
+        this.accountStatus = accountStatus;
+        this.nokName = nokName;
+        this.nokAddress = nokAddress;
+        this.nokPhoneNumber = nokPhoneNumber;
+    }
+    
+    
+    
     public Long getStaffID() {
         return staffID;
     }
@@ -287,14 +323,14 @@ public class Staff implements Serializable {
     /**
      * @return the appliedLeave
      */
-    public ArrayList<AnnualLeave> getAppliedLeave() {
+    public List<AnnualLeave> getAppliedLeave() {
         return appliedLeave;
     }
 
     /**
      * @param appliedLeave the appliedLeave to set
      */
-    public void setAppliedLeave(ArrayList<AnnualLeave> appliedLeave) {
+    public void setAppliedLeave(List<AnnualLeave> appliedLeave) {
         this.appliedLeave = appliedLeave;
     }
 
@@ -315,14 +351,14 @@ public class Staff implements Serializable {
     /**
      * @return the accountRights
      */
-    public ArrayList<StaffType> getAccountRights() {
+    public List<StaffType> getAccountRights() {
         return accountRights;
     }
 
     /**
      * @param accountRights the accountRights to set
      */
-    public void setAccountRights(ArrayList<StaffType> accountRights) {
+    public void setAccountRights(List<StaffType> accountRights) {
         this.accountRights = accountRights;
     }
 

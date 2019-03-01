@@ -11,14 +11,16 @@ and open the template in the editor.
         <meta charset="UTF-8" ></meta>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"></meta>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
-        <title>Kent Ridge Grand Facility</title>
+        <title>Sales and Marketing Staff</title>
         <meta name="description" content="Blueprint: A basic template for a responsive multi-level menu" ></meta>
         <meta name="keywords" content="blueprint, template, html, css, menu, responsive, mobile-friendly" ></meta>
         <meta name="author" content="Codrops" ></meta>
         <link rel="shortcut icon" href="favicon.ico"></link>
         <!-- food icons -->
+        <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" ></link>
         <link rel="stylesheet" type="text/css" href="css/organicfoodicons.css" ></link>
         <!-- demo styles -->
+        <link rel="stylesheet" type="text/css" href="styles/bootstrap-4.1.2/bootstrap.min.css"/>
         <link rel="stylesheet" type="text/css" href="css/demo.css" ></link>
         <!-- menu styles -->
         <link rel="stylesheet" type="text/css" href="css/component.css" ></link>
@@ -31,14 +33,14 @@ and open the template in the editor.
             <!-- Blueprint header -->
             <header class="bp-header cf">
                 <div class="dummy-logo">
-                  
+                    <div class="dummy-icon foodicon foodicon--coconut"></div> 
                     
                     <h2 class="dummy-heading">KRHG</h2>
                 </div>
                 <div class="bp-header__main">
-                    <h1 class="bp-header__title">Kent Ridge Grand Facility</h1>
+                    <h1 class="bp-header__title">Sales and Marketing Staff</h1>
                     <nav class="bp-nav">
-                        <a class="bp-nav__item bp-icon bp-icon--prev" href="http://tympanus.net/Blueprints/PageStackNavigation/" data-info="Log out"><span>Log out</span></a>
+                        <a class="bp-nav__item bp-icon bp-icon--prev" href="MainPage.xhtml" data-info="Log out"><span>Log out</span></a>
                         <a class="bp-nav__item bp-icon bp-icon--next" href="index.xhtml" data-info="Home"><span>Home</span></a>
 
                     </nav>
@@ -49,7 +51,7 @@ and open the template in the editor.
                 <button class="action action--close" aria-label="Close Menu"><span class="icon icon--cross"></span></button>
                 <div class="menu__wrap">
                     <ul data-menu="main" class="menu__level" tabindex="-1" role="menu" aria-label="All">
-                        <li class="menu__item" role="menuitem"><a class="menu__link"  onclick="goto('AddFacility.xhtml')" >Add Facility</a></li>
+
                     </ul>
                  
                   
@@ -58,21 +60,30 @@ and open the template in the editor.
             <div class="content">
                 <table>
                     <tr>
-                      <th>Facility Name</th>
-                      <th>Edit</th>
-                      <th>Delete</th>
+                      <th>Name</th>
+                      <th>Department</th>
+                      <th>Job Title</th>
+                      <th></th>
+                      <th></th>
                     </tr>
                     <tr>
-                      <td>Swimming Pool</td>
-                      <td><input type="button" value="Edit" onclick="window.location.href='EditHotelFForm.xhtml'" /></td>
-                      <td><input id="delete" type="button" value="Delete" onclick="DeleteFacility();" /></td>
+                      <td>Stanley</td>
+                      <td>Kitchen</td>
+                      <td>Cook</td>
+                      <td><input type="button" value="Edit" onclick="window.location.href='EditStaff.xhtml'" /></td>
+                      <td><input id="delete" type="button" value="Delete" onclick="DeleteStaff();" /></td>
                     </tr>
                     <tr>
-                      <td>Gym</td>    
-                      <td><input type="button" value="Edit" onclick="window.location.href='EditHotelFForm.xhtml'" /></td>
-                      <td><input id="delete" type="button" value="Delete" onclick="DeleteFacility();" /></td>
+                      <td>Dian</td>   
+                      <td>Laundry</td> 
+                      <td>Washer</td>
+                      <td><input type="button" value="Edit" onclick="window.location.href='EditStaff.xhtml'" /></td>
+                      <td><input id="delete" type="button" value="Delete" onclick="DeleteStaff();" /></td>
                     </tr>
-                  </table>
+                </table>
+
+
+
                 <!-- Ajax loaded content here -->
             </div>
         </div>

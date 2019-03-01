@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <head>
+        <meta charset="UTF-8" ></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+        <title>Kent Ridge Grand Facility</title>
+        <meta name="description" content="Blueprint: A basic template for a responsive multi-level menu" ></meta>
+        <meta name="keywords" content="blueprint, template, html, css, menu, responsive, mobile-friendly" ></meta>
+        <meta name="author" content="Codrops" ></meta>
+        <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" ></link>
+        <link rel="stylesheet" type="text/css" href="css/organicfoodicons.css" ></link>
+        <!-- demo styles -->
+        <link rel="stylesheet" type="text/css" href="styles/bootstrap-4.1.2/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="css/demo.css" ></link>
+        <!-- menu styles -->
+        <link rel="stylesheet" type="text/css" href="css/component.css" ></link>
+        <script src="js/modernizr-custom.js"></script>
+    </head>
+
+    <body>
+
+        <!-- Main container -->
+        <div class="container">
+            <!-- Blueprint header -->
+            <header class="bp-header cf">
+                <div class="dummy-logo">
+
+
+                    <h2 class="dummy-heading">KRHG</h2>
+                </div>
+                <div class="bp-header__main">
+                    <h1 class="bp-header__title">#{hotelManagedBean.selectedHotel}</h1>
+                    <nav class="bp-nav">
+                        <a class="bp-nav__item bp-icon bp-icon--prev" href="http://tympanus.net/Blueprints/PageStackNavigation/" data-info="Log out"><span>Log out</span></a>
+                        <a class="bp-nav__item bp-icon bp-icon--next" href="index.xhtml" data-info="Home"><span>Home</span></a>
+
+                    </nav>
+                </div>
+            </header>
+            <button class="action action--open" aria-label="Open Menu"><span class="icon icon--menu"></span></button>
+            <nav id="ml-menu" class="menu">
+                <button class="action action--close" aria-label="Close Menu"><span class="icon icon--cross"></span></button>
+                <div class="menu__wrap">
+                    <ul data-menu="main" class="menu__level" tabindex="-1" role="menu" aria-label="All">
+                        <li class="menu__item" role="menuitem"><a class="menu__link"  onclick="goto('AddFacility.xhtml')" >Add Facility</a></li>
+                    </ul>
+
+
+                </div>
+            </nav>
+            <div class="content">
+                <table style="width: 100%;">
+                    <tr>
+                        <th align="left" colspan="2">Facility Name</th>
+                        <th align="left" colspan="5">Facility Description</th>
+                        <th align="left" colspan="2">Facility Image</th>
+                        <th align="left" colspan="1">Edit</th>
+                        <th align="left" colspan="1">Delete</th>
+                    </tr>
+                    <h:form id="form1"> 
+                        <c:forEach items="${hotelManagedBean.hotelFacilities}" var="hf">
+                            <tr>
+                                <td colspan="2">#{hf.hotelFacilityName}</td>
+                                <td colspan="5">#{hf.hotelFacilityDescription}</td>
+                                <td colspan="2">#{hf.hotelFacilityImage}</td>
+                                <td colspan="1"><h:commandButton value="Edit" class="btn btn-info" /></td>
+                                <td colspan="1"><h:commandButton value="Delete" class="btn btn-danger" /></td>
+                            </tr>
+
+                        </c:forEach>
+                    </h:form>
+                    <tr></tr>
+                    <tr>
+                        <h:form>   
+                            <td colspan="9"> 
+                                <h:selectOneMenu value="#{hotelManagedBean.hotelStar}">
+                                    <f:selectItem itemValue="" itemLabel="-" />
+                                    <c:forEach items="${hotelManagedBean.getAddableHotelFacilities()}" var="hf">
+                                        <f:selectItem itemValue="#{hf.hotelFacilityName}" itemLabel="#{hf.hotelFacilityName}" />
+                                    </c:forEach>
+                                </h:selectOneMenu>      
+                            </td>
+    
+                            <td colspan="1"> <h:commandButton value="Add" action="#{hotelManagedBean.addFacilityToHotel()}" class="btn btn-basic" /></td>
+                        </h:form>
+                        <h:form>   
+                        <td colspan="1"><h:commandButton value="ViewAll" action="ViewAllFacility.xhtml?faces-redirect=true" class="btn btn-basic" /></td>
+                        </h:form>   
+
+                    </tr>
+                </table>
+
+
+                <!-- Ajax loaded content here -->
+            </div>
+        </div>
+
+        <!-- /view -->
+        <script src="js/classie.js"></script>
+        <script src="js/dummydata.js"></script>
+        <script src="js/main.js"></script>
+        <script>
+                            (function () {
+                                var menuEl = document.getElementById('ml-menu'),
+                                        mlmenu = new MLMenu(menuEl, {
+                                            // breadcrumbsCtrl : true, // show breadcrumbs
+                                            // initialBreadcrumb : 'all', // initial breadcrumb text
+                                            backCtrl: false, // show back button
+                                            // itemsDelayInterval : 60, // delay between each menu item sliding animation
+                                            onItemClick: loadDummyData // callback: item that doesn´t have a submenu gets clicked - onItemClick([event], [inner HTML of the clicked item])
+                                        });
+
+                                // mobile menu toggle
+                                var openMenuCtrl = document.querySelector('.action--open'),
+                                        closeMenuCtrl = document.querySelector('.action--close');
+
+                                openMenuCtrl.addEventListener('click', openMenu);
+                                closeMenuCtrl.addEventListener('click', closeMenu);
+
+                                function openMenu() {
+                                    classie.add(menuEl, 'menu--open');
+                                    closeMenuCtrl.focus();
+                                }
+
+                                function closeMenu() {
+                                    classie.remove(menuEl, 'menu--open');
+                                    openMenuCtrl.focus();
+                                }
+
+                                // simulate grid content loading
+                                var gridWrapper = document.querySelector('.content');
+
+                                function loadDummyData(ev, itemName) {
+                                    ev.preventDefault();
+
+                                    closeMenu();
+                                    gridWrapper.innerHTML = '';
+                                    classie.add(gridWrapper, 'content--loading');
+                                    setTimeout(function () {
+                                        classie.remove(gridWrapper, 'content--loading');
+                                        gridWrapper.innerHTML = '<ul class="products">' + dummyData[itemName] + '</ul>';
+                                    }, 700);
+                                }
+                                function goto(link) {
+                                    window.location.replace(link);
+                                }
+                            })();
+                            function goto(link) {
+                                window.location.replace(link);
+                            }
+        </script>
+    </body>
+</html>

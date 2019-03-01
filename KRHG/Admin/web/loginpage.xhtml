@@ -5,20 +5,24 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
     <head>
         <meta charset="UTF-8" ></meta>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"></meta>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
-        <title>Kent Ridge Grand Facility</title>
+        <title>Kent Ridge Hotel Login Page</title>
         <meta name="description" content="Blueprint: A basic template for a responsive multi-level menu" ></meta>
         <meta name="keywords" content="blueprint, template, html, css, menu, responsive, mobile-friendly" ></meta>
         <meta name="author" content="Codrops" ></meta>
         <link rel="shortcut icon" href="favicon.ico"></link>
         <!-- food icons -->
+        <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" ></link>
         <link rel="stylesheet" type="text/css" href="css/organicfoodicons.css" ></link>
         <!-- demo styles -->
+        <link rel="stylesheet" type="text/css" href="styles/bootstrap-4.1.2/bootstrap.min.css"/>
         <link rel="stylesheet" type="text/css" href="css/demo.css" ></link>
         <!-- menu styles -->
         <link rel="stylesheet" type="text/css" href="css/component.css" ></link>
@@ -26,21 +30,19 @@ and open the template in the editor.
     </head>
 
     <body>
+
         <!-- Main container -->
         <div class="container">
             <!-- Blueprint header -->
             <header class="bp-header cf">
                 <div class="dummy-logo">
-                  
-                    
+                    <div class="dummy-icon foodicon foodicon--coconut"></div>
                     <h2 class="dummy-heading">KRHG</h2>
                 </div>
                 <div class="bp-header__main">
-                    <h1 class="bp-header__title">Kent Ridge Grand Facility</h1>
+                    <h1 class="bp-header__title">Login Page</h1>
                     <nav class="bp-nav">
-                        <a class="bp-nav__item bp-icon bp-icon--prev" href="http://tympanus.net/Blueprints/PageStackNavigation/" data-info="Log out"><span>Log out</span></a>
-                        <a class="bp-nav__item bp-icon bp-icon--next" href="index.xhtml" data-info="Home"><span>Home</span></a>
-
+                        <a class="bp-nav__item bp-icon bp-icon--prev" href="MainPage.xhtml" data-info="Back"><span>Back</span></a>
                     </nav>
                 </div>
             </header>
@@ -48,31 +50,37 @@ and open the template in the editor.
             <nav id="ml-menu" class="menu">
                 <button class="action action--close" aria-label="Close Menu"><span class="icon icon--cross"></span></button>
                 <div class="menu__wrap">
-                    <ul data-menu="main" class="menu__level" tabindex="-1" role="menu" aria-label="All">
-                        <li class="menu__item" role="menuitem"><a class="menu__link"  onclick="goto('AddFacility.xhtml')" >Add Facility</a></li>
-                    </ul>
-                 
-                  
                 </div>
             </nav>
+
+
             <div class="content">
-                <table>
-                    <tr>
-                      <th>Facility Name</th>
-                      <th>Edit</th>
-                      <th>Delete</th>
-                    </tr>
-                    <tr>
-                      <td>Swimming Pool</td>
-                      <td><input type="button" value="Edit" onclick="window.location.href='EditHotelFForm.xhtml'" /></td>
-                      <td><input id="delete" type="button" value="Delete" onclick="DeleteFacility();" /></td>
-                    </tr>
-                    <tr>
-                      <td>Gym</td>    
-                      <td><input type="button" value="Edit" onclick="window.location.href='EditHotelFForm.xhtml'" /></td>
-                      <td><input id="delete" type="button" value="Delete" onclick="DeleteFacility();" /></td>
-                    </tr>
-                  </table>
+                <div class="log-form">
+                    <h2>Login to your account</h2>
+                    <h:form>
+                        <div class="form-group">
+                            <h:inputText class="form-control" value="#{authenticationManagedBean.username}" id="username" a:placeholder="USERNAME" required="true">
+
+                            </h:inputText>
+                        </div>
+                        <!-- Input Field Ends -->
+                        <!-- Input Field Starts -->
+                        <div class="form-group">
+                            <h:inputSecret class="form-control"  value="#{authenticationManagedBean.password}"  id="password" a:placeholder="PASSWORD" required="true">
+                            </h:inputSecret>
+                        </div>
+                        <!-- Input Field Ends -->
+                        <!-- Submit Form Button Starts -->
+                        <div class="form-group">
+                            <h:commandButton class="custom-button login" value="Login" action="#{authenticationManagedBean.login()}"></h:commandButton>
+                            <p class="text-center">don't have an account ? <a href="register.xhtml">register now</a><br /><a href="forgetPassword.xhtml">Forget Password</a></p>
+                            <!--<p class="text-center"></p>-->
+                        </div>
+<!--                        <input type="text" title="username" placeholder="username" />
+                        <input type="password" title="username" placeholder="password" />
+                        <button type="submit" class="btn">Login</button>-->
+                    </h:form>   
+                </div>
                 <!-- Ajax loaded content here -->
             </div>
         </div>
@@ -126,7 +134,7 @@ and open the template in the editor.
                     window.location.replace(link);
                 }
             })();
-            function goto(link){
+            function goto(link) {
                 window.location.replace(link);
             }
         </script>

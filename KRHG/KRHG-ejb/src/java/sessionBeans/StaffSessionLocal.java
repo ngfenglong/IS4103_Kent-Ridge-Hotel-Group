@@ -19,6 +19,7 @@ public interface StaffSessionLocal {
     public List<Staff> getAllStaffs();
     public Staff getStaffByID(Long sID) throws NoResultException;
     public Staff getStaffByNric(String nric) throws NoResultException;
+    public Staff getStaffByUsename(String username) throws NoResultException;
     public void deleteStaff(Long sID) throws NoResultException;
     public void createStaff(Staff s);
     public void deactivateStaff(Staff s) throws NoResultException;

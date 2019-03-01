@@ -19,6 +19,7 @@ public interface RoomFacilitySessionLocal {
     
     public List<RoomFacility> getAllRoomFacilities();
     public RoomFacility getRoomFacilityByID(Long rfID) throws NoResultException;
+    public RoomFacility getRoomFacilityByName(String roomFacilityName) throws NoResultException;
     public void createRoomFacility(RoomFacility rf);
     public void deleteRoomFacility(Long rfID) throws NoResultException;
     public void updateRoomFacility(RoomFacility rf) throws NoResultException;

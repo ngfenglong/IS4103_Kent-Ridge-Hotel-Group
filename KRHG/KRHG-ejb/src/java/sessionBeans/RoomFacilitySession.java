@@ -20,7 +20,7 @@ import javax.persistence.Query;
  */
 @Stateless
 public class RoomFacilitySession implements RoomFacilitySessionLocal {
-   
+
     @PersistenceContext
     private EntityManager em;
 
@@ -30,7 +30,7 @@ public class RoomFacilitySession implements RoomFacilitySessionLocal {
         q = em.createQuery("SELECT rf FROM RoomFacility rf");
         return q.getResultList();
     }
-    
+
     @Override
     public RoomFacility getRoomFacilityByID(Long rfID) throws NoResultException {
         RoomFacility rf = em.find(RoomFacility.class, rfID);
@@ -40,12 +40,12 @@ public class RoomFacilitySession implements RoomFacilitySessionLocal {
             throw new NoResultException("Room Facility not found.");
         }
     }
-    
+
     @Override
     public void createRoomFacility(RoomFacility rf) {
         em.persist(rf);
     }
-    
+
     @Override
     public void deleteRoomFacility(Long rfID) throws NoResultException {
         RoomFacility rf = em.find(RoomFacility.class, rfID);
@@ -58,12 +58,26 @@ public class RoomFacilitySession implements RoomFacilitySessionLocal {
 
     @Override
     public void updateRoomFacility(RoomFacility rf) throws NoResultException {
-      RoomFacility oldRF = em.find(RoomFacility.class, rf.getRoomFacilityID());
+        RoomFacility oldRF = em.find(RoomFacility.class, rf.getRoomFacilityID());
         if (oldRF != null) {
             oldRF.setRoomFacilityCategory(rf.getRoomFacilityCategory());
             oldRF.setRoomFacilityName(rf.getRoomFacilityName());
         } else {
             throw new NoResultException("Hotel Not found");
         }
-    }    
+    }
+
+    @Override
+    public RoomFacility getRoomFacilityByName(String roomFacilityName) throws NoResultException {
+        Query q;
+        q = em.createQuery("SELECT r FROM RoomFacility r WHERE "
+                + "LOWER(r.roomFacilityName) = :roomFacilityName");
+        q.setParameter("roomFacilityName", roomFacilityName.toLowerCase());
+
+        if (!q.getResultList().isEmpty()) {
+            return (RoomFacility) q.getResultList().get(0);
+        } else {
+            throw new NoResultException("RoomFacility not found.");
+        }
+    }
 }

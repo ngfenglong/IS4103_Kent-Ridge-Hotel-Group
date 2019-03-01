@@ -26,7 +26,19 @@ public class HotelFacility implements Serializable {
     private String hotelFacilityName;
     private String hotelFacilityDescription;
     private String hotelFacilityImage;
-    private Hotel hotel;
+
+
+    public HotelFacility() {
+    }
+
+    public HotelFacility(String hotelFacilityName, String hotelFacilityDescription, String hotelFacilityImage) {
+        this();
+        this.hotelFacilityName = hotelFacilityName;
+        this.hotelFacilityDescription = hotelFacilityDescription;
+        this.hotelFacilityImage = hotelFacilityImage;
+    }
+    
+    
 
     @Override
     public int hashCode() {
@@ -109,14 +121,5 @@ public class HotelFacility implements Serializable {
         this.hotelFacilityImage = hotelFacilityImage;
     }
 
-    public Hotel getHotel() {
-        return hotel;
-    }
 
-    public void setHotel(Hotel hotel) {
-        this.hotel = hotel;
-    }
-
-    
-    
 }

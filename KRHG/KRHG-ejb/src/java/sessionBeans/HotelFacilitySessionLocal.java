@@ -18,8 +18,11 @@ import javax.ejb.Local;
 public interface HotelFacilitySessionLocal {
     public List<HotelFacility> getAllHotelFacilities();
     public HotelFacility getHotelFacilityByID(Long hfID) throws NoResultException;
+    public HotelFacility getHotelFacilityByName(String hfName) throws NoResultException;
     public void createHotelFacility(HotelFacility hf);
     public void deleteHotelFacility(Long hfID) throws NoResultException;
     public void updateHotelFacility(HotelFacility hf) throws NoResultException;
+    
+    
     
 }

@@ -5,7 +5,11 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
 
     <head>
         <meta charset="UTF-8" ></meta>
@@ -17,12 +21,14 @@ and open the template in the editor.
         <meta name="author" content="Codrops" ></meta>
         <link rel="shortcut icon" href="favicon.ico"></link>
         <!-- food icons -->
+        <!--<link rel="stylesheet" type="text/css" href="styles/bootstrap-4.1.2/bootstrap.min.css"/>-->
         <link rel="stylesheet" type="text/css" href="css/organicfoodicons.css" ></link>
+        <!--<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" ></link>-->
         <!-- demo styles -->
         <link rel="stylesheet" type="text/css" href="css/demo.css" ></link>
         <!-- menu styles -->
         <link rel="stylesheet" type="text/css" href="css/component.css" ></link>
-        <script src="js/modernizr-custom.js"></script>
+        <script src="../js/modernizr-custom.js"></script>
     </head>
 
     <body>
@@ -52,18 +58,72 @@ and open the template in the editor.
                 </div>
             </nav>
             <div class="content" >
+                <div></div>
+                <div class="col-6">
 
+                    <h:form class="info">
+                        <section class="content">
 
-                <form class="info">
-                    Add Hotel<br/>
-                    Hotel Name: <input tyoe="text" name="name" placeholder="Enter Name"></input><br/>
-                    Hotel Code Name: <input type="text" name="codename" placeholder="Enter Code Name"></input><br/>
-                    Address: <input type="text" name="address" placeholder="Enter Address"></input><br/>
-                    Hotel Star: <input type="text" name="star" placeholder="Enter Stars"></input><br/>
-                    Contact number: <input type="text" name="phone" placeholder="Enter Contact Number"></input><br/>
-                    <input type="submit" value="Create Hotel">
-                    </input>
-                </form>
+                            <br/>
+                            <table style="width:auto; border: none;">
+                                <tr style="height: 30px;">
+                                    <td colspan="2"> <h2>Add Hotel </h2></td>
+                                </tr>
+                                <tr style="height: 30px;">
+                                    <td>  <h6>Hotel Name:</h6></td>
+                                    <td> <h:inputText class="form-control" value="#{hotelManagedBean.hotelName}" id="hotelName" a:placeholder="Hotel Name" required="true" /></td>
+                                </tr>
+
+                                <tr style="height: 30px;">
+                                    <td> <h6> Hotel Code: </h6></td>
+                                    <td><h:inputText class="form-control" value="#{hotelManagedBean.hotelCode}" id="hotelCode" a:placeholder="Hotel Code" required="true" /></td>
+                                </tr>
+
+                                <tr style="height: 30px;">
+                                    <td>  <h6> Address: </h6> </td>
+                                    <td> <h:inputText class="form-control" value="#{hotelManagedBean.address}" id="address" a:placeholder="Address" required="true" /></td>
+                                </tr>
+                                <tr style="height: 30px;">
+                                    <td> <h6> Hotel Star: </h6></td>
+                                    <td>     
+                                        <h:selectOneMenu value="#{hotelManagedBean.hotelStar}">
+                                            <f:selectItem itemValue="1" itemLabel="1" />
+                                            <f:selectItem itemValue="2" itemLabel="2" />
+                                            <f:selectItem itemValue="3" itemLabel="3" />
+                                            <f:selectItem itemValue="4" itemLabel="4" />
+                                            <f:selectItem itemValue="5" itemLabel="5" />
+                                        </h:selectOneMenu>                  
+                                    </td>
+                                </tr>
+
+                                <tr  style="height: 30px;">
+                                    <td>  <h6> Contact number: </h6></td>
+                                    <td> <h:inputText class="form-control" value="#{hotelManagedBean.contactNumber}" id="contactNumber" a:placeholder="Contact Number" required="true" /></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <h:commandButton class="custom-button" value="Add hotel" action="#{hotelManagedBean.createNewHotel()}"></h:commandButton>
+                                    </td>
+                                </tr>
+                            </table>
+                        </section>
+                    </h:form>
+                </div>
+
+                <div></div>
+<!--                    Hotel Name: <h:inputText class="form-control" value="#{hotelManagedBean.hotelName}" id="hotelName" a:placeholder="Hotel Name" required="true" /><br/>
+                Hotel Code Name:  <h:inputText class="form-control" value="#{hotelManagedBean.hotelCode}" id="hotelCode" a:placeholder="Hotel Code" required="true" /><br/>
+                Address:  <h:inputText class="form-control" value="#{hotelManagedBean.address}" id="address" a:placeholder="Address" required="true" /><br />
+                Hotel Star:  <h:selectOneMenu value="#{hotelManagedBean.hotelStar}">
+                    <f:selectItem itemValue="1" itemLabel="1" />
+                    <f:selectItem itemValue="2" itemLabel="2" />
+                    <f:selectItem itemValue="3" itemLabel="3" />
+                    <f:selectItem itemValue="4" itemLabel="4" />
+                    <f:selectItem itemValue="5" itemLabel="5" />
+                </h:selectOneMenu><br/>
+                Contact number: <h:inputText class="form-control" value="#{hotelManagedBean.contactNumber}" id="contactNumber" a:placeholder="Contact Number" required="true" /><br/>-->
+
 
             </div>
         </div>
@@ -72,54 +132,54 @@ and open the template in the editor.
         <script src="js/dummydata.js"></script>
         <script src="js/main.js"></script>
         <script>
-                            (function () {
-                                var menuEl = document.getElementById('ml-menu'),
-                                        mlmenu = new MLMenu(menuEl, {
-                                            // breadcrumbsCtrl : true, // show breadcrumbs
-                                            // initialBreadcrumb : 'all', // initial breadcrumb text
-                                            backCtrl: false, // show back button
-                                            // itemsDelayInterval : 60, // delay between each menu item sliding animation
-                                            onItemClick: loadDummyData // callback: item that doesn´t have a submenu gets clicked - onItemClick([event], [inner HTML of the clicked item])
-                                        });
+            (function () {
+                var menuEl = document.getElementById('ml-menu'),
+                        mlmenu = new MLMenu(menuEl, {
+                            // breadcrumbsCtrl : true, // show breadcrumbs
+                            // initialBreadcrumb : 'all', // initial breadcrumb text
+                            backCtrl: false, // show back button
+                            // itemsDelayInterval : 60, // delay between each menu item sliding animation
+                            onItemClick: loadDummyData // callback: item that doesn´t have a submenu gets clicked - onItemClick([event], [inner HTML of the clicked item])
+                        });
 
-                                // mobile menu toggle
-                                var openMenuCtrl = document.querySelector('.action--open'),
-                                        closeMenuCtrl = document.querySelector('.action--close');
+                // mobile menu toggle
+                var openMenuCtrl = document.querySelector('.action--open'),
+                        closeMenuCtrl = document.querySelector('.action--close');
 
-                                openMenuCtrl.addEventListener('click', openMenu);
-                                closeMenuCtrl.addEventListener('click', closeMenu);
+                openMenuCtrl.addEventListener('click', openMenu);
+                closeMenuCtrl.addEventListener('click', closeMenu);
 
-                                function openMenu() {
-                                    classie.add(menuEl, 'menu--open');
-                                    closeMenuCtrl.focus();
-                                }
+                function openMenu() {
+                    classie.add(menuEl, 'menu--open');
+                    closeMenuCtrl.focus();
+                }
 
-                                function closeMenu() {
-                                    classie.remove(menuEl, 'menu--open');
-                                    openMenuCtrl.focus();
-                                }
+                function closeMenu() {
+                    classie.remove(menuEl, 'menu--open');
+                    openMenuCtrl.focus();
+                }
 
-                                // simulate grid content loading
-                                var gridWrapper = document.querySelector('.content');
+                // simulate grid content loading
+                var gridWrapper = document.querySelector('.content');
 
-                                function loadDummyData(ev, itemName) {
-                                    ev.preventDefault();
+                function loadDummyData(ev, itemName) {
+                    ev.preventDefault();
 
-                                    closeMenu();
-                                    gridWrapper.innerHTML = '';
-                                    classie.add(gridWrapper, 'content--loading');
-                                    setTimeout(function () {
-                                        classie.remove(gridWrapper, 'content--loading');
-                                        gridWrapper.innerHTML = '<ul class="products">' + dummyData[itemName] + '</ul>';
-                                    }, 700);
-                                }
-                                function goto(link) {
-                                    window.location.replace(link);
-                                }
-                            })();
-                            function goto(link) {
-                                window.location.replace(link);
-                            }
+                    closeMenu();
+                    gridWrapper.innerHTML = '';
+                    classie.add(gridWrapper, 'content--loading');
+                    setTimeout(function () {
+                        classie.remove(gridWrapper, 'content--loading');
+                        gridWrapper.innerHTML = '<ul class="products">' + dummyData[itemName] + '</ul>';
+                    }, 700);
+                }
+                function goto(link) {
+                    window.location.replace(link);
+                }
+            })();
+            function goto(link) {
+                window.location.replace(link);
+            }
         </script>
     </body>
 

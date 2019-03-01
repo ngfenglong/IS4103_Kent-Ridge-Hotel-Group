@@ -16,7 +16,7 @@ import javax.persistence.Query;
 
 @Stateless
 public class HotelFacilitySession implements HotelFacilitySessionLocal {
- 
+
     @PersistenceContext
     private EntityManager em;
 
@@ -26,7 +26,7 @@ public class HotelFacilitySession implements HotelFacilitySessionLocal {
         q = em.createQuery("SELECT hf FROM HotelFacility hf");
         return q.getResultList();
     }
-    
+
     @Override
     public HotelFacility getHotelFacilityByID(Long hfID) throws NoResultException {
         HotelFacility hf = em.find(HotelFacility.class, hfID);
@@ -36,11 +36,11 @@ public class HotelFacilitySession implements HotelFacilitySessionLocal {
             throw new NoResultException("Hotel Facility not found.");
         }
     }
-    
+
     @Override
     public void createHotelFacility(HotelFacility hf) {
         em.persist(hf);
-    }    
+    }
 
     @Override
     public void deleteHotelFacility(Long hfID) throws NoResultException {
@@ -51,10 +51,10 @@ public class HotelFacilitySession implements HotelFacilitySessionLocal {
             throw new NoResultException("Hotel Facility not found");
         }
     }
-    
+
     @Override
     public void updateHotelFacility(HotelFacility hf) throws NoResultException {
-      HotelFacility oldHF = em.find(HotelFacility.class, hf.getHotelFacilityID());
+        HotelFacility oldHF = em.find(HotelFacility.class, hf.getHotelFacilityID());
         if (oldHF != null) {
             oldHF.setHotelFacilityName(hf.getHotelFacilityName());
             oldHF.setHotelFacilityDescription(hf.getHotelFacilityDescription());
@@ -62,6 +62,20 @@ public class HotelFacilitySession implements HotelFacilitySessionLocal {
         } else {
             throw new NoResultException("Hotel Not found");
         }
-    }    
-    
+    }
+
+    @Override
+    public HotelFacility getHotelFacilityByName(String hfName) throws NoResultException {
+        Query q;
+        q = em.createQuery("SELECT h FROM HotelFacility h WHERE "
+                + "LOWER(h.hotelFacilityName) = :hotelFacilityName");
+        q.setParameter("hotelFacilityName", hfName.toLowerCase());
+
+        if (!q.getResultList().isEmpty()) {
+            return (HotelFacility) q.getResultList().get(0);
+        } else {
+            throw new NoResultException("HotelFacility not found.");
+        }
+    }
+
 }

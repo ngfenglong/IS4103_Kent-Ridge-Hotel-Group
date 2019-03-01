@@ -37,7 +37,7 @@ public class Hotel implements Serializable {
 
     @OneToMany(mappedBy = "hotel")
     private List<Room> rooms;
-    @OneToMany(mappedBy = "hotel")
+    @OneToMany
     private List<HotelFacility> hotelFacilities;
     @OneToMany(mappedBy = "hotel")
     private List<Feedback> feedbacks;
