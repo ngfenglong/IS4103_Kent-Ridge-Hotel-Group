@@ -6,7 +6,10 @@
     padding: 5px;
     margin: 0px 0px 10px 0px;
 }
-
+#tableresult{    
+    color: white;
+    
+}
 #bottom {
     position: relative;
     background-color: #c2dfef;
