@@ -31,8 +31,8 @@ and open the template in the editor.
             <!-- Blueprint header -->
             <header class="bp-header cf">
                 <div class="dummy-logo">
-                  
-                    
+
+
                     <h2 class="dummy-heading">User name</h2>
                 </div>
                 <div class="bp-header__main">
@@ -53,6 +53,7 @@ and open the template in the editor.
                         <li class="menu__item" role="menuitem"><a class="menu__link"  onclick="goto('checkout.xhtml')" >Check Out</a></li>
                         <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-3" aria-owns="submenu-3" href="#">Accounts</a></li>
                         <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-4" aria-owns="submenu-4" href="#">Request</a></li>
+                        <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-5" aria-owns="submenu-5" href="#">Reservation</a></li>
                     </ul>
                     <!-- Submenu 1 -->
                     <ul data-menu="submenu-1" id="submenu-1" class="menu__level" tabindex="-1" role="menu" aria-label="Vegetables">
@@ -60,23 +61,28 @@ and open the template in the editor.
                         <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('walkin.xhtml')">Walk-in</a></li>
 
                     </ul>
-                 
-                   
+
+
                     <!-- Submenu 3 -->
                     <ul data-menu="submenu-3" id="submenu-3" class="menu__level" tabindex="-1" role="menu" aria-label="Grains">
                         <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('customerAccount.xhtml')">Create Account</a></li>
                         <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('manageAccount.xhtml')">Manage Account</a></li>
-                      
+
                     </ul>
-                   
+
                     <!-- Submenu 4 -->
                     <ul data-menu="submenu-4" id="submenu-4" class="menu__level" tabindex="-1" role="menu" aria-label="Mylk &amp; Drinks">
                         <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('lostAndFound.xhtml')">Lost and Found</a></li>
                         <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('roomService.xhtml')">Room Service</a></li>
                         <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('maintenance.xhtml')">Maintenance</a></li>
-                      
+
                     </ul>
-                  
+                    <ul data-menu="submenu-5" id="submenu-5" class="menu__level" tabindex="-1" role="menu" aria-label="Grains">
+                        <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('makeReservation.xhtml')">Make Reservation</a></li>
+                        <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('cancelReservation.xhtml')">Cancel Reservation</a></li>
+
+                    </ul>
+
                 </div>
             </nav>
             <div class="content">
@@ -89,54 +95,54 @@ and open the template in the editor.
         <script src="js/dummydata.js"></script>
         <script src="js/main.js"></script>
         <script>
-            (function () {
-                var menuEl = document.getElementById('ml-menu'),
-                        mlmenu = new MLMenu(menuEl, {
-                            // breadcrumbsCtrl : true, // show breadcrumbs
-                            // initialBreadcrumb : 'all', // initial breadcrumb text
-                            backCtrl: false, // show back button
-                            // itemsDelayInterval : 60, // delay between each menu item sliding animation
-                            onItemClick: loadDummyData // callback: item that doesn´t have a submenu gets clicked - onItemClick([event], [inner HTML of the clicked item])
-                        });
+                            (function () {
+                                var menuEl = document.getElementById('ml-menu'),
+                                        mlmenu = new MLMenu(menuEl, {
+                                            // breadcrumbsCtrl : true, // show breadcrumbs
+                                            // initialBreadcrumb : 'all', // initial breadcrumb text
+                                            backCtrl: false, // show back button
+                                            // itemsDelayInterval : 60, // delay between each menu item sliding animation
+                                            onItemClick: loadDummyData // callback: item that doesn´t have a submenu gets clicked - onItemClick([event], [inner HTML of the clicked item])
+                                        });
 
-                // mobile menu toggle
-                var openMenuCtrl = document.querySelector('.action--open'),
-                        closeMenuCtrl = document.querySelector('.action--close');
+                                // mobile menu toggle
+                                var openMenuCtrl = document.querySelector('.action--open'),
+                                        closeMenuCtrl = document.querySelector('.action--close');
 
-                openMenuCtrl.addEventListener('click', openMenu);
-                closeMenuCtrl.addEventListener('click', closeMenu);
+                                openMenuCtrl.addEventListener('click', openMenu);
+                                closeMenuCtrl.addEventListener('click', closeMenu);
 
-                function openMenu() {
-                    classie.add(menuEl, 'menu--open');
-                    closeMenuCtrl.focus();
-                }
+                                function openMenu() {
+                                    classie.add(menuEl, 'menu--open');
+                                    closeMenuCtrl.focus();
+                                }
 
-                function closeMenu() {
-                    classie.remove(menuEl, 'menu--open');
-                    openMenuCtrl.focus();
-                }
+                                function closeMenu() {
+                                    classie.remove(menuEl, 'menu--open');
+                                    openMenuCtrl.focus();
+                                }
 
-                // simulate grid content loading
-                var gridWrapper = document.querySelector('.content');
+                                // simulate grid content loading
+                                var gridWrapper = document.querySelector('.content');
 
-                function loadDummyData(ev, itemName) {
-                    ev.preventDefault();
+                                function loadDummyData(ev, itemName) {
+                                    ev.preventDefault();
 
-                    closeMenu();
-                    gridWrapper.innerHTML = '';
-                    classie.add(gridWrapper, 'content--loading');
-                    setTimeout(function () {
-                        classie.remove(gridWrapper, 'content--loading');
-                        gridWrapper.innerHTML = '<ul class="products">' + dummyData[itemName] + '</ul>';
-                    }, 700);
-                }
-                function goto(link) {
-                    window.location.replace(link);
-                }
-            })();
-            function goto(link){
-                window.location.replace(link);
-            }
+                                    closeMenu();
+                                    gridWrapper.innerHTML = '';
+                                    classie.add(gridWrapper, 'content--loading');
+                                    setTimeout(function () {
+                                        classie.remove(gridWrapper, 'content--loading');
+                                        gridWrapper.innerHTML = '<ul class="products">' + dummyData[itemName] + '</ul>';
+                                    }, 700);
+                                }
+                                function goto(link) {
+                                    window.location.replace(link);
+                                }
+                            })();
+                            function goto(link) {
+                                window.location.replace(link);
+                            }
         </script>
     </body>
 
