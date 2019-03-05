@@ -23,6 +23,13 @@ and open the template in the editor.
         <!-- menu styles -->
         <link rel="stylesheet" type="text/css" href="css/component.css" ></link>
         <script src="js/modernizr-custom.js"></script>
+
+        <link rel="stylesheet" href="css/adminlte.min.css"></link>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"></link>
+        <!-- Ionicons -->
+        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"></link>
+
+        <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap4.css"></link>
     </head>
 
     <body>
@@ -44,7 +51,7 @@ and open the template in the editor.
                 </div>
             </header>
             <button class="action action--open" aria-label="Open Menu"><span class="icon icon--menu"></span></button>
-            <nav id="ml-menu" class="menu">
+          <nav id="ml-menu" class="menu">
                 <button class="action action--close" aria-label="Close Menu"><span class="icon icon--cross"></span></button>
                 <div class="menu__wrap">
                     <ul data-menu="main" class="menu__level" tabindex="-1" role="menu" aria-label="All">
@@ -52,6 +59,7 @@ and open the template in the editor.
                         <li class="menu__item" role="menuitem"><a class="menu__link"  onclick="goto('checkout.xhtml')" >Check Out</a></li>
                         <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-3" aria-owns="submenu-3" href="#">Accounts</a></li>
                         <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-4" aria-owns="submenu-4" href="#">Request</a></li>
+                        <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-5" aria-owns="submenu-5" href="#">Reservation</a></li>
                     </ul>
                     <!-- Submenu 1 -->
                     <ul data-menu="submenu-1" id="submenu-1" class="menu__level" tabindex="-1" role="menu" aria-label="Vegetables">
@@ -73,6 +81,12 @@ and open the template in the editor.
                         <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('lostAndFound.xhtml')">Lost and Found</a></li>
                         <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('roomService.xhtml')">Room Service</a></li>
                         <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('maintenance.xhtml')">Maintenance</a></li>
+                        <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('housekeeping.xhtml')">Housekeeping</a></li>
+
+                    </ul>
+                    <ul data-menu="submenu-5" id="submenu-5" class="menu__level" tabindex="-1" role="menu" aria-label="Grains">
+                        <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('makeReservation.xhtml')">Make Reservation</a></li>
+                        <li class="menu__item" role="menuitem"><a class="menu__link" onclick="goto('cancelReservation.xhtml')">Cancel Reservation</a></li>
 
                     </ul>
 
@@ -80,28 +94,69 @@ and open the template in the editor.
             </nav>
             <div class="content" >
 
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Lost and founds</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Contact</th>
+                                    <th>Description</th>
+                                    <th>Date</th>
 
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
 
-                <h4>List of reported Lost and Found</h4>
-                <table>
-                    <tr><th>Name</th><th>Item Name</th><th>Description</th><th></th></tr>
-                    <tr><td>Ng Feng long</td><td>Water bottle</td><td>black </td><button>Claim</button></tr>
-                    <tr><td>Stanley Loh</td><td>Water bottle</td><td>Red </td><button>Claim</button></tr>
+                                    <td>bottle</td>
+                                    <td>96275379</td>
+                                    <td>black in color</td>
+                                    <td>23 march 2019 10am</td>
 
+                                    <td><input type="button" value="Claim"/></td>
+                                </tr>
+                                <tr>
+                                   <td>bottle</td>
+                                    <td>96275379</td>
+                                    <td>white in color, superman</td>
+                                    <td>23 march 2019 10am</td>
 
+                                    <td><input type="button" value="Claim"/></td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Room</th>
+                                    <th>Status</th>
+                                    <th>DateTime Requested</th>
 
+                                    <th></th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                    <a href='createLostAndFound.xhtml'>Make a report</a>
+                </div>
 
-                </table>
-
-
-                <a href='createLostAndFound.xhtml'>Make a report</a>
             </div>
         </div>
         <!-- /view -->
         <script src="js/classie.js"></script>
         <script src="js/dummydata.js"></script>
         <script src="js/main.js"></script>
+        <script src="plugins/jquery/jquery.min.js"></script>
+        <script src="plugins/datatables/jquery.dataTables.js"></script>
+        <script src="plugins/datatables/dataTables.bootstrap4.js"></script>
         <script>
+//<![CDATA[
+                            var dtable = $("#example1").DataTable();
                             (function () {
                                 var menuEl = document.getElementById('ml-menu'),
                                         mlmenu = new MLMenu(menuEl, {
@@ -146,12 +201,14 @@ and open the template in the editor.
                                 function goto(link) {
                                     window.location.replace(link);
                                 }
+
                             })();
                             function goto(link) {
                                 window.location.replace(link);
                             }
-
+//]]>
         </script>
     </body>
 
 </html>
+
