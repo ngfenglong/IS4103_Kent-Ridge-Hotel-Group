@@ -6,6 +6,8 @@
 package entity;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,6 +28,18 @@ public class Logging implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date loggingDateTime;
     private String operatorName;
+    
+    public Logging(){
+        
+    }
+
+    public Logging(String loggingType, String loggingName, String operatorName) {
+        this.loggingType = loggingType;
+        this.loggingName = loggingName;
+        this.loggingDateTime = java.util.Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
+        this.operatorName = operatorName;
+    }
+    
     
     public Long getLoggingID() {
         return loggingID;

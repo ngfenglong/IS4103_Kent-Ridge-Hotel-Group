@@ -11,6 +11,7 @@ import entity.MinibarItem;
 import entity.Room;
 import entity.RoomFacility;
 import entity.Staff;
+import entity.StaffType;
 import error.NoResultException;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -66,14 +67,42 @@ public class DataInitializationSessionBean {
     }
 
     public void initializeData() throws NoResultException {
+        //*********************************************Staff Type************************************************
+        StaffType st1 = new StaffType("Part Timer");
+        StaffType st2 = new StaffType("HR Manager");
+        StaffType st3 = new StaffType("Frontend Staff");
+        StaffType st4 = new StaffType("Frontend Manager");
+        StaffType st5 = new StaffType("IT Tech");
+
+        staffSessionLocal.createStaffType(st1);
+        staffSessionLocal.createStaffType(st2);
+        staffSessionLocal.createStaffType(st3);
+        staffSessionLocal.createStaffType(st4);
+        staffSessionLocal.createStaffType(st5);
+
+        st1 = staffSessionLocal.getStaffTypeByName("Part Timer");
+        st2 = staffSessionLocal.getStaffTypeByName("HR Manager");
+        st3 = staffSessionLocal.getStaffTypeByName("Frontend Staff");
+        st4 = staffSessionLocal.getStaffTypeByName("Frontend Manager");
+        st5 = staffSessionLocal.getStaffTypeByName("IT Tech");
 
         //*********************************************Staff************************************************
         Staff s0 = new Staff("Test User", "test", encryptPassword("test"), "test@krhg.com.sg", "88244165", "male", "S9226940Z", "7 Lok Yang Vista", new Date(), "Kent Ridge North", "Laundry Staff", "Laundry", 7, true, "Ee Pui Ling", "7 Lok Yang Vista", "68701722");
+        s0.addAccountRights(st1);
+        s0.addAccountRights(st2);
+        s0.addAccountRights(st3);
+        s0.addAccountRights(st4);
+        s0.addAccountRights(st5);
         Staff s1 = new Staff("Kenny Ee", "kennyee", encryptPassword("123456"), "kennyee@krhg.com.sg", "88244165", "male", "S9226940Z", "7 Lok Yang Vista", new Date(), "Kent Ridge North", "Laundry Staff", "Laundry", 7, true, "Ee Pui Ling", "7 Lok Yang Vista", "68701722");
+        s1.addAccountRights(st1);
         Staff s2 = new Staff("David Chia Zhi Jie", "davidchia", encryptPassword("123456"), "davidchia@krhg.com.sg", "98861094", "male", "S6831300G", "Blk 226 Lorong 7 Pasir Ris, #04-32", new Date(), "Kent Ridge Grand", "Kitchen Manager", "Kitchen", 14, true, "Chia Xian Siew", "Blk 226 Lorong 7 Pasir Ris, #04-32", "67494068");
+        s2.addAccountRights(st2);
         Staff s3 = new Staff("Alice Chai", "alicechai", encryptPassword("123456"), "alicechai@krhg.com.sg", "93070252", "Female", "S3543767C", "Blk 377 Serangoon North Street 88, #15-09", new Date(), "Kent Ridge Central", "Housekeeping Manager", "Housekeeping", 14, true, "Chai Li Ting", "Blk 377 Serangoon North Street 88, #15-09", "61935979");
+        s3.addAccountRights(st3);
         Staff s4 = new Staff("Siti Riduan", "sitiriduan", encryptPassword("123456"), "sitiriduan@krhg.com.sg", "93497066", "Female", "S1730049J", "Blk 29 Geylang Street 21, #01-27", new Date(), "Kent Ridge Central", "Housekeeping Staff", "Housekeeping", 7, true, "Riduan Mohd Yaccob", "Blk 29 Geylang Street 21, #01-27", "67603364");
+        s4.addAccountRights(st4);
         Staff s5 = new Staff("Geoffrey Gan", "geoffreygan", encryptPassword("123456"), "geoffreygan@krhg.com.sg", "91574480", "male", "F9117753Q", "Blk 364 Geylang Street 17, #18-06", new Date(), "Kent Ridge North East", "Housekeeping Manager", "Housekeeping", 14, true, "Gan Kim Hock", "Blk 364 Geylang Street 17, #18-06", "61446071");
+        s5.addAccountRights(st5);
 
         staffSessionLocal.createStaff(s0);
         staffSessionLocal.createStaff(s1);
@@ -146,9 +175,9 @@ public class DataInitializationSessionBean {
         m4 = houseKeepingOrderSessionLocal.getMinibarItemByItemName("Mineral Water");
 
         //*********************************************Room Facility************************************************
-        RoomFacility rf1 = new RoomFacility("Bathtub", "");
-        RoomFacility rf2 = new RoomFacility("TV", "");
-        RoomFacility rf3 = new RoomFacility("Room Facility 3", "");
+        RoomFacility rf1 = new RoomFacility("Bathtub", "Bathroom and Toiletries", "");
+        RoomFacility rf2 = new RoomFacility("TV", "Entertainments", "");
+        RoomFacility rf3 = new RoomFacility("Room Facility 3", "Others", "");
 
         roomFacilitySessionLocal.createRoomFacility(rf1);
         roomFacilitySessionLocal.createRoomFacility(rf2);

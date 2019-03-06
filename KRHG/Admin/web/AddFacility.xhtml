@@ -8,7 +8,8 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <head>
         <meta charset="UTF-8" ></meta>
@@ -36,38 +37,93 @@ and open the template in the editor.
             <!-- Blueprint header -->
             <header class="bp-header cf">
                 <div class="dummy-logo">
-                    <div class="dummy-icon foodicon foodicon--coconut"></div>
+
+                    <a class="dummy-icon foodicon foodicon--coconut" href="index.xhtml"></a>
                     <h2 class="dummy-heading">KRHG</h2>
                 </div>
                 <div class="bp-header__main">
-                    <h1 class="bp-header__title">Add Facility</h1>
+                    <h1 class="bp-header__title">Add Hotel Facility Page</h1>
                     <nav class="bp-nav">
-                        <a class="bp-nav__item bp-icon bp-icon--prev" href="http://tympanus.net/Blueprints/PageStackNavigation/" data-info="Log out"><span>Log out</span></a>
-                        <a class="bp-nav__item bp-icon bp-icon--next" href="index.xhtml" data-info="Home"><span>Home</span></a>
-
+                        <a class="bp-nav__item bp-icon bp-icon--prev" href="loginpage.xhtml" data-info="Log out"><span>Log out</span></a>
                     </nav>
                 </div>
             </header>
             <button class="action action--open" aria-label="Open Menu"><span class="icon icon--menu"></span></button>
             <nav id="ml-menu" class="menu">
-                <button class="action action--close" aria-label="Close Menu"><span class="icon icon--cross"></span></button>
-                <div class="menu__wrap">
+                <h:form>
+                    <button class="action action--close" aria-label="Close Menu"><span class="icon icon--cross"></span></button>
+                    <div class="menu__wrap">
+                        <ul data-menu="main" class="menu__level" tabindex="-1" role="menu" aria-label="All">
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1" aria-owns="submenu-1" href="#">Hotel Management</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-2" aria-owns="submenu-2" href="#">Surcharges</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-3" aria-owns="submenu-3" href="#">Facilities Management</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-4" aria-owns="submenu-4" href="#">Leave and Rooster</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-5" aria-owns="submenu-5" href="#">Testing Management</a></li>
+                        </ul>
+
+                        <!-- Submenu 1 -->
+                        <ul data-menu="submenu-1" id="submenu-1" class="menu__level" tabindex="-1" role="menu" aria-label="Vegetables">
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="addHotel" aria-owns="addHotel" onclick="goto('AddHotel.xhtml')">Add Hotel</a></li>
+                            <c:forEach items="${hotelManagedBean.allHotels}" var="hotel">
+                                <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="#{hotel.hotelName}" aria-owns="#{hotel.hotelName}" href="#">#{hotel.hotelName}</a></li>
+                            </c:forEach>
+                        </ul>
+
+                        <ul data-menu="submenu-5" id="submenu-5" class="menu__level" tabindex="-1" role="menu" aria-label="Vegetables">
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="addHotel" aria-owns="addHotel" onclick="goto('AddHotel.xhtml')">Add Hotel</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="addFacility" aria-owns="addHotel" onclick="goto('AddFacility.xhtml')">Add Hotel Facility</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="addRoom" aria-owns="addHotel" onclick="goto('AddRoom.xhtml')">Add Room</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="addRoomFacility" aria-owns="addHotel" onclick="goto('AddRoomFacility.xhtml')">Add Room Facility</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="addMinibarItem" aria-owns="addHotel" onclick="goto('AddMinibarItems.xhtml')">Add Minibar Items</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="addHolidays" aria-owns="addHotel" onclick="goto('AddHolidays.xhtml')">Add Holiday Surcharge</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="addSurcharge" aria-owns="addHotel" onclick="goto('AddSurcharge.xhtml')">Add Extra Surcharge</a></li>
+                        </ul>
+
+                        <c:forEach items="${hotelManagedBean.allHotels}" var="hotel">
+                            <ul data-menu="#{hotel.hotelName}" id="#{hotel.hotelName}" class="menu__level" tabindex="-1" role="menu" aria-label="Vegetables">
+                                <li class="menu__item" role="menuitem"><h:commandLink action="#{hotelManagedBean.viewHotelFacilities(hotel.hotelName)}">Hotel Facility</h:commandLink></li>
+                                <li class="menu__item" role="menuitem"><h:commandLink action="#{hotelManagedBean.viewHotelRooms(hotel.hotelName)}">Room</h:commandLink></li>
+                                <li class="menu__item" role="menuitem"><h:commandLink action="#{hotelManagedBean.viewHotelFeedbacks(hotel.hotelName)}">Feedback</h:commandLink></li>
+                            </ul>   
+                        </c:forEach>
+
+                        <!-- Submenu 2 -->
+                        <ul data-menu="submenu-2" id="submenu-2" class="menu__level" tabindex="-1" role="menu" aria-label="Vegetables">
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="extraSurcharge" aria-owns="extraSurcharge" onclick="goto('ViewSucharge.xhtml')">Extra Surcharge</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="holidays" aria-owns="holidays" onclick="goto('ViewHolidays.xhtml')">Holidays</a></li>
+                        </ul>
+
+                        <!-- Submenu 3 -->
+                        <ul data-menu="submenu-3" id="submenu-3" class="menu__level" tabindex="-1" role="menu" aria-label="Vegetables">
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="viewAllFacility" aria-owns="viewAllFacility" onclick="goto('ViewAllFacility.xhtml')" >Hotel Facilities</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="viewRoomFacility" aria-owns="viewRoomFacility" onclick="goto('ViewRoomFacility.xhtml')" >Room Facilities</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="viewMinibarItem" aria-owns="viewMinibarItem" onclick="goto('ViewMinibarItems.xhtml')" >Minibar Items</a></li>
+                        </ul>
+                    </div>
+                </h:form>
+            </nav>
 
 
+            <div class="content" >
+                <div class="form-container" >
+
+                    <h:form>
+                        <h2>Add Hotel Facility  </h2>
+                        <div class="form-group">
+                            <h:inputText class="form-control" value="#{hotelManagedBean.hfName}" id="hfName" a:placeholder="HOTEL FACILITY NAME" required="true" />
+                        </div>
+                        <div class="form-group">
+                            <h:inputText class="form-control" value="#{hotelManagedBean.hfImage}" id="hfImage" a:placeholder="HOTEL IMAGE" required="true" />
+                        </div>
+                        <div class="form-group">
+                            <h:inputText class="form-control" value="#{hotelManagedBean.hfDescription}" id="description" a:placeholder="DESCRIPTION" required="true" />
+                        </div>
+                        <div class="form-group">
+                            <h:commandButton class="custom-button" value="Create" action="#{hotelManagedBean.createHotelFacility()}"></h:commandButton>
+                        </div>
+                    </h:form>
 
                 </div>
-            </nav>
-            <div class="content" >
-
-
-                <form class="info">
-                    Add Hotel Facility <br/>
-                    Hotel Facility: <input tyoe="text" name="name" placeholder="Enter Facility"></input><br/>
-                    Desciption: <input type="text" name="description" placeholder="Enter Description"></input><br/>
-                    <input type="submit" value="Edit Facility">
-                    </input>
-                </form>
-
             </div>
         </div>
         <!-- /view -->
@@ -75,54 +131,54 @@ and open the template in the editor.
         <script src="js/dummydata.js"></script>
         <script src="js/main.js"></script>
         <script>
-            (function () {
-                var menuEl = document.getElementById('ml-menu'),
-                        mlmenu = new MLMenu(menuEl, {
-                            // breadcrumbsCtrl : true, // show breadcrumbs
-                            // initialBreadcrumb : 'all', // initial breadcrumb text
-                            backCtrl: false, // show back button
-                            // itemsDelayInterval : 60, // delay between each menu item sliding animation
-                            onItemClick: loadDummyData // callback: item that doesn´t have a submenu gets clicked - onItemClick([event], [inner HTML of the clicked item])
-                        });
+                                (function () {
+                                    var menuEl = document.getElementById('ml-menu'),
+                                            mlmenu = new MLMenu(menuEl, {
+                                                // breadcrumbsCtrl : true, // show breadcrumbs
+                                                // initialBreadcrumb : 'all', // initial breadcrumb text
+                                                backCtrl: false, // show back button
+                                                // itemsDelayInterval : 60, // delay between each menu item sliding animation
+                                                onItemClick: loadDummyData // callback: item that doesn´t have a submenu gets clicked - onItemClick([event], [inner HTML of the clicked item])
+                                            });
 
-                // mobile menu toggle
-                var openMenuCtrl = document.querySelector('.action--open'),
-                        closeMenuCtrl = document.querySelector('.action--close');
+                                    // mobile menu toggle
+                                    var openMenuCtrl = document.querySelector('.action--open'),
+                                            closeMenuCtrl = document.querySelector('.action--close');
 
-                openMenuCtrl.addEventListener('click', openMenu);
-                closeMenuCtrl.addEventListener('click', closxeMenu);
+                                    openMenuCtrl.addEventListener('click', openMenu);
+                                    closeMenuCtrl.addEventListener('click', closxeMenu);
 
-                function openMenu() {
-                    classie.add(menuEl, 'menu--open');
-                    closeMenuCtrl.focus();
-                }
+                                    function openMenu() {
+                                        classie.add(menuEl, 'menu--open');
+                                        closeMenuCtrl.focus();
+                                    }
 
-                function closeMenu() {
-                    classie.remove(menuEl, 'menu--open');
-                    openMenuCtrl.focus();
-                }
+                                    function closeMenu() {
+                                        classie.remove(menuEl, 'menu--open');
+                                        openMenuCtrl.focus();
+                                    }
 
-                // simulate grid content loading
-                var gridWrapper = document.querySelector('.content');
+                                    // simulate grid content loading
+                                    var gridWrapper = document.querySelector('.content');
 
-                function loadDummyData(ev, itemName) {
-                    ev.preventDefault();
+                                    function loadDummyData(ev, itemName) {
+                                        ev.preventDefault();
 
-                    closeMenu();
-                    gridWrapper.innerHTML = '';
-                    classie.add(gridWrapper, 'content--loading');
-                    setTimeout(function () {
-                        classie.remove(gridWrapper, 'content--loading');
-                        gridWrapper.innerHTML = '<ul class="products">' + dummyData[itemName] + '</ul>';
-                    }, 700);
-                }
-                function goto(link) {
-                    window.location.replace(link);
-                }
-            })();
-            function goto(link) {
-                window.location.replace(link);
-            }
+                                        closeMenu();
+                                        gridWrapper.innerHTML = '';
+                                        classie.add(gridWrapper, 'content--loading');
+                                        setTimeout(function () {
+                                            classie.remove(gridWrapper, 'content--loading');
+                                            gridWrapper.innerHTML = '<ul class="products">' + dummyData[itemName] + '</ul>';
+                                        }, 700);
+                                    }
+                                    function goto(link) {
+                                        window.location.replace(link);
+                                    }
+                                })();
+                                function goto(link) {
+                                    window.location.replace(link);
+                                }
         </script>
     </body>
 

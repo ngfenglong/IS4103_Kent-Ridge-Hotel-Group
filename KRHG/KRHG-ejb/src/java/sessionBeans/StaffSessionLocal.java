@@ -6,6 +6,7 @@
 package sessionBeans;
 
 import entity.Staff;
+import entity.StaffType;
 import error.NoResultException;
 import java.util.List;
 import javax.ejb.Local;
@@ -25,7 +26,12 @@ public interface StaffSessionLocal {
     public void deactivateStaff(Staff s) throws NoResultException;
     public void updateStaff(Staff s) throws NoResultException;   
     
-    
+    public void createStaffType(StaffType st);
+    public void deleteStaffType(Long stID) throws NoResultException;
+    public List<StaffType> getAllStaffTypes();
+    public StaffType getStaffTypeByID(Long stID) throws NoResultException;
+    public StaffType getStaffTypeByName(String typeName) throws NoResultException;
+        
     //Logging in
     public boolean Login(Staff s);
     public boolean LoginWithType(Staff s, String type);

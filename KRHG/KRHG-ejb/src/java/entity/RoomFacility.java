@@ -19,16 +19,18 @@ public class RoomFacility implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long roomFacilityID;
     private String roomFacilityName;
+    private String iconImg;
     private String roomFacilityCategory;
 
     public RoomFacility() {
 
     }
 
-    public RoomFacility(String roomFacilityName, String roomFacilityCategory) {
+    public RoomFacility(String roomFacilityName, String roomFacilityCategory, String iconImg) {
         this();
         this.roomFacilityName = roomFacilityName;
         this.roomFacilityCategory = roomFacilityCategory;
+        this.iconImg = iconImg;
 
     }
 
@@ -77,6 +79,14 @@ public class RoomFacility implements Serializable {
      */
     public void setRoomFacilityCategory(String roomFacilityCategory) {
         this.roomFacilityCategory = roomFacilityCategory;
+    }
+
+    public String getIconImg() {
+        return iconImg;
+    }
+
+    public void setIconImg(String iconImg) {
+        this.iconImg = iconImg;
     }
 
     /**

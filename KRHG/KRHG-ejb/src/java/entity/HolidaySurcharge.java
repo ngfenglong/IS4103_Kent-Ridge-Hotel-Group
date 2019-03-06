@@ -30,6 +30,15 @@ public class HolidaySurcharge implements Serializable {
     private Date holidayDate;
     private double holidaySurchargePrice;
     
+    public HolidaySurcharge(){
+    
+    }
+
+    public HolidaySurcharge(String holidayName, Date holidayDate, double holidaySurchargePrice) {
+        this.holidayName = holidayName;
+        this.holidayDate = holidayDate;
+        this.holidaySurchargePrice = holidaySurchargePrice;
+    }
     
     public Long getHolidaySurchargeID() {
         return holidaySurchargeID;

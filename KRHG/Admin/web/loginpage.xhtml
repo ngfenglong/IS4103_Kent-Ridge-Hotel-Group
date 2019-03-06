@@ -63,22 +63,14 @@ and open the template in the editor.
 
                             </h:inputText>
                         </div>
-                        <!-- Input Field Ends -->
-                        <!-- Input Field Starts -->
                         <div class="form-group">
                             <h:inputSecret class="form-control"  value="#{authenticationManagedBean.password}"  id="password" a:placeholder="PASSWORD" required="true">
                             </h:inputSecret>
                         </div>
-                        <!-- Input Field Ends -->
-                        <!-- Submit Form Button Starts -->
                         <div class="form-group">
                             <h:commandButton class="custom-button login" value="Login" action="#{authenticationManagedBean.login()}"></h:commandButton>
                             <p class="text-center">don't have an account ? <a href="register.xhtml">register now</a><br /><a href="forgetPassword.xhtml">Forget Password</a></p>
-                            <!--<p class="text-center"></p>-->
                         </div>
-<!--                        <input type="text" title="username" placeholder="username" />
-                        <input type="password" title="username" placeholder="password" />
-                        <button type="submit" class="btn">Login</button>-->
                     </h:form>   
                 </div>
                 <!-- Ajax loaded content here -->

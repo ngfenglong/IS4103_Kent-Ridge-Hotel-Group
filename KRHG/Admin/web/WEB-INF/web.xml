@@ -4,7 +4,11 @@
         <param-name>javax.faces.PROJECT_STAGE</param-name>
         <param-value>Development</param-value>
     </context-param>
-<!--    <filter>
+    <context-param>
+        <param-name>facelets.REFRESH_PERIOD</param-name>
+        <param-value>0</param-value>
+    </context-param>
+    <!--    <filter>
         <filter-name>AuthenticationFilter</filter-name>
         <filter-class>filter.AuthenticationFilter</filter-class>
     </filter>

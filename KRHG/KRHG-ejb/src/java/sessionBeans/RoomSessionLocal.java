@@ -6,10 +6,13 @@
 package sessionBeans;
 
 import entity.CleaningSchedule;
+import entity.ExtraSurcharge;
+import entity.HolidaySurcharge;
 import entity.MinibarItem;
 import entity.Room;
 import entity.RoomFacility;
 import error.NoResultException;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -30,4 +33,27 @@ public interface RoomSessionLocal {
     public void removeCleaningSchedule(Long rID, CleaningSchedule cs);
     public void addMinibarItem(Long rID, MinibarItem mi);
     public void removeMinibarItem(Long rID, MinibarItem mi);
+    
+    public void createHolidaySurcharge(HolidaySurcharge hs);
+    public void deleteHolidaySurcharge(Long hsID) throws NoResultException;
+    public void updateHolidaySurcarhge(HolidaySurcharge hs) throws NoResultException;
+    public List<HolidaySurcharge> getAllHolidaySurcharge();
+    public HolidaySurcharge getHolidaySurchargeByID(Long hsID) throws NoResultException;
+    public HolidaySurcharge getHolidaySurchargeByName(String name) throws NoResultException;
+    public HolidaySurcharge getHolidaySurchargeByDate(Date date) throws NoResultException;
+    
+    public void createExtraSurcharge(ExtraSurcharge es);
+    public void deleteExtraSurcharge(Long esID) throws NoResultException;
+    public void updateExtraSurcarhge(ExtraSurcharge es) throws NoResultException;
+    public List<ExtraSurcharge> getAllExtraSurcharge();
+    public ExtraSurcharge getExtraSurchargeByID(Long esID) throws NoResultException;
+    public ExtraSurcharge getExtraSurchargeByName(String name) throws NoResultException;
+
+    public void createMinibarItem(MinibarItem mi);
+    public void deleteMinibarItem(Long miID) throws NoResultException;
+    public void updateMinibarItem(MinibarItem mi) throws NoResultException;
+    public List<MinibarItem> getAllMinibarItem();
+    public MinibarItem getMinibarItemByID(Long miID) throws NoResultException;
+    public MinibarItem getMinibarItemByName(String name) throws NoResultException;
+    
 }

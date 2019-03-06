@@ -15,7 +15,13 @@ public class StaffType implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long staffTypeID;
     private String staffTypeName;
-    
+
+    public StaffType() {
+    }
+
+    public StaffType(String staffTypeName) {
+        this.staffTypeName = staffTypeName;
+    }
     
     public Long getStaffTypeID() {
         return staffTypeID;
