@@ -164,4 +164,50 @@ public class StaffSession implements StaffSessionLocal {
         }
     }
 
+    @Override
+    public void createStaffType(StaffType st) {
+        em.persist(st);
+    }
+
+    @Override
+    public void deleteStaffType(Long stID) throws NoResultException {
+        StaffType st = em.find(StaffType.class, stID);
+        if (st != null) {
+            em.remove(st);
+        } else {
+            throw new NoResultException("Staff Type not found");
+        }
+    }
+
+    @Override
+    public List<StaffType> getAllStaffTypes() {
+        Query q;
+        q = em.createQuery("SELECT st FROM StaffType st");
+        return q.getResultList();
+    }
+
+    @Override
+    public StaffType getStaffTypeByID(Long stID) throws NoResultException {
+        StaffType st = em.find(StaffType.class, stID);
+        if (st != null) {
+            return st;
+        } else {
+            throw new NoResultException("Staff Type not found.");
+        }
+    }
+
+    @Override
+    public StaffType getStaffTypeByName(String typeName) throws NoResultException {
+        Query q;
+        q = em.createQuery("SELECT st FROM StaffType st WHERE "
+                + "LOWER(st.staffTypeName) = :staffTypeName");
+        q.setParameter("staffTypeName", typeName.toLowerCase());
+
+        if (!q.getResultList().isEmpty()) {
+            return (StaffType) q.getResultList().get(0);
+        } else {
+            throw new NoResultException("Staff Type not found.");
+        }
+    }
+
 }

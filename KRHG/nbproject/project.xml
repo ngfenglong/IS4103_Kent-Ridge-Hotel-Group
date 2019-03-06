@@ -24,15 +24,15 @@
                     <path-in-war>/</path-in-war>
                 </library>
                 <library>
-                    <file>${reference.Kiosk-war.dist-ear}</file>
-                    <path-in-war>/</path-in-war>
-                </library>
-                <library>
                     <file>${reference.Admin-1.dist-ear}</file>
                     <path-in-war>/</path-in-war>
                 </library>
                 <library>
                     <file>${reference.RequestServicesManangment-War.dist-ear}</file>
+                    <path-in-war>/</path-in-war>
+                </library>
+                <library>
+                    <file>${reference.Kiosk-war.dist-ear}</file>
                     <path-in-war>/</path-in-war>
                 </library>
             </web-module-additional-libraries>

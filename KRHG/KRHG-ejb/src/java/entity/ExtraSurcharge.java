@@ -31,9 +31,22 @@ public class ExtraSurcharge implements Serializable {
     private Date surchargeFrom;
     @Temporal(TemporalType.DATE)
     private Date SurchargeTo;
-    private ArrayList<String> daysToChange;
+    private ArrayList<String> daysToCharge;
     private double surchargePrice;
 
+    public ExtraSurcharge() {
+    }
+
+    public ExtraSurcharge(String surchargeName, Date surchargeFrom, Date SurchargeTo, ArrayList<String> daysToCharge, double surchargePrice) {
+        this.surchargeName = surchargeName;
+        this.surchargeFrom = surchargeFrom;
+        this.SurchargeTo = SurchargeTo;
+        this.daysToCharge = daysToCharge;
+        this.surchargePrice = surchargePrice;
+    }
+
+    
+    
     public Long getSurchargeID() {
         return surchargeID;
     }
@@ -66,12 +79,12 @@ public class ExtraSurcharge implements Serializable {
         this.SurchargeTo = SurchargeTo;
     }
 
-    public ArrayList<String> getDaysToChange() {
-        return daysToChange;
+    public ArrayList<String> getDaysToCharge() {
+        return daysToCharge;
     }
 
-    public void setDaysToChange(ArrayList<String> daysToChange) {
-        this.daysToChange = daysToChange;
+    public void setDaysToCharge(ArrayList<String> daysToCharge) {
+        this.daysToCharge = daysToCharge;
     }
 
     public double getSurchargePrice() {

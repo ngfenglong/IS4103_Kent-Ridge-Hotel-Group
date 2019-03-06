@@ -6,11 +6,14 @@
 package sessionBeans;
 
 import entity.CleaningSchedule;
+import entity.ExtraSurcharge;
+import entity.HolidaySurcharge;
 import entity.Hotel;
 import entity.MinibarItem;
 import entity.Room;
 import entity.RoomFacility;
 import error.NoResultException;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -218,6 +221,189 @@ public class RoomSession implements RoomSessionLocal {
             em.flush();
         } catch (NoResultException ex) {
             Logger.getLogger(RoomSession.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public void createHolidaySurcharge(HolidaySurcharge hs) {
+        em.persist(hs);
+    }
+
+    @Override
+    public void deleteHolidaySurcharge(Long hsID) throws NoResultException {
+        HolidaySurcharge hs = em.find(HolidaySurcharge.class, hsID);
+        if (hs != null) {
+            em.remove(hs);
+        } else {
+            throw new NoResultException("Holiday Surcharge not found");
+        }
+    }
+
+    @Override
+    public void updateHolidaySurcarhge(HolidaySurcharge hs) throws NoResultException {
+        HolidaySurcharge oldHS = em.find(HolidaySurcharge.class, hs.getHolidaySurchargeID());
+        if (oldHS != null) {
+            oldHS.setHolidayName(hs.getHolidayName());
+            oldHS.setHolidaySurchargePrice(hs.getHolidaySurchargePrice());
+        } else {
+            throw new NoResultException("Holiday Surcharge not found");
+        }
+    }
+
+    @Override
+    public List<HolidaySurcharge> getAllHolidaySurcharge() {
+        Query q;
+        q = em.createQuery("SELECT hs FROM HolidaySurcharge hs");
+        return q.getResultList();
+    }
+
+    @Override
+    public HolidaySurcharge getHolidaySurchargeByID(Long hsID) throws NoResultException {
+        HolidaySurcharge hs = em.find(HolidaySurcharge.class, hsID);
+        if (hs != null) {
+            return hs;
+        } else {
+            throw new NoResultException("Holiday Surcharge not found");
+        }
+    }
+
+    @Override
+    public HolidaySurcharge getHolidaySurchargeByName(String name) throws NoResultException {
+        Query q;
+        q = em.createQuery("SELECT hs FROM HolidaySurcharge hs WHERE "
+                + "LOWER(hs.holidayName) = :holidayName");
+        q.setParameter("holidayName", name.toLowerCase());
+
+        if (!q.getResultList().isEmpty()) {
+            return (HolidaySurcharge) q.getResultList().get(0);
+        } else {
+            throw new NoResultException("Holiday Surcharge not found.");
+        }
+
+    }
+
+    @Override
+    public HolidaySurcharge getHolidaySurchargeByDate(Date date) throws NoResultException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void createExtraSurcharge(ExtraSurcharge es) {
+        em.persist(es);
+    }
+
+    @Override
+    public void deleteExtraSurcharge(Long esID) throws NoResultException {
+        ExtraSurcharge es = em.find(ExtraSurcharge.class, esID);
+        if (es != null) {
+            em.remove(es);
+        } else {
+            throw new NoResultException("Extra Surcharge not found");
+        }
+    }
+
+    @Override
+    public void updateExtraSurcarhge(ExtraSurcharge es) throws NoResultException {
+        ExtraSurcharge oldES = em.find(ExtraSurcharge.class, es.getSurchargeID());
+        if (oldES != null) {
+            oldES.setSurchargeName(es.getSurchargeName());
+            oldES.setSurchargePrice(es.getSurchargePrice());
+            oldES.setDaysToCharge(es.getDaysToCharge());
+            oldES.setSurchargeFrom(es.getSurchargeFrom());
+            oldES.setSurchargeTo(es.getSurchargeTo());
+            em.flush();
+        } else {
+            throw new NoResultException("Extra Surcharge not found");
+        }
+    }
+
+    @Override
+    public List<ExtraSurcharge> getAllExtraSurcharge() {
+        Query q;
+        q = em.createQuery("SELECT es FROM ExtraSurcharge es");
+        return q.getResultList();
+    }
+
+    @Override
+    public ExtraSurcharge getExtraSurchargeByID(Long esID) throws NoResultException {
+        ExtraSurcharge es = em.find(ExtraSurcharge.class, esID);
+        if (es != null) {
+            return es;
+        } else {
+            throw new NoResultException("Extra Surcharge not found");
+        }
+    }
+
+    @Override
+    public ExtraSurcharge getExtraSurchargeByName(String name) throws NoResultException {
+        Query q;
+        q = em.createQuery("SELECT es FROM ExtraSurcharge es WHERE "
+                + "LOWER(es.surchargeName) = :surchargeName");
+        q.setParameter("surchargeName", name.toLowerCase());
+
+        if (!q.getResultList().isEmpty()) {
+            return (ExtraSurcharge) q.getResultList().get(0);
+        } else {
+            throw new NoResultException("Extra Surcharge not found.");
+        }
+    }
+
+    @Override
+    public void createMinibarItem(MinibarItem mi) {
+        em.persist(mi);
+    }
+
+    @Override
+    public void deleteMinibarItem(Long miID) throws NoResultException {
+        MinibarItem mi = em.find(MinibarItem.class, miID);
+        if (mi != null) {
+            em.remove(mi);
+        } else {
+            throw new NoResultException("Minibar Item not found");
+        }
+    }
+
+    @Override
+    public void updateMinibarItem(MinibarItem mi) throws NoResultException {
+        MinibarItem oldMI = em.find(MinibarItem.class, mi.getMinibarItemID());
+        if (oldMI != null) {
+            oldMI.setItemName(mi.getItemName());
+            oldMI.setPrice(mi.getPrice());
+            oldMI.setQty(mi.getQty());
+            em.flush();
+        } else {
+            throw new NoResultException("Minibar Item not found");
+        }
+    }
+
+    @Override
+    public List<MinibarItem> getAllMinibarItem() {
+        Query q;
+        q = em.createQuery("SELECT mi FROM MinibarItem mi");
+        return q.getResultList();
+    }
+
+    @Override
+    public MinibarItem getMinibarItemByID(Long miID) throws NoResultException {
+        MinibarItem mi = em.find(MinibarItem.class, miID);
+        if (mi != null) {
+            return mi;
+        } else {
+            throw new NoResultException("Minibar Item not found");
+        }
+    }
+
+    @Override
+    public MinibarItem getMinibarItemByName(String name) throws NoResultException {
+        Query q;
+        q = em.createQuery("SELECT mi FROM MinibarItem mi WHERE "
+                + "LOWER(es.itemName) = :itemName");
+        q.setParameter("itemName", name.toLowerCase());
+
+        if (!q.getResultList().isEmpty()) {
+            return (MinibarItem) q.getResultList().get(0);
+        } else {
+              throw new NoResultException("Minibar Item not found");
         }
     }
 

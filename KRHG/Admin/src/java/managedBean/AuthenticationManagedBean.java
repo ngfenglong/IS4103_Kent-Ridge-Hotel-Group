@@ -6,12 +6,12 @@
 package managedBean;
 
 import entity.Hotel;
+import entity.Logging;
 import entity.Staff;
 import error.NoResultException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -19,8 +19,10 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Formatter;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletResponse;
+import sessionBeans.LogSessionLocal;
 import sessionBeans.StaffSessionLocal;
 
 /**
@@ -40,6 +42,9 @@ public class AuthenticationManagedBean implements Serializable {
 
     @EJB
     private StaffSessionLocal staffSessionLocal;
+
+    @EJB
+    private LogSessionLocal logSessionLocal;
 
     /**
      * Creates a new instance of AuthenticationManagedBean
@@ -61,10 +66,14 @@ public class AuthenticationManagedBean implements Serializable {
                 out.println("</script>");
                 return "/login.xhtml";
             } else {
+
                 loggedInStaff = staffSessionLocal.getStaffByUsename(username);
                 id = loggedInStaff.getStaffID();
                 setName(loggedInStaff.getName());
-                
+
+                Logging l = new Logging("Staff", "Login Successfuly as " + name, name);
+                logSessionLocal.createLogging(l);
+
                 out.println("<script type=\"text/javascript\">");
                 out.println("alert('Login Succesful!');");
                 out.println("</script>");
@@ -81,6 +90,18 @@ public class AuthenticationManagedBean implements Serializable {
             out.println("</script>");
             return "/login.xhtml";
         }
+    }
+
+    public String logout() {
+        String tempName = name;
+        
+        loggedInStaff = null;
+        id = -1L;
+        name = null;
+
+        Logging l = new Logging("Staff", "Logout from " + tempName, tempName);
+        logSessionLocal.createLogging(l);
+        return "loginpage.xhtml?faces-redirect=true";
     }
 
     private static String encryptPassword(String password) {
@@ -155,7 +176,5 @@ public class AuthenticationManagedBean implements Serializable {
     public void setStaffSessionLocal(StaffSessionLocal staffSessionLocal) {
         this.staffSessionLocal = staffSessionLocal;
     }
-    
-    
-    
+
 }

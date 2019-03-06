@@ -7,14 +7,15 @@ and open the template in the editor.
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
     <head>
         <meta charset="UTF-8" ></meta>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"></meta>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
-        <title>View All Facility</title>
+        <title>Add Staff</title>
         <meta name="description" content="Blueprint: A basic template for a responsive multi-level menu" ></meta>
         <meta name="keywords" content="blueprint, template, html, css, menu, responsive, mobile-friendly" ></meta>
         <meta name="author" content="Codrops" ></meta>
@@ -30,11 +31,10 @@ and open the template in the editor.
         <script src="js/modernizr-custom.js"></script>
     </head>
 
-
     <body>
         <!-- Main container -->
         <div class="container">
-
+            <!-- Blueprint header -->
             <header class="bp-header cf">
                 <div class="dummy-logo">
 
@@ -42,16 +42,9 @@ and open the template in the editor.
                     <h2 class="dummy-heading">KRHG</h2>
                 </div>
                 <div class="bp-header__main">
-                    <h:form>
-                        <h1 class="bp-header__title">#{hotelManagedBean.selectedHotel}</h1>
-                    </h:form>
-                    <nav class="bp-nav">
-                        <a class="bp-nav__item bp-icon bp-icon--prev" href="loginpage.xhtml" data-info="Log out"><span>Log out</span></a>
-                    </nav>
+                    <h1 class="bp-header__title">Create Staff Page</h1>
                 </div>
             </header>
-            <!-- Blueprint header -->
-
             <button class="action action--open" aria-label="Open Menu"><span class="icon icon--menu"></span></button>
             <nav id="ml-menu" class="menu">
                 <h:form>
@@ -108,50 +101,103 @@ and open the template in the editor.
             </nav>
 
 
-            <div class="content">
-                <table style="width: 100%;">
+            <div class="content" >
+                <div class="form-container" >
 
-                    <tr>
-                        <th align="left" colspan="2">Facility Name</th>
-                        <th align="left" colspan="4">Facility Description</th>
-                        <th align="left" colspan="2">Facility Image</th>
-                        <th align="left" colspan="1">Edit</th>
-                        <th align="left" colspan="1">Delete</th>
-                    </tr>
-                    <h:form id="form1">
-                        <c:forEach items="${hotelManagedBean.hotelFacilities}" var="hf">
-                            <tr>
-                                <td colspan="2">#{hf.hotelFacilityName}</td>
-                                <td colspan="4">#{hf.hotelFacilityDescription}</td>
-                                <td colspan="2">#{hf.hotelFacilityImage}</td>
-                                <td colspan="1"><h:commandButton value="Edit" id="editBtn" class="btn btn-info" /></td>
-                                <td colspan="1"><h:commandButton value="Delete" id="deleteBtn" action="#{hotelManagedBean.removeFacilityFromHotel(hf.hotelFacilityID)}" class="btn btn-danger" /></td>
-                            </tr>
-                        </c:forEach>
+                    <h:form>
+                        <h2>Create Staff Account</h2>
+                        <div class="form-group">
+                            <h:inputText class="form-control" value="#{hotelManagedBean.stName}" id="stName" a:placeholder="Name" required="true" />
+                        </div>
+                        <div class="form-group">
+                            <h:outputText class="form-control" value="#{hotelManagedBean.stPassword}" id="sPassword" />
+                            <h:commandButton class="custom-button" value="Generate" action="#{hotelManagedBean.generateNewPassword()}"></h:commandButton>
+                        </div>
+                        <div class="form-group">
+                            <h:inputText class="form-control" value="#{hotelManagedBean.stEmail}" id="stEmail" a:placeholder="EMAIL" required="true" />
+                        </div>
+
+                        <div class="form-group">
+                            <h:inputText class="form-control" value="#{hotelManagedBean.stPhoneNumber}" id="stPhoneNumber" a:placeholder="MOBILE NUMBER" required="true" />
+                        </div>
+
+                        <div class="form-group">
+                            <h:selectOneMenu value="#{hotelManagedBean.stGender}">
+                                <f:selectItem itemValue="Male" itemLabel="Male" />
+                                <f:selectItem itemValue="Female" itemLabel="Female" />
+                            </h:selectOneMenu>s
+                        </div>
+                        <div class="form-group">
+                            <h:inputText class="form-control" value="#{hotelManagedBean.stNric}" id="stNric" a:placeholder="NRIC" required="true" />
+                        </div>
+
+                        <div class="form-group">
+                            <h:inputText class="form-control" value="#{hotelManagedBean.stAddress}" id="stAddress" a:placeholder="ADDRESS" required="true" />
+                        </div>
+
+                        <div class="form-group">
+                            <h:selectOneMenu value="#{hotelManagedBean.stHotel}">
+                                <f:selectItem itemValue="HQ" itemLabel="HQ" />
+                                <f:selectItem itemValue="Not Applicable" itemLabel="#{h.hotelName}" />
+                                <c:forEach items="${hotelManagedBean.allHotels}" var="h">
+                                    <f:selectItem itemValue="#{h.hotelName}" itemLabel="#{h.hotelName}" />
+                                </c:forEach>
+                            </h:selectOneMenu><br/>
+                        </div>
+
+                        <div class="form-group">
+                            <h:inputText class="form-control" value="#{hotelManagedBean.stJobTitle}" id="stJobTitle" a:placeholder="JOB TITLE" required="true" />
+                        </div>
+
+
+                        <div class="form-group">
+                            <h:selectOneMenu value="#{hotelManagedBean.stDepartment}">
+                                <f:selectItem itemValue="HR" itemLabel="HR" />
+                                <f:selectItem itemValue="HouseKeeping" itemLabel="HouseKeeping" />
+                                <f:selectItem itemValue="Kitchen" itemLabel="Kitchen" />
+                                <f:selectItem itemValue="Frontdesk" itemLabel="Frontdesk" />
+                                <f:selectItem itemValue="Sales and Marketing" itemLabel="Sales and Marketing" />
+                                <f:selectItem itemValue="Part-Timer" itemLabel="Part-Timer" />
+                            </h:selectOneMenu>s
+                        </div>
+                        <div class="form-group">
+                            <h:selectManyCheckbox value = "#{hotelManagedBean.stStaffType}"> 
+                                <c:forEach items="${hotelManagedBean.allStaffType}" var="st">
+                                    <f:selectItem itemValue = "#{st.staffTypeName}" itemLabel = "#{st.staffTypeName}" /> 
+                                </c:forEach>
+                            </h:selectManyCheckbox>
+                        </div> 
+                        <div class="form-group">
+                            <h:selectOneMenu value="#{hotelManagedBean.stLeave}">
+                                <f:selectItem itemValue="7" itemLabel="7" />
+                                <f:selectItem itemValue="8" itemLabel="8" />
+                                <f:selectItem itemValue="9" itemLabel="9" />
+                                <f:selectItem itemValue="10" itemLabel="10" />
+                                <f:selectItem itemValue="11" itemLabel="11" />
+                                <f:selectItem itemValue="12" itemLabel="12" />
+                                <f:selectItem itemValue="13" itemLabel="13" />
+                                <f:selectItem itemValue="14" itemLabel="14" />
+                            </h:selectOneMenu><br/>
+                        </div>
+
+                        <div class="form-group">
+                            <h:inputText class="form-control" value="#{hotelManagedBean.stNokName}" id="stNokName" a:placeholder="NEXT-OF-KIN NAME"/>
+                        </div>
+
+                        <div class="form-group">
+                            <h:inputText class="form-control" value="#{hotelManagedBean.stNokAddress}" id="stNokAddress" a:placeholder="NEXT-OF-KIN ADDRESS"/>
+                        </div>
+
+                        <div class="form-group">
+                            <h:inputText class="form-control" value="#{hotelManagedBean.stNokPhoneNumber}" id="stNokPhoneNumber" a:placeholder="NEXT-OF-KIN Mobile Number" />
+                        </div>
+
+                        <div class="form-group">
+                            <h:commandButton class="custom-button" value="Create" action="#{hotelManagedBean.createStaff()}"></h:commandButton>
+                        </div>
                     </h:form>
 
-                    <tr></tr>
-                    <tr>
-                        <h:form>
-                            <td colspan="8"> 
-                                <h:selectOneMenu value="#{hotelManagedBean.selectedFacility}">
-                                    <f:selectItem itemValue="" itemLabel="-" />
-                                    <c:forEach items="${hotelManagedBean.getAddableHotelFacilities()}" var="hf">
-                                        <f:selectItem itemValue="#{hf.hotelFacilityName}" itemLabel="#{hf.hotelFacilityName}" />
-                                    </c:forEach>
-                                </h:selectOneMenu>      
-                            </td>
-                            <td colspan="1"> <h:commandButton value="Add" action="#{hotelManagedBean.addFacilityToHotel()}" class="btn btn-basic" /></td>
-                        </h:form>
-                        <h:form>
-                            <td colspan="1"><h:commandButton value="ViewAll" action="ViewAllFacility.xhtml?faces-redirect=true" class="btn btn-basic" /></td>
-                        </h:form>
-
-
-                    </tr>
-                </table>
-
-                <!-- Ajax loaded content here -->
+                </div>
             </div>
         </div>
         <!-- /view -->
@@ -174,7 +220,7 @@ and open the template in the editor.
                                             closeMenuCtrl = document.querySelector('.action--close');
 
                                     openMenuCtrl.addEventListener('click', openMenu);
-                                    closeMenuCtrl.addEventListener('click', closeMenu);
+                                    closeMenuCtrl.addEventListener('click', closxeMenu);
 
                                     function openMenu() {
                                         classie.add(menuEl, 'menu--open');
@@ -209,4 +255,5 @@ and open the template in the editor.
                                 }
         </script>
     </body>
+
 </html>
