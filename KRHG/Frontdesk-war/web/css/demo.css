@@ -69,7 +69,7 @@ a:hover {
 .bp-header__main {
     margin: 0 0 0 auto;
     padding: 2em 3em 0;
-    text-align: right;
+    text-align: left;
 }
 
 .bp-header__title {
@@ -210,7 +210,7 @@ a:hover {
     height: 120px;
     padding: 1em 0 0 0;
     text-align: center;
-    color: #3b3d4a;
+    color: #FFF;
     background: #1c1d22;
 }
 
@@ -222,6 +222,7 @@ a:hover {
     font-size: 0.75em;
     letter-spacing: 2px;
     text-transform: uppercase;
+    color: #FFF;
 }
 
 .content {
