@@ -22,6 +22,9 @@ and open the template in the editor.
         <link rel="stylesheet" type="text/css" href="css/demo.css" ></link>
         <!-- menu styles -->
         <link rel="stylesheet" type="text/css" href="css/component.css" ></link>
+         <!-- form styles -->
+        <link rel="stylesheet" type="text/css" href="styles/forms.css"></link>
+        <link rel="stylesheet" type="text/css" href="styles/bigform.css"></link>
         <script src="js/modernizr-custom.js"></script>
     </head>
 
@@ -35,7 +38,7 @@ and open the template in the editor.
                     <h2 class="dummy-heading">User name</h2>
                 </div>
                 <div class="bp-header__main">
-                    <h1 class="bp-header__title">Welcome To Kent Ridge Hotel Front Desk</h1>
+                    <!-- <h1 class="bp-header__title">Welcome To Kent Ridge Hotel Front Desk</h1> -->
                     <nav class="bp-nav">
                         <a class="bp-nav__item bp-icon bp-icon--prev" href="http://tympanus.net/Blueprints/PageStackNavigation/" data-info="Log out"><span>Log out</span></a>
                         <a class="bp-nav__item bp-icon bp-icon--next" href="index.xhtml" data-info="Home"><span>Home</span></a>
@@ -82,7 +85,7 @@ and open the template in the editor.
 
 
 
-                <h2>Create Maintenance Request</h2>
+                <!-- <h2>Create Maintenance Request</h2>
 
                 <form class="form-margin">
 
@@ -96,7 +99,38 @@ and open the template in the editor.
                     <br/>
                     <input type="submit"  value="Submit">
                     </input>
-                </form>
+                </form> -->
+
+                <div class="wrap">
+                        <h1>New Maintenance Report</h1>
+                        <p style="margin-bottom:30px; text-align: left">Enter maintenance request details</p>
+        
+        
+                        <form action="" class="mainWrap" style="width:100%; margin:0;">
+                            <div class="select animated zoomIn" style="width:100%; display:inline-block;">
+                                <!-- You can toggle select (disabled) -->
+                                <input type="radio" name="option" required="true"></input>
+                                <i class="toggle icon icon-arrow-down"></i>
+                                <i class="toggle icon icon-arrow-up"></i>
+                                <span class="placeholder">Select Report Type</span>
+                                <label class="option">
+                                    <input type="radio" name="option"></input>
+                                    <span class="title animated fadeIn">Hotel Facilities</span>
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="option"></input>
+                                    <span class="title animated fadeIn">Room Facilities</span>
+                                </label>
+                            </div>
+                            <!-- <input placeholder="No. of items" type="number" min="1" class="right" required="true" />
+                            <input placeholder="Item Name" type="text"  class="left" required="true" />
+                            <input placeholder="Contact Number" type="text" class="right" required="true" />
+                            <textarea placeholder="Description of Item" class="mainArea"></textarea> -->
+        
+
+                            <button class="bigBtn">View Facilities</button>
+                        </form>
+                        </div>
 
 
             </div>

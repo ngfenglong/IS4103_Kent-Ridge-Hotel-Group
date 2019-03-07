@@ -22,6 +22,11 @@ and open the template in the editor.
         <link rel="stylesheet" type="text/css" href="css/demo.css" ></link>
         <!-- menu styles -->
         <link rel="stylesheet" type="text/css" href="css/component.css" ></link>
+        <!-- form styles -->
+        <link rel="stylesheet" type="text/css" href="styles/forms.css">
+</link>
+        <link rel="stylesheet" type="text/css" href="styles/bigform.css">
+</link>
         <script src="js/modernizr-custom.js"></script>
     </head>
 
@@ -35,7 +40,7 @@ and open the template in the editor.
                     <h2 class="dummy-heading">User name</h2>
                 </div>
                 <div class="bp-header__main">
-                    <h1 class="bp-header__title">Welcome To Kent Ridge Hotel Front Desk</h1>
+                    <!-- <h1 class="bp-header__title">Welcome To Kent Ridge Hotel Front Desk</h1> -->
                     <nav class="bp-nav">
                         <a class="bp-nav__item bp-icon bp-icon--prev" href="http://tympanus.net/Blueprints/PageStackNavigation/" data-info="Log out"><span>Log out</span></a>
                         <a class="bp-nav__item bp-icon bp-icon--next" href="index.xhtml" data-info="Home"><span>Home</span></a>
@@ -88,7 +93,7 @@ and open the template in the editor.
             <div class="content" >
 
 
-                <form class="form-margin">
+                <!-- <form class="form-margin">
                     Room type
                     <select name="roomType" >
                         <option value="Standard">Standard</option>
@@ -104,7 +109,49 @@ and open the template in the editor.
                     <br/>
                     <input type="submit"  value="Search Room Availability">
                     </input>
-                </form>
+                </form> -->
+
+                <div class="wrap">
+                    <h1>Walk-in Booking</h1>
+                    <p style="margin-bottom:30px">Choose room type and size</p>
+                  
+                    <div class="select animated zoomIn">
+                            <!-- You can toggle select (disabled) -->
+                            <input type="radio" name="option" required="true"></input>
+                            <i class="toggle icon icon-arrow-down"></i>
+                            <i class="toggle icon icon-arrow-up"></i>
+                            <span class="placeholder">Select Room Type...</span>
+                            <label class="option">
+                                <input type="radio" name="option"></input>
+                                <span class="title animated fadeIn">Standard</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="option"></input>
+                                <span class="title animated fadeIn">Deluxe</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="option"></input>
+                                <span class="title animated fadeIn">Premium</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="option"></input>
+                                <span class="title animated fadeIn">Suite</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="option"></input>
+                                <span class="title animated fadeIn">Penthouse</span>
+                            </label>
+                            </div>
+                            
+                  <form action="" class="mainWrap"  style="width:70%; margin:0;" >
+                    <input placeholder="No. of guests" type="number" min="1" max="4" class="left" required="true"/>
+                    <button class="bigBtn" style="width:30%; margin-top:0; padding: 20px; font-size: 1.2em">Search</button>
+                    </form>
+
+
+                   
+
+                </div>
               
             </div>
         </div>

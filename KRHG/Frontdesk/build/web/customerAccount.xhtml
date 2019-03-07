@@ -22,6 +22,10 @@ and open the template in the editor.
         <link rel="stylesheet" type="text/css" href="css/demo.css" ></link>
         <!-- menu styles -->
         <link rel="stylesheet" type="text/css" href="css/component.css" ></link>
+        <!--form styles-->
+    <link rel="stylesheet" type="text/css" href="styles/forms.css"></link>
+    <link rel="stylesheet" type="text/css" href="styles/bigform.css">
+    </link>
         <script src="js/modernizr-custom.js"></script>
     </head>
 
@@ -35,7 +39,7 @@ and open the template in the editor.
                     <h2 class="dummy-heading">User name</h2>
                 </div>
                 <div class="bp-header__main">
-                    <h1 class="bp-header__title">Welcome To Kent Ridge Hotel Front Desk</h1>
+                    <!-- <h1 class="bp-header__title">Welcome To Kent Ridge Hotel Front Desk</h1> -->
                     <nav class="bp-nav">
                         <a class="bp-nav__item bp-icon bp-icon--prev" href="http://tympanus.net/Blueprints/PageStackNavigation/" data-info="Log out"><span>Log out</span></a>
                         <a class="bp-nav__item bp-icon bp-icon--next" href="index.xhtml" data-info="Home"><span>Home</span></a>
@@ -87,7 +91,7 @@ and open the template in the editor.
             </nav>
             <div class="content" >
 
-
+<!-- 
                 <form class="info">
                     Search Customer Account<br/>
                     Name: <input tyoe="text" name="name" placeholder="Enter name"></input><br/>
@@ -97,7 +101,59 @@ and open the template in the editor.
                     Phone number: <input type="text" name="phone" placeholder="Enter phone number"></input><br/>
                     <input type="submit" value="Create Account">
                     </input>
-                </form>
+                </form> -->
+
+                <div class="wrap">
+                    <h1>Create New Account</h1>
+                    <p>Fill in the following details to become a KRHG Member</p>
+                  </div>
+                  
+                  <form action="" class="mainWrap">
+                    <input placeholder="First Name" type="text" class="left" required="true"/>
+                    <input placeholder="Last Name" type="text" class="right" required="true"/>
+                    <input placeholder="Email Address" pattern="^([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22))*\x40([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d))*$" type="email" class="left" required="true"/>
+                    <input placeholder="NRIC" type="text" class="right" required="true"/>
+                    <input placeholder="Passport Number" type="text" class="left" required="true"/>
+                    <input placeholder="Phone Number" type="text" class="right" required="true"/>
+             
+                    <div class="right" style=" padding: 5px 0px; margin-bottom:100px;">
+                        <label style="margin:5px; padding-left:10px; color: #696969">Gender</label>
+                            <div class="inputGroup">
+                                <input id="radio1" name="radio" type="radio" />
+                                <label for="radio1">Male</label>
+                                
+                            </div>
+                            <div class="inputGroup">
+                                    <input id="radio2" name="radio" type="radio" />
+                                    <label for="radio2">Female</label>
+                                </div>
+                    </div>
+                    <input placeholder="Password" type="password" class="left" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" minlength="8" title="Please include at least 1 uppercase character, 1 lowercase character, and 1 number."  required="true"/>
+                    <!-- <div class="right" style="padding:0px">
+      
+                    </div> -->
+                    <input placeholder="Confirm Password" type="password" class="left" required="true"/>
+                    <input type="date" class="left" id="date" pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" required="true"/>
+                    <p>Permissions</p>
+    
+      
+                            <div class="inputGroupFull">
+                                    <input id="option1" name="option1" type="checkbox"/>
+                                    <label for="option1">I wish to subscribe to the KRHG Mailing list for updates and promotions.</label>
+                  
+                                  </div>
+        
+                    <div class="inputGroupFull">
+                            <input id="option2" name="option2" type="checkbox"/>
+                            <label for="option2">I agree to the terms and conditions of being a KRHG member.</label>
+    
+                    </div>
+                            
+    
+                   
+                    <button class="bigBtn"><i class="fa fa-inbox"></i> Create Account</button>
+    
+                  </form>
 
             </div>
         </div>

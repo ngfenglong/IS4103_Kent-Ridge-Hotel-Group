@@ -22,6 +22,11 @@ and open the template in the editor.
         <link rel="stylesheet" type="text/css" href="css/demo.css" ></link>
         <!-- menu styles -->
         <link rel="stylesheet" type="text/css" href="css/component.css" ></link>
+        <!-- form styles -->
+        <link rel="stylesheet" type="text/css" href="styles/forms.css">
+</link>
+        <link rel="stylesheet" type="text/css" href="styles/bigform.css">
+</link>
         <script src="js/modernizr-custom.js"></script>
     </head>
 
@@ -36,7 +41,7 @@ and open the template in the editor.
                     <h2 class="dummy-heading">User name</h2>
                 </div>
                 <div class="bp-header__main">
-                    <h1 class="bp-header__title">Welcome To Kent Ridge Hotel Front Desk</h1>
+                    <!-- <h1 class="bp-header__title">Welcome To Kent Ridge Hotel Front Desk</h1> -->
                     <nav class="bp-nav">
                         <a class="bp-nav__item bp-icon bp-icon--prev" href="http://tympanus.net/Blueprints/PageStackNavigation/" data-info="Log out"><span>Log out</span></a>
                         <a class="bp-nav__item bp-icon bp-icon--next" href="index.xhtml" data-info="Home"><span>Home</span></a>
@@ -87,13 +92,26 @@ and open the template in the editor.
                 </div>
             </nav>
             <div class="content">
-                <form class="info">
+                <!-- <form class="info">
                     Search NRIC number<br/>
                     <input type="text" name="NRIC">
                     </input>
                     <input type="submit" value="Search">
                     </input>
-                </form>
+                </form> -->
+
+                <div class="wrap">
+                    <h1>Cancel Reservation</h1>
+                    <p style="margin-bottom:20px">Please enter passport number</p>
+                  
+                  
+                  <form action="" class="mainWrap"  style="width:50%; margin:0;" >
+                    <input placeholder="Room" type="Text" class="left" required="true"/>
+                    <button class="bigBtn" style="width:30%; margin-top:0; padding: 20px; font-size: 1.2em">Search</button>
+                    </form>
+                   
+
+                </div>
             </div>
         </div>
         <!-- /view -->
