@@ -22,6 +22,11 @@ and open the template in the editor.
         <link rel="stylesheet" type="text/css" href="css/demo.css" ></link>
         <!-- menu styles -->
         <link rel="stylesheet" type="text/css" href="css/component.css" ></link>
+                <!-- form styles -->
+                <link rel="stylesheet" type="text/css" href="styles/forms.css">
+            </link>
+                    <link rel="stylesheet" type="text/css" href="styles/bigform.css">
+            </link>
         <script src="js/modernizr-custom.js"></script>
     </head>
 
@@ -36,7 +41,7 @@ and open the template in the editor.
                     <h2 class="dummy-heading">User name</h2>
                 </div>
                 <div class="bp-header__main">
-                    <h1 class="bp-header__title">Welcome To Kent Ridge Hotel Front Desk</h1>
+                    <!-- <h1 class="bp-header__title">Welcome To Kent Ridge Hotel Front Desk</h1> -->
                     <nav class="bp-nav">
                         <a class="bp-nav__item bp-icon bp-icon--prev" href="http://tympanus.net/Blueprints/PageStackNavigation/" data-info="Log out"><span>Log out</span></a>
                         <a class="bp-nav__item bp-icon bp-icon--next" href="index.xhtml" data-info="Home"><span>Home</span></a>
@@ -87,7 +92,7 @@ and open the template in the editor.
                 </div>
             </nav>
             <div class="content">
-                <form>
+                <!-- <form>
                    Facility: <select>
                         <option value="Hall1">Main hall</option>
                         <option value="Hall2">hall of justice</option>
@@ -95,18 +100,58 @@ and open the template in the editor.
                     </select>  
                     <input type="submit" value="Search">
                     </input>
-                </form>
-                
-                
-                <div>
-                    AFTER search, pop the calendar here
-                    Calendar here 
-                    <form>
-                      <input type="submit" value="book">
-                    </input>
+                </form> -->
+
+                <div class="wrap">
+                    <h1>Make a Reservation</h1>
+                    <p style="margin-bottom:30px; text-align: left">Enter type of facility</p>
+    
+    
+                    <form action="" class="mainWrap" style="width:100%; margin:0;">
+                        <div class="select animated zoomIn" style="width:100%; display:inline-block;">
+                            <!-- You can toggle select (disabled) -->
+                            <input type="radio" name="option" required="true"></input>
+                            <i class="toggle icon icon-arrow-down"></i>
+                            <i class="toggle icon icon-arrow-up"></i>
+                            <span class="placeholder">Select Facility</span>
+                            <label class="option">
+                                <input type="radio" name="option"></input>
+                                <span class="title animated fadeIn">Room</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="option"></input>
+                                <span class="title animated fadeIn">Ballroom</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="option"></input>
+                                <span class="title animated fadeIn">Swimming Pool</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="option"></input>
+                                <span class="title animated fadeIn">Barbeque Pit</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="option"></input>
+                                <span class="title animated fadeIn">Gym</span>
+                            </label>
+                        </div>   
+
+                        <button class="bigBtn">View Facilities</button>
                     </form>
+
+                    <div>
+                        AFTER search, pop the calendar here
+                        Calendar here 
+                        <form>
+                          <input type="submit" value="book">
+                        </input>
+                        </form>
+                        </div>
+                    <!-- Ajax loaded content here -->
                     </div>
-                <!-- Ajax loaded content here -->
+                
+                
+
             </div>
         </div>
         <!-- /view -->

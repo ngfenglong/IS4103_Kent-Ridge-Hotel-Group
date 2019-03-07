@@ -22,6 +22,9 @@ and open the template in the editor.
         <link rel="stylesheet" type="text/css" href="css/demo.css" ></link>
         <!-- menu styles -->
         <link rel="stylesheet" type="text/css" href="css/component.css" ></link>
+                 <!-- form styles -->
+                 <link rel="stylesheet" type="text/css" href="styles/forms.css"></link>
+                 <link rel="stylesheet" type="text/css" href="styles/bigform.css"></link>
         <script src="js/modernizr-custom.js"></script>
     </head>
 
@@ -36,7 +39,7 @@ and open the template in the editor.
                     <h2 class="dummy-heading">User name</h2>
                 </div>
                 <div class="bp-header__main">
-                    <h1 class="bp-header__title">Welcome To Kent Ridge Hotel Front Desk</h1>
+                    <!-- <h1 class="bp-header__title">Welcome To Kent Ridge Hotel Front Desk</h1> -->
                     <nav class="bp-nav">
                         <a class="bp-nav__item bp-icon bp-icon--prev" href="http://tympanus.net/Blueprints/PageStackNavigation/" data-info="Log out"><span>Log out</span></a>
                         <a class="bp-nav__item bp-icon bp-icon--next" href="index.xhtml" data-info="Home"><span>Home</span></a>
@@ -90,7 +93,7 @@ and open the template in the editor.
 
 
 
-                <div>
+                <!-- <div>
 
                     <form>
                         name of facility 
@@ -105,8 +108,33 @@ and open the template in the editor.
                         <input type="submit" value="Make payment">
                         </input>
                     </form>
-                </div>
-                <!-- Ajax loaded content here -->
+                </div> -->
+
+                <div class="wrap">
+                    <h1>Name of Facility Booking</h1>
+                    <p style="margin-bottom:30px; text-align: left">Booking Details are as follows:</p>
+                       <p style="font-size: 1.2em; font-style: italic">Price: $200</p> 
+                       <p style="font-size: 1.2em; font-style: italic">Number of Guests: 10pax</p> 
+                       <p style="font-size: 1.2em; font-style: italic;margin-bottom:30px;">Period : 12 aug to 16 Aug </p>
+                       <p style="margin-bottom:30px; text-align: left">Enter below details to complete reservation:</p>
+    
+    
+                    <form action="" class="mainWrap" style="width:100%; margin:0;">
+                        <input placeholder="First Name" type="text" class="left" required="true"/>
+                        <input placeholder="Last Name" type="text" class="right" required="true"/>
+                        <input placeholder="Email Address" pattern="^([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22))*\x40([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d))*$" type="email" class="left" required="true"/>
+                        <input placeholder="NRIC" type="text" class="right" required="true"/>
+                        <input placeholder="Passport Number" type="text" class="left" required="true"/>
+                        <input placeholder="Phone Number" type="text" class="right" required="true"/>
+                        <!-- <input placeholder="No. of items" type="number" min="1" class="right" required="true" />
+                        <input placeholder="Item Name" type="text"  class="left" required="true" />
+                        <input placeholder="Contact Number" type="text" class="right" required="true" />
+                        <textarea placeholder="Description of Item" class="mainArea"></textarea> -->
+                        <button class="bigBtn">Make Payment</button>
+                    </form>
+                     <!-- Ajax loaded content here -->
+                    </div>
+               
             </div>
         </div>
         <!-- /view -->
