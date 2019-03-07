@@ -44,6 +44,9 @@ public class RoomBooking implements Serializable {
     private Date transportTime;
     private String pickUpLocation;
 
+    public RoomBooking() {
+
+    }
 
     public Long getRoomBookingID() {
         return roomBookingID;
@@ -156,7 +159,6 @@ public class RoomBooking implements Serializable {
 //            throw new NoResultException("Extra Surcharge has not been added to Room Booking");
 //        }
 //    }
-
     @Override
     public int hashCode() {
         int hash = 0;

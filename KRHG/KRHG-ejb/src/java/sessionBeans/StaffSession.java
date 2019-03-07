@@ -73,6 +73,18 @@ public class StaffSession implements StaffSessionLocal {
         Staff oldS = em.find(Staff.class, s.getStaffID());
         if (oldS != null) {
             oldS.setAccountStatus(false);
+            em.flush();
+        } else {
+            throw new NoResultException("Staff Not found");
+        }
+    }
+
+    @Override
+    public void activateStaff(Staff s) throws NoResultException {
+        Staff oldS = em.find(Staff.class, s.getStaffID());
+        if (oldS != null) {
+            oldS.setAccountStatus(true);
+            em.flush();
         } else {
             throw new NoResultException("Staff Not found");
         }
@@ -207,6 +219,20 @@ public class StaffSession implements StaffSessionLocal {
             return (StaffType) q.getResultList().get(0);
         } else {
             throw new NoResultException("Staff Type not found.");
+        }
+    }
+
+    @Override
+    public Staff getStaffByEmail(String email) throws NoResultException {
+        Query q;
+        q = em.createQuery("SELECT s FROM Staff s WHERE "
+                + "LOWER(s.email) = :email");
+        q.setParameter("email", email.toLowerCase());
+
+        if (!q.getResultList().isEmpty()) {
+            return (Staff) q.getResultList().get(0);
+        } else {
+            throw new NoResultException("Staff not found.");
         }
     }
 

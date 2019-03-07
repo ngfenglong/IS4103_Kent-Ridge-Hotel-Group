@@ -20,11 +20,14 @@ public interface StaffSessionLocal {
     public List<Staff> getAllStaffs();
     public Staff getStaffByID(Long sID) throws NoResultException;
     public Staff getStaffByNric(String nric) throws NoResultException;
+    public Staff getStaffByEmail(String email) throws NoResultException;
     public Staff getStaffByUsename(String username) throws NoResultException;
     public void deleteStaff(Long sID) throws NoResultException;
     public void createStaff(Staff s);
     public void deactivateStaff(Staff s) throws NoResultException;
+    public void activateStaff(Staff s) throws NoResultException;
     public void updateStaff(Staff s) throws NoResultException;   
+    
     
     public void createStaffType(StaffType st);
     public void deleteStaffType(Long stID) throws NoResultException;

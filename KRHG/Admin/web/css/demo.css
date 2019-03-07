@@ -38,7 +38,7 @@ body {
     overflow: hidden;
     margin: 0;
     color: #cecece;
-    background: #2a2b30;
+    background: #3f4044;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -228,6 +228,7 @@ a:hover {
     position: relative;
     min-height: 300px;
     margin: 0 0 0 300px;
+    text-align: left;
 }
 
 .content--loading {

@@ -8,7 +8,9 @@ package managedBean;
 import entity.Hotel;
 import entity.Logging;
 import entity.Staff;
+import entity.StaffType;
 import error.NoResultException;
+import etc.RandomPassword;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.inject.Named;
@@ -17,10 +19,18 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Formatter;
+import java.util.Properties;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletResponse;
 import sessionBeans.LogSessionLocal;
 import sessionBeans.StaffSessionLocal;
@@ -36,6 +46,12 @@ public class AuthenticationManagedBean implements Serializable {
     private String username = null;
     private String password = null;
     private String name = null;
+
+    private String oldPassword;
+    private String newPassword;
+    private String confirmPassword;
+
+    private String resetEmail;
 
     private Long id = -1L;
     private Staff loggedInStaff;
@@ -94,7 +110,7 @@ public class AuthenticationManagedBean implements Serializable {
 
     public String logout() {
         String tempName = name;
-        
+
         loggedInStaff = null;
         id = -1L;
         name = null;
@@ -102,6 +118,118 @@ public class AuthenticationManagedBean implements Serializable {
         Logging l = new Logging("Staff", "Logout from " + tempName, tempName);
         logSessionLocal.createLogging(l);
         return "loginpage.xhtml?faces-redirect=true";
+    }
+
+    public String displayStaffTypes() {
+        String returnString = "";
+        for (StaffType s : loggedInStaff.getAccountRights()) {
+            returnString = returnString + s.getStaffTypeName() + ", ";
+        }
+        if (returnString.length() > 0) {
+            returnString = returnString.substring(0, returnString.length() - 2);
+        }
+
+        return returnString;
+    }
+
+    public String changePassword() throws IOException {
+        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        PrintWriter out = response.getWriter();
+
+        if (!encryptPassword(oldPassword).equals(loggedInStaff.getPassword())) {
+            out.println("<script type=\"text/javascript\">");
+            out.println("alert('Password is incorrect!');");
+            out.println("</script>");
+            return "/ChangePassword.xhtml";
+        }
+        
+        else if (!newPassword.equals(confirmPassword)) {
+            out.println("<script type=\"text/javascript\">");
+            out.println("alert('Confirm password is incorrect!');");
+            out.println("</script>");
+            return "/ChangePassword.xhtml";
+        } 
+        
+        else {
+            staffSessionLocal.changePasword(loggedInStaff, encryptPassword(newPassword));
+            Logging l = new Logging("Profile", loggedInStaff.getUserName() + " has just changed password" , loggedInStaff.getUserName());
+            logSessionLocal.createLogging(l);
+            
+            oldPassword = null;
+            newPassword = null;
+            confirmPassword = null;
+            
+            return logout();
+        }
+    }
+
+    public void resetPassword() throws NoResultException, IOException {
+        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        PrintWriter out = response.getWriter();
+
+        Staff tempStaff;
+        tempStaff = staffSessionLocal.getStaffByUsename(resetEmail);
+        if (tempStaff == null) {
+            tempStaff = staffSessionLocal.getStaffByEmail(name);
+        }
+
+        if (tempStaff == null) {
+            out.println("<script type=\"text/javascript\">");
+            out.println("alert('Wrong Email or Username is input!');");
+            out.println("</script>");
+        } else {
+            String newPass = new RandomPassword().generateRandomPassword();
+            String email = tempStaff.getEmail();
+
+            staffSessionLocal.changePasword(tempStaff, encryptPassword(newPass));
+
+            String msg = "Your password has been reset! Please login with the new password:\n\"" + newPass + "\"";
+            sendEmail(email, "Reset Password", msg);
+
+            out.println("<script type=\"text/javascript\">");
+            out.println("alert('New password has been sent');");
+            out.println("</script>");
+        }
+    }
+
+    public String updateProfile() throws NoResultException{
+        staffSessionLocal.updateStaff(loggedInStaff);
+        
+        return "index.xhtml?faces-redirect=true";
+    }
+    
+    public static void sendEmail(String recipient, String subject, String msg) {
+
+        String username = "automessage.kentridgehotelgroup@gmail.com";
+        String password = "krhg1234";
+
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+
+        Session session = Session.getInstance(props,
+                new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
+
+        try {
+
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("Do-not-reply@KentRidgeHotelGroup.com"));
+            message.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse(recipient));
+            message.setSubject(subject);
+            message.setText(msg);
+
+            Transport.send(message);
+
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private static String encryptPassword(String password) {
@@ -175,6 +303,46 @@ public class AuthenticationManagedBean implements Serializable {
 
     public void setStaffSessionLocal(StaffSessionLocal staffSessionLocal) {
         this.staffSessionLocal = staffSessionLocal;
+    }
+
+    public String getResetEmail() {
+        return resetEmail;
+    }
+
+    public void setResetEmail(String resetEmail) {
+        this.resetEmail = resetEmail;
+    }
+
+    public LogSessionLocal getLogSessionLocal() {
+        return logSessionLocal;
+    }
+
+    public void setLogSessionLocal(LogSessionLocal logSessionLocal) {
+        this.logSessionLocal = logSessionLocal;
+    }
+
+    public String getOldPassword() {
+        return oldPassword;
+    }
+
+    public void setOldPassword(String oldPassword) {
+        this.oldPassword = oldPassword;
+    }
+
+    public String getNewPassword() {
+        return newPassword;
+    }
+
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
 }

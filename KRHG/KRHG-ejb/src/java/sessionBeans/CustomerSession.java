@@ -128,6 +128,7 @@ public class CustomerSession implements CustomerSessionLocal {
     public void updateCustomer(Customer c) throws NoResultException {
         Customer oldC = em.find(Customer.class, c.getCustomerID());
         if (oldC != null) {
+            oldC.setName(c.getName());
             oldC.setPassword(c.getPassword());
             oldC.setPoints(c.getPoints());
             oldC.setBookingHistories(c.getBookingHistories());
