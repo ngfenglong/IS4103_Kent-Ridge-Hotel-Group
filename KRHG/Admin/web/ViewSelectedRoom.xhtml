@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -15,7 +11,7 @@ and open the template in the editor.
         <meta charset="UTF-8" ></meta>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"></meta>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
-        <title>Change Password</title>
+        <title>View Room Detail</title>
         <meta name="description" content="Blueprint: A basic template for a responsive multi-level menu" ></meta>
         <meta name="keywords" content="blueprint, template, html, css, menu, responsive, mobile-friendly" ></meta>
         <meta name="author" content="Codrops" ></meta>
@@ -42,9 +38,7 @@ and open the template in the editor.
                     <h2 class="dummy-heading">KRHG</h2>
                 </div>
                 <div class="bp-header__main">
-                    <h1 class="bp-header__title">Add Minibar Item Page</h1>
-                    <nav class="bp-nav">
-                    </nav>
+                    <h1 class="bp-header__title">View Room Detail</h1>
                 </div>
             </header>
             <button class="action action--open" aria-label="Open Menu"><span class="icon icon--menu"></span></button>
@@ -127,32 +121,54 @@ and open the template in the editor.
             </nav>
 
             <div class="content" >
+                <div class="form-container" >
 
-
-                <div class="log-form">
-                    <h2>Change Password</h2>
                     <h:form>
-                        <div class="form-group">
-                            <h:inputSecret class="form-control" value="#{authenticationManagedBean.oldPassword}" id="oldPassword" a:placeholder="OLD PASSWORD" required="true">
 
-                            </h:inputSecret>
-                        </div>
-                        <div class="form-group">
-                            <h:inputSecret class="form-control"  value="#{authenticationManagedBean.newPassword}"  id="newPassword" a:placeholder="NEW PASSWORD" required="true">
-                            </h:inputSecret>
-                        </div>
+                        <h2>View #{hotelManagedBean.selectedRoom.roomName}</h2>
 
-                        <div class="form-group">
-                            <h:inputSecret class="form-control"  value="#{authenticationManagedBean.confirmPassword}"  id="confirmPassword" a:placeholder="COMFIRMED PASSWORD" required="true">
-                            </h:inputSecret>
-                        </div>
-                        <div class="form-group">
-                            <h:commandButton class="custom-button login" value="Update" action="#{authenticationManagedBean.changePassword()}"></h:commandButton>
-                        </div>
-                    </h:form>   
+                        <table style="width:100%;">
+                            <tr>
+                                <td colspan="2">Room Name: </td>
+                                <td colspan="5">#{hotelManagedBean.selectedRoom.roomName}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">Room Number:  </td>
+                                <td colspan="5">#{hotelManagedBean.selectedRoom.roomNumber}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">Room Type </td>
+                                <td colspan="5">#{hotelManagedBean.selectedRoom.roomType}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">Room Pax: </td>
+                                <td colspan="5">#{hotelManagedBean.selectedRoom.roomPax}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">Status:  </td>
+                                <td colspan="5">#{hotelManagedBean.selectedRoom.status}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">Hotel: </td>
+                                <td colspan="5">#{hotelManagedBean.selectedRoom.hotel.hotelName}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">Room Facilities: </td>
+                                <td colspan="5">#{hotelManagedBean.displayRoomFacilities()}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">Minibar Items: </td>
+                                <td colspan="5">#{hotelManagedBean.displayMinibarItems()}</td>
+                            </tr>
+                            
+                        </table>
+                        <h:commandButton class="btn btn-primary" value="Back" action="ViewRooms.xhtml?faces-redirect=true"></h:commandButton>
+                    </h:form>
+
                 </div>
             </div>
         </div>
+        <!-- /view -->
         <script src="js/classie.js"></script>
         <script src="js/dummydata.js"></script>
         <script src="js/main.js"></script>
@@ -207,4 +223,5 @@ and open the template in the editor.
                                 }
         </script>
     </body>
+
 </html>

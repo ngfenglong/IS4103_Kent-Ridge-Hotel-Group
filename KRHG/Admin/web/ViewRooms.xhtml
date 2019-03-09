@@ -151,7 +151,7 @@ and open the template in the editor.
                                 <td colspan="2">#{r.roomType}</td>
                                 <td colspan="1">#{r.roomPax}</td>
                                 <td colspan="2">#{r.status}</td>
-                                <td colspan="1"><h:commandButton id="viewBtn" value="View" class="btn btn-primary" /></td>
+                                <td colspan="1"><h:commandButton id="viewBtn" value="View" class="btn btn-primary" action="#{hotelManagedBean.viewRoom(r.roomID)}"  /></td>
                                 <td colspan="1"><h:commandButton id="editBtn" value="Edit" class="btn btn-info"  action="#{hotelManagedBean.editRoom(r.roomID)}" /></td>
                                 <td colspan="1"><h:commandButton id="deleteBtn" value="Delete" action="#{hotelManagedBean.deleteRoom(r.roomID)}" class="btn btn-danger" /></td>
                             </tr>

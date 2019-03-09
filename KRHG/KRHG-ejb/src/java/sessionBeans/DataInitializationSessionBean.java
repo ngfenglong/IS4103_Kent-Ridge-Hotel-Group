@@ -117,7 +117,7 @@ public class DataInitializationSessionBean {
         st12 = staffSessionLocal.getStaffTypeByName("Finance Staff");
 
 //*********************************************Staff************************************************
-        Staff s0 = new Staff("Test User", "test", encryptPassword("test"), "test@krhg.com.sg", "88244165", "male", "S9226940Z", "7 Lok Yang Vista", new Date(), "Kent Ridge North", "Laundry Staff", "Laundry", 7, true, "Ee Pui Ling", "7 Lok Yang Vista", "68701722");
+        Staff s0 = new Staff("Test User", "test", encryptPassword("test"), "zell1502@hotmail.com", "88244165", "male", "S9226940Z", "7 Lok Yang Vista", new Date(), "Kent Ridge North", "Laundry Staff", "Laundry", 7, true, "Ee Pui Ling", "7 Lok Yang Vista", "68701722");
         s0.addAccountRights(st1);
         s0.addAccountRights(st2);
         s0.addAccountRights(st3);
@@ -545,64 +545,64 @@ public class DataInitializationSessionBean {
         staffSessionLocal.createStaff(s103);
 
 //*********************************************HOTEL FACILIY************************************************
-        HotelFacility hf1 = new HotelFacility("Restaurant", "Treat yourself to a tempting array of local and international culinary delights at KRHG Restaurant.", ""); //restaurant.png
+        HotelFacility hf1 = new HotelFacility("Restaurant", "Treat yourself to a tempting array of local and international culinary delights at KRHG Restaurant.", "restaurant.png"); //restaurant.png
         hotelFacilitySessionLocal.createHotelFacility(hf1);
         HotelFacility restaurant = hotelFacilitySessionLocal.getAllHotelFacilities().get(0);
 
-        HotelFacility hf2 = new HotelFacility("Gym", "Discover the fitness centre located in our hotels which features the latest gym equipment", "");//gym.png
+        HotelFacility hf2 = new HotelFacility("Gym", "Discover the fitness centre located in our hotels which features the latest gym equipment", "gym.png");//gym.png
         hotelFacilitySessionLocal.createHotelFacility(hf2);
         HotelFacility gym = hotelFacilitySessionLocal.getAllHotelFacilities().get(1);
 
-        HotelFacility hf3 = new HotelFacility("Spa & Massage", "Treat yourself to a relaxing experience at our hotel spa.", "");//spa.png
+        HotelFacility hf3 = new HotelFacility("Spa & Massage", "Treat yourself to a relaxing experience at our hotel spa.", "spa.png");//spa.png
         hotelFacilitySessionLocal.createHotelFacility(hf3);
         HotelFacility spa = hotelFacilitySessionLocal.getAllHotelFacilities().get(2);
 
-        HotelFacility hf4 = new HotelFacility("Swimming Pool", "An outdoor swimming pool and a children’s pool are available at our hotel.", "");//swimmingPool.png
+        HotelFacility hf4 = new HotelFacility("Swimming Pool", "An outdoor swimming pool and a children’s pool are available at our hotel.", "swimmingPool.png");//swimmingPool.png
         hotelFacilitySessionLocal.createHotelFacility(hf4);
         HotelFacility swimming = hotelFacilitySessionLocal.getAllHotelFacilities().get(3);
 
-        HotelFacility hf5 = new HotelFacility("Recreational Room", "Relax and have fun in our recreational room which consists of 8-ball Pool Table, Arcade Machines, Gaming console and more!", "");//recreationalRoom.png
+        HotelFacility hf5 = new HotelFacility("Recreational Room", "Relax and have fun in our recreational room which consists of 8-ball Pool Table, Arcade Machines, Gaming console and more!", "recreationalRoom.png");//recreationalRoom.png
         hotelFacilitySessionLocal.createHotelFacility(hf5);
         HotelFacility recreational = hotelFacilitySessionLocal.getAllHotelFacilities().get(4);
 
-        HotelFacility hf6 = new HotelFacility("Function Room", "Host successful events at our meeting rooms in KRHG.", "");//functionRoom.png
+        HotelFacility hf6 = new HotelFacility("Function Room", "Host successful events at our meeting rooms in KRHG.", "functionRoom.png");//functionRoom.png
         hotelFacilitySessionLocal.createHotelFacility(hf6);
         HotelFacility functionroom = hotelFacilitySessionLocal.getAllHotelFacilities().get(5);
 
-        HotelFacility hf7 = new HotelFacility("Concierge  Service", "We offer luxus concierge services that will make your stay at our luxury hotel in KRHG unforgettable", "");//concierge.png
+        HotelFacility hf7 = new HotelFacility("Concierge  Service", "We offer luxus concierge services that will make your stay at our luxury hotel in KRHG unforgettable", "concierge.png");//concierge.png
         hotelFacilitySessionLocal.createHotelFacility(hf7);
         HotelFacility concierge = hotelFacilitySessionLocal.getAllHotelFacilities().get(6);
 
-        HotelFacility hf8 = new HotelFacility("Medical Facility", "We have 24/7 medical centre with professional doctors and nurse to assist you your medical needs.", "");//medical.png
+        HotelFacility hf8 = new HotelFacility("Medical Facility", "We have 24/7 medical centre with professional doctors and nurse to assist you your medical needs.", "medical.png");//medical.png
         hotelFacilitySessionLocal.createHotelFacility(hf8);
         HotelFacility medical = hotelFacilitySessionLocal.getAllHotelFacilities().get(7);
 
-        HotelFacility hf9 = new HotelFacility("Gift Shops", "Every souvenir from our Gift Shop holds a story of your unique experiences enjoyed here with us.", "");//giftShop.png
+        HotelFacility hf9 = new HotelFacility("Gift Shops", "Every souvenir from our Gift Shop holds a story of your unique experiences enjoyed here with us.", "giftShop.png");//giftShop.png
         hotelFacilitySessionLocal.createHotelFacility(hf9);
         HotelFacility gift = hotelFacilitySessionLocal.getAllHotelFacilities().get(8);
 
-        HotelFacility hf10 = new HotelFacility("Convenience Store", "Selling basic items such as eggs, milk and bread, to today’s one-stop-shop convenient solution, offering a wide variety of products, fresh food, and services.", ""); //convenienceStore.png
+        HotelFacility hf10 = new HotelFacility("Convenience Store", "Selling basic items such as eggs, milk and bread, to today’s one-stop-shop convenient solution, offering a wide variety of products, fresh food, and services.", "convenienceStore.png"); //convenienceStore.png
         hotelFacilitySessionLocal.createHotelFacility(hf10);
         HotelFacility convenience = hotelFacilitySessionLocal.getAllHotelFacilities().get(9);
 
-        HotelFacility hf11 = new HotelFacility("Valet Parking", "We have valets to help you park your vehicle in our complimentary carpark exclusively for guests!", "");//valet.png
+        HotelFacility hf11 = new HotelFacility("Valet Parking", "We have valets to help you park your vehicle in our complimentary carpark exclusively for guests!", "valet.png");//valet.png
         hotelFacilitySessionLocal.createHotelFacility(hf11);
         HotelFacility valet = hotelFacilitySessionLocal.getAllHotelFacilities().get(10);
 
-        HotelFacility hf12 = new HotelFacility("Bar and Lounge", "KRHG Bar is a good place to meet your friends, take a pit-stop between excursions, or just relax in the lounge", "");//bar.png
+        HotelFacility hf12 = new HotelFacility("Bar and Lounge", "KRHG Bar is a good place to meet your friends, take a pit-stop between excursions, or just relax in the lounge", "bar.png");//bar.png
         hotelFacilitySessionLocal.createHotelFacility(hf12);
         HotelFacility bar = hotelFacilitySessionLocal.getAllHotelFacilities().get(11);
 
-        HotelFacility hf13 = new HotelFacility("Baby-Friendly Playground", "We have an inddor playground which is toddler-friendly to let your child run wild and have fun!", "");//playground.png
+        HotelFacility hf13 = new HotelFacility("Baby-Friendly Playground", "We have an inddor playground which is toddler-friendly to let your child run wild and have fun!", "playground.png");//playground.png
         hotelFacilitySessionLocal.createHotelFacility(hf13);
         HotelFacility playground = hotelFacilitySessionLocal.getAllHotelFacilities().get(12);
 
-        HotelFacility hf14 = new HotelFacility("Casino", "The KRHG casino offers a choice of table games to suit all players. There are more than 20 games played at the gaming tables which are available.", "");//casino.png
+        HotelFacility hf14 = new HotelFacility("Casino", "The KRHG casino offers a choice of table games to suit all players. There are more than 20 games played at the gaming tables which are available.", "casino.png");//casino.png
         hotelFacilitySessionLocal.createHotelFacility(hf14);
         HotelFacility casino = hotelFacilitySessionLocal.getAllHotelFacilities().get(13);
 
 //*********************************************HOTEL************************************************
-        Hotel h1 = new Hotel("Kent Ridge Grand", "KRG", "63 Somerset Rd Singapore 238163", 5, "6123 1000");
+        Hotel h1 = new Hotel("Kent Ridge Grand", "KRG", "63 Somerset Rd Singapore 238163", 5, "6123 1000","hotels_10.jpg");
         h1.addHotelFacility(restaurant);
         h1.addHotelFacility(gym);
         h1.addHotelFacility(spa);
@@ -620,7 +620,7 @@ public class DataInitializationSessionBean {
         hotelSessionLocal.createHotel(h1);
         h1 = hotelSessionLocal.getHotelByName("Kent Ridge Grand");
 
-        Hotel h2 = new Hotel("Kent Ridge Central", "KRC", "33 Ang Mo Kio Ave 3 Singapore 569933", 4, "6123 1100");
+        Hotel h2 = new Hotel("Kent Ridge Central", "KRC", "33 Ang Mo Kio Ave 3 Singapore 569933", 4, "6123 1100","hotels_9.jpg");
         h2.addHotelFacility(restaurant);
         h2.addHotelFacility(gym);
         h2.addHotelFacility(spa);
@@ -636,7 +636,7 @@ public class DataInitializationSessionBean {
         hotelSessionLocal.createHotel(h2);
         h2 = hotelSessionLocal.getHotelByName("Kent Ridge Central");
 
-        Hotel h3 = new Hotel("Kent Ridge North", "KRN", "930 Yishun Ave 2 Singapore 769098", 4, "6123 1200");
+        Hotel h3 = new Hotel("Kent Ridge North", "KRN", "930 Yishun Ave 2 Singapore 769098", 4, "6123 1200","hotels_1.jpg");
         h3.addHotelFacility(restaurant);
         h3.addHotelFacility(gym);
         h3.addHotelFacility(spa);
@@ -648,7 +648,7 @@ public class DataInitializationSessionBean {
         hotelSessionLocal.createHotel(h3);
         h3 = hotelSessionLocal.getHotelByName("Kent Ridge North");
 
-        Hotel h4 = new Hotel("Kent Ridge South", "KRS", "39 Bayfront Ave Singapore 118956", 4, "6123 1300");
+        Hotel h4 = new Hotel("Kent Ridge South", "KRS", "39 Bayfront Ave Singapore 118956", 4, "6123 1300","hotels_2.jpg");
         h4.addHotelFacility(restaurant);
         h4.addHotelFacility(gym);
         h4.addHotelFacility(spa);
@@ -660,7 +660,7 @@ public class DataInitializationSessionBean {
         hotelSessionLocal.createHotel(h4);
         h4 = hotelSessionLocal.getHotelByName("Kent Ridge South");
 
-        Hotel h5 = new Hotel("Kent Ridge East", "KRE", "5 Pasir Ris Cl Singapore 519599", 4, "6123 1400");
+        Hotel h5 = new Hotel("Kent Ridge East", "KRE", "5 Pasir Ris Cl Singapore 519599", 4, "6123 1400","hotels_3.jpg");
         h5.addHotelFacility(restaurant);
         h5.addHotelFacility(gym);
         h5.addHotelFacility(spa);
@@ -672,7 +672,7 @@ public class DataInitializationSessionBean {
         hotelSessionLocal.createHotel(h5);
         h5 = hotelSessionLocal.getHotelByName("Kent Ridge East");
 
-        Hotel h6 = new Hotel("Kent Ridge West", "KRW", "6 Jurong East Central Singapore 609731", 4, "6123 1500");
+        Hotel h6 = new Hotel("Kent Ridge West", "KRW", "6 Jurong East Central Singapore 609731", 4, "6123 1500","hotels_4.jpg");
         h6.addHotelFacility(restaurant);
         h6.addHotelFacility(gym);
         h6.addHotelFacility(spa);
@@ -684,7 +684,7 @@ public class DataInitializationSessionBean {
         hotelSessionLocal.createHotel(h6);
         h6 = hotelSessionLocal.getHotelByName("Kent Ridge West");
 
-        Hotel h7 = new Hotel("Kent Ridge North East", "KRNE", "78 Buangkok View Singapore 534191", 3, "6123 1600");
+        Hotel h7 = new Hotel("Kent Ridge North East", "KRNE", "78 Buangkok View Singapore 534191", 3, "6123 1600","hotels_5.jpg");
         h7.addHotelFacility(restaurant);
         h7.addHotelFacility(gym);
         h7.addHotelFacility(spa);
@@ -694,7 +694,7 @@ public class DataInitializationSessionBean {
         hotelSessionLocal.createHotel(h7);
         h7 = hotelSessionLocal.getHotelByName("Kent Ridge North East");
 
-        Hotel h8 = new Hotel("Kent Ridge North West", "KRNW", "21 Choa Chu Kang Ave 4 Singapore 689812", 3, "6123 1700");
+        Hotel h8 = new Hotel("Kent Ridge North West", "KRNW", "21 Choa Chu Kang Ave 4 Singapore 689812", 3, "6123 1700","hotels_6.jpg");
         h8.addHotelFacility(restaurant);
         h8.addHotelFacility(gym);
         h8.addHotelFacility(spa);
@@ -704,7 +704,7 @@ public class DataInitializationSessionBean {
         hotelSessionLocal.createHotel(h8);
         h8 = hotelSessionLocal.getHotelByName("Kent Ridge North West");
 
-        Hotel h9 = new Hotel("Kent Ridge South East", "KRSE", "80 Marine Parade Rd Singapore 449269", 3, "6123 1800");
+        Hotel h9 = new Hotel("Kent Ridge South East", "KRSE", "80 Marine Parade Rd Singapore 449269", 3, "6123 1800","hotels_7.jpg");
         h9.addHotelFacility(restaurant);
         h9.addHotelFacility(gym);
         h9.addHotelFacility(spa);
@@ -714,7 +714,7 @@ public class DataInitializationSessionBean {
         hotelSessionLocal.createHotel(h9);
         h9 = hotelSessionLocal.getHotelByName("Kent Ridge South East");
 
-        Hotel h10 = new Hotel("Kent Ridge South West", "KRSW", "36 Lower Kent Ridge Road Singapore 119077", 3, "6123 1900");
+        Hotel h10 = new Hotel("Kent Ridge South West", "KRSW", "36 Lower Kent Ridge Road Singapore 119077", 3, "6123 1900","hotels_8.jpg");
         h10.addHotelFacility(restaurant);
         h10.addHotelFacility(gym);
         h10.addHotelFacility(spa);
@@ -749,91 +749,91 @@ public class DataInitializationSessionBean {
         //houseKeepingOrderSessionLocal.createMinibarItem(m6);
         //m6 = houseKeepingOrderSessionLocal.getMinibarItemByItemName("Beer");
 //*********************************************ROOM FACILIY************************************************
-        RoomFacility rf1 = new RoomFacility("Wifi", "Communication", "");//wifi.png
+        RoomFacility rf1 = new RoomFacility("Wifi", "Communication", "wifi.png");//wifi.png
         roomFacilitySessionLocal.createRoomFacility(rf1);
         rf1 = roomFacilitySessionLocal.getRoomFacilityByName("Wifi");
 
-        RoomFacility rf2 = new RoomFacility("Minibar", "Refreshment and Dining", "");//miniBar.png
+        RoomFacility rf2 = new RoomFacility("Minibar", "Refreshment and Dining", "miniBar.png");//miniBar.png
         roomFacilitySessionLocal.createRoomFacility(rf2);
         rf2 = roomFacilitySessionLocal.getRoomFacilityByName("Minibar");
 
-        RoomFacility rf3 = new RoomFacility("Aircon", "Others", "");//aircon.png
+        RoomFacility rf3 = new RoomFacility("Aircon", "Others", "aircon.png");//aircon.png
         roomFacilitySessionLocal.createRoomFacility(rf3);
         rf3 = roomFacilitySessionLocal.getRoomFacilityByName("Aircon");
 
-        RoomFacility rf4 = new RoomFacility("Cable TV", "Entertainment", "");//tv.png
+        RoomFacility rf4 = new RoomFacility("Cable TV", "Entertainment", "//tv.png");//tv.png
         roomFacilitySessionLocal.createRoomFacility(rf4);
         rf4 = roomFacilitySessionLocal.getRoomFacilityByName("Cable TV");
 
-        RoomFacility rf5 = new RoomFacility("Telephone", "Communication", "");//telephone.png
+        RoomFacility rf5 = new RoomFacility("Telephone", "Communication", "telephone.png");//telephone.png
         roomFacilitySessionLocal.createRoomFacility(rf5);
         rf5 = roomFacilitySessionLocal.getRoomFacilityByName("Telephone");
 
-        RoomFacility rf6 = new RoomFacility("Water Heater", "Bathroom", "");//waterHeater.png
+        RoomFacility rf6 = new RoomFacility("Water Heater", "Bathroom", "waterHeater.png");//waterHeater.png
         roomFacilitySessionLocal.createRoomFacility(rf6);
         rf6 = roomFacilitySessionLocal.getRoomFacilityByName("Water Heater");
 
-        RoomFacility rf7 = new RoomFacility("Bathroom with Shower Head", "Bathroom", "");//shower.png
+        RoomFacility rf7 = new RoomFacility("Bathroom with Shower Head", "Bathroom", "shower.png");//shower.png
         roomFacilitySessionLocal.createRoomFacility(rf7);
         rf7 = roomFacilitySessionLocal.getRoomFacilityByName("Bathroom with Shower Head");
 
-        RoomFacility rf8 = new RoomFacility("HairDryer", "Bathroom", "");//hairdryer.png
+        RoomFacility rf8 = new RoomFacility("HairDryer", "Bathroom", "hairdryer.png");//hairdryer.png
         roomFacilitySessionLocal.createRoomFacility(rf8);
         rf8 = roomFacilitySessionLocal.getRoomFacilityByName("HairDryer");
 
-        RoomFacility rf9 = new RoomFacility("Safe Deposit Box", "Others", "");//safe.png
+        RoomFacility rf9 = new RoomFacility("Safe Deposit Box", "Others", "safe.png");//safe.png
         roomFacilitySessionLocal.createRoomFacility(rf9);
         rf9 = roomFacilitySessionLocal.getRoomFacilityByName("Safe Deposit Box");
 
-        RoomFacility rf10 = new RoomFacility("Water Kettle with complimentary teas/coffee", "Refreshment and Dining", "");//coffeeTea.png
+        RoomFacility rf10 = new RoomFacility("Water Kettle with complimentary teas/coffee", "Refreshment and Dining", "coffeeTea.png");//coffeeTea.png
         roomFacilitySessionLocal.createRoomFacility(rf10);
         rf10 = roomFacilitySessionLocal.getRoomFacilityByName("Water Kettle with complimentary teas/coffee");
 
-        RoomFacility rf11 = new RoomFacility("Room with Windows", "Others", "");//windows.png
+        RoomFacility rf11 = new RoomFacility("Room with Windows", "Others", "windows.png");//windows.png
         roomFacilitySessionLocal.createRoomFacility(rf11);
         rf11 = roomFacilitySessionLocal.getRoomFacilityByName("Room with Windows");
 
-        RoomFacility rf12 = new RoomFacility("Bathtub", "Bathroom", "");//baththub.png
+        RoomFacility rf12 = new RoomFacility("Bathtub", "Bathroom", "bathtub.png");//baththub.png
         roomFacilitySessionLocal.createRoomFacility(rf12);
         rf12 = roomFacilitySessionLocal.getRoomFacilityByName("Bathtub");
 
-        RoomFacility rf13 = new RoomFacility("Mini Fridge", "Refreshment and Dining", "");//miniFridge.png
+        RoomFacility rf13 = new RoomFacility("Mini Fridge", "Refreshment and Dining", "miniFridge.png");//miniFridge.png
         roomFacilitySessionLocal.createRoomFacility(rf13);
         rf13 = roomFacilitySessionLocal.getRoomFacilityByName("Mini Fridge");
 
-        RoomFacility rf14 = new RoomFacility("Coffee Machine", "Refreshment and Dining", "");//coffeeMachine.png
+        RoomFacility rf14 = new RoomFacility("Coffee Machine", "Refreshment and Dining", "coffeeMachine.png");//coffeeMachine.png
         roomFacilitySessionLocal.createRoomFacility(rf14);
         rf14 = roomFacilitySessionLocal.getRoomFacilityByName("Coffee Machine");
 
-        RoomFacility rf15 = new RoomFacility("Balcony", "Others", "");//balcony.png
+        RoomFacility rf15 = new RoomFacility("Balcony", "Others", "balcony.png");//balcony.png
         roomFacilitySessionLocal.createRoomFacility(rf15);
         rf15 = roomFacilitySessionLocal.getRoomFacilityByName("Balcony");
 
-        RoomFacility rf16 = new RoomFacility("Microwave", "Refreshment and Dining", "");//microwave.png
+        RoomFacility rf16 = new RoomFacility("Microwave", "Refreshment and Dining", "microwave.png");//microwave.png
         roomFacilitySessionLocal.createRoomFacility(rf16);
         rf16 = roomFacilitySessionLocal.getRoomFacilityByName("Microwave");
 
-        RoomFacility rf17 = new RoomFacility("Gaming Console", "Entertainment", "");//gaming.png
+        RoomFacility rf17 = new RoomFacility("Gaming Console", "Entertainment", "gaming.png");//gaming.png
         roomFacilitySessionLocal.createRoomFacility(rf17);
         rf17 = roomFacilitySessionLocal.getRoomFacilityByName("Gaming Console");
 
-        RoomFacility rf18 = new RoomFacility("Entertainment System", "Entertainment", "");//entertainmentSystem.png
+        RoomFacility rf18 = new RoomFacility("Entertainment System", "Entertainment", "entertainmentSystem.png");//entertainmentSystem.png
         roomFacilitySessionLocal.createRoomFacility(rf18);
         rf18 = roomFacilitySessionLocal.getRoomFacilityByName("Entertainment System");
 
-        RoomFacility rf19 = new RoomFacility("Blackout Curtains", "Others", "");//curtain.png
+        RoomFacility rf19 = new RoomFacility("Blackout Curtains", "Others", "curtain.png");//curtain.png
         roomFacilitySessionLocal.createRoomFacility(rf19);
         rf19 = roomFacilitySessionLocal.getRoomFacilityByName("Blackout Curtains");
 
-        RoomFacility rf20 = new RoomFacility("High Ceiling", "Others", "");//highCeiling.png
+        RoomFacility rf20 = new RoomFacility("High Ceiling", "Others", "highCeiling.png");//highCeiling.png
         roomFacilitySessionLocal.createRoomFacility(rf20);
         rf20 = roomFacilitySessionLocal.getRoomFacilityByName("High Ceiling");
 
-        RoomFacility rf21 = new RoomFacility("Jaccuzi", "Bathroom", "");//jacuzzi.png
+        RoomFacility rf21 = new RoomFacility("Jaccuzi", "Bathroom", "jacuzzi.png");//jacuzzi.png
         roomFacilitySessionLocal.createRoomFacility(rf21);
         rf21 = roomFacilitySessionLocal.getRoomFacilityByName("Jaccuzi");
 
-        RoomFacility rf22 = new RoomFacility("Kitchen", "Refreshment and Dining", "");//kitchen.png
+        RoomFacility rf22 = new RoomFacility("Kitchen", "Refreshment and Dining", "kitchen.png");//kitchen.png
         roomFacilitySessionLocal.createRoomFacility(rf22);
         rf22 = roomFacilitySessionLocal.getRoomFacilityByName("Kitchen");
 

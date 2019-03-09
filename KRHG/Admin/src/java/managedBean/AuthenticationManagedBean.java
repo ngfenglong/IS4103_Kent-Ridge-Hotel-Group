@@ -141,24 +141,20 @@ public class AuthenticationManagedBean implements Serializable {
             out.println("alert('Password is incorrect!');");
             out.println("</script>");
             return "/ChangePassword.xhtml";
-        }
-        
-        else if (!newPassword.equals(confirmPassword)) {
+        } else if (!newPassword.equals(confirmPassword)) {
             out.println("<script type=\"text/javascript\">");
             out.println("alert('Confirm password is incorrect!');");
             out.println("</script>");
             return "/ChangePassword.xhtml";
-        } 
-        
-        else {
+        } else {
             staffSessionLocal.changePasword(loggedInStaff, encryptPassword(newPassword));
-            Logging l = new Logging("Profile", loggedInStaff.getUserName() + " has just changed password" , loggedInStaff.getUserName());
+            Logging l = new Logging("Profile", loggedInStaff.getUserName() + " has just changed password", loggedInStaff.getUserName());
             logSessionLocal.createLogging(l);
-            
+
             oldPassword = null;
             newPassword = null;
             confirmPassword = null;
-            
+
             return logout();
         }
     }
@@ -182,6 +178,8 @@ public class AuthenticationManagedBean implements Serializable {
             String email = tempStaff.getEmail();
 
             staffSessionLocal.changePasword(tempStaff, encryptPassword(newPass));
+            Logging l = new Logging("Staff", "Reset Password for " + tempStaff.getName(), tempStaff.getName());
+            logSessionLocal.createLogging(l);
 
             String msg = "Your password has been reset! Please login with the new password:\n\"" + newPass + "\"";
             sendEmail(email, "Reset Password", msg);
@@ -192,12 +190,14 @@ public class AuthenticationManagedBean implements Serializable {
         }
     }
 
-    public String updateProfile() throws NoResultException{
+    public String updateProfile() throws NoResultException {
         staffSessionLocal.updateStaff(loggedInStaff);
+        Logging l = new Logging("Staff", "Update " + loggedInStaff.getName() + "'s profile", loggedInStaff.getName());
+        logSessionLocal.createLogging(l);
         
         return "index.xhtml?faces-redirect=true";
     }
-    
+
     public static void sendEmail(String recipient, String subject, String msg) {
 
         String username = "automessage.kentridgehotelgroup@gmail.com";

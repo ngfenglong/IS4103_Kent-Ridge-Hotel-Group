@@ -137,7 +137,6 @@ and open the template in the editor.
                             <th align="left" colspan="4">Log Activity</th>
                             <th align="left" colspan="1">Date</th>
                             <th align="left" colspan="1">Operator</th>
-                            <th align="left" colspan="1">Delete</th>
                         </tr>
 
                         <c:forEach items="${hotelManagedBean.allLogging}" var="l">
@@ -146,7 +145,6 @@ and open the template in the editor.
                                 <td colspan="4">#{l.loggingName}</td>
                                 <td colspan="1">#{l.loggingDateTime}</td>
                                 <td colspan="1">#{l.operatorName}</td>
-                                <td colspan="1"><h:commandButton value="Delete" action="#{hotelManagedBean.deleteLog(l.loggingID)}" class="btn btn-danger" /></td>
                             </tr>
                         </c:forEach>
                     </table>

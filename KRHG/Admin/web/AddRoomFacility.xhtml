@@ -49,7 +49,7 @@ and open the template in the editor.
             </header>
             <button class="action action--open" aria-label="Open Menu"><span class="icon icon--menu"></span></button>
             <nav id="ml-menu" class="menu">
-                <h:form>
+                <h:form enctype="multipart/form-data">
                     <button class="action action--close" aria-label="Close Menu"><span class="icon icon--cross"></span></button>
                     <div class="menu__wrap">
                         <ul data-menu="main" class="menu__level" tabindex="-1" role="menu" aria-label="All">
@@ -143,7 +143,9 @@ and open the template in the editor.
                             </h:selectOneMenu><br/>
                         </div>
                         <div class="form-group">
-                            <h:inputText class="form-control" value="#{hotelManagedBean.rfIconImg}" id="rfIconImg" a:placeholder="ICON IMANGE" required="true" />
+                            <h:inputFile value="#{hotelManagedBean.iconFile}">
+                                <f:passThroughAttribute name="accept" value="image/jpeg"/>
+                            </h:inputFile>
                         </div>
                         <div class="form-group">
                             <h:commandButton class="custom-button" value="Create" action="#{hotelManagedBean.createRoomFacility()}"></h:commandButton>

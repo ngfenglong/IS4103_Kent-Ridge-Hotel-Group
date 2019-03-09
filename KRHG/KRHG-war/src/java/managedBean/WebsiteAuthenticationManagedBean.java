@@ -43,8 +43,8 @@ import sessionBeans.LogSessionLocal;
 @SessionScoped
 public class WebsiteAuthenticationManagedBean implements Serializable {
 
-    private String email = null;
-    private String password = null;
+    private String email;
+    private String password;
     private String name = null;
 
     private String oldPassword;
@@ -163,13 +163,29 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
 
     }
 
+    public String deactivateAccount() throws NoResultException, IOException {
+        String logActivityName = loggedInCustomer.getName();
+        customerSessionLocal.deactivateAccount(loggedInCustomer.getCustomerID());
+
+        Logging l = new Logging("Customer", "Deactivate " + logActivityName + " account", logActivityName);
+        logSessionLocal.createLogging(l);
+        
+        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        PrintWriter out = response.getWriter();
+        out.println("<script type=\"text/javascript\">");
+        out.println("alert('Please email to admin to reactivate your account!');");
+        out.println("</script>");
+
+        return logout();
+    }
+
     public void forgetPassword() throws NoResultException, IOException {
         HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
         PrintWriter out = response.getWriter();
 
         Customer tempCust;
         tempCust = customerSessionLocal.getCustomerByEmail(rpEmail);
-  
+
         if (tempCust == null) {
             out.println("<script type=\"text/javascript\">");
             out.println("alert('Wrong Email is input!');");
@@ -209,12 +225,12 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
             out.println("<script type=\"text/javascript\">");
             out.println("alert('Password is incorrect!');");
             out.println("</script>");
-            return "/ChangePassword.xhtml";
+            return "/changePassword.xhtml";
         } else if (!newPassword.equals(confirmPassword)) {
             out.println("<script type=\"text/javascript\">");
             out.println("alert('Confirm password is incorrect!');");
             out.println("</script>");
-            return "/ChangePassword.xhtml";
+            return "/changePassword.xhtml";
         } else {
             customerSessionLocal.changePasword(loggedInCustomer, encryptPassword(newPassword));
             Logging l = new Logging("Profile", loggedInCustomer.getName() + " has just changed password", loggedInCustomer.getName());
@@ -258,7 +274,7 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
     public String updateProfile() throws NoResultException {
         customerSessionLocal.updateCustomer(loggedInCustomer);
 
-        return "index.xhtml?faces-redirect=true";
+        return "Profile.xhtml?faces-redirect=true";
     }
 
     public static void sendEmail(String recipient, String subject, String msg) {

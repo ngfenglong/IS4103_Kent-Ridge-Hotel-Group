@@ -9,6 +9,7 @@ import entity.Hotel;
 import entity.HotelFacility;
 import entity.Room;
 import error.NoResultException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -124,6 +125,34 @@ public class HotelSession implements HotelSessionLocal {
         } catch (NoResultException ex) {
             Logger.getLogger(HotelSession.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @Override
+    public Room getRoomDisplayByRoomType(Long hID, String roomType) throws NoResultException {
+        Hotel h = em.find(Hotel.class, hID);
+        List<Room> roomList = h.getRooms();
+        Room displayRoom;
+        for (Room r : roomList) {
+            if (r.getRoomType().toLowerCase().equals(roomType.toLowerCase())) {
+                displayRoom = r;
+                return displayRoom;
+            }
+        }
+        throw new NoResultException("Room Not found");
+    }
+
+    @Override
+    public List<String> getRoomTypes(Long hID) throws NoResultException {
+        Hotel h = em.find(Hotel.class, hID);
+        List<Room> roomList = h.getRooms();
+        List<String> roomTypes = new ArrayList<String>();
+        roomTypes.add("Standard");
+        for (Room r : roomList) {
+            if (!roomTypes.contains(r.getRoomType())) {
+                 roomTypes.add(r.getRoomType());
+            }
+        }
+        return roomTypes;
     }
 
 }

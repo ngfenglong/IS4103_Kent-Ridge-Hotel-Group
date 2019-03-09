@@ -6,7 +6,7 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <head>
-        <title>Check Avail</title>
+        <title>Edit Profile</title>
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="description" content="IS 4103"/>
@@ -26,7 +26,6 @@
 
             <!-- Header -->
 
-        
             <header class="header">
                 <div class="header_content d-flex flex-row align-items-center justify-content-start">
                     <div class="logo"><a href="index.xhtml">KRHG</a></div>
@@ -34,13 +33,13 @@
                         <h:form>
                             <nav class="main_nav">
                                 <ul class="d-flex flex-row align-items-start justify-content-start">
-                                    <li class="active"><a href="index.xhtml">Home</a></li>
+                                    <li><a href="index.xhtml">Home</a></li>
                                     <li><a href="about.xhtml">About us</a></li>
                                     <li><a href="hotels.xhtml">Hotels</a></li>
                                     <li><a href="blog.xhtml">Events</a></li>
                                     <li><a href="contact.xhtml">Contact us</a></li>
                                     <c:if test="${websiteAuthenticationManagedBean.id gt -1}">
-                                        <li><a href="Profile.xhtml">Profile</a></li>
+                                        <li class="active"><a href="Profile.xhtml">Profile</a></li>
                                     </c:if>
                                 </ul>
                             </nav>
@@ -106,8 +105,8 @@
                         <div class="row">
                             <div class="col">
                                 <div class="home_content text-center">
-                                    <div class="home_title">Hotels</div>
-                                    <div class="">With 10 hotels islandwide, there's bound to be 1 for you!</div>
+                                    <div class="home_title">Edit Profile</div>
+                                    <div class="">Update your details for us to serve you better</div>
                                 </div>
                             </div>
                         </div>
@@ -120,108 +119,55 @@
             <div class="split_section_right container_custom">
                 <div class="container">
                     <div class="row row-xl-eq-height">
-
-                        <div class="col-xl-6 order-xl-1 order-2">
-                            <div class="split_section_image">
-                                <div class="background_image" style="background-image:url(images/hotels_1.jpeg)"></div>
-                            </div>
-                        </div>
-
                         <div class="col-xl-6 order-xl-2 order-1">
-                            <div class="split_section_right_content">
+                            <div class="split_section_left_content">
                                 <style>
                                     table {
                                         font-family: arial, sans-serif;
                                         border-collapse: collapse;
                                         width: 100%;
+                                        border:none;
                                     }
 
                                     td, th {
-                                        border: 1px solid #dddddd;
+
                                         text-align: left;
                                         padding: 8px;
                                     }
 
                                 </style>
-                                <table>
-                                    <tr>
-                                        <th>Accomodation Type</th>
-                                        <th>Price/night</th>
-                                        <th>Select No. of Rooms</th>
-                                        <th></th>
-                                    </tr>
+                                <h:form>
+                                    <table>
+                                        <tr>
+                                            <td colspan="2">Name:  </td>
+                                            <td colspan="8"> <h:inputText class="form-control" value="#{websiteAuthenticationManagedBean.loggedInCustomer.name}" id="name" a:placeholder="NAME" required="true" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">Email: </td>
+                                            <td colspan="8"> <h:inputText class="form-control" value="#{websiteAuthenticationManagedBean.loggedInCustomer.email}" id="email" a:placeholder="EMAIL" required="true" /></td>
 
-                                    <tr>
-                                        <td>Standard</td>
-                                        <td>$240</td>
-                                        <td><select>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                            </select></td>
-                                        <td><input type="button" value="Submit"/></td>
+                                        </tr>
 
+                                        <tr>
+                                            <td colspan="2">NRIC: </td>
+                                            <td colspan="8"><h:inputText class="form-control" value="#{websiteAuthenticationManagedBean.loggedInCustomer.nric}" id="nric" a:placeholder="NRIC" required="true" /></td>
 
-                                    </tr>
-                                    <tr>
-                                        <td>Deluxe</td>
-                                        <td>$240</td>
-                                        <td><select>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                            </select></td>
-                                        <td><input type="button" value="Submit"/></td>
+                                        </tr>
 
+                                        <tr>
+                                            <td colspan="2">Contact Number: </td>
+                                            <td colspan="8"><h:inputText class="form-control" value="#{websiteAuthenticationManagedBean.loggedInCustomer.mobileNum}" id="mobileNumber" a:placeholder="CONTACT NUMBER" required="true" /></td>
+                                        </tr>
 
-                                    </tr>
-                                    <tr>
-                                        <td>Premium</td>
-                                        <td>$240</td>
-                                        <td><select>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                            </select></td>
-                                        <td><input type="button" value="Submit"/></td>
-
-
-                                    </tr>
-                                    <tr>
-                                        <td>Suite</td>
-                                        <td>$240</td>
-                                        <td><select>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                            </select></td>
-                                        <td><input type="button" value="Submit"/></td>
-
-
-                                    </tr>
-                                    <tr>
-                                        <td>Penthouse</td>
-                                        <td>$240</td>
-                                        <td><select>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                            </select></td>
-                                        <td><input type="button" value="Submit"/></td>
-
-
-                                    </tr>
-
-
-                                </table>
-                                <div class="split_section_text">
-                                    <p>For booking of 5 rooms and above, please contact us via our email or contact number.</p>
-                                </div>
+                                        <tr>
+                                            <td colspan="2">Passport Number: </td>
+                                            <td colspan="8"><h:inputText class="form-control" value="#{websiteAuthenticationManagedBean.loggedInCustomer.passportNum}" id="passportNumber" a:placeholder="PASSPORT NUMBER" required="true" /></td>
+                                        </tr>
+                                    </table>
+                                    <div>
+                                        <h:commandButton id="saveBtn" class="btn btn-primary" action="#{websiteAuthenticationManagedBean.updateProfile()}" value="Save" />
+                                    </div>
+                                </h:form>
                             </div>
                         </div>
                     </div>
@@ -295,7 +241,6 @@
                 </div>
             </div>
         </footer>
-        </div>
 
         <script src="js/jquery-3.3.1.min.js"></script>
         <script src="styles/bootstrap-4.1.2/popper.js"></script>
