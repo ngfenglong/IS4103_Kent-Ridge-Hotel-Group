@@ -37,5 +37,6 @@ public interface CustomerSessionLocal {
     public void cancelBookings(Customer c) throws NoResultException;
     public void signOut(Customer c);
     public void submitFeedback(Customer c);
+    public String getTierByPoints(Long cID);
     
 }
