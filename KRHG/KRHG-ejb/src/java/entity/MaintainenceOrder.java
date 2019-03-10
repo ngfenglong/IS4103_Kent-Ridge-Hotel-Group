@@ -103,7 +103,7 @@ public class MaintainenceOrder implements Serializable {
         this.dateResolved = dateResolved;
     }
 
-    public boolean isIsResolved() {
+    public boolean getIsResolved() {
         return isResolved;
     }
 
