@@ -305,7 +305,7 @@ section
 	top: 0;
 	left: 0;
 	width: 100%;
-	background: transparent;
+	background: rgba(0,0,0,0.7);
 	z-index: 100;
 }
 .header::before
@@ -573,7 +573,7 @@ section
 }
 .home .background_image
 {
-	opacity: 0.28;
+	opacity: 1.00;
 }
 .home_container
 {
