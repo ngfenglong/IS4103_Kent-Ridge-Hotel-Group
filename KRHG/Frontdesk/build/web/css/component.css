@@ -88,6 +88,7 @@
 	color: #bdbdbd;
 	-webkit-transition: color 0.1s;
 	transition: color 0.1s;
+	cursor: pointer;
 }
 
 .menu__link[data-submenu]::after {

@@ -28,7 +28,9 @@ and open the template in the editor.
         <link rel="stylesheet" type="text/css" href="css/demo.css" ></link>
         <!-- menu styles -->
         <link rel="stylesheet" type="text/css" href="css/component.css" ></link>
+        <link rel="stylesheet" type="text/css" href="styles/table2.css" ></link>
         <script src="js/modernizr-custom.js"></script>
+        <script src="js/table2.js"></script>
     </head>
 
     <body>
@@ -130,6 +132,116 @@ and open the template in the editor.
 
 
             <div class="content" >
+
+                <h:form>
+
+                
+
+                    <div id="demo" class="table-wrapper-scroll-y my-custom-scrollbar">
+                            
+                            <!-- Responsive table starts here -->
+                            <!-- For correct display on small screens you must add 'data-title' to each 'td' in your table -->
+                            <div class="table-responsive-vertical shadow-z-1">
+                            <!-- Table starts here -->
+                            <table id="table" class="table table-hover table-mc-light-blue">
+                                <thead>
+                                  <tr>
+                                        <th style="text-align:left" >Type</th>
+                                        <th style="text-align:left" >Log Activity</th>
+                                        <th style="text-align:left" >Date</th>
+                                        <th style="text-align:left" >Operator</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                        <c:forEach items="${hotelManagedBean.allLogging}" var="l">
+                                                <tr>
+                                                        <td data-title="Type">1</td>
+                                                        <td data-title="Log Activity">2</td>
+                                                        <td data-title="Date">3</td>
+                                                        <td data-title="Operator">4</td>
+                                                      </tr>
+                                        </c:forEach>
+
+                                  <tr>
+                                    <td data-title="ID">2</td>
+                                    <td data-title="Name">Material Design Iconic Font</td>
+                                    <td data-title="Link">
+                                      <a href="https://codepen.io/zavoloklom/pen/uqCsB" target="_blank">Codepen</a>
+                                      <a href="https://github.com/zavoloklom/material-design-iconic-font" target="_blank">GitHub</a>
+                                    </td>
+                                    <td data-title="Status">Completed</td>
+                                  </tr>
+                                  <tr>
+                                    <td data-title="ID">3</td>
+                                    <td data-title="Name">Material Design Hierarchical Display</td>
+                                    <td data-title="Link">
+                                      <a href="https://codepen.io/zavoloklom/pen/eNaEBM" target="_blank">Codepen</a>
+                                      <a href="https://github.com/zavoloklom/material-design-hierarchical-display" target="_blank">GitHub</a>
+                                    </td>
+                                    <td data-title="Status">Completed</td>
+                                  </tr>
+                                  <tr>
+                                    <td data-title="ID">4</td>
+                                    <td data-title="Name">Material Design Sidebar</td>
+                                    <td data-title="Link"><a href="https://codepen.io/zavoloklom/pen/dIgco" target="_blank">Codepen</a></td>
+                                    <td data-title="Status">Completed</td>
+                                  </tr>
+                                  <tr>
+                                    <td data-title="ID">5</td>
+                                    <td data-title="Name">Material Design Tiles</td>
+                                    <td data-title="Link">
+                                      <a href="https://codepen.io/zavoloklom/pen/wtApI" target="_blank">Codepen</a>
+                                    </td>
+                                    <td data-title="Status">Completed</td>
+                                  </tr>
+                                  <tr>
+                                    <td data-title="ID">6</td>
+                                    <td data-title="Name">Material Design Typography</td>
+                                    <td data-title="Link">
+                                      <a href="https://codepen.io/zavoloklom/pen/IkaFL" target="_blank">Codepen</a>
+                                      <a href="https://github.com/zavoloklom/material-design-typography" target="_blank">GitHub</a>
+                                    </td>
+                                    <td data-title="Status">Completed</td>
+                                  </tr>
+                                  <tr>
+                                    <td data-title="ID">7</td>
+                                    <td data-title="Name">Material Design Buttons</td>
+                                    <td data-title="Link">
+                                      <a href="https://codepen.io/zavoloklom/pen/Gubja" target="_blank">Codepen</a>
+                                    </td>
+                                    <td data-title="Status">In progress</td>
+                                  </tr>
+                                  <tr>
+                                    <td data-title="ID">8</td>
+                                    <td data-title="Name">Material Design Form Elements</td>
+                                    <td data-title="Link">
+                                      <a href="https://codepen.io/zavoloklom/pen/yaozl" target="_blank">Codepen</a>
+                                    </td>
+                                    <td data-title="Status">In progress</td>
+                                  </tr>
+                                  <tr>
+                                    <td data-title="ID">9</td>
+                                    <td data-title="Name">Material Design Email Template</td>
+                                    <td data-title="Link">
+                                      <a href="https://codepen.io/zavoloklom/pen/qEVqzx" target="_blank">Codepen</a>
+                                    </td>
+                                    <td data-title="Status">Completed</td>
+                                  </tr>
+                                  <tr>
+                                    <td data-title="ID">10</td>
+                                    <td data-title="Name">Material Design Animation Timing (old one)</td>
+                                    <td data-title="Link">
+                                      <a href="https://codepen.io/zavoloklom/pen/Jbrho" target="_blank">Codepen</a>
+                                    </td>
+                                    <td data-title="Status">Completed</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                            
+                          </div>
+                        </h:form>
+
                 <h:form>
                     <table style="width:100%;">
                         <tr>
@@ -204,6 +316,8 @@ and open the template in the editor.
                                 function goto(link) {
                                     window.location.replace(link);
                                 }
+
+                         
         </script>
     </body>
 
