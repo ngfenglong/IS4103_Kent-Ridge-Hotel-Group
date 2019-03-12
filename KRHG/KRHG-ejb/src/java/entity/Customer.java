@@ -9,6 +9,7 @@ import error.NoResultException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,13 +29,14 @@ public class Customer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long customerID;
+    private String name;
     private String nric;
     private String password;
     private int points;
-    @OneToMany(mappedBy = "bookedBy")
-    private ArrayList<RoomBooking> bookingHistories;
     @OneToMany
-    private ArrayList<RoomBooking> currentBookings;
+    private List<RoomBooking> bookingHistories;
+    @OneToMany
+    private List<RoomBooking> currentBookings;
     private String email;
     private String mobileNum;
     @Temporal(TemporalType.DATE)
@@ -42,12 +44,45 @@ public class Customer implements Serializable {
     private String passportNum;
     private boolean accountStatus;
 
+    public Customer() {
+        bookingHistories = new ArrayList<RoomBooking>();
+        currentBookings = new ArrayList<RoomBooking>();
+    }
+    
+    public Customer(String email, String password){
+        this();
+        this.email = email;
+        this.password = password;
+    }
+
+    public Customer(String name, String nric, String password, int points, String email, String mobileNum, Date dateJoined, String passportNum, boolean accountStatus) {
+        this();
+        this.name = name;
+        this.nric = nric;
+        this.password = password;
+        this.points = points;
+        this.email = email;
+        this.mobileNum = mobileNum;
+        this.dateJoined = dateJoined;
+        this.passportNum = passportNum;
+        this.accountStatus = accountStatus;
+    }
+    
+    
     public Long getCustomerID() {
         return customerID;
     }
 
     public void setCustomerID(Long customerID) {
         this.customerID = customerID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getNric() {
@@ -74,19 +109,19 @@ public class Customer implements Serializable {
         this.points = points;
     }
 
-    public ArrayList<RoomBooking> getBookingHistories() {
+    public List<RoomBooking> getBookingHistories() {
         return bookingHistories;
     }
 
-    public void setBookingHistories(ArrayList<RoomBooking> currentBookings) {
+    public void setBookingHistories(List<RoomBooking> currentBookings) {
         this.bookingHistories = bookingHistories;
     }
 
-    public ArrayList<RoomBooking> getCurrentBookings() {
+    public List<RoomBooking> getCurrentBookings() {
         return currentBookings;
     }
 
-    public void setCurrentBookings(ArrayList<RoomBooking> currentBookings) {
+    public void setCurrentBookings(List<RoomBooking> currentBookings) {
         this.currentBookings = currentBookings;
     }
     public String getEmail() {

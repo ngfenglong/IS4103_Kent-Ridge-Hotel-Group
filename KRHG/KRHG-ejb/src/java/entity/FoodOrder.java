@@ -6,6 +6,7 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,7 +20,7 @@ public class FoodOrder implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long foodOrderID;
     @OneToOne
-    private FoodMenuItem foodOrdered;
+    private List<FoodMenuItem> foodOrdered;
     private Double totalPrice;
     private String specialRequest;
     private int qty;
@@ -60,14 +61,14 @@ public class FoodOrder implements Serializable {
     /**
      * @return the foodOrdered
      */
-    public FoodMenuItem getFoodOrdered() {
+    public List<FoodMenuItem> getFoodOrdered() {
         return foodOrdered;
     }
 
     /**
      * @param foodOrdered the foodOrdered to set
      */
-    public void setFoodOrdered(FoodMenuItem foodOrdered) {
+    public void setFoodOrdered(List<FoodMenuItem> foodOrdered) {
         this.foodOrdered = foodOrdered;
     }
 

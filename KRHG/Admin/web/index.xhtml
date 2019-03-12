@@ -14,7 +14,7 @@ and open the template in the editor.
         <meta charset="UTF-8" ></meta>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"></meta>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
-        <title>Kent Ridge Hotel- Front Desk</title>
+        <title>Kent Ridge Hotel- Backend Admin</title>
         <meta name="description" content="Blueprint: A basic template for a responsive multi-level menu" ></meta>
         <meta name="keywords" content="blueprint, template, html, css, menu, responsive, mobile-friendly" ></meta>
         <meta name="author" content="Codrops" ></meta>
@@ -48,18 +48,16 @@ and open the template in the editor.
                 <h:form>
                     <button class="action action--close" aria-label="Close Menu"><span class="icon icon--cross"></span></button>
                     <div class="menu__wrap">
-                        <h:form>
-                            <ul data-menu="main" class="menu__level" tabindex="-1" role="menu" aria-label="All">
-                                <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1" aria-owns="submenu-1" href="#">Hotel Management</a></li>
-                                <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-2" aria-owns="submenu-2" href="#">Surcharges</a></li>
-                                <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-3" aria-owns="submenu-3" href="#">Facilities Management</a></li>
-                                <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-4" aria-owns="submenu-4" href="#">Leave and Rooster</a></li>
-                                <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-8" aria-owns="submenu-8" href="#">Staff Management</a></li>
-                                <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-5" aria-owns="submenu-5" href="#">Testing Management</a></li>
-                                <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-6" aria-owns="submenu-6" onclick="goto('ViewLog.xhtml')">Log Management</a></li>
-                                <li class="menu__item" role="menuitem"><h:commandLink value = "Logout" action = "#{authenticationManagedBean.logout()}" class="menu__item" a:data-submenu="submenu-7" a:aria-owns="submenu-7" /></li>
-                            </ul>
-                        </h:form>
+                        <ul data-menu="main" class="menu__level" tabindex="-1" role="menu" aria-label="All">
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1" aria-owns="submenu-1" href="#">Hotel Management</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-2" aria-owns="submenu-2" href="#">Surcharges</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-3" aria-owns="submenu-3" href="#">Facilities Management</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-4" aria-owns="submenu-4" href="#">Leave and Rooster</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-8" aria-owns="submenu-8" href="#">Staff Management</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-5" aria-owns="submenu-5" href="#">Testing Management</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-6" aria-owns="submenu-6" onclick="goto('ViewLog.xhtml')">Log Management</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-9" aria-owns="submenu-9" href="#">Profile</a></li>
+                        </ul>
 
                         <!-- Submenu 1 -->
                         <ul data-menu="submenu-1" id="submenu-1" class="menu__level" tabindex="-1" role="menu" aria-label="Vegetables">
@@ -68,6 +66,14 @@ and open the template in the editor.
                                 <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="#{hotel.hotelName}" aria-owns="#{hotel.hotelName}" href="#">#{hotel.hotelName}</a></li>
                             </c:forEach>
                         </ul>
+
+                        <c:forEach items="${hotelManagedBean.allHotels}" var="hotel">
+                            <ul data-menu="#{hotel.hotelName}" id="#{hotel.hotelName}" class="menu__level" tabindex="-1" role="menu" aria-label="Vegetables">
+                                <li class="menu__item" role="menuitem"><h:commandLink id="viewHotelFacilityCL" action="#{hotelManagedBean.viewHotelFacilities(hotel.hotelName)}">Hotel Facility</h:commandLink></li>
+                                <li class="menu__item" role="menuitem"><h:commandLink id="viewHotelRoomCL" action="#{hotelManagedBean.viewHotelRooms(hotel.hotelName)}">Room</h:commandLink></li>
+                                <li class="menu__item" role="menuitem"><h:commandLink id="viewHotelFeedbackCL" action="#{hotelManagedBean.viewHotelFeedbacks(hotel.hotelName)}">Feedback</h:commandLink></li>
+                            </ul>   
+                        </c:forEach>
 
 
                         <!-- Submenu 2 -->
@@ -97,19 +103,19 @@ and open the template in the editor.
                             <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="addSurcharge" aria-owns="addHotel" onclick="goto('AddSurcharge.xhtml')">Add Extra Surcharge</a></li>
                         </ul>
 
-                        <c:forEach items="${hotelManagedBean.allHotels}" var="hotel">
-                            <ul data-menu="#{hotel.hotelName}" id="#{hotel.hotelName}" class="menu__level" tabindex="-1" role="menu" aria-label="Vegetables">
-                                <li class="menu__item" role="menuitem"><h:commandLink action="#{hotelManagedBean.viewHotelFacilities(hotel.hotelName)}">Hotel Facility</h:commandLink></li>
-                                <li class="menu__item" role="menuitem"><h:commandLink action="#{hotelManagedBean.viewHotelRooms(hotel.hotelName)}">Room</h:commandLink></li>
-                                <li class="menu__item" role="menuitem"><h:commandLink action="#{hotelManagedBean.viewHotelFeedbacks(hotel.hotelName)}">Feedback</h:commandLink></li>
-                            </ul>   
-                        </c:forEach>
 
 
                         <!-- Submenu 8 -->
                         <ul data-menu="submenu-8" id="submenu-8" class="menu__level" tabindex="-1" role="menu" aria-label="Vegetables">
                             <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="extraSurcharge" aria-owns="extraSurcharge" onclick="goto('ViewStaff.xhtml')">View Staff</a></li>
                             <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="holidays" aria-owns="holidays" onclick="goto('AddStaff.xhtml')">Create Staff</a></li>
+                        </ul>
+
+                        <!-- Submenu 9 -->
+                        <ul data-menu="submenu-9" id="submenu-9" class="menu__level" tabindex="-1" role="menu" aria-label="Vegetables">
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="editProfile" aria-owns="editProfile" onclick="goto('EditProfile.xhtml')">Edit Profile</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="changePassword" aria-owns="changePassword" onclick="goto('ChangePassword.xhtml')">Change Password</a></li>
+                            <li class="menu__item" role="menuitem"><h:commandLink id="logoutBtn" action = "#{authenticationManagedBean.logout()}">Logout</h:commandLink> </li>
                         </ul>
 
                     </div>

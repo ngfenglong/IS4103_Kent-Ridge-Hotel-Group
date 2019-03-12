@@ -319,5 +319,20 @@ public class CustomerSession implements CustomerSessionLocal {
         
     }
 
-
+    public String getTierByPoints(Long cID) {
+        Customer latestC = em.find(Customer.class, cID);
+        int cPoints = latestC.getPoints();
+        if(cPoints >= 5000) {
+            return "Platinum";
+        }
+        else if (cPoints >= 1000) {
+            return "Gold";
+        }
+        else if (cPoints >= 500) {
+            return "Silver";
+        }
+        else {
+            return "Member";
+        }
+    }
 }

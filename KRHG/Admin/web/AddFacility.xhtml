@@ -44,7 +44,7 @@ and open the template in the editor.
                 <div class="bp-header__main">
                     <h1 class="bp-header__title">Add Hotel Facility Page</h1>
                     <nav class="bp-nav">
-                        <a class="bp-nav__item bp-icon bp-icon--prev" href="loginpage.xhtml" data-info="Log out"><span>Log out</span></a>
+                        
                     </nav>
                 </div>
             </header>
@@ -58,7 +58,10 @@ and open the template in the editor.
                             <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-2" aria-owns="submenu-2" href="#">Surcharges</a></li>
                             <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-3" aria-owns="submenu-3" href="#">Facilities Management</a></li>
                             <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-4" aria-owns="submenu-4" href="#">Leave and Rooster</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-8" aria-owns="submenu-8" href="#">Staff Management</a></li>
                             <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-5" aria-owns="submenu-5" href="#">Testing Management</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-6" aria-owns="submenu-6" onclick="goto('ViewLog.xhtml')">Log Management</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-9" aria-owns="submenu-9" href="#">Profile</a></li>
                         </ul>
 
                         <!-- Submenu 1 -->
@@ -68,6 +71,32 @@ and open the template in the editor.
                                 <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="#{hotel.hotelName}" aria-owns="#{hotel.hotelName}" href="#">#{hotel.hotelName}</a></li>
                             </c:forEach>
                         </ul>
+
+                        <c:forEach items="${hotelManagedBean.allHotels}" var="hotel">
+                            <ul data-menu="#{hotel.hotelName}" id="#{hotel.hotelName}" class="menu__level" tabindex="-1" role="menu" aria-label="Vegetables">
+                                <li class="menu__item" role="menuitem"><h:commandLink id="viewHotelFacilityCL" action="#{hotelManagedBean.viewHotelFacilities(hotel.hotelName)}">Hotel Facility</h:commandLink></li>
+                                <li class="menu__item" role="menuitem"><h:commandLink id="viewHotelRoomCL" action="#{hotelManagedBean.viewHotelRooms(hotel.hotelName)}">Room</h:commandLink></li>
+                                <li class="menu__item" role="menuitem"><h:commandLink id="viewHotelFeedbackCL" action="#{hotelManagedBean.viewHotelFeedbacks(hotel.hotelName)}">Feedback</h:commandLink></li>
+                            </ul>   
+                        </c:forEach>
+
+
+                        <!-- Submenu 2 -->
+                        <ul data-menu="submenu-2" id="submenu-2" class="menu__level" tabindex="-1" role="menu" aria-label="Vegetables">
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="extraSurcharge" aria-owns="extraSurcharge" onclick="goto('ViewSucharge.xhtml')">Extra Surcharge</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="holidays" aria-owns="holidays" onclick="goto('ViewHolidays.xhtml')">Holidays</a></li>
+                        </ul>
+
+
+                        <!-- Submenu 3 -->
+                        <ul data-menu="submenu-3" id="submenu-3" class="menu__level" tabindex="-1" role="menu" aria-label="Vegetables">
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="viewAllFacility" aria-owns="viewAllFacility" onclick="goto('ViewAllFacility.xhtml')" >Hotel Facilities</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="viewRoomFacility" aria-owns="viewRoomFacility" onclick="goto('ViewRoomFacility.xhtml')" >Room Facilities</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="viewMinibarItem" aria-owns="viewMinibarItem" onclick="goto('ViewMinibarItems.xhtml')" >Minibar Items</a></li>
+                        </ul>
+
+
+                        <!-- Submenu 5 -->
 
                         <ul data-menu="submenu-5" id="submenu-5" class="menu__level" tabindex="-1" role="menu" aria-label="Vegetables">
                             <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="addHotel" aria-owns="addHotel" onclick="goto('AddHotel.xhtml')">Add Hotel</a></li>
@@ -79,26 +108,21 @@ and open the template in the editor.
                             <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="addSurcharge" aria-owns="addHotel" onclick="goto('AddSurcharge.xhtml')">Add Extra Surcharge</a></li>
                         </ul>
 
-                        <c:forEach items="${hotelManagedBean.allHotels}" var="hotel">
-                            <ul data-menu="#{hotel.hotelName}" id="#{hotel.hotelName}" class="menu__level" tabindex="-1" role="menu" aria-label="Vegetables">
-                                <li class="menu__item" role="menuitem"><h:commandLink action="#{hotelManagedBean.viewHotelFacilities(hotel.hotelName)}">Hotel Facility</h:commandLink></li>
-                                <li class="menu__item" role="menuitem"><h:commandLink action="#{hotelManagedBean.viewHotelRooms(hotel.hotelName)}">Room</h:commandLink></li>
-                                <li class="menu__item" role="menuitem"><h:commandLink action="#{hotelManagedBean.viewHotelFeedbacks(hotel.hotelName)}">Feedback</h:commandLink></li>
-                            </ul>   
-                        </c:forEach>
 
-                        <!-- Submenu 2 -->
-                        <ul data-menu="submenu-2" id="submenu-2" class="menu__level" tabindex="-1" role="menu" aria-label="Vegetables">
-                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="extraSurcharge" aria-owns="extraSurcharge" onclick="goto('ViewSucharge.xhtml')">Extra Surcharge</a></li>
-                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="holidays" aria-owns="holidays" onclick="goto('ViewHolidays.xhtml')">Holidays</a></li>
+
+                        <!-- Submenu 8 -->
+                        <ul data-menu="submenu-8" id="submenu-8" class="menu__level" tabindex="-1" role="menu" aria-label="Vegetables">
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="extraSurcharge" aria-owns="extraSurcharge" onclick="goto('ViewStaff.xhtml')">View Staff</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="holidays" aria-owns="holidays" onclick="goto('AddStaff.xhtml')">Create Staff</a></li>
                         </ul>
 
-                        <!-- Submenu 3 -->
-                        <ul data-menu="submenu-3" id="submenu-3" class="menu__level" tabindex="-1" role="menu" aria-label="Vegetables">
-                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="viewAllFacility" aria-owns="viewAllFacility" onclick="goto('ViewAllFacility.xhtml')" >Hotel Facilities</a></li>
-                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="viewRoomFacility" aria-owns="viewRoomFacility" onclick="goto('ViewRoomFacility.xhtml')" >Room Facilities</a></li>
-                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="viewMinibarItem" aria-owns="viewMinibarItem" onclick="goto('ViewMinibarItems.xhtml')" >Minibar Items</a></li>
+                        <!-- Submenu 9 -->
+                        <ul data-menu="submenu-9" id="submenu-9" class="menu__level" tabindex="-1" role="menu" aria-label="Vegetables">
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="editProfile" aria-owns="editProfile" onclick="goto('EditProfile.xhtml')">Edit Profile</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="changePassword" aria-owns="changePassword" onclick="goto('ChangePassword.xhtml')">Change Password</a></li>
+                            <li class="menu__item" role="menuitem"><h:commandLink id="logoutBtn" action = "#{authenticationManagedBean.logout()}">Logout</h:commandLink> </li>
                         </ul>
+
                     </div>
                 </h:form>
             </nav>

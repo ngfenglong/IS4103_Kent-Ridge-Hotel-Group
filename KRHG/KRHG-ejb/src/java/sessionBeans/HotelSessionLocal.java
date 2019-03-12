@@ -28,5 +28,6 @@ public interface HotelSessionLocal {
     public void addHotelFacility(Long hID, HotelFacility hf);
     public void removeRoom(Long hID, Room r);
     public void addRoom(Long hID, Room r);
-    
+    public Room getRoomDisplayByRoomType(Long hID, String roomType) throws NoResultException;
+    public List<String> getRoomTypes(Long hID)throws NoResultException;
 }

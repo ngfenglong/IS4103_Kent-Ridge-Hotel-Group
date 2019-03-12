@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+
+    <head>
+        <meta charset="UTF-8" ></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+        <title>Edit Hotel</title>
+        <meta name="description" content="Blueprint: A basic template for a responsive multi-level menu" ></meta>
+        <meta name="keywords" content="blueprint, template, html, css, menu, responsive, mobile-friendly" ></meta>
+        <meta name="author" content="Codrops" ></meta>
+        <link rel="shortcut icon" href="favicon.ico"></link>
+        <!-- food icons -->
+        <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" ></link>
+        <link rel="stylesheet" type="text/css" href="css/organicfoodicons.css" ></link>
+        <!-- demo styles -->
+        <link rel="stylesheet" type="text/css" href="styles/bootstrap-4.1.2/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="css/demo.css" ></link>
+        <!-- menu styles -->
+        <link rel="stylesheet" type="text/css" href="css/component.css" ></link>
+        <script src="js/modernizr-custom.js"></script>
+    </head>
+    <body>
+        <!-- Main container -->
+        <div class="container">
+            <!-- Blueprint header -->
+            <header class="bp-header cf">
+                <div class="dummy-logo">
+
+                    <a class="dummy-icon foodicon foodicon--coconut" href="index.xhtml"></a>
+                    <h2 class="dummy-heading">KRHG</h2>
+                </div>
+                <div class="bp-header__main">
+                    <h1 class="bp-header__title">Edit Hotel Page</h1>
+                    <nav class="bp-nav">
+                    </nav>
+                </div>
+            </header>
+            <button class="action action--open" aria-label="Open Menu"><span class="icon icon--menu"></span></button>
+            <nav id="ml-menu" class="menu">
+                <h:form>
+                    <button class="action action--close" aria-label="Close Menu"><span class="icon icon--cross"></span></button>
+                    <div class="menu__wrap">
+                        <ul data-menu="main" class="menu__level" tabindex="-1" role="menu" aria-label="All">
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1" aria-owns="submenu-1" href="#">Hotel Management</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-2" aria-owns="submenu-2" href="#">Surcharges</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-3" aria-owns="submenu-3" href="#">Facilities Management</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-4" aria-owns="submenu-4" href="#">Leave and Rooster</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-8" aria-owns="submenu-8" href="#">Staff Management</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-5" aria-owns="submenu-5" href="#">Testing Management</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-6" aria-owns="submenu-6" onclick="goto('ViewLog.xhtml')">Log Management</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-9" aria-owns="submenu-9" href="#">Profile</a></li>
+                        </ul>
+
+                        <!-- Submenu 1 -->
+                        <ul data-menu="submenu-1" id="submenu-1" class="menu__level" tabindex="-1" role="menu" aria-label="Vegetables">
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="addHotel" aria-owns="addHotel" onclick="goto('AddHotel.xhtml')">Add Hotel</a></li>
+                            <c:forEach items="${hotelManagedBean.allHotels}" var="hotel">
+                                <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="#{hotel.hotelName}" aria-owns="#{hotel.hotelName}" href="#">#{hotel.hotelName}</a></li>
+                            </c:forEach>
+                        </ul>
+
+                        <c:forEach items="${hotelManagedBean.allHotels}" var="hotel">
+                            <ul data-menu="#{hotel.hotelName}" id="#{hotel.hotelName}" class="menu__level" tabindex="-1" role="menu" aria-label="Vegetables">
+                                <li class="menu__item" role="menuitem"><h:commandLink id="viewHotelFacilityCL" action="#{hotelManagedBean.viewHotelFacilities(hotel.hotelName)}">Hotel Facility</h:commandLink></li>
+                                <li class="menu__item" role="menuitem"><h:commandLink id="viewHotelRoomCL" action="#{hotelManagedBean.viewHotelRooms(hotel.hotelName)}">Room</h:commandLink></li>
+                                <li class="menu__item" role="menuitem"><h:commandLink id="viewHotelFeedbackCL" action="#{hotelManagedBean.viewHotelFeedbacks(hotel.hotelName)}">Feedback</h:commandLink></li>
+                            </ul>   
+                        </c:forEach>
+
+
+                        <!-- Submenu 2 -->
+                        <ul data-menu="submenu-2" id="submenu-2" class="menu__level" tabindex="-1" role="menu" aria-label="Vegetables">
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="extraSurcharge" aria-owns="extraSurcharge" onclick="goto('ViewSucharge.xhtml')">Extra Surcharge</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="holidays" aria-owns="holidays" onclick="goto('ViewHolidays.xhtml')">Holidays</a></li>
+                        </ul>
+
+
+                        <!-- Submenu 3 -->
+                        <ul data-menu="submenu-3" id="submenu-3" class="menu__level" tabindex="-1" role="menu" aria-label="Vegetables">
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="viewAllFacility" aria-owns="viewAllFacility" onclick="goto('ViewAllFacility.xhtml')" >Hotel Facilities</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="viewRoomFacility" aria-owns="viewRoomFacility" onclick="goto('ViewRoomFacility.xhtml')" >Room Facilities</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="viewMinibarItem" aria-owns="viewMinibarItem" onclick="goto('ViewMinibarItems.xhtml')" >Minibar Items</a></li>
+                        </ul>
+
+
+                        <!-- Submenu 5 -->
+
+                        <ul data-menu="submenu-5" id="submenu-5" class="menu__level" tabindex="-1" role="menu" aria-label="Vegetables">
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="addHotel" aria-owns="addHotel" onclick="goto('AddHotel.xhtml')">Add Hotel</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="addFacility" aria-owns="addHotel" onclick="goto('AddFacility.xhtml')">Add Hotel Facility</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="addRoom" aria-owns="addHotel" onclick="goto('AddRoom.xhtml')">Add Room</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="addRoomFacility" aria-owns="addHotel" onclick="goto('AddRoomFacility.xhtml')">Add Room Facility</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="addMinibarItem" aria-owns="addHotel" onclick="goto('AddMinibarItems.xhtml')">Add Minibar Items</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="addHolidays" aria-owns="addHotel" onclick="goto('AddHolidays.xhtml')">Add Holiday Surcharge</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="addSurcharge" aria-owns="addHotel" onclick="goto('AddSurcharge.xhtml')">Add Extra Surcharge</a></li>
+                        </ul>
+
+
+
+                        <!-- Submenu 8 -->
+                        <ul data-menu="submenu-8" id="submenu-8" class="menu__level" tabindex="-1" role="menu" aria-label="Vegetables">
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="extraSurcharge" aria-owns="extraSurcharge" onclick="goto('ViewStaff.xhtml')">View Staff</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="holidays" aria-owns="holidays" onclick="goto('AddStaff.xhtml')">Create Staff</a></li>
+                        </ul>
+
+                        <!-- Submenu 9 -->
+                        <ul data-menu="submenu-9" id="submenu-9" class="menu__level" tabindex="-1" role="menu" aria-label="Vegetables">
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="editProfile" aria-owns="editProfile" onclick="goto('EditProfile.xhtml')">Edit Profile</a></li>
+                            <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="changePassword" aria-owns="changePassword" onclick="goto('ChangePassword.xhtml')">Change Password</a></li>
+                            <li class="menu__item" role="menuitem"><h:commandLink id="logoutBtn" action = "#{authenticationManagedBean.logout()}">Logout</h:commandLink> </li>
+                        </ul>
+
+                    </div>
+                </h:form>
+            </nav>
+
+            <div class="content" >
+                <div class="form-container" >
+                    <h:form>
+
+                        <h2>Edit Hotel </h2>
+                        <div class="form-group">
+                            Hotel Name: 
+                            <h:inputText class="form-control" value="#{hotelManagedBean.selectedHotelObj.hotelName}" id="hotelName" a:placeholder="HOTEL NAME" required="true" />
+                        </div>
+                        <div class="form-group">
+                            Hotel Code: 
+                            <h:inputText class="form-control" value="#{hotelManagedBean.selectedHotelObj.hotelCodeName}" id="hotelCode" a:placeholder="HOTEL CODE" required="true" />
+                        </div>
+                        <div class="form-group">
+                            Address: 
+                            <h:inputText class="form-control" value="#{hotelManagedBean.selectedHotelObj.hotelAddress}" id="address" a:placeholder="ADDRESS" required="true" />
+                        </div>
+                        <div class="form-group">
+                            <h6>Hotel Star Rating</h6>
+                            <h:selectOneMenu value="#{hotelManagedBean.selectedHotelObj.hotelStar}">
+                                <f:selectItem itemValue="1" itemLabel="1" />
+                                <f:selectItem itemValue="2" itemLabel="2" />
+                                <f:selectItem itemValue="3" itemLabel="3" />
+                                <f:selectItem itemValue="4" itemLabel="4" />
+                                <f:selectItem itemValue="5" itemLabel="5" />
+                            </h:selectOneMenu>                  
+                        </div>
+                        <div class="form-group"> 
+                            Contact Number:
+                            <h:inputText class="form-control" value="#{hotelManagedBean.selectedHotelObj.hotelContact}" id="contactNumber" a:placeholder="CONTACT NUMBER" required="true" />
+                        </div>
+                        <div class="form-group">
+                            <h:commandButton class="custom-button" value="Save" action="#{hotelManagedBean.saveHotel()}"></h:commandButton>
+                        </div>
+
+                    </h:form>
+                </div>
+            </div>
+        </div>
+        <!-- /view -->
+        <script src="js/classie.js"></script>
+        <script src="js/dummydata.js"></script>
+        <script src="js/main.js"></script>
+        <script>
+                                (function () {
+                                    var menuEl = document.getElementById('ml-menu'),
+                                            mlmenu = new MLMenu(menuEl, {
+                                                // breadcrumbsCtrl : true, // show breadcrumbs
+                                                // initialBreadcrumb : 'all', // initial breadcrumb text
+                                                backCtrl: false, // show back button
+                                                // itemsDelayInterval : 60, // delay between each menu item sliding animation
+                                                onItemClick: loadDummyData // callback: item that doesn´t have a submenu gets clicked - onItemClick([event], [inner HTML of the clicked item])
+                                            });
+
+                                    // mobile menu toggle
+                                    var openMenuCtrl = document.querySelector('.action--open'),
+                                            closeMenuCtrl = document.querySelector('.action--close');
+
+                                    openMenuCtrl.addEventListener('click', openMenu);
+                                    closeMenuCtrl.addEventListener('click', closeMenu);
+
+                                    function openMenu() {
+                                        classie.add(menuEl, 'menu--open');
+                                        closeMenuCtrl.focus();
+                                    }
+
+                                    function closeMenu() {
+                                        classie.remove(menuEl, 'menu--open');
+                                        openMenuCtrl.focus();
+                                    }
+
+                                    // simulate grid content loading
+                                    var gridWrapper = document.querySelector('.content');
+
+                                    function loadDummyData(ev, itemName) {
+                                        ev.preventDefault();
+
+                                        closeMenu();
+                                        gridWrapper.innerHTML = '';
+                                        classie.add(gridWrapper, 'content--loading');
+                                        setTimeout(function () {
+                                            classie.remove(gridWrapper, 'content--loading');
+                                            gridWrapper.innerHTML = '<ul class="products">' + dummyData[itemName] + '</ul>';
+                                        }, 700);
+                                    }
+                                    function goto(link) {
+                                        window.location.replace(link);
+                                    }
+                                })();
+                                function goto(link) {
+                                    window.location.replace(link);
+                                }
+        </script>
+    </body>
+
+</html>

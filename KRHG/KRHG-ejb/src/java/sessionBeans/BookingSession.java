@@ -49,7 +49,7 @@ public class BookingSession implements BookingSessionLocal {
                             + "LOWER(rb.bookedBy.email) = :email "
                             + "AND rb.bookInDate = :bookInDate "
                             + "AND rb.bookOutDate = :bookOutDate "
-                            + "AND rb.status = :status");
+                            + "AND LOWER(rb.status) = :status");
                     q.setParameter("email", email.toLowerCase());
                     q.setParameter("bookInDate", bookInDate);
                     q.setParameter("bookOutDate", bookOutDate);
@@ -69,7 +69,7 @@ public class BookingSession implements BookingSessionLocal {
                 if (status != null) {
                     q = em.createQuery("SELECT rb FROM RoomBooking rb WHERE "
                             + "LOWER(rb.bookedBy.email) = :email "
-                            + "AND rb.status = :status");
+                            + "AND LOWER(rb.status) = :status");
                     q.setParameter("email", email.toLowerCase());
                     q.setParameter("status", status.toLowerCase());
                 } //Perform search with email parameter
@@ -98,7 +98,7 @@ public class BookingSession implements BookingSessionLocal {
                 q = em.createQuery("SELECT rb FROM RoomBooking rb WHERE "
                         + "rb.bookInDate = :bookInDate "
                         + "AND rb.bookOutDate = :bookOutDate "
-                        + "AND rb.status = :status");
+                        + "AND LOWER(rb.status) = :status");
                 q.setParameter("bookInDate", bookInDate);
                 q.setParameter("bookOutDate", bookOutDate);
                 q.setParameter("status", status.toLowerCase());
@@ -114,7 +114,7 @@ public class BookingSession implements BookingSessionLocal {
             //Perform search with status parameter
             if (status != null) {
                 q = em.createQuery("SELECT rb FROM RoomBooking rb WHERE "
-                        + "rb.status = :status");
+                        + "LOWER(rb.status) = :status");
                 q.setParameter("status", status.toLowerCase());
             } //No parameters found.
             else {
@@ -191,7 +191,7 @@ public class BookingSession implements BookingSessionLocal {
                             + "LOWER(hfb.bookedBy.email) = :email "
                             + "AND hfb.startDate = :startDate "
                             + "AND hfb.endDate = :endDate "
-                            + "AND hfb.status = :status");
+                            + "AND LOWER(hfb.status) = :status");
                     q.setParameter("email", email.toLowerCase());
                     q.setParameter("startDate", startDate);
                     q.setParameter("endDate", endDate);
@@ -211,7 +211,7 @@ public class BookingSession implements BookingSessionLocal {
                 if (status != null) {
                     q = em.createQuery("SELECT hfb FROM HotelFacilityBooking hfb WHERE "
                             + "LOWER(hfb.bookedBy.email) = :email "
-                            + "AND hfb.status = :status");
+                            + "AND LOWER(hfb.status) = :status");
                     q.setParameter("email", email.toLowerCase());
                     q.setParameter("status", status.toLowerCase());
                 } //Perform search with email parameter
@@ -240,7 +240,7 @@ public class BookingSession implements BookingSessionLocal {
                     q = em.createQuery("SELECT hfb FROM HotelFacilityBooking hfb WHERE "
                         + "hfb.startDate = :startDate "
                         + "AND hfb.endDate = :endDate "
-                        + "AND hfb.status = :status");
+                        + "AND LOWER(hfb.status) = :status");
                 q.setParameter("startDate", startDate);
                 q.setParameter("endDate", endDate);
                 q.setParameter("status", status.toLowerCase());
@@ -257,7 +257,7 @@ public class BookingSession implements BookingSessionLocal {
             //Perform search with status parameter
             if (status != null) {
                     q = em.createQuery("SELECT hfb FROM HotelFacilityBooking hfb WHERE "
-                        + "hfb.status = :status");
+                        + "LOWER(hfb.status) = :status");
                 q.setParameter("status", status.toLowerCase());
             } //No parameters found.
             else {

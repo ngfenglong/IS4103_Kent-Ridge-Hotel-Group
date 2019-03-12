@@ -34,6 +34,7 @@ public class Hotel implements Serializable {
     private String hotelAddress;
     private int hotelStar;
     private String hotelContact;
+    private String hotelImage;
 
     @OneToMany(mappedBy = "hotel")
     private List<Room> rooms;
@@ -48,13 +49,14 @@ public class Hotel implements Serializable {
         feedbacks = new ArrayList<>();
     }
 
-    public Hotel(String hotelName, String hotelCodeName, String hotelAddress, int hotelStar, String hotelContact) {
+    public Hotel(String hotelName, String hotelCodeName, String hotelAddress, int hotelStar, String hotelContact, String hotelImage) {
         this();
         this.hotelName = hotelName;
         this.hotelCodeName = hotelCodeName;
         this.hotelAddress = hotelAddress;
         this.hotelStar = hotelStar;
         this.hotelContact = hotelContact;
+        this.hotelImage = hotelImage;
     }
 
     public Long getHotelID() {
@@ -196,6 +198,16 @@ public class Hotel implements Serializable {
         this.feedbacks = feedbacks;
     }
 
+    public String getHotelImage() {
+        return hotelImage;
+    }
+
+    public void setHotelImage(String hotelImage) {
+        this.hotelImage = hotelImage;
+    }
+
+    
+    
     public void addHotelFacility(HotelFacility hotelFacility) throws NoResultException {
         if (hotelFacility != null && !this.getHotelFacilities().contains(hotelFacility)) {
             this.getHotelFacilities().add(hotelFacility);

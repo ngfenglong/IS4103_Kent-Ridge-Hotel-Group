@@ -17,7 +17,12 @@ import entity.RoomFacility;
 import entity.Staff;
 import entity.StaffType;
 import error.NoResultException;
+import etc.RandomPassword;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.Serializable;
+import java.net.URL;
+import java.net.URLConnection;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -29,6 +34,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.Part;
 import sessionBeans.FeedbackSessionLocal;
 import sessionBeans.HotelFacilitySessionLocal;
 
@@ -38,6 +44,7 @@ import sessionBeans.LogSessionLocal;
 import sessionBeans.RoomFacilitySessionLocal;
 import sessionBeans.RoomSessionLocal;
 import sessionBeans.StaffSessionLocal;
+import sun.misc.IOUtils;
 
 /**
  *
@@ -67,8 +74,19 @@ public class HotelManagedBean implements Serializable {
     private String loggedInUser;
 
     private String logActivityName;
+    private String noImageStr = "Noimage.jpg";
+    private Part file;
+    private Part iconFile;
 
     public String selectedHotel;
+    public Staff selectedStaff;
+    public HotelFacility selectedFacilityObj;
+    public HolidaySurcharge selectedHoliday;
+    public Hotel selectedHotelObj;
+    public MinibarItem selectedMinibarItem;
+    public Room selectedRoom;
+    public RoomFacility selectedRoomFacility;
+    public ExtraSurcharge selectedSurcharge;
 
     public String hotelName;
     public String hotelCode;
@@ -110,7 +128,7 @@ public class HotelManagedBean implements Serializable {
 
     public String stName;
     public String stPassword;
-    public String stEmail = "@krhg.com.sg";
+    public String stEmail;
     public String stPhoneNumber;
     public String stGender;
     public String stNric;
@@ -183,6 +201,205 @@ public class HotelManagedBean implements Serializable {
 
     public List<StaffType> getAllStaffType() {
         return staffSessionLocal.getAllStaffTypes();
+    }
+
+    public List<Staff> getAllStaff() {
+        return staffSessionLocal.getAllStaffs();
+    }
+
+    public String displayRoomFacilities(){
+        List<RoomFacility> facilities = selectedRoom.getRoomFacilities();
+        String returnString = "";
+        for(RoomFacility rf: facilities){
+            returnString = returnString + rf.getRoomFacilityName() + ", ";
+        }
+        if(returnString.length() >0){
+            returnString.substring(0, returnString.length()-2);
+        }
+        
+        return returnString;
+    }
+    
+    public String displayMinibarItems(){
+        List<MinibarItem> items = selectedRoom.getMiniBarItems();
+        String returnString = "";
+        for(MinibarItem mi: items){
+            returnString = returnString + mi.getItemName()+ ", ";
+        }
+        if(returnString.length() >0){
+            returnString.substring(0, returnString.length()-2);
+        }
+        
+        return returnString;
+    }
+    
+    public String saveFacility() throws NoResultException {
+        hotelFacilitySessionLocal.updateHotelFacility(selectedFacilityObj);
+
+        FacesContext context = FacesContext.getCurrentInstance();
+        String loggedInName = context.getApplication().createValueBinding("#{authenticationManagedBean.name}").getValue(context).toString();
+        Logging l = new Logging("Hotel Facility", "Update " + selectedFacilityObj.getHotelFacilityName() + " details", loggedInName);
+        logSessionLocal.createLogging(l);
+        selectedFacilityObj = null;
+
+        return "ViewAllFacility.xhtml?faces-redirect=true";
+    }
+
+    public String saveHoliday() throws NoResultException {
+        roomSessionLocal.updateHolidaySurcarhge(selectedHoliday);
+
+        FacesContext context = FacesContext.getCurrentInstance();
+        String loggedInName = context.getApplication().createValueBinding("#{authenticationManagedBean.name}").getValue(context).toString();
+        Logging l = new Logging("Holiday Surcharge", "Update " + selectedHoliday.getHolidayName() + " details", loggedInName);
+        logSessionLocal.createLogging(l);
+        selectedHoliday = null;
+
+        return "ViewHolidays.xhtml?faces-redirect=true";
+    }
+
+    public String saveHotel() throws NoResultException {
+        hotelSessionLocal.updateHotel(selectedHotelObj);
+
+        FacesContext context = FacesContext.getCurrentInstance();
+        String loggedInName = context.getApplication().createValueBinding("#{authenticationManagedBean.name}").getValue(context).toString();
+        Logging l = new Logging("Hotel", "Update " + selectedHotelObj.getHotelName() + " details", loggedInName);
+        logSessionLocal.createLogging(l);
+        selectedHotelObj = null;
+
+        return "ViewAllHotels.xhtml?faces-redirect=true";
+    }
+
+    public String saveMinibarItem() throws NoResultException {
+        roomSessionLocal.updateMinibarItem(selectedMinibarItem);
+
+        FacesContext context = FacesContext.getCurrentInstance();
+        String loggedInName = context.getApplication().createValueBinding("#{authenticationManagedBean.name}").getValue(context).toString();
+        Logging l = new Logging("Minibar Item", "Update " + selectedMinibarItem.getItemName() + " details", loggedInName);
+        logSessionLocal.createLogging(l);
+        selectedMinibarItem = null;
+
+        return "ViewMinibarItems.xhtml?faces-redirect=true";
+    }
+
+    public String saveProfile() {
+
+        return "index.xhtml?faces-redirect=true";
+    }
+
+    public String saveRoom() throws NoResultException {
+        roomSessionLocal.updateRoom(selectedRoom);
+
+        FacesContext context = FacesContext.getCurrentInstance();
+        String loggedInName = context.getApplication().createValueBinding("#{authenticationManagedBean.name}").getValue(context).toString();
+        Logging l = new Logging("Room", "Update " + selectedRoom.getRoomName() + " details", loggedInName);
+        logSessionLocal.createLogging(l);
+        selectedRoom = null;
+
+        return "ViewRooms.xhtml?faces-redirect=true";
+    }
+
+    public String saveRoomFacility() throws NoResultException {
+        roomFacilitySessionLocal.updateRoomFacility(selectedRoomFacility);
+
+        FacesContext context = FacesContext.getCurrentInstance();
+        String loggedInName = context.getApplication().createValueBinding("#{authenticationManagedBean.name}").getValue(context).toString();
+        Logging l = new Logging("Room Facility", "Update " + selectedRoomFacility.getRoomFacilityName() + " details", loggedInName);
+        logSessionLocal.createLogging(l);
+        selectedRoomFacility = null;
+
+        return "ViewRoomFacility.xhtml?faces-redirect=true";
+    }
+
+    public String saveStaff() throws NoResultException {
+        staffSessionLocal.updateStaff(selectedStaff);
+
+        FacesContext context = FacesContext.getCurrentInstance();
+        String loggedInName = context.getApplication().createValueBinding("#{authenticationManagedBean.name}").getValue(context).toString();
+        Logging l = new Logging("Staff", "Update " + selectedStaff.getName() + " details", loggedInName);
+        logSessionLocal.createLogging(l);
+        selectedStaff = null;
+
+        return "ViewStaff.xhtml?faces-redirect=true";
+    }
+
+    public String saveSurcharge() throws NoResultException {
+        roomSessionLocal.updateExtraSurcarhge(selectedSurcharge);
+
+        FacesContext context = FacesContext.getCurrentInstance();
+        String loggedInName = context.getApplication().createValueBinding("#{authenticationManagedBean.name}").getValue(context).toString();
+        Logging l = new Logging("Surcharge Holiday", "Update " + selectedSurcharge.getSurchargeName()+ " details", loggedInName);
+        logSessionLocal.createLogging(l);
+        selectedSurcharge = null;
+
+        return "ViewSucharge.xhtml?faces-redirect=true";
+    }
+
+    public String editSurcharge(Long sID) throws NoResultException {
+        selectedSurcharge = roomSessionLocal.getExtraSurchargeByID(sID);
+
+        return "EditSurcharge.xhtml?faces-redirect=true";
+    }
+
+    public String editStaff(Long sID) throws NoResultException {
+        selectedStaff = staffSessionLocal.getStaffByID(sID);
+
+        return "EditStaff.xhtml?faces-redirect=true";
+    }
+
+    public String editRoomFacility(Long rfID) throws NoResultException {
+        selectedRoomFacility = roomFacilitySessionLocal.getRoomFacilityByID(rfID);
+
+        return "EditRoomFacility.xhtml?faces-redirect=true";
+    }
+
+    public String editRoom(Long rID) throws NoResultException {
+        selectedRoom = roomSessionLocal.getRoomByID(rID);
+
+        return "EditRoom.xhtml?faces-redirect=true";
+    }
+    public String viewRoom(Long rID) throws NoResultException {
+        selectedRoom = roomSessionLocal.getRoomByID(rID);
+
+        return "ViewSelectedRoom.xhtml?faces-redirect=true";
+    }
+
+    public String editProfile(Long pID) {
+        return "EditProfile.xhtml?faces-redirect=true";
+    }
+
+    public String editMinibarItem(Long miID) throws NoResultException {
+        selectedMinibarItem = roomSessionLocal.getMinibarItemByID(miID);
+
+        return "EditMinibarItems.xhtml?faces-redirect=true";
+    }
+
+    public String editHotel(Long hID) throws NoResultException {
+        selectedHotelObj = hotelSessionLocal.getHotelByID(hID);
+
+        return "EditHotel.xhtml?faces-redirect=true";
+    }
+
+    public String editHolidaySurcharge(Long hID) throws NoResultException {
+        selectedHoliday = roomSessionLocal.getHolidaySurchargeByID(hID);
+
+        return "EditHolidays.xhtml?faces-redirect=true";
+    }
+
+    public String editHotelFacility(Long fID) throws NoResultException {
+        selectedFacilityObj = hotelFacilitySessionLocal.getHotelFacilityByID(fID);
+
+        return "EditFacility.xhtml?faces-redirect=true";
+    }
+
+    public String saveHotelFacility() {
+
+        return "ViewAllFacility.xhtml?faces-redirect=true";
+    }
+
+    public String generateNewPassword() {
+        stPassword = new RandomPassword().generateRandomPassword();
+
+        return "AddStaff.xhtml?faces-redirect=true";
     }
 
     public String deleteHotelFacility(Long hfID) throws NoResultException {
@@ -327,6 +544,35 @@ public class HotelManagedBean implements Serializable {
         return "ViewSucharge.xhtml?faces-redirect=true";
     }
 
+    public String deleteStaff(Long sID) throws NoResultException {
+        logActivityName = staffSessionLocal.getStaffByID(sID).getUserName();
+        FacesContext context = FacesContext.getCurrentInstance();
+        String loggedInName = context.getApplication().createValueBinding("#{authenticationManagedBean.name}").getValue(context).toString();
+        staffSessionLocal.deleteStaff(sID);
+        Logging l = new Logging("Staff", "Delete " + logActivityName + " from System", loggedInName);
+        logSessionLocal.createLogging(l);
+
+        return "ViewStaff.xhtml?faces-redirect=true";
+    }
+
+    public String changeStatus(Long sID) throws NoResultException {
+        logActivityName = staffSessionLocal.getStaffByID(sID).getUserName();
+        Staff tempStaff = staffSessionLocal.getStaffByID(sID);
+
+        if (tempStaff.getAccountStatus() == true) {
+            staffSessionLocal.deactivateStaff(tempStaff);
+        } else {
+            staffSessionLocal.activateStaff(tempStaff);
+        }
+
+        FacesContext context = FacesContext.getCurrentInstance();
+        String loggedInName = context.getApplication().createValueBinding("#{authenticationManagedBean.name}").getValue(context).toString();
+        Logging l = new Logging("Staff", "Change " + logActivityName + "'s status", loggedInName);
+        logSessionLocal.createLogging(l);
+
+        return "ViewStaff.xhtml?faces-redirect=true";
+    }
+
     public List<HotelFacility> getAddableHotelFacilities() throws NoResultException {
         List<HotelFacility> allFacilities = hotelFacilitySessionLocal.getAllHotelFacilities();
         List<HotelFacility> unwantedList = getHotelFacilities();
@@ -407,11 +653,33 @@ public class HotelManagedBean implements Serializable {
 
     public String createNewHotel() {
         Hotel hotel = new Hotel();
+        String imgFile = noImageStr;
         hotel.setHotelName(hotelName);
         hotel.setHotelCodeName(hotelCode);
         hotel.setHotelContact(contactNumber);
         hotel.setHotelStar(hotelStar);
         hotel.setHotelAddress(address);
+
+        if (file != null) {
+            imgFile = file.getSubmittedFileName();
+            try {
+
+                InputStream bytes = file.getInputStream();
+                //Files.copy(bytes, path, StandardCopyOption.REPLACE_EXISTING);
+
+                URL ftp = new URL("ftp://chernotm:kkskkskks24@cherr.website/public_html/krhgImages/" + file.getSubmittedFileName());
+                URLConnection conn = ftp.openConnection();
+                conn.setDoOutput(true);
+                OutputStream out = conn.getOutputStream();
+                // Copy an InputStream to that OutputStream then
+                out.write(IOUtils.readFully(bytes, -1, false));
+                out.close();
+
+            } catch (Exception e) {
+                e.printStackTrace(System.out);
+            }
+        }
+        hotel.setHotelImage(imgFile);
         hotelSessionLocal.createHotel(hotel);
 
         logActivityName = hotelName;
@@ -500,30 +768,44 @@ public class HotelManagedBean implements Serializable {
         return returnString;
     }
 
+    public String displayStaffTypes() {
+        String returnString = "";
+        for (StaffType s : selectedStaff.getAccountRights()) {
+            returnString = returnString + s.getStaffTypeName() + ", ";
+        }
+        if (returnString.length() > 0) {
+            returnString = returnString.substring(0, returnString.length() - 2);
+        }
+
+        return returnString;
+    }
+
     public String createRoomFacility() {
         RoomFacility rf = new RoomFacility();
+        String imgFile = noImageStr;
         rf.setRoomFacilityName(rfName);
         rf.setRoomFacilityCategory(rfCategory);
-        rf.setIconImg(rfIconImg);
-//        if (file != null) {
-//            imgFile = file.getSubmittedFileName();
-//            try {
-//
-//                InputStream bytes = file.getInputStream();
-//                //Files.copy(bytes, path, StandardCopyOption.REPLACE_EXISTING);
-//
-//                URL ftp = new URL("ftp://zetegrdb:iqDcPqo8ornE@zetegral.website/public_html/krhgImages/" + file.getSubmittedFileName());
-//                URLConnection conn = ftp.openConnection();
-//                conn.setDoOutput(true);
-//                OutputStream out = conn.getOutputStream();
-//                // Copy an InputStream to that OutputStream then
-//                out.write(IOUtils.readFully(bytes, -1, false));
-//                out.close();
-//
-//            } catch (Exception e) {
-//                e.printStackTrace(System.out);
-//            }
-//        }
+
+        if (iconFile != null) {
+            imgFile = iconFile.getSubmittedFileName();
+            try {
+
+                InputStream bytes = iconFile.getInputStream();
+                //Files.copy(bytes, path, StandardCopyOption.REPLACE_EXISTING);
+
+                URL ftp = new URL("ftp://chernotm:kkskkskks24@cherr.website/public_html/krhgImages/" + iconFile.getSubmittedFileName());
+                URLConnection conn = ftp.openConnection();
+                conn.setDoOutput(true);
+                OutputStream out = conn.getOutputStream();
+                // Copy an InputStream to that OutputStream then
+                out.write(IOUtils.readFully(bytes, -1, false));
+                out.close();
+
+            } catch (Exception e) {
+                e.printStackTrace(System.out);
+            }
+        }
+        rf.setIconImg(imgFile);
         roomFacilitySessionLocal.createRoomFacility(rf);
 
         logActivityName = rfName;
@@ -598,6 +880,21 @@ public class HotelManagedBean implements Serializable {
         s.setAccountRights(tempStaffTypes);
 
         staffSessionLocal.createStaff(s);
+        stName = null;
+        stPassword = null;
+        stEmail = null;
+        stPhoneNumber = null;
+        stGender = null;
+        stNric = null;
+        stAddress = null;
+        stHotel = null;
+        stJobTitle = null;
+        stDepartment = null;
+        stLeave = 7;
+        stNokName = null;
+        stNokAddress = null;
+        stNokPhoneNumber = null;
+        stStaffType = null;
 
         logActivityName = tempUsername;
         FacesContext context = FacesContext.getCurrentInstance();
@@ -606,6 +903,12 @@ public class HotelManagedBean implements Serializable {
         logSessionLocal.createLogging(l);
 
         return "ViewStaff.xhtml?faces-redirect=true";
+    }
+
+    public String viewStaffDetail(Long sID) throws NoResultException {
+        selectedStaff = staffSessionLocal.getStaffByID(sID);
+
+        return "ViewStaffProfile.xhtml?faces-redirect=true";
     }
 
     public List<MinibarItem> getMinibarItemList() {
@@ -1069,6 +1372,102 @@ public class HotelManagedBean implements Serializable {
 
     public void setStStaffType(String[] stStaffType) {
         this.stStaffType = stStaffType;
+    }
+
+    public StaffSessionLocal getStaffSessionLocal() {
+        return staffSessionLocal;
+    }
+
+    public void setStaffSessionLocal(StaffSessionLocal staffSessionLocal) {
+        this.staffSessionLocal = staffSessionLocal;
+    }
+
+    public Staff getSelectedStaff() {
+        return selectedStaff;
+    }
+
+    public void setSelectedStaff(Staff selectedStaff) {
+        this.selectedStaff = selectedStaff;
+    }
+
+    public HotelFacility getSelectedFacilityObj() {
+        return selectedFacilityObj;
+    }
+
+    public void setSelectedFacilityObj(HotelFacility selectedFacilityObj) {
+        this.selectedFacilityObj = selectedFacilityObj;
+    }
+
+    public HolidaySurcharge getSelectedHoliday() {
+        return selectedHoliday;
+    }
+
+    public void setSelectedHoliday(HolidaySurcharge selectedHoliday) {
+        this.selectedHoliday = selectedHoliday;
+    }
+
+    public Hotel getSelectedHotelObj() {
+        return selectedHotelObj;
+    }
+
+    public void setSelectedHotelObj(Hotel selectedHotelObj) {
+        this.selectedHotelObj = selectedHotelObj;
+    }
+
+    public MinibarItem getSelectedMinibarItem() {
+        return selectedMinibarItem;
+    }
+
+    public void setSelectedMinibarItem(MinibarItem selectedMinibarItem) {
+        this.selectedMinibarItem = selectedMinibarItem;
+    }
+
+    public Room getSelectedRoom() {
+        return selectedRoom;
+    }
+
+    public void setSelectedRoom(Room selectedRoom) {
+        this.selectedRoom = selectedRoom;
+    }
+
+    public RoomFacility getSelectedRoomFacility() {
+        return selectedRoomFacility;
+    }
+
+    public void setSelectedRoomFacility(RoomFacility selectedRoomFacility) {
+        this.selectedRoomFacility = selectedRoomFacility;
+    }
+
+    public ExtraSurcharge getSelectedSurcharge() {
+        return selectedSurcharge;
+    }
+
+    public void setSelectedSurcharge(ExtraSurcharge selectedSurcharge) {
+        this.selectedSurcharge = selectedSurcharge;
+    }
+
+    public String getNoImageStr() {
+        return noImageStr;
+    }
+
+    public void setNoImageStr(String noImageStr) {
+        this.noImageStr = noImageStr;
+    }
+
+    public Part getFile() {
+        return file;
+    }
+
+    public void setFile(Part file) {
+        this.file = file;
+    }
+
+    public Part getIconFile() {
+        return iconFile;
+    }
+
+    public void setIconFile(Part iconFile) {
+        this.iconFile = iconFile;
     }
 
 }
