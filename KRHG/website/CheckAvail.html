@@ -30,11 +30,9 @@
 						<li><a href="index.html">Home</a></li>
 						<li><a href="about.html">About us</a></li>
 						<li><a href="hotels.html">Hotels</a></li>
-						<li><a href="blog.html">Events</a></li>
 						<li><a href="contact.html">Contact us</a></li>
 					</ul>
 				</nav>
-				<div class="book_button"><a href="#">Reserve Now</a></div>
 				<div class="book_button"><a href="login.html">Login/Signup</a></div>
 
 
@@ -54,16 +52,11 @@
 					<li><a href="index.html">Home</a></li>
 					<li><a href="about.html">About us</a></li>
 					<li><a href="hotels.html">Hotels</a></li>
-					<li><a href="blog.html">Events</a></li>
 					<li><a href="contact.html">Contact us</a></li>
 				</ul>
 			</nav>
 		</div>
-		<div class="menu_extra">
-			<div class="menu_book text-right"><a href="hotels.html">Reserve Now</a></div>
-			<div class="book_button"><a href="login.html">Login/Signup</a></div>
 
-		</div>
 	</div>
 
 	<!-- Home -->
@@ -98,6 +91,20 @@
 
 				<div class="col-xl-6 order-xl-2 order-1">
 					<div class="split_section_right_content">
+						
+							<table>
+								<tr>
+									<td>Check in date</td>
+									<td>Check out date</td>
+								</tr>
+								<tr>
+								<td><div><input type="text" class="datepicker" placeholder="Check in date" required="required"></div>
+								</td>
+								<td><div><input type="text" class="datepicker" placeholder="Check out date" required="required"></div>
+								</td>
+								</tr>
+							</table>					
+
 							<style>
 									table {
 									  font-family: arial, sans-serif;
@@ -117,7 +124,6 @@
 							<th>Accomodation Type</th>
 							<th>Price/night</th>
 							<th>Select No. of Rooms</th>
-							<th></th>
 							</tr>
 							
 							<tr>
@@ -129,68 +135,45 @@
 										<option value="3">3</option>
 										<option value="4">4</option>
 									  </select></td>
-								<td><input type="button" value="Submit"/></td>
-
 
 							</tr>
-							<tr>
-									<td>Deluxe</td>
-									<td>$240</td>
-									<td><select>
-											<option value="1">1</option>
-											<option value="2">2</option>
-											<option value="3">3</option>
-											<option value="4">4</option>
-										  </select></td>
-										  <td><input type="button" value="Submit"/></td>
-
-	
-							</tr>
-							<tr>
-									<td>Premium</td>
-									<td>$240</td>
-									<td><select>
-											<option value="1">1</option>
-											<option value="2">2</option>
-											<option value="3">3</option>
-											<option value="4">4</option>
-										  </select></td>
-										  <td><input type="button" value="Submit"/></td>
-
-	
-							</tr>
-							<tr>
-									<td>Suite</td>
-									<td>$240</td>
-									<td><select>
-											<option value="1">1</option>
-											<option value="2">2</option>
-											<option value="3">3</option>
-											<option value="4">4</option>
-										  </select></td>
-										  <td><input type="button" value="Submit"/></td>
-
-	
-							</tr>
-							<tr>
-									<td>Penthouse</td>
-									<td>$240</td>
-									<td><select>
-											<option value="1">1</option>
-											<option value="2">2</option>
-											<option value="3">3</option>
-											<option value="4">4</option>
-										  </select></td>
-										  <td><input type="button" value="Submit"/></td>
-
-	
-								</tr>
 
 
 						</table>
-						<div class="split_section_text">
-							<p>For booking of 5 rooms and above, please contact us via our email or contact number.</p>
-						</div>
+						<br><br>
+
+						<style> button {
+								background-color: #ffa37b;
+								border: none;
+								color: rgb(255, 255, 255);
+								padding: 15px 32px;
+								text-align: center;
+								text-decoration: none;
+								display: inline-block;
+								font-size: 16px;
+								margin: 4px 2px;
+								cursor: pointer;
+							  }
+							  button:hover{
+							  background: rgba(0, 0, 0, 0.2);
+							  }
+						      button:hover a
+							  {
+							  color: #ffa37b;
+							  }
+							  button a
+							  {
+							  display: block;
+							  width: 100%;
+							  height: 100%;
+							  line-height: 54px;
+							  font-size: 14px;
+		 					  font-weight: 500;
+							  color: #070707;
+ 							  }
+							  </style>
+						
+						<button type="button" > Confirm</button>
 						</div>
 					</div>
 				</div>
