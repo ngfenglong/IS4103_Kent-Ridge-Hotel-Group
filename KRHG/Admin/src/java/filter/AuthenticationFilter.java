@@ -62,11 +62,11 @@ public class AuthenticationFilter implements Filter {
             hotelManagedBean = (HotelManagedBean) session.getAttribute("hotelManagedBean");
         }
 
-//        if (bean == null || bean.getId() == -1L) {
-//            ((HttpServletResponse) response).sendRedirect(request1.getContextPath() + "/loginpage.xhtml");
-//        } else {
-//            chain.doFilter(request1, response);
-//        }
+        if (bean == null || bean.getId() == -1L) {
+            ((HttpServletResponse) response).sendRedirect(request1.getContextPath() + "/login.xhtml");
+        } else {
+            chain.doFilter(request1, response);
+        }
 
     }
 

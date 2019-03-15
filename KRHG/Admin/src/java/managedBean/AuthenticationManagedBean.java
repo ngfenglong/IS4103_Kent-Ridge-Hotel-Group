@@ -93,7 +93,7 @@ public class AuthenticationManagedBean implements Serializable {
                 out.println("<script type=\"text/javascript\">");
                 out.println("alert('Login Succesful!');");
                 out.println("</script>");
-                return "/index.xhtml?faces-redirect=true";
+                return "/admin/adminIndex.xhtml?faces-redirect=true";
 
             }
         } else {
@@ -117,7 +117,7 @@ public class AuthenticationManagedBean implements Serializable {
 
         Logging l = new Logging("Staff", "Logout from " + tempName, tempName);
         logSessionLocal.createLogging(l);
-        return "loginpage.xhtml?faces-redirect=true";
+        return "../login.xhtml?faces-redirect=true";
     }
 
     public String displayStaffTypes() {

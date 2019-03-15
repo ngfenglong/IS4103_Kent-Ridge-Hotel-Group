@@ -77,6 +77,7 @@ public class HotelManagedBean implements Serializable {
     private String noImageStr = "Noimage.jpg";
     private Part file;
     private Part iconFile;
+    private Part hotelIconFile;
 
     public String selectedHotel;
     public Staff selectedStaff;
@@ -87,6 +88,7 @@ public class HotelManagedBean implements Serializable {
     public Room selectedRoom;
     public RoomFacility selectedRoomFacility;
     public ExtraSurcharge selectedSurcharge;
+    public Feedback selectedFeedback;
 
     public String hotelName;
     public String hotelCode;
@@ -207,32 +209,32 @@ public class HotelManagedBean implements Serializable {
         return staffSessionLocal.getAllStaffs();
     }
 
-    public String displayRoomFacilities(){
+    public String displayRoomFacilities() {
         List<RoomFacility> facilities = selectedRoom.getRoomFacilities();
         String returnString = "";
-        for(RoomFacility rf: facilities){
+        for (RoomFacility rf : facilities) {
             returnString = returnString + rf.getRoomFacilityName() + ", ";
         }
-        if(returnString.length() >0){
-            returnString.substring(0, returnString.length()-2);
+        if (returnString.length() > 0) {
+            returnString.substring(0, returnString.length() - 2);
         }
-        
+
         return returnString;
     }
-    
-    public String displayMinibarItems(){
+
+    public String displayMinibarItems() {
         List<MinibarItem> items = selectedRoom.getMiniBarItems();
         String returnString = "";
-        for(MinibarItem mi: items){
-            returnString = returnString + mi.getItemName()+ ", ";
+        for (MinibarItem mi : items) {
+            returnString = returnString + mi.getItemName() + ", ";
         }
-        if(returnString.length() >0){
-            returnString.substring(0, returnString.length()-2);
+        if (returnString.length() > 0) {
+            returnString.substring(0, returnString.length() - 2);
         }
-        
+
         return returnString;
     }
-    
+
     public String saveFacility() throws NoResultException {
         hotelFacilitySessionLocal.updateHotelFacility(selectedFacilityObj);
 
@@ -327,7 +329,7 @@ public class HotelManagedBean implements Serializable {
 
         FacesContext context = FacesContext.getCurrentInstance();
         String loggedInName = context.getApplication().createValueBinding("#{authenticationManagedBean.name}").getValue(context).toString();
-        Logging l = new Logging("Surcharge Holiday", "Update " + selectedSurcharge.getSurchargeName()+ " details", loggedInName);
+        Logging l = new Logging("Surcharge Holiday", "Update " + selectedSurcharge.getSurchargeName() + " details", loggedInName);
         logSessionLocal.createLogging(l);
         selectedSurcharge = null;
 
@@ -340,27 +342,34 @@ public class HotelManagedBean implements Serializable {
         return "EditSurcharge.xhtml?faces-redirect=true";
     }
 
+    public String viewSurcharge(Long sID) throws NoResultException {
+        selectedSurcharge = roomSessionLocal.getExtraSurchargeByID(sID);
+
+        return "viewSurcharge.xhtml?faces-redirect=true";
+    }
+
     public String editStaff(Long sID) throws NoResultException {
         selectedStaff = staffSessionLocal.getStaffByID(sID);
 
-        return "EditStaff.xhtml?faces-redirect=true";
+        return "editStaff.xhtml?faces-redirect=true";
     }
 
     public String editRoomFacility(Long rfID) throws NoResultException {
         selectedRoomFacility = roomFacilitySessionLocal.getRoomFacilityByID(rfID);
 
-        return "EditRoomFacility.xhtml?faces-redirect=true";
+        return "editRoomFacility.xhtml?faces-redirect=true";
     }
 
     public String editRoom(Long rID) throws NoResultException {
         selectedRoom = roomSessionLocal.getRoomByID(rID);
 
-        return "EditRoom.xhtml?faces-redirect=true";
+        return "editRoom.xhtml?faces-redirect=true";
     }
+
     public String viewRoom(Long rID) throws NoResultException {
         selectedRoom = roomSessionLocal.getRoomByID(rID);
 
-        return "ViewSelectedRoom.xhtml?faces-redirect=true";
+        return "viewRoom.xhtml?faces-redirect=true";
     }
 
     public String editProfile(Long pID) {
@@ -370,25 +379,43 @@ public class HotelManagedBean implements Serializable {
     public String editMinibarItem(Long miID) throws NoResultException {
         selectedMinibarItem = roomSessionLocal.getMinibarItemByID(miID);
 
-        return "EditMinibarItems.xhtml?faces-redirect=true";
+        return "editMinibarItem.xhtml?faces-redirect=true";
     }
 
     public String editHotel(Long hID) throws NoResultException {
         selectedHotelObj = hotelSessionLocal.getHotelByID(hID);
 
-        return "EditHotel.xhtml?faces-redirect=true";
+        return "editHotel.xhtml?faces-redirect=true";
+    }
+
+    public String viewHotel(Long hID) throws NoResultException {
+        selectedHotelObj = hotelSessionLocal.getHotelByID(hID);
+
+        return "viewHotel.xhtml?faces-redirect=true";
     }
 
     public String editHolidaySurcharge(Long hID) throws NoResultException {
         selectedHoliday = roomSessionLocal.getHolidaySurchargeByID(hID);
 
-        return "EditHolidays.xhtml?faces-redirect=true";
+        return "editHoliday.xhtml?faces-redirect=true";
+    }
+
+    public String viewFeedback(Long fID) throws NoResultException {
+        selectedFeedback = feedbackSessionLocal.getFeedbackByID(fID);
+
+        return "viewFeedback.xhtml?faces-redirect=true";
+    }
+
+    public String viewHolidaySurcharge(Long hID) throws NoResultException {
+        selectedHoliday = roomSessionLocal.getHolidaySurchargeByID(hID);
+
+        return "viewtHoliday.xhtml?faces-redirect=true";
     }
 
     public String editHotelFacility(Long fID) throws NoResultException {
         selectedFacilityObj = hotelFacilitySessionLocal.getHotelFacilityByID(fID);
 
-        return "EditFacility.xhtml?faces-redirect=true";
+        return "editFacility.xhtml?faces-redirect=true";
     }
 
     public String saveHotelFacility() {
@@ -418,7 +445,7 @@ public class HotelManagedBean implements Serializable {
         Logging l = new Logging("Hotel Facility", "Delete " + logActivityName + " from Hotel Facility", loggedInName);
         logSessionLocal.createLogging(l);
 
-        return "ViewAllFacility.xhtml?faces-redirect=true";
+        return "manageFacility.xhtml?faces-redirect=true";
     }
 
     public String deleteLog(Long lID) throws NoResultException {
@@ -451,7 +478,7 @@ public class HotelManagedBean implements Serializable {
         Logging l = new Logging("Hotel", "Delete " + logActivityName + " from System", loggedInName);
         logSessionLocal.createLogging(l);
 
-        return "ViewAllHotels.xhtml?faces-redirect=true";
+        return "manageHotel.xhtml?faces-redirect=true";
     }
 
     public String deleteRoomFacility(Long rfID) throws NoResultException {
@@ -481,7 +508,7 @@ public class HotelManagedBean implements Serializable {
         Logging l = new Logging("Feedback", "Delete " + logActivityName + " from System", loggedInName);
         logSessionLocal.createLogging(l);
 
-        return "ViewFeedback.xhtml?faces-redirect=true";
+        return "manageFeedback.xhtml?faces-redirect=true";
     }
 
     public String deleteHolidaySurcharge(Long hsID) throws NoResultException {
@@ -510,7 +537,7 @@ public class HotelManagedBean implements Serializable {
         Logging l = new Logging("Minibar", "Delete " + logActivityName + " from System", loggedInName);
         logSessionLocal.createLogging(l);
 
-        return "ViewMinibarItems.xhtml?faces-redirect=true";
+        return "manageMinibarItem.xhtml?faces-redirect=true";
     }
 
     public String deleteRoom(Long rID) throws NoResultException {
@@ -530,7 +557,7 @@ public class HotelManagedBean implements Serializable {
         Logging l = new Logging("Room", "Delete " + logActivityName + " from " + tempHotelName, loggedInName);
         logSessionLocal.createLogging(l);
 
-        return "ViewRooms.xhtml?faces-redirect=true";
+        return "manageRoom.xhtml?faces-redirect=true";
     }
 
     public String deleteSurcharge(Long sID) throws NoResultException {
@@ -541,7 +568,7 @@ public class HotelManagedBean implements Serializable {
         Logging l = new Logging("Extra Surcharge", "Delete " + logActivityName + " from System", loggedInName);
         logSessionLocal.createLogging(l);
 
-        return "ViewSucharge.xhtml?faces-redirect=true";
+        return "manageSucharge.xhtml?faces-redirect=true";
     }
 
     public String deleteStaff(Long sID) throws NoResultException {
@@ -552,7 +579,7 @@ public class HotelManagedBean implements Serializable {
         Logging l = new Logging("Staff", "Delete " + logActivityName + " from System", loggedInName);
         logSessionLocal.createLogging(l);
 
-        return "ViewStaff.xhtml?faces-redirect=true";
+        return "manageStaff.xhtml?faces-redirect=true";
     }
 
     public String changeStatus(Long sID) throws NoResultException {
@@ -667,7 +694,7 @@ public class HotelManagedBean implements Serializable {
                 InputStream bytes = file.getInputStream();
                 //Files.copy(bytes, path, StandardCopyOption.REPLACE_EXISTING);
 
-                URL ftp = new URL("ftp://chernotm:kkskkskks24@cherr.website/public_html/krhgImages/" + file.getSubmittedFileName());
+                URL ftp = new URL("ftp://zetegrdb:iqDcPqo8ornE@zetegral.website/public_html/krhgImages/" + file.getSubmittedFileName());
                 URLConnection conn = ftp.openConnection();
                 conn.setDoOutput(true);
                 OutputStream out = conn.getOutputStream();
@@ -694,14 +721,35 @@ public class HotelManagedBean implements Serializable {
         hotelStar = 1;
         address = null;
 
-        return "index.xhtml?faces-redirect=true";
+        return "manageHotel.xhtml?faces-redirect=true";
     }
 
     public String createHotelFacility() {
         HotelFacility hf = new HotelFacility();
-        hf.setHotelFacilityImage(hfImage);
+        hfImage = "";
         hf.setHotelFacilityName(hfName);
         hf.setHotelFacilityDescription(hfDescription);
+
+        if (hotelIconFile != null) {
+            hfImage = hotelIconFile.getSubmittedFileName();
+            try {
+
+                InputStream bytes = hotelIconFile.getInputStream();
+                //Files.copy(bytes, path, StandardCopyOption.REPLACE_EXISTING);
+
+                URL ftp = new URL("ftp://zetegrdb:iqDcPqo8ornE@zetegral.website/public_html/krhgImages/" + hotelIconFile.getSubmittedFileName());
+                URLConnection conn = ftp.openConnection();
+                conn.setDoOutput(true);
+                OutputStream out = conn.getOutputStream();
+                // Copy an InputStream to that OutputStream then
+                out.write(IOUtils.readFully(bytes, -1, false));
+                out.close();
+
+            } catch (Exception e) {
+                e.printStackTrace(System.out);
+            }
+        }
+        hf.setHotelFacilityImage(hfImage);
         hotelFacilitySessionLocal.createHotelFacility(hf);
 
         logActivityName = hfName;
@@ -712,9 +760,10 @@ public class HotelManagedBean implements Serializable {
 
         hfImage = null;
         hfName = null;
+        hotelIconFile = null;
         hfDescription = null;
 
-        return "ViewAllFacility.xhtml?faces-redirect=true";
+        return "manageFacility.xhtml?faces-redirect=true";
     }
 
     public String createHolidaySurcharge() throws ParseException {
@@ -734,7 +783,7 @@ public class HotelManagedBean implements Serializable {
         holPrice = 0.0;
         holDate = null;
 
-        return "ViewHolidays.xhtml?faces-redirect=true";
+        return "manageHolidaySurcharge.xhtml?faces-redirect=true";
     }
 
     public String createMinibarItem() {
@@ -753,7 +802,7 @@ public class HotelManagedBean implements Serializable {
         miName = null;
         miPrice = 0.0;
 
-        return "ViewMinibarItems.xhtml?faces-redirect=true";
+        return "manageMinibarItem.xhtml?faces-redirect=true";
     }
 
     public String displayDays(ArrayList<String> days) {
@@ -793,7 +842,7 @@ public class HotelManagedBean implements Serializable {
                 InputStream bytes = iconFile.getInputStream();
                 //Files.copy(bytes, path, StandardCopyOption.REPLACE_EXISTING);
 
-                URL ftp = new URL("ftp://chernotm:kkskkskks24@cherr.website/public_html/krhgImages/" + iconFile.getSubmittedFileName());
+                URL ftp = new URL("ftp://zetegrdb:iqDcPqo8ornE@zetegral.website/public_html/krhgImages/" + iconFile.getSubmittedFileName());
                 URLConnection conn = ftp.openConnection();
                 conn.setDoOutput(true);
                 OutputStream out = conn.getOutputStream();
@@ -908,7 +957,7 @@ public class HotelManagedBean implements Serializable {
     public String viewStaffDetail(Long sID) throws NoResultException {
         selectedStaff = staffSessionLocal.getStaffByID(sID);
 
-        return "ViewStaffProfile.xhtml?faces-redirect=true";
+        return "viewStaff.xhtml?faces-redirect=true";
     }
 
     public List<MinibarItem> getMinibarItemList() {
@@ -937,7 +986,7 @@ public class HotelManagedBean implements Serializable {
     public String viewHotelRooms(String hotelName) {
         selectedHotel = hotelName;
 
-        return "ViewRooms.xhtml?faces-redirect=true";
+        return "manageRoom.xhtml?faces-redirect=true";
     }
 
     public String viewHotelFeedbacks(String hotelName) {
@@ -1468,6 +1517,22 @@ public class HotelManagedBean implements Serializable {
 
     public void setIconFile(Part iconFile) {
         this.iconFile = iconFile;
+    }
+
+    public Feedback getSelectedFeedback() {
+        return selectedFeedback;
+    }
+
+    public void setSelectedFeedback(Feedback selectedFeedback) {
+        this.selectedFeedback = selectedFeedback;
+    }
+
+    public Part getHotelIconFile() {
+        return hotelIconFile;
+    }
+
+    public void setHotelIconFile(Part hotelIconFile) {
+        this.hotelIconFile = hotelIconFile;
     }
 
 }
