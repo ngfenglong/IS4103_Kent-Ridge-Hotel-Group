@@ -1,0 +1,90 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#accordian {
+    background: white;
+    /* margin: 50px auto 0 auto; */
+    color: black;
+    box-shadow: 0 10px 20px 3px rgba(0, 0, 0, 0.6);
+    font-family: Nunito, arial, verdana;
+}
+
+#accordian h3 {
+    background: white;
+    
+    /* background: linear-gradient(#003040, #002535); */
+}
+
+#accordian h3 a {
+    padding: 0 10px;
+    font-size: 20px;
+    line-height: 50px;
+    display: block;
+    color: black;
+    text-decoration: none;
+    /* border-bottom: 1px solid grey; */
+    border-top: 1px solid lightgray;
+}
+
+#accordian h3:hover {
+    text-shadow: 0 0 1px rgba(255, 255, 255, 0.7);
+}
+
+i {
+    margin-right: 10px;
+}
+
+#accordian li {
+    list-style-type: none;
+    
+}
+
+#accordian ul ul li a,
+#accordian h4 {
+    color: black;
+    text-decoration: none;
+    font-size: 15px;
+    line-height: 27px;
+    display: block;
+    padding: 0 15px;
+    transition: all 0.15s;
+    position: relative;
+
+    
+}
+
+#accordian ul ul li a:hover {
+    background: lightgray;
+    border-left: 5px solid lightseagreen;
+}
+
+#accordian ul ul {
+    display: none;
+}
+
+#accordian li.active>ul {
+    display: block;
+}
+
+#accordian ul ul ul {
+    margin-left: 15px;
+    border-left: 1px dotted rgba(0, 0, 0, 0.5);
+   
+}
+
+
+#accordian a:not(:only-child):after {
+    font-family: "Font Awesome 5 Free"; font-weight: 600; content: "\f078";
+    position: absolute;
+    right: 10px;
+    top: 0;
+    font-size: 14px;
+}
+
+#accordian .active>a:not(:only-child):after {
+    font-family: "Font Awesome 5 Free";
+    font-weight:bold;
+    content: "\f077";
+}
