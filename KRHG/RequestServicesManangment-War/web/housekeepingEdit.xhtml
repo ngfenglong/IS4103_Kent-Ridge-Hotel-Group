@@ -73,50 +73,20 @@ and open the template in the editor.
             </nav>
             <div class="content" >
 
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">List of inventory reports</h3>
-                    </div>
-                    <!-- /.card-header -->
-                    <div class="card-body">
-                        <table id="example1" class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Item</th>
-                                    <th>Quantity</th>
+         
+                <form class="info">
+                    
+                    Room: <input type="text" value="402" name="name" ></input><br/>
+                   
+                    Status: <select>
+                        <option value="Completed">Completed</option>
+                        <option value="Incomplete">Incomplete</option>
 
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Toilet paper</td>
-                                    <td>500</td>
-
-                                    <td><input type="button" value="View"/></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Rubbish bag </td>
-                                    <td>2000</td>
-                                    <td><input type="button" value="View"/></td>
-                                </tr>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Item</th>
-                                    <th>Quantity</th>
-
-                                    <th></th>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                    <!-- /.card-body -->
-                </div>
+                    </select>
+                    <br/>
+                    <input type="submit" value="Update">
+                    </input>
+                </form>
 
             </div>
         </div>

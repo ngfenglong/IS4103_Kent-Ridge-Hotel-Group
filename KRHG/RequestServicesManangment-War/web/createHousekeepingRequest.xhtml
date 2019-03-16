@@ -5,7 +5,8 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <head>
         <meta charset="UTF-8" ></meta>
@@ -73,49 +74,23 @@ and open the template in the editor.
             </nav>
             <div class="content" >
 
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">List of inventory reports</h3>
-                    </div>
-                    <!-- /.card-header -->
-                    <div class="card-body">
-                        <table id="example1" class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Item</th>
-                                    <th>Quantity</th>
+                <div class="wrap">
+                    <h1>Housekeeping Request</h1>
+                    <p style="margin-bottom:30px; text-align: left">Enter request details</p>
 
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Toilet paper</td>
-                                    <td>500</td>
 
-                                    <td><input type="button" value="View"/></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Rubbish bag </td>
-                                    <td>2000</td>
-                                    <td><input type="button" value="View"/></td>
-                                </tr>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Item</th>
-                                    <th>Quantity</th>
+                    <form action="" class="mainWrap" style="width:80%; margin:0;">
+                        <input placeholder="Room Number" type="text" maxlength="4" class="left" required="true" />
+                        <textarea placeholder="Additional Requests" class="mainArea"></textarea>
 
-                                    <th></th>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                    <!-- /.card-body -->
+
+
+                        <button class="bigBtn">Submit Request</button>
+                    </form>
+
+
+
+
                 </div>
 
             </div>

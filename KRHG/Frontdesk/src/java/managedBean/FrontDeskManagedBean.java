@@ -5,20 +5,25 @@
  */
 package managedBean;
 
-import javax.faces.bean.RequestScoped;
+import javax.ejb.EJB;
+import javax.faces.bean.SessionScoped;
 import javax.inject.Named;
+import sessionBeans.RoomSessionLocal;
 
 /**
  *
  * @author Congx2
  */
 @Named(value = "frontDeskManagedBean")
-@RequestScoped
+@SessionScoped
 public class FrontDeskManagedBean {
 
     /**
      * Creates a new instance of FrontDeskManagedBean
      */
+    @EJB
+    private RoomSessionLocal roomSessionLocal;
+    
     private String customerName;
     private String customerRoom;
 

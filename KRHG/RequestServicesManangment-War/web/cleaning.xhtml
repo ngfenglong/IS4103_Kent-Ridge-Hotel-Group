@@ -5,7 +5,8 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <head>
         <meta charset="UTF-8" ></meta>
@@ -75,40 +76,37 @@ and open the template in the editor.
 
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">List of inventory reports</h3>
+                        <h3 class="card-title">List of housekeeping request for ENTER BACKEND hotel name</h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <table id="example1" class="table table-bordered table-striped">
+                        <table  id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Item</th>
-                                    <th>Quantity</th>
+                                    <th>Room</th>
+                                    <th>Status</th>
+                                    <th>DateTime Requested</th>
 
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Toilet paper</td>
-                                    <td>500</td>
+                                <ui:repeat var="o" value="#{requestServicesManagedBean.housekeepingOrder}" varStatus="status">
 
-                                    <td><input type="button" value="View"/></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Rubbish bag </td>
-                                    <td>2000</td>
-                                    <td><input type="button" value="View"/></td>
-                                </tr>
+                                    <tr>
+                                        <td>#{o.room.roomID}</td>
+                                        <td>#{o.status}</td>
+                                        <td>#{o.orderDateTime}</td>
+                                     
+                                    </tr>
+
+                                </ui:repeat>
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Item</th>
-                                    <th>Quantity</th>
+                                    <th>Room</th>
+                                    <th>Status</th>
+                                    <th>DateTime Requested</th>
 
                                     <th></th>
                                 </tr>
