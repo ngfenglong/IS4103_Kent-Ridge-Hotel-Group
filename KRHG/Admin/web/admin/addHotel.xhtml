@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./AdminTemplate.xhtml">
+
+            <ui:define name="title">
+                KRHG Admin Console System
+            </ui:define>
+
+            <ui:define name="content">
+                <!-- Content Header (Page header) -->
+                <div class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+
+
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li class="breadcrumb-item active">
+                                        <!--Add Btn-->
+                                    </li>
+                                </ol>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </div> 
+                <section class="content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <!-- left column -->
+                            <div class="col-md-10">
+                                <!-- general form elements -->
+                                <div class="card card-primary">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Add Hotel</h3>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <!-- form start -->
+                                    <h:form enctype="multipart/form-data">
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label for="hotelName">Hotel Name</label>
+                                                <h:inputText class="form-control" value="#{hotelManagedBean.hotelName}" id="hotelName" a:placeholder="Enter Hotel Name" required="true" />
+                                            </div>  <div class="form-group">
+                                                <label for="hotelName">Hotel Code</label>
+                                                <h:inputText class="form-control" value="#{hotelManagedBean.hotelCode}" id="hotelCode" a:placeholder="Enter Hotel Code" required="true" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="address">Address</label>
+                                                <h:inputText class="form-control" value="#{hotelManagedBean.address}" id="address" a:placeholder="Enter Address" required="true" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Hotel Star</label>
+                                                <h:selectOneMenu class="form-control select2" value="#{hotelManagedBean.hotelStar}">
+                                                    <f:selectItem itemValue="1" itemLabel="1" />
+                                                    <f:selectItem itemValue="2" itemLabel="2" />
+                                                    <f:selectItem itemValue="3" itemLabel="3" />
+                                                    <f:selectItem itemValue="4" itemLabel="4" />
+                                                    <f:selectItem itemValue="5" itemLabel="5" />
+                                                </h:selectOneMenu>                  
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="contact">Contact Number</label>
+                                                <h:inputText class="form-control" a:pattern=".{8,8}" a:required title="8 digits phone number is requried" a:type="number" value="#{hotelManagedBean.contactNumber}" id="contact" a:placeholder="Enter Contact" required="true" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="hotelImage">Hotel Image</label><br />
+                                                <h:inputFile id="hotelImage" value="#{hotelManagedBean.file}">
+                                                    <f:passThroughAttribute name="accept" value="image/jpeg"/>
+                                                </h:inputFile>
+                                            </div>
+                                        </div>
+                                        <!-- /.card-body -->
+
+                                        <div class="card-footer">
+                                            <h:commandButton class="btn btn-primary" value="Add hotel" action="#{hotelManagedBean.createNewHotel()}"></h:commandButton>
+                                        </div>
+                                    </h:form>
+                                </div>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </section>
+                <!-- /.content-header -->
+                <!-- Main content -->
+
+            </ui:define>
+            <ui:define name="script">
+                script
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

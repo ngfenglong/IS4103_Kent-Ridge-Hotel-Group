@@ -169,7 +169,7 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
 
         Logging l = new Logging("Customer", "Deactivate " + logActivityName + " account", logActivityName);
         logSessionLocal.createLogging(l);
-        
+
         HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
         PrintWriter out = response.getWriter();
         out.println("<script type=\"text/javascript\">");
@@ -196,8 +196,11 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
 
             customerSessionLocal.changePasword(tempCust, encryptPassword(newPass));
 
-            String msg = "Your password has been reset! Please login with the new password:\n\"" + newPass + "\"";
-            sendEmail(emailToSent, "Reset Password", msg);
+            String msg2 = "Dear User\n\n\n"
+                    + "We have received your password change request. Please click here to enter your new password. Access code: F$%f4syb\n\nSincerely\n\n\n"
+                    + "Kent Ridge Hotels Group";
+            //String msg = "Your password has been reset! Please login with the new password:\n\"" + newPass + "\"";
+            sendEmail(emailToSent, "Reset Password", msg2);
 
             out.println("<script type=\"text/javascript\">");
             out.println("alert('New password has been sent');");
