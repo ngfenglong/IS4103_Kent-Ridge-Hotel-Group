@@ -31,12 +31,15 @@
             var h = today.getHours();
             var m = today.getMinutes();
             var s = today.getSeconds();
+            var ampm = h>= 12 ? ' PM' : ' AM';
+            h = h % 12;
+             h = h ? h : 12;
             // add a zero in front of numbers<10
             m = checkTime(m);
             s = checkTime(s);
-            document.getElementById('txt').innerHTML = h + ":" + m;
-            document.getElementById('timeinput').
-                t = setTimeout('startTime()', 500);
+            document.getElementById("printtime").innerHTML = h + ":" + m + ampm;
+            // document.getElementById('timeinput').
+            //     t = setTimeout('startTime()', 500);
         }
         function checkTime(i) {
             if (i < 10) {
@@ -118,7 +121,7 @@
                     </form>
                     <button class="cd-popup-trigger" id="modal-1" data-target="#modal-1"
                         style="display:block; position:absolute; top:100%; left:45%">Submit></button>
-                    <button class="nextbutton" style='position:absolute; top:130%; left:1%; font-size:150%'
+                    <button class="nextbutton" style='position:absolute; top:140%; left:1%; font-size:150%'
                         onclick="onClickNext(0)">Back</button>
                 </div>
             </div>
@@ -194,7 +197,12 @@
             console.log("time", instances[0]);
         });
         function loadtime() {
-            document.getElementById("printtime").innerHTML = timepicked;
+            if(timepicked != undefined){
+                document.getElementById("printtime").innerHTML = timepicked;
+            } else {
+               startTime();
+            }
+
             console.log("hello", timepicked);
             console.log(document.getElementById("printtime"));
         }

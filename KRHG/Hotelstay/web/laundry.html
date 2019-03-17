@@ -32,12 +32,15 @@
             var h = today.getHours();
             var m = today.getMinutes();
             var s = today.getSeconds();
+            var ampm = h>= 12 ? ' PM' : ' AM';
+            h = h % 12;
+             h = h ? h : 12;
             // add a zero in front of numbers<10
             m = checkTime(m);
             s = checkTime(s);
-            document.getElementById('txt').innerHTML = h + ":" + m;
-            document.getElementById('timeinput').
-                t = setTimeout('startTime()', 500);
+            document.getElementById("printTime").innerHTML = h + ":" + m + ampm;
+            // document.getElementById('timeinput').
+            //     t = setTimeout('startTime()', 500);
         }
         function checkTime(i) {
             if (i < 10) {
@@ -127,8 +130,10 @@
                 <div class="col-lg-12">
                     <p style="color: #fff; text-align: center; font-size: 180%; margin-bottom: 2%">Your laundry pickup
                         will be scheduled at:</p>
-                    <p id="printDate" style="font-size: 200%; color:white; text-align: center">hi</p>
-                    <p id="printTime" style="font-size: 200%; color:white; text-align: center">hi</p>
+                    <p id="printTime" style="font-size: 200%; color:white; text-align: center; font-weight:bold">hi</p>
+                    <p style="color: #fff; text-align: center; font-size: 180%; margin-bottom: 2%"> It will be returned by:
+                    <p id="printDate" style="font-size: 200%; color:white; text-align: center; font-weight:bold">hi</p>
+                    
                     <p id="checkrequests1" style="font-size: 150%; color:grey; text-align: center">Please prepare your
                         laundry items.</p>
                     <button class="cd-popup-trigger" id="modal-2" data-target="#modal-1"
@@ -232,12 +237,23 @@
             console.log("time", instances[0]);
         });
         function loadTime() {
-            document.getElementById("printTime").innerHTML = timepicked;
+            if(timepicked != undefined){
+                document.getElementById("printTime").innerHTML = timepicked;
+            } else {
+               startTime();
+            }
 
         }
 
         function loadDate() {
+            if(datepicked != undefined){
             document.getElementById("printDate").innerHTML = formatDate(datepicked);
+            } else {
+                var today = new Date();
+                today.setDate(today.getDate() + 4);
+                  console.log(today);
+                document.getElementById("printDate").innerHTML = formatDate(today);
+            }
         }
 
         function formatDate(date) {
@@ -249,7 +265,7 @@
             ];
 
             var dayNames = [
-                "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+               "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
             ];
 
             var weekday = date.getDay();
