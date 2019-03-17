@@ -2,9 +2,14 @@ var check = false;
 
 function changeVal(el) {
   var qt = parseFloat(el.parent().children(".qt").html());
-  var price = parseFloat(el.parent().children(".price").html());
+  console.log(qt);
+  var singleprice = el.parent().children(".price").html();
+  var price = parseFloat(singleprice.trim().substring(1,singleprice.length));
+ 
+  console.log(singleprice.trim().substring(1,singleprice.length));
   var eq = Math.round(price * qt * 100) / 100;
-  
+  console.log(eq);
+
   el.parent().children(".full-price").html( "$" + eq );
   
   changeTotal();			
@@ -15,13 +20,18 @@ function changeTotal() {
   var price = 0;
   
   $(".full-price").each(function(index){
-    price += parseFloat($(".full-price").eq(index).html());
+    var temp = $(".full-price").eq(index).html().trim();
+    price += parseFloat(temp.substring(1,temp.length));
+    console.log($(".full-price").eq(index).html().trim());
+    console.log(price);
   });
-  
+  console.log("total -" + price);
   price = Math.round(price * 100) / 100;
+  console.log("total -" + price);
   var tax = Math.round(price * 0.05 * 100) / 100
-  var shipping = parseFloat($(".shipping span").html());
-  var fullPrice = Math.round((price + tax + shipping) *100) / 100;
+  console.log("total - " + tax);
+  var fullPrice = Math.round((price + tax) *100) / 100;
+  console.log("total - " + fullPrice);
   
   if(price == 0) {
     fullPrice = 0;
@@ -36,16 +46,18 @@ $(document).ready(function(){
   
   $(".remove").click(function(){
     var el = $(this);
+    console.log(el);
     el.parent().parent().addClass("removed");
     window.setTimeout(
       function(){
         el.parent().parent().slideUp('fast', function() { 
           el.parent().parent().remove(); 
+          console.log(el);
           if($(".product").length == 0) {
             if(check) {
-              $("#cart").html("<h1>The shop does not function, yet!</h1><p>If you liked my shopping cart, please take a second and heart this Pen on <a href='https://codepen.io/ziga-miklic/pen/xhpob'>CodePen</a>. Thank you!</p>");
+              $("#site-footer").html("<p>Thank you for dining with KRHG Room Service. We have received your order. Your food will be delivered to you within 30 minutes.</p>");
             } else {
-              $("#cart").html("<h1>No products!</h1>");
+              $("#cart").html("<h1>No Food Item selected! Please select your items from the menu</h1>");
             }
           }
           changeTotal(); 
@@ -54,11 +66,14 @@ $(document).ready(function(){
   });
   
   $(".qt-plus").click(function(){
+
+    console.log($(this).parent().children(".full-price"));
     $(this).parent().children(".qt").html(parseInt($(this).parent().children(".qt").html()) + 1);
     
     $(this).parent().children(".full-price").addClass("added");
-    
+    console.log($(this).parent().children(".full-price"));
     var el = $(this);
+    console.log(el);
     window.setTimeout(function(){el.parent().children(".full-price").removeClass("added"); changeVal(el);}, 150);
   });
   
@@ -78,7 +93,7 @@ $(document).ready(function(){
   
   window.setTimeout(function(){$(".is-open").removeClass("is-open")}, 1200);
   
-  $(".btn").click(function(){
+  $(".os-btn").click(function(){
     check = true;
     $(".remove").click();
   });

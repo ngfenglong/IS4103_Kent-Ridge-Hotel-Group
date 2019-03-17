@@ -9,14 +9,16 @@
     <meta name="author" content="">
 
     <title>Hotel Stay Management System</title>
-    <link href="https://fonts.googleapis.com/css?family=News+Cycle|Poiret+One|Abel" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=News+Cycle|Poiret+One|Abel|Open+Sans" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Nunito" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-
-    <link rel="stylesheet" href="./resources/notifications/dist/Notifications.unmin.css">
-    <link rel="stylesheet" href="./resources/styles/ordersummary.css">
+   
+        <!--Order Summary, Component Stylesheets: Growl, Modal, Date/Time Picker-->
+        <link rel="stylesheet" href="./resources/styles/ordersummary.css">
+        <link rel="stylesheet" href="./resources/notifications/dist/Notifications.unmin.css">
+        <link href="./resources/styles/modal.css" rel="stylesheet">
 
 </head>
 
@@ -71,6 +73,7 @@
                             <span class="qt">2</span>
                             <span class="qt-plus">+</span>
         
+                            
                             <h2 class="full-price">
                                 $18.00
                             </h2>
@@ -105,11 +108,11 @@
                             <span class="qt-plus">+</span>
         
                             <h2 class="full-price">
-                                79.99€
+                                $20.40
                             </h2>
         
                             <h2 class="price">
-                                79.99€
+                                $20.40
                             </h2>
                         </footer>
                     </article>
@@ -138,11 +141,11 @@
                             <span class="qt-plus">+</span>
         
                             <h2 class="full-price">
-                                53.99€
+                                $60
                             </h2>
         
                             <h2 class="price">
-                                17.99€
+                                $60
                             </h2>
                         </footer>
                     </article>
@@ -154,15 +157,14 @@
             <footer id="site-footer">
                 <div class="container clearfix">
         
-                    <div class="left">
-                        <h2 class="subtotal">Subtotal: <span>163.96</span>€</h2>
-                        <h3 class="tax">Taxes (5%): <span>8.2</span>€</h3>
-                        <h3 class="shipping">Shipping: <span>5.00</span>€</h3>
+                    <div class="left checkout">
+                        <h2 class="subtotal">Subtotal: $<span>163.96</span></h2>
+                        <h3 class="tax">Taxes (5%): $<span>8.2</span></h3>
                     </div>
         
                     <div class="right">
-                        <h1 class="total">Total: <span>177.16</span>€</h1>
-                        <a class="btn">Checkout</a>
+                        <h1 class="total">Total: $<span>177.16</span></h1>
+                        <a class="btn cd-popup-trigger">Checkout</a>
                     </div>
         
                 </div>
@@ -178,6 +180,24 @@
     <script src="./resources/jquery/jquery.min.js"></script>
     <script src="./resources/bootstrap/js/bootstrap.bundle.js"></script>
     <script src="./resources/js/ordersummary.js"></script>
+    <script src="./resources/js/modal.js"></script>
+    <script src="./resources/notifications/dist/Notifications.js"></script>
+
+     <!--modal-->
+     <div id="modal" class="cd-popup" role="alert">
+            <div class="cd-popup-container">
+                <p class="popup-content"> Would you like to place your room service order?</p>
+    
+                <ul style="padding-inline-start: 0px
+                
+                
+                " class="cd-buttons">
+                    <li><a onclick="" id="roomservice" class="cd-popup-confirm os-btn">Yes</a></li>
+                    <li><a href="#0"  class=" cd-popup-closemodal">No</a></li>
+                </ul>
+                <a href="#0" class="cd-popup-close img-replace">Close</a>
+            </div> <!-- cd-popup-container -->
+        </div> <!-- cd-popup -->
 
 
 </body>
