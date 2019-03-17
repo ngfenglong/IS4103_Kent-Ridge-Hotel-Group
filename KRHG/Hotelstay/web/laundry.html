@@ -38,7 +38,12 @@
             // add a zero in front of numbers<10
             m = checkTime(m);
             s = checkTime(s);
-            document.getElementById("printTime").innerHTML = h + ":" + m + ampm;
+            if((ampm == " AM" && h<10) || (ampm ==" PM" && h>10)){
+                    document.getElementById("printTime").innerHTML = "12:00 PM";
+            } else{
+                document.getElementById("printTime").innerHTML = h + ":" + m + ampm;
+            }
+            
             // document.getElementById('timeinput').
             //     t = setTimeout('startTime()', 500);
         }
@@ -74,8 +79,10 @@
                         like us to pick up your clothing?</p>
                     <input type="text" id="time" class="timepicker"
                         style="color:white; width: 40%; height: 50%; font-size:500%; text-align: center; border-radius:2px;  margin-left: 30%;">
-                    <p style="color: #fff; text-align: center; font-size: 150%; margin-top: 1%">Please note that you are
-                        only able to select time from now to 11:59PM.</p>
+                    <p style="color: #fff; text-align: center; font-size: 150%; margin-top: 1%">Please note that laundry pick-up services are only available from 10am to 10pm. </p>
+                    <p style="color: #fff; text-align: center; font-size: 120%; margin-top: 1%">If time is not picked, your laundry pick-up will be scheduled at 12:00 PM. </p>
+             
+                    
                     <button class="nextbutton" onclick="onClickNext(1)">Next ></button>
                 </div>
             </div>
@@ -161,6 +168,16 @@
         </div> <!-- cd-popup-container -->
     </div> <!-- cd-popup -->
 
+    <div id="modal2" class="cd-popup" role="alert">
+            <div class="cd-popup-container">
+                <p class="popup-content">Time selected is not valid! Please select a time from 10AM to 10PM.</p>
+    
+                <ul class="cd-buttons">
+                    <li><a style="width:200%; color: #2b2b2b" href="laundry.html" class="cd-popup-confirm">Okay</a></li>
+                </ul>
+                <a href="#0" class="cd-popup-close img-replace">Close</a>
+            </div> <!-- cd-popup-container -->
+        </div> <!-- cd-popup -->
 
 
 
@@ -201,20 +218,28 @@
             console.log(modal.find('.cd-popup-confirm')[0].onclick);
             modal.find('.popup-content').text(message);
         })
+
+
     </script>
 
     <!--Date&Time Functions-->
     <script type="text/javascript">
         var timepicked;
         var datepicked;
+        var today = new Date();
+        var duedate = new Date();
+        duedate.setDate(duedate.getDate() + 4);
 
         document.addEventListener('DOMContentLoaded', function () {
             var elems = document.querySelectorAll('.datepicker');
             var dateinstances = M.Datepicker.init(elems, {
                 autoClose: true,
+                minDate: today,
+                maxDate: duedate,
                 onClose: function () {
                     datepicked = dateinstances[0].date;
                 }
+                
             });
 
 
@@ -229,6 +254,17 @@
                 autoClose: true,
                 onCloseEnd: function () {
                     timepicked = instances[0].time + instances[0].amOrPm;
+                    console.log("hiii " + timepicked);
+                    //if user picks time before 10am
+                    if((timepicked.substring(timepicked.length - 2 , timepicked.length) == "AM") && ((new Number(timepicked.substring(0,2))) < 10)){
+                        console.log(timepicked.substring(timepicked.length - 2 , timepicked.length));
+                        console.log(new Number(timepicked.substring(0,2)).valueOf() );
+                        callModal();
+                        //if user picks time after 10pm
+                    } else if ((timepicked.substring(timepicked.length - 2 , timepicked.length) == "PM") && ((new Number(timepicked.substring(0,2))) > 10)){
+                        console.log("hiii2");
+                        callModal();
+                    }
                     document.getElementById("time").blur();
 
                 }
@@ -236,6 +272,11 @@
             var a = M.Timepicker.getInstance(elems);
             console.log("time", instances[0]);
         });
+
+        function callModal(){
+           $('#modal2').addClass('is-visible');
+        }
+
         function loadTime() {
             if(timepicked != undefined){
                 document.getElementById("printTime").innerHTML = timepicked;
