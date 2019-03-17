@@ -7,7 +7,7 @@ package ManagedBean;
 
 import entity.HouseKeepingOrder;
 import error.NoResultException;
-import javax.inject.Named;
+
 
 import java.io.Serializable;
 import java.util.List;
@@ -22,7 +22,6 @@ import sessionBeans.MaintainenceOrderSessionLocal;
  *
  * @author Congx2
  */
-@Named(value = "requestServicesManagedBean")
 @ManagedBean
 @SessionScoped
 public class requestServicesManagedBean implements Serializable {
