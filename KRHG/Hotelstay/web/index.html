@@ -24,11 +24,15 @@
             var h = today.getHours();
             var m = today.getMinutes();
             var s = today.getSeconds();
+            var ampm = h>= 12 ? ' PM' : ' AM';
+            h = h % 12;
+             h = h ? h : 12;
             // add a zero in front of numbers<10
             m = checkTime(m);
             s = checkTime(s);
-            document.getElementById('txt').innerHTML = h + ":" + m;
-            t = setTimeout('startTime()', 500);
+            document.getElementById("txt").innerHTML = h + ":" + m + ampm;
+            document.getElementById('timeinput').
+                t = setTimeout('startTime()', 500);
         }
         function checkTime(i) {
             if (i < 10) {
@@ -75,7 +79,7 @@
         <div class="container">
             <div class="row" style="margin-top: 8%;margin-left: 2%;">
                 <div class="col-lg-12">
-                    <div id="txt" style="color: #fff; text-align: center; font-size: 500%; font-weight: 600;"></div>
+                    <div id="txt" style="color: #fff; text-align: center; font-size: 500%; font-weight: 500;"></div>
                     <p style="color: #fff; text-align: center; font-size: 200%; margin-bottom: 5%">Hello John, how can we help you today?
                     </p>
                 </div>
