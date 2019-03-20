@@ -18,6 +18,7 @@ import javax.ejb.Local;
 @Local
 public interface HouseKeepingOrderSessionLocal {
     public List<HouseKeepingOrder> getAllHouseKeepingOrder() throws NoResultException;
+    public List<HouseKeepingOrder> getHouseKeepingOrderByLevel(int level) throws NoResultException;
     public HouseKeepingOrder getHouseKeepingOrderID(Long houseKeepingOrderID) throws NoResultException;
     public void updateHouseKeepingOrder (HouseKeepingOrder houseKeepingOrder) throws NoResultException;
     public void deleteHouseKeepingOrder (Long houseKeepingOrderID) throws NoResultException;
