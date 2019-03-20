@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./AdminTemplate.xhtml">
+
+            <ui:define name="title">
+                KRHG Admin Console System
+            </ui:define>
+
+            <ui:define name="content">
+                <!-- Content Header (Page header) -->
+                <div class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+
+
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li class="breadcrumb-item active">
+                                        <!--Add Btn-->
+                                        <h:form>
+                                            <h:commandButton class="btn btn-primary" action="addRoomFacility.xhtml?faces-redirect=true" value="Add Room Facility" />
+                                        </h:form>
+                                    </li>
+                                </ol>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </div>
+                <!-- /.content-header -->
+                <!-- Main content -->
+                <section class="content">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">All Room Facilities</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <h:form id="form1">
+                                <table id="example1" class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Room Facility</th>
+                                            <th>Category</th>
+                                            <th>Icon Image</th>
+                                            <th>Edit</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach items="${hotelManagedBean.allRoomFacility}" var="rf">
+                                            <tr>
+                                                <td>#{rf.roomFacilityName}</td>
+                                                <td>#{rf.roomFacilityCategory}</td>
+                                                <td><img style="width:20px; height: 20px;" alt="#{rf.iconImg}" src="http://zetegral.website/krhgImages/#{rf.iconImg}" /> </td>
+                                                <td><h:commandButton id="editBtn" value="Edit" action="#{hotelManagedBean.editRoomFacility(rf.roomFacilityID)}" class="btn btn-secondary"  /></td>
+                                                <td><h:commandButton id="deleteBtn" onclick="return confirm('Are you sure?');" action="#{hotelManagedBean.deleteRoomFacility(rf.roomFacilityID)}" value="Delete" class="btn btn-danger"  /></td>
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                            </h:form>
+
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </section>
+                <!-- /.content -->
+            </ui:define>
+            <ui:define name="script">
+                script
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
