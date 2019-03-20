@@ -35,6 +35,36 @@ public class HouseKeepingOrder implements Serializable {
     @OneToOne
     private Staff houseKeeper;
     private String specialRequest;
+    private int level;
+
+    public HouseKeepingOrder() {
+        
+    }
+    
+    public HouseKeepingOrder(Room room, String status, int level, Date orderDateTime, Date completeDateTime, Staff houseKeeper, String specialRequest) {
+        this();
+        this.room = room;
+        this.status = status;
+        this.level = level;
+        this.orderDateTime = orderDateTime;
+        this.completeDateTime = completeDateTime;
+        this.houseKeeper = houseKeeper;
+        this.specialRequest = specialRequest;
+    }
+    
+         /**
+     * @return the level
+     */
+    public int getLevel() {
+        return level;
+    }
+
+    /**
+     * @param level the level to set
+     */
+    public void setLevel(int level) {
+        this.level = level;
+    }
 
     public Long getHouseKeepingOrderID() {
         return houseKeepingOrderID;
