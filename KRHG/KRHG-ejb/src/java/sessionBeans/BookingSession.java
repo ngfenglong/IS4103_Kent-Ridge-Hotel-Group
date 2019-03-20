@@ -37,6 +37,19 @@ public class BookingSession implements BookingSessionLocal {
             throw new NoResultException("Room Booking not found.");
         }
     }
+    
+    @Override
+    public List<RoomBooking> getRoomBookingByPassportNum(String passportNum) throws NoResultException {
+        Query q;
+        q = em.createQuery("SELECT rb FROM RoomBooking rb WHERE "
+                            + "LOWER(rb.bookedBy.passportNum) = :passportNum");
+                    q.setParameter("passportNum", passportNum.toLowerCase());
+        if (!q.getResultList().isEmpty()) {
+                return q.getResultList();
+            } else {
+                throw new NoResultException("Room Booking not found.");
+        }
+    }
 
     @Override
     public List<RoomBooking> getRoomBookingByEmail(String email, Date bookInDate, Date bookOutDate, String status) throws NoResultException {
@@ -179,6 +192,7 @@ public class BookingSession implements BookingSessionLocal {
             throw new NoResultException("Hotel Facility Booking not found.");
         }
     }
+    
 
     @Override
     public List<HotelFacilityBooking> getHotelFacilityBookingByEmail(String email, Date startDate, Date endDate, String status) throws NoResultException {
