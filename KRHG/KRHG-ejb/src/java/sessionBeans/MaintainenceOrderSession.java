@@ -39,8 +39,7 @@ public class MaintainenceOrderSession implements MaintainenceOrderSessionLocal {
     public void updateMaintainenceOrder(MaintainenceOrder maintainenceOrder) throws NoResultException {
         MaintainenceOrder oldMaintainenceOrder = em.find(MaintainenceOrder.class, maintainenceOrder.getRequestID());
         if (oldMaintainenceOrder != null) {
-            oldMaintainenceOrder.setRoom(maintainenceOrder.getRoom());
-            oldMaintainenceOrder.setFacility(maintainenceOrder.getFacility());
+            oldMaintainenceOrder.setLocation(maintainenceOrder.getLocation());
             oldMaintainenceOrder.setDateReported(maintainenceOrder.getDateReported());
             oldMaintainenceOrder.setDateResolved(maintainenceOrder.getDateResolved());
             oldMaintainenceOrder.setIsResolved(maintainenceOrder.getIsResolved());

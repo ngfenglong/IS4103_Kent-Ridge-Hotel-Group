@@ -26,9 +26,7 @@ public class MaintainenceOrder implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long requestID;
-    private Room room;
-    @OneToOne
-    private RoomFacility facility;
+    String location;
     @Temporal(TemporalType.DATE)
     private Date dateReported;
     @Temporal(TemporalType.DATE)
@@ -71,21 +69,7 @@ public class MaintainenceOrder implements Serializable {
         return "entity.MaintainenceOrder[ requestID=" + requestID + " ]";
     }
 
-    public Room getRoom() {
-        return room;
-    }
-
-    public void setRoom(Room room) {
-        this.room = room;
-    }
-
-    public RoomFacility getFacility() {
-        return facility;
-    }
-
-    public void setFacility(RoomFacility facility) {
-        this.facility = facility;
-    }
+  
 
     public Date getDateReported() {
         return dateReported;
@@ -126,5 +110,14 @@ public class MaintainenceOrder implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+    
     
 }
