@@ -7,6 +7,7 @@ package sessionBeans;
 
 import entity.Hotel;
 import entity.HotelFacility;
+import entity.HouseKeepingOrder;
 import entity.MinibarItem;
 import entity.Room;
 import entity.RoomFacility;
@@ -14727,6 +14728,17 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRSW_1202);
         h10.addRoom(roomSessionLocal.getRoomByName("KRSW_1202"));
 
+        em.flush();
+        HouseKeepingOrder ho1 = new HouseKeepingOrder(roomSessionLocal.getRoomByID(188l), "test", 12, new Date(), new Date(), null, "123");
+        HouseKeepingOrder ho2 = new HouseKeepingOrder(roomSessionLocal.getRoomByID(187l), "test", 7, new Date(), new Date(), null, "123");
+        HouseKeepingOrder ho3 = new HouseKeepingOrder(roomSessionLocal.getRoomByID(189l), "test", 11, new Date(), new Date(), null, "123");
+        HouseKeepingOrder ho4 = new HouseKeepingOrder(roomSessionLocal.getRoomByID(190l), "test", 12, new Date(), new Date(), null, "123");
+
+//        HouseKeepingOrder ho1 = new HouseKeepingOrder(roomSessionLocal.getRoomByID(1l), "", 12, new Date(), new Date(), staffSessionLocal.getStaffByID(1l), "");
+        houseKeepingOrderSessionLocal.createHouseKeepingOrder(ho1);
+        houseKeepingOrderSessionLocal.createHouseKeepingOrder(ho2);
+        houseKeepingOrderSessionLocal.createHouseKeepingOrder(ho3);
+        houseKeepingOrderSessionLocal.createHouseKeepingOrder(ho4);
         em.flush();
     }
 

@@ -30,6 +30,20 @@ public class HouseKeepingOrderSession implements HouseKeepingOrderSessionLocal {
         q = em.createQuery("SELECT ho FROM HouseKeepingOrder ho");
         return q.getResultList();
     }
+    
+    @Override
+    public List<HouseKeepingOrder> getHouseKeepingOrderByLevel(int level) throws NoResultException {
+        Query q;
+        q = em.createQuery("SELECT ho FROM HouseKeepingOrder ho WHERE "
+                + "ho.level = :level");
+        q.setParameter("level", level);
+
+        if (!q.getResultList().isEmpty()) {
+            return q.getResultList();
+        } else {
+            throw new NoResultException("House Keeping Order not found.");
+        }
+    }
 
     @Override
     public HouseKeepingOrder getHouseKeepingOrderID(Long houseKeepingOrderID) throws NoResultException {

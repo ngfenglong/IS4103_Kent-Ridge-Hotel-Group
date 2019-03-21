@@ -5,9 +5,11 @@
  */
 package managedBean;
 
+import error.NoResultException;
 import javax.ejb.EJB;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Named;
+import sessionBeans.BookingSessionLocal;
 import sessionBeans.RoomSessionLocal;
 
 /**
@@ -24,10 +26,23 @@ public class FrontDeskManagedBean {
     @EJB
     private RoomSessionLocal roomSessionLocal;
     
+    @EJB
+    private BookingSessionLocal bookSessionLocal;
+    
     private String customerName;
     private String customerRoom;
+    private Long passportNumber;
+   // private List<room>
 
     public FrontDeskManagedBean() {
+    }
+
+    public Long getPassportNumber() {
+        return passportNumber;
+    }
+
+    public void setPassportNumber(Long passportNumber) {
+        this.passportNumber = passportNumber;
     }
 
     public String getCustomerName() {
@@ -46,9 +61,15 @@ public class FrontDeskManagedBean {
         this.customerRoom = customerRoom;
     }
 
-    public void searchCustomerForCheckin() {
-
-    }
+ // public String searchCustomerForCheckin() {
+       // try{
+       // bookSessionLocal.getRoomBookingByID(passportNumber);
+        
+      //  }
+       // catch(NoResultException e){
+       //     return 
+      //  }
+    //}
 
     public void searchRoomForCheckout() {
 
@@ -57,5 +78,9 @@ public class FrontDeskManagedBean {
     public void searchCustomer() {
 
     }
+  /*  public List<> getTodayBooking(){
+     //   bookSessionLocal.get
+    }
+*/
 
 }

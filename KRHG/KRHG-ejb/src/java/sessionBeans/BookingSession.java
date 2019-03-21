@@ -29,12 +29,39 @@ public class BookingSession implements BookingSessionLocal {
     }
 
     @Override
+    public List<RoomBooking> getAllRoomBookingByDate(Date todayDate) throws NoResultException {
+        Query q;
+        q = em.createQuery("SELECT rb FROM RoomBooking rb WHERE "
+                            + "rb.bookInDate <= :todayDate "
+                            + "AND rb.bookOutDate >= :todayDate ");
+        q.setParameter("todayDate", todayDate);
+        if (!q.getResultList().isEmpty()) {
+                return q.getResultList();
+            } else {
+                throw new NoResultException("Room Booking not found.");
+        }
+    }
+    
+    @Override
     public RoomBooking getRoomBookingByID(Long roomBookingID) throws NoResultException {
         RoomBooking rb = em.find(RoomBooking.class, roomBookingID);
         if (rb != null) {
             return rb;
         } else {
             throw new NoResultException("Room Booking not found.");
+        }
+    }
+    
+    @Override
+    public List<RoomBooking> getRoomBookingByPassportNum(String passportNum) throws NoResultException {
+        Query q;
+        q = em.createQuery("SELECT rb FROM RoomBooking rb WHERE "
+                            + "LOWER(rb.bookedBy.passportNum) = :passportNum");
+                    q.setParameter("passportNum", passportNum.toLowerCase());
+        if (!q.getResultList().isEmpty()) {
+                return q.getResultList();
+            } else {
+                throw new NoResultException("Room Booking not found.");
         }
     }
 
@@ -47,8 +74,8 @@ public class BookingSession implements BookingSessionLocal {
                 if (status != null) {
                     q = em.createQuery("SELECT rb FROM RoomBooking rb WHERE "
                             + "LOWER(rb.bookedBy.email) = :email "
-                            + "AND rb.bookInDate = :bookInDate "
-                            + "AND rb.bookOutDate = :bookOutDate "
+                            + "AND rb.bookInDate <= :bookInDate "
+                            + "AND rb.bookOutDate >= :bookOutDate "
                             + "AND LOWER(rb.status) = :status");
                     q.setParameter("email", email.toLowerCase());
                     q.setParameter("bookInDate", bookInDate);
@@ -58,8 +85,8 @@ public class BookingSession implements BookingSessionLocal {
                 else {
                     q = em.createQuery("SELECT rb FROM RoomBooking rb WHERE "
                             + "LOWER(rb.bookedBy.email) = :email "
-                            + "AND rb.bookInDate = :bookInDate "
-                            + "AND rb.bookOutDate = :bookOutDate ");
+                            + "AND rb.bookInDate <= :bookInDate "
+                            + "AND rb.bookOutDate >= :bookOutDate ");
                     q.setParameter("email", email.toLowerCase());
                     q.setParameter("bookInDate", bookInDate);
                     q.setParameter("bookOutDate", bookOutDate);
@@ -96,8 +123,8 @@ public class BookingSession implements BookingSessionLocal {
             //Perform search with bookInDate, bookOutDate, status parameter
             if (status != null) {
                 q = em.createQuery("SELECT rb FROM RoomBooking rb WHERE "
-                        + "rb.bookInDate = :bookInDate "
-                        + "AND rb.bookOutDate = :bookOutDate "
+                        + "rb.bookInDate <= :bookInDate "
+                        + "AND rb.bookOutDate >= :bookOutDate "
                         + "AND LOWER(rb.status) = :status");
                 q.setParameter("bookInDate", bookInDate);
                 q.setParameter("bookOutDate", bookOutDate);
@@ -105,8 +132,8 @@ public class BookingSession implements BookingSessionLocal {
             } //Perform search with bookInDate, bookOutDate parameter
             else {
                 q = em.createQuery("SELECT rb FROM RoomBooking rb WHERE "
-                        + "rb.bookInDate = :bookInDate "
-                        + "AND rb.bookOutDate = :bookOutDate");
+                        + "rb.bookInDate <= :bookInDate "
+                        + "AND rb.bookOutDate >= :bookOutDate");
                 q.setParameter("bookInDate", bookInDate);
                 q.setParameter("bookOutDate", bookOutDate);
             }
@@ -179,6 +206,7 @@ public class BookingSession implements BookingSessionLocal {
             throw new NoResultException("Hotel Facility Booking not found.");
         }
     }
+    
 
     @Override
     public List<HotelFacilityBooking> getHotelFacilityBookingByEmail(String email, Date startDate, Date endDate, String status) throws NoResultException {
@@ -189,8 +217,8 @@ public class BookingSession implements BookingSessionLocal {
                 if (status != null) {
                     q = em.createQuery("SELECT hfb FROM HotelFacilityBooking hfb WHERE "
                             + "LOWER(hfb.bookedBy.email) = :email "
-                            + "AND hfb.startDate = :startDate "
-                            + "AND hfb.endDate = :endDate "
+                            + "AND hfb.startDate <= :startDate "
+                            + "AND hfb.endDate >= :endDate "
                             + "AND LOWER(hfb.status) = :status");
                     q.setParameter("email", email.toLowerCase());
                     q.setParameter("startDate", startDate);
@@ -200,8 +228,8 @@ public class BookingSession implements BookingSessionLocal {
                 else {
                     q = em.createQuery("SELECT hfb FROM HotelFacilityBooking hfb WHERE "
                             + "LOWER(hfb.bookedBy.email) = :email "
-                            + "AND hfb.startDate = :startDate "
-                            + "AND hfb.endDate = :endDate ");
+                            + "AND hfb.startDate <= :startDate "
+                            + "AND hfb.endDate >= :endDate ");
                     q.setParameter("email", email.toLowerCase());
                     q.setParameter("startDate", startDate);
                     q.setParameter("endDate", endDate);
@@ -238,8 +266,8 @@ public class BookingSession implements BookingSessionLocal {
             //Perform search with startDate, endDate, status parameter
             if (status != null) {
                     q = em.createQuery("SELECT hfb FROM HotelFacilityBooking hfb WHERE "
-                        + "hfb.startDate = :startDate "
-                        + "AND hfb.endDate = :endDate "
+                        + "hfb.startDate <= :startDate "
+                        + "AND hfb.endDate >= :endDate "
                         + "AND LOWER(hfb.status) = :status");
                 q.setParameter("startDate", startDate);
                 q.setParameter("endDate", endDate);
@@ -248,8 +276,8 @@ public class BookingSession implements BookingSessionLocal {
             //Perform search with startDate, endDate parameter
             else {
                 q = em.createQuery("SELECT hfb FROM HotelFacilityBooking hfb WHERE "
-                        + "hfb.startDate = :startDate "
-                        + "AND hfb.endDate = :endDate");
+                        + "hfb.startDate <= :startDate "
+                        + "AND hfb.endDate >= :endDate");
                 q.setParameter("startDate", startDate);
                 q.setParameter("endDate", endDate);
             }
