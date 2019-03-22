@@ -49,6 +49,7 @@
         }
     </script>
 
+
 </h:head>
 
 <body onload="startTime()">
@@ -57,31 +58,21 @@
     <section>
         <div class="content">
             <div class="row">
-                <a href="checkin.xhtml"><i class="fas fa-arrow-circle-left"
+                <a href="checkmember.xhtml"><i class="fas fa-arrow-circle-left"
                         style="position:absolute; top:30px; left: 30px; color:white; font-size: 2em;"></i></a>
                 <div id="txt" class="time"></div>
                 <div class="col-lg-7 title">
                     <p class="hotelname">KRHG GRAND</p>
-                    <p class="hotelname">Booking Details</p>
+                    <p class="hotelname">Login</p>
                 </div>
             </div>
 
-            <div class="row rowcontent" style="background-color: white; padding-bottom:500px; padding-top:30px">
-            <col class="col-sm-6 col-xl-12">
-                <p class="bookinginfo col-lg-12 col-sm-6">Name:<span class="bookinginfo">Mary Impicciche</span></p>
-                <p class="bookinginfo col-lg-12 col-sm-6">Nationality:<span class="bookinginfo">American</span></p>
-                <p class="bookinginfo col-lg-12 col-sm-6">Contact Number:<span class="bookinginfo">+78 5163 48301</span></p>
-            </col>
-            <col class="col-sm-6 col-xl-12">
-            <p class="bookinginfo col-lg-12 col-sm-6">Email:<span class="bookinginfo">mary_impicciche@gmail.com</span></p>
-            <p class="bookinginfo col-lg-12 col-sm-6">Room Type: <span class="bookinginfo">2-Deluxe Suite</span></p>
-            <p class="bookinginfo col-lg-12 col-sm-6">Booking No.: <span class="bookinginfo">103748293</span></p>
-        </col>
-                    
-                    <p class="bookinginfo" style="border:none;">Input passport number to confirm your details:</p>
-                    <input placeholder="Passport Number" style="border:1px solid grey; box-shadow: none;" type="Text" class="left" required="true" /><br/>
-                    <button class="bigBtn" onclick=' location.href = "payment.xhtml";' >Confirm</button>
-
+            <div class="rowcontent">
+                <form action="" class="mainWrap">
+                    <input placeholder="Email" type="Text" class="left" required="true" />
+                    <input placeholder="Password" type="Text" class="left" required="true" />
+                    <button class="bigBtn">Login</button>
+                </form>
             </div>
 
         </div>
