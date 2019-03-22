@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://java.sun.com/jsf/core">
 
     <body>
 
@@ -38,53 +39,50 @@
                     <!-- /.container-fluid -->
                 </div> 
                 <section class="content">
-                    <div class="wrap">
-                        <h1>Make a Reservation</h1>
-                        <p style="margin-bottom:30px; text-align: left">Enter type of facility</p>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <!-- left column -->
+                            <div class="col-md-10">
 
 
-                        <form action="" class="mainWrap" style="width:100%; margin:0;">
-                            <div class="select animated zoomIn" style="width:100%; display:inline-block;">
-                                <!-- You can toggle select (disabled) -->
-                                <input type="radio" name="option" required="true"></input>
-                                <i class="toggle icon icon-arrow-down"></i>
-                                <i class="toggle icon icon-arrow-up"></i>
-                                <span class="placeholder">Select Facility</span>
-                                <label class="option">
-                                    <input type="radio" name="option"></input>
-                                    <span class="title animated fadeIn">Room</span>
-                                </label>
-                                <label class="option">
-                                    <input type="radio" name="option"></input>
-                                    <span class="title animated fadeIn">Ballroom</span>
-                                </label>
-                                <label class="option">
-                                    <input type="radio" name="option"></input>
-                                    <span class="title animated fadeIn">Swimming Pool</span>
-                                </label>
-                                <label class="option">
-                                    <input type="radio" name="option"></input>
-                                    <span class="title animated fadeIn">Barbeque Pit</span>
-                                </label>
-                                <label class="option">
-                                    <input type="radio" name="option"></input>
-                                    <span class="title animated fadeIn">Gym</span>
-                                </label>
-                            </div>   
 
-                            <button class="bigBtn">View Facilities</button>
-                        </form>
 
-                        <div>
-                            AFTER search, pop the calendar here
-                            Calendar here 
-                            <form>
-                                <input type="submit" value="book">
-                                </input>
-                            </form>
+                                <div class="card card-primary">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Walk in Customer</h3>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <!-- form start -->
+                                    <h:form role="form">
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label for="roomtype">Select facility:</label>
+                                                <h:selectOneMenu value="#{user.favCoffee1}">
+                                                    <f:selectItem itemValue="Room" itemLabel="Room" />
+                                                    <f:selectItem itemValue="Ballroom" itemLabel="Ballroom" />
+                                                    <f:selectItem itemValue="Swimming Pool" itemLabel="Swimming Pool" />
+                                                    <f:selectItem itemValue="Barbeque Pit" itemLabel="Barbeque Pit" />
+                                                </h:selectOneMenu>
+                                            </div>
+
+                                        
+                                            <!--    <h:inputText value="#{bean.number}" converterMessage="Please enter digits only." /> -->
+
+                                            <!-- /.input group -->
+
+                                        </div>
+                                        <!-- /.card-body -->
+
+                                        <div class="card-footer">
+                                            <h:commandButton class="btn btn-primary" value="Search" ></h:commandButton>
+                                        </div>
+                                    </h:form>
+                                </div>
+
+                            </div>
                         </div>
-                        <!-- Ajax loaded content here -->
                     </div>
+                  
                     <!-- /.container-fluid -->
                 </section>
                 <!-- /.content-header -->

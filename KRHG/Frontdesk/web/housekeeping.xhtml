@@ -55,21 +55,17 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    <ui:repeat var="o" value="#{frontDeskManagedBean.allHousekeepingOrder}" varStatus="status">
 
-                                        <td>402</td>
-                                        <td>Incomplete</td>
-                                        <td>23 march 2019 10am</td>
+                                        <tr>
+                                            <td>#{o.room.roomNumber}</td>
+                                            <td>#{o.status}</td>
+                                            <td>#{o.orderDateTime}</td>
+                                            <td><input type="button" value="update"/></td>
+                                        </tr>
 
-                                        <td><input type="button" value="update"/></td>
-                                    </tr>
-                                    <tr>
-                                        <td>110</td>
-                                        <td>Complated</td>
-                                        <td>23 march 2019 11am</td>
+                                    </ui:repeat>
 
-                                        <td><input type="button" value="update"/></td>
-                                    </tr>
                                 </tbody>
                                 <tfoot>
                                     <tr>

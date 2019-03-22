@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+       xmlns:f="http://java.sun.com/jsf/core">
 
     <body>
 
@@ -52,7 +53,16 @@
                             <button class="bigBtn">Submit Request</button>
                         </form>
 
-
+                        <h:form class="form-control">
+                            <h:selectOneMenu value="#{frontDeskManagedBean.hkroom}">
+                                <ui:repeat var="o" value="#{frontDeskManagedBean.allOccupiedRooms}" varStatus="status">
+                                    <f:selectItem itemValue="" itemLabel="Coffee3 - Cream Latte" />
+                                </ui:repeat>
+                            </h:selectOneMenu>
+                            
+                            <h:inputTextarea cols="10" rows="10" a:placeholder="Special request" value="#{frontDeskManagedBean.hkSpecialRequest}"></h:inputTextarea>
+                            <h:commandButton value="Create Request" action="#{frontDeskManagedBean.createHouseKeeping()}"></h:commandButton>
+                        </h:form>
 
 
                     </div>

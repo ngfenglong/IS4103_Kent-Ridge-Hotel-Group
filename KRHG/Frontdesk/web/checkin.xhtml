@@ -38,24 +38,87 @@
                     <!-- /.container-fluid -->
                 </div> 
                 <section class="content">
-                    <div class="wrap">
-                        <h1>Check In</h1>
-                        <p style="margin-bottom:20px">Please enter passport number</p>
-                        <div class="form-container" >
-                            <h:form >
-                                <div class="form-group">
-                                    <h:inputText class="form-control" value="#{frontDeskManagedBean.passportNumber}" id="passportnumber" a:placeholder="passport Number" required="true" />
+                
+                    <div class="container-fluid">
+                        <div class="row">
+                            <!-- left column -->
+                            <div class="col-md-10">
 
 
+
+
+                                <div class="card card-primary">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Check in Customer</h3>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <!-- form start -->
+                                    <h:form role="form">
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                               
+                                                <h:inputText class="form-control" value="#{frontDeskManagedBean.passportNumber}" id="passportnumber" a:placeholder="passport Number" required="true" />
+
+                                            </div>
+
+                                           
+                                            <!-- /.input group -->
+
+                                        </div>
+                                        <!-- /.card-body -->
+
+                                        <div class="card-footer">
+                                            <h:commandButton class="btn btn-primary" value="Search" ></h:commandButton>
+                                        </div>
+                                    </h:form>
                                 </div>
 
-                                <div class="form-group">
-                                    <h:commandButton class="custom-button" value="Search" action="#{frontDeskManagedBean.searchCustomerForCheckin()}"></h:commandButton>
-                                </div>
-                            </h:form>
+                            </div>
                         </div>
                     </div>
                     <!-- /.container-fluid -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">List of housekeeping request for ENTER BACKEND hotel name</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table  id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Room</th>
+                                        <th>Passport Number</th>
+                                        <th>Book out Date </th>
+
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <ui:repeat var="o" value="#{frontDeskManagedBean.todayBooking}" varStatus="status">
+
+                                        <tr>
+                                            <td>#{o.bookedBy.name}</td>
+                                            <td>#{o.bookedBy.passportNum}</td>
+                                            <td>#{o.bookOutDate}</td>
+
+                                        </tr>
+
+                                    </ui:repeat>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Room</th>
+                                        <th>Passport Number</th>
+                                        <th>Book out Date </th>
+
+                                        <th></th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                        <a href="createHousekeepingRequest.xhtml">Create New Request</a>
+                    </div>
                 </section>
                 <!-- /.content-header -->
                 <!-- Main content -->

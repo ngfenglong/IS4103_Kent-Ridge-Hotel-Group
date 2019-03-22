@@ -26,7 +26,7 @@ public class MaintainenceOrder implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long requestID;
-    String location;
+   private String location;
     @Temporal(TemporalType.DATE)
     private Date dateReported;
     @Temporal(TemporalType.DATE)

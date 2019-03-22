@@ -38,7 +38,54 @@
                     <!-- /.container-fluid -->
                 </div> 
                 <section class="content">
-              
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">List of housekeeping request for ENTER BACKEND hotel name</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table  id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Room Number</th>
+                                        <th>Date Ordered</th>
+                                        <th>specialRequest </th>
+                                        <th>Quantity </th>
+                                        <th>Status </th>
+
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <ui:repeat var="o" value="#{frontDeskManagedBean.allLaundryOrders}" varStatus="status">
+
+                                        <tr>
+                                            <td>#{o.room.roomNumber}</td>
+                                            <td>#{o.orderDateTime}</td>
+                                            <td>#{o.specialRequest}</td>
+                                            <td>#{o.qty}</td>
+                                            <td>#{o.status}</td>
+
+                                        </tr>
+
+                                    </ui:repeat>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                         <th>Room Number</th>
+                                        <th>Date Ordered</th>
+                                        <th>specialRequest </th>
+                                        <th>Quantity </th>
+                                        <th>Status </th>
+
+                                        <th></th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                        <a href="createLaundryRequest.xhtml">Create New Request</a>
+                    </div>
                     <!-- /.container-fluid -->
                 </section>
                 <!-- /.content-header -->

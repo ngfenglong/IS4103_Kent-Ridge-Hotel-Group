@@ -38,35 +38,49 @@
                     <!-- /.container-fluid -->
                 </div> 
                 <section class="content">
-                    <div class="wrap">
-                        <h1>New Maintenance Report</h1>
-                        <p style="margin-bottom:30px; text-align: left">Enter maintenance request details</p>
 
 
-                        <form action="" class="mainWrap" style="width:100%; margin:0;">
-                            <div class="select animated zoomIn" style="width:100%; display:inline-block;">
-                                <!-- You can toggle select (disabled) -->
-                                <input type="radio" name="option" required="true"></input>
-                                <i class="toggle icon icon-arrow-down"></i>
-                                <i class="toggle icon icon-arrow-up"></i>
-                                <span class="placeholder">Select Report Type</span>
-                                <label class="option">
-                                    <input type="radio" name="option"></input>
-                                    <span class="title animated fadeIn">Hotel Facilities</span>
-                                </label>
-                                <label class="option">
-                                    <input type="radio" name="option"></input>
-                                    <span class="title animated fadeIn">Room Facilities</span>
-                                </label>
+
+                    <div class="container-fluid">
+                        <div class="row">
+                            <!-- left column -->
+                            <div class="col-md-10">
+
+
+
+
+                                <div class="card card-primary">
+                                    <div class="card-header">
+                                        <h3 class="card-title">New Maintenance Report</h3>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <!-- form start -->
+                                    <h:form role="form">
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <h:inputText class="form-control" value="#{frontDeskManagedBean.mlocation}" a:placeholder="location" required="true"></h:inputText>
+
+                                            </div>
+                                            <div class="form-group">
+                                                <h:inputTextarea rows="20" cols="10" value="#{frontDeskManagedBean.maintainDescription}" a:placeholder="Report Description" ></h:inputTextarea>
+
+                                            </div>
+
+
+
+                                            <!-- /.input group -->
+
+                                        </div>
+                                        <!-- /.card-body -->
+
+                                        <div class="card-footer">
+                                            <h:commandButton value="Create Maintainence request" action="#{frontDeskManagedBean.createMaintainence()}" ></h:commandButton>
+                                        </div>
+                                    </h:form>
+                                </div>
+
                             </div>
-                            <!-- <input placeholder="No. of items" type="number" min="1" class="right" required="true" />
-                            <input placeholder="Item Name" type="text"  class="left" required="true" />
-                            <input placeholder="Contact Number" type="text" class="right" required="true" />
-                            <textarea placeholder="Description of Item" class="mainArea"></textarea> -->
-
-
-                            <button class="bigBtn">View Facilities</button>
-                        </form>
+                        </div>
                     </div>
 
                     <!-- /.container-fluid -->
