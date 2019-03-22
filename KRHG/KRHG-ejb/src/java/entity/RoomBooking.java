@@ -43,6 +43,11 @@ public class RoomBooking implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date transportTime;
     private String pickUpLocation;
+    private String emailAddress;
+    private CreditCard creditCard;
+    private String passportNum;
+    private String name;
+    private String roomType;
 
     public RoomBooking() {
 
@@ -126,6 +131,46 @@ public class RoomBooking implements Serializable {
 
     public void setBookedBy(Customer bookedBy) {
         this.bookedBy = bookedBy;
+    }
+
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
+
+    public CreditCard getCreditCard() {
+        return creditCard;
+    }
+
+    public void setCreditCard(CreditCard creditCard) {
+        this.creditCard = creditCard;
+    }
+
+    public String getPassportNum() {
+        return passportNum;
+    }
+
+    public void setPassportNum(String passportNum) {
+        this.passportNum = passportNum;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getRoomType() {
+        return roomType;
+    }
+
+    public void setRoomType(String roomType) {
+        this.roomType = roomType;
     }
 
 //    public void addHolidaySurcharge(HolidaySurcharge holidaySurcharge) throws NoResultException {

@@ -52,7 +52,7 @@ public class CustomerSession implements CustomerSessionLocal {
             throw new NoResultException("Customer not found.");
         }
     }
-
+/*
     @Override
     public Customer getCustomerByNric(String nric) throws NoResultException {
         Query q;
@@ -66,7 +66,7 @@ public class CustomerSession implements CustomerSessionLocal {
             throw new NoResultException("Customer not found.");
         }
     }
-
+*/
     @Override
     public Customer getCustomerByEmail(String email) throws NoResultException {
         Query q;
@@ -257,8 +257,8 @@ public class CustomerSession implements CustomerSessionLocal {
         c.getEmail();
         c.getMobileNum();
         c.getDateJoined();
-        c.getNric();
-        c.getPassportNum();
+//       c.getNric();
+ //       c.getPassportNum();
     }
 
     

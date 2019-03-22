@@ -14,7 +14,7 @@ import javax.ejb.Local;
 public interface CustomerSessionLocal {
     public List<Customer> getAllCustomers();
     public Customer getCustomerByID(Long cID) throws NoResultException;
-    public Customer getCustomerByNric(String nric) throws NoResultException;
+    //public Customer getCustomerByNric(String nric) throws NoResultException;
     public Customer getCustomerByEmail(String email) throws NoResultException;
     public Customer getCustomerByMobileNum(String mobileNum) throws NoResultException;
     public Customer getCustomerByPassportNum(String passportNum) throws NoResultException;
