@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://java.sun.com/jsf/core">
 
     <body>
 
@@ -42,33 +43,31 @@
                         <h1>Lost and Found Report</h1>
                         <p style="margin-bottom:30px; text-align: left">Enter lost/found item details</p>
 
+                        <h:form class="form-control">
 
-                        <form action="" class="mainWrap" style="width:100%; margin:0;">
-                            <div class="select animated zoomIn" style="width:50%; display:inline-block;">
-                                <!-- You can toggle select (disabled) -->
-                                <input type="radio" name="option" required="true"></input>
-                                <i class="toggle icon icon-arrow-down"></i>
-                                <i class="toggle icon icon-arrow-up"></i>
-                                <span class="placeholder">Select Report Type</span>
-                                <label class="option">
-                                    <input type="radio" name="option"></input>
-                                    <span class="title animated fadeIn">Found</span>
-                                </label>
-                                <label class="option">
-                                    <input type="radio" name="option"></input>
-                                    <span class="title animated fadeIn">Lost</span>
-                                </label>
-                            </div>
-                            <input placeholder="No. of items" type="number" min="1" class="right" required="true" />
-                            <input placeholder="Item Name" type="text"  class="left" required="true" />
-                            <input placeholder="Contact Number" type="text" class="right" required="true" />
-                            <textarea placeholder="Description of Item" class="mainArea"></textarea>
+
+                            <!-- You can toggle select (disabled) -->
+
+                            <span class="placeholder">Select Report Type</span>
+                            <h:selectOneRadio value="#{frontDeskManagedBean.lfreportType}">
+                                <f:selectItem itemValue="Found" itemLabel="Found" />
+                                <f:selectItem itemValue="Lost" itemLabel="Lost" />
+
+                            </h:selectOneRadio>
 
 
 
-                            <button class="bigBtn">Create Report</button>
-                        </form>
+                            <h:inputText class="form-control" value="#{frontDeskManagedBean.lfItemName}" a:placeholder="Item name" required="true"></h:inputText>
+                            <h:inputText class="form-control" value="#{frontDeskManagedBean.lfContactNumber}" a:placeholder="Contact details" required="true"></h:inputText>
+                            <h:inputTextarea rows="10" cols="5" value="#{frontDeskManagedBean.lfDescription}" a:placeholder="Item description" ></h:inputTextarea>
 
+
+
+                            <h:commandButton class="custom-button" value="Create Report" action="#{frontDeskManagedBean.makeLFRequest()}"></h:commandButton>
+
+                         
+
+                        </h:form>
 
 
 

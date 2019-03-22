@@ -56,23 +56,19 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    <ui:repeat var="o" value="#{frontDeskManagedBean.allMaintainenceOrders}" varStatus="status">
 
-                                        <td>level 2 outside lift</td>
-                                        <td>the light is not working</td>
+                                        <tr>
+                                            <td>#{o.location}</td>
+                                            <td>#{o.description}</td>
+                                            <td>#{o.dateReported}</td>
+                                            <td>#{o.status}</td>
+                                       
 
-                                        <td>23 march 2019 10am</td>
-                                        <td>Solved</td>
+                                        </tr>
 
-
-                                    </tr>
-                                    <tr>
-                                        <td>level 4 girls toilet</td>
-                                        <td>the tap is not working</td>
-
-                                        <td>23 march 2019 11am</td>
-                                        <td>unSolved</td>
-                                    </tr>
+                                    </ui:repeat>
+                                  
                                 </tbody>
                                 <tfoot>
                                     <tr>

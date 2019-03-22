@@ -38,56 +38,48 @@
                     <!-- /.container-fluid -->
                 </div> 
                 <section class="content">
-                    <div class="info" >
-                        Search Customer booking result
-                    </div>
-                    <br/>
-                    <br/>
-                    <div class = "tablemargin">
-                        <table>
-                            <tr>
-                                <td>
-                                    Booking Id
-                                </td>
-                                <td>
-                                    Name
-                                </td>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">List of housekeeping request for ENTER BACKEND hotel name</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table  id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Room</th>
+                                        <th>Passport Number</th>
+                                        <th>Book out Date </th>
 
-                                <td>
-                                    Start date
-                                </td>
-                                <td>
-                                    End date
-                                </td>
-                                <td>
-                                    Passport no
-                                </td>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <ui:repeat var="o" value="#{frontDeskManagedBean.searchbookings}" varStatus="status">
+                                        
 
-                            </tr>
-                            <tr>
-                                <td>
-                                    123
-                                </td>
-                                <td>
-                                    Keith Carther
-                                </td>
-                                <td>
-                                    12/12/2019
-                                </td>
-                                <td>
-                                    23/12/2019
-                                </td>
-                                <td>
-                                    A0123567
-                                </td>
+                                        <tr>
+                                            <td>#{o.bookedBy.name}</td>
+                                            <td>#{o.bookedBy.passportNum}</td>
+                                            <td>#{o.bookOutDate}</td>
 
-                            </tr>
-                            <tr>
-                                <td>
-                                    <button onclick="checkin()">Check in</button>
-                                </td>
-                            </tr>
-                        </table>
+                                        </tr>
+
+                                    </ui:repeat>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Room</th>
+                                        <th>Passport Number</th>
+                                        <th>Book out Date </th>
+
+                                        <th></th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                        <a href="createHousekeepingRequest.xhtml">Create New Request</a>
                     </div>
                     <!-- /.container-fluid -->
                 </section>

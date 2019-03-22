@@ -38,18 +38,45 @@
                     <!-- /.container-fluid -->
                 </div> 
                 <section class="content">
-                    <div class="wrap">
-                        <h1>Cancel Reservation</h1>
-                        <p style="margin-bottom:20px">Please enter passport number</p>
+
+                    <div class="container-fluid">
+                        <div class="row">
+                            <!-- left column -->
+                            <div class="col-md-10">
 
 
-                        <form action="" class="mainWrap"  style="width:50%; margin:0;" >
-                            <input placeholder="Room" type="Text" class="left" required="true"/>
-                            <button class="bigBtn" style="width:30%; margin-top:0; padding: 20px; font-size: 1.2em">Search</button>
-                        </form>
 
 
+                                <div class="card card-primary">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Cancel Reservation</h3>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <!-- form start -->
+                                    <h:form role="form">
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <h:inputText value="#{frontDeskManagedBean}" a:placeholder="Enter Booking ID"  > </h:inputText>
+
+                                            </div>
+
+
+
+                                            <!-- /.input group -->
+
+                                        </div>
+                                        <!-- /.card-body -->
+
+                                        <div class="card-footer">
+                                            <h:commandButton class="btn btn-primary" value="Search" ></h:commandButton>
+                                        </div>
+                                    </h:form>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
+
                     <!-- /.container-fluid -->
                 </section>
                 <!-- /.content-header -->

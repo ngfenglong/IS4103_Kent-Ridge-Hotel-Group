@@ -38,239 +38,51 @@
                     <!-- /.container-fluid -->
                 </div> 
                 <section class="content">
-                   <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Data Table With Full Features</h3>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Data Table With Full Features</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>NRIC</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <ui:repeat var="o" value="#{frontDeskManagedBean.allCustomer}" varStatus="status">
+
+                                        <tr>
+                                            <td>#{o.name}</td>
+                                            <td>#{o.nric}</td>
+                                            <td>#{o.email}</td>
+                                            <td>#{o.mobileNum}</td>
+
+                                        </tr>
+
+                                    </ui:repeat>
+
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>NRIC</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th></th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
                     </div>
-                    <!-- /.card-header -->
-                    <div class="card-body">
-                        <table id="example1" class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>NRIC</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Lim Dian Cong</td>
-                                    <td>S9876423J</td>
-                                    <td>diancong@gmail.com</td>
-                                    <td>9876543</td>
-                                    <td><input type="button" value="edit"/></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Clarisse </td>
-                                    <td>S97156537</td>
-                                    <td>Clarisse@gmail.com</td>
-                                    <td>928761543</td>
-                                    <td><input type="button" value="edit"/></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Clarisse </td>
-                                    <td>S97156537</td>
-                                    <td>Clarisse@gmail.com</td>
-                                    <td>928761543</td>
-                                    <td><input type="button" value="edit"/></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Clarisse </td>
-                                    <td>S97156537</td>
-                                    <td>Clarisse@gmail.com</td>
-                                    <td>928761543</td>
-                                    <td><input type="button" value="edit"/></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Clarisse </td>
-                                    <td>S97156537</td>
-                                    <td>Clarisse@gmail.com</td>
-                                    <td>928761543</td>
-                                    <td><input type="button" value="edit"/></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Clarisse </td>
-                                    <td>S97156537</td>
-                                    <td>Clarisse@gmail.com</td>
-                                    <td>928761543</td>
-                                    <td><input type="button" value="edit"/></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Clarisse </td>
-                                    <td>S97156537</td>
-                                    <td>Clarisse@gmail.com</td>
-                                    <td>928761543</td>
-                                    <td><input type="button" value="edit"/></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Clarisse </td>
-                                    <td>S97156537</td>
-                                    <td>Clarisse@gmail.com</td>
-                                    <td>928761543</td>
-                                    <td><input type="button" value="edit"/></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Clarisse </td>
-                                    <td>S97156537</td>
-                                    <td>Clarisse@gmail.com</td>
-                                    <td>928761543</td>
-                                    <td><input type="button" value="edit"/></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Clarisse </td>
-                                    <td>S97156537</td>
-                                    <td>Clarisse@gmail.com</td>
-                                    <td>928761543</td>
-                                    <td><input type="button" value="edit"/></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Clarisse </td>
-                                    <td>S97156537</td>
-                                    <td>Clarisse@gmail.com</td>
-                                    <td>928761543</td>
-                                    <td><input type="button" value="edit"/></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Clarisse </td>
-                                    <td>S97156537</td>
-                                    <td>Clarisse@gmail.com</td>
-                                    <td>928761543</td>
-                                    <td><input type="button" value="edit"/></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Clarisse </td>
-                                    <td>S97156537</td>
-                                    <td>Clarisse@gmail.com</td>
-                                    <td>928761543</td>
-                                    <td><input type="button" value="edit"/></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Clarisse </td>
-                                    <td>S97156537</td>
-                                    <td>Clarisse@gmail.com</td>
-                                    <td>928761543</td>
-                                    <td><input type="button" value="edit"/></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Clarisse </td>
-                                    <td>S97156537</td>
-                                    <td>Clarisse@gmail.com</td>
-                                    <td>928761543</td>
-                                    <td><input type="button" value="edit"/></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Clarisse </td>
-                                    <td>S97156537</td>
-                                    <td>Clarisse@gmail.com</td>
-                                    <td>928761543</td>
-                                    <td><input type="button" value="edit"/></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Clarisse </td>
-                                    <td>S97156537</td>
-                                    <td>Clarisse@gmail.com</td>
-                                    <td>928761543</td>
-                                    <td><input type="button" value="edit"/></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Clarisse </td>
-                                    <td>S97156537</td>
-                                    <td>Clarisse@gmail.com</td>
-                                    <td>928761543</td>
-                                    <td><input type="button" value="edit"/></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Clarisse </td>
-                                    <td>S97156537</td>
-                                    <td>Clarisse@gmail.com</td>
-                                    <td>928761543</td>
-                                    <td><input type="button" value="edit"/></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Clarisse </td>
-                                    <td>S97156537</td>
-                                    <td>Clarisse@gmail.com</td>
-                                    <td>928761543</td>
-                                    <td><input type="button" value="edit"/></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Clarisse </td>
-                                    <td>S97156537</td>
-                                    <td>Clarisse@gmail.com</td>
-                                    <td>928761543</td>
-                                    <td><input type="button" value="edit"/></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Clarisse </td>
-                                    <td>S97156537</td>
-                                    <td>Clarisse@gmail.com</td>
-                                    <td>928761543</td>
-                                    <td><input type="button" value="edit"/></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Clarisse </td>
-                                    <td>S97156537</td>
-                                    <td>Clarisse@gmail.com</td>
-                                    <td>928761543</td>
-                                    <td><input type="button" value="edit"/></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Clarisse </td>
-                                    <td>S97156537</td>
-                                    <td>Clarisse@gmail.com</td>
-                                    <td>928761543</td>
-                                    <td><input type="button" value="edit"/></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Clarisse </td>
-                                    <td>S97156537</td>
-                                    <td>Clarisse@gmail.com</td>
-                                    <td>928761543</td>
-                                    <td><input type="button" value="edit"/></td>
-                                </tr>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>NRIC</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th></th>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                    <!-- /.card-body -->
-                </div>
                     <!-- /.container-fluid -->
                 </section>
                 <!-- /.content-header -->

@@ -19,6 +19,7 @@ import javax.ejb.Local;
 public interface BookingSessionLocal {
     public List<RoomBooking> getAllRoomBooking() throws NoResultException;
     public List<RoomBooking> getAllRoomBookingByDate(Date todayDate) throws NoResultException;
+    public List<RoomBooking> getAllRoomBookingByDate() throws NoResultException;
     public RoomBooking getRoomBookingByID(Long roomBookingID) throws NoResultException;
     public List<RoomBooking> getRoomBookingByPassportNum(String passportNum) throws NoResultException;
 //  getRoomBookingBookedBy searches for rooms booked by a specific customer  
