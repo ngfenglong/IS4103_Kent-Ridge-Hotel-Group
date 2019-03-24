@@ -66,9 +66,9 @@
                                     <c:forEach items="${hotelManagedBean.allSurcharge}" var="s">
                                         <tr>
                                             <td>#{s.surchargeName}</td>
-                                            <td>#{s.surchargeFrom.date} #{s.surchargeFrom.month} #{s.surchargeFrom.year}</td>
-                                            <td>#{s.surchargeTo.date} #{s.surchargeTo.month} #{s.surchargeTo.year}</td>
-                                            <td>#{s.surchargePrice}</td>
+                                            <td>#{hotelManagedBean.convertDateFormat(s.surchargeFrom)}</td>
+                                            <td>#{hotelManagedBean.convertDateFormat(s.surchargeTo)}</td>
+                                            <td>$#{s.surchargePrice}0</td>
                                             <td>#{hotelManagedBean.displayDays(s.daysToCharge)}</td>
                                             <td><h:commandButton id="viewBtn" value="View" class="btn btn-primary" action="#{hotelManagedBean.viewSurcharge(s.surchargeID)}"/></td>
                                             <td><h:commandButton id="editBtn" value="Edit" class="btn btn-secondary" action="#{hotelManagedBean.editSurcharge(s.surchargeID)}"  /></td>

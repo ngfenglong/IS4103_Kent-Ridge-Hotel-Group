@@ -64,7 +64,7 @@
                                         <c:forEach items="${hotelManagedBean.allHolidaySurcharge}" var="h">
                                             <tr>
                                                 <td>#{h.holidayName}</td>
-                                                <td>#{h.holidayDate.date} #{h.holidayDate.month} #{h.holidayDate.year}</td>
+                                                <td>#{hotelManagedBean.convertDateFormat(h.holidayDate)}</td>
                                                 <td>$#{h.holidaySurchargePrice}0</td>
                                                 <td><h:commandButton value="View" id="viewBtn" action="#{hotelManagedBean.viewHolidaySurcharge(h.holidaySurchargeID)}" class="btn btn-primary"/></td>
                                                 <td><h:commandButton value="Edit" id="editBtn" class="btn btn-secondary" action="#{hotelManagedBean.editHolidaySurcharge(h.holidaySurchargeID)}"  /></td>

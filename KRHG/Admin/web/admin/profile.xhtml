@@ -1,18 +1,137 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
         <ui:composition template="./AdminTemplate.xhtml">
 
+
             <ui:define name="title">
-                title
+                KRHG Admin Console System
             </ui:define>
 
             <ui:define name="content">
-                content
+                <!-- Content Header (Page header) -->
+                <div class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+
+
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li class="breadcrumb-item active">
+                                        <h:form>
+                                            <h:commandButton class="btn btn-primary" action="editProfile.xhtml?faces-redirect=true" value="Edit Profile" />
+                                            <h:commandButton class="btn btn-primary" action="changePassword.xhtml?faces-redirect=true" value="Change Password" />
+                                        </h:form>
+                                        <!--Add Btn-->
+                                    </li>
+                                </ol>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </div> 
+                <!--                <section class="content">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                             left column 
+                                            <div class="col-md-10">
+                                                 general form elements 
+                                                <div class="card card-primary">
+                                                    <div class="card-header">
+                                                        <h3 class="card-title">Profile</h3>
+                                                    </div>-->
+                <!-- /.card-header -->
+                <!-- form start -->
+                <h:form role="form">
+                    <!-- Content Header (Page header) -->
+                    <section class="content-header">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">
+                                            <i class="fa fa-text-width"></i>
+                                            Profile
+                                        </h3>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <div class="card-body">
+                                        <dl>
+                                            <dt>Name: </dt>
+                                            <dd>#{authenticationManagedBean.loggedInStaff.name}</dd>
+
+                                            <dt>Email: </dt>
+                                            <dd>#{authenticationManagedBean.loggedInStaff.email}</dd>
+
+                                            <dt>Phone Number: </dt>
+                                            <dd>#{authenticationManagedBean.loggedInStaff.phoneNumber}</dd>
+
+                                            <dt>Gender: </dt>
+                                            <dd>#{authenticationManagedBean.loggedInStaff.gender}</dd>
+
+                                            <dt>NRIC: </dt>
+                                            <dd>#{authenticationManagedBean.loggedInStaff.nric}</dd>
+
+                                            <dt>Hotel: </dt>
+                                            <dd>#{authenticationManagedBean.loggedInStaff.hotelGroup}</dd>
+
+                                            <dt>Job Title: </dt>
+                                            <dd>#{authenticationManagedBean.loggedInStaff.jobTitle}</dd>
+
+                                            <dt>Department: </dt>
+                                            <dd>#{authenticationManagedBean.loggedInStaff.department}</dd>
+
+                                            <dt>Roles </dt>
+                                            <dd>#{authenticationManagedBean.displayStaffTypesInLines()}</dd>
+
+                                            <dt>Entitled Number of Leaves</dt>
+                                            <dd>#{authenticationManagedBean.loggedInStaff.entitledLeaves} days </dd>
+
+                                            <dt>NOK's Name</dt>
+                                            <dd>#{authenticationManagedBean.loggedInStaff.nokName}</dd>
+
+                                            <dt>NOK's Address</dt>
+                                            <dd>#{authenticationManagedBean.loggedInStaff.nokAddress}</dd>
+
+                                            <dt>NOK's Phone Number</dt>
+                                            <dd>#{authenticationManagedBean.loggedInStaff.nokPhoneNumber}</dd>
+
+                                            <dt>  <h:commandButton class="btn btn-primary" action="editProfile.xhtml?faces-redirect=true" value="Edit Profile" />
+                                                <h:commandButton class="btn btn-primary" action="changePassword.xhtml?faces-redirect=true" value="Change Password" />   
+                                            </dt>
+                                        </dl>
+                                    </div>
+                                    <!-- /.card-body -->
+                                </div>
+                                <!-- /.card -->
+                            </div>
+                        </div>
+                    </section>
+                </h:form>
+                <!--                </div>
+                                </div>
+                                 /.col 
+                                </div>
+                                 /.row 
+                                </div>
+                                 /.container-fluid 
+                                </section>
+                                 /.content-header 
+                                 Main content -->
+
             </ui:define>
 
             <ui:define name="script">
