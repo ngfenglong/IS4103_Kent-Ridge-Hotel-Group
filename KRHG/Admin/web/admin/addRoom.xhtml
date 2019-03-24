@@ -3,7 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
@@ -27,9 +29,6 @@
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item active">
                                         <!--Add Btn-->
-                                        <h:form>
-                                            <h:commandButton class="btn btn-primary" action="addFacility.xhtml?faces-redirect=true" value="Add Hotel Facility" />
-                                        </h:form>
                                     </li>
                                 </ol>
                             </div>
@@ -47,43 +46,79 @@
                                 <!-- general form elements -->
                                 <div class="card card-primary">
                                     <div class="card-header">
-                                        <h3 class="card-title">Add Hotel</h3>
+                                        <h3 class="card-title">Add Room</h3>
                                     </div>
                                     <!-- /.card-header -->
                                     <!-- form start -->
-                                    <form role="form">
+                                    <h:form role="form">
                                         <div class="card-body">
                                             <div class="form-group">
-                                                <label for="exampleInputEmail1">Email address</label>
-                                                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email" />
+                                                <label for="selectHotel">Hotel</label><br />
+                                                <h:selectOneMenu value="#{hotelManagedBean.addRoomHotelName}" id="selectHotel" class="select2-selection--single">
+                                                    <c:forEach items="${hotelManagedBean.allHotels}" var="h">
+                                                        <f:selectItem itemValue="#{h.hotelName}" itemLabel="#{h.hotelName}" />
+                                                    </c:forEach>
+                                                </h:selectOneMenu><br/>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="roomNumber">Room Number</label>
+                                                <h:inputText class="form-control" value="#{hotelManagedBean.roomNumber}" id="roomNumber" a:placeholder="enter room number" required="true"></h:inputText>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <label for="selectRoomPax">Room Pax</label><br />
+                                                <h:selectOneMenu value="#{hotelManagedBean.roomPax}" class="select2-selection--single" id="selectRoomPax">
+                                                    <f:selectItem itemValue="1" itemLabel="1" />
+                                                    <f:selectItem itemValue="2" itemLabel="2" />
+                                                    <f:selectItem itemValue="3" itemLabel="3" />
+                                                    <f:selectItem itemValue="4" itemLabel="4" />
+                                                    <f:selectItem itemValue="5" itemLabel="5" />
+                                                    <f:selectItem itemValue="6" itemLabel="6" />
+                                                    <f:selectItem itemValue="7" itemLabel="7" />
+                                                    <f:selectItem itemValue="8" itemLabel="8" />
+                                                    <f:selectItem itemValue="9" itemLabel="9" />
+                                                    <f:selectItem itemValue="10" itemLabel="10" />
+                                                </h:selectOneMenu><br/>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <label for="roomType">Room Type</label><br />
+                                                <h:selectOneMenu id="roomType" value="#{hotelManagedBean.roomType}" class="select2-selection--single">
+                                                    <f:selectItem itemValue="Standard" itemLabel="Standard" />
+                                                    <f:selectItem itemValue="Deluxe" itemLabel="Deluxe" />
+                                                    <f:selectItem itemValue="Premium" itemLabel="Premium" />
+                                                    <f:selectItem itemValue="Suite" itemLabel="Suite" />
+                                                    <f:selectItem itemValue="Penthouse" itemLabel="Penthouse" />
+                                                </h:selectOneMenu><br/>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="roomFacilities">Room Facilities</label> <br />
+                                                <h:selectManyListbox id="roomFacilities" size="10" a:multiple="multiple" class="select2-selection--multiple" value = "#{hotelManagedBean.roomFacilities}" >
+                                                    <c:forEach items="${hotelManagedBean.roomFacilityList}" var="r">
+                                                        <f:selectItem itemValue = "#{r.roomFacilityName}" itemLabel = "#{r.roomFacilityName}" /> 
+                                                    </c:forEach>
+                                                </h:selectManyListbox>
                                             </div>
                                             <div class="form-group">
-                                                <label for="exampleInputPassword1">Password</label>
-                                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" />
+                                                <label for="minibarItems">Minibar Items</label> <br />
+                                                <h:selectManyListbox id="minibarItems" size="5" a:multiple="multiple" class="select2-selection--multiple" value = "#{hotelManagedBean.minibarItems}" >
+                                                    <c:forEach items="${hotelManagedBean.minibarItemList}" var="m">
+                                                        <f:selectItem itemValue = "#{m.itemName}" itemLabel = "#{m.itemName}" /> 
+                                                    </c:forEach>
+                                                </h:selectManyListbox>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="exampleInputFile">File input</label>
-                                                <div class="input-group">
-                                                    <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" id="exampleInputFile" />
-                                                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                                                    </div>
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text" id="">Upload</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-check">
-                                                <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-                                                <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                                            </div>
+
                                         </div>
                                         <!-- /.card-body -->
 
                                         <div class="card-footer">
-                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                            <h:commandButton class="btn btn-primary" value="Add Room" action="#{hotelManagedBean.addRoom()}"></h:commandButton>
                                         </div>
-                                    </form>
+                                    </h:form>
                                 </div>
                             </div>
                             <!-- /.col -->
@@ -98,7 +133,21 @@
             </ui:define>
 
             <ui:define name="script">
-                script
+                <script>
+                    $('option').mousedown(function (e) {
+                        e.preventDefault();
+                        var originalScrollTop = $(this).parent().scrollTop();
+                        console.log(originalScrollTop);
+                        $(this).prop('selected', $(this).prop('selected') ? false : true);
+                        var self = this;
+                        $(this).parent().focus();
+                        setTimeout(function () {
+                            $(self).parent().scrollTop(originalScrollTop);
+                        }, 0);
+
+                        return false;
+                    });
+                </script>
             </ui:define>
 
         </ui:composition>

@@ -1,19 +1,105 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <body>
 
         <ui:composition template="./AdminTemplate.xhtml">
 
             <ui:define name="title">
-                title
+                KRHG Admin Console System
             </ui:define>
 
             <ui:define name="content">
-                content
+                <!-- Content Header (Page header) -->
+                <div class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li class="breadcrumb-item active">
+                                        <!--Add Btn-->
+                                    </li>
+                                </ol>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </div> 
+                <!-- form start -->
+                <h:form role="form">
+                    <!-- Content Header (Page header) -->
+                    <section class="content-header">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">
+                                            <i class="fa fa-text-width"></i>
+                                            #{hotelManagedBean.selectedHotelObj.hotelName}
+                                        </h3>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <div style="padding:3rem;" class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="col-md-4" style="padding:2rem;">  
+                                                <dl>
+                                                    <dt>
+                                                        <img  style="width:480px; height: 360px;" alt="#{rf.iconImg}" src="http://zetegral.website/krhgImages/#{hotelManagedBean.selectedHotelObj.hotelImage}" /> 
+                                                    </dt>
+                                                </dl>
+                                            </div>
+                                            <div class="col-md-5">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <dl>
+                                                    <dt style="padding-left: 1rem;">Hotel: </dt>
+                                                    <dd style="padding-left:1rem;">#{hotelManagedBean.selectedHotelObj.hotelName}</dd>
+                                                    <dt style="padding-left:1rem; ">Hotel Code: </dt>
+                                                    <dd style="padding-left:1rem;">#{hotelManagedBean.selectedHotelObj.hotelCodeName}</dd>
+                                                    <dt style="padding-left: 1rem;">Contact Number: </dt>
+                                                    <dd style="padding-left:1rem;">+65 #{hotelManagedBean.selectedHotelObj.hotelContact}</dd>
+                                                    <dt style="padding-left: 1rem;">Address: </dt>
+                                                    <dd style="padding-left:1rem;">#{hotelManagedBean.selectedHotelObj.hotelAddress}</dd>
+                                                    <dt style="padding-left: 1rem;">Rating</dt>
+                                                    <dd style="padding-left:1rem;">#{hotelManagedBean.selectedHotelObj.hotelStar} Stars</dd>
+                                                </dl>
+                                            </div> 
+                                            <div class="col-md-6">
+                                                <dl>
+                                                    <dt style="padding-left: 1rem;">Hotel Facilities</dt>
+                                                    <dd style="padding-left:1rem;">
+                                                        <c:forEach items="${hotelManagedBean.selectedHotelObj.hotelFacilities}" var="f">    
+                                                            <img style="width:20px; height: 20px;" alt="#{f.hotelFacilityImage}" src="http://zetegral.website/krhgImages/#{f.hotelFacilityImage}" /> - #{f.hotelFacilityName} <br />
+                                                        </c:forEach>
+                                                    </dd>
+
+                                                </dl>
+                                            </div> 
+                                        </div>
+                                    </div>
+                                    <!-- /.card-body -->
+                                </div>
+                                <!-- /.card -->
+                            </div>
+                        </div>
+                    </section>
+                </h:form>
             </ui:define>
+
 
             <ui:define name="script">
                 script

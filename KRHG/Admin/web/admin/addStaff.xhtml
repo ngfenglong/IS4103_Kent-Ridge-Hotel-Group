@@ -3,7 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <body>
 
@@ -26,9 +28,7 @@
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item active">
                                         <!--Add Btn-->
-                                        <h:form>
-                                            <h:commandButton class="btn btn-primary" action="addFacility.xhtml?faces-redirect=true" value="Add Hotel Facility" />
-                                        </h:form>
+
                                     </li>
                                 </ol>
                             </div>
@@ -42,47 +42,116 @@
                     <div class="container-fluid">
                         <div class="row">
                             <!-- left column -->
-                            <div class="col-md-6">
+                            <div class="col-md-10">
                                 <!-- general form elements -->
                                 <div class="card card-primary">
                                     <div class="card-header">
-                                        <h3 class="card-title">Add Hotel</h3>
+                                        <h3 class="card-title">Create Staff Account</h3>
                                     </div>
                                     <!-- /.card-header -->
                                     <!-- form start -->
-                                    <form role="form">
+                                    <h:form>
                                         <div class="card-body">
                                             <div class="form-group">
-                                                <label for="exampleInputEmail1">Email address</label>
-                                                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email" />
+                                                <label for="stName">Staff Name</label>
+                                                <h:inputText class="form-control" value="#{hotelManagedBean.stName}" id="stName" a:placeholder="Enter staff name" required="true" />
                                             </div>
                                             <div class="form-group">
-                                                <label for="exampleInputPassword1">Password</label>
-                                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" />
+                                                <label for="stPassword">Password</label>
+                                                <h:inputText class="form-control" value="#{hotelManagedBean.stPassword}"  a:placeholder="Enter password" id="stPassword" required="true" />
                                             </div>
                                             <div class="form-group">
-                                                <label for="exampleInputFile">File input</label>
-                                                <div class="input-group">
-                                                    <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" id="exampleInputFile" />
-                                                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                                                    </div>
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text" id="">Upload</span>
-                                                    </div>
-                                                </div>
+                                                <label for="stEmail">Email Address</label>
+                                                <h:inputText a:type="email" class="form-control" value="#{hotelManagedBean.stEmail}" id="stEmail" a:placeholder="Enter email" required="true" />
                                             </div>
-                                            <div class="form-check">
-                                                <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-                                                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                            <div class="form-group">
+                                                <label for="stPhoneNumber">Contact Number</label>
+                                                <h:inputText class="form-control" value="#{hotelManagedBean.stPhoneNumber}" id="stPhoneNumber" a:placeholder="Enter contact number" required="true" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="stGender">Gender</label> <br />
+                                                <h:selectOneMenu class="select2-selection--single" value="#{hotelManagedBean.stGender}" id="stGender">
+                                                    <f:selectItem itemValue="Male" itemLabel="Male" />
+                                                    <f:selectItem itemValue="Female" itemLabel="Female" />
+                                                </h:selectOneMenu>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="stNric">NRIC</label>
+                                                <h:inputText class="form-control" value="#{hotelManagedBean.stNric}" id="stNric" a:placeholder="Enter NRIC" required="true" />
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="stAddress">Address</label>
+                                                <h:inputText class="form-control" value="#{hotelManagedBean.stAddress}" id="stAddress" a:placeholder="Enter address" required="true" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="stHotel">Hotel</label> <br />
+                                                <h:selectOneMenu id="stHotel" value="#{hotelManagedBean.stHotel}">
+                                                    <f:selectItem itemValue="HQ" itemLabel="HQ" />
+                                                    <c:forEach items="${hotelManagedBean.allHotels}" var="h">
+                                                        <f:selectItem itemValue="#{h.hotelName}" itemLabel="#{h.hotelName}" />
+                                                    </c:forEach>
+                                                </h:selectOneMenu><br/>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="stHotel">Job Title</label>
+                                                <h:inputText class="form-control" value="#{hotelManagedBean.stJobTitle}" id="stJobTitle" a:placeholder="Enter job title" required="true" />
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="stDepartment">Department</label> <br />
+                                                <h:selectOneMenu id="stDepartment" value="#{hotelManagedBean.stDepartment}">
+                                                    <f:selectItem itemValue="HR" itemLabel="HR" />
+                                                    <f:selectItem itemValue="HouseKeeping" itemLabel="HouseKeeping" />
+                                                    <f:selectItem itemValue="Kitchen" itemLabel="Kitchen" />
+                                                    <f:selectItem itemValue="Frontdesk" itemLabel="Frontdesk" />
+                                                    <f:selectItem itemValue="Sales and Marketing" itemLabel="Sales and Marketing" />
+                                                    <f:selectItem itemValue="Part-Timer" itemLabel="Part-Timer" />
+                                                </h:selectOneMenu> <br/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="stStaffType">Staff Types</label> <br />
+                                                <h:selectManyListbox id="stStaffType" a:multiple="multiple" class="select2-selection--multiple" value = "#{hotelManagedBean.stStaffType}" >
+                                                    <c:forEach items="${hotelManagedBean.allStaffType}" var="st">
+                                                        <f:selectItem itemValue = "#{st.staffTypeName}" itemLabel = "#{st.staffTypeName}" /> 
+                                                    </c:forEach>
+                                                </h:selectManyListbox>
+                                            </div> 
+                                            <div class="form-group">
+                                                <label for="stLeave">Entitled Number of Leaves</label> <br />
+                                                <h:selectOneMenu value="#{hotelManagedBean.stLeave}">
+                                                    <f:selectItem itemValue="7" itemLabel="7" />
+                                                    <f:selectItem itemValue="8" itemLabel="8" />
+                                                    <f:selectItem itemValue="9" itemLabel="9" />
+                                                    <f:selectItem itemValue="10" itemLabel="10" />
+                                                    <f:selectItem itemValue="11" itemLabel="11" />
+                                                    <f:selectItem itemValue="12" itemLabel="12" />
+                                                    <f:selectItem itemValue="13" itemLabel="13" />
+                                                    <f:selectItem itemValue="14" itemLabel="14" />
+                                                </h:selectOneMenu><br/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="stNokName">Next-of-Kin's Name</label>
+                                                <h:inputText class="form-control" value="#{hotelManagedBean.stNokName}" id="stNokName" a:placeholder="Enter NOK's name"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="stNokAddress">Next-of-Kin's Address</label>
+                                                <h:inputText class="form-control" value="#{hotelManagedBean.stNokAddress}" id="stNokAddress" a:placeholder="Enter NOK's address"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="stNokPhoneNumber">Next-of-Kin's Contact Number</label>
+                                                <h:inputText class="form-control" value="#{hotelManagedBean.stNokPhoneNumber}" id="stNokPhoneNumber" a:placeholder="Enter NOK's mobile number" />
                                             </div>
                                         </div>
+
                                         <!-- /.card-body -->
 
                                         <div class="card-footer">
-                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                            <h:commandButton class="btn btn-primary" id="createStaffBtn" value="Create" action="#{hotelManagedBean.createStaff()}"></h:commandButton>
                                         </div>
-                                    </form>
+                                    </h:form>
                                 </div>
                             </div>
                             <!-- /.col -->
@@ -96,7 +165,21 @@
 
             </ui:define>
             <ui:define name="script">
-                script
+                <script>
+                    $('option').mousedown(function (e) {
+                        e.preventDefault();
+                        var originalScrollTop = $(this).parent().scrollTop();
+                        console.log(originalScrollTop);
+                        $(this).prop('selected', $(this).prop('selected') ? false : true);
+                        var self = this;
+                        $(this).parent().focus();
+                        setTimeout(function () {
+                            $(self).parent().scrollTop(originalScrollTop);
+                        }, 0);
+
+                        return false;
+                    });
+                </script>
             </ui:define>
 
         </ui:composition>

@@ -56,12 +56,12 @@
                                                 <h:inputText class="form-control" value="#{hotelManagedBean.holName}" id="holName" a:placeholder="Enter Holiday" required="true" />
                                             </div>
                                             <div class="form-group">
-                                                <label>Date</label>
+                                                <label for="holiDate">Date</label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                                     </div>
-                                                    <h:inputText value="#{hotelManagedBean.holDate}" class="form-control" a:data-inputmask="'alias': 'dd/mm/yyyy'" required="true" a:placeholder="e.g 01/01/2019"  />
+                                                     <h:inputText a:type="date" class="datepicker booking_input booking_input_a booking_in" value="#{hotelManagedBean.holDate}" id="holiDate" a:placeholder="Date" required="true" />
                                                 </div>
                                             </div>
                                             <!-- /.input group -->
