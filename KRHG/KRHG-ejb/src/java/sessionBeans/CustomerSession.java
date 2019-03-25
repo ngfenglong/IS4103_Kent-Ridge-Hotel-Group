@@ -133,6 +133,9 @@ public class CustomerSession implements CustomerSessionLocal {
             oldC.setBookingHistories(c.getBookingHistories());
             oldC.setEmail(c.getEmail());
             oldC.setMobileNum(c.getMobileNum());
+            oldC.setName(c.getName());
+            oldC.setAccountStatus(c.getAccountStatus());
+            oldC.setMember(c.getMember());
         } else {
             throw new NoResultException("Customer Not found");
         }
