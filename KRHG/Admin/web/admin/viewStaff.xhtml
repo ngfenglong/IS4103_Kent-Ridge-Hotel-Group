@@ -1,19 +1,97 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
 
     <body>
 
         <ui:composition template="./AdminTemplate.xhtml">
 
             <ui:define name="title">
-                title
+                KRHG Admin Console System
             </ui:define>
 
             <ui:define name="content">
-                content
+                <!-- Content Header (Page header) -->
+                <div class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li class="breadcrumb-item active">
+                                        <!--Add Btn-->
+                                    </li>
+                                </ol>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </div> 
+                <!-- form start -->
+                <h:form role="form">
+                    <!-- Content Header (Page header) -->
+                    <section class="content-header">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">
+                                            <i class="fa fa-text-width"></i>
+                                            #{hotelManagedBean.selectedStaff.name}'s Profile
+                                        </h3>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <div class="card-body">
+                                        <dl>
+                                            <dt style="padding-left: 1rem;">Staff Name:</dt>
+                                            <dd style="padding-left:1rem;">#{hotelManagedBean.selectedStaff.name}</dd>
+                                            <dt style="padding-left: 1rem;">NRIC: </dt>
+                                            <dd style="padding-left:1rem;">#{hotelManagedBean.selectedStaff.nric}</dd>
+                                            <dt style="padding-left: 1rem;">Contact Number: </dt>
+                                            <dd style="padding-left:1rem;">#{hotelManagedBean.selectedStaff.phoneNumber}</dd>
+                                            <dt style="padding-left: 1rem;">Email: </dt>
+                                            <dd style="padding-left:1rem;">#{hotelManagedBean.selectedStaff.email}</dd>
+                                            <dt style="padding-left: 1rem;">Address: </dt>
+                                            <dd style="padding-left:1rem;">#{hotelManagedBean.selectedStaff.address}</dd>
+
+
+                                            <dt style="padding-left: 1rem;">Hotel: </dt>
+                                            <dd style="padding-left:1rem;">#{hotelManagedBean.selectedStaff.hotelGroup}</dd>
+                                            <dt style="padding-left: 1rem;">Job Title: </dt>
+                                            <dd style="padding-left:1rem;">#{hotelManagedBean.selectedStaff.jobTitle}</dd>
+                                            <dt style="padding-left: 1rem;">Department: </dt>
+                                            <dd style="padding-left:1rem;">#{hotelManagedBean.selectedStaff.department}</dd>
+                                            <dt style="padding-left: 1rem;">Entitled Number of Leave</dt>
+                                            <dd style="padding-left:1rem;">#{hotelManagedBean.selectedStaff.entitledLeaves}</dd>
+                                            <dt style="padding-left: 1rem;">Manager-In-Charged</dt>
+                                            <dd style="padding-left:1rem;">#{hotelManagedBean.selectedStaff.managerInCharge.name}</dd>
+
+
+                                            <dt style="padding-top:1rem; padding-left: 1rem;">Next-of-Kin's Name</dt>
+                                            <dd style="padding-left:1rem;">#{hotelManagedBean.selectedStaff.nokName}</dd>
+                                            <dt style="padding-top:1rem; padding-left: 1rem;">Next-of-Kin's Address</dt>
+                                            <dd style="padding-left:1rem;">#{hotelManagedBean.selectedStaff.nokAddress}</dd>
+                                            <dt style="padding-top:1rem; padding-left: 1rem;">Next-of-Kin's Contact Number</dt>
+                                            <dd style="padding-left:1rem;">#{hotelManagedBean.selectedStaff.nokPhoneNumber}</dd>
+
+                                        </dl>
+                                    </div>
+                                    <!-- /.card-body -->
+                                </div>
+                                <!-- /.card -->
+                            </div>
+                        </div>
+                    </section>
+                </h:form>
             </ui:define>
+
 
             <ui:define name="script">
                 script

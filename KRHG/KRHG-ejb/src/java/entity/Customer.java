@@ -30,7 +30,6 @@ public class Customer implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long customerID;
     private String name;
-    private String nric;
     private String password;
     private int points;
     @OneToMany
@@ -41,8 +40,8 @@ public class Customer implements Serializable {
     private String mobileNum;
     @Temporal(TemporalType.DATE)
     private Date dateJoined;
-    private String passportNum;
     private boolean accountStatus;
+    private boolean member;
 
     public Customer() {
         bookingHistories = new ArrayList<RoomBooking>();
@@ -58,13 +57,11 @@ public class Customer implements Serializable {
     public Customer(String name, String nric, String password, int points, String email, String mobileNum, Date dateJoined, String passportNum, boolean accountStatus) {
         this();
         this.name = name;
-        this.nric = nric;
         this.password = password;
         this.points = points;
         this.email = email;
         this.mobileNum = mobileNum;
         this.dateJoined = dateJoined;
-        this.passportNum = passportNum;
         this.accountStatus = accountStatus;
     }
     
@@ -83,14 +80,6 @@ public class Customer implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getNric() {
-        return nric;
-    }
-
-    public void setNric(String nric) {
-        this.nric = nric;
     }
 
     public String getPassword() {
@@ -148,13 +137,14 @@ public class Customer implements Serializable {
         this.dateJoined = dateJoined;
     }
 
-    public String getPassportNum() {
-        return passportNum;
+    public boolean isMember() {
+        return member;
     }
 
-    public void setPassportNum(String passportNum) {
-        this.passportNum = passportNum;
+    public void setMember(boolean member) {
+        this.member = member;
     }
+    
 
     public boolean isAccountStatus() {
         return accountStatus;

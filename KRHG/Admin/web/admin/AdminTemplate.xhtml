@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title><ui:insert name="title">Title</ui:insert></title>
@@ -21,6 +22,7 @@
         <link rel="stylesheet" href="#{request.contextPath}/plugins/datatables/dataTables.bootstrap4.css" />
         <!-- Theme style (comes with Bootstrap) -->
         <link rel="stylesheet" href="#{request.contextPath}/dist/css/adminlte.min.css" />
+        <link rel="stylesheet" href="#{request.contextPath}/dist/css/adminlte.css" />
         <!-- Google Font: Source Sans Pro -->
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet" />
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous"></link>
@@ -53,9 +55,13 @@
                         </a>
 
                     </li>
-                    <li class="nav-item float-sm-right">
+
+                </ul>
+
+                <ul class="navbar-nav ml-auto">
+                    <li>
                         <h:form>
-                            Welcome #{authenticationManagedBean.name}
+                            Welcome <b>#{authenticationManagedBean.name}</b>
                         </h:form>
                     </li>
                 </ul>
@@ -74,99 +80,282 @@
                 <!-- Sidebar -->
                 <div class="sidebar">
                     <!-- Sidebar Menu -->
-                    <nav class="mt-2">
-                        <ul class="nav nav-pills nav-sidebar flex-column" datawidget="treeview" role="menu" data-accordion="false">
-                            <!-- Add icons to the links using the .nav-icon class
-                            with font-awesome or any other icon font library -->
+                    <nav class="mt-2 ">
+                        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                            data-accordion="false">
+                            <c:if test="#{authenticationManagedBean.financeStaff eq true}">
+                                <li class="nav-header">Admin System</li>
+                                <li class="nav-item has-treeview">
+                                    <a href="#" class="nav-link">
+                                        <i class="fa fa-hotel"></i>
+                                        <p>
+                                            Hotel
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item has-treeview">
+                                            <a href="#{request.contextPath}/admin/addHotel.xhtml" class="nav-link">
+                                                <i class="fa fa-plus nav-icon"></i>
+                                                <p>Add Hotel</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="#{request.contextPath}/admin/manageHotel.xhtml" class="nav-link">
+                                                <i class="nav-icon fa fa-bars"></i>
+                                                <p>Manage Hotel</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item has-treeview">
+                                    <a href="#" class="nav-link">
+                                        <i class="fa fa-swimming-pool"></i>
+                                        <p>
+                                            Hotel Facilities
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item has-treeview">
+                                            <a href="#{request.contextPath}/admin/addFacility.xhtml" class="nav-link">
+                                                <i class="fa fa-plus nav-icon"></i>
+                                                <p>Add Hotel Facility</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="#{request.contextPath}/admin/manageFacility.xhtml" class="nav-link">
+                                                <i class="nav-icon fa fa-bars"></i>
+                                                <p>Manage Hotel Facility</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
 
-                            <li class="nav-item" >
-                                <a href="#{request.contextPath}/admin/manageHotel.xhtml" class="nav-link" >
-                                    <i class="fa fa-hotel"></i>
-                                    <p>
-                                        Hotel Management
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="nav-item" >
-                                <a href="#{request.contextPath}/admin/manageSurcharge.xhtml" class="nav-link" >
-                                    <i class="fa fa-credit-card"></i>
-                                    <p>
-                                        Extra Surcharge Management
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="nav-item" >
-                                <a href="#{request.contextPath}/admin/manageHolidaySurcharge.xhtml" class="nav-link" >
-                                    <i class="fa fa-credit-card"></i>
-                                    <p>
-                                        Holiday Surcharges Management
-                                    </p>
-                                </a>
-                            </li>
+                                <li class="nav-item has-treeview">
+                                    <a href="#" class="nav-link">
+                                        <i class="fa fa-hotel"></i>
+                                        <p>
+                                            Room Facilities 
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item has-treeview">
+                                            <a href="#{request.contextPath}/admin/addRoomFacility.xhtml" class="nav-link">
+                                                <i class="fa fa-plus nav-icon"></i>
+                                                <p>Add Room Facility</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="#{request.contextPath}/admin/manageRoomFacility.xhtml" class="nav-link">
+                                                <i class="nav-icon fa fa-bars"></i>
+                                                <p>Manage Room Facility</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item has-treeview">
+                                    <a href="#" class="nav-link">
+                                        <i class="fa fa-hotel"></i>
+                                        <p>
+                                            Minibar Items
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item has-treeview">
+                                            <a href="#{request.contextPath}/admin/addMinibarItem.xhtml" class="nav-link">
+                                                <i class="fa fa-plus nav-icon"></i>
+                                                <p>Add Minibar Item</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="#{request.contextPath}/admin/manageMinibarItem.xhtml" class="nav-link">
+                                                <i class="nav-icon fa fa-bars"></i>
+                                                <p>Manage Minibar item</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </c:if>
+                            <c:if test="#{authenticationManagedBean.HRStaff eq true}">
+                                <li class="nav-header">Human Resource System</li>
+                                <li class="nav-item has-treeview">
+                                    <a href="#" class="nav-link">
+                                        <i class="fa fa-user-tie"></i>
+                                        <p>
+                                            Staffs
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item has-treeview">
+                                            <a href="#{request.contextPath}/admin/addStaff.xhtml" class="nav-link">
+                                                <i class="fa fa-plus nav-icon"></i>
+                                                <p>Add Staff</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="#{request.contextPath}/admin/manageStaff.xhtml" class="nav-link">
+                                                <i class="nav-icon fa fa-bars"></i>
+                                                <p>Manage Staff</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item" >
+                                    <a href="#{request.contextPath}/admin/manageLeaveAndRoster.xhtml"  class="nav-link" >
+                                        <i class="fas fa-table"></i>
+                                        <p>
+                                            Leave and Roster
+                                        </p>
+                                    </a>
+                                </li>
+                            </c:if>
+                            <c:if test="#{authenticationManagedBean.ITStaff eq true}">
+                                <li class="nav-header">IT System</li>
+                                <li class="nav-item" >
+                                    <a href="#{request.contextPath}/admin/manageLog.xhtml" class="nav-link" >
+                                        <i class="fa fa-bug"></i>
+                                        <p>
+                                            Log Management
+                                        </p>
+                                    </a>
+                                </li>
+                            </c:if>
+                            <c:if test="#{authenticationManagedBean.SMAdmin eq true}">
+                                <li class="nav-header">Sales and Marketing System</li>
 
-                            <li class="nav-item" >
-                                <a href="#{request.contextPath}/admin/manageFacility.xhtml" class="nav-link" >
-                                    <i class="fas fa-swimming-pool"></i>
-                                    <p>
-                                        Hotel Facilities Management
-                                    </p>
-                                </a>
-                            </li>
+                                <li class="nav-item has-treeview">
+                                    <a href="#" class="nav-link">
+                                        <i class="fa fa-user-tie"></i>
+                                        <p>
+                                            Room Pricing
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item has-treeview">
+                                            <a href="#{request.contextPath}/admin/addRoomPricing.xhtml" class="nav-link">
+                                                <i class="fa fa-plus nav-icon"></i>
+                                                <p>Add Room Pricing</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="#{request.contextPath}/admin/manageRoomPricing.xhtml" class="nav-link">
+                                                <i class="nav-icon fa fa-bars"></i>
+                                                <p>Manage Room Pricing</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li class="nav-item has-treeview">
+                                    <a href="#" class="nav-link">
+                                        <i class="fa fa-credit-card"></i>
+                                        <p>
+                                            Extra Surcharges
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item has-treeview">
+                                            <a href="#{request.contextPath}/admin/addSurcharge.xhtml" class="nav-link">
+                                                <i class="fa fa-plus nav-icon"></i>
+                                                <p>Add Extra Surcharge</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="#{request.contextPath}/admin/manageSurcharge.xhtml" class="nav-link">
+                                                <i class="nav-icon fa fa-bars"></i>
+                                                <p>Manage Extra Surcharge</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item has-treeview">
+                                    <a href="#" class="nav-link">
+                                        <i class="fa fa-credit-card"></i>
+                                        <p>
+                                            Holiday Surcharges
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item has-treeview">
+                                            <a href="#{request.contextPath}/admin/addHolidaySurcharge.xhtml" class="nav-link">
+                                                <i class="fa fa-plus nav-icon"></i>
+                                                <p>Add Holiday Surcharge</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="#{request.contextPath}/admin/manageHolidaySurcharge.xhtml" class="nav-link">
+                                                <i class="nav-icon fa fa-bars"></i>
+                                                <p>Manage Holiday Surcharge</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <!-- Add icons to the links using the .nav-icon class
+                                with font-awesome or any other icon font library -->
+                                <li class="nav-item has-treeview">
+                                    <a href="#{request.contextPath}/admin/manageCustomer.xhtml" class="nav-link">
+                                        <i class="fa fa-user-tie"></i>
+                                        <p>
+                                            Customers
+                                        </p>
+                                    </a>
+                                </li>
 
 
-                            <li class="nav-item" >
-                                <a href="#{request.contextPath}/admin/manageRoomFacility.xhtml" class="nav-link" >
-                                    <i class="fas fa-swimming-pool"></i>
-                                    <p>
-                                        Room Facilities Management
-                                    </p>
-                                </a>
-                            </li>
+                                <li class="nav-item has-treeview">
+                                    <a href="#" class="nav-link">
+                                        <i class="fa fa-user-tie"></i>
+                                        <p>
+                                            Member Tiers
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item has-treeview">
+                                            <a href="#{request.contextPath}/admin/addStaff.xhtml" class="nav-link">
+                                                <i class="fa fa-plus nav-icon"></i>
+                                                <p>Add Member Tier</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="#{request.contextPath}/admin/manageStaff.xhtml" class="nav-link">
+                                                <i class="nav-icon fa fa-bars"></i>
+                                                <p>Manage Member Tier</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
 
-
-                            <li class="nav-item" >
-                                <a href="#{request.contextPath}/admin/manageMinibarItem.xhtml" class="nav-link" >
-                                    <i class="fas fa-swimming-pool"></i>
-                                    <p>
-                                        Minibar Item Management
-                                    </p>
-                                </a>
-                            </li>
-
-                            <li class="nav-item" >
-                                <a href="#{request.contextPath}/admin/manageFeedback.xhtml" class="nav-link" >
-                                    <i class="fas fa-swimming-pool"></i>
-                                    <p>
-                                        Feedback Management
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="nav-item" >
-
-                                <a href="#{request.contextPath}/admin/manageLeaveAndRoster.xhtml"  class="nav-link" >
-                                    <i class="fas fa-table"></i>
-                                    <p>
-                                        Leave and Roster
-                                    </p>
-                                </a>
-
-                            </li>
-                            <li class="nav-item" >
-                                <a href="#{request.contextPath}/admin/manageStaff.xhtml" class="nav-link" >
-                                    <i class="fas fa-user-tie"></i>
-                                    <p>
-                                        Staff Management
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="nav-item" >
-                                <a href="#{request.contextPath}/admin/manageLog.xhtml" class="nav-link" >
-                                    <i class="fas fa-bars"></i>
-                                    <p>
-                                        Log Management
-                                    </p>
-                                </a>
-                            </li>
+                                <li class="nav-item has-treeview">
+                                    <a href="#" class="nav-link">
+                                        <i class="fa fa-user-tie"></i>
+                                        <p>
+                                            Mailing List
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item has-treeview">
+                                            <a href="#{request.contextPath}/admin/addStaff.xhtml" class="nav-link">
+                                                <i class="fa fa-plus nav-icon"></i>
+                                                <p>Add Mailing List</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="#{request.contextPath}/admin/manageStaff.xhtml" class="nav-link">
+                                                <i class="nav-icon fa fa-bars"></i>
+                                                <p>Manage Mailing List</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item has-treeview">
+                                    <a href="#{request.contextPath}/admin/manageFeedback.xhtml" class="nav-link" >
+                                        <i class="fas fa-swimming-pool"></i>
+                                        <p>
+                                            Feedback Management
+                                        </p>
+                                    </a>
+                                </li>
+                            </c:if>
                             <li class="nav-item" >
                                 <a href="#{request.contextPath}/admin/profile.xhtml" class="nav-link" >
                                     <i class="fas fa-user"></i>
@@ -181,6 +370,8 @@
                                 </h:form>
                             </li>
                         </ul>
+
+
                     </nav>
                     <!-- /.sidebar-menu -->
                 </div>
@@ -232,11 +423,16 @@
         <script>
             $(function () {
                 $("#example1").DataTable();
+
                 $('#example2').DataTable({
                     "paging": true,
                     "lengthChange": false,
-                    "searching": false,
-                    "ordering": true,
+                    "searching": true,
+                    "columns": [
+                        {"orderData": [0, 1], "targets": 0},
+                        {"orderData": 0, "targets": 1},
+                        {"orderData": [2, 3, 4], "targets": 2}
+                    ],
                     "info": true,
                     "autoWidth": false
                 });

@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
@@ -26,9 +27,7 @@
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item active">
                                         <!--Add Btn-->
-                                        <h:form>
-                                            <h:commandButton class="btn btn-primary" action="addFacility.xhtml?faces-redirect=true" value="Add Hotel Facility" />
-                                        </h:form>
+                                      
                                     </li>
                                 </ol>
                             </div>
@@ -42,49 +41,51 @@
                     <div class="container-fluid">
                         <div class="row">
                             <!-- left column -->
-                            <div class="col-md-6">
+                            <div class="col-md-10">
+
                                 <!-- general form elements -->
                                 <div class="card card-primary">
                                     <div class="card-header">
-                                        <h3 class="card-title">Add Hotel</h3>
+                                        <h3 class="card-title">Add Room Facility</h3>
                                     </div>
                                     <!-- /.card-header -->
                                     <!-- form start -->
-                                    <form role="form">
+                                    <h:form role="form" enctype="multipart/form-data">
                                         <div class="card-body">
                                             <div class="form-group">
-                                                <label for="exampleInputEmail1">Email address</label>
-                                                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email" />
+                                                <label for="rfName">Room Facility</label>
+                                                <h:inputText class="form-control" value="#{hotelManagedBean.rfName}" id="rfName" a:placeholder="enter hotel facility" required="true" />
                                             </div>
+
                                             <div class="form-group">
-                                                <label for="exampleInputPassword1">Password</label>
-                                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" />
+                                                <label for="rfCategory">Facility Category </label><br />
+                                                <h:selectOneMenu id="rfCategory" value="#{hotelManagedBean.rfCategory}">
+                                                    <f:selectItem itemValue="Bathroom" itemLabel="Bathroom" />
+                                                    <f:selectItem itemValue="Entertainments" itemLabel="Entertainments" />
+                                                    <f:selectItem itemValue="Communication" itemLabel="Communication" />
+                                                    <f:selectItem itemValue="Refreshment and Dining" itemLabel="Refreshement and Dining" />
+                                                    <f:selectItem itemValue="Others" itemLabel="Others" />
+                                                </h:selectOneMenu><br/>
                                             </div>
+
                                             <div class="form-group">
-                                                <label for="exampleInputFile">File input</label>
-                                                <div class="input-group">
-                                                    <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" id="exampleInputFile" />
-                                                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                                                    </div>
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text" id="">Upload</span>
-                                                    </div>
-                                                </div>
+                                                <label for="hotelImage">Facility Icon</label><br />
+                                                <h:inputFile id="hotelImage" value="#{hotelManagedBean.iconFile}">
+                                                    <f:passThroughAttribute name="accept" value="image/jpeg"/>
+                                                </h:inputFile>
                                             </div>
-                                            <div class="form-check">
-                                                <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-                                                <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                                            </div>
+
+
+
                                         </div>
                                         <!-- /.card-body -->
 
                                         <div class="card-footer">
-                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                            <h:commandButton class="btn btn-primary" value="Create" action="#{hotelManagedBean.createRoomFacility()}"></h:commandButton>
                                         </div>
-                                    </form>
+                                    </h:form>
                                 </div>
-                            </div>
+                            </div>.t
                             <!-- /.col -->
                         </div>
                         <!-- /.row -->

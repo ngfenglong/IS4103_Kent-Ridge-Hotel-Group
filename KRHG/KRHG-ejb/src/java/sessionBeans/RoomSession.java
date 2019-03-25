@@ -152,6 +152,7 @@ public class RoomSession implements RoomSessionLocal {
             oldR.setRoomType(r.getRoomType());
             oldR.setRoomPax(r.getRoomPax());
             oldR.setRoomFacilities(r.getRoomFacilities());
+            oldR.setMiniBarItems(r.getMiniBarItems());
             oldR.setStatus(r.getStatus());
         } else {
             throw new NoResultException("Room Not found");
@@ -397,7 +398,7 @@ public class RoomSession implements RoomSessionLocal {
     public MinibarItem getMinibarItemByName(String name) throws NoResultException {
         Query q;
         q = em.createQuery("SELECT mi FROM MinibarItem mi WHERE "
-                + "LOWER(es.itemName) = :itemName");
+                + "LOWER(mi.itemName) = :itemName");
         q.setParameter("itemName", name.toLowerCase());
 
         if (!q.getResultList().isEmpty()) {

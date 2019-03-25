@@ -19,6 +19,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Formatter;
+import java.util.List;
 import java.util.Properties;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -120,6 +121,48 @@ public class AuthenticationManagedBean implements Serializable {
         return "../login.xhtml?faces-redirect=true";
     }
 
+    public boolean isFinanceStaff() {
+        boolean status = false;
+        List<StaffType> checkList = loggedInStaff.getAccountRights();
+        for (StaffType st : checkList) {
+            if (st.getStaffTypeName().equals("Sales and Marketing Staff") || st.getStaffTypeName().equals("Sales and Marketing Manager")) {
+                status = true;
+            }
+        }
+        return status;
+    }
+    public boolean isITStaff() {
+        boolean status = false;
+        List<StaffType> checkList = loggedInStaff.getAccountRights();
+        for (StaffType st : checkList) {    
+            if (st.getStaffTypeName().equals("IT Staff") || st.getStaffTypeName().equals("Sales and Marketing Manager")) {
+                status = true;
+            }
+        }
+        return status;
+    }
+    public boolean isHRStaff() {
+        boolean status = false;
+        List<StaffType> checkList = loggedInStaff.getAccountRights();
+        for (StaffType st : checkList) {
+            if (st.getStaffTypeName().equals("HR Staff") || st.getStaffTypeName().equals("HR Manager")) {
+                status = true;
+            }
+        }
+        return status;
+    }
+
+    public boolean isSMAdmin() {
+        boolean status = false;
+        List<StaffType> checkList = loggedInStaff.getAccountRights();
+        for (StaffType st : checkList) {
+            if (st.getStaffTypeName().equals("Sales and Marketing Staff") || st.getStaffTypeName().equals("Sales and Marketing Manager")) {
+                status = true;
+            }
+        }
+        return status;
+    }
+
     public String displayStaffTypes() {
         String returnString = "";
         for (StaffType s : loggedInStaff.getAccountRights()) {
@@ -127,6 +170,18 @@ public class AuthenticationManagedBean implements Serializable {
         }
         if (returnString.length() > 0) {
             returnString = returnString.substring(0, returnString.length() - 2);
+        }
+
+        return returnString;
+    }
+
+    public String displayStaffTypesInLines() {
+        String returnString = "";
+        for (StaffType s : loggedInStaff.getAccountRights()) {
+            returnString = returnString + s.getStaffTypeName() + "\n";
+        }
+        if (returnString.length() > 0) {
+            returnString = returnString.substring(0, returnString.length() - 1);
         }
 
         return returnString;
@@ -194,7 +249,7 @@ public class AuthenticationManagedBean implements Serializable {
         staffSessionLocal.updateStaff(loggedInStaff);
         Logging l = new Logging("Staff", "Update " + loggedInStaff.getName() + "'s profile", loggedInStaff.getName());
         logSessionLocal.createLogging(l);
-        
+
         return "index.xhtml?faces-redirect=true";
     }
 

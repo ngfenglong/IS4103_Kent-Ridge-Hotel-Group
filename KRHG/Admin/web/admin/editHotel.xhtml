@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
 
     <body>
 
@@ -44,27 +44,29 @@
                             <div class="col-md-10">
                                 <!-- general form elements -->
                                 <div class="card card-primary">
-                                    <div class="card-header">
-                                        <h3 class="card-title">Add Hotel</h3>
-                                    </div>
-                                    <!-- /.card-header -->
-                                    <!-- form start -->
                                     <h:form enctype="multipart/form-data">
+
+                                        <div class="card-header">
+                                            <h3 class="card-title">Edit #{hotelManagedBean.selectedHotelObj.hotelName}</h3>
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <!-- form start -->
                                         <div class="card-body">
                                             <div class="form-group">
                                                 <label for="hotelName">Hotel Name</label>
-                                                <h:inputText class="form-control" value="#{hotelManagedBean.hotelName}" id="hotelName" a:placeholder="Enter Hotel Name" required="true" />
-                                            </div>  <div class="form-group">
+                                                <h:inputText class="form-control" value="#{hotelManagedBean.selectedHotelObj.hotelName}" id="hotelName" a:placeholder="enter hotel name" required="true" />
+                                            </div>  
+                                            <div class="form-group">
                                                 <label for="hotelCode">Hotel Code</label>
-                                                <h:inputText class="form-control" value="#{hotelManagedBean.hotelCode}" id="hotelCode" a:placeholder="Enter Hotel Code" required="true" />
+                                                <h:inputText class="form-control" value="#{hotelManagedBean.selectedHotelObj.hotelCodeName}" id="hotelCode" a:placeholder="enter hotel code" required="true" />
                                             </div>
                                             <div class="form-group">
                                                 <label for="address">Address</label>
-                                                <h:inputText class="form-control" value="#{hotelManagedBean.address}" id="address" a:placeholder="Enter Address" required="true" />
+                                                <h:inputText class="form-control" value="#{hotelManagedBean.selectedHotelObj.hotelAddress}" id="address" a:placeholder="enter address" required="true" />
                                             </div>
                                             <div class="form-group">
-                                                <label>Hotel Star</label>
-                                                <h:selectOneMenu class="form-control select2" value="#{hotelManagedBean.hotelStar}">
+                                                <label for="hotelStar">Hotel Star</label><br />
+                                                <h:selectOneMenu id="hotelStar" class="form-control select2" value="#{hotelManagedBean.selectedHotelObj.hotelStar}">
                                                     <f:selectItem itemValue="1" itemLabel="1" />
                                                     <f:selectItem itemValue="2" itemLabel="2" />
                                                     <f:selectItem itemValue="3" itemLabel="3" />
@@ -74,7 +76,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="contact">Contact Number</label>
-                                                <h:inputText class="form-control" value="#{hotelManagedBean.contactNumber}" id="contact" a:placeholder="Enter Contact" required="true" />
+                                                <h:inputText class="form-control" value="#{hotelManagedBean.selectedHotelObj.hotelContact}" id="contact" a:placeholder="Enter Contact" required="true" />
                                             </div>
                                             <div class="form-group">
                                                 <label for="hotelImage">Hotel Image</label><br />
@@ -86,7 +88,7 @@
                                         <!-- /.card-body -->
 
                                         <div class="card-footer">
-                                            <h:commandButton class="btn btn-primary" value="Add hotel" action="#{hotelManagedBean.createNewHotel()}"></h:commandButton>
+                                            <h:commandButton class="btn btn-primary" value="Save" action="#{hotelManagedBean.saveHotel()}"></h:commandButton>
                                         </div>
                                     </h:form>
                                 </div>
