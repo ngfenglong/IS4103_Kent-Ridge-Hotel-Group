@@ -84,7 +84,7 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
         PrintWriter out = response.getWriter();
 
         if (customerSessionLocal.Login(c) == true) {
-            if (customerSessionLocal.getCustomerByEmail(email).isAccountStatus() == false) {
+            if (customerSessionLocal.getCustomerByEmail(email).getAccountStatus() == false) {
                 out.println("<script type=\"text/javascript\">");
                 out.println("alert('Your account has been banned! Please contact the administrator!');");
                 out.println("</script>");
@@ -124,10 +124,8 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
         if (regPassword.equals(regConfirmPassword)) {
             Customer c = new Customer();
             c.setName(regName);
-            c.setNric(regNric);
             c.setEmail(regEmail);
             c.setMobileNum(regMobileNum);
-            c.setPassportNum(regPassportNum);
             c.setPassword(encryptPassword(regPassword));
             c.setAccountStatus(true);
             c.setPoints(0);
