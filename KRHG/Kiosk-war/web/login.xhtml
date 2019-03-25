@@ -30,49 +30,77 @@
     <link href="./resources/styles/main.css" rel="stylesheet">
     </link>
 
-    <script type="text/javaScript">
-        function startTime() {
-            var today = new Date();
-            var h = today.getHours();
-            var m = today.getMinutes();
-            var s = today.getSeconds();
-            m = checkTime(m);
-            s = checkTime(s);
-            document.getElementById('txt').innerHTML = h + ":" + m;
-            t = setTimeout('startTime()', 500);
-        }
-        function checkTime(i) {
-            if (i &lt; 10) {
-                i = "0" + i;
-            }
-            return i;
-        }
-    </script>
-
 
 </h:head>
 
-<body onload="startTime()">
+<body>
 
     <!-- Page Content -->
     <section>
         <div class="content">
-            <div class="row">
-                <a href="checkmember.xhtml"><i class="fas fa-arrow-circle-left"
-                        style="position:absolute; top:30px; left: 30px; color:white; font-size: 2em;"></i></a>
-                <div id="txt" class="time"></div>
-                <div class="col-lg-7 title">
-                    <p class="hotelname">KRHG GRAND</p>
-                    <p class="hotelname">Login</p>
-                </div>
-            </div>
 
-            <div class="rowcontent">
-                <form action="" class="mainWrap">
-                    <input placeholder="Email" type="Text" class="left" required="true" />
-                    <input placeholder="Password" type="Text" class="left" required="true" />
-                    <button class="bigBtn">Login</button>
-                </form>
+            <div class="row invoicecontent" style=" padding-bottom:900px; padding-top:30px; top:0px">
+
+                    <div class="theTitle active" style="width:800px; top:200px; left:520px ">
+
+                            <div class="titleleft" style="margin-right:30px">
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        <div class="line">
+                                            <hr>
+                                            </hr>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2" style="padding:0px;  text-align:center; overflow-x: visible" >
+                                            <img width="80px" height="80px" style="position:absolute; bottom:0px; left:5px" src="resources/images/krhglogo4.svg" />
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <div class="line">
+                                            <hr>
+                                            </hr>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12" style="padding:0px; text-align: center" >
+                                        <h1>Kent Ridge</h1>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                        <div class="col-sm-5">
+                                            <div class="line">
+                                                <hr>
+                                                </hr>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2" style="padding:0px;  text-align:center">
+                                            <p style="position:absolute; top:0px; padding-left:10px;">Hotel Group</p>
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <div class="line">
+                                                <hr>
+                                                </hr>
+                                            </div>
+                                        </div>
+                                    </div>
+        
+        
+                            </div>
+                            <span class="separator"></span>
+                            <div class="titleright" style="height:100%">
+                                    <p style="margin-top:30%; color:#C5B358">Kiosk </p><br/>
+                                    <p style=" color:#C5B358">Login</p>
+                                  
+                            </div>
+        
+                        </div>
+
+                    <form action="" class="mainWrap" style="position: absolute; top:400px; padding-left:20px; width:85%">
+                            <input style="text-align: center" placeholder="Hotel Code" type="Text" class="left" required="true" />
+                            <input style="text-align: center" placeholder="Password" type="Text" class="left" required="true" />
+                            <button class="bigBtn" onclick=' location.href = "index.html";'>Login</button>
+                        </form>
+            
             </div>
 
         </div>

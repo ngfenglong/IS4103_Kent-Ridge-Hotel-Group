@@ -46,7 +46,7 @@
   background:#fff;
   padding:20px;
   font-size:1.2em;
-  font-family:'Noto Serif TC', serif;
+  font-family: 'Raleway', sans-serif;
   box-shadow:4px 4px 0px rgba(0,0,0,.1);
   margin-bottom:5px;
   color:#111;
@@ -59,9 +59,10 @@
     text-align:center;
     margin-top:20px;
     font-size:2em;
-    font-family:'Poiret One', cursive;
-    background:#5c5edc;
-    color:#fff;
+    font-family: 'Lora', serif;
+    border: 2px solid#C5B358;
+    background:transparent;
+    color:#C5B358;
     cursor:pointer;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
@@ -82,7 +83,7 @@
   .btn {
     display: block;
     background: #bded7d;
-    color: #fff;
+    color: #C5B358;
     text-decoration: none;
     margin: 20px 0;
     padding: 15px 15px;
@@ -98,6 +99,7 @@
     width: 100%;
     height: 100%;
     transition: all 0.2s ease-in-out;
+ 
     box-shadow: inset 0 3px 0 rgba(0, 0, 0, 0), 0 3px 3px rgba(0, 0, 0, .2);
     border-radius: 5px;
   }
@@ -132,8 +134,8 @@
   .form fieldset label {
     display: block;
     text-transform: uppercase;
-    font-size: 11px;
-    color: rgba(0, 0, 0, .6);
+    font-size: 15px;
+    color: rgba(255, 255, 255, .6);
     margin-bottom: 5px;
     font-weight: bold;
     font-family: Inconsolata;
@@ -143,7 +145,6 @@
     height: 38px;
     color: #333;
     padding: 10px;
-    border-radius: 5px;
     font-size: 15px;
     outline: none !important;
     border: 1px solid rgba(0, 0, 0, 0.3);
@@ -159,6 +160,7 @@
   }
   .form fieldset .select {
     position: relative;
+    background-color:white;
   }
   .form fieldset .select::after {
     content: '';
@@ -194,44 +196,106 @@
     color: transparent;
     text-shadow: 0 0 0 #000;
   }
-  .form button {
-    width: 100%;
-    outline: none !important;
-    background: linear-gradient(180deg, #49a09b, #3d8291);
-    text-transform: uppercase;
-    font-weight: bold;
-    border: none;
-    box-shadow: none;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-    margin-top: 90px;
-  }
   .form button .fa {
     margin-right: 6px;
   }
   /*--------------------
    Checkout
    --------------------*/
-  .checkout {
-    margin: 150px 900px 30px;
-    position: relative;
-    width: 460px;
-    background: white;
-    border-radius: 15px;
-    padding: 160px 45px 30px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, .1);
-  }
+   @media screen and (min-width: 900px){
+    .checkout {
+      margin: 300px 320px 30px;
+      position: relative;
+      width: 660px;
+      background: rgb(43,43,43,0.5);
+      padding: 60px 35px 50px 30px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, .1);
+    }
+
+    .form fieldset {
+      border: none;
+      padding: 0; 
+      padding: 10px 10px 10px 120px;
+      position: relative;
+      clear: both;
+    }
+
+    .form button {
+      width: 80%;
+      outline: none !important;
+      background: transparent;
+      text-transform: uppercase;
+      font-weight: bold;
+      border: 2px solid #C5B358;
+      box-shadow: none;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      margin-top: 90px;
+      margin-left:120px;
+    }
+   }
+
+    @media screen and (min-width: 1200px){
+      .checkout {
+        margin: 150px 900px 30px;
+        position: relative;
+        width: 460px;
+        background: rgb(43,43,43,0.5);
+        padding: 160px 45px 30px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, .1);
+      }
+
+      .form fieldset {
+        border: none;
+        padding: 0;
+        padding: 10px 0;
+        position: relative;
+        clear: both;
+      }
+
+      .form button {
+        width: 100%;
+        outline: none !important;
+        background: transparent;
+        text-transform: uppercase;
+        font-weight: bold;
+        border: 2px solid #C5B358;
+        box-shadow: none;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        margin-top: 90px;
+        margin-left:0px;
+      }
+    }
+
+  
   /*--------------------
    Credit Card
    --------------------*/
-  .credit-card-box {
-    perspective: 1000;
-    width: 400px;
-    height: 280px;
-    position: absolute;
-    top: -112px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
+
+   @media screen and (min-width: 900px){
+    .credit-card-box {
+      perspective: 1000;
+      width: 400px;
+      height: 280px;
+      position: absolute;
+      top:90px;
+      left:-70px;
+      transform: translateX(-50%);
+    }
+   }
+
+   @media screen and (min-width: 1200px){
+    .credit-card-box {
+      perspective: 1000;
+      width: 400px;
+      height: 280px;
+      position: absolute;
+      top: -112px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+   }
+
+ 
   .credit-card-box:hover .flip, .credit-card-box.hover .flip {
     transform: rotateY(180deg);
   }
@@ -377,3 +441,165 @@
     max-width: 100%;
   }
   
+  /* -------------------------------------------------------------------------------------------------------------------------------------- */
+
+
+
+  @media screen and (min-width: 900px){
+    .theTitle{
+      display: flex;
+      align-items: center;
+      height: 150px;
+      position: absolute;
+      left: 52%;
+      top: 180px;
+      transform: translate(-50%, -50%);
+      width: 600px;
+  }
+  }
+
+  @media screen and (min-width: 1200px){
+    .theTitle{
+        display: flex;
+        align-items: center;
+        height: 150px;
+        position: absolute;
+        left: 30%;
+        top: 300px;
+        transform: translate(-50%, -50%);
+        width: 600px;
+        }
+      }
+
+ .titleleft{
+    width: 70%;
+
+}
+
+.titleright{
+  width: 30%;
+  padding-left:5px;
+}
+.theTitle h1{
+    margin: 0;
+    height: 120px;
+    vertical-align: bottom;
+    font-family: 'Lora', serif;
+    font-size: 7rem;
+    color: white;
+    transform: translateX(100%);
+    transition: transform 0.6s ease-out .1s;
+}
+
+.theTitle .separator{
+    background-color: #C5B358;
+    width: 2px;
+    transform: rotate(90deg);
+    height: 0;
+    display: block;
+    margin: 0 6px 0 0;
+    transition: height 0.3s ease 0.9s, transform 0.3s ease 0.6s;
+}
+
+.active .separator{
+    height: 100%;
+    transform: rotate(0);
+    transition: height 0.3s ease, transform 0.3s ease 0.4s;
+
+}
+.theTitle.active h1{
+    transform: translateX(0);
+    transition: transform 0.6s ease-out 0.8s;
+}
+.theTitle.active p{
+    transform: translateX(0);
+    transition: transform 0.5s ease-out 0.7s;
+}
+.theTitle .right{
+    display: flex;
+    align-items: center;
+    width: 50%;
+}
+.theTitle p{
+    margin: 0;
+    padding: 0;
+    font-family: Calibri;
+    font-size: 2rem;
+    line-height: 0.8;
+    vertical-align: middle;
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+    color: white;
+    transform: translateX(-100%);
+    transition: transform 0.5s ease-out;
+}
+.line hr{
+    border: 0;
+    clear:both !important;
+    display:block !important;         
+    background-color:#FFFF !important;
+    height: 5px;
+    margin-top:5px !important;
+    margin-bottom:5px !important;
+  }
+  
+  .line{
+    width: 100%;
+  }
+
+
+.toggleClass{
+    background: none;
+    border: none;
+    border: 2px solid #333;
+    font-size: 2rem;
+    font-family: Calibri;
+    font-weight: 100;
+    text-transform: uppercase;
+    cursor: pointer;
+    outline: none;
+}
+.toggleClass:hover{
+    background-color: #333;
+    color: #fff;
+}
+.toggleClass:active{
+    background-color: #2a2a2a;
+}
+
+
+.mylink{
+  position: absolute;
+  z-index: 150;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  text-align: right;
+  padding: .6rem;
+}
+
+.mylink a{
+  font-family: Calibri;
+  color: #000;
+  border-bottom: 1px solid #000;
+  opacity: .5;
+  transition: opacity .3s;
+  text-decoration: none
+}
+.mylink a:hover{
+  opacity: 1
+}
+
+/* -------------------------------------------------------------------------------------------------------------------------------------------------- */
+@media screen and (min-width: 900px){
+  .logo{
+    position:absolute; left:70px; top:71px;
+  }
+}
+
+@media screen and (min-width: 1200px){
+  .logo{
+    position:absolute; left:240px; top:60px;
+  }
+}

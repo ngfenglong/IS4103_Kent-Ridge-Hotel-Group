@@ -30,23 +30,120 @@
     <link href="./resources/styles/main.css" rel="stylesheet">
     </link>
 
+    <link href="./resources/styles/loadingpage.css" rel="stylesheet">
+    </link>
+
+    <script type="text/javaScript">
+      function startTime() {
+          var today = new Date();
+          var h = today.getHours();
+          var m = today.getMinutes();
+          var s = today.getSeconds();
+          m = checkTime(m);
+          s = checkTime(s);
+          document.getElementById('txt').innerHTML = h + ":" + m;
+          t = setTimeout('startTime()', 500);
+      }
+      function checkTime(i) {
+          if (i &lt; 10) {
+              i = "0" + i;
+          }
+          return i;
+      }
+
+      function onReady(callback) {
+var intervalId = window.setInterval(function() {
+  if (document.getElementsByTagName('body')[0] !== undefined) {
+    window.clearInterval(intervalId);
+    callback.call(this);
+  }
+}, 1000);
+}
+
+function setVisible(selector, visible) {
+document.querySelector(selector).style.display = visible ? 'block' : 'none';
+}
+
+onReady(function() {
+  console.log("hi");
+setVisible('#content', true);
+setVisible('#loading', false);
+});
+  </script>
 
 
 </h:head>
 
-<body>
+<body onload="startTime()">
 
     <!-- Page Content -->
-    <section>
-        <div class="content">
+    <section class="content">
+
+        <div id="loading" class="spinner">
+            <img width="60px" height="60px" style="position:absolute; bottom:50px; left:740px" src="resources/images/krhglogo4.svg" />
+            <br/><br/>
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+        </div>
+        
+        <div style="display:none" id="content" class="content">
             <div class="row">
                 <a href="checkinResult.xhtml"><i class="fas fa-arrow-circle-left"
                         style="position:absolute; top:30px; left: 30px; color:white; font-size: 2em;"></i></a>
                 <div id="txt" class="time"></div>
-                <div class="col-lg-7 title">
-                        <p class="hotelname">KRHG GRAND</p>
-                        <p class="hotelname">Payment</p>
+                <div class="theTitle active" style="width:800px; ">
+
+                    <div class="titleleft" style="margin-right:30px">
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <div class="line">
+                                    <hr>
+                                    </hr>
+                                </div>
+                            </div>
+                            <div class="col-sm-2" style="padding:0px;  text-align:center; overflow-x: visible" >
+                                    <img width="80px" height="80px" style="position:absolute; bottom:0px; left:5px" src="resources/images/krhglogo4.svg" />
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="line">
+                                    <hr>
+                                    </hr>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12" style="padding:0px; text-align: center" >
+                                <h1>GRAND</h1>
+                            </div>
+                        </div>
+                        <div class="row">
+                                <div class="col-sm-5">
+                                    <div class="line">
+                                        <hr>
+                                        </hr>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2" style="padding:0px;  text-align:center">
+                                    <p style="position:absolute; top:0px; padding-left:10px;">KRHG</p>
+                                </div>
+                                <div class="col-sm-5">
+                                    <div class="line">
+                                        <hr>
+                                        </hr>
+                                    </div>
+                                </div>
+                            </div>
+
+
                     </div>
+                    <span class="separator"></span>
+                    <div class="titleright" style="height:100%">
+                        <p style="margin-top:50%; color:#C5B358">Payment</p>
+                    </div>
+
+                </div>
+
             </div>
             <div class="checkout">
             <div class="credit-card-box">
@@ -125,11 +222,11 @@
                         </select>
                       </div>
                     </fieldset>
-                    <fieldset class="fieldset-ccv">
+                    <fieldset class="fieldset-ccv" style="padding-left:0px">
                       <label for="card-ccv">CCV</label>
-                      <input type="text" id="card-ccv" maxlength="3" />
+                      <input type="text" id="card-ccv" maxlength="3"    />
                     </fieldset>
-                    <button class="btn"><i class="fa fa-lock"></i> submit</button>
+                    <button class="btn" formaction="roomallocation.xhtml"><i class="fa fa-lock"></i> submit</button>
                   </form>
                   </div>
 
