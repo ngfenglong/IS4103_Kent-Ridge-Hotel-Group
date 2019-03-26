@@ -103,7 +103,7 @@ public class Customer implements Serializable {
     }
 
     public void setBookingHistories(List<RoomBooking> currentBookings) {
-        this.bookingHistories = bookingHistories;
+        this.bookingHistories = currentBookings;
     }
 
     public List<RoomBooking> getCurrentBookings() {
@@ -137,7 +137,7 @@ public class Customer implements Serializable {
         this.dateJoined = dateJoined;
     }
 
-    public boolean isMember() {
+    public boolean getMember() {
         return member;
     }
 
@@ -146,7 +146,7 @@ public class Customer implements Serializable {
     }
     
 
-    public boolean isAccountStatus() {
+    public boolean getAccountStatus() {
         return accountStatus;
     }
 
