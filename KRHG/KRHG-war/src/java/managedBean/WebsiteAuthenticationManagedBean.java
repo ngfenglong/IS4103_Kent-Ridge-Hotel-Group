@@ -126,6 +126,10 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
             c.setName(regName);
             c.setEmail(regEmail);
             c.setMobileNum(regMobileNum);
+
+            c.setEmail(regEmail);
+            c.setMobileNum(regMobileNum);
+   
             c.setPassword(encryptPassword(regPassword));
             c.setAccountStatus(true);
             c.setPoints(0);

@@ -39,7 +39,7 @@
                 </div> 
                 <section class="content">
 
-                    
+
                     <div class="container-fluid">
                         <div class="row">
                             <!-- left column -->
@@ -61,7 +61,7 @@
 
                                             </div>
 
-                                           
+
 
                                             <!-- /.input group -->
 
@@ -78,6 +78,53 @@
                         </div>
                     </div>
                     <!-- /.container-fluid -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Rooms checking out today</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table  id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Booked by</th>
+                                        <th>Booking Id</th>
+                                        <th>Passport Number</th>
+                                        <th>Book out Date</th>
+
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <h:form>
+                                        <ui:repeat var="o" value="#{frontDeskManagedBean.todayCheckOutRoom}" varStatus="status">
+
+                                            <tr>
+                                                <td>#{o.bookedBy.name}</td>
+                                                <td>#{o.bookedRoom.roomNumber}</td>
+                                                <td>#{o.passportNum}</td>
+                                                <td>#{o.bookOutDate}</td>
+                                                <td><h:commandButton value="Check in" ></h:commandButton></td>
+                                            </tr>
+                                        </ui:repeat>
+                                    </h:form>
+
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Booked by</th>
+                                        <th>Booking Id</th>
+                                        <th>Passport Number</th>
+                                        <th>Book out Date</th>
+
+                                        <th></th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                       
+                    </div>
                 </section>
                 <!-- /.content-header -->
                 <!-- Main content -->

@@ -4,7 +4,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-       xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core">
 
     <body>
 
@@ -39,33 +39,36 @@
                     <!-- /.container-fluid -->
                 </div> 
                 <section class="content">
-                    <div class="wrap">
-                        <h1>Housekeeping Request</h1>
-                        <p style="margin-bottom:30px; text-align: left">Enter request details</p>
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">New housekeeping Report</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+                        <h:form role="form">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <h:inputText class="form-control" value="#{frontDeskManagedBean.mlocation}" a:placeholder="Room" required="true"></h:inputText>
+
+                                </div>
+                                <div class="form-group">
+                                    <h:inputTextarea rows="10" cols="50" value="#{frontDeskManagedBean.maintainDescription}" a:placeholder="Additional Request" ></h:inputTextarea>
+
+                                </div>
 
 
-                        <form action="" class="mainWrap" style="width:80%; margin:0;">
-                            <input placeholder="Room Number" type="text" maxlength="4" class="left" required="true" />
-                            <textarea placeholder="Additional Requests" class="mainArea"></textarea>
 
+                                <!-- /.input group -->
 
+                            </div>
+                            <!-- /.card-body -->
 
-                            <button class="bigBtn">Submit Request</button>
-                        </form>
-
-                        <h:form class="form-control">
-                            <h:selectOneMenu value="#{frontDeskManagedBean.hkroom}">
-                                <ui:repeat var="o" value="#{frontDeskManagedBean.allOccupiedRooms}" varStatus="status">
-                                    <f:selectItem itemValue="" itemLabel="Coffee3 - Cream Latte" />
-                                </ui:repeat>
-                            </h:selectOneMenu>
-                            
-                            <h:inputTextarea cols="10" rows="10" a:placeholder="Special request" value="#{frontDeskManagedBean.hkSpecialRequest}"></h:inputTextarea>
-                            <h:commandButton value="Create Request" action="#{frontDeskManagedBean.createHouseKeeping()}"></h:commandButton>
+                            <div class="card-footer">
+                                <h:commandButton value="Create housekeeping request"  ></h:commandButton>
+                            </div>
                         </h:form>
-
-
                     </div>
+
                     <!-- /.container-fluid -->
                 </section>
                 <!-- /.content-header -->

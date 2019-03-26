@@ -5,11 +5,14 @@
  */
 package sessionBeans;
 
+import entity.CreditCard;
+import entity.Customer;
 import entity.Hotel;
 import entity.HotelFacility;
 import entity.HouseKeepingOrder;
 import entity.MinibarItem;
 import entity.Room;
+import entity.RoomBooking;
 import entity.RoomFacility;
 import entity.Staff;
 import entity.StaffType;
@@ -17,6 +20,9 @@ import error.NoResultException;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Formatter;
 import javax.annotation.PostConstruct;
@@ -51,6 +57,10 @@ public class DataInitializationSessionBean {
     RoomFacilitySessionLocal roomFacilitySessionLocal;
     @EJB
     HouseKeepingOrderSessionLocal houseKeepingOrderSessionLocal;
+    @EJB
+    CustomerSessionLocal customerSessionLocal;
+    @EJB
+    BookingSessionLocal bookingSessionLocal;
 
     public DataInitializationSessionBean() {
     }
@@ -70,8 +80,11 @@ public class DataInitializationSessionBean {
                 initializeKRNWRoom();
                 initializeKRSERoom();
                 initializeKRSWRoom();
+                intializeRoomBookingsAndCustomer();
             } catch (NoResultException ex) {
                 ex.printStackTrace();
+            } catch (ParseException e) {
+                e.printStackTrace();
             }
         }
 
@@ -14740,6 +14753,60 @@ public class DataInitializationSessionBean {
         houseKeepingOrderSessionLocal.createHouseKeepingOrder(ho3);
         houseKeepingOrderSessionLocal.createHouseKeepingOrder(ho4);
         em.flush();
+    }
+
+    public void intializeRoomBookingsAndCustomer() throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String dateString = format.format(new Date());
+        Customer customer1 = new Customer();
+        customer1.setAccountStatus(true);
+        customer1.setDateJoined(new Date());
+        customer1.setEmail("Congx2@hotmail.com");
+        customer1.setMember(true);
+        customer1.setMobileNum("94308808");
+        customer1.setName("Lim Dian Cong");
+        customer1.setPassword(encryptPassword("1234"));
+        customer1.setPoints(20);
+
+        customerSessionLocal.createCustomer(customer1);
+        em.flush();
+
+        Customer customer2 = new Customer();
+        customer2.setAccountStatus(true);
+        customer2.setDateJoined(new Date());
+        customer2.setEmail("Stanley@hotmail.com");
+        customer2.setMember(true);
+        customer2.setMobileNum("97628485");
+        customer2.setName("Stanlet loh");
+        customer2.setPassword(encryptPassword("1234"));
+        customer2.setPoints(1);
+
+        customerSessionLocal.createCustomer(customer2);
+        em.flush();
+
+        CreditCard creditCard1 = new CreditCard();
+        creditCard1.setCardNum(encryptPassword("1234123412341234"));
+        creditCard1.setCvv(encryptPassword("123"));
+        creditCard1.setExpiryDate(format.parse("2021-04-01"));
+
+        Date date = format.parse("2019-04-01");
+
+        RoomBooking rm1 = new RoomBooking();
+        rm1.setBookInDate(new Date());
+        rm1.setBookOutDate(date);
+        rm1.setBookedBy(customer1);
+        rm1.setCreditCard(null);
+        rm1.setEmailAddress(customer1.getEmail());
+        rm1.setHasTransport(false);
+        rm1.setName(customer1.getName());
+        rm1.setPassportNum("A0173719Y");
+        rm1.setPrice(2000.0);
+        rm1.setRoomType("Standard");
+        rm1.setStatus("Incomplete");
+
+        bookingSessionLocal.createRoomBooking(rm1);
+        em.flush();
+
     }
 
     private static String encryptPassword(String password) {

@@ -38,7 +38,7 @@
                     <!-- /.container-fluid -->
                 </div> 
                 <section class="content">
-                
+
                     <div class="container-fluid">
                         <div class="row">
                             <!-- left column -->
@@ -56,12 +56,12 @@
                                     <h:form role="form">
                                         <div class="card-body">
                                             <div class="form-group">
-                                               
-                                                <h:inputText class="form-control" value="#{frontDeskManagedBean.passportNumber}" id="passportnumber" a:placeholder="passport Number" required="true" />
+
+                                                <h:inputText class="form-control" value="#{frontDeskManagedBean.checkinPassportNumber}" id="passportnumber" a:placeholder="passport Number" required="true" />
 
                                             </div>
 
-                                           
+
                                             <!-- /.input group -->
 
                                         </div>
@@ -79,37 +79,42 @@
                     <!-- /.container-fluid -->
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">List of housekeeping request for ENTER BACKEND hotel name</h3>
+                            <h3 class="card-title">Room bookings for today</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
                             <table  id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Room</th>
+                                        <th>Booked by</th>
+                                        <th>Booking Id</th>
                                         <th>Passport Number</th>
-                                        <th>Book out Date </th>
+                                        <th>Book out Date</th>
 
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <ui:repeat var="o" value="#{frontDeskManagedBean.todayBooking}" varStatus="status">
+                                    <h:form>
+                                        <ui:repeat var="o" value="#{frontDeskManagedBean.todayBooking}" varStatus="status">
 
-                                        <tr>
-                                            <td>#{o.bookedBy.name}</td>
-                                            <td>#{o.bookedBy.passportNum}</td>
-                                            <td>#{o.bookOutDate}</td>
+                                            <tr>
+                                                <td>#{o.bookedBy.name}</td>
+                                                <td>#{o.roomBookingID}</td>
+                                                <td>#{o.passportNum}</td>
+                                                <td>#{o.bookOutDate}</td>
+                                                <td><h:commandButton value="Check in" action="checkinResult.xhtml?faces-redirect=true" ></h:commandButton></td>
+                                            </tr>
+                                        </ui:repeat>
+                                    </h:form>
 
-                                        </tr>
-
-                                    </ui:repeat>
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th>Room</th>
+                                        <th>Booked by</th>
+                                        <th>Booking Id</th>
                                         <th>Passport Number</th>
-                                        <th>Book out Date </th>
+                                        <th>Book out Date</th>
 
                                         <th></th>
                                     </tr>
@@ -117,7 +122,6 @@
                             </table>
                         </div>
                         <!-- /.card-body -->
-                        <a href="createHousekeepingRequest.xhtml">Create New Request</a>
                     </div>
                 </section>
                 <!-- /.content-header -->
