@@ -593,13 +593,17 @@
 
 /* -------------------------------------------------------------------------------------------------------------------------------------------------- */
 @media screen and (min-width: 900px){
-  .logo{
-    position:absolute; left:70px; top:71px;
+  .krhglogo{
+    position:absolute; 
+    bottom:50px; 
+    left:480px;
   }
 }
 
 @media screen and (min-width: 1200px){
-  .logo{
-    position:absolute; left:240px; top:60px;
+  .krhglogo{
+    position:absolute; 
+    bottom:50px; 
+    left:740px;
   }
 }

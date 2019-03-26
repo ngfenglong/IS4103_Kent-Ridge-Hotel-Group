@@ -14,6 +14,11 @@ body {
 
 }
 
+::-webkit-scrollbar {
+  width: 0px;  /* remove scrollbar space */
+  background: transparent;  /* optional: just make scrollbar invisible */
+}
+
 a {
   text-decoration:none;
 }
@@ -68,6 +73,8 @@ span.bookinginfo{
     margin:0px;
   }
 
+  
+
   .subhotelname{
     color: #fff; 
     text-align: left;
@@ -103,9 +110,16 @@ span.bookinginfo{
     right:0px;
     left:120px;
     width:80%;
-    padding:100px 50px;
+    padding:50px 50px;
     background-color: rgb(43,43,43,0.2);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+
+  .resultcontent{
+    max-height:200px ;
+    overflow-y: scroll; 
+    margin-top:0px;
+    padding-top:10px;
   }
 
   p.bookinginfo{
@@ -226,7 +240,14 @@ span.bookinginfo{
     width:45%;
     padding:200px 50px;
     background-color: rgb(43,43,43,0.5);
+    overflow:hidden;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+
+  .resultcontent{
+    max-height:400px ;
+    overflow-y: scroll; 
+    margin-top:60px;
   }
 
   a.menubutton{

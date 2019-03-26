@@ -12,7 +12,7 @@
     <meta name="author" content="">
     </meta>
 
-    <title>Hotel Stay Management System</title>
+    <title>KRGH Kiosk</title>
 
     <link href="https://fonts.googleapis.com/css?family=News+Cycle|Poiret+One" rel="stylesheet">
     </link>
@@ -79,7 +79,7 @@
     <section class="content">
         
             <div id="loading" class="spinner">
-                    <img width="60px" height="60px" style="position:absolute; bottom:50px; left:740px" src="resources/images/krhglogo4.svg" />
+                    <img width="60px" height="60px" class="krhglogo" src="resources/images/krhglogo4.svg" />
                     <br/><br/>
                 <div class="bounce1"></div>
                 <div class="bounce2"></div>
@@ -138,23 +138,26 @@
                         </div>
                         <span class="separator"></span>
                         <div class="titleright" style="height:100%">
-                                <p style="margin-top:30%; color:#C5B358">Booking</p><br/>
+                                <p style="margin-top:30%; color:#C5B358">Room</p><br/>
                                 <p style=" color:#C5B358">Details</p>
                         </div>
     
                     </div>
             </div>
 
-            <div class="row rowcontent" style=" padding-bottom:500px; padding-top:6%">
-            <col class="col-sm-6 col-xl-12">
-                <p class="bookinginfo col-lg-12 col-sm-6">Guest Name:<span class="bookinginfo">Mary Impicciche</span></p>
-                <p class="bookinginfo col-lg-12 col-sm-6">Room Number:<span class="bookinginfo">1837</span></p>
-                <p class="bookinginfo col-lg-12 col-sm-6">Charges Incurred:<span class="bookinginfo">$421</span><a style="margin-left:10px; text-decoration: none; color:#C5B358" href="invoice.xhtml">view invoice ></a></p>
-            </col>
-            <col class="col-sm-6 col-xl-12">
-            <p class="bookinginfo col-lg-12 col-sm-6">Room Type: <span class="bookinginfo">2-Deluxe Suite</span></p>
-            <p class="bookinginfo col-lg-12 col-sm-6">Booking No.: <span class="bookinginfo">103748293</span></p>
-        </col>
+            <div class="row rowcontent" id="checkoutResult" style="padding-bottom:500px; padding-top:0px">
+                <div class=" row resultcontent">
+                        <col class="col-sm-6 col-xl-12">
+                        <p class="bookinginfo col-lg-12 col-sm-6">Guest Name:<span class="bookinginfo">Mary Impicciche</span></p>
+                        <p class="bookinginfo col-lg-12 col-sm-6">Room Number:<span class="bookinginfo">1837</span></p>
+                        <p class="bookinginfo col-lg-12 col-sm-6">Charges Incurred:<span class="bookinginfo">$421</span><a style="margin-left:10px; text-decoration: none; color:#C5B358" href="invoice.xhtml">view invoice ></a></p>
+                    </col>
+                    <col class="col-sm-6 col-xl-12">
+                    <p class="bookinginfo col-lg-12 col-sm-6">Room Type: <span class="bookinginfo">2-Deluxe Suite</span></p>
+                    <p class="bookinginfo col-lg-12 col-sm-6">Booking No.: <span class="bookinginfo">103748293</span></p>
+                </col>
+                </div>
+
                     
                     <p class="bookinginfo" style="border:none; margin:0px">Input passport number to confirm checkout:</p>
                     <input placeholder="Passport Number" style="border:1px solid grey; box-shadow: none;" type="Text" class="left" required="true" /><br/>
