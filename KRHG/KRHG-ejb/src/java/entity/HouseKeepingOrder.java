@@ -36,12 +36,12 @@ public class HouseKeepingOrder implements Serializable {
     private Staff houseKeeper;
     private String specialRequest;
     private int level;
-
+    private String requestType;
     public HouseKeepingOrder() {
         
     }
     
-    public HouseKeepingOrder(Room room, String status, int level, Date orderDateTime, Date completeDateTime, Staff houseKeeper, String specialRequest) {
+    public HouseKeepingOrder(Room room, String status, int level, Date orderDateTime, Date completeDateTime, Staff houseKeeper, String specialRequest, String requestType) {
         this();
         this.room = room;
         this.status = status;
@@ -50,6 +50,22 @@ public class HouseKeepingOrder implements Serializable {
         this.completeDateTime = completeDateTime;
         this.houseKeeper = houseKeeper;
         this.specialRequest = specialRequest;
+        this.requestType = requestType;
+    }
+    
+    
+    /**
+     * @return the requestType
+     */
+    public String getRequestType() {
+        return requestType;
+    }
+
+    /**
+     * @param requestType the requestType to set
+     */
+    public void setRequestType(String requestType) {
+        this.requestType = requestType;
     }
     
          /**
