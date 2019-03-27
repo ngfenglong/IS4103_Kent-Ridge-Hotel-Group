@@ -14742,16 +14742,26 @@ public class DataInitializationSessionBean {
         h10.addRoom(roomSessionLocal.getRoomByName("KRSW_1202"));
 
         em.flush();
-        HouseKeepingOrder ho1 = new HouseKeepingOrder(roomSessionLocal.getRoomByID(188l), "test", 12, new Date(), new Date(), null, "123");
-        HouseKeepingOrder ho2 = new HouseKeepingOrder(roomSessionLocal.getRoomByID(187l), "test", 7, new Date(), new Date(), null, "123");
-        HouseKeepingOrder ho3 = new HouseKeepingOrder(roomSessionLocal.getRoomByID(189l), "test", 11, new Date(), new Date(), null, "123");
-        HouseKeepingOrder ho4 = new HouseKeepingOrder(roomSessionLocal.getRoomByID(190l), "test", 12, new Date(), new Date(), null, "123");
+        
+        HouseKeepingOrder ho1 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_401"), "incomplete", 4, new Date(), new Date(), null, "Toothpaste and hairnet","toiletries");
+        HouseKeepingOrder ho2 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_402"), "incomplete", 4, new Date(), new Date(), null, "Spoilt TV","maintenance");
+        HouseKeepingOrder ho3 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_405"), "incomplete", 4, new Date(), new Date(), null, "Spilled drinks","housekeeping");
+        HouseKeepingOrder ho4 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_406"), "incomplete", 4, new Date(), new Date(), null, "Dusty table","housekeeping");
+        HouseKeepingOrder ho5 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_402"), "incomplete", 4, new Date(), new Date(), null, "Tv not working","maintenance");
+        HouseKeepingOrder ho6 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_403"), "incomplete", 4, new Date(), new Date(), null, "1 pants & 1 shirt","laundry");
+        HouseKeepingOrder ho7 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_409"), "incomplete", 4, new Date(), new Date(), null, "5 pants & 5 shirts","laundry");
+        HouseKeepingOrder ho8 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_408"), "incomplete", 4, new Date(), new Date(), null, "Mineral water refill","housekeeping");
+        HouseKeepingOrder ho9 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_407"), "incomplete", 4, new Date(), new Date(), null, "Clogged Sink","maintenance");
 
-//        HouseKeepingOrder ho1 = new HouseKeepingOrder(roomSessionLocal.getRoomByID(1l), "", 12, new Date(), new Date(), staffSessionLocal.getStaffByID(1l), "");
         houseKeepingOrderSessionLocal.createHouseKeepingOrder(ho1);
         houseKeepingOrderSessionLocal.createHouseKeepingOrder(ho2);
         houseKeepingOrderSessionLocal.createHouseKeepingOrder(ho3);
         houseKeepingOrderSessionLocal.createHouseKeepingOrder(ho4);
+        houseKeepingOrderSessionLocal.createHouseKeepingOrder(ho5);
+        houseKeepingOrderSessionLocal.createHouseKeepingOrder(ho6);
+        houseKeepingOrderSessionLocal.createHouseKeepingOrder(ho7);
+        houseKeepingOrderSessionLocal.createHouseKeepingOrder(ho8);
+        houseKeepingOrderSessionLocal.createHouseKeepingOrder(ho9);
         em.flush();
     }
 
