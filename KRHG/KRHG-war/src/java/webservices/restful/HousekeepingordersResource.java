@@ -90,10 +90,12 @@ public class HousekeepingordersResource {
     @GET
     @Path("/query")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response searchHouseKeepingOrder(@QueryParam("level") String level) throws NoResultException {
-        System.out.println("444Searching based on level: " + level);
+    public Response searchHouseKeepingOrder(@QueryParam("level") String level,@QueryParam("hotelCodeName") String hotelCodeName) throws NoResultException {
+        System.out.println("444Searching based on level: " + level + " Hotel Codename: " + hotelCodeName);
         if (level != null) {
-            List<HouseKeepingOrder> getList = houseKeepingOrderSession.getHouseKeepingOrderByLevel(Integer.parseInt(level));
+//            List<HouseKeepingOrder> getList = houseKeepingOrderSession.getHouseKeepingOrderByLevel(Integer.parseInt(level));
+//              List<HouseKeepingOrder> getList = houseKeepingOrderSession.getHouseKeepingOrderByLevelAndHotelCodeName(Integer.parseInt(level), hotelCodeName);
+              List<HouseKeepingOrder> getList = houseKeepingOrderSession.getHouseKeepingOrderByLevelAndHotelCodeNameAndStatus(Integer.parseInt(level), hotelCodeName, "complete");
 //            List<HouseKeepingOrder> returnList = new ArrayList<>();
             List<HouseKeepingOrder> returnList = new ArrayList<>();
             for (HouseKeepingOrder h : getList) {
@@ -108,6 +110,7 @@ public class HousekeepingordersResource {
                 tempHouseKeepingOrder.setStatus(h.getStatus());
                 tempHouseKeepingOrder.setSpecialRequest(h.getSpecialRequest());
                 tempHouseKeepingOrder.setLevel(h.getLevel());
+                tempHouseKeepingOrder.setRequestType(h.getRequestType());
                 returnList.add(tempHouseKeepingOrder);
             }
             GenericEntity<List<HouseKeepingOrder>> entity = new GenericEntity<List<HouseKeepingOrder>>(returnList) {};
