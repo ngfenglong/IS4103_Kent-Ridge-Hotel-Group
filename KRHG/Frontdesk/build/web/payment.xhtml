@@ -38,7 +38,83 @@
                     <!-- /.container-fluid -->
                 </div> 
                 <section class="content">
-                    <p class="info">Link from either walk in or make resevration then go to paypal</p>
+                    <h:form role="form">
+                        <div class="card-body">
+                            <table>
+                                <tr>
+
+                                    <div class="form-group">
+                                        <td>
+                                            <label>
+                                                Price:
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <h:outputText value="$100"></h:outputText>
+                                        </td>
+                                    </div>
+                                </tr>
+
+
+
+                                <tr>
+                                    <td>
+                                        <label>
+                                           Name on card:
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <h:inputText >
+
+                                            </h:inputText>
+                                        </div>
+                                    </td>
+                                </tr>
+
+
+
+                                <tr>
+                                    <td>
+                                        <label>
+                                        Expiry date:
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <h:inputText >
+
+                                            </h:inputText>
+                                        </div>
+                                    </td>
+                                </tr>
+
+
+
+                                  <tr>
+                                    <td>
+                                        <label>
+                                          CVV:
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <h:inputText >
+
+                                            </h:inputText>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- /.input group -->
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+
+                        <div class="card-footer">
+                            <h:commandButton class="btn btn-primary" value="Make Payment" ></h:commandButton>
+                        </div>
+                    </h:form>
                     <!-- /.container-fluid -->
                 </section>
                 <!-- /.content-header -->

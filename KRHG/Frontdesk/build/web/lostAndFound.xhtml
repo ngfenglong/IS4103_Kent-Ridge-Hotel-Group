@@ -39,9 +39,14 @@
                 </div> 
                 <section class="content">
                     <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Lost and founds</h3>
-                        </div>
+                        <h:form>
+                            <div class="card-header">
+                                <h:commandLink class="btn btn-primary float-sm-right" action="createLostAndFound.xhtml?faces-redirect=true"> <i class="fa fa-plus" ></i></h:commandLink>
+
+
+                                <h3 class="card-title">Lost And Found</h3>
+                            </div>
+                        </h:form>
                         <!-- /.card-header -->
                         <div class="card-body">
                             <table id="example1" class="table table-bordered table-striped">
@@ -51,25 +56,29 @@
                                         <th>Contact</th>
                                         <th>Description</th>
                                         <th>Date</th>
+                                        <th>Report type</th>
                                         <th>Status</th>
 
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <ui:repeat var="o" value="#{frontDeskManagedBean.allLostAndFounds}" varStatus="status">
+                                    <h:form>
+                                        <ui:repeat var="o" value="#{frontDeskManagedBean.allLostAndFounds}" varStatus="status">
 
-                                        <tr>
-                                            <td>#{o.itemName}</td>
-                                            <td>#{o.contactNum}</td>
-                                            <td>#{o.itemDescription}</td>
-                                            <td>#{o.reportedDate}</td>
-                                            <td>#{o.isResolved}</td>
+                                            <tr>
+                                                <td>#{o.itemName}</td>
+                                                <td>#{o.contactNum}</td>
+                                                <td>#{o.itemDescription}</td>
+                                                <td>#{o.reportedDate}</td>
+                                                <td>#{o.reportType}</td>
+                                                <td>#{o.isResolved}</td>
+                                                <td colspan="3"><h:commandLink > <i class="fa fa-edit" style="color:gray"></i></h:commandLink></td>
+                                           
+                                            </tr>
 
-                                        </tr>
-
-                                    </ui:repeat>
-
+                                        </ui:repeat>
+                                    </h:form>
                                 </tbody>
                                 <tfoot>
                                     <tr>
@@ -77,6 +86,7 @@
                                         <th>Contact</th>
                                         <th>Description</th>
                                         <th>Date</th>
+                                        <th>Report type</th>
                                         <th>Status</th>
                                         <th></th>
                                     </tr>
@@ -84,7 +94,6 @@
                             </table>
                         </div>
                         <!-- /.card-body -->
-                        <a href='createLostAndFound.xhtml'>Make a report</a>
                     </div>
                     <!-- /.container-fluid -->
                 </section>

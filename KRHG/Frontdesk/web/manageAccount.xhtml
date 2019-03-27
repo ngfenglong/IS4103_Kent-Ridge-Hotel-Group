@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <body>
 
@@ -44,42 +45,50 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="example1" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>NRIC</th>
-                                        <th>Email</th>
-                                        <th>Phone</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <ui:repeat var="o" value="#{frontDeskManagedBean.allCustomer}" varStatus="status">
-
+                            <h:form>
+                                <table id="example1" class="table table-bordered table-striped">
+                                    <thead>
                                         <tr>
-                                            <td>#{o.name}</td>
-                                            <td>#{o.nric}</td>
-                                            <td>#{o.email}</td>
-                                            <td>#{o.mobileNum}</td>
 
+                                            <th>Name</th>
+
+                                            <th>Email</th>
+                                            <th>Phone</th>
+                                            <th>Status</th>
+
+                                            <th></th>
                                         </tr>
+                                    </thead>
+                                    <tbody>
 
-                                    </ui:repeat>
+                                        <c:forEach items="${frontDeskManagedBean.allCustomer}" var="o">
 
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>NRIC</th>
-                                        <th>Email</th>
-                                        <th>Phone</th>
-                                        <th></th>
-                                    </tr>
-                                </tfoot>
-                            </table>
+                                            <tr>
+                                                <td>#{o.name}</td>
+
+                                                <td>#{o.email}</td>
+                                                <td>#{o.mobileNum}</td>
+                                                <td>#{o.accountStatus}</td>
+                                                <td colspan="3"><h:commandLink action="#{frontDeskManagedBean.viewAccount(o)}"> <i class="fa fa-edit" style="color:gray"></i></h:commandLink></td>
+
+                                            </tr>
+
+                                        </c:forEach>
+
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+
+                                            <th>Name</th>
+
+                                            <th>Email</th>
+                                            <th>Phone</th>
+                                            <th>Status</th>
+                                            <th></th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </h:form>
                         </div>
                         <!-- /.card-body -->
                     </div>

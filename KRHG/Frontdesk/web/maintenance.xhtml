@@ -39,9 +39,12 @@
                 </div> 
                 <section class="content">
                     <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Maintenance reports</h3>
-                        </div>
+                        <h:form>
+                            <div class="card-header">
+                                <h:commandLink class="btn btn-primary float-sm-right" action="creatMaintainence.xhtml?faces-redirect=true"> <i class="fa fa-plus" ></i></h:commandLink>
+                                <h3 class="card-title">Maintenance Report</h3>
+                            </div>
+                        </h:form>
                         <!-- /.card-header -->
                         <div class="card-body">
                             <table id="example1" class="table table-bordered table-striped">
@@ -63,12 +66,12 @@
                                             <td>#{o.description}</td>
                                             <td>#{o.dateReported}</td>
                                             <td>#{o.status}</td>
-                                       
+
 
                                         </tr>
 
                                     </ui:repeat>
-                                  
+
                                 </tbody>
                                 <tfoot>
                                     <tr>
@@ -83,7 +86,7 @@
                             </table>
                         </div>
                         <!-- /.card-body -->
-                        <a href='creatMaintainence.xhtml'>Make a report</a>
+
                     </div>
                     <!-- /.container-fluid -->
                 </section>

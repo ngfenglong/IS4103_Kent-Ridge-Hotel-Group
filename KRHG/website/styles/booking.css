@@ -42,7 +42,7 @@ body
 	font-size: 14px;
 	font-weight: 400;
 	background: #FFFFFF;
-	color: #a5a5a5;
+	color: #ffffff;
 }
 div
 {
@@ -618,7 +618,7 @@ section
 	padding-left: 27px;
 	font-size: 14px;
 	font-weight: 500;
-	color: #ffffff;
+	color: #797979;
 	outline: none;
 }
 .booking_input_container

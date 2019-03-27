@@ -1,116 +1,250 @@
-<html lang="en">
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html">
 
-    <head>
+<h:head>
 
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
+    <meta charset="utf-8">
+    </meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    </meta>
+    <meta name="description" content="">
+    </meta>
+    <meta name="author" content="">
+    </meta>
 
-        <title>Hotel Stay Management System</title>
+    <title>Hotel Stay Management System</title>
 
-        <link href="https://fonts.googleapis.com/css?family=News+Cycle|Poiret+One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=News+Cycle|Poiret+One" rel="stylesheet">
+    </link>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    </link>
 
-        <!-- Bootstrap core CSS -->
-        <link href="./resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="./resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    </link>
 
-        <!-- Custom styles for this template -->
-        <link href="./resources/styles/the-big-picture.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="./resources/styles/the-big-picture.css" rel="stylesheet">
+    </link>
+    <link href="./resources/styles/main.css" rel="stylesheet">
+    </link>
 
-        <script type="text/javascript">
-            function startTime() {
-                var today = new Date();
-                var h = today.getHours();
-                var m = today.getMinutes();
-                var s = today.getSeconds();
-                // add a zero in front of numbers<10
-                m = checkTime(m);
-                s = checkTime(s);
-                document.getElementById('txt').innerHTML = h + ":" + m;
-                t = setTimeout('startTime()', 500);
-            }
-            function checkTime(i) {
-                if (i < 10) {
-                    i = "0" + i;
-                }
-                return i;
-            }
-        </script>
+    <link href="./resources/styles/loadingpage.css" rel="stylesheet">
+    </link>
 
-    </head>
+    <script type="text/javaScript">
+      function startTime() {
+          var today = new Date();
+          var h = today.getHours();
+          var m = today.getMinutes();
+          var s = today.getSeconds();
+          m = checkTime(m);
+          s = checkTime(s);
+          document.getElementById('txt').innerHTML = h + ":" + m;
+          t = setTimeout('startTime()', 500);
+      }
+      function checkTime(i) {
+          if (i &lt; 10) {
+              i = "0" + i;
+          }
+          return i;
+      }
 
-    <body onload="startTime()">
+      function onReady(callback) {
+var intervalId = window.setInterval(function() {
+  if (document.getElementsByTagName('body')[0] !== undefined) {
+    window.clearInterval(intervalId);
+    callback.call(this);
+  }
+}, 1000);
+}
 
-        <!-- Navigation -->
-        <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-bottom">
-                <div class="container">
-                    <a class="navbar-brand" href="#">Start Bootstrap</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarResponsive">
-                        <ul class="navbar-nav ml-auto">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="#">Home
-                                    <span class="sr-only">(current)</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">About</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Services</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Contact</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav> -->
+function setVisible(selector, visible) {
+document.querySelector(selector).style.display = visible ? 'block' : 'none';
+}
 
-        <!-- Page Content -->
-        <section>
-            <div class="container">
-                <div class="row" style="margin-top: 8%;margin-left: 2%;">
-                    <div class="col-lg-12">
-                        <div id="txt" style="color: #fff; text-align: center; font-size: 500%; font-weight: 600;"></div>
-                        <p style="color: #fff; text-align: center; font-size: 200%; margin-bottom: 5%">Hello, how can we help you today?
-                        </p>
-                    </div>
-                    <div class="col-lg-3">
-                        <a href="checkin.xhtml" style="text-decoration: none">
-                            <div class="polaroid">
-                                <img src="./resources/images/roomservice.jpg" alt="5 Terre" style="width:100%">
-                                <div class="polaroidcontainer">
-                                    <p>Check in</p>
+onReady(function() {
+  console.log("hi");
+setVisible('#content', true);
+setVisible('#loading', false);
+});
+  </script>
+
+
+</h:head>
+
+<body onload="startTime()">
+
+    <!-- Page Content -->
+    <section class="content">
+
+        <div id="loading" class="spinner">
+            <img width="60px" height="60px" style="position:absolute; bottom:50px; left:740px" src="resources/images/krhglogo4.svg" />
+            <br/><br/>
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+        </div>
+        
+        <div style="display:none" id="content" class="content">
+            <div class="row">
+                <a href="checkinResult.xhtml"><i class="fas fa-arrow-circle-left"
+                        style="position:absolute; top:30px; left: 30px; color:white; font-size: 2em;"></i></a>
+                <div id="txt" class="time"></div>
+                <div class="theTitle active" style="width:800px; ">
+
+                    <div class="titleleft" style="margin-right:30px">
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <div class="line">
+                                    <hr>
+                                    </hr>
                                 </div>
                             </div>
-                        </a>
-                    </div>
-
-                    <div class="col-lg-3">
-                        <a href="checkout.xhtml" style="text-decoration: none">
-                            <div class="polaroid">
-                                <img src="./resources/images/housekeeping.jpg" alt="5 Terre" style="width:100%">
-                                <div class="polaroidcontainer">
-                                    <p>Check out</p>
+                            <div class="col-sm-2" style="padding:0px;  text-align:center; overflow-x: visible" >
+                                    <img width="80px" height="80px" style="position:absolute; bottom:0px; left:5px" src="resources/images/krhglogo4.svg" />
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="line">
+                                    <hr>
+                                    </hr>
                                 </div>
                             </div>
-                        </a>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12" style="padding:0px; text-align: center" >
+                                <h1>GRAND</h1>
+                            </div>
+                        </div>
+                        <div class="row">
+                                <div class="col-sm-5">
+                                    <div class="line">
+                                        <hr>
+                                        </hr>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2" style="padding:0px;  text-align:center">
+                                    <p style="position:absolute; top:0px; padding-left:10px;">KRHG</p>
+                                </div>
+                                <div class="col-sm-5">
+                                    <div class="line">
+                                        <hr>
+                                        </hr>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                    </div>
+                    <span class="separator"></span>
+                    <div class="titleright" style="height:100%">
+                        <p style="margin-top:50%; color:#C5B358">Payment</p>
                     </div>
 
-
-
-
                 </div>
+
             </div>
-        </section>
+            <div class="checkout">
+            <div class="credit-card-box">
+                    <div class="flip">
+                      <div class="front">
+                        <div class="chip"></div>
+                        <div class="logo">
+                            <img src="resources/images/mastercard.svg"  width="47.834px" height="47.834px" viewBox="0 0 47.834 47.834" style="enable-background:new 0 0 47.834 47.834;"/>
+                        </div>
+                        <div class="number"></div>
+                        <div class="card-holder">
+                          <label>Card holder</label>
+                          <div></div>
+                        </div>
+                        <div class="card-expiration-date">
+                          <label>Expires</label>
+                          <div></div>
+                        </div>
+                      </div>
+                      <div class="back">
+                        <div class="strip"></div>
+                        <div class="logo">
+                            <img width="47.834px" height="47.834px" viewBox="0 0 47.834 47.834" style="enable-background:new 0 0 47.834 47.834;" src="resources/images/mastercard.svg"/>   
+                        </div>
+                        <div class="ccv">
+                          <label>CCV</label>
+                          <div></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <form class="form" autocomplete="off" novalidate="true">
+                    <fieldset>
+                      <label for="card-number">Card Number</label>
+                      <input type="num" id="card-number" class="input-cart-number" maxlength="4" />
+                      <input type="num" id="card-number-1" class="input-cart-number" maxlength="4" />
+                      <input type="num" id="card-number-2" class="input-cart-number" maxlength="4" />
+                      <input type="num" id="card-number-3" class="input-cart-number" maxlength="4" />
+                    </fieldset>
+                    <fieldset>
+                      <label for="card-holder">Card holder</label>
+                      <input type="text" id="card-holder" />
+                    </fieldset>
+                    <fieldset class="fieldset-expiration">
+                      <label for="card-expiration-month">Expiration date</label>
+                      <div class="select">
+                        <select id="card-expiration-month">
+                          <option></option>
+                          <option>01</option>
+                          <option>02</option>
+                          <option>03</option>
+                          <option>04</option>
+                          <option>05</option>
+                          <option>06</option>
+                          <option>07</option>
+                          <option>08</option>
+                          <option>09</option>
+                          <option>10</option>
+                          <option>11</option>
+                          <option>12</option>
+                        </select>
+                      </div>
+                      <div class="select">
+                        <select id="card-expiration-year">
+                          <option></option>
+                          <option>2016</option>
+                          <option>2017</option>
+                          <option>2018</option>
+                          <option>2019</option>
+                          <option>2020</option>
+                          <option>2021</option>
+                          <option>2022</option>
+                          <option>2023</option>
+                          <option>2024</option>
+                          <option>2025</option>
+                        </select>
+                      </div>
+                    </fieldset>
+                    <fieldset class="fieldset-ccv" style="padding-left:0px">
+                      <label for="card-ccv">CCV</label>
+                      <input type="text" id="card-ccv" maxlength="3"    />
+                    </fieldset>
+                    <button class="btn" formaction="roomallocation.xhtml"><i class="fa fa-lock"></i> submit</button>
+                  </form>
+                  </div>
 
-        <!-- Bootstrap core JavaScript -->
-        <script src="./resources/jquery/jquery.min.js"></script>
-        <script src="./resources/bootstrap/js/bootstrap.bundle.js"></script>
+              
+               
 
-    </body>
+        
+
+        </div>
+    </section>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="./resources/jquery/jquery.min.js"></script>
+    <script src="./resources/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="./resources/js/select.js"></script>
+
+   
+
+</body>
 
 </html>
