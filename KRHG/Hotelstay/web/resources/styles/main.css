@@ -39,8 +39,7 @@
   }
 
   
-.left,
-.right{
+.loginleft{
   width:100%;
   border:0;
   background:#fff;
@@ -54,8 +53,9 @@
 
 
 .bigBtn {
-    width:100%;
+    width:80%;
     padding:20px;
+    margin-left:80px;
     text-align:center;
     margin-top:20px;
     font-size:2em;
@@ -199,18 +199,9 @@
   .form button .fa {
     margin-right: 6px;
   }
-  /*--------------------
-   Checkout
-   --------------------*/
+
    @media screen and (min-width: 900px){
-    .checkout {
-      margin: 300px 320px 30px;
-      position: relative;
-      width: 660px;
-      background: rgb(43,43,43,0.5);
-      padding: 60px 35px 50px 30px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, .1);
-    }
+
 
     .form fieldset {
       border: none;
@@ -235,14 +226,7 @@
    }
 
     @media screen and (min-width: 1200px){
-      .checkout {
-        margin: 150px 900px 30px;
-        position: relative;
-        width: 460px;
-        background: rgb(43,43,43,0.5);
-        padding: 160px 45px 30px;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, .1);
-      }
+
 
       .form fieldset {
         border: none;
@@ -454,7 +438,7 @@
       left: 52%;
       top: 180px;
       transform: translate(-50%, -50%);
-      width: 600px;
+      width: 800px;
   }
   }
 
@@ -464,20 +448,20 @@
         align-items: center;
         height: 150px;
         position: absolute;
-        left: 30%;
-        top: 300px;
+        left: 55%;
+        top: 150px;
         transform: translate(-50%, -50%);
-        width: 600px;
+        width: 800px;
         }
       }
 
  .titleleft{
-    width: 70%;
+    width: 60%;
 
 }
 
 .titleright{
-  width: 30%;
+  width: 40%;
   padding-left:5px;
 }
 .theTitle h1{
