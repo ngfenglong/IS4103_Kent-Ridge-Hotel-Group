@@ -26,7 +26,7 @@ public class FoodOrderSession implements FoodOrderSessionLocal {
     }
 
     @Override
-    public FoodOrder getgetAllFoodOrderByID(Long foodOrderID) throws NoResultException {
+    public FoodOrder getAllFoodOrderByID(Long foodOrderID) throws NoResultException {
         FoodOrder fo = em.find(FoodOrder.class, foodOrderID);
         if (fo != null) {
             return fo;
