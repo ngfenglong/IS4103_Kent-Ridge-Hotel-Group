@@ -58,11 +58,11 @@
                                     <h:form role="form">
                                         <div class="card-body">
                                             <div class="form-group">
-                                                <h:inputText class="form-control" value="#{frontDeskManagedBean.mlocation}" a:placeholder="location" required="true"></h:inputText>
+                                                <h:inputText class="form-control" value="#{requestAndServiceManagedBean.mlocation}" a:placeholder="location" required="true"></h:inputText>
 
                                             </div>
                                             <div class="form-group">
-                                                <h:inputTextarea rows="10" cols="50" value="#{frontDeskManagedBean.maintainDescription}" a:placeholder="Report Description" ></h:inputTextarea>
+                                                <h:inputTextarea rows="10" cols="50" value="#{requestAndServiceManagedBean.maintainDescription}" a:placeholder="Report Description" ></h:inputTextarea>
 
                                             </div>
 
@@ -74,7 +74,7 @@
                                         <!-- /.card-body -->
 
                                         <div class="card-footer">
-                                            <h:commandButton value="Create Maintainence request" action="#{frontDeskManagedBean.createMaintainence()}" ></h:commandButton>
+                                            <h:commandButton value="Create Maintainence request" action="#{requestAndServiceManagedBean.createMaintainence()}" ></h:commandButton>
                                         </div>
                                     </h:form>
                                 </div>

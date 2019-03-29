@@ -38,63 +38,59 @@
                     <!-- /.container-fluid -->
                 </div> 
                 <section class="content">
-                    <div class="info" >
-                    Search Customer booking result
-                </div>
-                <br/>
-                <br/>
-                <div class = "tablemargin">
-                    <table>
-                        <tr>
-                            <td>
-                                Booking Id
-                            </td>
-                            <td>
-                                Name
-                            </td>
 
-                            <td>
-                                Start date
-                            </td>
-                            <td>
-                                End date
-                            </td>
-                            <td>
-                                Passport no
-                            </td>
-                            <td>
-                                Room type
-                            </td>
 
-                        </tr>
-                        <tr>
-                            <td>
-                                123
-                            </td>
-                            <td>
-                                Keith Carther
-                            </td>
-                            <td>
-                                12/12/2019
-                            </td>
-                            <td>
-                                23/12/2019
-                            </td>
-                            <td>
-                                A0123567
-                            </td>
-                            <td>
-                                Standard
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <button onclick="checkout()">Check out</button>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
+
                     <!-- /.container-fluid -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Rooms checking out today</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <h:form>
+                                <table  id="example1" class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Booked by</th>
+                                            <th>Booking Id</th>
+                                            <th>Passport Number</th>
+                                            <th>Book out Date</th>
+
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <ui:repeat var="o" value="#{frontDeskManagedBean.checkOutRoomResult}" varStatus="status">
+
+                                            <tr>
+                                                <td>#{o.bookedBy.name}</td>
+                                                <td>#{o.bookedRoom.roomNumber}</td>
+                                                <td>#{o.passportNum}</td>
+                                                <td>#{o.bookOutDate}</td>
+                                                <td colspan="3"><h:commandLink action="#{frontDeskManagedBean.checkOut(o)}" > <i class="fa fa-arrow-circle-down" style="color:gray" ></i></h:commandLink></td>                                            </tr>
+                                            </tr>
+                                        </ui:repeat>
+
+
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Booked by</th>
+                                            <th>Booking Id</th>
+                                            <th>Passport Number</th>
+                                            <th>Book out Date</th>
+
+                                            <th></th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </h:form>
+                        </div>
+                        <!-- /.card-body -->
+
+                    </div>
                 </section>
                 <!-- /.content-header -->
                 <!-- Main content -->

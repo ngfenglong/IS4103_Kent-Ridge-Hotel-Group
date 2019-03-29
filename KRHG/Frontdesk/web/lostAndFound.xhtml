@@ -42,8 +42,6 @@
                         <h:form>
                             <div class="card-header">
                                 <h:commandLink class="btn btn-primary float-sm-right" action="createLostAndFound.xhtml?faces-redirect=true"> <i class="fa fa-plus" ></i></h:commandLink>
-
-
                                 <h3 class="card-title">Lost And Found</h3>
                             </div>
                         </h:form>
@@ -64,7 +62,7 @@
                                 </thead>
                                 <tbody>
                                     <h:form>
-                                        <ui:repeat var="o" value="#{frontDeskManagedBean.allLostAndFounds}" varStatus="status">
+                                        <ui:repeat var="o" value="#{requestAndServiceManagedBean.allLostAndFounds}" varStatus="status">
 
                                             <tr>
                                                 <td>#{o.itemName}</td>

@@ -65,7 +65,7 @@
                                                         </td>
                                                         <td>
 
-                                                            <h:inputText value=""></h:inputText>
+                                                            <h:inputText value="#{frontDeskManagedBean.checkinName}"></h:inputText>
                                                         </td>
                                                     </div>
                                                 </tr>
@@ -79,11 +79,24 @@
                                                         </td>
                                                         <td>
 
-                                                            <h:inputText value=""></h:inputText>
+                                                            <h:inputText value="#{frontDeskManagedBean.checkinEmail}"></h:inputText>
                                                         </td>
                                                     </div>
                                                 </tr>
+                                                <tr>
 
+                                                    <div class="form-group">
+                                                        <td>
+                                                            <label>
+                                                                Passport:
+                                                            </label>
+                                                        </td>
+                                                        <td>
+
+                                                            <h:inputText value="#{frontDeskManagedBean.checkinPassportNumber}"></h:inputText>
+                                                        </td>
+                                                    </div>
+                                                </tr>
 
 
                                                 <tr>
@@ -141,7 +154,7 @@
                                         <!-- /.card-body -->
 
                                         <div class="card-footer">
-                                            <h:commandButton class="btn btn-primary" value="Proceed to pay" action="#{frontDeskManagedBean.UpdateAccount()}" ></h:commandButton>
+                                            <h:commandButton class="btn btn-primary" value="Proceed to pay" action="#{frontDeskManagedBean.walkinpayment()}" ></h:commandButton>
                                         </div>
                                     </h:form>
                                 </div>

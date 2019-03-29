@@ -59,13 +59,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <ui:repeat var="o" value="#{frontDeskManagedBean.allMaintainenceOrders}" varStatus="status">
+                                    <ui:repeat var="o" value="#{requestAndServiceManagedBean.allMaintainenceOrders}" varStatus="status">
 
                                         <tr>
                                             <td>#{o.location}</td>
                                             <td>#{o.description}</td>
                                             <td>#{o.dateReported}</td>
-                                            <td>#{o.status}</td>
+                                            <td>#{o.isResolved==true? 'Completed':'Incomplete'}</td>
 
 
                                         </tr>

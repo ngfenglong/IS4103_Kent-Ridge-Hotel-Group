@@ -39,9 +39,12 @@
                 </div> 
                 <section class="content">
                     <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Laundry for ENTER BACKEND hotel name</h3>
-                        </div>
+                      <h:form>
+                                <div class="card-header">
+                                    <h:commandButton class="btn btn-primary float-sm-right" action="createLaundry.xhtml?faces-redirect=true" value="Add New Housekeeping request" />
+                                    <h3 class="card-title">Laundry request</h3>
+                                </div>
+                            </h:form>
                         <!-- /.card-header -->
                         <div class="card-body">
                             <table id="example1" class="table table-bordered table-striped">
@@ -82,7 +85,7 @@
                                 </tfoot>
                             </table>
                         </div>
-                        <a href="createLaundry.xhtml">Create New Request</a>
+                       
                     </div>
                     <!-- /.container-fluid -->
                 </section>

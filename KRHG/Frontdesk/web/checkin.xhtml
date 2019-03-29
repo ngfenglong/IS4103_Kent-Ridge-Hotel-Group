@@ -68,7 +68,7 @@
                                         <!-- /.card-body -->
 
                                         <div class="card-footer">
-                                            <h:commandButton class="btn btn-primary" value="Search" ></h:commandButton>
+                                            <h:commandButton class="btn btn-primary" value="Search" action="#{frontDeskManagedBean.searchCustomerForCheckin()}" ></h:commandButton>
                                         </div>
                                     </h:form>
                                 </div>
@@ -83,6 +83,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
+                                 <h:form>
                             <table  id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
@@ -95,7 +96,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <h:form>
+                             
                                         <ui:repeat var="o" value="#{frontDeskManagedBean.todayBooking}" varStatus="status">
 
                                             <tr>
@@ -103,10 +104,9 @@
                                                 <td>#{o.roomBookingID}</td>
                                                 <td>#{o.passportNum}</td>
                                                 <td>#{o.bookOutDate}</td>
-                                                <td><h:commandButton value="Check in" action="checkinResult.xhtml?faces-redirect=true" ></h:commandButton></td>
-                                            </tr>
+                                                <td colspan="3"><h:commandLink action="#{frontDeskManagedBean.checkin(o)}" > <i class="fa fa-arrow-circle-down" style="color:gray" ></i></h:commandLink></td>                                            </tr>
                                         </ui:repeat>
-                                    </h:form>
+                              
 
                                 </tbody>
                                 <tfoot>
@@ -120,6 +120,7 @@
                                     </tr>
                                 </tfoot>
                             </table>
+                                           </h:form>
                         </div>
                         <!-- /.card-body -->
                     </div>

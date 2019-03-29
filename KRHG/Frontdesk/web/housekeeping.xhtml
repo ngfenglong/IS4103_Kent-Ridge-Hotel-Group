@@ -39,14 +39,14 @@
                 </div> 
                 <section class="content">
                     <div class="card">
-                      
-                            <h:form>
-                                <div class="card-header">
-                                    <h:commandButton class="btn btn-primary float-sm-right" action="createHouseKeepingRequest.xhtml?faces-redirect=true" value="Add New Housekeeping request" />
-                                    <h3 class="card-title">List of requests</h3>
-                                </div>
-                            </h:form>
-                        
+
+                        <h:form>
+                            <div class="card-header">
+                                <h:commandButton class="btn btn-primary float-sm-right" action="createHouseKeepingRequest.xhtml?faces-redirect=true" value="Add New Housekeeping request" />
+                                <h3 class="card-title">List of requests</h3>
+                            </div>
+                        </h:form>
+
                         <!-- /.card-header -->
                         <div class="card-body">
 
@@ -61,17 +61,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <ui:repeat var="o" value="#{frontDeskManagedBean.allHousekeepingOrder}" varStatus="status">
+                                    <h:form>
+                                        <ui:repeat var="o" value="#{requestAndServiceManagedBean.allHousekeepingOrder}" varStatus="status">
 
-                                        <tr>
-                                            <td>#{o.room.roomNumber}</td>
-                                            <td>#{o.status}</td>
-                                            <td>#{o.orderDateTime}</td>
-                                            <td><input type="button" value="update"/></td>
-                                        </tr>
+                                            <tr>
+                                                <td>#{o.room.roomNumber}</td>
+                                                <td>#{o.status}</td>
+                                                <td>#{o.orderDateTime}</td>
+                                                <td><input type="button" value="update"/></td>
+                                            </tr>
 
-                                    </ui:repeat>
-
+                                        </ui:repeat>
+                                    </h:form>
                                 </tbody>
                                 <tfoot>
                                     <tr>
