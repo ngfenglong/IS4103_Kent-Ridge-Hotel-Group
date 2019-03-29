@@ -44,6 +44,41 @@ public class HouseKeepingOrderSession implements HouseKeepingOrderSessionLocal {
             throw new NoResultException("House Keeping Order not found.");
         }
     }
+    
+    @Override
+    public List<HouseKeepingOrder> getHouseKeepingOrderByLevelAndHotelCodeName(int level, String hotelCodeName) throws NoResultException {
+        Query q;
+        q = em.createQuery("SELECT ho FROM HouseKeepingOrder ho WHERE "
+                + "ho.level = :level AND "
+                + "LOWER(ho.room.hotel.hotelCodeName) = :hotelCodeName");
+        q.setParameter("level", level);
+        q.setParameter("hotelCodeName", hotelCodeName.toLowerCase());
+
+        if (!q.getResultList().isEmpty()) {
+            return q.getResultList();
+        } else {
+            throw new NoResultException("House Keeping Order not found.");
+        }
+    }
+    
+    @Override
+    public List<HouseKeepingOrder> getHouseKeepingOrderByLevelAndHotelCodeNameAndStatus(int level, String hotelCodeName, String status) throws NoResultException {
+        Query q;
+        q = em.createQuery("SELECT ho FROM HouseKeepingOrder ho WHERE "
+                + "ho.level = :level AND "
+                + "LOWER(ho.room.hotel.hotelCodeName) = :hotelCodeName AND "
+                + "LOWER(ho.status) != :status"
+                + " ORDER BY ho.room.roomNumber ASC");
+        q.setParameter("level", level);
+        q.setParameter("hotelCodeName", hotelCodeName.toLowerCase());
+        q.setParameter("status", status.toLowerCase());
+        System.out.println("Status is: " + status.toLowerCase());
+        if (!q.getResultList().isEmpty()) {
+            return q.getResultList();
+        } else {
+            throw new NoResultException("House Keeping Order not found.");
+        }
+    }
 
     @Override
     public HouseKeepingOrder getHouseKeepingOrderID(Long houseKeepingOrderID) throws NoResultException {

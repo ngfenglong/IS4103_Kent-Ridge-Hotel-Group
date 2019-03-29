@@ -14,7 +14,7 @@ import javax.ejb.Local;
 public interface FoodOrderSessionLocal {
         
     public List<FoodOrder> getAllFoodOrder();
-    public FoodOrder getgetAllFoodOrderByID(Long foodOrderID) throws NoResultException;
+    public FoodOrder getAllFoodOrderByID(Long foodOrderID) throws NoResultException;
     public void updateFoodOrder (FoodOrder foodOrder) throws NoResultException;
     public void deleteFoodOrder (Long foodOrderID) throws NoResultException;
     public void createFoodOrder (FoodOrder foodOrder);

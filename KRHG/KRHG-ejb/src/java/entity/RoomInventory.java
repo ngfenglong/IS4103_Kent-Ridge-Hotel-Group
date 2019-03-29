@@ -24,7 +24,24 @@ public class RoomInventory implements Serializable {
     private Long roomInventoryID;
     private String inventoryName;
     private int qty;
-    
+    private String hotelName;
+    private String roomNumber;
+
+    public String getHotelName() {
+        return hotelName;
+    }
+
+    public void setHotelName(String hotelName) {
+        this.hotelName = hotelName;
+    }
+
+    public String getRoomNumber() {
+        return roomNumber;
+    }
+
+    public void setRoomNumber(String roomNumber) {
+        this.roomNumber = roomNumber;
+    }
 
     public Long getroomInventoryID() {
         return roomInventoryID;

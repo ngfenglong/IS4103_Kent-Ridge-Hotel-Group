@@ -16,47 +16,13 @@ public class FoodMenuItem implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long FoodMenuItemID;
-    private String FoodMenuItemName;
-    private String FoodMenuItemDescription;
+    private Long foodMenuItemID;
+    private String foodMenuItemName;
+    private String foodMenuItemDescription;
     private Boolean availability;
     private Double unitPrice;
-    public Long getFoodMenuItemID() {
-        return FoodMenuItemID;
-    }
-
-    public void setFoodMenuItemID(Long FoodMenuItemID) {
-        this.FoodMenuItemID = FoodMenuItemID;
-    }
-    
-        /**
-     * @return the FoodMenuItemName
-     */
-    public String getFoodMenuItemName() {
-        return FoodMenuItemName;
-    }
-
-    /**
-     * @param FoodMenuItemName the FoodMenuItemName to set
-     */
-    public void setFoodMenuItemName(String FoodMenuItemName) {
-        this.FoodMenuItemName = FoodMenuItemName;
-    }
-
-    /**
-     * @return the FoodMenuItemDescription
-     */
-    public String getFoodMenuItemDescription() {
-        return FoodMenuItemDescription;
-    }
-
-    /**
-     * @param FoodMenuItemDescription the FoodMenuItemDescription to set
-     */
-    public void setFoodMenuItemDescription(String FoodMenuItemDescription) {
-        this.FoodMenuItemDescription = FoodMenuItemDescription;
-    }
-
+    private String category;
+  
     /**
      * @return the availability
      */
@@ -89,7 +55,7 @@ public class FoodMenuItem implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (FoodMenuItemID != null ? FoodMenuItemID.hashCode() : 0);
+        hash += (foodMenuItemID != null ? foodMenuItemID.hashCode() : 0);
         return hash;
     }
 
@@ -100,7 +66,7 @@ public class FoodMenuItem implements Serializable {
             return false;
         }
         FoodMenuItem other = (FoodMenuItem) object;
-        if ((this.FoodMenuItemID == null && other.FoodMenuItemID != null) || (this.FoodMenuItemID != null && !this.FoodMenuItemID.equals(other.FoodMenuItemID))) {
+        if ((this.foodMenuItemID == null && other.foodMenuItemID != null) || (this.foodMenuItemID != null && !this.foodMenuItemID.equals(other.foodMenuItemID))) {
             return false;
         }
         return true;
@@ -108,7 +74,39 @@ public class FoodMenuItem implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.FoodMenuItem[ FoodMenuItemID=" + FoodMenuItemID + " ]";
+        return "entity.FoodMenuItem[ foodMenuItemID=" + foodMenuItemID + " ]";
+    }
+
+    public Long getFoodMenuItemID() {
+        return foodMenuItemID;
+    }
+
+    public void setFoodMenuItemID(Long foodMenuItemID) {
+        this.foodMenuItemID = foodMenuItemID;
+    }
+
+    public String getFoodMenuItemName() {
+        return foodMenuItemName;
+    }
+
+    public void setFoodMenuItemName(String foodMenuItemName) {
+        this.foodMenuItemName = foodMenuItemName;
+    }
+
+    public String getFoodMenuItemDescription() {
+        return foodMenuItemDescription;
+    }
+
+    public void setFoodMenuItemDescription(String foodMenuItemDescription) {
+        this.foodMenuItemDescription = foodMenuItemDescription;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
     
 }
