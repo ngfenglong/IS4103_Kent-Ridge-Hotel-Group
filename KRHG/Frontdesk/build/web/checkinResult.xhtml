@@ -64,7 +64,7 @@
                                                             </label>
                                                         </td>
                                                         <td>
-                                                            <h:outputText value="#{frontDeskManagedBean.roombooking.name}"></h:outputText>
+                                                            <h:outputText value="#{frontDeskManagedBean.checkinName}"></h:outputText>
                                                         </td>
                                                     </div>
                                                 </tr>
@@ -76,7 +76,7 @@
                                                             <label>Email:</label>
                                                         </td>
                                                         <td> 
-                                                            <h:outputText value="#{frontDeskManagedBean.roombooking.emailAddress}">
+                                                            <h:outputText value="#{frontDeskManagedBean.roombooking.payer.email}">
                                                             </h:outputText>
                                                         </td>
                                                     </div>
@@ -89,19 +89,19 @@
                                                     </td>
                                                     <td>
                                                         <div class="form-group">
-                                                            <h:outputText value="94308808">
+                                                            <h:outputText value="#{frontDeskManagedBean.roombooking.payer.mobileNum}">
                                                             </h:outputText>                                                        </div>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>
                                                         <label>
-                                                            Booking id:
+                                                            Transaction id:
                                                         </label>
                                                     </td>
                                                     <td>
                                                         <div class="form-group">
-                                                            <h:outputText value="#{frontDeskManagedBean.roombooking.roomBookingID}">
+                                                            <h:outputText value="#{frontDeskManagedBean.roombooking.transactionID}">
 
                                                             </h:outputText>
                                                         </div>
@@ -115,38 +115,7 @@
                                                     </td>
                                                     <td>
                                                         <div class="form-group">
-                                                            <h:outputText value="#{frontDeskManagedBean.roombooking.passportNum}">
-
-                                                            </h:outputText>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <label>
-                                                            Check in date:
-                                                        </label>
-                                                    </td>
-                                                    <td>
-                                                        <div class="form-group">
-                                                            <h:outputText value="#{frontDeskManagedBean.roombooking.bookInDate}">
-
-                                                            </h:outputText>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-
-
-
-                                                <tr>
-                                                    <td>
-                                                        <label>
-                                                            Checkout date:
-                                                        </label>
-                                                    </td>
-                                                    <td>
-                                                        <div class="form-group">
-                                                            <h:outputText value="#{frontDeskManagedBean.roombooking.bookOutDate}">
+                                                            <h:outputText value="#{frontDeskManagedBean.checkinPassportNumber}">
 
                                                             </h:outputText>
                                                         </div>
@@ -156,59 +125,79 @@
                                                 <tr>
                                                     <td>
                                                         <label>
-                                                            Room type:
+                                                            Total   price:
                                                         </label>
                                                     </td>
                                                     <td>
                                                         <div class="form-group">
-                                                            <h:outputText value="#{frontDeskManagedBean.roombooking.roomType}">
+                                                            <h:outputText value="#{frontDeskManagedBean.roombooking.initialPayment}">
 
                                                             </h:outputText>
                                                         </div>
                                                     </td>
                                                 </tr>
-   <tr>
-                                                    <td>
-                                                        <label>
-                                                            price:
-                                                        </label>
-                                                    </td>
-                                                    <td>
-                                                        <div class="form-group">
-                                                            <h:outputText value="#{frontDeskManagedBean.roombooking.price}">
 
-                                                            </h:outputText>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-   <tr>
-                                                    <td>
-                                                        <label>
-                                                            Number of pax:
-                                                        </label>
-                                                    </td>
-                                                    <td>
-                                                        <div class="form-group">
-                                                            <h:outputText value="This not in entity of roombooking">
-
-                                                            </h:outputText>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                
                                                 <!-- /.input group -->
                                             </table>
                                         </div>
                                         <!-- /.card-body -->
 
                                         <div class="card-footer">
-                                            <h:commandButton class="btn btn-primary" value="Confirm Check in" action="#{frontDeskManagedBean.confirmCheckin()}" ></h:commandButton>
+                                            <h:commandButton class="btn btn-primary" value="Assign Rooms" action="#{frontDeskManagedBean.confirmCheckin()}" ></h:commandButton>
                                         </div>
                                     </h:form>
                                 </div>
 
                             </div>
                         </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">booked by #{frontDeskManagedBean.checkinName}</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <h:form>
+                                <table  id="example1" class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Booking Id</th>
+                                            <th>Room Type</th>
+                                            <th>Number of pax</th>
+                                            <th>Check in date</th>
+                                            <th>Check out date</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <ui:repeat var="o" value="#{frontDeskManagedBean.roombooking.roomsBooked}" varStatus="status">
+
+                                            <tr>
+                                                <td>#{o.roomBookingID}</td>
+                                                <td>#{o.roomType}</td>
+                                                <td>not in entity field</td>
+                                                <td>#{o.bookInDate}</td>
+                                                <td>#{o.bookOutDate}</td>
+                                            </tr>
+                                        </ui:repeat>
+
+
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Booking Id</th>
+                                            <th>Room Type</th>
+                                            <th>Number of pax</th>
+                                            <th>Check in date</th>
+                                            <th>Check out date</th>
+
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </h:form>
+                        </div>
+                        <!-- /.card-body -->
                     </div>
                     <!-- /.container-fluid -->
                 </section>

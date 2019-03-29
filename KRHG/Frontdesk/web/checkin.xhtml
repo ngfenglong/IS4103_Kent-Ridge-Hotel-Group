@@ -90,20 +90,20 @@
                                         <th>Booked by</th>
                                         <th>Booking Id</th>
                                         <th>Passport Number</th>
-                                        <th>Book out Date</th>
+                                        <th>Rooms booked</th>
 
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                              
-                                        <ui:repeat var="o" value="#{frontDeskManagedBean.todayBooking}" varStatus="status">
+                                    <ui:repeat var="o" value="#{frontDeskManagedBean.todaysbookings}" varStatus="status">
 
                                             <tr>
-                                                <td>#{o.bookedBy.name}</td>
-                                                <td>#{o.roomBookingID}</td>
-                                                <td>#{o.passportNum}</td>
-                                                <td>#{o.bookOutDate}</td>
+                                                <td>#{o.transactionID}</td>
+                                                <td>#{o.payer.name}</td>
+                                                <td>#{o.roomsBooked[0].passportNum}</td>
+                                                <td>#{o.roomsBooked.size()}</td>
                                                 <td colspan="3"><h:commandLink action="#{frontDeskManagedBean.checkin(o)}" > <i class="fa fa-arrow-circle-down" style="color:gray" ></i></h:commandLink></td>                                            </tr>
                                         </ui:repeat>
                               

@@ -11,6 +11,7 @@ import entity.HouseKeepingOrder;
 import entity.LaundryOrder;
 import entity.LostAndFoundReport;
 import entity.MaintainenceOrder;
+import entity.PaymentTransaction;
 import entity.Room;
 import entity.RoomBooking;
 import error.NoResultException;
@@ -54,15 +55,14 @@ public class FrontDeskManagedBean {
     private BookingSessionLocal bookSessionLocal;
     @EJB
     private CustomerSessionLocal customerSessionLocal;
-   
 
     //customer check in
     private String customerName;
     private String customerRoom;
     private String checkinPassportNumber;
-    private List<RoomBooking> todaysbookings;
+    private List<PaymentTransaction> todaysbookings;
     private List<RoomBooking> Searchbookings;
-    private RoomBooking roombooking;
+    private PaymentTransaction roombooking;
 
     //customer check out
     private List<RoomBooking> todayCheckOutRoom;
@@ -189,8 +189,10 @@ public class FrontDeskManagedBean {
         }
     }
 
-    public String checkin(RoomBooking rb) {
-        roombooking = rb;
+    public String checkin(PaymentTransaction PT) {
+        checkinPassportNumber = PT.getRoomsBooked().get(0).getPassportNum();
+        checkinName = PT.getPayer().getName();
+        roombooking = PT;
         return "checkinResult.xhtml?faces-redirect=true";
     }
 
@@ -225,11 +227,12 @@ public class FrontDeskManagedBean {
         return "";
     }
 
-    public List<RoomBooking> getTodaysbookings() {
-        return todaysbookings;
+    public List<PaymentTransaction> getTodaysbookings() {
+        //List<paymentTransaction>bookSessionLocal.getTodaysTransaction();
+        return  null;
     }
 
-    public void setTodaysbookings(List<RoomBooking> todaysbookings) {
+    public void setTodaysbookings(List<PaymentTransaction> todaysbookings) {
         this.todaysbookings = todaysbookings;
     }
 
@@ -249,13 +252,7 @@ public class FrontDeskManagedBean {
         this.allCustomer = allCustomer;
     }
 
-    public List<RoomBooking> getTodayBooking() {
-        try {
-            return todaysbookings = bookSessionLocal.getAllRoomBookingByDate();
-        } catch (NoResultException e) {
-            return todaysbookings = null;
-        }
-    }
+ 
 
     public String createAccount() throws IOException {
         HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
@@ -487,11 +484,11 @@ public class FrontDeskManagedBean {
         this.walkinAvailableRoom = walkinAvailableRoom;
     }
 
-    public RoomBooking getRoombooking() {
+    public PaymentTransaction getRoombooking() {
         return roombooking;
     }
 
-    public void setRoombooking(RoomBooking roombooking) {
+    public void setRoombooking(PaymentTransaction roombooking) {
         this.roombooking = roombooking;
     }
 
