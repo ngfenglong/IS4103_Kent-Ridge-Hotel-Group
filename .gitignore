@@ -115,3 +115,4 @@ KRHG/Kiosk/setup/project.properties
 KRHG/Frontdesk-war/setup/project.properties
 KRHG/Frontdesk/setup/project.properties
 /KRHG/RequestServicesManangment-War/nbproject/private/
+*.properties
