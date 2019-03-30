@@ -57,7 +57,7 @@
                                     <h:form role="form">
                                         <div class="card-body">
                                             <div class="form-group">
-                                                <h:inputText value="#{frontDeskManagedBean}" a:placeholder="Enter Room number"  > </h:inputText>
+                                                <h:inputText value="#{frontDeskManagedBean.checkoutRoom}" a:placeholder="Enter Room number"  > </h:inputText>
 
                                             </div>
 
@@ -69,7 +69,7 @@
                                         <!-- /.card-body -->
 
                                         <div class="card-footer">
-                                            <h:commandButton class="btn btn-primary" value="Search" ></h:commandButton>
+                                            <h:commandButton class="btn btn-primary" value="Search" action="#{frontDeskManagedBean.searchCheckout()}" ></h:commandButton>
                                         </div>
                                     </h:form>
                                 </div>
@@ -84,19 +84,20 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table  id="example1" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Booked by</th>
-                                        <th>Booking Id</th>
-                                        <th>Passport Number</th>
-                                        <th>Book out Date</th>
+                            <h:form>
+                                <table  id="example1" class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Booked by</th>
+                                            <th>Booking Id</th>
+                                            <th>Passport Number</th>
+                                            <th>Book out Date</th>
 
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <h:form>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
                                         <ui:repeat var="o" value="#{frontDeskManagedBean.todayCheckOutRoom}" varStatus="status">
 
                                             <tr>
@@ -104,26 +105,27 @@
                                                 <td>#{o.bookedRoom.roomNumber}</td>
                                                 <td>#{o.passportNum}</td>
                                                 <td>#{o.bookOutDate}</td>
-                                                <td><h:commandButton value="Check in" ></h:commandButton></td>
+                                                <td colspan="3"><h:commandLink action="#{frontDeskManagedBean.checkOut(o)}" > <i class="fa fa-arrow-circle-down" style="color:gray" ></i></h:commandLink></td>                                            </tr>
                                             </tr>
                                         </ui:repeat>
-                                    </h:form>
 
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>Booked by</th>
-                                        <th>Booking Id</th>
-                                        <th>Passport Number</th>
-                                        <th>Book out Date</th>
 
-                                        <th></th>
-                                    </tr>
-                                </tfoot>
-                            </table>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Booked by</th>
+                                            <th>Booking Id</th>
+                                            <th>Passport Number</th>
+                                            <th>Book out Date</th>
+
+                                            <th></th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </h:form>
                         </div>
                         <!-- /.card-body -->
-                       
+
                     </div>
                 </section>
                 <!-- /.content-header -->

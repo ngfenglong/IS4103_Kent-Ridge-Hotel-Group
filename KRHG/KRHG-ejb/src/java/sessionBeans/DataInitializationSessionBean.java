@@ -10,6 +10,8 @@ import entity.Customer;
 import entity.Hotel;
 import entity.HotelFacility;
 import entity.HouseKeepingOrder;
+import entity.LostAndFoundReport;
+import entity.MaintainenceOrder;
 import entity.MinibarItem;
 import entity.Room;
 import entity.RoomBooking;
@@ -61,6 +63,10 @@ public class DataInitializationSessionBean {
     CustomerSessionLocal customerSessionLocal;
     @EJB
     BookingSessionLocal bookingSessionLocal;
+    @EJB
+    MaintainenceOrderSessionLocal maintainenceOrderSessionLocal;
+    @EJB
+    LostAndFoundSessionLocal lostAndFoundSessionLocal;
 
     public DataInitializationSessionBean() {
     }
@@ -81,6 +87,7 @@ public class DataInitializationSessionBean {
                 initializeKRSERoom();
                 initializeKRSWRoom();
                 intializeRoomBookingsAndCustomer();
+                intializeRequests();
             } catch (NoResultException ex) {
                 ex.printStackTrace();
             } catch (ParseException e) {
@@ -14767,7 +14774,7 @@ public class DataInitializationSessionBean {
 
     public void intializeRoomBookingsAndCustomer() throws ParseException {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        String dateString = format.format(new Date());
+
         Customer customer1 = new Customer();
         customer1.setAccountStatus(true);
         customer1.setDateJoined(new Date());
@@ -14787,11 +14794,24 @@ public class DataInitializationSessionBean {
         customer2.setEmail("Stanley@hotmail.com");
         customer2.setMember(true);
         customer2.setMobileNum("97628485");
-        customer2.setName("Stanlet loh");
+        customer2.setName("Stanley loh");
         customer2.setPassword(encryptPassword("1234"));
         customer2.setPoints(1);
 
         customerSessionLocal.createCustomer(customer2);
+        em.flush();
+
+        Customer customer3 = new Customer();
+        customer3.setAccountStatus(true);
+        customer3.setDateJoined(new Date());
+        customer3.setEmail("NgFengLong@hotmail.com");
+        customer3.setMember(true);
+        customer3.setMobileNum("9668913");
+        customer3.setName("Ng Feng Long");
+        customer3.setPassword(encryptPassword("1234"));
+        customer3.setPoints(1);
+
+        customerSessionLocal.createCustomer(customer3);
         em.flush();
 
         CreditCard creditCard1 = new CreditCard();
@@ -14815,6 +14835,51 @@ public class DataInitializationSessionBean {
         rm1.setStatus("Incomplete");
 
         bookingSessionLocal.createRoomBooking(rm1);
+        em.flush();
+
+    }
+
+    public void intializeRequests() throws ParseException {
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        MaintainenceOrder mo1 = new MaintainenceOrder();
+        mo1.setDateReported(format.parse("2019-03-01"));
+        mo1.setDateResolved(format.parse("2019-03-29"));
+        mo1.setDescription("Toilet flush not working");
+        mo1.setIsResolved(true);
+        mo1.setLocation("Level 2 Male public toilet");
+        maintainenceOrderSessionLocal.createMaintainenceOrder(mo1);
+        em.flush();
+
+        MaintainenceOrder mo2 = new MaintainenceOrder();
+        mo2.setDateReported(format.parse("2019-03-01"));
+        mo2.setDescription("Light keeps flickering");
+        mo2.setIsResolved(false);
+        mo2.setLocation("Level 4 female public toilet");
+        maintainenceOrderSessionLocal.createMaintainenceOrder(mo2);
+        em.flush();
+
+        LostAndFoundReport lf1 = new LostAndFoundReport();
+        lf1.setContactNum("98765432");
+        lf1.setIsResolved(true);
+        lf1.setItemDescription("Black in colour, item is for a 5 years old kid");
+        lf1.setItemName("black teddy bear");
+        lf1.setReportType("Lost");
+        lf1.setReportedDate(new Date());
+       
+
+        lostAndFoundSessionLocal.createLostAndFoundReport(lf1);
+        em.flush();
+
+        LostAndFoundReport lf2 = new LostAndFoundReport();
+    
+        lf2.setIsResolved(false);
+        lf2.setItemDescription("colour worm stuff toy, found it in the room");
+        lf2.setItemName("stuff toy");
+        lf2.setReportType("Found");
+        lf2.setReportedDate(new Date());
+
+        lostAndFoundSessionLocal.createLostAndFoundReport(lf2);
         em.flush();
 
     }

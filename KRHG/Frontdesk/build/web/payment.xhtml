@@ -60,12 +60,12 @@
                                 <tr>
                                     <td>
                                         <label>
-                                           Name on card:
+                                            Name on card:
                                         </label>
                                     </td>
                                     <td>
                                         <div class="form-group">
-                                            <h:inputText >
+                                            <h:inputText value="#{frontDeskManagedBean.paymentNameOnCard}">
 
                                             </h:inputText>
                                         </div>
@@ -77,29 +77,42 @@
                                 <tr>
                                     <td>
                                         <label>
-                                        Expiry date:
+                                            Expiry date:
                                         </label>
                                     </td>
                                     <td>
                                         <div class="form-group">
-                                            <h:inputText >
+                                            <h:inputText value="#{frontDeskManagedBean.paymentExpiryDate}" >
 
                                             </h:inputText>
                                         </div>
                                     </td>
                                 </tr>
 
-
-
-                                  <tr>
+                                <tr>
                                     <td>
                                         <label>
-                                          CVV:
+                                            16 digits number:
                                         </label>
                                     </td>
                                     <td>
                                         <div class="form-group">
-                                            <h:inputText >
+                                            <h:inputText value="#{frontDeskManagedBean.paymentDigits}" >
+
+                                            </h:inputText>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <label>
+                                            CVV:
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <h:inputText value="#{frontDeskManagedBean.paymentCVV}" >
 
                                             </h:inputText>
                                         </div>
@@ -112,7 +125,7 @@
                         <!-- /.card-body -->
 
                         <div class="card-footer">
-                            <h:commandButton class="btn btn-primary" value="Make Payment" ></h:commandButton>
+                            <h:commandButton class="btn btn-primary" value="Make Payment" action="#{frontDeskManagedBean.makePayment}" ></h:commandButton>
                         </div>
                     </h:form>
                     <!-- /.container-fluid -->

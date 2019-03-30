@@ -3,8 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
     <body>
 
@@ -39,7 +38,6 @@
                     <!-- /.container-fluid -->
                 </div> 
                 <section class="content">
-
                     <div class="container-fluid">
                         <div class="row">
                             <!-- left column -->
@@ -50,77 +48,56 @@
 
                                 <div class="card card-primary">
                                     <div class="card-header">
-                                        <h3 class="card-title">Lost and Found Report</h3>
+                                        <h3 class="card-title">Update maintenance</h3>
                                     </div>
                                     <!-- /.card-header -->
                                     <!-- form start -->
                                     <h:form role="form">
                                         <div class="card-body">
                                             <table>
+
+
+
+
+
+
+                                                <tr>
+                                                    <td>
+                                                        <label>
+                                                            Location:
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <h:outputText value="Lvl 1 toielt">
+
+                                                            </h:outputText>
+                                                        </div>
+                                                    </td>
+                                                </tr>
                                                 <tr>
 
                                                     <div class="form-group">
                                                         <td>
                                                             <label>
-                                                                Report type:
+                                                                Status:
                                                             </label>
                                                         </td>
-                                                        <td>
-                                                            <h:selectOneRadio value="#{requestAndServiceManagedBean.lfreportType}">
-                                                                <f:selectItem itemValue="Found" itemLabel="Found" />
-                                                                <f:selectItem itemValue="Lost" itemLabel="Lost" />
+                                                        <td><select>
+                                                                <option value="Completed">Completed</option>
+                                                                <option value="Incomplete">Incomplete</option>
 
-                                                            </h:selectOneRadio>
+                                                            </select>
                                                         </td>
                                                     </div>
                                                 </tr>
-
-                                                <tr>
-                                                    <div class="form-group">
-
-                                                        <td>
-                                                            <label>Item name:</label>
-                                                        </td>
-                                                        <td>  
-                                                            <h:inputText class="form-control" value="#{requestAndServiceManagedBean.lfItemName}" a:placeholder="Item name" required="true"></h:inputText>
-
-                                                        </td>
-                                                    </div>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <label>
-                                                            Mobile number:
-                                                        </label>
-                                                    </td>
-                                                    <td>
-                                                        <div class="form-group">
-                                                            <h:inputText class="form-control" value="#{requestAndServiceManagedBean.lfContactNumber}" a:placeholder="Contact details" required="true"></h:inputText>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <label>
-                                                            Desription:
-                                                        </label>
-                                                    </td>
-                                                    <td>
-                                                        <div class="form-group">
-                                                            <h:inputTextarea rows="10" cols="50" value="#{requestAndServiceManagedBean.lfDescription}" a:placeholder="Item description" ></h:inputTextarea>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-
-
-
                                                 <!-- /.input group -->
                                             </table>
                                         </div>
                                         <!-- /.card-body -->
 
                                         <div class="card-footer">
-                                            <h:commandButton class="custom-button" value="Create Report" action="#{requestAndServiceManagedBean.makeLFRequest()}"></h:commandButton>
+                                            <h:commandButton class="btn btn-primary" value="Update" action="#{frontDeskManagedBean.UpdateAccount()}" ></h:commandButton>
                                         </div>
                                     </h:form>
                                 </div>

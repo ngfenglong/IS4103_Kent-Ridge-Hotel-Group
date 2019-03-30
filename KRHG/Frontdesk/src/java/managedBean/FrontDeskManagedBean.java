@@ -5,11 +5,13 @@
  */
 package managedBean;
 
+import entity.CreditCard;
 import entity.Customer;
 import entity.HouseKeepingOrder;
 import entity.LaundryOrder;
 import entity.LostAndFoundReport;
 import entity.MaintainenceOrder;
+import entity.PaymentTransaction;
 import entity.Room;
 import entity.RoomBooking;
 import error.NoResultException;
@@ -27,7 +29,6 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.inject.Named;
 import javax.servlet.http.HttpServletResponse;
 import sessionBeans.BookingSessionLocal;
 import sessionBeans.CustomerSessionLocal;
@@ -54,49 +55,33 @@ public class FrontDeskManagedBean {
     private BookingSessionLocal bookSessionLocal;
     @EJB
     private CustomerSessionLocal customerSessionLocal;
-    @EJB
-    private LaundrySessionLocal laundrySessionLocal;
-    @EJB
-    private LostAndFoundSessionLocal lostAndFoundSessionLocal;
-    @EJB
-    private MaintainenceOrderSessionLocal maintainenceOrderSessionLocal;
-    @EJB
-    private HouseKeepingOrderSessionLocal houseKeepingOrderSessionLocal;
 
     //customer check in
     private String customerName;
     private String customerRoom;
     private String checkinPassportNumber;
-    private List<RoomBooking> todaysbookings;
+    private List<PaymentTransaction> todaysbookings;
     private List<RoomBooking> Searchbookings;
-    private RoomBooking roombooking;
+    private PaymentTransaction roombooking;
 
+    //customer check out
     private List<RoomBooking> todayCheckOutRoom;
+    private String checkoutRoom;
+    private List<RoomBooking> checkOutRoomResult;
 
-    //laundry 
-    private List<LaundryOrder> allLaundryOrders;
+    //Cusrtomer walk in
+    private String walkinRoomtype;
+    private int walkinPax;
+    private int walkinNumberOfday;
+    private List<Room> walkinAvailableRoom;
+
+    //walk in details
+    //reuse checkinPassportNumber for walk in too
+    private String checkinName;
+    private String checkinEmail;
 
     //manage account
     private List<Customer> allCustomer;
-
-    //Lost and found
-    private List<LostAndFoundReport> allLostAndFounds;
-    private String lfreportType;
-    private String lfItemName;
-    private String lfContactNumber;
-    private String lfDescription;
-
-    //Maintenance
-    private List<MaintainenceOrder> allMaintainenceOrders;
-    private String mlocation;
-    private String maintainDescription;
-
-    //housekeeping
-    private List<HouseKeepingOrder> allHousekeepingOrder;
-    private List<Room> allOccupiedRooms;
-    private String hkroom;
-    private String hkSpecialRequest;
-
     //customer
     private String CreateCustomerEmail;
     private String CreateCustomerPassword;
@@ -112,7 +97,61 @@ public class FrontDeskManagedBean {
     private String editCustomerMobileNumber;
     private boolean editCustomerStatus;
 
+    //payment
+    private String paymentNameOnCard;
+    private Date paymentExpiryDate;
+    private String paymentDigits;
+    private String paymentCVV;
+
     public FrontDeskManagedBean() {
+    }
+
+    public String getPaymentNameOnCard() {
+        return paymentNameOnCard;
+    }
+
+    public void setPaymentNameOnCard(String paymentNameOnCard) {
+        this.paymentNameOnCard = paymentNameOnCard;
+    }
+
+    public Date getPaymentExpiryDate() {
+        return paymentExpiryDate;
+    }
+
+    public void setPaymentExpiryDate(Date paymentExpiryDate) {
+        this.paymentExpiryDate = paymentExpiryDate;
+    }
+
+    public String getPaymentDigits() {
+        return paymentDigits;
+    }
+
+    public void setPaymentDigits(String paymentDigits) {
+        this.paymentDigits = paymentDigits;
+    }
+
+    public String getPaymentCVV() {
+        return paymentCVV;
+    }
+
+    public void setPaymentCVV(String paymentCVV) {
+        this.paymentCVV = paymentCVV;
+    }
+
+    public String getCheckinName() {
+        return checkinName;
+    }
+
+    public void setCheckinName(String checkinName) {
+        this.checkinName = checkinName;
+    }
+
+    public String getCheckinEmail() {
+        return checkinEmail;
+    }
+
+    public void setCheckinEmail(String checkinEmail) {
+        this.checkinEmail = checkinEmail;
     }
 
     public String getPassportNumber() {
@@ -144,17 +183,56 @@ public class FrontDeskManagedBean {
 
             Searchbookings = bookSessionLocal.getRoomBookingByPassportNum(checkinPassportNumber);
             checkinPassportNumber = null;
-            return "checkinResult.xhtml";
+            return "checkinResult.xhtml?faces-redirect=true";
         } catch (NoResultException e) {
-            return "checkinResult.xhtml";
+            return "checkinResult.xhtml?faces-redirect=true";
         }
     }
 
-    public List<RoomBooking> getTodaysbookings() {
-        return todaysbookings;
+    public String checkin(PaymentTransaction PT) {
+        checkinPassportNumber = PT.getRoomsBooked().get(0).getPassportNum();
+        checkinName = PT.getPayer().getName();
+        roombooking = PT;
+        return "checkinResult.xhtml?faces-redirect=true";
     }
 
-    public void setTodaysbookings(List<RoomBooking> todaysbookings) {
+    public String confirmCheckin() {
+        //bookSessionLocal.assignBooking(roombooking);
+        return "checkinRoom.xhtml?faces-redirect=true";
+    }
+
+    public String walkinpayment() {
+        return "payment.xhtml?faces-redirect=true";
+    }
+
+    public String makePayment() {
+        CreditCard cc = new CreditCard();
+        cc.setCardNum(encryptPassword(paymentDigits));
+        cc.setCvv(encryptPassword(paymentCVV));
+        cc.setExpiryDate(paymentExpiryDate);
+        //payment complete and roombooking is done here
+
+        return null;
+    }
+
+    public String searchCheckout() {
+        //bookSessionLocal.getRoombookingbyRoomNumber(String roomNumber); check status, dont just anyhow get room. 
+
+        //setCheckOutRoomResult(checkOutRoomResult);
+        return "checkoutResult.xhtml?faces-redirect=true";
+    }
+
+    public String checkOut(RoomBooking rm) {
+        //do check out 
+        return "";
+    }
+
+    public List<PaymentTransaction> getTodaysbookings() {
+        //List<paymentTransaction>bookSessionLocal.getTodaysTransaction();
+        return  null;
+    }
+
+    public void setTodaysbookings(List<PaymentTransaction> todaysbookings) {
         this.todaysbookings = todaysbookings;
     }
 
@@ -174,173 +252,7 @@ public class FrontDeskManagedBean {
         this.allCustomer = allCustomer;
     }
 
-    public List<RoomBooking> getTodayBooking() {
-        try {
-            return todaysbookings = bookSessionLocal.getAllRoomBookingByDate();
-        } catch (NoResultException e) {
-            return todaysbookings = null;
-        }
-    }
-
-    public List<LaundryOrder> getAllLaundryOrders() {
-        return allLaundryOrders = laundrySessionLocal.getAllLaundryOrder();
-    }
-
-    public void setAllLaundryOrders(List<LaundryOrder> allLaundryOrders) {
-        this.allLaundryOrders = allLaundryOrders;
-    }
-
-    public List<LostAndFoundReport> getAllLostAndFounds() {
-        try {
-            return allLostAndFounds = lostAndFoundSessionLocal.getAllLostAndFoundReport();
-        } catch (NoResultException e) {
-            return null;
-        }
-    }
-
-    public void setAllLostAndFounds(List<LostAndFoundReport> allLostAndFounds) {
-        this.allLostAndFounds = allLostAndFounds;
-    }
-
-    public String getLfreportType() {
-        return lfreportType;
-    }
-
-    public void setLfreportType(String lfreportType) {
-        this.lfreportType = lfreportType;
-    }
-
-    public String getLfItemName() {
-        return lfItemName;
-    }
-
-    public void setLfItemName(String lfItemName) {
-        this.lfItemName = lfItemName;
-    }
-
-    public String getLfContactNumber() {
-        return lfContactNumber;
-    }
-
-    public void setLfContactNumber(String lfContactNumber) {
-        this.lfContactNumber = lfContactNumber;
-    }
-
-    public String getLfDescription() {
-        return lfDescription;
-    }
-
-    public void setLfDescription(String lfDescription) {
-        this.lfDescription = lfDescription;
-    }
-
-    public String makeLFRequest() {
-        LostAndFoundReport lf = new LostAndFoundReport();
-        lf.setItemName(lfItemName);
-        lf.setReportType(lfreportType);
-        lf.setContactNum(lfContactNumber);
-        lf.setItemDescription(lfDescription);
-        lf.setIsResolved(false);
-        lf.setReportedDate(new Date());
-
-        lostAndFoundSessionLocal.createLostAndFoundReport(lf);
-        return "lostAndFoundDetails.xhtml";
-    }
-
-    public List<MaintainenceOrder> getAllMaintainenceOrders() {
-        try {
-
-            return allMaintainenceOrders = maintainenceOrderSessionLocal.getAllMaintainenceOrder();
-
-        } catch (NoResultException e) {
-            return null;
-        }
-    }
-
-    public void setAllMaintainenceOrders(List<MaintainenceOrder> allMaintainenceOrders) {
-        this.allMaintainenceOrders = allMaintainenceOrders;
-    }
-
-    public String getMlocation() {
-        return mlocation;
-    }
-
-    public void setMlocation(String mlocation) {
-        this.mlocation = mlocation;
-    }
-
-    public String getMaintainDescription() {
-        return maintainDescription;
-    }
-
-    public void setMaintainDescription(String maintainDescription) {
-        this.maintainDescription = maintainDescription;
-    }
-
-    public String createMaintainence() throws IOException {
-
-        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
-        PrintWriter out = response.getWriter();
-        MaintainenceOrder maintainence = new MaintainenceOrder();
-        maintainence.setDateReported(new Date());
-        maintainence.setDescription(maintainDescription);
-        maintainence.setLocation(mlocation);
-        maintainence.setStatus("Unresolve");
-
-        maintainDescription = null;
-        mlocation = null;
-        maintainenceOrderSessionLocal.createMaintainenceOrder(maintainence);
-
-        out.println("<script type=\"text/javascript\">");
-        out.println("alert('Register Succesful!');");
-        out.println("</script>");
-
-        return "maintenance.xhtml?faces-redirect=true";
-    }
-
-    public List<HouseKeepingOrder> getAllHousekeepingOrder() {
-        try {
-            return allHousekeepingOrder = houseKeepingOrderSessionLocal.getAllHouseKeepingOrder();
-        } catch (NoResultException e) {
-            return allHousekeepingOrder = null;
-        }
-    }
-
-    public void setAllHousekeepingOrder(List<HouseKeepingOrder> allHousekeepingOrder) {
-        this.allHousekeepingOrder = allHousekeepingOrder;
-    }
-
-    public List<Room> getAllOccupiedRooms() {
-        return allOccupiedRooms = roomSessionLocal.getAllRooms();
-    }
-
-    public void setAllOccupiedRooms(List<Room> allOccupiedRooms) {
-        this.allOccupiedRooms = allOccupiedRooms;
-    }
-
-    public String getHkroom() {
-        return hkroom;
-    }
-
-    public void setHkroom(String hkroom) {
-        this.hkroom = hkroom;
-    }
-
-    public String getHkSpecialRequest() {
-        return hkSpecialRequest;
-    }
-
-    public void setHkSpecialRequest(String hkSpecialRequest) {
-        this.hkSpecialRequest = hkSpecialRequest;
-    }
-//stop here
-
-    public String createHouseKeeping() {
-        HouseKeepingOrder hkOrder = new HouseKeepingOrder();
-        //  hkOrder.setRoom(roomSessionLocal.getRoom);
-        hkOrder.setSpecialRequest(hkSpecialRequest);
-        return null;
-    }
+ 
 
     public String createAccount() throws IOException {
         HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
@@ -517,17 +429,83 @@ public class FrontDeskManagedBean {
     }
 
     public List<RoomBooking> getTodayCheckOutRoom() {
-        // return todayCheckOutRoom = bookSessionLocal.getAllRoomBookingByCheckOutDate(todayDate);
-
+        //bookSessionLocal.getbookingbyCheckoutDate(new Date());
+        //to get today's date
         return null;
     }
 
-   // public String checkOut(RoomBooking checkoutroombookings) {
-
-    //}
-
     public void setTodayCheckOutRoom(List<RoomBooking> todayCheckOutRoom) {
         this.todayCheckOutRoom = todayCheckOutRoom;
+    }
+
+    public String searchRoomAvailable() {
+        // return todayCheckOutRoom = bookSessionLocal.getAllRoomBookingByCheckOutDate(todayDate);
+        //some algorithm to get availble room to view and return list of room, group by room type
+        setWalkinAvailableRoom(walkinAvailableRoom);
+
+        return "walkinResult.xhtml?faces-redirect=true";
+
+    }
+
+    public String confirmWalkin(Room room) {
+
+        return "walkinSummary.xhtml?faces-redirect=true";
+    }
+
+    public String getWalkinRoomtype() {
+        return walkinRoomtype;
+    }
+
+    public void setWalkinRoomtype(String walkinRoomtype) {
+        this.walkinRoomtype = walkinRoomtype;
+    }
+
+    public int getWalkinPax() {
+        return walkinPax;
+    }
+
+    public void setWalkinPax(int walkinPax) {
+        this.walkinPax = walkinPax;
+    }
+
+    public int getWalkinNumberOfday() {
+        return walkinNumberOfday;
+    }
+
+    public void setWalkinNumberOfday(int walkinNumberOfday) {
+        this.walkinNumberOfday = walkinNumberOfday;
+    }
+
+    public List<Room> getWalkinAvailableRoom() {
+        return walkinAvailableRoom;
+    }
+
+    public void setWalkinAvailableRoom(List<Room> walkinAvailableRoom) {
+        this.walkinAvailableRoom = walkinAvailableRoom;
+    }
+
+    public PaymentTransaction getRoombooking() {
+        return roombooking;
+    }
+
+    public void setRoombooking(PaymentTransaction roombooking) {
+        this.roombooking = roombooking;
+    }
+
+    public String getCheckoutRoom() {
+        return checkoutRoom;
+    }
+
+    public void setCheckoutRoom(String checkoutRoom) {
+        this.checkoutRoom = checkoutRoom;
+    }
+
+    public List<RoomBooking> getCheckOutRoomResult() {
+        return checkOutRoomResult;
+    }
+
+    public void setCheckOutRoomResult(List<RoomBooking> checkOutRoomResult) {
+        this.checkOutRoomResult = checkOutRoomResult;
     }
 
 }

@@ -68,7 +68,7 @@
                                         <!-- /.card-body -->
 
                                         <div class="card-footer">
-                                            <h:commandButton class="btn btn-primary" value="Search" ></h:commandButton>
+                                            <h:commandButton class="btn btn-primary" value="Search" action="#{frontDeskManagedBean.searchCustomerForCheckin()}" ></h:commandButton>
                                         </div>
                                     </h:form>
                                 </div>
@@ -83,30 +83,30 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
+                                 <h:form>
                             <table  id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>Booked by</th>
                                         <th>Booking Id</th>
                                         <th>Passport Number</th>
-                                        <th>Book out Date</th>
+                                        <th>Rooms booked</th>
 
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <h:form>
-                                        <ui:repeat var="o" value="#{frontDeskManagedBean.todayBooking}" varStatus="status">
+                             
+                                    <ui:repeat var="o" value="#{frontDeskManagedBean.todaysbookings}" varStatus="status">
 
                                             <tr>
-                                                <td>#{o.bookedBy.name}</td>
-                                                <td>#{o.roomBookingID}</td>
-                                                <td>#{o.passportNum}</td>
-                                                <td>#{o.bookOutDate}</td>
-                                                <td><h:commandButton value="Check in" action="checkinResult.xhtml?faces-redirect=true" ></h:commandButton></td>
-                                            </tr>
+                                                <td>#{o.transactionID}</td>
+                                                <td>#{o.payer.name}</td>
+                                                <td>#{o.roomsBooked[0].passportNum}</td>
+                                                <td>#{o.roomsBooked.size()}</td>
+                                                <td colspan="3"><h:commandLink action="#{frontDeskManagedBean.checkin(o)}" > <i class="fa fa-arrow-circle-down" style="color:gray" ></i></h:commandLink></td>                                            </tr>
                                         </ui:repeat>
-                                    </h:form>
+                              
 
                                 </tbody>
                                 <tfoot>
@@ -120,6 +120,7 @@
                                     </tr>
                                 </tfoot>
                             </table>
+                                           </h:form>
                         </div>
                         <!-- /.card-body -->
                     </div>

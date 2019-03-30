@@ -52,36 +52,30 @@
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Room</th>
+                                        
                                         <th>Room type</th>
                                         <th>Price/Night</th>
-
+                                        <th>Quantity</th>
 
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <h:form>
+                                        <ui:repeat value="#{frontDeskManagedBean.walkinAvailableRoom}" var="o" varStatus="status">
+                                            <tr>
+                                              
+                                                <td>o</td>
+                                                <td>$100</td>
+                                                <td>5</td>
+                                                <td><input type="button" value="check in" action="#{confirmWalkin(o)}"/></td>
+                                            </tr>
 
 
-                                    <tr>
-                                        <td>102</td>
-                                        <td>Standard</td>
-                                        <td>$100</td>
-                                        <td><input type="button" value="check in"/></td>
-                                    </tr>
-                                    <tr>
-                                        <td>1102</td>
-                                        <td>Standard</td>
-                                        <td>$100</td>
-                                        <td><input type="button" value="check in"/></td>
-                                    </tr>
-                                    <tr>
-                                        <td>902</td>
-                                        <td>Standard</td>
-                                        <td>$100</td>
-                                        <td><input type="button" value="check in"/></td>
-                                    </tr>
+                                        </ui:repeat>
 
+
+                                    </h:form>
 
 
                                 </tbody>

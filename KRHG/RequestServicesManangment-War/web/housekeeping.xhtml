@@ -37,52 +37,54 @@
                     </div>
                     <!-- /.container-fluid -->
                 </div> 
-                <section class="content">
-                    <div class="container-fluid">
+                       <section class="content">
+                    <div class="card">
+                      
+                            <h:form>
+                                <div class="card-header">
+                                    <h:commandButton class="btn btn-primary float-sm-right" action="createHouseKeepingRequest.xhtml?faces-redirect=true" value="Add New Housekeeping request" />
+                                    <h3 class="card-title">List of requests</h3>
+                                </div>
+                            </h:form>
+                        
+                        <!-- /.card-header -->
+                        <div class="card-body">
 
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">List of housekeeping request for ENTER BACKEND hotel name</h3>
-                            </div>
-                            <!-- /.card-header -->
-                            <div class="card-body">
-                                <table  id="example1" class="table table-bordered table-striped">
-                                    <thead>
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Room</th>
+                                        <th>Status</th>
+                                        <th>DateTime Requested</th>
+
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
                                         <tr>
-                                            <th>Room</th>
-                                            <th>Status</th>
-                                            <th>DateTime Requested</th>
-
-                                            <th></th>
+                                            <td>602</td>
+                                            <td>Incomplete</td>
+                                            <td>27 March 2019</td>
+                                            <td><input type="button" value="update"/></td>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        <ui:repeat var="o" value="#{requestServicesManagedBean.housekeepingOrder}" varStatus="status">
 
-                                            <tr>
-                                                <td>#{o.room.roomID}</td>
-                                                <td>#{o.status}</td>
-                                                <td>#{o.orderDateTime}</td>
+                                 
 
-                                            </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Room</th>
+                                        <th>Status</th>
+                                        <th>DateTime Requested</th>
 
-                                        </ui:repeat>
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Room</th>
-                                            <th>Status</th>
-                                            <th>DateTime Requested</th>
-
-                                            <th></th>
-                                        </tr>
-                                    </tfoot>
-                                </table>
-                            </div>
-                            <!-- /.card-body -->
-                            <a href="createHousekeepingRequest.xhtml">Create New Request</a>
+                                        <th></th>
+                                    </tr>
+                                </tfoot>
+                            </table>
                         </div>
-                        <!-- /.row -->
+                        <!-- /.card-body -->
+
                     </div>
                     <!-- /.container-fluid -->
                 </section>

@@ -38,8 +38,8 @@
                     <!-- /.container-fluid -->
                 </div> 
                 <section class="content">
-                    <div class="card">
 
+                    <div class="card">
 
                         <h:form>
                             <div class="card-header">
@@ -55,7 +55,7 @@
                                     <tr>
                                         <th>Room Number</th>
                                         <th>Date Ordered</th>
-                                        <th>specialRequest </th>
+                                        <th>special Request </th>
                                         <th>Quantity </th>
                                         <th>Status </th>
 
@@ -63,24 +63,26 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <ui:repeat var="o" value="#{frontDeskManagedBean.allLaundryOrders}" varStatus="status">
+                                    <h:form>
+                                        <ui:repeat var="o" value="#{requestAndServiceManagedBean.allLaundryOrders}" varStatus="status">
 
-                                        <tr>
-                                            <td>#{o.room.roomNumber}</td>
-                                            <td>#{o.orderDateTime}</td>
-                                            <td>#{o.specialRequest}</td>
-                                            <td>#{o.qty}</td>
-                                            <td>#{o.status}</td>
+                                            <tr>
+                                                <td>#{o.room.roomNumber}</td>
+                                                <td>#{o.orderDateTime}</td>
+                                                <td>#{o.specialRequest}</td>
+                                                <td>#{o.qty}</td>
+                                                <td>#{o.status}</td>
 
-                                        </tr>
+                                            </tr>
 
-                                    </ui:repeat>
+                                        </ui:repeat>
+                                    </h:form>
                                 </tbody>
                                 <tfoot>
                                     <tr>
                                         <th>Room Number</th>
                                         <th>Date Ordered</th>
-                                        <th>specialRequest </th>
+                                        <th>special Request </th>
                                         <th>Quantity </th>
                                         <th>Status </th>
 
@@ -90,8 +92,9 @@
                             </table>
                         </div>
                         <!-- /.card-body -->
-                        <a href="createLaundryRequest.xhtml">Create New Request</a>
+
                     </div>
+
                     <!-- /.container-fluid -->
                 </section>
                 <!-- /.content-header -->
