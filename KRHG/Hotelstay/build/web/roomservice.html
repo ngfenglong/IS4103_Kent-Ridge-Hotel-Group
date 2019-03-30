@@ -25,143 +25,249 @@
 <!-- Custom styles for this template -->
 <link href="./resources/styles/the-big-picture.css" rel="stylesheet">
 <link href="./resources/styles/accordion.css" rel="stylesheet">
+<link href="./resources/styles/main.css" rel="stylesheet">
+</link>
 
+<script type="text/javascript">
+    function startTime() {
 
+        var today = new Date();
+        var h = today.getHours();
+        var m = today.getMinutes();
+        var s = today.getSeconds();
+        var ampm = h >= 12 ? ' PM' : ' AM';
+        h = h % 12;
+        h = h ? h : 12;
+        // add a zero in front of numbers<10
+        m = checkTime(m);
+        s = checkTime(s);
+        document.getElementById("txt").innerHTML = h + ":" + m + ampm;
+
+        // document.getElementById('timeinput').
+        //     t = setTimeout('startTime()', 500);
+    }
+    function checkTime(i) {
+        if (i < 10) {
+            i = "0" + i;
+        }
+        return i;
+    }
+</script>
 
 
 </head>
 
-<body>
+<body onload=startTime()>
 
     <!-- Page Content -->
     <section>
+        <div class="content">
+            <div class="row"
+                style="position:absolute; top:50px; left:50px; margin-bottom:50px; text-align: center; width:100%">
 
-        <div class="row">
-            <h1
-                style="margin-left:40px; margin-top: 30px; color: #fff;font-size: 400%; font-weight: 400; font-family: 'Abel', sans-serif;">
-                In-Room Dining</h1>
-            <a href="ordersummary.html">
-                <!-- <span style="color: white; position: absolute; right:30px;top: 40px; font-size: 30px"><i
-                        class="fas fa-shopping-cart"></i></span> -->
-                        <span style="color: black; position: absolute; right:140px;top: 40px; font-size: 13px" class="fa-stack">
-                                <!-- The icon that will wrap the number -->
-                                <span  style="color:white; font-size:35px" class="fas fa-shopping-cart fa-stack-2x"></span>
-                                <!-- a strong element with the custom content, in this case a number -->
-                                <strong style="margin-left:5px; margin-bottom: 2px" class="fa-stack-1x">
-                                    2    
-                                </strong>
-                            </span>
-            </a>
+                <a href="index.html"><img height="50px" width="50px" src="resources/images/krhglogo5.svg">
+                    <h1 style="color: #fff; font-family: 'Lora',serif; font-size:40px">
+                        In-Room Dining</h1>
 
-            <a href="index.html"><i class="fa fa-home"
-                style="color:white; font-size:35px; position: absolute; right:70px; top: 40px;"></i></a>
-        </div>
-        <div class="container" style="width:70%">
+                </a>
+                <div class="theSubtitle active" style="width:400px; top:50px; height:100px;">
 
-            <p style="color: #fff; text-align: center; font-size: 150%;">Press on food item to add it to your cart</p>
-            <div id="accordian">
-                <ul>
-                    <li>
-                        <h3><a href="#"><i class="fas fa-bacon"></i>Breakfast</a></h3>
-                        <ul>
-                            <li><a href="#"><span style="font-weight:bold;">All-Day Breakfast</span></a>
-                                <ul>
-                                    <li><a id="add-new" href="#">
-                                            <div class="row">
-                                                <div class="col-3"><img src="./resources/images/laundry.jpg"
-                                                        alt="Italian Trulli" width="100%" style="padding: 5px 0px">
-                                                </div>
-                                                <div class="col-8"><span class="itemName">Pancakes</span> <span
-                                                        style="font-weight: 500; font-size:13px"> -- $18</span><br />
-                                                    <span
-                                                        style="font-size: 12px; font-weight:lighter; font-style: italic">Served
-                                                        With Sauteed Mushrooms & White wine vinegar sauce</span><br>
-                                                    <div style="font-size:inherit; position: absolute; bottom: 5px;">
-                                                        <i class="fas fa-egg"></i>
-                                                        <i class="fas fa-cheese"></i>
-                                                        <i class="	fas fa-pepper-hot"></i>
-                                                        <img height="20px" style="margin-right:5px"
-                                                            src="./resources/images/cow-silhouette.svg">
-                                                        <img height="20px" style="margin-right:5px"
-                                                            src="./resources/images/pig-side-view-silhouette.svg">
-                                                        <img height="20px" style="margin-right:5px"
-                                                            src="./resources/images/raw-fish.svg">
+                    <span class="separator" style="height:100%; "></span>
+                    <div class="titleright" style="width:40%">
+                        <p style=" margin-top:12%; color:#C5B358">
+                            <div id="txt" style="text-align:left;color: #C5B358; font-size: 150%; font-weight: 500;">
+                            </div>
+                        </p>
+                        <p style=" color:#C5B358; font-size:150%">0256</p>
+                    </div>
 
+                </div>
+
+            </div>
+
+
+
+            <div class="rowcontent" style="width:80%;">
+
+                <p style="color: #fff; text-align: center; font-size: 150%;">Press on food item to add it to your cart
+                </p>
+                <div id="accordian" style=" max-height:380px; overflow-y: scroll">
+                    <ul>
+                        <li>
+                            <h3><a href="#"><i class="fas fa-bacon"></i>Breakfast</a></h3>
+                            <ul>
+                                <li><a href="#"><span style="font-weight:bold;">All-Day Breakfast</span></a>
+                                    <ul>
+                                        <li class="add-new"><a>
+                                                <div class="row">
+                                                        <div class="col-3"><img height="150px" width="150px"
+                                                                src="./resources/images/LemonRicottaPancakes.jpg"
+                                                                alt="Italian Trulli" width="100%" style="padding: 5px 0px">
+                                                        </div>
+                                                        <div class="col-8"><span class="itemName">Pancakes</span> <span
+                                                                style="font-weight: 500; font-size:13px"> -- $18</span><br />
+                                                            <span
+                                                                style="font-size: 12px; font-weight:lighter; font-style: italic">Served
+                                                                With strawberry sauce</span><br>
+                                                            <div style="font-size:inherit; position: absolute; bottom: 5px;">
+                                                                <i class="fas fa-egg"></i>
+                                                                <i class="fas fa-cheese"></i>
+                                                                <i class="	fas fa-pepper-hot"></i>
+                                                                <img height="20px" style="margin-right:5px"
+                                                                    src="./resources/images/cow-silhouette.svg">
+                                                                <img height="20px" style="margin-right:5px"
+                                                                    src="./resources/images/pig-side-view-silhouette.svg">
+                                                                <img height="20px" style="margin-right:5px"
+                                                                    src="./resources/images/raw-fish.svg">
+        
+                                                            </div>
+                                                        </div>
+        
                                                     </div>
+                                        </a>
+                                           
+                                        </li>
+                                        <li  class="add-new"><a>
+                                                <div class="row">
+                                                    <div class="col-3"><img height="150px" width="150px"
+                                                            src="./resources/images/SmokedSalmonEggsBenedict.jpg"
+                                                            alt="Italian Trulli" width="100%" style="padding: 5px 0px">
+                                                    </div>
+                                                    <div class="col-8"><span class="itemName">Smoked Salmon Eggs
+                                                            Benedict</span> <span
+                                                            style="font-weight: 500; font-size:13px"> --
+                                                            $23</span><br />
+                                                        <span
+                                                            style="font-size: 12px; font-weight:lighter; font-style: italic">Served
+                                                            With lightly smoked salmon and Australian eggs.</span><br>
+                                                        <div
+                                                            style="font-size:inherit; position: absolute; bottom: 5px;">
+                                                            <i class="fas fa-egg"></i>
+                                                            <i class="fas fa-cheese"></i>
+                                                            <i class="	fas fa-pepper-hot"></i>
+                                                            <img height="20px" style="margin-right:5px"
+                                                                src="./resources/images/cow-silhouette.svg">
+                                                            <img height="20px" style="margin-right:5px"
+                                                                src="./resources/images/pig-side-view-silhouette.svg">
+                                                            <img height="20px" style="margin-right:5px"
+                                                                src="./resources/images/raw-fish.svg">
+
+                                                        </div>
+                                                    </div>
+
                                                 </div>
+                                            </a>
+                                        </li>
+                                        <li class="add-new"><a  href="#">
+                                                <div class="row">
+                                                    <div class="col-3"><img height="150px" width="150px"
+                                                            src="./resources/images/ClassicToastedWesternSandwhiches.jpg"
+                                                            alt="Italian Trulli" width="100%" style="padding: 5px 0px">
+                                                    </div>
+                                                    <div class="col-8"><span class="itemName">Classic Toasted Western
+                                                            Sandwiches</span> <span
+                                                            style="font-weight: 500; font-size:13px"> --
+                                                            $16</span><br />
+                                                        <span
+                                                            style="font-size: 12px; font-weight:lighter; font-style: italic">Served
+                                                            With turkey bacon ham and melted cheddar cheese.</span><br>
+                                                        <div
+                                                            style="font-size:inherit; position: absolute; bottom: 5px;">
+                                                            <i class="fas fa-egg"></i>
+                                                            <i class="fas fa-cheese"></i>
+                                                            <i class="	fas fa-pepper-hot"></i>
+                                                            <img height="20px" style="margin-right:5px"
+                                                                src="./resources/images/cow-silhouette.svg">
+                                                            <img height="20px" style="margin-right:5px"
+                                                                src="./resources/images/pig-side-view-silhouette.svg">
+                                                            <img height="20px" style="margin-right:5px"
+                                                                src="./resources/images/raw-fish.svg">
 
-                                            </div>
-                                        </a></li>
-                                    <li><a href="#">
-                                            <div class="row">
-                                                <div class="col-3"><img src="./resources/images/laundry.jpg"
-                                                        alt="Italian Trulli" width="100%" style="padding: 5px 0px">
+                                                        </div>
+                                                    </div>
+
                                                 </div>
-                                                <div class="col-8"> Today's tasks <br />
-                                                    <span
-                                                        style="font-size: 12px; font-weight:lighter; font-style: italic">Served
-                                                        With Sauteed Mushrooms & White wine vinegar sauce</span></div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
 
-                                            </div>
-                                        </a></li>
-                                    <li><a href="#">
-                                            <div class="row">
-                                                <div class="col-3"><img src="./resources/images/laundry.jpg"
-                                                        alt="Italian Trulli" width="100%" style="padding: 5px 0px">
-                                                </div>
-                                                <div class="col-8"> Today's tasks <br />
-                                                    <span
-                                                        style="font-size: 12px; font-weight:lighter; font-style: italic">Served
-                                                        With Sauteed Mushrooms & White wine vinegar sauce</span></div>
-
-                                            </div>
-                                        </a></li>
-                                    <li><a href="#">
-                                            <div class="row">
-                                                <div class="col-3"><img src="./resources/images/laundry.jpg"
-                                                        alt="Italian Trulli" width="100%" style="padding: 5px 0px">
-                                                </div>
-                                                <div class="col-8"> Today's tasks <br />
-                                                    <span
-                                                        style="font-size: 12px; font-weight:lighter; font-style: italic">Served
-                                                        With Sauteed Mushrooms & White wine vinegar sauce</span></div>
-
-                                            </div>
-                                        </a></li>
-                                </ul>
-                            </li>
-
-                            <li><a href="#"><span style="font-weight:bold;">From the Bakery</span></a>
-                                <ul>
-                                    <li><a href="#">Today's tasks</a></li>
-                                    <li><a href="#">Urgent</a></li>
-                                    <li><a href="#">Recurring</a></li>
-                                    <li><a href="#">Settings</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#"><span style="font-weight:bold;">Specialty Eggs</span></a>
-                                <ul>
-                                    <li><a href="#">Today's tasks</a></li>
-                                    <li><a href="#">Urgent</a></li>
-                                    <li><a href="#">Overdues</a></li>
-                                    <li><a href="#">Recurring</a></li>
-                                    <li><a href="#">Settings</a></li>
-                                </ul>
-                            </li>
-                        </ul>
+                                <li><a href="#"><span style="font-weight:bold;">From the Bakery</span></a>
+                                    <ul>
+                                        <li><a href="#">Today's tasks</a></li>
+                                        <li><a href="#">Urgent</a></li>
+                                        <li><a href="#">Recurring</a></li>
+                                        <li><a href="#">Settings</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#"><span style="font-weight:bold;">Specialty Eggs</span></a>
+                                    <ul>
+                                        <li><a href="#">Today's tasks</a></li>
+                                        <li><a href="#">Urgent</a></li>
+                                        <li><a href="#">Overdues</a></li>
+                                        <li><a href="#">Recurring</a></li>
+                                        <li><a href="#">Settings</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="active">
+                            <h3><a href="#"><i class="fas fa-bars"></i>All-Day Menu</a></h3>
+                            <ul>
+                                <li><a href="#"><span style="font-weight:bold;">Starters</span></a>
+                                    <ul>
+                                        <li><a href="#">Today's tasks</a></li>
+                                        <li><a href="#">Urgent</a></li>
+                                        <li><a href="#">Recurring</a></li>
+                                        <li><a href="#">Settings</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#"><span style="font-weight:bold;">Flavours of Asia</span></a>
+                                    <ul>
+                                        <li><a href="#">Today's tasks</a></li>
+                                        <li><a href="#">Urgent</a></li>
+                                        <li><a href="#">Overdues</a></li>
+                                        <li><a href="#">Recurring</a></li>
+                                        <li><a href="#">Settings</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#"><span style="font-weight:bold;">Mains</span></a>
+                                    <ul>
+                                        <li><a href="#">Today's tasks</a></li>
+                                        <li><a href="#">Urgent</a></li>
+                                        <li><a href="#">Overdues</a></li>
+                                        <li><a href="#">Recurring</a></li>
+                                        <li><a href="#">Settings</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#"><span style="font-weight:bold;">Sandwiches and Burgers</span</a> <ul>
+                                <li><a href="#">Today's tasks</a></li>
+                                <li><a href="#">Urgent</a></li>
+                                <li><a href="#">Overdues</a></li>
+                                <li><a href="#">Recurring</a></li>
+                                <li><a href="#">Settings</a></li>
+                            </ul>
+                        </li>
+                    </ul>
                     </li>
-                    <li class="active">
-                        <h3><a href="#"><i class="fas fa-bars"></i>All-Day Menu</a></h3>
+                    <li style="padding-bottom:8px">
+                        <h3><a href="#"><i class="fas fa-coffee"></i></span>Beverages</a></h3>
                         <ul>
-                            <li><a href="#"><span style="font-weight:bold;">Starters</span></a>
+                            <li><a href="#"><span style="font-weight:bold;">Soft Drinks</span></a>
                                 <ul>
-                                    <li><a href="#">Today's tasks</a></li>
+                                    <li><a href="#">
+                                            Today's tasks <br />
+                                            <span
+                                                style="font-size: 12px; font-weight:lighter; font-style: italic">Served
+                                                With Sauteed Mushrooms & White wine vinegar sauce</span>
+
+                                        </a></li>
                                     <li><a href="#">Urgent</a></li>
                                     <li><a href="#">Recurring</a></li>
                                     <li><a href="#">Settings</a></li>
                                 </ul>
                             </li>
-                            <li><a href="#"><span style="font-weight:bold;">Flavours of Asia</span></a>
+                            <li><a href="#"><span style="font-weight:bold;">Coffee</span></a>
                                 <ul>
                                     <li><a href="#">Today's tasks</a></li>
                                     <li><a href="#">Urgent</a></li>
@@ -170,7 +276,7 @@
                                     <li><a href="#">Settings</a></li>
                                 </ul>
                             </li>
-                            <li><a href="#"><span style="font-weight:bold;">Mains</span></a>
+                            <li><a href="#"><span style="font-weight:bold;">Tea</span></a>
                                 <ul>
                                     <li><a href="#">Today's tasks</a></li>
                                     <li><a href="#">Urgent</a></li>
@@ -179,7 +285,7 @@
                                     <li><a href="#">Settings</a></li>
                                 </ul>
                             </li>
-                            <li><a href="#"><span style="font-weight:bold;">Sandwiches and Burgers</span</a> <ul>
+                            <li><a href="#"><span style="font-weight:bold;">Juices</span</a> <ul>
                             <li><a href="#">Today's tasks</a></li>
                             <li><a href="#">Urgent</a></li>
                             <li><a href="#">Overdues</a></li>
@@ -187,89 +293,50 @@
                             <li><a href="#">Settings</a></li>
                         </ul>
                     </li>
-                </ul>
-                </li>
-                <li style="padding-bottom:8px">
-                    <h3><a href="#"><i class="fas fa-coffee"></i></span>Beverages</a></h3>
-                    <ul>
-                        <li><a href="#"><span style="font-weight:bold;">Soft Drinks</span></a>
-                            <ul>
-                                <li><a href="#">
-                                        Today's tasks <br />
-                                        <span style="font-size: 12px; font-weight:lighter; font-style: italic">Served
-                                            With Sauteed Mushrooms & White wine vinegar sauce</span>
-
-                                    </a></li>
-                                <li><a href="#">Urgent</a></li>
-                                <li><a href="#">Recurring</a></li>
-                                <li><a href="#">Settings</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#"><span style="font-weight:bold;">Coffee</span></a>
-                            <ul>
-                                <li><a href="#">Today's tasks</a></li>
-                                <li><a href="#">Urgent</a></li>
-                                <li><a href="#">Overdues</a></li>
-                                <li><a href="#">Recurring</a></li>
-                                <li><a href="#">Settings</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#"><span style="font-weight:bold;">Tea</span></a>
-                            <ul>
-                                <li><a href="#">Today's tasks</a></li>
-                                <li><a href="#">Urgent</a></li>
-                                <li><a href="#">Overdues</a></li>
-                                <li><a href="#">Recurring</a></li>
-                                <li><a href="#">Settings</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#"><span style="font-weight:bold;">Juices</span</a> <ul>
-                        <li><a href="#">Today's tasks</a></li>
-                        <li><a href="#">Urgent</a></li>
-                        <li><a href="#">Overdues</a></li>
-                        <li><a href="#">Recurring</a></li>
-                        <li><a href="#">Settings</a></li>
+                    <li><a href="#"><span style="font-weight:bold;">Alchoholic Beverages</span</a> <ul>
+                    <li><a href="#">Today's tasks</a></li>
+                    <li><a href="#">Urgent</a></li>
+                    <li><a href="#">Overdues</a></li>
+                    <li><a href="#">Recurring</a></li>
+                    <li><a href="#">Settings</a></li>
                     </ul>
-                </li>
-                <li><a href="#"><span style="font-weight:bold;">Alchoholic Beverages</span</a> <ul>
-                <li><a href="#">Today's tasks</a></li>
-                <li><a href="#">Urgent</a></li>
-                <li><a href="#">Overdues</a></li>
-                <li><a href="#">Recurring</a></li>
-                <li><a href="#">Settings</a></li>
-                </ul>
-                </li>
-                </ul>
-                </li>
-                </ul>
-            </div>
-            <!-- <ul class="collapsible">
-                <li>
-                  <div class="collapsible-header"><i class="material-icons">restaurant</i>Appetizer</div>
-                  <div class="collapsible-body">
-                        <a class="waves-effect waves-teal btn-flat">Fruit Kebab</a>
-                        <a class="waves-effect waves-teal btn-flat">Scrambled Eggs</a>
-                        <a class="waves-effect waves-teal btn-flat">Ham Sandwich</a>
-                    </div>
-                </li>
-                <li>
-                  <div class="collapsible-header"><i class="material-icons">restaurant_menu</i>Main Course</div>
-                  <div class="collapsible-body">
-                    <a class="waves-effect waves-teal btn-flat">American Breakfast</a>
-                    <a class="waves-effect waves-teal btn-flat">Chicken Aglio Olio</a>
-                    <a class="waves-effect waves-teal btn-flat"></a></div>
-                </li>
-                <li>
-                  <div class="collapsible-header"><i class="material-icons">whatshot</i>Dessert</div>
-                  <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                </li>
-                <li>
-                    <div class="collapsible-header"><i class="material-icons">local_cafe</i>Beverages</div>
-                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                  </li>
-              </ul> -->
+                    </li>
+                    </ul>
+                    </li>
+                    </ul>
+                </div>
 
+                <button class="bigBtn" onclick="location.href = 'ordersummary.html';">Go To Cart (<span>2</span>
+                    items)</button>
+                <!-- <ul class="collapsible">
+                    <li>
+                      <div class="collapsible-header"><i class="material-icons">restaurant</i>Appetizer</div>
+                      <div class="collapsible-body">
+                            <a class="waves-effect waves-teal btn-flat">Fruit Kebab</a>
+                            <a class="waves-effect waves-teal btn-flat">Scrambled Eggs</a>
+                            <a class="waves-effect waves-teal btn-flat">Ham Sandwich</a>
+                        </div>
+                    </li>
+                    <li>
+                      <div class="collapsible-header"><i class="material-icons">restaurant_menu</i>Main Course</div>
+                      <div class="collapsible-body">
+                        <a class="waves-effect waves-teal btn-flat">American Breakfast</a>
+                        <a class="waves-effect waves-teal btn-flat">Chicken Aglio Olio</a>
+                        <a class="waves-effect waves-teal btn-flat"></a></div>
+                    </li>
+                    <li>
+                      <div class="collapsible-header"><i class="material-icons">whatshot</i>Dessert</div>
+                      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header"><i class="material-icons">local_cafe</i>Beverages</div>
+                        <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                      </li>
+                  </ul> -->
+
+            </div>
         </div>
+
 
 
     </section>
@@ -287,40 +354,89 @@
         });
         notifications.init();
     </script>
-    
+
     <script type="text/javascript">
-        var ADDNEW = document.getElementById("add-new");
-        ADDNEW.addEventListener('click', function () {
-            var behaviorValue = 'yes';
-            var typeValue = 'info';
-            console.log(ADDNEW.getElementsByClassName("itemName")[0].innerText);
-            var foodName=ADDNEW.getElementsByClassName("itemName")[0].innerText;
-            var el = document.createElement('p');
-            el.classList.add('notification');
-            // var innerHTML = '';
-            var text = foodName + " has been added to cart"
-            switch (typeValue) {
-                case "success":
-                    el.classList.add('is-success');
-                    break;
-                case "error":
-                    el.classList.add('is-danger');
-                    break;
-                case "warning":
-                    el.classList.add('is-warning');
-                    break;
-                default:
-                    el.classList.add('is-primary');
-                    break;
-            }
-            if (behaviorValue === 'yes') {
-                el.setAttribute('data-close', 'self');
-            } else {
-                innerHTML += '<button class="delete" type="button">Close</button>';
-            }
-            el.innerHTML = text;
-            document.querySelector('section').appendChild(el);
+
+        $(function () {
+            var all = document.querySelectorAll(".add-new");
+            console.log(all);
+            $(".add-new").click(function (e) {
+                e.preventDefault();
+                console.log("hi");
+                console.log($(this).find("span.itemName")[0].innerText);
+                var behaviorValue = 'yes';
+                var typeValue = 'info';
+                var foodName = $(this).find("span.itemName")[0].innerText;
+                var el = document.createElement('p');
+                el.classList.add('notification');
+                // var innerHTML = '';
+                var text = foodName + " has been added to cart"
+                switch (typeValue) {
+                    case "success":
+                        el.classList.add('is-success');
+                        break;
+                    case "error":
+                        el.classList.add('is-danger');
+                        break;
+                    case "warning":
+                        el.classList.add('is-warning');
+                        break;
+                    default:
+                        el.classList.add('is-primary');
+                        break;
+                }
+                if (behaviorValue === 'yes') {
+                    el.setAttribute('data-close', 'self');
+                } else {
+                    innerHTML += '<button class="delete" type="button">Close</button>';
+                }
+                el.innerHTML = text;
+                document.querySelector('section').appendChild(el);
+            });
         });
+
+    //     var ADDNEW = document.getElementsByClassName("add-new");
+    //     var len = ADDNEW.length;
+    //     console.log(len);
+    //     for (var ADDNEW of ADDNEWs) {
+    //         ADDNEW.addEventListener('click', function () {
+    //         var behaviorValue = 'yes';
+    //         var typeValue = 'info';
+    //         console.log(ADDNEW);
+    //         var foodName=ADDNEW.getElementsByClassName("itemName")[0].innerText;
+    //         var el = document.createElement('p');
+    //         el.classList.add('notification');
+    //         // var innerHTML = '';
+    //         var text = foodName + " has been added to cart"
+    //         switch (typeValue) {
+    //             case "success":
+    //                 el.classList.add('is-success');
+    //                 break;
+    //             case "error":
+    //                 el.classList.add('is-danger');
+    //                 break;
+    //             case "warning":
+    //                 el.classList.add('is-warning');
+    //                 break;
+    //             default:
+    //                 el.classList.add('is-primary');
+    //                 break;
+    //         }
+    //         if (behaviorValue === 'yes') {
+    //             el.setAttribute('data-close', 'self');
+    //         } else {
+    //             innerHTML += '<button class="delete" type="button">Close</button>';
+    //         }
+    //         el.innerHTML = text;
+    //         document.querySelector('section').appendChild(el);
+
+    //     });
+
+
+    // }
+
+
+
     </script>
 
 

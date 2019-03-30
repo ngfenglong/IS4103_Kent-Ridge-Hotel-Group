@@ -24,26 +24,38 @@
 
     <!-- Custom styles for this template -->
     <link href="./resources/styles/the-big-picture.css" rel="stylesheet">
+    <link href="./resources/styles/main.css" rel="stylesheet">
 
 
     <script type="text/javascript">
+
+        function startTime2() {
+            var today = new Date();
+            var h = today.getHours();
+            var m = today.getMinutes();
+            var s = today.getSeconds();
+            var ampm = h >= 12 ? ' PM' : ' AM';
+            h = h % 12;
+            h = h ? h : 12;
+            // add a zero in front of numbers<10
+            m = checkTime(m);
+            s = checkTime(s);
+            document.getElementById("txt").innerHTML = h + ":" + m + ampm;
+        }
         function startTime() {
             var today = new Date();
             var h = today.getHours();
             var m = today.getMinutes();
             var s = today.getSeconds();
-            var ampm = h>= 12 ? ' PM' : ' AM';
+            var ampm = h >= 12 ? ' PM' : ' AM';
             h = h % 12;
-             h = h ? h : 12;
+            h = h ? h : 12;
             // add a zero in front of numbers<10
             m = checkTime(m);
             s = checkTime(s);
-            if((ampm == " AM" && h<10) || (ampm ==" PM" && h>10)){
-                    document.getElementById("printTime").innerHTML = "12:00 PM";
-            } else{
-                document.getElementById("printTime").innerHTML = h + ":" + m + ampm;
-            }
-            
+            document.getElementById("printTime").innerHTML = "12:00 PM";
+
+
             // document.getElementById('timeinput').
             //     t = setTimeout('startTime()', 500);
         }
@@ -60,48 +72,56 @@
 </head>
 
 <body onload=determinePage()>
+    <div class="content">
+        <!-- Page Content -->
+        <div class="row"
+            style="position:absolute; top:50px; left:50px; margin-bottom:50px; text-align: center; width:100%">
 
-    <!-- Page Content -->
-    <section id="section1">
-        <div class="row">
-            <h1
-                style="margin-left:40px; margin-top: 30px; color: #fff;font-size: 400%; font-weight: 400; font-family: 'Abel', sans-serif;">
-                Laundry Request</h1>
+            <a href="index.html"><img height="50px" width="50px" src="resources/images/krhglogo5.svg">
+                <h1 style="color: #fff; font-family: 'Lora',serif; font-size:40px">
+                    Laundry Request</h1>
+            </a>
+            <div class="theSubtitle active" style="width:400px; top:50px; height:100px;">
 
-            <a href="index.html"><i class="fa fa-home"
-                    style="color:white; font-size:35px; position: absolute; right:70px; top: 40px;"></i></a>
+                <span class="separator" style="height:100%; "></span>
+                <div class="titleright" style="width:40%">
+                    <p style=" margin-top:12%; color:#C5B358">
+                        <div id="txt" style="text-align:left;color: #C5B358; font-size: 150%; font-weight: 500;"></div>
+                    </p>
+                    <p style=" color:#C5B358; font-size:150%">0256</p>
+                </div>
+
+            </div>
+
         </div>
-        <div class="container" style="background-color:rgb(43,43,43,0.5)">
 
-            <div class="row" style="margin-top: 7%; opacity:1;">
+        <section id="section1">
+
+            <div class="row rowcontent">
+
                 <div class="col-lg-12">
                     <p style="color: #fff; text-align: center; font-size: 200%; margin-bottom: 2%">What time would you
                         like us to pick up your clothing?</p>
                     <input type="text" id="time" class="timepicker"
-                        style="color:white; width: 40%; height: 50%; font-size:500%; text-align: center; border-radius:2px;  margin-left: 30%;">
-                    <p style="color: #fff; text-align: center; font-size: 150%; margin-top: 1%">Please note that laundry pick-up services are only available from 10am to 10pm. </p>
-                    <p style="color: #fff; text-align: center; font-size: 120%; margin-top: 1%">If time is not picked, your laundry pick-up will be scheduled at 12:00 PM. </p>
-             
-                    
-                    <button class="nextbutton" onclick="onClickNext(1)">Next ></button>
+                        style="color:#C5B358;font-family: 'Lora',serif; width: 40%; height: 50%; font-size:500%; text-align: center; border-radius:2px;  margin-left: 30%;">
+                    <p style="color: #fff; text-align: center; font-size: 150%; margin-top: 1%">Please note that laundry
+                        pick-up services are only available from 10am to 10pm. </p>
+                    <p style="color: #fff; text-align: center; font-size: 120%; margin-top: 1%">If time is not picked,
+                        your laundry pick-up will be scheduled at 12:00 PM. </p>
+
+
+                    <button class="bigBtn" onclick="onClickNext(1)">Next ></button>
+
                 </div>
             </div>
-        </div>
 
-    </section>
+        </section>
 
-    <section style="display: none;" id="section2">
-        <div class="row">
-            <h1
-                style="margin-left:40px; margin-top: 30px; color: #fff;font-size: 400%; font-weight: 400; font-family: 'Abel', sans-serif;">
-                Laundry Request</h1>
+        <section style="display: none;" id="section2">
 
-            <a href="index.html"><i class="fa fa-home"
-                    style="color:white; font-size:35px; position: absolute; right:70px; top: 40px;"></i></a>
-        </div>
-        <div class="container">
+            <div class="row rowcontent">
 
-            <div class="row" style="margin-top: 7%;">
+
                 <div class="col-lg-12">
                     <p style="color: #fff; text-align: center; font-size: 200%; margin-bottom: 2%">Laundry Service will
                         take 2-4 days.</p>
@@ -110,50 +130,44 @@
                         Otherwise, press next.</p>
 
                     <input type="text" id="time" class="datepicker"
-                        style="display:inline-block; color:white; width: 40%; height: 30%; font-size:400%; text-align: center; border-radius:2px;  margin-left: 30%;">
+                        style="display:inline-block; color:#C5B358;font-family: 'Lora',serif; width: 60%; height: 30%; font-size:400%; text-align: center; border-radius:2px; margin-left:20%  ">
 
-                    <button class="cd-popup-trigger" id="modal-1" data-target="#modal-1"
-                        style="display:block; position:absolute; left:45%">Submit></button>
-                    <button class="nextbutton" style='position:absolute; top:130%; left:1%; font-size:150%'
-                        onclick="onClickNext(0)">Back</button>
+                    <button class="cd-popup-trigger bigBtn" id="modal-1" data-target="#modal-1"
+                        style="display:block;">Submit</button>
+                    <button class="bigBtn" onclick="onClickNext(0)">Back</button>
+
 
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section style="display: none;" id="section3">
-        <div class="row">
-            <h1
-                style="margin-left:40px; margin-top: 30px; color: #fff;font-size: 400%; font-weight: 400; font-family: 'Abel', sans-serif;">
-                Laundry Request</h1>
+        <section style="display: none;" id="section3">
 
-            <a href="index.html"><i class="fa fa-home"
-                    style="color:white; font-size:35px; position: absolute; right:70px; top: 40px;"></i></a>
-        </div>
-        <div class="container">
 
-            <div class="row" style="margin-top: 7%;">
+
+            <div class="rowcontent row">
                 <div class="col-lg-12">
                     <p style="color: #fff; text-align: center; font-size: 180%; margin-bottom: 2%">Your laundry pickup
-                        will be scheduled at:</p>
-                    <p id="printTime" style="font-size: 200%; color:white; text-align: center; font-weight:bold">hi</p>
-                    <p style="color: #fff; text-align: center; font-size: 180%; margin-bottom: 2%"> It will be returned by:
-                    <p id="printDate" style="font-size: 200%; color:white; text-align: center; font-weight:bold">hi</p>
-                    
-                    <p id="checkrequests1" style="font-size: 150%; color:grey; text-align: center">Please prepare your
-                        laundry items.</p>
-                    <button class="cd-popup-trigger" id="modal-2" data-target="#modal-1"
-                        style="display:block; position:absolute; left:38% ">Cancel/Edit Request</button>
+                        is scheduled at:</p>
+                    <p id="printTime"
+                        style="font-size: 200%; color:#C5B358; text-align: center; font-weight:medium; font-family: 'lora,serif;'">
+                        hi</p>
+                    <p style="color: #fff; text-align: center; font-size: 180%; margin-bottom: 2%"> It will be returned
+                        by:
+                        <p id="printDate"
+                            style="font-size: 200%; color:#C5B358; text-align: center; font-weight:medium; font-family: 'lora',serif;">
+                            hi</p>
 
-
-
-
+                        <p id="checkrequests1" style="font-size: 150%; color:grey; text-align: center">Please prepare
+                            your
+                            laundry items.</p>
+                        <button class="cd-popup-trigger bigBtn" id="modal-2" data-target="#modal-1"
+                            style="display:block;">Cancel/Edit Request</button>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
+    </div>
 
     <!--modal-->
     <div id="modal" class="cd-popup" role="alert">
@@ -162,22 +176,22 @@
 
             <ul class="cd-buttons">
                 <li><a onclick="" id="laundry" class="cd-popup-confirm">Yes</a></li>
-                <li><a href="#0"  class=" cd-popup-closemodal">No</a></li>
+                <li><a href="#0" class=" cd-popup-closemodal">No</a></li>
             </ul>
             <a href="#0" class="cd-popup-close img-replace">Close</a>
         </div> <!-- cd-popup-container -->
     </div> <!-- cd-popup -->
 
     <div id="modal2" class="cd-popup" role="alert">
-            <div class="cd-popup-container">
-                <p class="popup-content">Time selected is not valid! Please select a time from 10AM to 10PM.</p>
-    
-                <ul class="cd-buttons">
-                    <li><a style="width:200%; color: #2b2b2b" href="laundry.html" class="cd-popup-confirm">Okay</a></li>
-                </ul>
-                <a href="#0" class="cd-popup-close img-replace">Close</a>
-            </div> <!-- cd-popup-container -->
-        </div> <!-- cd-popup -->
+        <div class="cd-popup-container">
+            <p class="popup-content">Time selected is not valid! Please select a time from 10AM to 10PM.</p>
+
+            <ul class="cd-buttons">
+                <li><a style="width:200%; color: #2b2b2b" href="laundry.html" class="cd-popup-confirm">Okay</a></li>
+            </ul>
+            <a href="#0" class="cd-popup-close img-replace">Close</a>
+        </div> <!-- cd-popup-container -->
+    </div> <!-- cd-popup -->
 
 
 
@@ -206,11 +220,11 @@
             var modalfunction = '';
             if ($(event)[0].target.id == "modal-1") {
                 message = "Submit Laundry Request?"
-                modalfunction="onClickNext(2)"
+                modalfunction = "onClickNext(2)"
             }
             if ($(event)[0].target.id == "modal-2") {
                 message = "Cancel Laundry Request?"
-                modalfunction="onClickNext(0)"
+                modalfunction = "onClickNext(0)"
             }
             var modal = $('.cd-popup')
             console.log(message);
@@ -239,7 +253,7 @@
                 onClose: function () {
                     datepicked = dateinstances[0].date;
                 }
-                
+
             });
 
 
@@ -256,12 +270,12 @@
                     timepicked = instances[0].time + instances[0].amOrPm;
                     console.log("hiii " + timepicked);
                     //if user picks time before 10am
-                    if((timepicked.substring(timepicked.length - 2 , timepicked.length) == "AM") && ((new Number(timepicked.substring(0,2))) < 10)){
-                        console.log(timepicked.substring(timepicked.length - 2 , timepicked.length));
-                        console.log(new Number(timepicked.substring(0,2)).valueOf() );
+                    if ((timepicked.substring(timepicked.length - 2, timepicked.length) == "AM") && ((new Number(timepicked.substring(0, 2))) < 10)) {
+                        console.log(timepicked.substring(timepicked.length - 2, timepicked.length));
+                        console.log(new Number(timepicked.substring(0, 2)).valueOf());
                         callModal();
                         //if user picks time after 10pm
-                    } else if ((timepicked.substring(timepicked.length - 2 , timepicked.length) == "PM") && ((new Number(timepicked.substring(0,2))) > 10)){
+                    } else if ((timepicked.substring(timepicked.length - 2, timepicked.length) == "PM") && ((new Number(timepicked.substring(0, 2))) > 10)) {
                         console.log("hiii2");
                         callModal();
                     }
@@ -273,26 +287,26 @@
             console.log("time", instances[0]);
         });
 
-        function callModal(){
-           $('#modal2').addClass('is-visible');
+        function callModal() {
+            $('#modal2').addClass('is-visible');
         }
 
         function loadTime() {
-            if(timepicked != undefined){
+            if (timepicked != undefined) {
                 document.getElementById("printTime").innerHTML = timepicked;
             } else {
-               startTime();
+                startTime();
             }
 
         }
 
         function loadDate() {
-            if(datepicked != undefined){
-            document.getElementById("printDate").innerHTML = formatDate(datepicked);
+            if (datepicked != undefined) {
+                document.getElementById("printDate").innerHTML = formatDate(datepicked);
             } else {
                 var today = new Date();
                 today.setDate(today.getDate() + 4);
-                  console.log(today);
+                console.log(today);
                 document.getElementById("printDate").innerHTML = formatDate(today);
             }
         }
@@ -306,7 +320,7 @@
             ];
 
             var dayNames = [
-               "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
+                "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
             ];
 
             var weekday = date.getDay();
@@ -336,12 +350,13 @@
             }
         }
 
-        
+
 
         function determinePage() {
             //if there is an existing request (from backend), show section 3
             //if there is no existing request, show section 1
             //refer to onClickNext function to show/hide sections
+            startTime2();
         }
     </script>
 

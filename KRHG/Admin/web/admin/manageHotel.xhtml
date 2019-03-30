@@ -5,6 +5,9 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
 
+      <head>
+            <link rel="stylesheet" href="#{request.contextPath}/css/adminlte.min.css" />
+    </head>
     <body>
 
         <ui:composition template="./AdminTemplate.xhtml">
@@ -27,7 +30,7 @@
                                     <li class="breadcrumb-item active">
                                         <!--Add Btn-->
                                         <h:form>
-                                            <h:commandButton class="btn btn-primary" action="addMinibarItem.xhtml?faces-redirect=true" value="Add Minibar Item" />
+                                            <h:commandButton class="btn btn-primary" action="addHotel.xhtml?faces-redirect=true" value="Add Hotel" />
                                         </h:form>
                                     </li>
                                 </ol>
@@ -41,12 +44,27 @@
                 <!-- /.content-header -->
                 <!-- Main content -->
                 <section class="content">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">All Hotels</h3>
+                    <div class="row">
+                        <div class="col-lg-4 col-xs-12">
+                                <div class="info-box bg-red">
+                                        <span class="info-box-icon"><i class="fa fa-comments-o"></i></span>
+                                        <div class="info-box-content">
+                                          <span class="info-box-text">Likes</span>
+                                          <span class="info-box-number">41,410</span>
+                                          <!-- The progress section is optional -->
+                                          <div class="progress">
+                                            <div class="progress-bar" style="width: 70%"></div>
+                                          </div>
+                                          <span class="progress-description">
+                                            70% Increase in 30 Days
+                                          </span>
+                                        </div>
+                                        <!-- /.info-box-content -->
+                                      </div>
+                                      <!-- /.info-box -->
                         </div>
-                        <!-- /.card-header -->
-                        <div class="card-body">
+                    </div>
+            
                             <h:form>
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
@@ -57,8 +75,6 @@
                                             <th>Address</th>
                                             <th>Rooms</th>
                                             <th>View</th>
-                                            <th>Edit</th>
-                                            <th>Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -70,16 +86,12 @@
                                                 <td>#{hotel.hotelAddress}</td>
                                                 <td><h:commandButton id="viewRoomBtn" action="#{hotelManagedBean.viewHotelRooms(hotel.hotelName)}" value="View Rooms" class="btn btn-primary"  /></td>
                                                 <td><h:commandButton id="viewDetailBtn" action="#{hotelManagedBean.viewHotel(hotel.hotelID)}" value="View" class="btn btn-primary"  /></td>
-                                                <td><h:commandButton id="editHotelBtn" action="#{hotelManagedBean.editHotel(hotel.hotelID)}" value="Edit" class="btn btn-secondary"  /></td>
-                                                <td><h:commandButton id="deleteHotelBtn" onclick="return confirm('Are you sure?');" action="#{hotelManagedBean.deleteHotel(hotel.hotelID)}" value="Delete" class="btn btn-danger"  /></td>
                                             </tr>
                                         </c:forEach>
                                     </tbody>
                                 </table>
                             </h:form>
-                        </div>
-                        <!-- /.card-body -->
-                    </div>
+                        
                 </section>
                 <!-- /.content -->
             </ui:define>

@@ -17,15 +17,32 @@
     <!--Component Stylesheets: Growl, Modal, Date/Time Picker-->
     <link rel="stylesheet" href="./resources/notifications/dist/Notifications.unmin.css">
     <link href="./resources/styles/modal.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="./resources/css/materialize.min.css">
 
     <!-- Bootstrap core CSS -->
     <link href="./resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="./resources/styles/the-big-picture.css" rel="stylesheet">
+    <link href="./resources/styles/main.css" rel="stylesheet">
 
     <script type="text/javascript">
+
+    function startTime2() {
+            var today = new Date();
+            var h = today.getHours();
+            var m = today.getMinutes();
+            var s = today.getSeconds();
+            var ampm = h>= 12 ? ' PM' : ' AM';
+            h = h % 12;
+             h = h ? h : 12;
+            // add a zero in front of numbers<10
+            m = checkTime(m);
+            s = checkTime(s);
+            document.getElementById("txt").innerHTML = h + ":" + m + ampm;
+    }
+
+
         function startTime() {
             var today = new Date();
             var h = today.getHours();
@@ -37,12 +54,10 @@
             // add a zero in front of numbers<10
             m = checkTime(m);
             s = checkTime(s);
-            if((ampm == " AM" && h<10) || (ampm ==" PM" && h>10)){
+
                 //set 12pm if user does not pick a time, can change to whatever housekeeping manager assigns.
                     document.getElementById("printtime").innerHTML = "12:00 PM";
-            } else{
-                document.getElementById("printtime").innerHTML = h + ":" + m + ampm;
-            }
+
             // document.getElementById('timeinput').
             //     t = setTimeout('startTime()', 500);
         }
@@ -60,105 +75,104 @@
 
 <body onload=determinePage()>
 
+        <div class="content">
+                <div class="row" style="position:absolute; top:50px; left:50px; margin-bottom:50px; text-align: center; width:100%">
+
+                        <a href="index.html"><img height="50px" width="50px" src="resources/images/krhglogo5.svg">
+                            <h1 style="color: #fff; font-family: 'Lora',serif; font-size:40px">
+                                    Housekeeping <br/> Request</h1>
+
+                                </a>
+                                    <div class="theSubtitle active" style="width:400px; top:50px; height:100px;">
+        
+                                            <span class="separator" style="height:100%; "></span>
+                                            <div class="titleright" style="width:40%">
+                                                    <p style=" margin-top:12%; color:#C5B358"><div id="txt" style="text-align:left;color: #C5B358; font-size: 150%; font-weight: 500;"></div></p>
+                                                    <p style=" color:#C5B358; font-size:150%">0256</p>
+                                            </div>
+                        
+                                            </div>
+                        
+                </div>
+
+                <section id="section1">
+   
+
+                
+                            <div class="rowcontent row">
+                                <div class="col-lg-12">
+                                    <p style="color: #fff; text-align: center; font-size: 200%; margin-bottom: 2%">What time would you
+                                        like us to drop by?</p>
+                                        <input type="text" id="time" class="timepicker"
+                                        style="color:#C5B358;font-family: 'Lora',serif; width: 40%; height: 50%; font-size:500%; text-align: center; border-radius:2px;  margin-left: 30%;">
+                                        <p style="color: #fff; text-align: center; font-size: 150%; margin-top: 1%">Please note that housekeeping services are only available from 10am to 10pm. </p>
+                                        <p style="color: #fff; text-align: center; font-size: 110%; margin-top: 1%">If time is not picked, your housekeeping request will be scheduled at anytime from 12PM to 5PM. </p>
+                                    <button class="bigBtn" onclick="onClickNext(1)">Next</button>
+                                </div>
+                            </div>
+
+                
+                    </section>
+                
+                    <section style="display: none;" id="section2">
+
+                
+                            <div class="row rowcontent" >
+                                <div class="col-lg-12">
+                                    <p style="color: #fff; text-align: center; font-size: 200%; margin-bottom: 2%">Any special requests?
+                                    </p>
+                                    <form action="#">
+                                        <p>
+                                            <label style="margin-right: 30px; ">
+                                                <input class="check" type="checkbox" value="Extra Towels" />
+                                                <span style="font-size: 200%; color: white;">Extra Towels</span>
+                                            </label>
+                                            <label style="margin-right: 30px">
+                                                <input class="check" type="checkbox" value="More Shower Amenities" />
+                                                <span style="font-size: 200%; color: white;">More Shower Amenities</span>
+                                            </label>
+                                            <label style="margin-right: 30px">
+                                                <input class="check" type="checkbox" value="Restock Minibar"/>
+                                                <span style="font-size: 200%; color: white;">Restock Minibar</span>
+                                            </label>
+                                        </p>
+                
+                                        <div class="input-field col-xs-12" style="padding-top:50px">
+                                            <textarea id="otherrequests" style="color:white; font-size:150%"
+                                                class="materialize-textarea" data-length="120"></textarea>
+                                            <label for="otherrequests" style="font-size: 140%; font-weight:300;">Other Requests</label>
+                                        </div>
+                
+                
+                                    </form>
+                                    <button class="cd-popup-trigger bigBtn" id="modal-1" data-target="#modal-1"
+                                        style="display:block;">Submit</button>
+                                    <button class="bigBtn" onclick="onClickNext(0)">Back</button>
+                                </div>
+                            </div>
+
+                    </section>
+                
+                    <section style="display: none;" id="section3">
+  
+                            <div class="row rowcontent">
+                                <div class="col-lg-12">
+                                    <p style="color: #fff; text-align: center; font-size: 200%; margin-bottom: 2%">Your housekeeping
+                                        request has been confirmed.</p>
+                                    <p style="color: #fff; text-align: center; font-size: 180%; margin-bottom: 2%">The details are as
+                                        follows:</p>
+                                    <p id="printtime" style="font-size: 200%; color:#C5B358; font-family: 'lora',serif; text-align: center">hi</p>
+                                    <p id="checkrequests1" style="font-size: 150%; color:grey; text-align: center"></p>
+                                    <p id="checkrequests2" style="font-size: 150%; color:grey; text-align: center"></p>
+                                    <p id="checkrequests3" style="font-size: 150%; color:grey; text-align: center"></p>
+                                    <button class="cd-popup-trigger bigBtn" id="modal-2" data-target="#modal-1">Cancel/Edit Request</button>
+                                </div>
+                            </div>
+
+                    </section>
+            </div>
     <!-- Page Content -->
-    <section id="section1">
-        <div class="row">
-            <h1
-                style="margin-left:40px; margin-top: 30px; color: #fff;font-size: 400%; font-weight: 400; font-family: 'Abel', sans-serif;">
-                Housekeeping</h1>
-                <a href="index.html"><i class="fa fa-home"
-                    style="color:white; font-size:35px; position: absolute; right:70px; top: 40px;"></i></a>
-        </div>
-        <div class="container">
-
-            <div class="row" style="margin-top: 7%;">
-                <div class="col-lg-12">
-                    <p style="color: #fff; text-align: center; font-size: 200%; margin-bottom: 2%">What time would you
-                        like us to drop by?</p>
-                    <input type="text" id="time" class="timepicker"
-                        style="color:white; width: 40%; height: 50%; font-size:500%; text-align: center; border-radius:2px;  margin-left: 30%;">
-                        <p style="color: #fff; text-align: center; font-size: 150%; margin-top: 1%">Please note that housekeeping services are only available from 10am to 10pm. </p>
-                        <p style="color: #fff; text-align: center; font-size: 110%; margin-top: 1%">If time is not picked, your housekeeping request will be scheduled at anytime from 12PM to 5PM. </p>
-                    <button class="nextbutton" onclick="onClickNext(1)">Next ></button>
-                </div>
-            </div>
-        </div>
-
-    </section>
-
-    <section style="display: none;" id="section2">
-        <div class="row">
-            <h1
-                style="margin-left:40px; margin-top: 30px; color: #fff;font-size: 400%; font-weight: 400; font-family: 'Abel', sans-serif;">
-                Housekeeping</h1>
-                <a href="index.html"><i class="fa fa-home"
-                    style="color:white; font-size:35px; position: absolute; right:70px; top: 40px;"></i></a>
-        </div>
-        <div class="container">
-
-            <div class="row" style="margin-top: 7%;">
-                <div class="col-lg-12">
-                    <p style="color: #fff; text-align: center; font-size: 200%; margin-bottom: 2%">Any special requests?
-                    </p>
-                    <form action="#">
-                        <p>
-                            <label style="margin-right: 30px; margin-left:20%; ">
-                                <input class="check" type="checkbox" value="Extra Towels" />
-                                <span style="font-size: 200%; color: white;">Extra Towels</span>
-                            </label>
-                            <label style="margin-right: 30px">
-                                <input class="check" type="checkbox" value="More Shower Amenities" />
-                                <span style="font-size: 200%; color: white;">More Shower Amenities</span>
-                            </label>
-                            <label style="margin-right: 30px">
-                                <input class="check" type="checkbox" value="Restock Minibar"/>
-                                <span style="font-size: 200%; color: white;">Restock Minibar</span>
-                            </label>
-                        </p>
-
-                        <div class="input-field col s12">
-                            <textarea id="otherrequests" style="color:white; font-size:150%"
-                                class="materialize-textarea" data-length="120"></textarea>
-                            <label for="otherrequests" style="font-size: 140%; font-weight:300;">Other Requests</label>
-                        </div>
-
-
-                    </form>
-                    <button class="cd-popup-trigger" id="modal-1" data-target="#modal-1"
-                        style="display:block; position:absolute; top:100%; left:45%">Submit></button>
-                    <button class="nextbutton" style='position:absolute; top:140%; left:1%; font-size:150%'
-                        onclick="onClickNext(0)">Back</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section style="display: none;" id="section3">
-        <div class="row">
-            <h1
-                style="margin-left:40px; margin-top: 30px; color: #fff;font-size: 400%; font-weight: 400; font-family: 'Abel', sans-serif;">
-                Housekeeping</h1>
-                <a href="index.html"><i class="fa fa-home"
-                    style="color:white; font-size:35px; position: absolute; right:70px; top: 40px;"></i></a>
-        </div>
-        <div class="container">
-
-            <div class="row" style="margin-top: 7%;">
-                <div class="col-lg-12">
-                    <p style="color: #fff; text-align: center; font-size: 200%; margin-bottom: 2%">Your housekeeping
-                        request has been confirmed.</p>
-                    <p style="color: #fff; text-align: center; font-size: 180%; margin-bottom: 2%">The details are as
-                        follows:</p>
-                    <p id="printtime" style="font-size: 200%; color:white; text-align: center">hi</p>
-                    <p id="checkrequests1" style="font-size: 150%; color:grey; text-align: center"></p>
-                    <p id="checkrequests2" style="font-size: 150%; color:grey; text-align: center"></p>
-                    <p id="checkrequests3" style="font-size: 150%; color:grey; text-align: center"></p>
-                    <button class="cd-popup-trigger" id="modal-2" data-target="#modal-1"
-                        style="display:block; position:absolute; left:38% ">Cancel/Edit Request</button>
-                </div>
-            </div>
-        </div>
-    </section>
+   
 
         <!--modal-->
         <div id="modal" class="cd-popup" role="alert">
@@ -198,13 +212,21 @@
         var timepicked;
         document.addEventListener('DOMContentLoaded', function () {
             var time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+            //print out current time on display
+            console.log("test1:" + time);
+            console.log( document.getElementById('time'));
             document.getElementById('time').value = time;
+
+
             var elems = document.querySelectorAll('.timepicker');
             var instances = M.Timepicker.init(elems, {
                 defaultTime: 'now',
                 autoClose: true,
                 onCloseEnd: function () {
+                    
                     timepicked = instances[0].time + instances[0].amOrPm;
+                    console.log("test2:" + timepicked);
                     if((timepicked.substring(timepicked.length - 2 , timepicked.length) == "AM") && ((new Number(timepicked.substring(0,2))) < 10)){
                         console.log(timepicked.substring(timepicked.length - 2 , timepicked.length));
                         console.log(new Number(timepicked.substring(0,2)).valueOf() );
@@ -219,7 +241,7 @@
                 }
             });
             var a = M.Timepicker.getInstance(elems);
-            console.log("time", instances[0]);
+            console.log(a);
         });
 
         function callModal(){
@@ -227,9 +249,13 @@
         }
 
         function loadtime() {
+            console.log(timepicked);
             if(timepicked != undefined){
+                console.log("inloadtime");
+                console.log(timepicked);
                 document.getElementById("printtime").innerHTML = timepicked;
             } else {
+                console.log("timestart");
                startTime();
             }
 
@@ -263,7 +289,7 @@
             }
 
         function determinePage(){
-            
+            startTime2();
         }
 
         
@@ -287,9 +313,7 @@
                     modalfunction="onClickNext(0)"
                 }
                 var modal = $('.cd-popup')
-                console.log(message);
                 modal.find('.cd-popup-confirm').attr("onclick", modalfunction);
-                console.log(modal.find('.cd-popup-confirm')[0].onclick);
                 modal.find('.popup-content').text(message);
             })
         </script>
