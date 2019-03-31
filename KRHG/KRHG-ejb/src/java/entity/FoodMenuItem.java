@@ -22,6 +22,8 @@ public class FoodMenuItem implements Serializable {
     private Boolean availability;
     private Double unitPrice;
     private String category;
+    private String foodImage;
+   
   
     /**
      * @return the availability
@@ -107,6 +109,14 @@ public class FoodMenuItem implements Serializable {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getFoodImage() {
+        return foodImage;
+    }
+
+    public void setFoodImage(String foodImage) {
+        this.foodImage = foodImage;
     }
     
 }
