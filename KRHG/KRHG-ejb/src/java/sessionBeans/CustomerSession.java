@@ -133,7 +133,8 @@ public class CustomerSession implements CustomerSessionLocal {
             oldC.setBookingHistories(c.getBookingHistories());
             oldC.setEmail(c.getEmail());
             oldC.setMobileNum(c.getMobileNum());
-            oldC.setName(c.getName());
+            oldC.setFirstName(c.getFirstName());
+            oldC.setLastName(c.getLastName());
             oldC.setAccountStatus(c.getAccountStatus());
             oldC.setMember(c.getMember());
         } else {

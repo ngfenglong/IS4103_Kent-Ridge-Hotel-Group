@@ -24,9 +24,10 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Formatter;
+import java.util.GregorianCalendar;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Singleton;
@@ -868,6 +869,67 @@ public class DataInitializationSessionBean {
         RoomFacility rf22 = new RoomFacility("Kitchen", "Refreshment and Dining", "kitchen.png");//kitchen.png
         roomFacilitySessionLocal.createRoomFacility(rf22);
         rf22 = roomFacilitySessionLocal.getRoomFacilityByName("Kitchen");
+//*********************************************CUSTOMER************************************************
+
+        Calendar myCalendar = new GregorianCalendar(2019, 2, 4); 
+        Date d1 = myCalendar.getTime();
+        Customer c1 = new Customer("Zack", "Neo Guohui", "S7511901A", encryptPassword("test"), 187, "neoguoh202@hotmail.com", "+6591321876", d1, "E2342213B", true);
+        customerSessionLocal.createCustomer(c1);
+        c1 = customerSessionLocal.getCustomerByPassportNum("E2342213B");
+
+        Calendar myCalendar2 = new GregorianCalendar(2019, 1, 28);
+        Date d2 = myCalendar2.getTime();
+        Customer c2 = new Customer("Pillay", "Maureen", "S8273571B", encryptPassword("test"), 31877, "maureenpi1@yahoo.com.sg", "+6582375237", d2, "E5323423E", false);
+        customerSessionLocal.createCustomer(c2);
+        c2 = customerSessionLocal.getCustomerByPassportNum("E5323423E");
+
+        Calendar myCalendar3 = new GregorianCalendar(2019, 3, 1);
+        Date d3 = myCalendar3.getTime();
+        Customer c3 = new Customer("Mei Fang", "Chia", "S1073264F", encryptPassword("test"), 1023823, "chiame317@gmail.com", "+6591312719", d3, "E2545443C", true);
+        customerSessionLocal.createCustomer(c3);
+        c3 = customerSessionLocal.getCustomerByPassportNum("E2545443C");
+
+        Calendar myCalendar4 = new GregorianCalendar(2019, 1, 19); 
+        Date d4 = myCalendar4.getTime();
+        Customer c4 = new Customer("Randal", "Ho", "S9467910I", encryptPassword("test"), 5099, "randalh753@gmail.com", "+6593243287", d4, "E4354363D", false);
+        customerSessionLocal.createCustomer(c4);
+        c4 = customerSessionLocal.getCustomerByPassportNum("E4354363D");
+
+        Calendar myCalendar5 = new GregorianCalendar(2019, 4, 5);
+        Date d5 = myCalendar5.getTime();
+        Customer c5 = new Customer("Lok Li", "Choo", "S9122868H", encryptPassword("test"), 38271, "loklich35@hotmail.com", "+6598768896", d5, "E3453353H", true);
+        customerSessionLocal.createCustomer(c5);
+        c5 = customerSessionLocal.getCustomerByPassportNum("E3453353H");
+
+        Calendar myCalendar6 = new GregorianCalendar(2019, 2, 27);
+        Date d6 = myCalendar6.getTime();
+        Customer c6 = new Customer("Mervin", "Ee", "S2419077C", encryptPassword("test"), 200192, "mervinee@live.com", "+6587652376", d6, "A16436253", true);
+        customerSessionLocal.createCustomer(c6);
+        c6 = customerSessionLocal.getCustomerByPassportNum("A16436253");
+
+        Calendar myCalendar7 = new GregorianCalendar(2019, 3, 6);
+        Date d7 = myCalendar7.getTime();
+        Customer c7 = new Customer("Galuh Jabal", "Thamrin", "F0416856U", encryptPassword("test"), 382, "thamrinjb@live.com", "+622169195347", d7, "B2342869", true);
+        customerSessionLocal.createCustomer(c7);
+        c7 = customerSessionLocal.getCustomerByPassportNum("B2342869");
+
+        Calendar myCalendar8 = new GregorianCalendar(2019, 4, 14);
+        Date d8 = myCalendar8.getTime();
+        Customer c8 = new Customer("Bao Cong", "Chen", "F0642755M", encryptPassword("test"), 4819, "chenbc@163.com", "+8613067076921", d8, "EA2676233", true);
+        customerSessionLocal.createCustomer(c8);
+        c8 = customerSessionLocal.getCustomerByPassportNum("EA2676233");
+
+        Calendar myCalendar9 = new GregorianCalendar(2019, 3, 31);
+        Date d9 = myCalendar9.getTime();
+        Customer c9 = new Customer("Meg Kou", "Thong", "G1797808Q", encryptPassword("test"), 2938, "thongmk@hotmail.com", "+60188617734", d9, "A23782622", true);
+        customerSessionLocal.createCustomer(c9);
+        c9 = customerSessionLocal.getCustomerByPassportNum("A23782622");
+
+        Calendar myCalendar10 = new GregorianCalendar(2019, 4, 15);
+        Date d10 = myCalendar10.getTime();
+        Customer c10 = new Customer("Cuong Khanh", "Anh Nhiem", "G0278921W", encryptPassword("test"), 9281, "cukhanhn@gmail.com", "+84843506870", d10, "B3228963", true);
+        customerSessionLocal.createCustomer(c10);
+        c10 = customerSessionLocal.getCustomerByPassportNum("B3228963");
 
         em.flush();
 
@@ -14749,16 +14811,16 @@ public class DataInitializationSessionBean {
         h10.addRoom(roomSessionLocal.getRoomByName("KRSW_1202"));
 
         em.flush();
-        
-        HouseKeepingOrder ho1 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_401"), "incomplete", 4, new Date(), new Date(), null, "Toothpaste and hairnet","toiletries");
-        HouseKeepingOrder ho2 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_402"), "incomplete", 4, new Date(), new Date(), null, "Spoilt TV","maintenance");
-        HouseKeepingOrder ho3 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_405"), "incomplete", 4, new Date(), new Date(), null, "Spilled drinks","housekeeping");
-        HouseKeepingOrder ho4 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_406"), "incomplete", 4, new Date(), new Date(), null, "Dusty table","housekeeping");
-        HouseKeepingOrder ho5 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_402"), "incomplete", 4, new Date(), new Date(), null, "Tv not working","maintenance");
-        HouseKeepingOrder ho6 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_403"), "incomplete", 4, new Date(), new Date(), null, "1 pants & 1 shirt","laundry");
-        HouseKeepingOrder ho7 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_409"), "incomplete", 4, new Date(), new Date(), null, "5 pants & 5 shirts","laundry");
-        HouseKeepingOrder ho8 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_408"), "incomplete", 4, new Date(), new Date(), null, "Mineral water refill","housekeeping");
-        HouseKeepingOrder ho9 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_407"), "incomplete", 4, new Date(), new Date(), null, "Clogged Sink","maintenance");
+
+        HouseKeepingOrder ho1 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_401"), "incomplete", 4, new Date(), new Date(), null, "Toothpaste and hairnet", "toiletries");
+        HouseKeepingOrder ho2 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_402"), "incomplete", 4, new Date(), new Date(), null, "Spoilt TV", "maintenance");
+        HouseKeepingOrder ho3 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_405"), "incomplete", 4, new Date(), new Date(), null, "Spilled drinks", "housekeeping");
+        HouseKeepingOrder ho4 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_406"), "incomplete", 4, new Date(), new Date(), null, "Dusty table", "housekeeping");
+        HouseKeepingOrder ho5 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_402"), "incomplete", 4, new Date(), new Date(), null, "Tv not working", "maintenance");
+        HouseKeepingOrder ho6 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_403"), "incomplete", 4, new Date(), new Date(), null, "1 pants & 1 shirt", "laundry");
+        HouseKeepingOrder ho7 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_409"), "incomplete", 4, new Date(), new Date(), null, "5 pants & 5 shirts", "laundry");
+        HouseKeepingOrder ho8 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_408"), "incomplete", 4, new Date(), new Date(), null, "Mineral water refill", "housekeeping");
+        HouseKeepingOrder ho9 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_407"), "incomplete", 4, new Date(), new Date(), null, "Clogged Sink", "maintenance");
 
         houseKeepingOrderSessionLocal.createHouseKeepingOrder(ho1);
         houseKeepingOrderSessionLocal.createHouseKeepingOrder(ho2);
@@ -14781,7 +14843,8 @@ public class DataInitializationSessionBean {
         customer1.setEmail("Congx2@hotmail.com");
         customer1.setMember(true);
         customer1.setMobileNum("94308808");
-        customer1.setName("Lim Dian Cong");
+        customer1.setFirstName("Lim");
+        customer1.setLastName("Dian Cong");
         customer1.setPassword(encryptPassword("1234"));
         customer1.setPoints(20);
 
@@ -14794,7 +14857,8 @@ public class DataInitializationSessionBean {
         customer2.setEmail("Stanley@hotmail.com");
         customer2.setMember(true);
         customer2.setMobileNum("97628485");
-        customer2.setName("Stanley loh");
+        customer2.setFirstName("Loh");
+        customer2.setLastName("Stanley");
         customer2.setPassword(encryptPassword("1234"));
         customer2.setPoints(1);
 
@@ -14807,7 +14871,8 @@ public class DataInitializationSessionBean {
         customer3.setEmail("NgFengLong@hotmail.com");
         customer3.setMember(true);
         customer3.setMobileNum("9668913");
-        customer3.setName("Ng Feng Long");
+        customer3.setFirstName("Ng");
+        customer3.setLastName("Feng Long");
         customer3.setPassword(encryptPassword("1234"));
         customer3.setPoints(1);
 
@@ -14828,7 +14893,7 @@ public class DataInitializationSessionBean {
         rm1.setCreditCard(null);
         rm1.setEmailAddress(customer1.getEmail());
         rm1.setHasTransport(false);
-        rm1.setName(customer1.getName());
+        rm1.setName(customer1.getLastName());
         rm1.setPassportNum("A0173719Y");
         rm1.setPrice(2000.0);
         rm1.setRoomType("Standard");
@@ -14866,13 +14931,12 @@ public class DataInitializationSessionBean {
         lf1.setItemName("black teddy bear");
         lf1.setReportType("Lost");
         lf1.setReportedDate(new Date());
-       
 
         lostAndFoundSessionLocal.createLostAndFoundReport(lf1);
         em.flush();
 
         LostAndFoundReport lf2 = new LostAndFoundReport();
-    
+
         lf2.setIsResolved(false);
         lf2.setItemDescription("colour worm stuff toy, found it in the room");
         lf2.setItemName("stuff toy");
