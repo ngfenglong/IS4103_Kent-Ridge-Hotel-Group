@@ -3,7 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core">
 
     <body>
 
@@ -48,23 +50,38 @@
 
                                 <div class="card card-primary">
                                     <div class="card-header">
-                                        <h3 class="card-title">Edit Customer Account</h3>
+                                        <h3 class="card-title">Assign Room</h3>
                                     </div>
+                                    <c:forEach items="#{frontDeskManagedBean.roombooking.roomsBooked}" var="o">
+                                        #{o.roomType} - 
+                                    </c:forEach>
                                     <!-- /.card-header -->
                                     <!-- form start -->
                                     <form id="reservation">
                                         <section id="seats">
-                                            <input id="seat-1" class="seat-select" type="checkbox" value="1" name="seat[]" ></input>
-                                            <label for="seat-1" class="seat"></label>
-                                            <input id="seat-2" class="seat-select" type="checkbox" value="2" name="seat[]" ></input>
+
+                                            <h:selectManyCheckbox >
+                                                <f:selectItem id="seat-1" class="seat-select" itemValue="1" itemLabel="seat" />
+                                                <f:selectItem id="seat-2" class="seat-select"  itemValue="2"  />
+                                                <f:selectItem id="seat-3" class="seat-select" itemValue="3" />
+                                            </h:selectManyCheckbox>
+
+                                            <input id="seat-2" class="seat-select" type="checkbox" value="2" ></input>
                                             <label for="seat-2" class="seat"></label>
-                                            <input id="seat-3" class="seat-select" type="checkbox" value="3" name="seat[]" ></input>
+                                            <input id="seat-3" class="seat-select" type="checkbox" value="3"  ></input>
                                             <label for="seat-3" class="seat"></label>
-                                            <input id="seat-4" class="seat-select" type="checkbox" value="4" name="seat[]" ></input>
+                                            <input id="seat-4" class="seat-select" type="checkbox" value="4"  ></input>
                                             <label for="seat-4" class="seat"></label>
                                         </section>
-                                        <input type="submit"></input>
+
                                     </form>
+
+
+                                    <h:form>
+                                        <h:commandButton value="Confirm Check in" action="#{frontDeskManagedBean.confirmCheckin()}">
+
+                                        </h:commandButton>
+                                    </h:form>
                                 </div>
 
                             </div>

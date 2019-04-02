@@ -49,6 +49,8 @@ public class FrontDeskManagedBean {
     @EJB
     private CustomerSessionLocal customerSessionLocal;
 
+    private String mode;
+
     //customer check in
     private String customerName;
     private String customerRoom;
@@ -96,10 +98,12 @@ public class FrontDeskManagedBean {
     private String paymentDigits;
     private String paymentCVV;
 
-    
-    
+    //hotel code
+    private String hotelCode;
+
     //reservation 
     private List<FunctionRoomBooking> allFunctionrooms;
+
     public FrontDeskManagedBean() {
     }
 
@@ -185,8 +189,7 @@ public class FrontDeskManagedBean {
 
     public String searchCustomerForCheckin() {
         try {
-
-            Searchbookings = bookSessionLocal.getRoomBookingByPassportNum(checkinPassportNumber);
+            Searchbookings = bookSessionLocal.getRoomBookingByPassportNum(checkinPassportNumber, hotelCode);
             checkinPassportNumber = null;
             return "checkinResult.xhtml?faces-redirect=true";
         } catch (NoResultException e) {
@@ -198,13 +201,19 @@ public class FrontDeskManagedBean {
         checkinPassportNumber = PT.getRoomsBooked().get(0).getPassportNum();
         checkinName = PT.getPayer().getName();
         roombooking = PT;
+        mode = "online";
         return "checkinResult.xhtml?faces-redirect=true";
     }
 
     public String confirmCheckin() {
         //bookSessionLocal.assignBooking(roombooking);
-        // this one i DO ok .
-        return "checkinRoom.xhtml?faces-redirect=true";
+        //this one i DO ok .
+        //get room name and change the status to occupied 
+        //roombooking.setRoom(to the above room)
+        //change roombooking'Statuses
+        //display the room details
+        mode = "online";
+        return "summary.xhmtl?faces-redirect=true";
     }
 
     public String walkinpayment() {
@@ -235,8 +244,8 @@ public class FrontDeskManagedBean {
     }
 
     public List<PaymentTransaction> getTodaysbookings() {
-        //List<paymentTransaction>bookSessionLocal.getTodaysTransaction();
-        return  null;
+        //bookSessionLocal.getPaymentTransactionByTodayDate(Date todaydate);
+        return null;
     }
 
     public void setTodaysbookings(List<PaymentTransaction> todaysbookings) {
@@ -258,8 +267,6 @@ public class FrontDeskManagedBean {
     public void setAllCustomer(List<Customer> allCustomer) {
         this.allCustomer = allCustomer;
     }
-
- 
 
     public String createAccount() throws IOException {
         HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
@@ -389,6 +396,14 @@ public class FrontDeskManagedBean {
         this.createConfirmCustomerPassword = createConfirmCustomerPassword;
     }
 
+    public String getMode() {
+        return mode;
+    }
+
+    public void setMode(String mode) {
+        this.mode = mode;
+    }
+
     public String UpdateAccount() throws NoResultException, IOException {
         HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
         PrintWriter out = response.getWriter();
@@ -439,7 +454,7 @@ public class FrontDeskManagedBean {
         //bookSessionLocal.getbookingbyCheckoutDate(new Date());
         //to get today's date
         //bookSessionLocal.getAllRoomBookingByStatus(String Status)
-        
+
         return null;
     }
 
@@ -451,6 +466,7 @@ public class FrontDeskManagedBean {
         // return todayCheckOutRoom = bookSessionLocal.getAllRoomBookingByCheckOutDate(todayDate);
         //some algorithm to get availble room to view and return list of room, group by room type
         //wait feng long 
+        mode = "walkin";
         setWalkinAvailableRoom(walkinAvailableRoom);
 
         return "walkinResult.xhtml?faces-redirect=true";
@@ -487,7 +503,7 @@ public class FrontDeskManagedBean {
     }
 
     public List<Room> getWalkinAvailableRoom() {
-        
+
         //need to return pricing too
         return walkinAvailableRoom;
     }
