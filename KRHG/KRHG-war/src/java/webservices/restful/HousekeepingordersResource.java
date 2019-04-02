@@ -16,6 +16,8 @@ import javax.naming.NamingException;
 
 import java.util.logging.Logger;
 import javax.ejb.EJB;
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
@@ -23,6 +25,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
@@ -90,12 +93,12 @@ public class HousekeepingordersResource {
     @GET
     @Path("/query")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response searchHouseKeepingOrder(@QueryParam("level") String level,@QueryParam("hotelCodeName") String hotelCodeName) throws NoResultException {
+    public Response searchHouseKeepingOrder(@QueryParam("level") String level, @QueryParam("hotelCodeName") String hotelCodeName) throws NoResultException {
         System.out.println("444Searching based on level: " + level + " Hotel Codename: " + hotelCodeName);
         if (level != null) {
 //            List<HouseKeepingOrder> getList = houseKeepingOrderSession.getHouseKeepingOrderByLevel(Integer.parseInt(level));
 //              List<HouseKeepingOrder> getList = houseKeepingOrderSession.getHouseKeepingOrderByLevelAndHotelCodeName(Integer.parseInt(level), hotelCodeName);
-              List<HouseKeepingOrder> getList = houseKeepingOrderSession.getHouseKeepingOrderByLevelAndHotelCodeNameAndStatus(Integer.parseInt(level), hotelCodeName, "complete");
+            List<HouseKeepingOrder> getList = houseKeepingOrderSession.getHouseKeepingOrderByLevelAndHotelCodeNameAndStatus(Integer.parseInt(level), hotelCodeName, "complete");
 //            List<HouseKeepingOrder> returnList = new ArrayList<>();
             List<HouseKeepingOrder> returnList = new ArrayList<>();
             for (HouseKeepingOrder h : getList) {
@@ -113,12 +116,32 @@ public class HousekeepingordersResource {
                 tempHouseKeepingOrder.setRequestType(h.getRequestType());
                 returnList.add(tempHouseKeepingOrder);
             }
-            GenericEntity<List<HouseKeepingOrder>> entity = new GenericEntity<List<HouseKeepingOrder>>(returnList) {};
+            GenericEntity<List<HouseKeepingOrder>> entity = new GenericEntity<List<HouseKeepingOrder>>(returnList) {
+            };
             return Response.status(200).entity(entity).build();
 //            return returnList;
         } else {
             return null;
         }
     }
+
+    @PUT
+    @Path("/update")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response editCustomer(@QueryParam("id") String hoID) {
+        try {
+
+            HouseKeepingOrder ho = houseKeepingOrderSession.getHouseKeepingOrderID(Long.parseLong(hoID));
+            ho.setStatus("complete");
+            houseKeepingOrderSession.updateHouseKeepingOrder(ho);
+            return Response.status(204).build();
+        } catch (NoResultException e) {
+            JsonObject exception = Json.createObjectBuilder()
+                    .add("error", "Not found")
+                    .build();
+            return Response.status(404).entity(exception)
+                    .type(MediaType.APPLICATION_JSON).build();
+        }
+    } 
 
 }

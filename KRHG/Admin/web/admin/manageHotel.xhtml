@@ -1,93 +1,149 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:h="http://xmlns.jcp.org/jsf/html">
 
-    <body>
+<body>
 
-        <ui:composition template="./AdminTemplate.xhtml">
-            <ui:define name="title">
-                KRHG Admin Console System
-            </ui:define>
+    <ui:composition template="./AdminTemplate.xhtml">
+        <ui:define name="title">
+            KRHG Admin Console System
+        </ui:define>
 
-            <ui:define name="content">
-                <!-- Content Header (Page header) -->
-                <div class="content-header">
-                    <div class="container-fluid">
-                        <div class="row mb-2">
-                            <div class="col-sm-6">
-
-
-                            </div>
-                            <!-- /.col -->
-                            <div class="col-sm-6">
-                                <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item active">
-                                        <!--Add Btn-->
-                                        <h:form>
-                                            <h:commandButton class="btn btn-primary" action="addMinibarItem.xhtml?faces-redirect=true" value="Add Minibar Item" />
-                                        </h:form>
-                                    </li>
-                                </ol>
-                            </div>
-                            <!-- /.col -->
+        <ui:define name="content">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 style="font-size: xx-large; margin-bottom:20px">Manage Hotels</h1>
                         </div>
-                        <!-- /.row -->
+                        <!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                    <li><a href="#"> Home</a></li>
+                                    <li class="active">Manage Hotels</li>
+                            </ol>
+                        </div>
+                        <!-- /.col -->
                     </div>
-                    <!-- /.container-fluid -->
+                    <!-- /.row -->
                 </div>
-                <!-- /.content-header -->
-                <!-- Main content -->
-                <section class="content">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">All Hotels</h3>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+            <!-- Main content -->
+            <section class="content">
+                <div class="row" style="padding:0px 10px">
+                    <div class="col-lg-4 col-xs-12">
+                        <div class="info-box bg-red">
+                            <span class="info-box-icon"><i class="fas fa-user-friends"></i></span>
+                            <div class="info-box-content"  style="margin-left:0px;">
+                                <span class="info-box-text">Overall Occupancy Rate</span>
+                                <span class="info-box-number">70%</span>
+                                <!-- The progress section is optional -->
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 70%"></div>
+                                </div>
+                                <span class="progress-description">
+                                    70% Increase in 30 Days
+                                </span>
+                            </div>
+                            <!-- /.info-box-content -->
                         </div>
-                        <!-- /.card-header -->
-                        <div class="card-body">
-                            <h:form>
-                                <table id="example1" class="table table-bordered table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Hotel Name</th>
-                                            <th>Hotel Code</th>
-                                            <th>Contact</th>
-                                            <th>Address</th>
-                                            <th>Rooms</th>
-                                            <th>View</th>
-                                            <th>Edit</th>
-                                            <th>Delete</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <c:forEach items="${hotelManagedBean.allHotels}" var="hotel">
-                                            <tr>
-                                                <td>#{hotel.hotelName}</td>
-                                                <td>#{hotel.hotelCodeName}</td>
-                                                <td>+65 #{hotel.hotelContact}</td>
-                                                <td>#{hotel.hotelAddress}</td>
-                                                <td><h:commandButton id="viewRoomBtn" action="#{hotelManagedBean.viewHotelRooms(hotel.hotelName)}" value="View Rooms" class="btn btn-primary"  /></td>
-                                                <td><h:commandButton id="viewDetailBtn" action="#{hotelManagedBean.viewHotel(hotel.hotelID)}" value="View" class="btn btn-primary"  /></td>
-                                                <td><h:commandButton id="editHotelBtn" action="#{hotelManagedBean.editHotel(hotel.hotelID)}" value="Edit" class="btn btn-secondary"  /></td>
-                                                <td><h:commandButton id="deleteHotelBtn" onclick="return confirm('Are you sure?');" action="#{hotelManagedBean.deleteHotel(hotel.hotelID)}" value="Delete" class="btn btn-danger"  /></td>
-                                            </tr>
-                                        </c:forEach>
-                                    </tbody>
-                                </table>
-                            </h:form>
-                        </div>
-                        <!-- /.card-body -->
+                        <!-- /.info-box -->
                     </div>
-                </section>
-                <!-- /.content -->
-            </ui:define>
-            <ui:define name="script">
+                    <div class="col-lg-4 col-xs-12">
+                        <div class="info-box bg-yellow">
+                            <span class="info-box-icon"><i class="fas fa-star"></i></span>
+                            <div class="info-box-content" style="margin-left:0px;">
+                                <span class="info-box-text">Overall Satisfaction Rating</span>
+                                <span class="info-box-number">4.5/5</span>
+                                <!-- The progress section is optional -->
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 80%"></div>
+                                </div>
+                                <span class="progress-description">
+                                    70% Increase in 30 Days
+                                </span>
+                            </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                        <!-- /.info-box -->
+                    </div>
+                    <div class="col-lg-4 col-xs-12">
+                        <div class="info-box bg-blue">
+                            <span class="info-box-icon"><i class="fas fa-trophy"></i></span>
+                            <div class="info-box-content"  style="margin-left:0px;">
+                                <span class="info-box-text">Top Performing Hotel</span>
+                                <span class="info-box-number">Kent Ridge Grand</span>
+                                <span class="progress-description">
+                                    70% Increase in 30 Days
+                                </span>
+                            </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                        <!-- /.info-box -->
+                    </div>
 
-            </ui:define>
 
-        </ui:composition>
+                </div>
+            <div class="box box-primary" style="padding:20px 50px; margin:14px; width:98% ">
+               
+                        <h3 class="box-title" style="margin-bottom:10px; text-align: center; font-size:x-large">KRHG Hotels</h3>
+                        <div class="box-tools pull-right">
+                     <!--Add Btn-->
+                     <h:form>
+                            <h:commandButton class="btn btn-primary"
+                                action="addHotel.xhtml?faces-redirect=true" value="Add Hotel" />
+                        </h:form>
+                </div>
+                <h:form>
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Hotel Name</th>
+                                <th>Hotel Code</th>
+                                <th>Contact</th>
+                                <th>Address</th>
+                                <th>View Rooms</th>
+                                <th>View Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach items="${hotelManagedBean.allHotels}" var="hotel">
+                                <tr>
+                                    <td>#{hotel.hotelName}</td>
+                                    <td>#{hotel.hotelCodeName}</td>
+                                    <td>+65 #{hotel.hotelContact}</td>
+                                    <td>#{hotel.hotelAddress}</td>
+                                    <td>
+                                        <h:commandButton id="viewRoomBtn"
+                                            action="#{hotelManagedBean.viewHotelRooms(hotel.hotelName)}"
+                                            value="View Rooms" class="btn btn-primary"/>
+                                    </td>
+                                    <td>
+                                        <h:commandButton id="viewDetailBtn"
+                                            action="#{hotelManagedBean.viewHotel(hotel.hotelID)}" value="View Details"
+                                            class="btn btn-primary" />
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                </h:form>
+            </div>
 
-    </body>
+
+
+                
+            </section>
+            <!-- /.content -->
+        </ui:define>
+
+    </ui:composition>
+
+</body>
+
 </html>

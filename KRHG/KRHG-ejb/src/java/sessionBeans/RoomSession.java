@@ -58,6 +58,34 @@ public class RoomSession implements RoomSessionLocal {
             throw new NoResultException("Room not found.");
         }
     }
+    
+    @Override
+    public List<Room> getRoomByStatus(String status, String hotelCodeName) throws NoResultException {
+        Query q;
+        if (hotelCodeName == null) {
+            q = em.createQuery("SELECT r FROM Room r WHERE "
+                    + "LOWER(r.status) = :status");
+            q.setParameter("status", status.toLowerCase());
+
+            if (!q.getResultList().isEmpty()) {
+                return q.getResultList();
+            } else {
+                throw new NoResultException("Room not found.");
+            }
+        } else {
+            q = em.createQuery("SELECT r FROM Room r WHERE "
+                    + "LOWER(r.status) = :status AND "
+                    + "LOWER(r.hotel.hotelCodeName) = :hotelCodeName");
+            q.setParameter("status", status.toLowerCase());
+            q.setParameter("hotelCodeName", hotelCodeName.toLowerCase());
+
+            if (!q.getResultList().isEmpty()) {
+                return q.getResultList();
+            } else {
+                throw new NoResultException("Room not found.");
+            }
+        }
+    }
 
     @Override
     public List<Room> getRoomByType(String roomType, String roomHotel) throws NoResultException {

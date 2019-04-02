@@ -29,6 +29,28 @@ public class BookingSession implements BookingSessionLocal {
     }
 
     @Override
+    public List<RoomBooking> getAllRoomBookingByStatus(String status, String hotelCodeName) throws NoResultException {
+        Query q;
+        if (hotelCodeName == null) {
+            q = em.createQuery("SELECT rb FROM RoomBooking rb WHERE "
+                    + "LOWER(rb.status) = :status ");
+            q.setParameter("status", status.toLowerCase());
+        } else {
+            q = em.createQuery("SELECT rb FROM RoomBooking rb WHERE "
+                    + "LOWER(rb.status) = :status AND "
+                    + "LOWER(rb.bookedRoom.hotel.hotelCodeName) = :hotelCodeName");
+            q.setParameter("status", status.toLowerCase());
+            q.setParameter("hotelCodeName", hotelCodeName.toLowerCase());
+        }
+
+        if (!q.getResultList().isEmpty()) {
+            return q.getResultList();
+        } else {
+            throw new NoResultException("Room Booking not found.");
+        }
+    }
+
+    @Override
     public List<RoomBooking> getAllRoomBookingByDate(Date todayDate) throws NoResultException {
         Query q;
         q = em.createQuery("SELECT rb FROM RoomBooking rb WHERE "
@@ -43,12 +65,20 @@ public class BookingSession implements BookingSessionLocal {
     }
 
     @Override
-    public List<RoomBooking> getAllRoomBookingByDate() throws NoResultException {
+    public List<RoomBooking> getAllRoomBookingByCheckoutDate(Date checkoutDate, String hotelCodeName) throws NoResultException {
         Query q;
-        Date todayDate = new Date();
-        q = em.createQuery("SELECT rb FROM RoomBooking rb WHERE "
-                + "rb.bookInDate <= :todayDate ");
-        q.setParameter("todayDate", todayDate);
+        //Wont filter by hotel if hotelcodename is not specified
+        if (hotelCodeName == null) {
+            q = em.createQuery("SELECT rb FROM RoomBooking rb WHERE "
+                    + "rb.bookInDate <= :checkoutDate ");
+            q.setParameter("todayDate", checkoutDate);
+        } else {
+            q = em.createQuery("SELECT rb FROM RoomBooking rb WHERE "
+                    + "rb.bookInDate <= :checkoutDate AND "
+                    + "LOWER(rb.bookedRoom.hotel.hotelCodeName) = :hotelCodeName");
+            q.setParameter("checkoutDate", checkoutDate);
+            q.setParameter("hotelCodeName", hotelCodeName.toLowerCase());
+        }
         if (!q.getResultList().isEmpty()) {
             return q.getResultList();
         } else {
@@ -67,11 +97,72 @@ public class BookingSession implements BookingSessionLocal {
     }
 
     @Override
-    public List<RoomBooking> getRoomBookingByPassportNum(String passportNum) throws NoResultException {
+    public List<RoomBooking> getRoomBookingByPassportNum(String passportNum, String hotelCodeName) throws NoResultException {
         Query q;
-        q = em.createQuery("SELECT rb FROM RoomBooking rb WHERE "
-                + "LOWER(rb.bookedBy.passportNum) = :passportNum");
-        q.setParameter("passportNum", passportNum.toLowerCase());
+        if (hotelCodeName == null) {
+            q = em.createQuery("SELECT rb FROM RoomBooking rb WHERE "
+                    + "LOWER(rb.passportNum) = :passportNum");
+            q.setParameter("passportNum", passportNum.toLowerCase());
+        } else {
+            q = em.createQuery("SELECT rb FROM RoomBooking rb WHERE "
+                    + "LOWER(rb.passportNum) = :passportNum AND "
+                    + "LOWER(rb.bookedRoom.hotel.hotelCodeName) = :hotelCodeName");
+            q.setParameter("passportNum", passportNum.toLowerCase());
+            q.setParameter("hotelCodeName", hotelCodeName.toLowerCase());
+
+        }
+        if (!q.getResultList().isEmpty()) {
+            return q.getResultList();
+        } else {
+            throw new NoResultException("Room Booking not found.");
+        }
+    }
+
+    @Override
+    public List<RoomBooking> getRoomBookingByPassportNumCheckInToday(String passportNum, Date todayDate, String hotelCodeName) throws NoResultException {
+        Query q;
+        if (hotelCodeName == null) {
+            q = em.createQuery("SELECT rb FROM RoomBooking rb WHERE "
+                    + "LOWER(rb.passportNum) = :passportNum AND "
+                    + "rb.bookInDate = :todayDate");
+            q.setParameter("passportNum", passportNum.toLowerCase());
+            q.setParameter("todayDate", todayDate);
+        } else {
+            q = em.createQuery("SELECT rb FROM RoomBooking rb WHERE "
+                    + "LOWER(rb.passportNum) = :passportNum AND "
+                    + "LOWER(rb.bookedRoom.hotel.hotelCodeName) = :hotelCodeName AND "
+                    + "rb.bookInDate = :todayDate");
+            q.setParameter("passportNum", passportNum.toLowerCase());
+            q.setParameter("hotelCodeName", hotelCodeName.toLowerCase());
+            q.setParameter("todayDate", todayDate);
+
+        }
+        if (!q.getResultList().isEmpty()) {
+            return q.getResultList();
+        } else {
+            throw new NoResultException("Room Booking not found.");
+        }
+    }
+
+    @Override
+    public List<RoomBooking> getRoomBookingByRoomNumber(String roomNumber, String status, String hotelCodeName) throws NoResultException {
+        Query q;
+        if (hotelCodeName == null) {
+            q = em.createQuery("SELECT rb FROM RoomBooking rb WHERE "
+                    + "LOWER(rb.bookedRoom.roomNumber) = :roomNumber AND "
+                    + "LOWER(rb.status) = :status");
+            q.setParameter("roomNumber", roomNumber.toLowerCase());
+            q.setParameter("status", status.toLowerCase());
+        } else {
+            q = em.createQuery("SELECT rb FROM RoomBooking rb WHERE "
+                    + "LOWER(rb.bookedRoom.roomNumber) = :roomNumber AND "
+                    + "LOWER(rb.status) = :status AND "
+                    + "LOWER(rb.bookedRoom.hotel.hotelCodeName) = :hotelCodeName");
+            q.setParameter("roomNumber", roomNumber.toLowerCase());
+            q.setParameter("status", status.toLowerCase());
+            q.setParameter("hotelCodeName", hotelCodeName.toLowerCase());
+
+        }
         if (!q.getResultList().isEmpty()) {
             return q.getResultList();
         } else {

@@ -27,7 +27,8 @@
     <link href="./resources/styles/main.css" rel="stylesheet">
 
     <script type="text/javascript">
-        function startTime() {
+
+    function startTime2() {
             var today = new Date();
             var h = today.getHours();
             var m = today.getMinutes();
@@ -39,7 +40,20 @@
             m = checkTime(m);
             s = checkTime(s);
             document.getElementById("txt").innerHTML = h + ":" + m + ampm;
+    }
 
+
+        function startTime() {
+            var today = new Date();
+            var h = today.getHours();
+            var m = today.getMinutes();
+            var s = today.getSeconds();
+            var ampm = h>= 12 ? ' PM' : ' AM';
+            h = h % 12;
+             h = h ? h : 12;
+            // add a zero in front of numbers<10
+            m = checkTime(m);
+            s = checkTime(s);
 
                 //set 12pm if user does not pick a time, can change to whatever housekeeping manager assigns.
                     document.getElementById("printtime").innerHTML = "12:00 PM";
@@ -69,7 +83,7 @@
                                     Housekeeping <br/> Request</h1>
 
                                 </a>
-                                    <div class="theTitle active" style="width:400px; top:50px; height:100px; left:45%">
+                                    <div class="theSubtitle active" style="width:400px; top:50px; height:100px;">
         
                                             <span class="separator" style="height:100%; "></span>
                                             <div class="titleright" style="width:40%">
@@ -275,7 +289,7 @@
             }
 
         function determinePage(){
-
+            startTime2();
         }
 
         

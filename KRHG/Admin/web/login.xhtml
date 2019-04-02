@@ -8,8 +8,8 @@
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>KRHG Admin Console - Login PPage</title>
-
+        <title>KRHG Admin Console - Login Page</title>
+ 
         <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <!-- Font Awesome -->
@@ -37,11 +37,19 @@
                 margin: 0;
             }
             body { 
-                background:  url("img/login_bg.jpg") no-repeat center center fixed; 
+                background:  linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8) ), url("img/wallpaper2.jpg") no-repeat center center fixed; 
                 -webkit-background-size: cover;
                 -moz-background-size: cover;
                 -o-background-size: cover;
                 background-size: cover;
+            }
+
+            .hold-transition sidebar-mini:before{
+                -webkit-filter: blur(5px);
+                -moz-filter: blur(5px);
+                -o-filter: blur(5px);
+                -ms-filter: blur(5px);
+                filter: blur(5px);
             }
 
 
@@ -54,21 +62,21 @@
 
 
     <h:body class="hold-transition sidebar-mini">
-        <div class="login-box">
+        <div class="login-box" style="width:600px; align-content: center; margin:1% auto;">
             <div class="login-logo">
-                <a href="#"><img style="width: 150px; height:125px;" src="img/logo.png" alt="KRHG Logo" /></a>
+                <a href="#"><img style="width:600px; height:300px" src="img/logo3.png" alt="KRHG Logo" /></a>
             </div>
             <!-- /.login-logo -->
-            <div class="card">
+            <div class="card" style="width:70%; margin-left: 90px; border-radius:0px; ">
                 <div class="card-body login-card-body">
                     <h:form>
                         <div class="form-group has-feedback">
-                            <label for="username">  <span class="fa fa-user form-control-feedback"></span>Username</label>
+                            <label for="username">  <i style="margin-right:10px" class="fa fa-user form-control-feedback"></i>Username</label>
                             <h:inputText class="form-control" value="#{authenticationManagedBean.username}" id="username" a:placeholder="enter username" required="true"/>
 
                         </div>
                         <div class="form-group has-feedback">
-                            <label for="password"><span class="fa fa-lock form-control-feedback"></span>Password</label>
+                            <label for="password"><i style="margin-right:10px" class="fa fa-lock form-control-feedback"></i>Password</label>
                             <h:inputSecret class="form-control"  value="#{authenticationManagedBean.password}"  id="password" a:placeholder="enter password" required="true">
                             </h:inputSecret>
 
@@ -90,7 +98,7 @@
                     <!-- /.social-auth-links -->
 
                     <p class="mb-1">
-                        <a href="#">I forgot my password</a>
+                        <a href="#">Forget Password?</a>
                     </p>
 
                 </div>
@@ -99,7 +107,7 @@
 
         </div>
         <!-- /.content-wrapper -->
-        <footer style="padding:15px" >
+        <footer style="padding:15px; color:white" >
             <strong>Copyright &copy; 2018 Kent Ridge Hotel Group Pte Ltd</strong> All rights
             reserved.
         </footer>
