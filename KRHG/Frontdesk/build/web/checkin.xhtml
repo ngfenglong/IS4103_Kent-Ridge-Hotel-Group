@@ -83,21 +83,21 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                                 <h:form>
-                            <table  id="example1" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Booked by</th>
-                                        <th>Booking Id</th>
-                                        <th>Passport Number</th>
-                                        <th>Rooms booked</th>
+                            <h:form>
+                                <table  id="example1" class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Booked by</th>
+                                            <th>Booking Id</th>
+                                            <th>Passport Number</th>
+                                            <th>Rooms booked</th>
 
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                             
-                                    <ui:repeat var="o" value="#{frontDeskManagedBean.todaysbookings}" varStatus="status">
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <ui:repeat var="o" value="#{frontDeskManagedBean.todaysbookings}" varStatus="status">
 
                                             <tr>
                                                 <td>#{o.transactionID}</td>
@@ -106,21 +106,21 @@
                                                 <td>#{o.roomsBooked.size()}</td>
                                                 <td colspan="3"><h:commandLink action="#{frontDeskManagedBean.checkin(o)}" > <i class="fa fa-arrow-circle-down" style="color:gray" ></i></h:commandLink></td>                                            </tr>
                                         </ui:repeat>
-                              
 
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>Booked by</th>
-                                        <th>Booking Id</th>
-                                        <th>Passport Number</th>
-                                        <th>Book out Date</th>
 
-                                        <th></th>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                                           </h:form>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Booked by</th>
+                                            <th>Booking Id</th>
+                                            <th>Passport Number</th>
+                                            <th>Book out Date</th>
+
+                                            <th></th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </h:form>
                         </div>
                         <!-- /.card-body -->
                     </div>

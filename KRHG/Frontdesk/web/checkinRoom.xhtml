@@ -52,88 +52,27 @@
                                     </div>
                                     <!-- /.card-header -->
                                     <!-- form start -->
-                                    <h:form role="form">
-                                        <div class="card-body">
-                                            <table>
-                                                <tr>
-
-                                                    <div class="form-group">
-                                                        <td>
-                                                            <label>
-                                                                Name:
-                                                            </label>
-                                                        </td>
-                                                        <td>
-                                                            <h:outputText value="Lim Dian Cong"></h:outputText>
-                                                        </td>
-                                                    </div>
-                                                </tr>
-
-
-
-                                                <tr>
-                                                    <td>
-                                                        <label>
-                                                            Check in date:
-                                                        </label>
-                                                    </td>
-                                                    <td>
-                                                        <div class="form-group">
-                                                            <h:outputText value="26 March 2019">
-
-                                                            </h:outputText>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-
-
-
-                                                <tr>
-                                                    <td>
-                                                        <label>
-                                                            Checkout date:
-                                                        </label>
-                                                    </td>
-                                                    <td>
-                                                        <div class="form-group">
-                                                            <h:outputText value="01 April 2019">
-
-                                                            </h:outputText>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-
-
-
-                                                <tr>
-                                                    <td>
-                                                        <label>
-                                                            Room number:
-                                                        </label>
-                                                    </td>
-                                                    <td>
-                                                        <div class="form-group">
-                                                            <h:outputText value="1023">
-
-                                                            </h:outputText>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-
-                                                <!-- /.input group -->
-                                            </table>
-                                        </div>
-                                        <!-- /.card-body -->
-
-                                        <div class="card-footer">
-                                            <h:commandButton class="btn btn-primary" value="back" action="checkin.xhtml"  ></h:commandButton>
-                                        </div>
-                                    </h:form>
+                                    <form id="reservation">
+                                        <section id="seats">
+                                            <input id="seat-1" class="seat-select" type="checkbox" value="1" name="seat[]" ></input>
+                                            <label for="seat-1" class="seat"></label>
+                                            <input id="seat-2" class="seat-select" type="checkbox" value="2" name="seat[]" ></input>
+                                            <label for="seat-2" class="seat"></label>
+                                            <input id="seat-3" class="seat-select" type="checkbox" value="3" name="seat[]" ></input>
+                                            <label for="seat-3" class="seat"></label>
+                                            <input id="seat-4" class="seat-select" type="checkbox" value="4" name="seat[]" ></input>
+                                            <label for="seat-4" class="seat"></label>
+                                        </section>
+                                        <input type="submit"></input>
+                                    </form>
                                 </div>
 
                             </div>
                         </div>
+
                     </div>
+
+
                     <!-- /.container-fluid -->
                 </section>
                 <!-- /.content-header -->

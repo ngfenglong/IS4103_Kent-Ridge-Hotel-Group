@@ -50,6 +50,9 @@ public class requestAndServiceManagedBean implements Serializable {
      */
     //laundry 
     private List<LaundryOrder> allLaundryOrders;
+    private String laundryRoomNumber;
+    private int laundryQuantity;
+    private String laundrySpecialRequest;
 
     //Lost and found
     private List<LostAndFoundReport> allLostAndFounds;
@@ -57,6 +60,8 @@ public class requestAndServiceManagedBean implements Serializable {
     private String lfItemName;
     private String lfContactNumber;
     private String lfDescription;
+    private LostAndFoundReport editLF;
+    private Boolean lfStatus;
 
     //Maintenance
     private List<MaintainenceOrder> allMaintainenceOrders;
@@ -68,6 +73,9 @@ public class requestAndServiceManagedBean implements Serializable {
     private List<Room> allOccupiedRooms;
     private String hkroom;
     private String hkSpecialRequest;
+    private HouseKeepingOrder editHK;
+    private String hkRequestStatus;
+    private String hkRequestType;
 
     public requestAndServiceManagedBean() {
     }
@@ -81,6 +89,12 @@ public class requestAndServiceManagedBean implements Serializable {
     }
 
     public List<LostAndFoundReport> getAllLostAndFounds() {
+        lfContactNumber = null;
+        lfDescription = null;
+        lfItemName = null;
+        lfStatus = null;
+        lfreportType = null;
+        editLF = null;
         try {
             return allLostAndFounds = lostAndFoundSessionLocal.getAllLostAndFoundReport();
         } catch (NoResultException e) {
@@ -90,6 +104,14 @@ public class requestAndServiceManagedBean implements Serializable {
 
     public void setAllLostAndFounds(List<LostAndFoundReport> allLostAndFounds) {
         this.allLostAndFounds = allLostAndFounds;
+    }
+
+    public Boolean getLfStatus() {
+        return lfStatus;
+    }
+
+    public void setLfStatus(Boolean lfStatus) {
+        this.lfStatus = lfStatus;
     }
 
     public String getLfreportType() {
@@ -189,6 +211,10 @@ public class requestAndServiceManagedBean implements Serializable {
     }
 
     public List<HouseKeepingOrder> getAllHousekeepingOrder() {
+        hkSpecialRequest = null;
+        hkroom = null;
+
+        //split by hotel
         try {
             return allHousekeepingOrder = houseKeepingOrderSessionLocal.getAllHouseKeepingOrder();
         } catch (NoResultException e) {
@@ -201,6 +227,8 @@ public class requestAndServiceManagedBean implements Serializable {
     }
 
     public List<Room> getAllOccupiedRooms() {
+        // get only those occupiedroom
+        // also by hotel
         return allOccupiedRooms = roomSessionLocal.getAllRooms();
     }
 
@@ -224,10 +252,164 @@ public class requestAndServiceManagedBean implements Serializable {
         this.hkSpecialRequest = hkSpecialRequest;
     }
 
-    public String createHouseKeeping() {
+    public String createHouseKeeping() throws NoResultException, IOException {
+        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        PrintWriter out = response.getWriter();
+
         HouseKeepingOrder hkOrder = new HouseKeepingOrder();
-        //  hkOrder.setRoom(roomSessionLocal.getRoom);
+
+        hkOrder.setRoom(roomSessionLocal.getRoomByName(hkroom));
         hkOrder.setSpecialRequest(hkSpecialRequest);
-        return null;
+        hkOrder.setSpecialRequest(hkRequestType);
+        hkOrder.setOrderDateTime(new Date());
+        hkOrder.setStatus("incomplete");
+
+        houseKeepingOrderSessionLocal.createHouseKeepingOrder(hkOrder);
+
+        out.println("<script type=\"text/javascript\">");
+        out.println("alert('Housekeeping request created Succesful!');");
+        out.println("</script>");
+
+        return "housekeeping.xhtmlfaces-redirect=true";
     }
+
+    public String getLaundryRoomNumber() {
+        return laundryRoomNumber;
+    }
+
+    public void setLaundryRoomNumber(String laundryRoomNumber) {
+        this.laundryRoomNumber = laundryRoomNumber;
+    }
+
+    public int getLaundryQuantity() {
+        return laundryQuantity;
+    }
+
+    public void setLaundryQuantity(int laundryQuantity) {
+        this.laundryQuantity = laundryQuantity;
+    }
+
+    public String getLaundrySpecialRequest() {
+        return laundrySpecialRequest;
+    }
+
+    public void setLaundrySpecialRequest(String laundrySpecialRequest) {
+        this.laundrySpecialRequest = laundrySpecialRequest;
+    }
+
+    public String createLaundry() throws NoResultException, IOException {
+
+        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        PrintWriter out = response.getWriter();
+
+        LaundryOrder LO = new LaundryOrder();
+        LO.setRoom(roomSessionLocal.getRoomByName(laundryRoomNumber));
+        LO.setOrderDateTime(new Date());
+        LO.setQty(laundryQuantity);
+        LO.setSpecialRequest(laundrySpecialRequest);
+        LO.setStatus("Pending");
+        
+        HouseKeepingOrder HKo = new HouseKeepingOrder();
+        //HKo.setLevel(laundryQuantity); do something
+        HKo.setSpecialRequest(laundrySpecialRequest);
+        HKo.setStatus("incomplete");
+        HKo.setRequestType("laundry");
+        HKo.setRoom(roomSessionLocal.getRoomByName(laundryRoomNumber));
+        HKo.setOrderDateTime(new Date());
+        
+        
+        
+
+        out.println("<script type=\"text/javascript\">");
+        out.println("alert('Laundry created Succesful!');");
+        out.println("</script>");
+
+        return "laundry.xhtml?faces-redirect=true";
+    }
+
+    public String editLostAndFound(LostAndFoundReport LF) {
+        editLF = LF;
+        setLfContactNumber(LF.getContactNum());
+        setLfDescription(LF.getItemDescription());
+        setLfreportType(LF.getReportType());
+        setLfItemName(LF.getItemName());
+        setLfStatus(editLF.getIsResolved());
+
+        return "editLostAndFound.xhtml?faces-redirect=true";
+    }
+
+    public String updateLFRequest() throws IOException, NoResultException {
+        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        PrintWriter out = response.getWriter();
+        editLF.setContactNum(lfContactNumber);
+        editLF.setItemName(lfItemName);
+        editLF.setReportType(lfreportType);
+        editLF.setContactNum(lfContactNumber);
+        editLF.setItemDescription(lfDescription);
+        editLF.setIsResolved(lfStatus);
+
+        lostAndFoundSessionLocal.updateLostAndFoundReport(editLF);
+
+        out.println("<script type=\"text/javascript\">");
+        out.println("alert('Lost And Found report updated Succesfully!');");
+        out.println("</script>");
+
+        return "lostAndFound.xhtml?faces-redirect=true";
+    }
+
+   
+
+    public HouseKeepingOrder getEditHK() {
+        return editHK;
+    }
+
+    public void setEditHK(HouseKeepingOrder editHK) {
+        this.editHK = editHK;
+    }
+
+    public String getHkRequestStatus() {
+        return hkRequestStatus;
+    }
+
+    public void setHkRequestStatus(String hkRequestStatus) {
+        this.hkRequestStatus = hkRequestStatus;
+    }
+
+    public String editHousekeeping(HouseKeepingOrder hk) {
+        hkSpecialRequest = hk.getSpecialRequest();
+        hkRequestStatus = hk.getStatus();
+        hkRequestType = hk.getRequestType();
+        editHK = hk;
+
+        return "housekeepingEdit.xhtml?faces-redirect=true";
+    }
+
+    public String updateEditHKRequest() throws NoResultException, IOException {
+        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        PrintWriter out = response.getWriter();
+
+        editHK.setSpecialRequest(hkSpecialRequest);
+        editHK.setRequestType(hkRequestType);
+        if (hkRequestStatus.equalsIgnoreCase("complete")) {
+            editHK.setCompleteDateTime(new Date());
+        }
+        editHK.setStatus(hkRequestStatus);
+
+        houseKeepingOrderSessionLocal.updateHouseKeepingOrder(editHK);
+
+        out.println("<script type=\"text/javascript\">");
+        out.println("alert('Lost And Found report updated Succesfully!');");
+        out.println("</script>");
+
+        return "housekeeping.xhtml?faces-redirect=true";
+    }
+
+    public String getHkRequestType() {
+        return hkRequestType;
+    }
+
+    public void setHkRequestType(String hkRequestType) {
+        this.hkRequestType = hkRequestType;
+    }
+
 }

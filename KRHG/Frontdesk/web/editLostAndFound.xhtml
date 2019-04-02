@@ -50,7 +50,7 @@
 
                                 <div class="card card-primary">
                                     <div class="card-header">
-                                        <h3 class="card-title">Lost and Found Report</h3>
+                                        <h3 class="card-title">Update Lost and Found Report</h3>
                                     </div>
                                     <!-- /.card-header -->
                                     <!-- form start -->
@@ -95,7 +95,7 @@
                                                     </td>
                                                     <td>
                                                         <div class="form-group">
-                                                            <h:inputText class="form-control" value="#{requestAndServiceManagedBean.lfContactNumber}" a:placeholder="Contact details" required="true"></h:inputText>
+                                                            <h:inputText class="form-control" value="#{requestAndServiceManagedBean.lfContactNumber}" a:placeholder="Contact details"></h:inputText>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -111,7 +111,21 @@
                                                         </div>
                                                     </td>
                                                 </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label>
+                                                            Status:
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <h:selectOneMenu value="#{requestAndServiceManagedBean.lfStatus}">
+                                                                <f:selectItem itemValue="#{false}" itemLabel="Unresolved" />
+                                                                <f:selectItem itemValue="#{true}" itemLabel="Solved" />
 
+                                                            </h:selectOneMenu>                                                        </div>
+                                                    </td>
+                                                </tr>
 
 
                                                 <!-- /.input group -->
@@ -120,7 +134,7 @@
                                         <!-- /.card-body -->
 
                                         <div class="card-footer">
-                                            <h:commandButton class="custom-button" value="Create Report" action="#{requestAndServiceManagedBean.makeLFRequest()}"></h:commandButton>
+                                            <h:commandButton class="custom-button" value="Update Report" action="#{requestAndServiceManagedBean.updateLFRequest()}"></h:commandButton>
                                         </div>
                                     </h:form>
                                 </div>

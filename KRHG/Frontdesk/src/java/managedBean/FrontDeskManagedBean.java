@@ -7,10 +7,7 @@ package managedBean;
 
 import entity.CreditCard;
 import entity.Customer;
-import entity.HouseKeepingOrder;
-import entity.LaundryOrder;
-import entity.LostAndFoundReport;
-import entity.MaintainenceOrder;
+import entity.FunctionRoomBooking;
 import entity.PaymentTransaction;
 import entity.Room;
 import entity.RoomBooking;
@@ -32,10 +29,6 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletResponse;
 import sessionBeans.BookingSessionLocal;
 import sessionBeans.CustomerSessionLocal;
-import sessionBeans.HouseKeepingOrderSessionLocal;
-import sessionBeans.LaundrySessionLocal;
-import sessionBeans.LostAndFoundSessionLocal;
-import sessionBeans.MaintainenceOrderSessionLocal;
 import sessionBeans.RoomSessionLocal;
 
 /**
@@ -103,6 +96,10 @@ public class FrontDeskManagedBean {
     private String paymentDigits;
     private String paymentCVV;
 
+    
+    
+    //reservation 
+    private List<FunctionRoomBooking> allFunctionrooms;
     public FrontDeskManagedBean() {
     }
 
@@ -178,6 +175,14 @@ public class FrontDeskManagedBean {
         this.customerRoom = customerRoom;
     }
 
+    public List<FunctionRoomBooking> getAllFunctionrooms() {
+        return allFunctionrooms;
+    }
+
+    public void setAllFunctionrooms(List<FunctionRoomBooking> allFunctionrooms) {
+        this.allFunctionrooms = allFunctionrooms;
+    }
+
     public String searchCustomerForCheckin() {
         try {
 
@@ -198,6 +203,7 @@ public class FrontDeskManagedBean {
 
     public String confirmCheckin() {
         //bookSessionLocal.assignBooking(roombooking);
+        // this one i DO ok .
         return "checkinRoom.xhtml?faces-redirect=true";
     }
 
@@ -216,7 +222,7 @@ public class FrontDeskManagedBean {
     }
 
     public String searchCheckout() {
-        //bookSessionLocal.getRoombookingbyRoomNumber(String roomNumber); check status, dont just anyhow get room. 
+        //bookSessionLocal.getRoombookingbyRoomNumber(String roomNumber,String status); check status, dont just anyhow get room. 
 
         //setCheckOutRoomResult(checkOutRoomResult);
         return "checkoutResult.xhtml?faces-redirect=true";
@@ -224,6 +230,7 @@ public class FrontDeskManagedBean {
 
     public String checkOut(RoomBooking rm) {
         //do check out 
+        //update check out room and change roombooking status
         return "";
     }
 
@@ -431,6 +438,8 @@ public class FrontDeskManagedBean {
     public List<RoomBooking> getTodayCheckOutRoom() {
         //bookSessionLocal.getbookingbyCheckoutDate(new Date());
         //to get today's date
+        //bookSessionLocal.getAllRoomBookingByStatus(String Status)
+        
         return null;
     }
 
@@ -441,6 +450,7 @@ public class FrontDeskManagedBean {
     public String searchRoomAvailable() {
         // return todayCheckOutRoom = bookSessionLocal.getAllRoomBookingByCheckOutDate(todayDate);
         //some algorithm to get availble room to view and return list of room, group by room type
+        //wait feng long 
         setWalkinAvailableRoom(walkinAvailableRoom);
 
         return "walkinResult.xhtml?faces-redirect=true";
@@ -477,6 +487,8 @@ public class FrontDeskManagedBean {
     }
 
     public List<Room> getWalkinAvailableRoom() {
+        
+        //need to return pricing too
         return walkinAvailableRoom;
     }
 

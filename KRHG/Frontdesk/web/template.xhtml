@@ -20,7 +20,8 @@
         <!-- DataTables -->
         <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap4.css" />
         <!-- Theme style (comes with Bootstrap) -->
-        <link rel="stylesheet" href="dist/css/adminlte.min.css" />
+        <link rel="stylesheet" href="css/adminlte.min.css" />
+        <link rel="stylesheet" href="css/adminlte.css" />
         <!-- Google Font: Source Sans Pro -->
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet" />
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous"></link>
@@ -30,6 +31,8 @@
         <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0/ css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />-->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
         <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"></link>
+
+        <link rel="stylesheet" href="#{request.contextPath}/css/materialize.min.css"></link>
         <style>
             input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
                 -webkit-appearance: none;
@@ -81,7 +84,7 @@
                             <li class="nav-header">Frontdesk System</li>
                             <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
-                                    <i class="fa fa-hotel"></i>
+                                    <i class="fa fa-book-open"></i>
                                     <p>
                                         Bookings 
                                     </p>
@@ -89,7 +92,7 @@
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item has-treeview">
                                         <a href="checkin.xhtml" class="nav-link">
-                                            <i class="fa fa-plus nav-icon"></i>
+                                            <i class="fa fa-vote-yea"></i>
                                             <p>Online Booking </p>
                                         </a>
                                     </li>
@@ -109,9 +112,9 @@
                             </li>
                             <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
-                                    <i class="fa fa-swimming-pool"></i>
+                                    <i class="fa fa-user-tie"></i>
                                     <p>
-                                      Customer
+                                        Customer
                                     </p>
                                 </a>
                                 <ul class="nav nav-treeview">
@@ -132,9 +135,9 @@
 
                             <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
-                                    <i class="fa fa-hotel"></i>
+                                    <i class="fa fa-concierge-bell"></i>
                                     <p>
-                                       Requests and Services
+                                        Requests and Services
                                     </p>
                                 </a>
                                 <ul class="nav nav-treeview">
@@ -172,9 +175,9 @@
                             </li>
                             <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
-                                    <i class="fa fa-hotel"></i>
+                                    <i class="fa fa-vote-yea"></i>
                                     <p>
-                                      Reservation 
+                                        Reservation 
                                     </p>
                                 </a>
                                 <ul class="nav nav-treeview">
@@ -244,6 +247,7 @@
         <script src="plugins/fastclick/fastclick.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
         <script>
             $('.collapse').collapse();
         </script>

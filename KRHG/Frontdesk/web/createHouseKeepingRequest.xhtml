@@ -47,24 +47,64 @@
                         <!-- form start -->
                         <h:form role="form">
                             <div class="card-body">
-                                <div class="form-group">
-                                    <h:inputText class="form-control" value="#{requestAndServiceManagedBean.mlocation}" a:placeholder="Room" required="true"></h:inputText>
+                                <table>
+                                    <tr>
 
-                                </div>
-                                <div class="form-group">
-                                    <h:inputTextarea rows="10" cols="50" value="#{requestAndServiceManagedBean.maintainDescription}" a:placeholder="Additional Request" ></h:inputTextarea>
+                                        <div class="form-group">
+                                            <td>
+                                                <label>
+                                                    Room:
+                                                </label>
+                                            </td>
+                                            <td>
 
-                                </div>
+                                                <h:selectOneMenu value="#{requestAndServiceManagedBean.hkroom}">
+                                                    <f:selectItems value="#{requestAndServiceManagedBean.allOccupiedRooms}" var="c"
+                                                                   itemLabel="#{c.roomNumber}" itemValue="#{c.roomName}" />
+                                                </h:selectOneMenu>
+                                            </td>
+                                        </div>
+                                    </tr>
 
+                                    <tr>
+                                        <td>
+                                            <label>
+                                                Special Request:
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <h:inputTextarea cols="50" rows="10" class="form-control" value="#{requestAndServiceManagedBean.hkSpecialRequest}"  a:placeholder="Special Request" ></h:inputTextarea>
+                                            </div>
+                                        </td>
+                                    </tr>
 
+                                    <tr>
 
-                                <!-- /.input group -->
+                                        <div class="form-group">
+                                            <td>
+                                                <label>
+                                                    Request type:
+                                                </label>
+                                            </td>
+                                            <td>
 
+                                                <h:selectOneMenu value="#{requestAndServiceManagedBean.hkRequestType}">
+
+                                                    <f:selectItem itemValue="Toiletries" itemLabel="toiletries" />
+                                                    <f:selectItem itemValue="Housekeeping" itemLabel="housekeeping" />
+                                                </h:selectOneMenu>
+                                            </td>
+                                        </div>
+                                    </tr>
+
+                                    <!-- /.input group -->
+                                </table>
                             </div>
                             <!-- /.card-body -->
 
                             <div class="card-footer">
-                                <h:commandButton value="Create housekeeping request"  ></h:commandButton>
+                                <h:commandButton value="Create housekeeping request"  action="#{requestAndServiceManagedBean.createHouseKeeping()}" ></h:commandButton>
                             </div>
                         </h:form>
                     </div>
