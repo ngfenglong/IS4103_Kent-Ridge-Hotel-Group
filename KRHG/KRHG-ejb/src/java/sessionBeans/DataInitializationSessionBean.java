@@ -1144,7 +1144,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRGS2);
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_202"));
 
-        Room KRGS3 = new Room("KRG_203", "203", "Standard", 2, "Available", h1);
+        Room KRGS3 = new Room("KRG_203", "203", "Standard", 2, "Occupied", h1);
         KRGS3.addRoomFacility(rf1);
         KRGS3.addRoomFacility(rf2);
         KRGS3.addRoomFacility(rf3);
@@ -1161,7 +1161,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRGS3);
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_203"));
 
-        Room KRGS4 = new Room("KRG_204", "204", "Standard", 2, "Available", h1);
+        Room KRGS4 = new Room("KRG_204", "204", "Standard", 2, "Unavailable", h1);
         KRGS4.addRoomFacility(rf1);
         KRGS4.addRoomFacility(rf2);
         KRGS4.addRoomFacility(rf3);
@@ -1229,7 +1229,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRGS7);
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_207"));
 
-        Room KRGS8 = new Room("KRG_208", "208", "Standard", 2, "Available", h1);
+        Room KRGS8 = new Room("KRG_208", "208", "Standard", 2, "Occupied", h1);
         KRGS8.addRoomFacility(rf1);
         KRGS8.addRoomFacility(rf2);
         KRGS8.addRoomFacility(rf3);
@@ -1280,7 +1280,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRGS10);
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_210"));
 
-        Room KRGS11 = new Room("KRG_301", "301", "Standard", 2, "Available", h1);
+        Room KRGS11 = new Room("KRG_301", "301", "Standard", 2, "Unavailable", h1);
         KRGS11.addRoomFacility(rf1);
         KRGS11.addRoomFacility(rf2);
         KRGS11.addRoomFacility(rf3);
@@ -1314,7 +1314,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRGS12);
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_302"));
 
-        Room KRGS13 = new Room("KRG_303", "303", "Standard", 2, "Available", h1);
+        Room KRGS13 = new Room("KRG_303", "303", "Standard", 2, "Occupied", h1);
         KRGS13.addRoomFacility(rf1);
         KRGS13.addRoomFacility(rf2);
         KRGS13.addRoomFacility(rf3);
@@ -1348,7 +1348,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRGS14);
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_304"));
 
-        Room KRGS15 = new Room("KRG_305", "305", "Standard", 2, "Available", h1);
+        Room KRGS15 = new Room("KRG_305", "305", "Standard", 2, "Unavailable", h1);
         KRGS15.addRoomFacility(rf1);
         KRGS15.addRoomFacility(rf2);
         KRGS15.addRoomFacility(rf3);
@@ -1365,7 +1365,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRGS15);
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_305"));
 
-        Room KRGS16 = new Room("KRG_306", "306", "Standard", 2, "Available", h1);
+        Room KRGS16 = new Room("KRG_306", "306", "Standard", 2, "Occupied", h1);
         KRGS16.addRoomFacility(rf1);
         KRGS16.addRoomFacility(rf2);
         KRGS16.addRoomFacility(rf3);
@@ -1416,7 +1416,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRGS18);
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_308"));
 
-        Room KRGS19 = new Room("KRG_309", "309", "Standard", 2, "Available", h1);
+        Room KRGS19 = new Room("KRG_309", "309", "Standard", 2, "Unavailable", h1);
         KRGS19.addRoomFacility(rf1);
         KRGS19.addRoomFacility(rf2);
         KRGS19.addRoomFacility(rf3);
@@ -1433,7 +1433,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRGS19);
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_309"));
 
-        Room KRGS20 = new Room("KRG_310", "310", "Standard", 2, "Available", h1);
+        Room KRGS20 = new Room("KRG_310", "310", "Standard", 2, "Occupied", h1);
         KRGS20.addRoomFacility(rf1);
         KRGS20.addRoomFacility(rf2);
         KRGS20.addRoomFacility(rf3);
@@ -1467,7 +1467,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRGS21);
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_401"));
 
-        Room KRGS22 = new Room("KRG_402", "402", "Standard", 2, "Available", h1);
+        Room KRGS22 = new Room("KRG_402", "402", "Standard", 2, "Unavailable", h1);
         KRGS22.addRoomFacility(rf1);
         KRGS22.addRoomFacility(rf2);
         KRGS22.addRoomFacility(rf3);
@@ -1501,7 +1501,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRGS23);
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_403"));
 
-        Room KRGS24 = new Room("KRG_404", "404", "Standard", 2, "Available", h1);
+        Room KRGS24 = new Room("KRG_404", "404", "Standard", 2, "Occupied", h1);
         KRGS24.addRoomFacility(rf1);
         KRGS24.addRoomFacility(rf2);
         KRGS24.addRoomFacility(rf3);
@@ -1518,7 +1518,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRGS24);
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_404"));
 
-        Room KRGS25 = new Room("KRG_405", "405", "Standard", 2, "Available", h1);
+        Room KRGS25 = new Room("KRG_405", "405", "Standard", 2, "Unavailable", h1);
         KRGS25.addRoomFacility(rf1);
         KRGS25.addRoomFacility(rf2);
         KRGS25.addRoomFacility(rf3);
@@ -1535,7 +1535,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRGS25);
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_405"));
 
-        Room KRGS26 = new Room("KRG_406", "406", "Standard", 2, "Available", h1);
+        Room KRGS26 = new Room("KRG_406", "406", "Standard", 2, "Unavailable", h1);
         KRGS26.addRoomFacility(rf1);
         KRGS26.addRoomFacility(rf2);
         KRGS26.addRoomFacility(rf3);
@@ -1552,7 +1552,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRGS26);
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_406"));
 
-        Room KRGS27 = new Room("KRG_407", "407", "Standard", 2, "Available", h1);
+        Room KRGS27 = new Room("KRG_407", "407", "Standard", 2, "Occupied", h1);
         KRGS27.addRoomFacility(rf1);
         KRGS27.addRoomFacility(rf2);
         KRGS27.addRoomFacility(rf3);
@@ -1569,7 +1569,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRGS27);
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_407"));
 
-        Room KRGS28 = new Room("KRG_408", "408", "Standard", 2, "Available", h1);
+        Room KRGS28 = new Room("KRG_408", "408", "Standard", 2, "Unavailable", h1);
         KRGS28.addRoomFacility(rf1);
         KRGS28.addRoomFacility(rf2);
         KRGS28.addRoomFacility(rf3);
@@ -1603,7 +1603,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRGS29);
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_409"));
 
-        Room KRGS30 = new Room("KRG_410", "410", "Standard", 2, "Available", h1);
+        Room KRGS30 = new Room("KRG_410", "410", "Standard", 2, "Unavailable", h1);
         KRGS30.addRoomFacility(rf1);
         KRGS30.addRoomFacility(rf2);
         KRGS30.addRoomFacility(rf3);
@@ -1637,7 +1637,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRGS31);
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_501"));
 
-        Room KRGS32 = new Room("KRG_502", "502", "Standard", 2, "Available", h1);
+        Room KRGS32 = new Room("KRG_502", "502", "Standard", 2, "Occupied", h1);
         KRGS32.addRoomFacility(rf1);
         KRGS32.addRoomFacility(rf2);
         KRGS32.addRoomFacility(rf3);
@@ -1688,7 +1688,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRGS34);
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_504"));
 
-        Room KRGS35 = new Room("KRG_505", "505", "Standard", 2, "Available", h1);
+        Room KRGS35 = new Room("KRG_505", "505", "Standard", 2, "Unavailable", h1);
         KRGS35.addRoomFacility(rf1);
         KRGS35.addRoomFacility(rf2);
         KRGS35.addRoomFacility(rf3);
@@ -1722,7 +1722,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRGS36);
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_506"));
 
-        Room KRGS37 = new Room("KRG_507", "507", "Standard", 2, "Available", h1);
+        Room KRGS37 = new Room("KRG_507", "507", "Standard", 2, "Occupied", h1);
         KRGS37.addRoomFacility(rf1);
         KRGS37.addRoomFacility(rf2);
         KRGS37.addRoomFacility(rf3);
@@ -1739,7 +1739,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRGS37);
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_507"));
 
-        Room KRGS38 = new Room("KRG_508", "508", "Standard", 2, "Available", h1);
+        Room KRGS38 = new Room("KRG_508", "508", "Standard", 2, "Unavailable", h1);
         KRGS38.addRoomFacility(rf1);
         KRGS38.addRoomFacility(rf2);
         KRGS38.addRoomFacility(rf3);
@@ -1790,7 +1790,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRGS40);
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_510"));
 
-        Room KRGS41 = new Room("KRG_601", "601", "Standard", 2, "Available", h1);
+        Room KRGS41 = new Room("KRG_601", "601", "Standard", 2, "Occupied", h1);
         KRGS41.addRoomFacility(rf1);
         KRGS41.addRoomFacility(rf2);
         KRGS41.addRoomFacility(rf3);
@@ -1841,7 +1841,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRGS43);
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_603"));
 
-        Room KRGS44 = new Room("KRG_604", "604", "Standard", 2, "Available", h1);
+        Room KRGS44 = new Room("KRG_604", "604", "Standard", 2, "Occupied", h1);
         KRGS44.addRoomFacility(rf1);
         KRGS44.addRoomFacility(rf2);
         KRGS44.addRoomFacility(rf3);
@@ -1875,7 +1875,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRGS45);
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_605"));
 
-        Room KRGS46 = new Room("KRG_606", "606", "Standard", 2, "Available", h1);
+        Room KRGS46 = new Room("KRG_606", "606", "Standard", 2, "Unavailable", h1);
         KRGS46.addRoomFacility(rf1);
         KRGS46.addRoomFacility(rf2);
         KRGS46.addRoomFacility(rf3);
@@ -1926,7 +1926,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRGS48);
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_608"));
 
-        Room KRGS49 = new Room("KRG_609", "609", "Standard", 2, "Available", h1);
+        Room KRGS49 = new Room("KRG_609", "609", "Standard", 2, "Occupied", h1);
         KRGS49.addRoomFacility(rf1);
         KRGS49.addRoomFacility(rf2);
         KRGS49.addRoomFacility(rf3);
@@ -2008,7 +2008,7 @@ public class DataInitializationSessionBean {
 
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_1002"));
 
-        Room KRG_1003 = new Room("KRG_1003", "1003", "Deluxe", 3, "Available", h1);
+        Room KRG_1003 = new Room("KRG_1003", "1003", "Deluxe", 3, "Occupied", h1);
 
         KRG_1003.addRoomFacility(rf1);
         KRG_1003.addRoomFacility(rf2);
@@ -2080,7 +2080,7 @@ public class DataInitializationSessionBean {
 
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_1005"));
 
-        Room KRG_1006 = new Room("KRG_1006", "1006", "Deluxe", 3, "Available", h1);
+        Room KRG_1006 = new Room("KRG_1006", "1006", "Deluxe", 3, "Unavailable", h1);
 
         KRG_1006.addRoomFacility(rf1);
         KRG_1006.addRoomFacility(rf2);
@@ -2104,7 +2104,7 @@ public class DataInitializationSessionBean {
 
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_1006"));
 
-        Room KRG_1101 = new Room("KRG_1101", "1101", "Deluxe", 3, "Available", h1);
+        Room KRG_1101 = new Room("KRG_1101", "1101", "Deluxe", 3, "Occupied", h1);
 
         KRG_1101.addRoomFacility(rf1);
         KRG_1101.addRoomFacility(rf2);
@@ -2176,7 +2176,7 @@ public class DataInitializationSessionBean {
 
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_1103"));
 
-        Room KRG_1104 = new Room("KRG_1104", "1104", "Deluxe", 3, "Available", h1);
+        Room KRG_1104 = new Room("KRG_1104", "1104", "Deluxe", 3, "Unavailable", h1);
 
         KRG_1104.addRoomFacility(rf1);
         KRG_1104.addRoomFacility(rf2);
@@ -2200,7 +2200,7 @@ public class DataInitializationSessionBean {
 
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_1104"));
 
-        Room KRG_1105 = new Room("KRG_1105", "1105", "Deluxe", 3, "Available", h1);
+        Room KRG_1105 = new Room("KRG_1105", "1105", "Deluxe", 3, "Occupied", h1);
 
         KRG_1105.addRoomFacility(rf1);
         KRG_1105.addRoomFacility(rf2);
@@ -2274,7 +2274,7 @@ public class DataInitializationSessionBean {
 
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_701"));
 
-        Room KRG_702 = new Room("KRG_702", "702", "Premium", 4, "Available", h1);
+        Room KRG_702 = new Room("KRG_702", "702", "Premium", 4, "Occupied", h1);
 
         KRG_702.addRoomFacility(rf1);
         KRG_702.addRoomFacility(rf2);
@@ -2300,7 +2300,7 @@ public class DataInitializationSessionBean {
 
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_702"));
 
-        Room KRG_703 = new Room("KRG_703", "703", "Premium", 4, "Available", h1);
+        Room KRG_703 = new Room("KRG_703", "703", "Premium", 4, "Unavailable", h1);
 
         KRG_703.addRoomFacility(rf1);
         KRG_703.addRoomFacility(rf2);
@@ -2352,7 +2352,7 @@ public class DataInitializationSessionBean {
 
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_704"));
 
-        Room KRG_705 = new Room("KRG_705", "705", "Premium", 4, "Available", h1);
+        Room KRG_705 = new Room("KRG_705", "705", "Premium", 4, "Occupied", h1);
 
         KRG_705.addRoomFacility(rf1);
         KRG_705.addRoomFacility(rf2);
@@ -2456,7 +2456,7 @@ public class DataInitializationSessionBean {
 
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_708"));
 
-        Room KRG_801 = new Room("KRG_801", "801", "Premium", 4, "Available", h1);
+        Room KRG_801 = new Room("KRG_801", "801", "Premium", 4, "Unavailable", h1);
 
         KRG_801.addRoomFacility(rf1);
         KRG_801.addRoomFacility(rf2);
@@ -2482,7 +2482,7 @@ public class DataInitializationSessionBean {
 
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_801"));
 
-        Room KRG_802 = new Room("KRG_802", "802", "Premium", 4, "Available", h1);
+        Room KRG_802 = new Room("KRG_802", "802", "Premium", 4, "Occupied", h1);
 
         KRG_802.addRoomFacility(rf1);
         KRG_802.addRoomFacility(rf2);
@@ -2534,7 +2534,7 @@ public class DataInitializationSessionBean {
 
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_803"));
 
-        Room KRG_804 = new Room("KRG_804", "804", "Premium", 4, "Available", h1);
+        Room KRG_804 = new Room("KRG_804", "804", "Premium", 4, "Occupied", h1);
 
         KRG_804.addRoomFacility(rf1);
         KRG_804.addRoomFacility(rf2);
@@ -2586,7 +2586,7 @@ public class DataInitializationSessionBean {
 
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_805"));
 
-        Room KRG_806 = new Room("KRG_806", "806", "Premium", 4, "Available", h1);
+        Room KRG_806 = new Room("KRG_806", "806", "Premium", 4, "Unavailable", h1);
 
         KRG_806.addRoomFacility(rf1);
         KRG_806.addRoomFacility(rf2);
@@ -2638,7 +2638,7 @@ public class DataInitializationSessionBean {
 
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_807"));
 
-        Room KRG_808 = new Room("KRG_808", "808", "Premium", 4, "Available", h1);
+        Room KRG_808 = new Room("KRG_808", "808", "Premium", 4, "Occupied", h1);
 
         KRG_808.addRoomFacility(rf1);
         KRG_808.addRoomFacility(rf2);
@@ -2716,7 +2716,7 @@ public class DataInitializationSessionBean {
 
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_902"));
 
-        Room KRG_903 = new Room("KRG_903", "903", "Premium", 4, "Available", h1);
+        Room KRG_903 = new Room("KRG_903", "903", "Premium", 4, "Occupied", h1);
 
         KRG_903.addRoomFacility(rf1);
         KRG_903.addRoomFacility(rf2);
@@ -2742,7 +2742,7 @@ public class DataInitializationSessionBean {
 
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_903"));
 
-        Room KRG_904 = new Room("KRG_904", "904", "Premium", 4, "Available", h1);
+        Room KRG_904 = new Room("KRG_904", "904", "Premium", 4, "Unavailable", h1);
 
         KRG_904.addRoomFacility(rf1);
         KRG_904.addRoomFacility(rf2);
@@ -2846,7 +2846,7 @@ public class DataInitializationSessionBean {
 
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_907"));
 
-        Room KRG_908 = new Room("KRG_908", "908", "Premium", 4, "Available", h1);
+        Room KRG_908 = new Room("KRG_908", "908", "Premium", 4, "Occupied", h1);
 
         KRG_908.addRoomFacility(rf1);
         KRG_908.addRoomFacility(rf2);
@@ -2904,7 +2904,7 @@ public class DataInitializationSessionBean {
 
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_1201"));
 
-        Room KRG_1202 = new Room("KRG_1202", "1202", "Suite", 4, "Available", h1);
+        Room KRG_1202 = new Room("KRG_1202", "1202", "Suite", 4, "Occupied", h1);
 
         KRG_1202.addRoomFacility(rf1);
         KRG_1202.addRoomFacility(rf2);
@@ -2936,7 +2936,7 @@ public class DataInitializationSessionBean {
 
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_1202"));
 
-        Room KRG_1203 = new Room("KRG_1203", "1203", "Suite", 4, "Available", h1);
+        Room KRG_1203 = new Room("KRG_1203", "1203", "Suite", 4, "Unavailable", h1);
 
         KRG_1203.addRoomFacility(rf1);
         KRG_1203.addRoomFacility(rf2);
@@ -3000,7 +3000,7 @@ public class DataInitializationSessionBean {
 
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_1204"));
 
-        Room KRG_1205 = new Room("KRG_1205", "1205", "Suite", 4, "Available", h1);
+        Room KRG_1205 = new Room("KRG_1205", "1205", "Suite", 4, "Occupied", h1);
 
         KRG_1205.addRoomFacility(rf1);
         KRG_1205.addRoomFacility(rf2);
@@ -3032,7 +3032,7 @@ public class DataInitializationSessionBean {
 
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_1205"));
 
-        Room KRG_1301 = new Room("KRG_1301", "1301", "Suite", 4, "Available", h1);
+        Room KRG_1301 = new Room("KRG_1301", "1301", "Suite", 4, "Unavailable", h1);
 
         KRG_1301.addRoomFacility(rf1);
         KRG_1301.addRoomFacility(rf2);
@@ -3128,7 +3128,7 @@ public class DataInitializationSessionBean {
 
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_1303"));
 
-        Room KRG_1304 = new Room("KRG_1304", "1304", "Suite", 4, "Available", h1);
+        Room KRG_1304 = new Room("KRG_1304", "1304", "Suite", 4, "Unavailable", h1);
 
         KRG_1304.addRoomFacility(rf1);
         KRG_1304.addRoomFacility(rf2);
@@ -3192,7 +3192,7 @@ public class DataInitializationSessionBean {
 
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_1305"));
 
-        Room KRGP1 = new Room("KRG_1401", "1401", "Penthouse", 4, "Available", h1);
+        Room KRGP1 = new Room("KRG_1401", "1401", "Penthouse", 4, "Occupied", h1);
         KRGP1.addRoomFacility(rf1);
         KRGP1.addRoomFacility(rf2);
         KRGP1.addRoomFacility(rf3);
@@ -3285,7 +3285,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRGP3);
         h1.addRoom(roomSessionLocal.getRoomByName("KRG_1403"));
 
-        Room KRGP4 = new Room("KRG_1404", "1404", "Penthouse", 4, "Available", h1);
+        Room KRGP4 = new Room("KRG_1404", "1404", "Penthouse", 4, "Occupied", h1);
         KRGP4.addRoomFacility(rf1);
         KRGP4.addRoomFacility(rf2);
         KRGP4.addRoomFacility(rf3);
@@ -3367,7 +3367,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRCS1);
         h2.addRoom(roomSessionLocal.getRoomByName("KRC_201"));
 
-        Room KRCS2 = new Room("KRC_202", "202", "Standard", 2, "Available", h2);
+        Room KRCS2 = new Room("KRC_202", "202", "Standard", 2, "Unavailable", h2);
         KRCS2.addRoomFacility(rf1);
         KRCS2.addRoomFacility(rf2);
         KRCS2.addRoomFacility(rf3);
@@ -3418,7 +3418,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRCS4);
         h2.addRoom(roomSessionLocal.getRoomByName("KRC_204"));
 
-        Room KRCS5 = new Room("KRC_205", "205", "Standard", 2, "Available", h2);
+        Room KRCS5 = new Room("KRC_205", "205", "Standard", 2, "Occupied", h2);
         KRCS5.addRoomFacility(rf1);
         KRCS5.addRoomFacility(rf2);
         KRCS5.addRoomFacility(rf3);
@@ -3486,7 +3486,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRCS8);
         h2.addRoom(roomSessionLocal.getRoomByName("KRC_208"));
 
-        Room KRCS11 = new Room("KRC_301", "301", "Standard", 2, "Available", h2);
+        Room KRCS11 = new Room("KRC_301", "301", "Standard", 2, "Occupied", h2);
         KRCS11.addRoomFacility(rf1);
         KRCS11.addRoomFacility(rf2);
         KRCS11.addRoomFacility(rf3);
@@ -3503,7 +3503,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRCS11);
         h2.addRoom(roomSessionLocal.getRoomByName("KRC_301"));
 
-        Room KRCS12 = new Room("KRC_302", "302", "Standard", 2, "Available", h2);
+        Room KRCS12 = new Room("KRC_302", "302", "Standard", 2, "Unavailable", h2);
         KRCS12.addRoomFacility(rf1);
         KRCS12.addRoomFacility(rf2);
         KRCS12.addRoomFacility(rf3);
@@ -3537,7 +3537,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRCS13);
         h2.addRoom(roomSessionLocal.getRoomByName("KRC_303"));
 
-        Room KRCS14 = new Room("KRC_304", "304", "Standard", 2, "Available", h2);
+        Room KRCS14 = new Room("KRC_304", "304", "Standard", 2, "Occupied", h2);
         KRCS14.addRoomFacility(rf1);
         KRCS14.addRoomFacility(rf2);
         KRCS14.addRoomFacility(rf3);
@@ -3588,7 +3588,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRCS16);
         h2.addRoom(roomSessionLocal.getRoomByName("KRC_306"));
 
-        Room KRCS17 = new Room("KRC_307", "307", "Standard", 2, "Available", h2);
+        Room KRCS17 = new Room("KRC_307", "307", "Standard", 2, "Occupied", h2);
         KRCS17.addRoomFacility(rf1);
         KRCS17.addRoomFacility(rf2);
         KRCS17.addRoomFacility(rf3);
@@ -3622,7 +3622,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRCS18);
         h2.addRoom(roomSessionLocal.getRoomByName("KRC_308"));
 
-        Room KRCS21 = new Room("KRC_401", "401", "Standard", 2, "Available", h2);
+        Room KRCS21 = new Room("KRC_401", "401", "Standard", 2, "Unavailable", h2);
         KRCS21.addRoomFacility(rf1);
         KRCS21.addRoomFacility(rf2);
         KRCS21.addRoomFacility(rf3);
@@ -3690,7 +3690,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRCS24);
         h2.addRoom(roomSessionLocal.getRoomByName("KRC_404"));
 
-        Room KRCS25 = new Room("KRC_405", "405", "Standard", 2, "Available", h2);
+        Room KRCS25 = new Room("KRC_405", "405", "Standard", 2, "Occupied", h2);
         KRCS25.addRoomFacility(rf1);
         KRCS25.addRoomFacility(rf2);
         KRCS25.addRoomFacility(rf3);
@@ -3707,7 +3707,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRCS25);
         h2.addRoom(roomSessionLocal.getRoomByName("KRC_405"));
 
-        Room KRCS26 = new Room("KRC_406", "406", "Standard", 2, "Available", h2);
+        Room KRCS26 = new Room("KRC_406", "406", "Standard", 2, "Unavailable", h2);
         KRCS26.addRoomFacility(rf1);
         KRCS26.addRoomFacility(rf2);
         KRCS26.addRoomFacility(rf3);
@@ -3741,7 +3741,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRCS27);
         h2.addRoom(roomSessionLocal.getRoomByName("KRC_407"));
 
-        Room KRCS28 = new Room("KRC_408", "408", "Standard", 2, "Available", h2);
+        Room KRCS28 = new Room("KRC_408", "408", "Standard", 2, "Occupied", h2);
         KRCS28.addRoomFacility(rf1);
         KRCS28.addRoomFacility(rf2);
         KRCS28.addRoomFacility(rf3);
@@ -3775,7 +3775,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRCS31);
         h2.addRoom(roomSessionLocal.getRoomByName("KRC_501"));
 
-        Room KRCS32 = new Room("KRC_502", "502", "Standard", 2, "Available", h2);
+        Room KRCS32 = new Room("KRC_502", "502", "Standard", 2, "Occupied", h2);
         KRCS32.addRoomFacility(rf1);
         KRCS32.addRoomFacility(rf2);
         KRCS32.addRoomFacility(rf3);
@@ -3809,7 +3809,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRCS33);
         h2.addRoom(roomSessionLocal.getRoomByName("KRC_503"));
 
-        Room KRCS34 = new Room("KRC_504", "504", "Standard", 2, "Available", h2);
+        Room KRCS34 = new Room("KRC_504", "504", "Standard", 2, "Unavailable", h2);
         KRCS34.addRoomFacility(rf1);
         KRCS34.addRoomFacility(rf2);
         KRCS34.addRoomFacility(rf3);
@@ -3843,7 +3843,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRCS35);
         h2.addRoom(roomSessionLocal.getRoomByName("KRC_505"));
 
-        Room KRCS36 = new Room("KRC_506", "506", "Standard", 2, "Available", h2);
+        Room KRCS36 = new Room("KRC_506", "506", "Standard", 2, "Occupied", h2);
         KRCS36.addRoomFacility(rf1);
         KRCS36.addRoomFacility(rf2);
         KRCS36.addRoomFacility(rf3);
@@ -3894,7 +3894,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRCS38);
         h2.addRoom(roomSessionLocal.getRoomByName("KRC_508"));
 
-        Room KRCS41 = new Room("KRC_601", "601", "Standard", 2, "Available", h2);
+        Room KRCS41 = new Room("KRC_601", "601", "Standard", 2, "Occupied", h2);
         KRCS41.addRoomFacility(rf1);
         KRCS41.addRoomFacility(rf2);
         KRCS41.addRoomFacility(rf3);
@@ -3928,7 +3928,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRCS42);
         h2.addRoom(roomSessionLocal.getRoomByName("KRC_602"));
 
-        Room KRCS43 = new Room("KRC_603", "603", "Standard", 2, "Available", h2);
+        Room KRCS43 = new Room("KRC_603", "603", "Standard", 2, "Unavailable", h2);
         KRCS43.addRoomFacility(rf1);
         KRCS43.addRoomFacility(rf2);
         KRCS43.addRoomFacility(rf3);
@@ -3962,7 +3962,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRCS44);
         h2.addRoom(roomSessionLocal.getRoomByName("KRC_604"));
 
-        Room KRCS45 = new Room("KRC_605", "605", "Standard", 2, "Available", h2);
+        Room KRCS45 = new Room("KRC_605", "605", "Standard", 2, "Occupied", h2);
         KRCS45.addRoomFacility(rf1);
         KRCS45.addRoomFacility(rf2);
         KRCS45.addRoomFacility(rf3);
@@ -4013,7 +4013,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRCS47);
         h2.addRoom(roomSessionLocal.getRoomByName("KRC_607"));
 
-        Room KRCS48 = new Room("KRC_608", "608", "Standard", 2, "Available", h2);
+        Room KRCS48 = new Room("KRC_608", "608", "Standard", 2, "Unavailable", h2);
         KRCS48.addRoomFacility(rf1);
         KRCS48.addRoomFacility(rf2);
         KRCS48.addRoomFacility(rf3);
@@ -4078,7 +4078,7 @@ public class DataInitializationSessionBean {
 
         h2.addRoom(roomSessionLocal.getRoomByName("KRC_1002"));
 
-        Room KRC_1003 = new Room("KRC_1003", "1003", "Deluxe", 3, "Available", h2);
+        Room KRC_1003 = new Room("KRC_1003", "1003", "Deluxe", 3, "Occupied", h2);
 
         KRC_1003.addRoomFacility(rf1);
         KRC_1003.addRoomFacility(rf2);
@@ -4150,7 +4150,7 @@ public class DataInitializationSessionBean {
 
         h2.addRoom(roomSessionLocal.getRoomByName("KRC_1005"));
 
-        Room KRC_1101 = new Room("KRC_1101", "1101", "Deluxe", 3, "Available", h2);
+        Room KRC_1101 = new Room("KRC_1101", "1101", "Deluxe", 3, "Occupied", h2);
 
         KRC_1101.addRoomFacility(rf1);
         KRC_1101.addRoomFacility(rf2);
@@ -4174,7 +4174,7 @@ public class DataInitializationSessionBean {
 
         h2.addRoom(roomSessionLocal.getRoomByName("KRC_1101"));
 
-        Room KRC_1102 = new Room("KRC_1102", "1102", "Deluxe", 3, "Available", h2);
+        Room KRC_1102 = new Room("KRC_1102", "1102", "Deluxe", 3, "Unavailable", h2);
 
         KRC_1102.addRoomFacility(rf1);
         KRC_1102.addRoomFacility(rf2);
@@ -4222,7 +4222,7 @@ public class DataInitializationSessionBean {
 
         h2.addRoom(roomSessionLocal.getRoomByName("KRC_1103"));
 
-        Room KRC_1104 = new Room("KRC_1104", "1104", "Deluxe", 3, "Available", h2);
+        Room KRC_1104 = new Room("KRC_1104", "1104", "Deluxe", 3, "Occupied", h2);
 
         KRC_1104.addRoomFacility(rf1);
         KRC_1104.addRoomFacility(rf2);
@@ -4270,7 +4270,7 @@ public class DataInitializationSessionBean {
 
         h2.addRoom(roomSessionLocal.getRoomByName("KRC_1105"));
 
-        Room KRC_701 = new Room("KRC_701", "701", "Premium", 4, "Available", h2);
+        Room KRC_701 = new Room("KRC_701", "701", "Premium", 4, "Occupied", h2);
 
         KRC_701.addRoomFacility(rf1);
         KRC_701.addRoomFacility(rf2);
@@ -4348,7 +4348,7 @@ public class DataInitializationSessionBean {
 
         h2.addRoom(roomSessionLocal.getRoomByName("KRC_703"));
 
-        Room KRC_704 = new Room("KRC_704", "704", "Premium", 4, "Available", h2);
+        Room KRC_704 = new Room("KRC_704", "704", "Premium", 4, "Unavailable", h2);
 
         KRC_704.addRoomFacility(rf1);
         KRC_704.addRoomFacility(rf2);
@@ -4374,7 +4374,7 @@ public class DataInitializationSessionBean {
 
         h2.addRoom(roomSessionLocal.getRoomByName("KRC_704"));
 
-        Room KRC_705 = new Room("KRC_705", "705", "Premium", 4, "Available", h2);
+        Room KRC_705 = new Room("KRC_705", "705", "Premium", 4, "Occupied", h2);
 
         KRC_705.addRoomFacility(rf1);
         KRC_705.addRoomFacility(rf2);
@@ -4426,7 +4426,7 @@ public class DataInitializationSessionBean {
 
         h2.addRoom(roomSessionLocal.getRoomByName("KRC_706"));
 
-        Room KRC_707 = new Room("KRC_707", "707", "Premium", 4, "Available", h2);
+        Room KRC_707 = new Room("KRC_707", "707", "Premium", 4, "Occupied", h2);
 
         KRC_707.addRoomFacility(rf1);
         KRC_707.addRoomFacility(rf2);
@@ -4504,7 +4504,7 @@ public class DataInitializationSessionBean {
 
         h2.addRoom(roomSessionLocal.getRoomByName("KRC_802"));
 
-        Room KRC_803 = new Room("KRC_803", "803", "Premium", 4, "Available", h2);
+        Room KRC_803 = new Room("KRC_803", "803", "Premium", 4, "Occupied", h2);
 
         KRC_803.addRoomFacility(rf1);
         KRC_803.addRoomFacility(rf2);
@@ -4530,7 +4530,7 @@ public class DataInitializationSessionBean {
 
         h2.addRoom(roomSessionLocal.getRoomByName("KRC_803"));
 
-        Room KRC_804 = new Room("KRC_804", "804", "Premium", 4, "Available", h2);
+        Room KRC_804 = new Room("KRC_804", "804", "Premium", 4, "Unavailable", h2);
 
         KRC_804.addRoomFacility(rf1);
         KRC_804.addRoomFacility(rf2);
@@ -4582,7 +4582,7 @@ public class DataInitializationSessionBean {
 
         h2.addRoom(roomSessionLocal.getRoomByName("KRC_805"));
 
-        Room KRC_806 = new Room("KRC_806", "806", "Premium", 4, "Available", h2);
+        Room KRC_806 = new Room("KRC_806", "806", "Premium", 4, "Occupied", h2);
 
         KRC_806.addRoomFacility(rf1);
         KRC_806.addRoomFacility(rf2);
@@ -4634,7 +4634,7 @@ public class DataInitializationSessionBean {
 
         h2.addRoom(roomSessionLocal.getRoomByName("KRC_807"));
 
-        Room KRC_901 = new Room("KRC_901", "901", "Premium", 4, "Available", h2);
+        Room KRC_901 = new Room("KRC_901", "901", "Premium", 4, "Unavailable", h2);
 
         KRC_901.addRoomFacility(rf1);
         KRC_901.addRoomFacility(rf2);
@@ -4660,7 +4660,7 @@ public class DataInitializationSessionBean {
 
         h2.addRoom(roomSessionLocal.getRoomByName("KRC_901"));
 
-        Room KRC_902 = new Room("KRC_902", "902", "Premium", 4, "Available", h2);
+        Room KRC_902 = new Room("KRC_902", "902", "Premium", 4, "Occupied", h2);
 
         KRC_902.addRoomFacility(rf1);
         KRC_902.addRoomFacility(rf2);
@@ -4738,7 +4738,7 @@ public class DataInitializationSessionBean {
 
         h2.addRoom(roomSessionLocal.getRoomByName("KRC_904"));
 
-        Room KRC_905 = new Room("KRC_905", "905", "Premium", 4, "Available", h2);
+        Room KRC_905 = new Room("KRC_905", "905", "Premium", 4, "Occupied", h2);
 
         KRC_905.addRoomFacility(rf1);
         KRC_905.addRoomFacility(rf2);
@@ -4816,7 +4816,7 @@ public class DataInitializationSessionBean {
 
         h2.addRoom(roomSessionLocal.getRoomByName("KRC_907"));
 
-        Room KRC_1201 = new Room("KRC_1201", "1201", "Suite", 4, "Available", h2);
+        Room KRC_1201 = new Room("KRC_1201", "1201", "Suite", 4, "Occupied", h2);
 
         KRC_1201.addRoomFacility(rf1);
         KRC_1201.addRoomFacility(rf2);
@@ -4848,7 +4848,7 @@ public class DataInitializationSessionBean {
 
         h2.addRoom(roomSessionLocal.getRoomByName("KRC_1201"));
 
-        Room KRC_1202 = new Room("KRC_1202", "1202", "Suite", 4, "Available", h2);
+        Room KRC_1202 = new Room("KRC_1202", "1202", "Suite", 4, "Unavailable", h2);
 
         KRC_1202.addRoomFacility(rf1);
         KRC_1202.addRoomFacility(rf2);
@@ -4977,7 +4977,7 @@ public class DataInitializationSessionBean {
         RoomFacility rf21 = roomFacilitySessionLocal.getRoomFacilityByName("Jaccuzi");
         RoomFacility rf22 = roomFacilitySessionLocal.getRoomFacilityByName("Kitchen");
 
-        Room KRNS1 = new Room("KRN_201", "201", "Standard", 2, "Available", h3);
+        Room KRNS1 = new Room("KRN_201", "201", "Standard", 2, "Occupied", h3);
         KRNS1.addRoomFacility(rf1);
         KRNS1.addRoomFacility(rf2);
         KRNS1.addRoomFacility(rf3);
@@ -5028,7 +5028,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRNS3);
         h3.addRoom(roomSessionLocal.getRoomByName("KRN_203"));
 
-        Room KRNS4 = new Room("KRN_204", "204", "Standard", 2, "Available", h3);
+        Room KRNS4 = new Room("KRN_204", "204", "Standard", 2, "Unavailable", h3);
         KRNS4.addRoomFacility(rf1);
         KRNS4.addRoomFacility(rf2);
         KRNS4.addRoomFacility(rf3);
@@ -5096,7 +5096,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRNS7);
         h3.addRoom(roomSessionLocal.getRoomByName("KRN_207"));
 
-        Room KRNS8 = new Room("KRN_208", "208", "Standard", 2, "Available", h3);
+        Room KRNS8 = new Room("KRN_208", "208", "Standard", 2, "Occupied", h3);
         KRNS8.addRoomFacility(rf1);
         KRNS8.addRoomFacility(rf2);
         KRNS8.addRoomFacility(rf3);
@@ -5130,7 +5130,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRNS11);
         h3.addRoom(roomSessionLocal.getRoomByName("KRN_301"));
 
-        Room KRNS12 = new Room("KRN_302", "302", "Standard", 2, "Available", h3);
+        Room KRNS12 = new Room("KRN_302", "302", "Standard", 2, "Occupied", h3);
         KRNS12.addRoomFacility(rf1);
         KRNS12.addRoomFacility(rf2);
         KRNS12.addRoomFacility(rf3);
@@ -5147,7 +5147,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRNS12);
         h3.addRoom(roomSessionLocal.getRoomByName("KRN_302"));
 
-        Room KRNS13 = new Room("KRN_303", "303", "Standard", 2, "Available", h3);
+        Room KRNS13 = new Room("KRN_303", "303", "Standard", 2, "Unavailable", h3);
         KRNS13.addRoomFacility(rf1);
         KRNS13.addRoomFacility(rf2);
         KRNS13.addRoomFacility(rf3);
@@ -5198,7 +5198,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRNS15);
         h3.addRoom(roomSessionLocal.getRoomByName("KRN_305"));
 
-        Room KRNS16 = new Room("KRN_306", "306", "Standard", 2, "Available", h3);
+        Room KRNS16 = new Room("KRN_306", "306", "Standard", 2, "Occupied", h3);
         KRNS16.addRoomFacility(rf1);
         KRNS16.addRoomFacility(rf2);
         KRNS16.addRoomFacility(rf3);
@@ -5266,7 +5266,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRNS21);
         h3.addRoom(roomSessionLocal.getRoomByName("KRN_401"));
 
-        Room KRNS22 = new Room("KRN_402", "402", "Standard", 2, "Available", h3);
+        Room KRNS22 = new Room("KRN_402", "402", "Standard", 2, "Unavailable", h3);
         KRNS22.addRoomFacility(rf1);
         KRNS22.addRoomFacility(rf2);
         KRNS22.addRoomFacility(rf3);
@@ -5283,7 +5283,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRNS22);
         h3.addRoom(roomSessionLocal.getRoomByName("KRN_402"));
 
-        Room KRNS23 = new Room("KRN_403", "403", "Standard", 2, "Available", h3);
+        Room KRNS23 = new Room("KRN_403", "403", "Standard", 2, "Occupied", h3);
         KRNS23.addRoomFacility(rf1);
         KRNS23.addRoomFacility(rf2);
         KRNS23.addRoomFacility(rf3);
@@ -5351,7 +5351,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRNS26);
         h3.addRoom(roomSessionLocal.getRoomByName("KRN_406"));
 
-        Room KRNS27 = new Room("KRN_407", "407", "Standard", 2, "Available", h3);
+        Room KRNS27 = new Room("KRN_407", "407", "Standard", 2, "Occupied", h3);
         KRNS27.addRoomFacility(rf1);
         KRNS27.addRoomFacility(rf2);
         KRNS27.addRoomFacility(rf3);
@@ -5402,7 +5402,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRNS31);
         h3.addRoom(roomSessionLocal.getRoomByName("KRN_501"));
 
-        Room KRNS32 = new Room("KRN_502", "502", "Standard", 2, "Available", h3);
+        Room KRNS32 = new Room("KRN_502", "502", "Standard", 2, "Occupied", h3);
         KRNS32.addRoomFacility(rf1);
         KRNS32.addRoomFacility(rf2);
         KRNS32.addRoomFacility(rf3);
@@ -5470,7 +5470,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRNS35);
         h3.addRoom(roomSessionLocal.getRoomByName("KRN_505"));
 
-        Room KRNS36 = new Room("KRN_506", "506", "Standard", 2, "Available", h3);
+        Room KRNS36 = new Room("KRN_506", "506", "Standard", 2, "Occupied", h3);
         KRNS36.addRoomFacility(rf1);
         KRNS36.addRoomFacility(rf2);
         KRNS36.addRoomFacility(rf3);
@@ -5538,7 +5538,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRNS41);
         h3.addRoom(roomSessionLocal.getRoomByName("KRN_601"));
 
-        Room KRNS42 = new Room("KRN_602", "602", "Standard", 2, "Available", h3);
+        Room KRNS42 = new Room("KRN_602", "602", "Standard", 2, "Occupied", h3);
         KRNS42.addRoomFacility(rf1);
         KRNS42.addRoomFacility(rf2);
         KRNS42.addRoomFacility(rf3);
@@ -5589,7 +5589,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRNS44);
         h3.addRoom(roomSessionLocal.getRoomByName("KRN_604"));
 
-        Room KRNS45 = new Room("KRN_605", "605", "Standard", 2, "Available", h3);
+        Room KRNS45 = new Room("KRN_605", "605", "Standard", 2, "Occupied", h3);
         KRNS45.addRoomFacility(rf1);
         KRNS45.addRoomFacility(rf2);
         KRNS45.addRoomFacility(rf3);
@@ -5640,7 +5640,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRNS47);
         h3.addRoom(roomSessionLocal.getRoomByName("KRN_607"));
 
-        Room KRNS48 = new Room("KRN_608", "608", "Standard", 2, "Available", h3);
+        Room KRNS48 = new Room("KRN_608", "608", "Standard", 2, "Occupied", h3);
         KRNS48.addRoomFacility(rf1);
         KRNS48.addRoomFacility(rf2);
         KRNS48.addRoomFacility(rf3);
@@ -5705,7 +5705,7 @@ public class DataInitializationSessionBean {
 
         h3.addRoom(roomSessionLocal.getRoomByName("KRN_1002"));
 
-        Room KRN_1003 = new Room("KRN_1003", "1003", "Deluxe", 3, "Available", h3);
+        Room KRN_1003 = new Room("KRN_1003", "1003", "Deluxe", 3, "Unavailable", h3);
 
         KRN_1003.addRoomFacility(rf1);
         KRN_1003.addRoomFacility(rf2);
@@ -5729,7 +5729,7 @@ public class DataInitializationSessionBean {
 
         h3.addRoom(roomSessionLocal.getRoomByName("KRN_1003"));
 
-        Room KRN_1004 = new Room("KRN_1004", "1004", "Deluxe", 3, "Available", h3);
+        Room KRN_1004 = new Room("KRN_1004", "1004", "Deluxe", 3, "Occupied", h3);
 
         KRN_1004.addRoomFacility(rf1);
         KRN_1004.addRoomFacility(rf2);
@@ -5801,7 +5801,7 @@ public class DataInitializationSessionBean {
 
         h3.addRoom(roomSessionLocal.getRoomByName("KRN_1101"));
 
-        Room KRN_1102 = new Room("KRN_1102", "1102", "Deluxe", 3, "Available", h3);
+        Room KRN_1102 = new Room("KRN_1102", "1102", "Deluxe", 3, "Occupied", h3);
 
         KRN_1102.addRoomFacility(rf1);
         KRN_1102.addRoomFacility(rf2);
@@ -5873,7 +5873,7 @@ public class DataInitializationSessionBean {
 
         h3.addRoom(roomSessionLocal.getRoomByName("KRN_1104"));
 
-        Room KRN_1105 = new Room("KRN_1105", "1105", "Deluxe", 3, "Available", h3);
+        Room KRN_1105 = new Room("KRN_1105", "1105", "Deluxe", 3, "Unavailable", h3);
 
         KRN_1105.addRoomFacility(rf1);
         KRN_1105.addRoomFacility(rf2);
@@ -5897,7 +5897,7 @@ public class DataInitializationSessionBean {
 
         h3.addRoom(roomSessionLocal.getRoomByName("KRN_1105"));
 
-        Room KRN_701 = new Room("KRN_701", "701", "Premium", 4, "Available", h3);
+        Room KRN_701 = new Room("KRN_701", "701", "Premium", 4, "Occupied", h3);
 
         KRN_701.addRoomFacility(rf1);
         KRN_701.addRoomFacility(rf2);
@@ -5949,7 +5949,7 @@ public class DataInitializationSessionBean {
 
         h3.addRoom(roomSessionLocal.getRoomByName("KRN_702"));
 
-        Room KRN_703 = new Room("KRN_703", "703", "Premium", 4, "Available", h3);
+        Room KRN_703 = new Room("KRN_703", "703", "Premium", 4, "Occupied", h3);
 
         KRN_703.addRoomFacility(rf1);
         KRN_703.addRoomFacility(rf2);
@@ -6027,7 +6027,7 @@ public class DataInitializationSessionBean {
 
         h3.addRoom(roomSessionLocal.getRoomByName("KRN_705"));
 
-        Room KRN_706 = new Room("KRN_706", "706", "Premium", 4, "Available", h3);
+        Room KRN_706 = new Room("KRN_706", "706", "Premium", 4, "Occupied", h3);
 
         KRN_706.addRoomFacility(rf1);
         KRN_706.addRoomFacility(rf2);
@@ -6105,7 +6105,7 @@ public class DataInitializationSessionBean {
 
         h3.addRoom(roomSessionLocal.getRoomByName("KRN_801"));
 
-        Room KRN_802 = new Room("KRN_802", "802", "Premium", 4, "Available", h3);
+        Room KRN_802 = new Room("KRN_802", "802", "Premium", 4, "Occupied", h3);
 
         KRN_802.addRoomFacility(rf1);
         KRN_802.addRoomFacility(rf2);
@@ -6183,7 +6183,7 @@ public class DataInitializationSessionBean {
 
         h3.addRoom(roomSessionLocal.getRoomByName("KRN_804"));
 
-        Room KRN_805 = new Room("KRN_805", "805", "Premium", 4, "Available", h3);
+        Room KRN_805 = new Room("KRN_805", "805", "Premium", 4, "Occupied", h3);
 
         KRN_805.addRoomFacility(rf1);
         KRN_805.addRoomFacility(rf2);
@@ -6235,7 +6235,7 @@ public class DataInitializationSessionBean {
 
         h3.addRoom(roomSessionLocal.getRoomByName("KRN_806"));
 
-        Room KRN_807 = new Room("KRN_807", "807", "Premium", 4, "Available", h3);
+        Room KRN_807 = new Room("KRN_807", "807", "Premium", 4, "Occupied", h3);
 
         KRN_807.addRoomFacility(rf1);
         KRN_807.addRoomFacility(rf2);
@@ -6261,7 +6261,7 @@ public class DataInitializationSessionBean {
 
         h3.addRoom(roomSessionLocal.getRoomByName("KRN_807"));
 
-        Room KRN_901 = new Room("KRN_901", "901", "Premium", 4, "Available", h3);
+        Room KRN_901 = new Room("KRN_901", "901", "Premium", 4, "Unavailable", h3);
 
         KRN_901.addRoomFacility(rf1);
         KRN_901.addRoomFacility(rf2);
@@ -6313,7 +6313,7 @@ public class DataInitializationSessionBean {
 
         h3.addRoom(roomSessionLocal.getRoomByName("KRN_902"));
 
-        Room KRN_903 = new Room("KRN_903", "903", "Premium", 4, "Available", h3);
+        Room KRN_903 = new Room("KRN_903", "903", "Premium", 4, "Occupied", h3);
 
         KRN_903.addRoomFacility(rf1);
         KRN_903.addRoomFacility(rf2);
@@ -6391,7 +6391,7 @@ public class DataInitializationSessionBean {
 
         h3.addRoom(roomSessionLocal.getRoomByName("KRN_905"));
 
-        Room KRN_906 = new Room("KRN_906", "906", "Premium", 4, "Available", h3);
+        Room KRN_906 = new Room("KRN_906", "906", "Premium", 4, "Occupied", h3);
 
         KRN_906.addRoomFacility(rf1);
         KRN_906.addRoomFacility(rf2);
@@ -6443,7 +6443,7 @@ public class DataInitializationSessionBean {
 
         h3.addRoom(roomSessionLocal.getRoomByName("KRN_907"));
 
-        Room KRN_1201 = new Room("KRN_1201", "1201", "Suite", 4, "Available", h3);
+        Room KRN_1201 = new Room("KRN_1201", "1201", "Suite", 4, "Occupied", h3);
 
         KRN_1201.addRoomFacility(rf1);
         KRN_1201.addRoomFacility(rf2);
@@ -6539,7 +6539,7 @@ public class DataInitializationSessionBean {
 
         h3.addRoom(roomSessionLocal.getRoomByName("KRN_1203"));
 
-        Room KRN_1204 = new Room("KRN_1204", "1204", "Suite", 4, "Available", h3);
+        Room KRN_1204 = new Room("KRN_1204", "1204", "Suite", 4, "Unavailable", h3);
 
         KRN_1204.addRoomFacility(rf1);
         KRN_1204.addRoomFacility(rf2);
@@ -6639,7 +6639,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRSS2);
         h4.addRoom(roomSessionLocal.getRoomByName("KRS_202"));
 
-        Room KRSS3 = new Room("KRS_203", "203", "Standard", 2, "Available", h4);
+        Room KRSS3 = new Room("KRS_203", "203", "Standard", 2, "Occupied", h4);
         KRSS3.addRoomFacility(rf1);
         KRSS3.addRoomFacility(rf2);
         KRSS3.addRoomFacility(rf3);
@@ -6690,7 +6690,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRSS5);
         h4.addRoom(roomSessionLocal.getRoomByName("KRS_205"));
 
-        Room KRSS6 = new Room("KRS_206", "206", "Standard", 2, "Available", h4);
+        Room KRSS6 = new Room("KRS_206", "206", "Standard", 2, "Occupied", h4);
         KRSS6.addRoomFacility(rf1);
         KRSS6.addRoomFacility(rf2);
         KRSS6.addRoomFacility(rf3);
@@ -6724,7 +6724,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRSS7);
         h4.addRoom(roomSessionLocal.getRoomByName("KRS_207"));
 
-        Room KRSS8 = new Room("KRS_208", "208", "Standard", 2, "Available", h4);
+        Room KRSS8 = new Room("KRS_208", "208", "Standard", 2, "Unavailable", h4);
         KRSS8.addRoomFacility(rf1);
         KRSS8.addRoomFacility(rf2);
         KRSS8.addRoomFacility(rf3);
@@ -6758,7 +6758,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRSS11);
         h4.addRoom(roomSessionLocal.getRoomByName("KRS_301"));
 
-        Room KRSS12 = new Room("KRS_302", "302", "Standard", 2, "Available", h4);
+        Room KRSS12 = new Room("KRS_302", "302", "Standard", 2, "Occupied", h4);
         KRSS12.addRoomFacility(rf1);
         KRSS12.addRoomFacility(rf2);
         KRSS12.addRoomFacility(rf3);
@@ -6792,7 +6792,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRSS13);
         h4.addRoom(roomSessionLocal.getRoomByName("KRS_303"));
 
-        Room KRSS14 = new Room("KRS_304", "304", "Standard", 2, "Available", h4);
+        Room KRSS14 = new Room("KRS_304", "304", "Standard", 2, "Occupied", h4);
         KRSS14.addRoomFacility(rf1);
         KRSS14.addRoomFacility(rf2);
         KRSS14.addRoomFacility(rf3);
@@ -6860,7 +6860,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRSS17);
         h4.addRoom(roomSessionLocal.getRoomByName("KRS_307"));
 
-        Room KRSS18 = new Room("KRS_308", "308", "Standard", 2, "Available", h4);
+        Room KRSS18 = new Room("KRS_308", "308", "Standard", 2, "Occupied", h4);
         KRSS18.addRoomFacility(rf1);
         KRSS18.addRoomFacility(rf2);
         KRSS18.addRoomFacility(rf3);
@@ -6894,7 +6894,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRSS21);
         h4.addRoom(roomSessionLocal.getRoomByName("KRS_401"));
 
-        Room KRSS22 = new Room("KRS_402", "402", "Standard", 2, "Available", h4);
+        Room KRSS22 = new Room("KRS_402", "402", "Standard", 2, "Occupied", h4);
         KRSS22.addRoomFacility(rf1);
         KRSS22.addRoomFacility(rf2);
         KRSS22.addRoomFacility(rf3);
@@ -6911,7 +6911,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRSS22);
         h4.addRoom(roomSessionLocal.getRoomByName("KRS_402"));
 
-        Room KRSS23 = new Room("KRS_403", "403", "Standard", 2, "Available", h4);
+        Room KRSS23 = new Room("KRS_403", "403", "Standard", 2, "Unavailable", h4);
         KRSS23.addRoomFacility(rf1);
         KRSS23.addRoomFacility(rf2);
         KRSS23.addRoomFacility(rf3);
@@ -6962,7 +6962,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRSS25);
         h4.addRoom(roomSessionLocal.getRoomByName("KRS_405"));
 
-        Room KRSS26 = new Room("KRS_406", "406", "Standard", 2, "Available", h4);
+        Room KRSS26 = new Room("KRS_406", "406", "Standard", 2, "Occupied", h4);
         KRSS26.addRoomFacility(rf1);
         KRSS26.addRoomFacility(rf2);
         KRSS26.addRoomFacility(rf3);
@@ -7013,7 +7013,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRSS28);
         h4.addRoom(roomSessionLocal.getRoomByName("KRS_408"));
 
-        Room KRSS31 = new Room("KRS_501", "501", "Standard", 2, "Available", h4);
+        Room KRSS31 = new Room("KRS_501", "501", "Standard", 2, "Occupied", h4);
         KRSS31.addRoomFacility(rf1);
         KRSS31.addRoomFacility(rf2);
         KRSS31.addRoomFacility(rf3);
@@ -7030,7 +7030,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRSS31);
         h4.addRoom(roomSessionLocal.getRoomByName("KRS_501"));
 
-        Room KRSS32 = new Room("KRS_502", "502", "Standard", 2, "Available", h4);
+        Room KRSS32 = new Room("KRS_502", "502", "Standard", 2, "Unavailable", h4);
         KRSS32.addRoomFacility(rf1);
         KRSS32.addRoomFacility(rf2);
         KRSS32.addRoomFacility(rf3);
@@ -7081,7 +7081,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRSS34);
         h4.addRoom(roomSessionLocal.getRoomByName("KRS_504"));
 
-        Room KRSS35 = new Room("KRS_505", "505", "Standard", 2, "Available", h4);
+        Room KRSS35 = new Room("KRS_505", "505", "Standard", 2, "Occupied", h4);
         KRSS35.addRoomFacility(rf1);
         KRSS35.addRoomFacility(rf2);
         KRSS35.addRoomFacility(rf3);
@@ -7132,7 +7132,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRSS37);
         h4.addRoom(roomSessionLocal.getRoomByName("KRS_507"));
 
-        Room KRSS38 = new Room("KRS_508", "508", "Standard", 2, "Available", h4);
+        Room KRSS38 = new Room("KRS_508", "508", "Standard", 2, "Occupied", h4);
         KRSS38.addRoomFacility(rf1);
         KRSS38.addRoomFacility(rf2);
         KRSS38.addRoomFacility(rf3);
@@ -7149,7 +7149,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRSS38);
         h4.addRoom(roomSessionLocal.getRoomByName("KRS_508"));
 
-        Room KRSS41 = new Room("KRS_601", "601", "Standard", 2, "Available", h4);
+        Room KRSS41 = new Room("KRS_601", "601", "Standard", 2, "Unavailable", h4);
         KRSS41.addRoomFacility(rf1);
         KRSS41.addRoomFacility(rf2);
         KRSS41.addRoomFacility(rf3);
@@ -7183,7 +7183,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRSS42);
         h4.addRoom(roomSessionLocal.getRoomByName("KRS_602"));
 
-        Room KRSS43 = new Room("KRS_603", "603", "Standard", 2, "Available", h4);
+        Room KRSS43 = new Room("KRS_603", "603", "Standard", 2, "Occupied", h4);
         KRSS43.addRoomFacility(rf1);
         KRSS43.addRoomFacility(rf2);
         KRSS43.addRoomFacility(rf3);
@@ -7217,7 +7217,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRSS44);
         h4.addRoom(roomSessionLocal.getRoomByName("KRS_604"));
 
-        Room KRSS45 = new Room("KRS_605", "605", "Standard", 2, "Available", h4);
+        Room KRSS45 = new Room("KRS_605", "605", "Standard", 2, "Occupied", h4);
         KRSS45.addRoomFacility(rf1);
         KRSS45.addRoomFacility(rf2);
         KRSS45.addRoomFacility(rf3);
@@ -7268,7 +7268,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRSS47);
         h4.addRoom(roomSessionLocal.getRoomByName("KRS_607"));
 
-        Room KRSS48 = new Room("KRS_608", "608", "Standard", 2, "Available", h4);
+        Room KRSS48 = new Room("KRS_608", "608", "Standard", 2, "Unavailable", h4);
         KRSS48.addRoomFacility(rf1);
         KRSS48.addRoomFacility(rf2);
         KRSS48.addRoomFacility(rf3);
@@ -7285,7 +7285,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRSS48);
         h4.addRoom(roomSessionLocal.getRoomByName("KRS_608"));
 
-        Room KRS_1001 = new Room("KRS_1001", "1001", "Deluxe", 3, "Available", h4);
+        Room KRS_1001 = new Room("KRS_1001", "1001", "Deluxe", 3, "Occupied", h4);
 
         KRS_1001.addRoomFacility(rf1);
         KRS_1001.addRoomFacility(rf2);
@@ -7333,7 +7333,7 @@ public class DataInitializationSessionBean {
 
         h4.addRoom(roomSessionLocal.getRoomByName("KRS_1002"));
 
-        Room KRS_1003 = new Room("KRS_1003", "1003", "Deluxe", 3, "Available", h4);
+        Room KRS_1003 = new Room("KRS_1003", "1003", "Deluxe", 3, "Occupied", h4);
 
         KRS_1003.addRoomFacility(rf1);
         KRS_1003.addRoomFacility(rf2);
@@ -7405,7 +7405,7 @@ public class DataInitializationSessionBean {
 
         h4.addRoom(roomSessionLocal.getRoomByName("KRS_1005"));
 
-        Room KRS_1101 = new Room("KRS_1101", "1101", "Deluxe", 3, "Available", h4);
+        Room KRS_1101 = new Room("KRS_1101", "1101", "Deluxe", 3, "Unavailable", h4);
 
         KRS_1101.addRoomFacility(rf1);
         KRS_1101.addRoomFacility(rf2);
@@ -7429,7 +7429,7 @@ public class DataInitializationSessionBean {
 
         h4.addRoom(roomSessionLocal.getRoomByName("KRS_1101"));
 
-        Room KRS_1102 = new Room("KRS_1102", "1102", "Deluxe", 3, "Available", h4);
+        Room KRS_1102 = new Room("KRS_1102", "1102", "Deluxe", 3, "Occupied", h4);
 
         KRS_1102.addRoomFacility(rf1);
         KRS_1102.addRoomFacility(rf2);
@@ -7477,7 +7477,7 @@ public class DataInitializationSessionBean {
 
         h4.addRoom(roomSessionLocal.getRoomByName("KRS_1103"));
 
-        Room KRS_1104 = new Room("KRS_1104", "1104", "Deluxe", 3, "Available", h4);
+        Room KRS_1104 = new Room("KRS_1104", "1104", "Deluxe", 3, "Occupied", h4);
 
         KRS_1104.addRoomFacility(rf1);
         KRS_1104.addRoomFacility(rf2);
@@ -7525,7 +7525,7 @@ public class DataInitializationSessionBean {
 
         h4.addRoom(roomSessionLocal.getRoomByName("KRS_1105"));
 
-        Room KRS_701 = new Room("KRS_701", "701", "Premium", 4, "Available", h4);
+        Room KRS_701 = new Room("KRS_701", "701", "Premium", 4, "Unavailable", h4);
 
         KRS_701.addRoomFacility(rf1);
         KRS_701.addRoomFacility(rf2);
@@ -7551,7 +7551,7 @@ public class DataInitializationSessionBean {
 
         h4.addRoom(roomSessionLocal.getRoomByName("KRS_701"));
 
-        Room KRS_702 = new Room("KRS_702", "702", "Premium", 4, "Available", h4);
+        Room KRS_702 = new Room("KRS_702", "702", "Premium", 4, "Occupied", h4);
 
         KRS_702.addRoomFacility(rf1);
         KRS_702.addRoomFacility(rf2);
@@ -7629,7 +7629,7 @@ public class DataInitializationSessionBean {
 
         h4.addRoom(roomSessionLocal.getRoomByName("KRS_704"));
 
-        Room KRS_705 = new Room("KRS_705", "705", "Premium", 4, "Available", h4);
+        Room KRS_705 = new Room("KRS_705", "705", "Premium", 4, "Occupied", h4);
 
         KRS_705.addRoomFacility(rf1);
         KRS_705.addRoomFacility(rf2);
@@ -7707,7 +7707,7 @@ public class DataInitializationSessionBean {
 
         h4.addRoom(roomSessionLocal.getRoomByName("KRS_707"));
 
-        Room KRS_801 = new Room("KRS_801", "801", "Premium", 4, "Available", h4);
+        Room KRS_801 = new Room("KRS_801", "801", "Premium", 4, "Occupied", h4);
 
         KRS_801.addRoomFacility(rf1);
         KRS_801.addRoomFacility(rf2);
@@ -7733,7 +7733,7 @@ public class DataInitializationSessionBean {
 
         h4.addRoom(roomSessionLocal.getRoomByName("KRS_801"));
 
-        Room KRS_802 = new Room("KRS_802", "802", "Premium", 4, "Available", h4);
+        Room KRS_802 = new Room("KRS_802", "802", "Premium", 4, "Unavailable", h4);
 
         KRS_802.addRoomFacility(rf1);
         KRS_802.addRoomFacility(rf2);
@@ -7837,7 +7837,7 @@ public class DataInitializationSessionBean {
 
         h4.addRoom(roomSessionLocal.getRoomByName("KRS_805"));
 
-        Room KRS_806 = new Room("KRS_806", "806", "Premium", 4, "Available", h4);
+        Room KRS_806 = new Room("KRS_806", "806", "Premium", 4, "Occupied", h4);
 
         KRS_806.addRoomFacility(rf1);
         KRS_806.addRoomFacility(rf2);
@@ -7915,7 +7915,7 @@ public class DataInitializationSessionBean {
 
         h4.addRoom(roomSessionLocal.getRoomByName("KRS_901"));
 
-        Room KRS_902 = new Room("KRS_902", "902", "Premium", 4, "Available", h4);
+        Room KRS_902 = new Room("KRS_902", "902", "Premium", 4, "Occupied", h4);
 
         KRS_902.addRoomFacility(rf1);
         KRS_902.addRoomFacility(rf2);
@@ -7967,7 +7967,7 @@ public class DataInitializationSessionBean {
 
         h4.addRoom(roomSessionLocal.getRoomByName("KRS_903"));
 
-        Room KRS_904 = new Room("KRS_904", "904", "Premium", 4, "Available", h4);
+        Room KRS_904 = new Room("KRS_904", "904", "Premium", 4, "Occupied", h4);
 
         KRS_904.addRoomFacility(rf1);
         KRS_904.addRoomFacility(rf2);
@@ -8019,7 +8019,7 @@ public class DataInitializationSessionBean {
 
         h4.addRoom(roomSessionLocal.getRoomByName("KRS_905"));
 
-        Room KRS_906 = new Room("KRS_906", "906", "Premium", 4, "Available", h4);
+        Room KRS_906 = new Room("KRS_906", "906", "Premium", 4, "Unavailable", h4);
 
         KRS_906.addRoomFacility(rf1);
         KRS_906.addRoomFacility(rf2);
@@ -8045,7 +8045,7 @@ public class DataInitializationSessionBean {
 
         h4.addRoom(roomSessionLocal.getRoomByName("KRS_906"));
 
-        Room KRS_907 = new Room("KRS_907", "907", "Premium", 4, "Available", h4);
+        Room KRS_907 = new Room("KRS_907", "907", "Premium", 4, "Occupied", h4);
 
         KRS_907.addRoomFacility(rf1);
         KRS_907.addRoomFacility(rf2);
@@ -8103,7 +8103,7 @@ public class DataInitializationSessionBean {
 
         h4.addRoom(roomSessionLocal.getRoomByName("KRS_1201"));
 
-        Room KRS_1202 = new Room("KRS_1202", "1202", "Suite", 4, "Available", h4);
+        Room KRS_1202 = new Room("KRS_1202", "1202", "Suite", 4, "Occupied", h4);
 
         KRS_1202.addRoomFacility(rf1);
         KRS_1202.addRoomFacility(rf2);
@@ -8167,7 +8167,7 @@ public class DataInitializationSessionBean {
 
         h4.addRoom(roomSessionLocal.getRoomByName("KRS_1203"));
 
-        Room KRS_1204 = new Room("KRS_1204", "1204", "Suite", 4, "Available", h4);
+        Room KRS_1204 = new Room("KRS_1204", "1204", "Suite", 4, "Occupied", h4);
 
         KRS_1204.addRoomFacility(rf1);
         KRS_1204.addRoomFacility(rf2);
@@ -8232,7 +8232,7 @@ public class DataInitializationSessionBean {
         RoomFacility rf21 = roomFacilitySessionLocal.getRoomFacilityByName("Jaccuzi");
         RoomFacility rf22 = roomFacilitySessionLocal.getRoomFacilityByName("Kitchen");
 
-        Room KRES1 = new Room("KRE_201", "201", "Standard", 2, "Available", h5);
+        Room KRES1 = new Room("KRE_201", "201", "Standard", 2, "Occupied", h5);
         KRES1.addRoomFacility(rf1);
         KRES1.addRoomFacility(rf2);
         KRES1.addRoomFacility(rf3);
@@ -8266,7 +8266,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRES2);
         h5.addRoom(roomSessionLocal.getRoomByName("KRE_202"));
 
-        Room KRES3 = new Room("KRE_203", "203", "Standard", 2, "Available", h5);
+        Room KRES3 = new Room("KRE_203", "203", "Standard", 2, "Occupied", h5);
         KRES3.addRoomFacility(rf1);
         KRES3.addRoomFacility(rf2);
         KRES3.addRoomFacility(rf3);
@@ -8317,7 +8317,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRES5);
         h5.addRoom(roomSessionLocal.getRoomByName("KRE_205"));
 
-        Room KRES6 = new Room("KRE_206", "206", "Standard", 2, "Available", h5);
+        Room KRES6 = new Room("KRE_206", "206", "Standard", 2, "Unavailable", h5);
         KRES6.addRoomFacility(rf1);
         KRES6.addRoomFacility(rf2);
         KRES6.addRoomFacility(rf3);
@@ -8334,7 +8334,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRES6);
         h5.addRoom(roomSessionLocal.getRoomByName("KRE_206"));
 
-        Room KRES7 = new Room("KRE_207", "207", "Standard", 2, "Available", h5);
+        Room KRES7 = new Room("KRE_207", "207", "Standard", 2, "Occupied", h5);
         KRES7.addRoomFacility(rf1);
         KRES7.addRoomFacility(rf2);
         KRES7.addRoomFacility(rf3);
@@ -8368,7 +8368,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRES8);
         h5.addRoom(roomSessionLocal.getRoomByName("KRE_208"));
 
-        Room KRES11 = new Room("KRE_301", "301", "Standard", 2, "Available", h5);
+        Room KRES11 = new Room("KRE_301", "301", "Standard", 2, "Occupied", h5);
         KRES11.addRoomFacility(rf1);
         KRES11.addRoomFacility(rf2);
         KRES11.addRoomFacility(rf3);
@@ -8419,7 +8419,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRES13);
         h5.addRoom(roomSessionLocal.getRoomByName("KRE_303"));
 
-        Room KRES14 = new Room("KRE_304", "304", "Standard", 2, "Available", h5);
+        Room KRES14 = new Room("KRE_304", "304", "Standard", 2, "Occupied", h5);
         KRES14.addRoomFacility(rf1);
         KRES14.addRoomFacility(rf2);
         KRES14.addRoomFacility(rf3);
@@ -8470,7 +8470,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRES16);
         h5.addRoom(roomSessionLocal.getRoomByName("KRE_306"));
 
-        Room KRES17 = new Room("KRE_307", "307", "Standard", 2, "Available", h5);
+        Room KRES17 = new Room("KRE_307", "307", "Standard", 2, "Occupied", h5);
         KRES17.addRoomFacility(rf1);
         KRES17.addRoomFacility(rf2);
         KRES17.addRoomFacility(rf3);
@@ -8487,7 +8487,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRES17);
         h5.addRoom(roomSessionLocal.getRoomByName("KRE_307"));
 
-        Room KRES18 = new Room("KRE_308", "308", "Standard", 2, "Available", h5);
+        Room KRES18 = new Room("KRE_308", "308", "Standard", 2, "Unavailable", h5);
         KRES18.addRoomFacility(rf1);
         KRES18.addRoomFacility(rf2);
         KRES18.addRoomFacility(rf3);
@@ -8538,7 +8538,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRES22);
         h5.addRoom(roomSessionLocal.getRoomByName("KRE_402"));
 
-        Room KRES23 = new Room("KRE_403", "403", "Standard", 2, "Available", h5);
+        Room KRES23 = new Room("KRE_403", "403", "Standard", 2, "Occupied", h5);
         KRES23.addRoomFacility(rf1);
         KRES23.addRoomFacility(rf2);
         KRES23.addRoomFacility(rf3);
@@ -8589,7 +8589,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRES25);
         h5.addRoom(roomSessionLocal.getRoomByName("KRE_405"));
 
-        Room KRES26 = new Room("KRE_406", "406", "Standard", 2, "Available", h5);
+        Room KRES26 = new Room("KRE_406", "406", "Standard", 2, "Occupied", h5);
         KRES26.addRoomFacility(rf1);
         KRES26.addRoomFacility(rf2);
         KRES26.addRoomFacility(rf3);
@@ -8674,7 +8674,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRES30);
         h5.addRoom(roomSessionLocal.getRoomByName("KRE_410"));
 
-        Room KRES31 = new Room("KRE_501", "501", "Standard", 2, "Available", h5);
+        Room KRES31 = new Room("KRE_501", "501", "Standard", 2, "Occupied", h5);
         KRES31.addRoomFacility(rf1);
         KRES31.addRoomFacility(rf2);
         KRES31.addRoomFacility(rf3);
@@ -8725,7 +8725,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRES33);
         h5.addRoom(roomSessionLocal.getRoomByName("KRE_503"));
 
-        Room KRES34 = new Room("KRE_504", "504", "Standard", 2, "Available", h5);
+        Room KRES34 = new Room("KRE_504", "504", "Standard", 2, "Occupied", h5);
         KRES34.addRoomFacility(rf1);
         KRES34.addRoomFacility(rf2);
         KRES34.addRoomFacility(rf3);
@@ -8793,7 +8793,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRES37);
         h5.addRoom(roomSessionLocal.getRoomByName("KRE_507"));
 
-        Room KRES38 = new Room("KRE_508", "508", "Standard", 2, "Available", h5);
+        Room KRES38 = new Room("KRE_508", "508", "Standard", 2, "Occupied", h5);
         KRES38.addRoomFacility(rf1);
         KRES38.addRoomFacility(rf2);
         KRES38.addRoomFacility(rf3);
@@ -8810,7 +8810,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRES38);
         h5.addRoom(roomSessionLocal.getRoomByName("KRE_508"));
 
-        Room KRES41 = new Room("KRE_601", "601", "Standard", 2, "Available", h5);
+        Room KRES41 = new Room("KRE_601", "601", "Standard", 2, "Unavailable", h5);
         KRES41.addRoomFacility(rf1);
         KRES41.addRoomFacility(rf2);
         KRES41.addRoomFacility(rf3);
@@ -8878,7 +8878,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRES44);
         h5.addRoom(roomSessionLocal.getRoomByName("KRE_604"));
 
-        Room KRES45 = new Room("KRE_605", "605", "Standard", 2, "Available", h5);
+        Room KRES45 = new Room("KRE_605", "605", "Standard", 2, "Occupied", h5);
         KRES45.addRoomFacility(rf1);
         KRES45.addRoomFacility(rf2);
         KRES45.addRoomFacility(rf3);
@@ -8912,7 +8912,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRES46);
         h5.addRoom(roomSessionLocal.getRoomByName("KRE_606"));
 
-        Room KRES47 = new Room("KRE_607", "607", "Standard", 2, "Available", h5);
+        Room KRES47 = new Room("KRE_607", "607", "Standard", 2, "Unavailable", h5);
         KRES47.addRoomFacility(rf1);
         KRES47.addRoomFacility(rf2);
         KRES47.addRoomFacility(rf3);
@@ -8946,7 +8946,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRES48);
         h5.addRoom(roomSessionLocal.getRoomByName("KRE_608"));
 
-        Room KRE_1201 = new Room("KRE_1201", "1201", "Suite", 4, "Available", h5);
+        Room KRE_1201 = new Room("KRE_1201", "1201", "Suite", 4, "Occupied", h5);
 
         KRE_1201.addRoomFacility(rf1);
         KRE_1201.addRoomFacility(rf2);
@@ -9042,7 +9042,7 @@ public class DataInitializationSessionBean {
 
         h5.addRoom(roomSessionLocal.getRoomByName("KRE_1203"));
 
-        Room KRE_1204 = new Room("KRE_1204", "1204", "Suite", 4, "Available", h5);
+        Room KRE_1204 = new Room("KRE_1204", "1204", "Suite", 4, "Occupied", h5);
 
         KRE_1204.addRoomFacility(rf1);
         KRE_1204.addRoomFacility(rf2);
@@ -9142,7 +9142,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRWS2);
         h6.addRoom(roomSessionLocal.getRoomByName("KRW_202"));
 
-        Room KRWS3 = new Room("KRW_203", "203", "Standard", 2, "Available", h6);
+        Room KRWS3 = new Room("KRW_203", "203", "Standard", 2, "Unavailable", h6);
         KRWS3.addRoomFacility(rf1);
         KRWS3.addRoomFacility(rf2);
         KRWS3.addRoomFacility(rf3);
@@ -9176,7 +9176,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRWS4);
         h6.addRoom(roomSessionLocal.getRoomByName("KRW_204"));
 
-        Room KRWS5 = new Room("KRW_205", "205", "Standard", 2, "Available", h6);
+        Room KRWS5 = new Room("KRW_205", "205", "Standard", 2, "Occupied", h6);
         KRWS5.addRoomFacility(rf1);
         KRWS5.addRoomFacility(rf2);
         KRWS5.addRoomFacility(rf3);
@@ -9244,7 +9244,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRWS8);
         h6.addRoom(roomSessionLocal.getRoomByName("KRW_208"));
 
-        Room KRWS11 = new Room("KRW_301", "301", "Standard", 2, "Available", h6);
+        Room KRWS11 = new Room("KRW_301", "301", "Standard", 2, "Unavailable", h6);
         KRWS11.addRoomFacility(rf1);
         KRWS11.addRoomFacility(rf2);
         KRWS11.addRoomFacility(rf3);
@@ -9261,7 +9261,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRWS11);
         h6.addRoom(roomSessionLocal.getRoomByName("KRW_301"));
 
-        Room KRWS12 = new Room("KRW_302", "302", "Standard", 2, "Available", h6);
+        Room KRWS12 = new Room("KRW_302", "302", "Standard", 2, "Occupied", h6);
         KRWS12.addRoomFacility(rf1);
         KRWS12.addRoomFacility(rf2);
         KRWS12.addRoomFacility(rf3);
@@ -9312,7 +9312,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRWS14);
         h6.addRoom(roomSessionLocal.getRoomByName("KRW_304"));
 
-        Room KRWS15 = new Room("KRW_305", "305", "Standard", 2, "Available", h6);
+        Room KRWS15 = new Room("KRW_305", "305", "Standard", 2, "Occupied", h6);
         KRWS15.addRoomFacility(rf1);
         KRWS15.addRoomFacility(rf2);
         KRWS15.addRoomFacility(rf3);
@@ -9380,7 +9380,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRWS18);
         h6.addRoom(roomSessionLocal.getRoomByName("KRW_308"));
 
-        Room KRWS21 = new Room("KRW_401", "401", "Standard", 2, "Available", h6);
+        Room KRWS21 = new Room("KRW_401", "401", "Standard", 2, "Occupied", h6);
         KRWS21.addRoomFacility(rf1);
         KRWS21.addRoomFacility(rf2);
         KRWS21.addRoomFacility(rf3);
@@ -9414,7 +9414,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRWS22);
         h6.addRoom(roomSessionLocal.getRoomByName("KRW_402"));
 
-        Room KRWS23 = new Room("KRW_403", "403", "Standard", 2, "Available", h6);
+        Room KRWS23 = new Room("KRW_403", "403", "Standard", 2, "Unavailable", h6);
         KRWS23.addRoomFacility(rf1);
         KRWS23.addRoomFacility(rf2);
         KRWS23.addRoomFacility(rf3);
@@ -9431,7 +9431,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRWS23);
         h6.addRoom(roomSessionLocal.getRoomByName("KRW_403"));
 
-        Room KRWS24 = new Room("KRW_404", "404", "Standard", 2, "Available", h6);
+        Room KRWS24 = new Room("KRW_404", "404", "Standard", 2, "Occupied", h6);
         KRWS24.addRoomFacility(rf1);
         KRWS24.addRoomFacility(rf2);
         KRWS24.addRoomFacility(rf3);
@@ -9465,7 +9465,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRWS25);
         h6.addRoom(roomSessionLocal.getRoomByName("KRW_405"));
 
-        Room KRWS26 = new Room("KRW_406", "406", "Standard", 2, "Available", h6);
+        Room KRWS26 = new Room("KRW_406", "406", "Standard", 2, "Occupied", h6);
         KRWS26.addRoomFacility(rf1);
         KRWS26.addRoomFacility(rf2);
         KRWS26.addRoomFacility(rf3);
@@ -9499,7 +9499,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRWS27);
         h6.addRoom(roomSessionLocal.getRoomByName("KRW_407"));
 
-        Room KRWS28 = new Room("KRW_408", "408", "Standard", 2, "Available", h6);
+        Room KRWS28 = new Room("KRW_408", "408", "Standard", 2, "Occupied", h6);
         KRWS28.addRoomFacility(rf1);
         KRWS28.addRoomFacility(rf2);
         KRWS28.addRoomFacility(rf3);
@@ -9533,7 +9533,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRWS31);
         h6.addRoom(roomSessionLocal.getRoomByName("KRW_501"));
 
-        Room KRWS32 = new Room("KRW_502", "502", "Standard", 2, "Available", h6);
+        Room KRWS32 = new Room("KRW_502", "502", "Standard", 2, "Unavailable", h6);
         KRWS32.addRoomFacility(rf1);
         KRWS32.addRoomFacility(rf2);
         KRWS32.addRoomFacility(rf3);
@@ -9567,7 +9567,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRWS33);
         h6.addRoom(roomSessionLocal.getRoomByName("KRW_503"));
 
-        Room KRWS34 = new Room("KRW_504", "504", "Standard", 2, "Available", h6);
+        Room KRWS34 = new Room("KRW_504", "504", "Standard", 2, "Occupied", h6);
         KRWS34.addRoomFacility(rf1);
         KRWS34.addRoomFacility(rf2);
         KRWS34.addRoomFacility(rf3);
@@ -9635,7 +9635,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRWS37);
         h6.addRoom(roomSessionLocal.getRoomByName("KRW_507"));
 
-        Room KRWS38 = new Room("KRW_508", "508", "Standard", 2, "Available", h6);
+        Room KRWS38 = new Room("KRW_508", "508", "Standard", 2, "Occupied", h6);
         KRWS38.addRoomFacility(rf1);
         KRWS38.addRoomFacility(rf2);
         KRWS38.addRoomFacility(rf3);
@@ -9686,7 +9686,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRWS42);
         h6.addRoom(roomSessionLocal.getRoomByName("KRW_602"));
 
-        Room KRWS43 = new Room("KRW_603", "603", "Standard", 2, "Available", h6);
+        Room KRWS43 = new Room("KRW_603", "603", "Standard", 2, "Unavailable", h6);
         KRWS43.addRoomFacility(rf1);
         KRWS43.addRoomFacility(rf2);
         KRWS43.addRoomFacility(rf3);
@@ -9703,7 +9703,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRWS43);
         h6.addRoom(roomSessionLocal.getRoomByName("KRW_603"));
 
-        Room KRWS44 = new Room("KRW_604", "604", "Standard", 2, "Available", h6);
+        Room KRWS44 = new Room("KRW_604", "604", "Standard", 2, "Occupied", h6);
         KRWS44.addRoomFacility(rf1);
         KRWS44.addRoomFacility(rf2);
         KRWS44.addRoomFacility(rf3);
@@ -9771,7 +9771,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRWS47);
         h6.addRoom(roomSessionLocal.getRoomByName("KRW_607"));
 
-        Room KRWS48 = new Room("KRW_608", "608", "Standard", 2, "Available", h6);
+        Room KRWS48 = new Room("KRW_608", "608", "Standard", 2, "Occupied", h6);
         KRWS48.addRoomFacility(rf1);
         KRWS48.addRoomFacility(rf2);
         KRWS48.addRoomFacility(rf3);
@@ -9860,7 +9860,7 @@ public class DataInitializationSessionBean {
 
         h6.addRoom(roomSessionLocal.getRoomByName("KRW_1003"));
 
-        Room KRW_1004 = new Room("KRW_1004", "1004", "Deluxe", 3, "Available", h6);
+        Room KRW_1004 = new Room("KRW_1004", "1004", "Deluxe", 3, "Occupied", h6);
 
         KRW_1004.addRoomFacility(rf1);
         KRW_1004.addRoomFacility(rf2);
@@ -9932,7 +9932,7 @@ public class DataInitializationSessionBean {
 
         h6.addRoom(roomSessionLocal.getRoomByName("KRW_1101"));
 
-        Room KRW_1102 = new Room("KRW_1102", "1102", "Deluxe", 3, "Available", h6);
+        Room KRW_1102 = new Room("KRW_1102", "1102", "Deluxe", 3, "Unavailable", h6);
 
         KRW_1102.addRoomFacility(rf1);
         KRW_1102.addRoomFacility(rf2);
@@ -10004,7 +10004,7 @@ public class DataInitializationSessionBean {
 
         h6.addRoom(roomSessionLocal.getRoomByName("KRW_1104"));
 
-        Room KRW_1105 = new Room("KRW_1105", "1105", "Deluxe", 3, "Available", h6);
+        Room KRW_1105 = new Room("KRW_1105", "1105", "Deluxe", 3, "Occupied", h6);
 
         KRW_1105.addRoomFacility(rf1);
         KRW_1105.addRoomFacility(rf2);
@@ -10054,7 +10054,7 @@ public class DataInitializationSessionBean {
 
         h6.addRoom(roomSessionLocal.getRoomByName("KRW_701"));
 
-        Room KRW_702 = new Room("KRW_702", "702", "Premium", 4, "Available", h6);
+        Room KRW_702 = new Room("KRW_702", "702", "Premium", 4, "Occupied", h6);
 
         KRW_702.addRoomFacility(rf1);
         KRW_702.addRoomFacility(rf2);
@@ -10080,7 +10080,7 @@ public class DataInitializationSessionBean {
 
         h6.addRoom(roomSessionLocal.getRoomByName("KRW_702"));
 
-        Room KRW_703 = new Room("KRW_703", "703", "Premium", 4, "Available", h6);
+        Room KRW_703 = new Room("KRW_703", "703", "Premium", 4, "Unavailable", h6);
 
         KRW_703.addRoomFacility(rf1);
         KRW_703.addRoomFacility(rf2);
@@ -10184,7 +10184,7 @@ public class DataInitializationSessionBean {
 
         h6.addRoom(roomSessionLocal.getRoomByName("KRW_706"));
 
-        Room KRW_707 = new Room("KRW_707", "707", "Premium", 4, "Available", h6);
+        Room KRW_707 = new Room("KRW_707", "707", "Premium", 4, "Occupied", h6);
 
         KRW_707.addRoomFacility(rf1);
         KRW_707.addRoomFacility(rf2);
@@ -10210,7 +10210,7 @@ public class DataInitializationSessionBean {
 
         h6.addRoom(roomSessionLocal.getRoomByName("KRW_707"));
 
-        Room KRW_801 = new Room("KRW_801", "801", "Premium", 4, "Available", h6);
+        Room KRW_801 = new Room("KRW_801", "801", "Premium", 4, "Unavailable", h6);
 
         KRW_801.addRoomFacility(rf1);
         KRW_801.addRoomFacility(rf2);
@@ -10288,7 +10288,7 @@ public class DataInitializationSessionBean {
 
         h6.addRoom(roomSessionLocal.getRoomByName("KRW_803"));
 
-        Room KRW_804 = new Room("KRW_804", "804", "Premium", 4, "Available", h6);
+        Room KRW_804 = new Room("KRW_804", "804", "Premium", 4, "Occupied", h6);
 
         KRW_804.addRoomFacility(rf1);
         KRW_804.addRoomFacility(rf2);
@@ -10340,7 +10340,7 @@ public class DataInitializationSessionBean {
 
         h6.addRoom(roomSessionLocal.getRoomByName("KRW_805"));
 
-        Room KRW_806 = new Room("KRW_806", "806", "Premium", 4, "Available", h6);
+        Room KRW_806 = new Room("KRW_806", "806", "Premium", 4, "Unavailable", h6);
 
         KRW_806.addRoomFacility(rf1);
         KRW_806.addRoomFacility(rf2);
@@ -10444,7 +10444,7 @@ public class DataInitializationSessionBean {
 
         h6.addRoom(roomSessionLocal.getRoomByName("KRW_902"));
 
-        Room KRW_903 = new Room("KRW_903", "903", "Premium", 4, "Available", h6);
+        Room KRW_903 = new Room("KRW_903", "903", "Premium", 4, "Occupied", h6);
 
         KRW_903.addRoomFacility(rf1);
         KRW_903.addRoomFacility(rf2);
@@ -10496,7 +10496,7 @@ public class DataInitializationSessionBean {
 
         h6.addRoom(roomSessionLocal.getRoomByName("KRW_904"));
 
-        Room KRW_905 = new Room("KRW_905", "905", "Premium", 4, "Available", h6);
+        Room KRW_905 = new Room("KRW_905", "905", "Premium", 4, "Unavailable", h6);
 
         KRW_905.addRoomFacility(rf1);
         KRW_905.addRoomFacility(rf2);
@@ -10522,7 +10522,7 @@ public class DataInitializationSessionBean {
 
         h6.addRoom(roomSessionLocal.getRoomByName("KRW_905"));
 
-        Room KRW_906 = new Room("KRW_906", "906", "Premium", 4, "Available", h6);
+        Room KRW_906 = new Room("KRW_906", "906", "Premium", 4, "Occupied", h6);
 
         KRW_906.addRoomFacility(rf1);
         KRW_906.addRoomFacility(rf2);
@@ -10606,7 +10606,7 @@ public class DataInitializationSessionBean {
 
         h6.addRoom(roomSessionLocal.getRoomByName("KRW_1201"));
 
-        Room KRW_1202 = new Room("KRW_1202", "1202", "Suite", 4, "Available", h6);
+        Room KRW_1202 = new Room("KRW_1202", "1202", "Suite", 4, "Occupied", h6);
 
         KRW_1202.addRoomFacility(rf1);
         KRW_1202.addRoomFacility(rf2);
@@ -10752,7 +10752,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRNES1);
         h7.addRoom(roomSessionLocal.getRoomByName("KRNE_201"));
 
-        Room KRNES2 = new Room("KRNE_202", "202", "Standard", 2, "Available", h7);
+        Room KRNES2 = new Room("KRNE_202", "202", "Standard", 2, "Occupied", h7);
         KRNES2.addRoomFacility(rf1);
         KRNES2.addRoomFacility(rf2);
         KRNES2.addRoomFacility(rf3);
@@ -10769,7 +10769,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRNES2);
         h7.addRoom(roomSessionLocal.getRoomByName("KRNE_202"));
 
-        Room KRNES3 = new Room("KRNE_203", "203", "Standard", 2, "Available", h7);
+        Room KRNES3 = new Room("KRNE_203", "203", "Standard", 2, "Unavailable", h7);
         KRNES3.addRoomFacility(rf1);
         KRNES3.addRoomFacility(rf2);
         KRNES3.addRoomFacility(rf3);
@@ -10820,7 +10820,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRNES5);
         h7.addRoom(roomSessionLocal.getRoomByName("KRNE_205"));
 
-        Room KRNES6 = new Room("KRNE_206", "206", "Standard", 2, "Available", h7);
+        Room KRNES6 = new Room("KRNE_206", "206", "Standard", 2, "Occupied", h7);
         KRNES6.addRoomFacility(rf1);
         KRNES6.addRoomFacility(rf2);
         KRNES6.addRoomFacility(rf3);
@@ -10871,7 +10871,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRNES12);
         h7.addRoom(roomSessionLocal.getRoomByName("KRNE_302"));
 
-        Room KRNES13 = new Room("KRNE_303", "303", "Standard", 2, "Available", h7);
+        Room KRNES13 = new Room("KRNE_303", "303", "Standard", 2, "Occupied", h7);
         KRNES13.addRoomFacility(rf1);
         KRNES13.addRoomFacility(rf2);
         KRNES13.addRoomFacility(rf3);
@@ -10922,7 +10922,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRNES15);
         h7.addRoom(roomSessionLocal.getRoomByName("KRNE_305"));
 
-        Room KRNES16 = new Room("KRNE_306", "306", "Standard", 2, "Available", h7);
+        Room KRNES16 = new Room("KRNE_306", "306", "Standard", 2, "Occupied", h7);
         KRNES16.addRoomFacility(rf1);
         KRNES16.addRoomFacility(rf2);
         KRNES16.addRoomFacility(rf3);
@@ -10990,7 +10990,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRNES23);
         h7.addRoom(roomSessionLocal.getRoomByName("KRNE_403"));
 
-        Room KRNES24 = new Room("KRNE_404", "404", "Standard", 2, "Available", h7);
+        Room KRNES24 = new Room("KRNE_404", "404", "Standard", 2, "Occupied", h7);
         KRNES24.addRoomFacility(rf1);
         KRNES24.addRoomFacility(rf2);
         KRNES24.addRoomFacility(rf3);
@@ -11041,7 +11041,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRNES26);
         h7.addRoom(roomSessionLocal.getRoomByName("KRNE_406"));
 
-        Room KRNES31 = new Room("KRNE_501", "501", "Standard", 2, "Available", h7);
+        Room KRNES31 = new Room("KRNE_501", "501", "Standard", 2, "Occupied", h7);
         KRNES31.addRoomFacility(rf1);
         KRNES31.addRoomFacility(rf2);
         KRNES31.addRoomFacility(rf3);
@@ -11092,7 +11092,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRNES33);
         h7.addRoom(roomSessionLocal.getRoomByName("KRNE_503"));
 
-        Room KRNES34 = new Room("KRNE_504", "504", "Standard", 2, "Available", h7);
+        Room KRNES34 = new Room("KRNE_504", "504", "Standard", 2, "Unavailable", h7);
         KRNES34.addRoomFacility(rf1);
         KRNES34.addRoomFacility(rf2);
         KRNES34.addRoomFacility(rf3);
@@ -11109,7 +11109,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRNES34);
         h7.addRoom(roomSessionLocal.getRoomByName("KRNE_504"));
 
-        Room KRNES35 = new Room("KRNE_505", "505", "Standard", 2, "Available", h7);
+        Room KRNES35 = new Room("KRNE_505", "505", "Standard", 2, "Occupied", h7);
         KRNES35.addRoomFacility(rf1);
         KRNES35.addRoomFacility(rf2);
         KRNES35.addRoomFacility(rf3);
@@ -11160,7 +11160,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRNES41);
         h7.addRoom(roomSessionLocal.getRoomByName("KRNE_601"));
 
-        Room KRNES42 = new Room("KRNE_602", "602", "Standard", 2, "Available", h7);
+        Room KRNES42 = new Room("KRNE_602", "602", "Standard", 2, "Occupied", h7);
         KRNES42.addRoomFacility(rf1);
         KRNES42.addRoomFacility(rf2);
         KRNES42.addRoomFacility(rf3);
@@ -11211,7 +11211,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRNES44);
         h7.addRoom(roomSessionLocal.getRoomByName("KRNE_604"));
 
-        Room KRNES45 = new Room("KRNE_605", "605", "Standard", 2, "Available", h7);
+        Room KRNES45 = new Room("KRNE_605", "605", "Standard", 2, "Occupied", h7);
         KRNES45.addRoomFacility(rf1);
         KRNES45.addRoomFacility(rf2);
         KRNES45.addRoomFacility(rf3);
@@ -11293,7 +11293,7 @@ public class DataInitializationSessionBean {
 
         h7.addRoom(roomSessionLocal.getRoomByName("KRNE_1002"));
 
-        Room KRNE_1003 = new Room("KRNE_1003", "1003", "Deluxe", 3, "Available", h7);
+        Room KRNE_1003 = new Room("KRNE_1003", "1003", "Deluxe", 3, "Occupied", h7);
 
         KRNE_1003.addRoomFacility(rf1);
         KRNE_1003.addRoomFacility(rf2);
@@ -11317,7 +11317,7 @@ public class DataInitializationSessionBean {
 
         h7.addRoom(roomSessionLocal.getRoomByName("KRNE_1003"));
 
-        Room KRNE_1101 = new Room("KRNE_1101", "1101", "Deluxe", 3, "Available", h7);
+        Room KRNE_1101 = new Room("KRNE_1101", "1101", "Deluxe", 3, "Occupied", h7);
 
         KRNE_1101.addRoomFacility(rf1);
         KRNE_1101.addRoomFacility(rf2);
@@ -11341,7 +11341,7 @@ public class DataInitializationSessionBean {
 
         h7.addRoom(roomSessionLocal.getRoomByName("KRNE_1101"));
 
-        Room KRNE_1102 = new Room("KRNE_1102", "1102", "Deluxe", 3, "Available", h7);
+        Room KRNE_1102 = new Room("KRNE_1102", "1102", "Deluxe", 3, "Unavailable", h7);
 
         KRNE_1102.addRoomFacility(rf1);
         KRNE_1102.addRoomFacility(rf2);
@@ -11467,7 +11467,7 @@ public class DataInitializationSessionBean {
 
         h7.addRoom(roomSessionLocal.getRoomByName("KRNE_703"));
 
-        Room KRNE_704 = new Room("KRNE_704", "704", "Premium", 4, "Available", h7);
+        Room KRNE_704 = new Room("KRNE_704", "704", "Premium", 4, "Occupied", h7);
 
         KRNE_704.addRoomFacility(rf1);
         KRNE_704.addRoomFacility(rf2);
@@ -11519,7 +11519,7 @@ public class DataInitializationSessionBean {
 
         h7.addRoom(roomSessionLocal.getRoomByName("KRNE_801"));
 
-        Room KRNE_802 = new Room("KRNE_802", "802", "Premium", 4, "Available", h7);
+        Room KRNE_802 = new Room("KRNE_802", "802", "Premium", 4, "Unavailable", h7);
 
         KRNE_802.addRoomFacility(rf1);
         KRNE_802.addRoomFacility(rf2);
@@ -11545,7 +11545,7 @@ public class DataInitializationSessionBean {
 
         h7.addRoom(roomSessionLocal.getRoomByName("KRNE_802"));
 
-        Room KRNE_803 = new Room("KRNE_803", "803", "Premium", 4, "Available", h7);
+        Room KRNE_803 = new Room("KRNE_803", "803", "Premium", 4, "Occupied", h7);
 
         KRNE_803.addRoomFacility(rf1);
         KRNE_803.addRoomFacility(rf2);
@@ -11623,7 +11623,7 @@ public class DataInitializationSessionBean {
 
         h7.addRoom(roomSessionLocal.getRoomByName("KRNE_901"));
 
-        Room KRNE_902 = new Room("KRNE_902", "902", "Premium", 4, "Available", h7);
+        Room KRNE_902 = new Room("KRNE_902", "902", "Premium", 4, "Occupied", h7);
 
         KRNE_902.addRoomFacility(rf1);
         KRNE_902.addRoomFacility(rf2);
@@ -11675,7 +11675,7 @@ public class DataInitializationSessionBean {
 
         h7.addRoom(roomSessionLocal.getRoomByName("KRNE_903"));
 
-        Room KRNE_904 = new Room("KRNE_904", "904", "Premium", 4, "Available", h7);
+        Room KRNE_904 = new Room("KRNE_904", "904", "Premium", 4, "Unavailable", h7);
 
         KRNE_904.addRoomFacility(rf1);
         KRNE_904.addRoomFacility(rf2);
@@ -11701,7 +11701,7 @@ public class DataInitializationSessionBean {
 
         h7.addRoom(roomSessionLocal.getRoomByName("KRNE_904"));
 
-        Room KRNE_1201 = new Room("KRNE_1201", "1201", "Suite", 4, "Available", h7);
+        Room KRNE_1201 = new Room("KRNE_1201", "1201", "Suite", 4, "Occupied", h7);
 
         KRNE_1201.addRoomFacility(rf1);
         KRNE_1201.addRoomFacility(rf2);
@@ -11833,7 +11833,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRNWS2);
         h8.addRoom(roomSessionLocal.getRoomByName("KRNW_202"));
 
-        Room KRNWS3 = new Room("KRNW_203", "203", "Standard", 2, "Available", h8);
+        Room KRNWS3 = new Room("KRNW_203", "203", "Standard", 2, "Occupied", h8);
         KRNWS3.addRoomFacility(rf1);
         KRNWS3.addRoomFacility(rf2);
         KRNWS3.addRoomFacility(rf3);
@@ -11867,7 +11867,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRNWS4);
         h8.addRoom(roomSessionLocal.getRoomByName("KRNW_204"));
 
-        Room KRNWS5 = new Room("KRNW_205", "205", "Standard", 2, "Available", h8);
+        Room KRNWS5 = new Room("KRNW_205", "205", "Standard", 2, "Unavailable", h8);
         KRNWS5.addRoomFacility(rf1);
         KRNWS5.addRoomFacility(rf2);
         KRNWS5.addRoomFacility(rf3);
@@ -11901,7 +11901,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRNWS6);
         h8.addRoom(roomSessionLocal.getRoomByName("KRNW_206"));
 
-        Room KRNWS11 = new Room("KRNW_301", "301", "Standard", 2, "Available", h8);
+        Room KRNWS11 = new Room("KRNW_301", "301", "Standard", 2, "Occupied", h8);
         KRNWS11.addRoomFacility(rf1);
         KRNWS11.addRoomFacility(rf2);
         KRNWS11.addRoomFacility(rf3);
@@ -11952,7 +11952,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRNWS13);
         h8.addRoom(roomSessionLocal.getRoomByName("KRNW_303"));
 
-        Room KRNWS14 = new Room("KRNW_304", "304", "Standard", 2, "Available", h8);
+        Room KRNWS14 = new Room("KRNW_304", "304", "Standard", 2, "Occupied", h8);
         KRNWS14.addRoomFacility(rf1);
         KRNWS14.addRoomFacility(rf2);
         KRNWS14.addRoomFacility(rf3);
@@ -12020,7 +12020,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRNWS21);
         h8.addRoom(roomSessionLocal.getRoomByName("KRNW_401"));
 
-        Room KRNWS22 = new Room("KRNW_402", "402", "Standard", 2, "Available", h8);
+        Room KRNWS22 = new Room("KRNW_402", "402", "Standard", 2, "Occupied", h8);
         KRNWS22.addRoomFacility(rf1);
         KRNWS22.addRoomFacility(rf2);
         KRNWS22.addRoomFacility(rf3);
@@ -12037,7 +12037,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRNWS22);
         h8.addRoom(roomSessionLocal.getRoomByName("KRNW_402"));
 
-        Room KRNWS23 = new Room("KRNW_403", "403", "Standard", 2, "Available", h8);
+        Room KRNWS23 = new Room("KRNW_403", "403", "Standard", 2, "Unavailable", h8);
         KRNWS23.addRoomFacility(rf1);
         KRNWS23.addRoomFacility(rf2);
         KRNWS23.addRoomFacility(rf3);
@@ -12105,7 +12105,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRNWS26);
         h8.addRoom(roomSessionLocal.getRoomByName("KRNW_406"));
 
-        Room KRNWS31 = new Room("KRNW_501", "501", "Standard", 2, "Available", h8);
+        Room KRNWS31 = new Room("KRNW_501", "501", "Standard", 2, "Occupied", h8);
         KRNWS31.addRoomFacility(rf1);
         KRNWS31.addRoomFacility(rf2);
         KRNWS31.addRoomFacility(rf3);
@@ -12173,7 +12173,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRNWS34);
         h8.addRoom(roomSessionLocal.getRoomByName("KRNW_504"));
 
-        Room KRNWS35 = new Room("KRNW_505", "505", "Standard", 2, "Available", h8);
+        Room KRNWS35 = new Room("KRNW_505", "505", "Standard", 2, "Unavailable", h8);
         KRNWS35.addRoomFacility(rf1);
         KRNWS35.addRoomFacility(rf2);
         KRNWS35.addRoomFacility(rf3);
@@ -12190,7 +12190,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRNWS35);
         h8.addRoom(roomSessionLocal.getRoomByName("KRNW_505"));
 
-        Room KRNWS36 = new Room("KRNW_506", "506", "Standard", 2, "Available", h8);
+        Room KRNWS36 = new Room("KRNW_506", "506", "Standard", 2, "Occupied", h8);
         KRNWS36.addRoomFacility(rf1);
         KRNWS36.addRoomFacility(rf2);
         KRNWS36.addRoomFacility(rf3);
@@ -12258,7 +12258,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRNWS43);
         h8.addRoom(roomSessionLocal.getRoomByName("KRNW_603"));
 
-        Room KRNWS44 = new Room("KRNW_604", "604", "Standard", 2, "Available", h8);
+        Room KRNWS44 = new Room("KRNW_604", "604", "Standard", 2, "Occupied", h8);
         KRNWS44.addRoomFacility(rf1);
         KRNWS44.addRoomFacility(rf2);
         KRNWS44.addRoomFacility(rf3);
@@ -12309,7 +12309,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRNWS46);
         h8.addRoom(roomSessionLocal.getRoomByName("KRNW_606"));
 
-        Room KRNW_1001 = new Room("KRNW_1001", "1001", "Deluxe", 3, "Available", h8);
+        Room KRNW_1001 = new Room("KRNW_1001", "1001", "Deluxe", 3, "Unavailable", h8);
 
         KRNW_1001.addRoomFacility(rf1);
         KRNW_1001.addRoomFacility(rf2);
@@ -12381,7 +12381,7 @@ public class DataInitializationSessionBean {
 
         h8.addRoom(roomSessionLocal.getRoomByName("KRNW_1003"));
 
-        Room KRNW_1101 = new Room("KRNW_1101", "1101", "Deluxe", 3, "Available", h8);
+        Room KRNW_1101 = new Room("KRNW_1101", "1101", "Deluxe", 3, "Occupied", h8);
 
         KRNW_1101.addRoomFacility(rf1);
         KRNW_1101.addRoomFacility(rf2);
@@ -12453,7 +12453,7 @@ public class DataInitializationSessionBean {
 
         h8.addRoom(roomSessionLocal.getRoomByName("KRNW_1103"));
 
-        Room KRNW_701 = new Room("KRNW_701", "701", "Premium", 4, "Available", h8);
+        Room KRNW_701 = new Room("KRNW_701", "701", "Premium", 4, "Unavailable", h8);
 
         KRNW_701.addRoomFacility(rf1);
         KRNW_701.addRoomFacility(rf2);
@@ -12505,7 +12505,7 @@ public class DataInitializationSessionBean {
 
         h8.addRoom(roomSessionLocal.getRoomByName("KRNW_702"));
 
-        Room KRNW_703 = new Room("KRNW_703", "703", "Premium", 4, "Available", h8);
+        Room KRNW_703 = new Room("KRNW_703", "703", "Premium", 4, "Occupied", h8);
 
         KRNW_703.addRoomFacility(rf1);
         KRNW_703.addRoomFacility(rf2);
@@ -12583,7 +12583,7 @@ public class DataInitializationSessionBean {
 
         h8.addRoom(roomSessionLocal.getRoomByName("KRNW_801"));
 
-        Room KRNW_802 = new Room("KRNW_802", "802", "Premium", 4, "Available", h8);
+        Room KRNW_802 = new Room("KRNW_802", "802", "Premium", 4, "Unavailable", h8);
 
         KRNW_802.addRoomFacility(rf1);
         KRNW_802.addRoomFacility(rf2);
@@ -12609,7 +12609,7 @@ public class DataInitializationSessionBean {
 
         h8.addRoom(roomSessionLocal.getRoomByName("KRNW_802"));
 
-        Room KRNW_803 = new Room("KRNW_803", "803", "Premium", 4, "Available", h8);
+        Room KRNW_803 = new Room("KRNW_803", "803", "Premium", 4, "Occupied", h8);
 
         KRNW_803.addRoomFacility(rf1);
         KRNW_803.addRoomFacility(rf2);
@@ -12687,7 +12687,7 @@ public class DataInitializationSessionBean {
 
         h8.addRoom(roomSessionLocal.getRoomByName("KRNW_901"));
 
-        Room KRNW_902 = new Room("KRNW_902", "902", "Premium", 4, "Available", h8);
+        Room KRNW_902 = new Room("KRNW_902", "902", "Premium", 4, "Occupied", h8);
 
         KRNW_902.addRoomFacility(rf1);
         KRNW_902.addRoomFacility(rf2);
@@ -12713,7 +12713,7 @@ public class DataInitializationSessionBean {
 
         h8.addRoom(roomSessionLocal.getRoomByName("KRNW_902"));
 
-        Room KRNW_903 = new Room("KRNW_903", "903", "Premium", 4, "Available", h8);
+        Room KRNW_903 = new Room("KRNW_903", "903", "Premium", 4, "Unavailable", h8);
 
         KRNW_903.addRoomFacility(rf1);
         KRNW_903.addRoomFacility(rf2);
@@ -12765,7 +12765,7 @@ public class DataInitializationSessionBean {
 
         h8.addRoom(roomSessionLocal.getRoomByName("KRNW_904"));
 
-        Room KRNW_1201 = new Room("KRNW_1201", "1201", "Suite", 4, "Available", h8);
+        Room KRNW_1201 = new Room("KRNW_1201", "1201", "Suite", 4, "Occupied", h8);
 
         KRNW_1201.addRoomFacility(rf1);
         KRNW_1201.addRoomFacility(rf2);
@@ -12879,7 +12879,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRSES1);
         h9.addRoom(roomSessionLocal.getRoomByName("KRSE_201"));
 
-        Room KRSES2 = new Room("KRSE_202", "202", "Standard", 2, "Available", h9);
+        Room KRSES2 = new Room("KRSE_202", "202", "Standard", 2, "Occupied", h9);
         KRSES2.addRoomFacility(rf1);
         KRSES2.addRoomFacility(rf2);
         KRSES2.addRoomFacility(rf3);
@@ -12930,7 +12930,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRSES4);
         h9.addRoom(roomSessionLocal.getRoomByName("KRSE_204"));
 
-        Room KRSES5 = new Room("KRSE_205", "205", "Standard", 2, "Available", h9);
+        Room KRSES5 = new Room("KRSE_205", "205", "Standard", 2, "Unavailable", h9);
         KRSES5.addRoomFacility(rf1);
         KRSES5.addRoomFacility(rf2);
         KRSES5.addRoomFacility(rf3);
@@ -12981,7 +12981,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRSES11);
         h9.addRoom(roomSessionLocal.getRoomByName("KRSE_301"));
 
-        Room KRSES12 = new Room("KRSE_302", "302", "Standard", 2, "Available", h9);
+        Room KRSES12 = new Room("KRSE_302", "302", "Standard", 2, "Occupied", h9);
         KRSES12.addRoomFacility(rf1);
         KRSES12.addRoomFacility(rf2);
         KRSES12.addRoomFacility(rf3);
@@ -13066,7 +13066,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRSES16);
         h9.addRoom(roomSessionLocal.getRoomByName("KRSE_306"));
 
-        Room KRSES21 = new Room("KRSE_401", "401", "Standard", 2, "Available", h9);
+        Room KRSES21 = new Room("KRSE_401", "401", "Standard", 2, "Occupied", h9);
         KRSES21.addRoomFacility(rf1);
         KRSES21.addRoomFacility(rf2);
         KRSES21.addRoomFacility(rf3);
@@ -13168,7 +13168,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRSES26);
         h9.addRoom(roomSessionLocal.getRoomByName("KRSE_406"));
 
-        Room KRSES31 = new Room("KRSE_501", "501", "Standard", 2, "Available", h9);
+        Room KRSES31 = new Room("KRSE_501", "501", "Standard", 2, "Occupied", h9);
         KRSES31.addRoomFacility(rf1);
         KRSES31.addRoomFacility(rf2);
         KRSES31.addRoomFacility(rf3);
@@ -13202,7 +13202,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRSES32);
         h9.addRoom(roomSessionLocal.getRoomByName("KRSE_502"));
 
-        Room KRSES33 = new Room("KRSE_503", "503", "Standard", 2, "Available", h9);
+        Room KRSES33 = new Room("KRSE_503", "503", "Standard", 2, "Unavailable", h9);
         KRSES33.addRoomFacility(rf1);
         KRSES33.addRoomFacility(rf2);
         KRSES33.addRoomFacility(rf3);
@@ -13270,7 +13270,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRSES36);
         h9.addRoom(roomSessionLocal.getRoomByName("KRSE_506"));
 
-        Room KRSES41 = new Room("KRSE_601", "601", "Standard", 2, "Available", h9);
+        Room KRSES41 = new Room("KRSE_601", "601", "Standard", 2, "Occupied", h9);
         KRSES41.addRoomFacility(rf1);
         KRSES41.addRoomFacility(rf2);
         KRSES41.addRoomFacility(rf3);
@@ -13338,7 +13338,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRSES44);
         h9.addRoom(roomSessionLocal.getRoomByName("KRSE_604"));
 
-        Room KRSES45 = new Room("KRSE_605", "605", "Standard", 2, "Available", h9);
+        Room KRSES45 = new Room("KRSE_605", "605", "Standard", 2, "Occupied", h9);
         KRSES45.addRoomFacility(rf1);
         KRSES45.addRoomFacility(rf2);
         KRSES45.addRoomFacility(rf3);
@@ -13444,7 +13444,7 @@ public class DataInitializationSessionBean {
 
         h9.addRoom(roomSessionLocal.getRoomByName("KRSE_1003"));
 
-        Room KRSE_1101 = new Room("KRSE_1101", "1101", "Deluxe", 3, "Available", h9);
+        Room KRSE_1101 = new Room("KRSE_1101", "1101", "Deluxe", 3, "Occupied", h9);
 
         KRSE_1101.addRoomFacility(rf1);
         KRSE_1101.addRoomFacility(rf2);
@@ -13594,7 +13594,7 @@ public class DataInitializationSessionBean {
 
         h9.addRoom(roomSessionLocal.getRoomByName("KRSE_703"));
 
-        Room KRSE_704 = new Room("KRSE_704", "704", "Premium", 4, "Available", h9);
+        Room KRSE_704 = new Room("KRSE_704", "704", "Premium", 4, "Occupied", h9);
 
         KRSE_704.addRoomFacility(rf1);
         KRSE_704.addRoomFacility(rf2);
@@ -13698,7 +13698,7 @@ public class DataInitializationSessionBean {
 
         h9.addRoom(roomSessionLocal.getRoomByName("KRSE_803"));
 
-        Room KRSE_804 = new Room("KRSE_804", "804", "Premium", 4, "Available", h9);
+        Room KRSE_804 = new Room("KRSE_804", "804", "Premium", 4, "Occupied", h9);
 
         KRSE_804.addRoomFacility(rf1);
         KRSE_804.addRoomFacility(rf2);
@@ -13724,7 +13724,7 @@ public class DataInitializationSessionBean {
 
         h9.addRoom(roomSessionLocal.getRoomByName("KRSE_804"));
 
-        Room KRSE_901 = new Room("KRSE_901", "901", "Premium", 4, "Available", h9);
+        Room KRSE_901 = new Room("KRSE_901", "901", "Premium", 4, "Unavailable", h9);
 
         KRSE_901.addRoomFacility(rf1);
         KRSE_901.addRoomFacility(rf2);
@@ -13828,7 +13828,7 @@ public class DataInitializationSessionBean {
 
         h9.addRoom(roomSessionLocal.getRoomByName("KRSE_904"));
 
-        Room KRSE_1201 = new Room("KRSE_1201", "1201", "Suite", 4, "Available", h9);
+        Room KRSE_1201 = new Room("KRSE_1201", "1201", "Suite", 4, "Occupied", h9);
 
         KRSE_1201.addRoomFacility(rf1);
         KRSE_1201.addRoomFacility(rf2);
@@ -13994,7 +13994,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRSWS4);
         h10.addRoom(roomSessionLocal.getRoomByName("KRSW_204"));
 
-        Room KRSWS5 = new Room("KRSW_205", "205", "Standard", 2, "Available", h10);
+        Room KRSWS5 = new Room("KRSW_205", "205", "Standard", 2, "Unavailable", h10);
         KRSWS5.addRoomFacility(rf1);
         KRSWS5.addRoomFacility(rf2);
         KRSWS5.addRoomFacility(rf3);
@@ -14130,7 +14130,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRSWS16);
         h10.addRoom(roomSessionLocal.getRoomByName("KRSW_306"));
 
-        Room KRSWS21 = new Room("KRSW_401", "401", "Standard", 2, "Available", h10);
+        Room KRSWS21 = new Room("KRSW_401", "401", "Standard", 2, "Occupied", h10);
         KRSWS21.addRoomFacility(rf1);
         KRSWS21.addRoomFacility(rf2);
         KRSWS21.addRoomFacility(rf3);
@@ -14181,7 +14181,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRSWS23);
         h10.addRoom(roomSessionLocal.getRoomByName("KRSW_403"));
 
-        Room KRSWS24 = new Room("KRSW_404", "404", "Standard", 2, "Available", h10);
+        Room KRSWS24 = new Room("KRSW_404", "404", "Standard", 2, "Unavailable", h10);
         KRSWS24.addRoomFacility(rf1);
         KRSWS24.addRoomFacility(rf2);
         KRSWS24.addRoomFacility(rf3);
@@ -14232,7 +14232,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRSWS26);
         h10.addRoom(roomSessionLocal.getRoomByName("KRSW_406"));
 
-        Room KRSWS31 = new Room("KRSW_501", "501", "Standard", 2, "Available", h10);
+        Room KRSWS31 = new Room("KRSW_501", "501", "Standard", 2, "Occupied", h10);
         KRSWS31.addRoomFacility(rf1);
         KRSWS31.addRoomFacility(rf2);
         KRSWS31.addRoomFacility(rf3);
@@ -14368,7 +14368,7 @@ public class DataInitializationSessionBean {
         roomSessionLocal.createRoom(KRSWS42);
         h10.addRoom(roomSessionLocal.getRoomByName("KRSW_602"));
 
-        Room KRSWS43 = new Room("KRSW_603", "603", "Standard", 2, "Available", h10);
+        Room KRSWS43 = new Room("KRSW_603", "603", "Standard", 2, "Occupied", h10);
         KRSWS43.addRoomFacility(rf1);
         KRSWS43.addRoomFacility(rf2);
         KRSWS43.addRoomFacility(rf3);
@@ -14484,7 +14484,7 @@ public class DataInitializationSessionBean {
 
         h10.addRoom(roomSessionLocal.getRoomByName("KRSW_1002"));
 
-        Room KRSW_1003 = new Room("KRSW_1003", "1003", "Deluxe", 3, "Available", h10);
+        Room KRSW_1003 = new Room("KRSW_1003", "1003", "Deluxe", 3, "Unavailable", h10);
 
         KRSW_1003.addRoomFacility(rf1);
         KRSW_1003.addRoomFacility(rf2);
@@ -14508,7 +14508,7 @@ public class DataInitializationSessionBean {
 
         h10.addRoom(roomSessionLocal.getRoomByName("KRSW_1003"));
 
-        Room KRSW_1101 = new Room("KRSW_1101", "1101", "Deluxe", 3, "Available", h10);
+        Room KRSW_1101 = new Room("KRSW_1101", "1101", "Deluxe", 3, "Occupied", h10);
 
         KRSW_1101.addRoomFacility(rf1);
         KRSW_1101.addRoomFacility(rf2);
@@ -14632,7 +14632,7 @@ public class DataInitializationSessionBean {
 
         h10.addRoom(roomSessionLocal.getRoomByName("KRSW_702"));
 
-        Room KRSW_703 = new Room("KRSW_703", "703", "Premium", 4, "Available", h10);
+        Room KRSW_703 = new Room("KRSW_703", "703", "Premium", 4, "Occupied", h10);
 
         KRSW_703.addRoomFacility(rf1);
         KRSW_703.addRoomFacility(rf2);
@@ -14762,7 +14762,7 @@ public class DataInitializationSessionBean {
 
         h10.addRoom(roomSessionLocal.getRoomByName("KRSW_803"));
 
-        Room KRSW_804 = new Room("KRSW_804", "804", "Premium", 4, "Available", h10);
+        Room KRSW_804 = new Room("KRSW_804", "804", "Premium", 4, "Unavailable", h10);
 
         KRSW_804.addRoomFacility(rf1);
         KRSW_804.addRoomFacility(rf2);
@@ -14788,7 +14788,7 @@ public class DataInitializationSessionBean {
 
         h10.addRoom(roomSessionLocal.getRoomByName("KRSW_804"));
 
-        Room KRSW_901 = new Room("KRSW_901", "901", "Premium", 4, "Available", h10);
+        Room KRSW_901 = new Room("KRSW_901", "901", "Premium", 4, "Occupied", h10);
 
         KRSW_901.addRoomFacility(rf1);
         KRSW_901.addRoomFacility(rf2);
@@ -14892,7 +14892,7 @@ public class DataInitializationSessionBean {
 
         h10.addRoom(roomSessionLocal.getRoomByName("KRSW_904"));
 
-        Room KRSW_1201 = new Room("KRSW_1201", "1201", "Suite", 4, "Available", h10);
+        Room KRSW_1201 = new Room("KRSW_1201", "1201", "Suite", 4, "Occupied", h10);
 
         KRSW_1201.addRoomFacility(rf1);
         KRSW_1201.addRoomFacility(rf2);
@@ -14924,7 +14924,7 @@ public class DataInitializationSessionBean {
 
         h10.addRoom(roomSessionLocal.getRoomByName("KRSW_1201"));
 
-        Room KRSW_1202 = new Room("KRSW_1202", "1202", "Suite", 4, "Available", h10);
+        Room KRSW_1202 = new Room("KRSW_1202", "1202", "Suite", 4, "Unavailable", h10);
 
         KRSW_1202.addRoomFacility(rf1);
         KRSW_1202.addRoomFacility(rf2);
