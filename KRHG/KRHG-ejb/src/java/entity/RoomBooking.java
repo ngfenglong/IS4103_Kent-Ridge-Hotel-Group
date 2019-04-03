@@ -35,6 +35,7 @@ public class RoomBooking implements Serializable {
     private Date bookOutDate;
     private String status;
     private boolean hasTransport;
+    private boolean hasExtraBed;
     private double price;
     @OneToOne
     private Room bookedRoom;
@@ -45,7 +46,8 @@ public class RoomBooking implements Serializable {
     private String pickUpLocation;
     private String emailAddress;
     private String passportNum;
-    private String name;
+    private String firstName;
+    private String lastName;
     private String roomType;
 
     public RoomBooking() {
@@ -148,20 +150,28 @@ public class RoomBooking implements Serializable {
         this.passportNum = passportNum;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getRoomType() {
         return roomType;
     }
 
     public void setRoomType(String roomType) {
         this.roomType = roomType;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
 //    public void addHolidaySurcharge(HolidaySurcharge holidaySurcharge) throws NoResultException {
@@ -218,6 +228,20 @@ public class RoomBooking implements Serializable {
     @Override
     public String toString() {
         return "entity.RoomBooking[ roomBookingID=" + roomBookingID + " ]";
+    }
+
+    /**
+     * @return the hasExtraBed
+     */
+    public boolean getHasExtraBed() {
+        return hasExtraBed;
+    }
+
+    /**
+     * @param hasExtraBed the hasExtraBed to set
+     */
+    public void setHasExtraBed(boolean hasExtraBed) {
+        this.hasExtraBed = hasExtraBed;
     }
 
 }

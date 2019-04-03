@@ -8,6 +8,7 @@ package sessionBeans;
 import entity.CreditCard;
 import entity.Customer;
 import entity.FoodMenuItem;
+import entity.FunctionRoom;
 import entity.Hotel;
 import entity.HotelFacility;
 import entity.HouseKeepingOrder;
@@ -18,6 +19,7 @@ import entity.PaymentTransaction;
 import entity.Room;
 import entity.RoomBooking;
 import entity.RoomFacility;
+import entity.RoomPricing;
 import entity.Staff;
 import entity.StaffType;
 import error.NoResultException;
@@ -72,6 +74,10 @@ public class DataInitializationSessionBean {
     FoodMenuItemSessionLocal foodMenuItemSessionLocal;
     @EJB
     PaymentTransactionSessionLocal paymentTransactionSessionLocal;
+    @EJB
+    FunctionRoomSessionLocal functionRoomSessionLocal;
+    @EJB
+    RoomPricingSessionLocal roomPricingSessionLocal;
 
     public DataInitializationSessionBean() {
     }
@@ -915,7 +921,7 @@ public class DataInitializationSessionBean {
         Customer c10 = new Customer("Cuong Khanh", "Anh Nhiem", "Male", encryptPassword("test"), 9281, "cukhanhn@gmail.com", "+84843506870", format.parse("2019-04-01"), true);
         customerSessionLocal.createCustomer(c10);
         c10 = customerSessionLocal.getCustomerByEmail("cukhanhn@gmail.com");
-
+//*********************************************FOOD MENU ITEM************************************************
         FoodMenuItem fmi1 = new FoodMenuItem("Pancakes", "Served with maple syrup, wild berry compote and toasted almond flakes", "All Day Breakfast", true, 18.0, "pancakes.jpg");
         foodMenuItemSessionLocal.createFoodMenuItem(fmi1);
         fmi1 = foodMenuItemSessionLocal.getFoodMenuItemByName("Pancakes");
@@ -1076,6 +1082,99 @@ public class DataInitializationSessionBean {
         foodMenuItemSessionLocal.createFoodMenuItem(fmi40);
         fmi40 = foodMenuItemSessionLocal.getFoodMenuItemByName("Grand Jasmine");
 
+//*********************************************ROOM PRICING************************************************
+        RoomPricing rp1 = new RoomPricing("KRG_Standard", 150.0);
+        roomPricingSessionLocal.createRoomPricing(rp1);
+        RoomPricing rp2 = new RoomPricing("KRG_Premium", 200.0);
+        roomPricingSessionLocal.createRoomPricing(rp2);
+        RoomPricing rp3 = new RoomPricing("KRG_Deluxe", 300.0);
+        roomPricingSessionLocal.createRoomPricing(rp3);
+        RoomPricing rp4 = new RoomPricing("KRG_Suite", 400.0);
+        roomPricingSessionLocal.createRoomPricing(rp4);
+        RoomPricing rp5 = new RoomPricing("KRG_Penthouse", 500.0);
+        roomPricingSessionLocal.createRoomPricing(rp5);
+        
+        RoomPricing rp6 = new RoomPricing("KRC_Standard", 120.0);
+        roomPricingSessionLocal.createRoomPricing(rp6);
+        RoomPricing rp7 = new RoomPricing("KRC_Premium", 150.0);
+        roomPricingSessionLocal.createRoomPricing(rp7);
+        RoomPricing rp8 = new RoomPricing("KRC_Deluxe", 200.0);
+        roomPricingSessionLocal.createRoomPricing(rp8);
+        RoomPricing rp9 = new RoomPricing("KRC_Suite", 250.0);
+        roomPricingSessionLocal.createRoomPricing(rp9);
+        
+        RoomPricing rp10 = new RoomPricing("KRN_Standard", 120.0);
+        roomPricingSessionLocal.createRoomPricing(rp10);
+        RoomPricing rp11 = new RoomPricing("KRN_Premium", 150.0);
+        roomPricingSessionLocal.createRoomPricing(rp11);
+        RoomPricing rp12 = new RoomPricing("KRN_Deluxe", 200.0);
+        roomPricingSessionLocal.createRoomPricing(rp12);
+        RoomPricing rp13 = new RoomPricing("KRN_Suite", 250.0);
+        roomPricingSessionLocal.createRoomPricing(rp13);
+
+        RoomPricing rp14 = new RoomPricing("KRS_Standard", 120.0);
+        roomPricingSessionLocal.createRoomPricing(rp14);
+        RoomPricing rp15 = new RoomPricing("KRS_Premium", 150.0);
+        roomPricingSessionLocal.createRoomPricing(rp15);
+        RoomPricing rp16 = new RoomPricing("KRS_Deluxe", 200.0);
+        roomPricingSessionLocal.createRoomPricing(rp16);
+        RoomPricing rp17 = new RoomPricing("KRS_Suite", 250.0);
+        roomPricingSessionLocal.createRoomPricing(rp17);    
+        
+        RoomPricing rp18 = new RoomPricing("KRE_Standard", 120.0);
+        roomPricingSessionLocal.createRoomPricing(rp18);
+        RoomPricing rp19 = new RoomPricing("KRE_Premium", 150.0);
+        roomPricingSessionLocal.createRoomPricing(rp19);
+        RoomPricing rp20 = new RoomPricing("KRE_Deluxe", 200.0);
+        roomPricingSessionLocal.createRoomPricing(rp20);
+        RoomPricing rp21 = new RoomPricing("KRE_Suite", 250.0);
+        roomPricingSessionLocal.createRoomPricing(rp21);   
+        
+        RoomPricing rp22 = new RoomPricing("KRW_Standard", 120.0);
+        roomPricingSessionLocal.createRoomPricing(rp22);
+        RoomPricing rp23 = new RoomPricing("KRW_Premium", 150.0);
+        roomPricingSessionLocal.createRoomPricing(rp23);
+        RoomPricing rp24 = new RoomPricing("KRW_Deluxe", 200.0);
+        roomPricingSessionLocal.createRoomPricing(rp24);
+        RoomPricing rp25 = new RoomPricing("KRW_Suite", 250.0);
+        roomPricingSessionLocal.createRoomPricing(rp25);            
+        
+        RoomPricing rp26 = new RoomPricing("KRNE_Standard", 100.0);
+        roomPricingSessionLocal.createRoomPricing(rp26);
+        RoomPricing rp27 = new RoomPricing("KRNE_Premium", 120.0);
+        roomPricingSessionLocal.createRoomPricing(rp27);
+        RoomPricing rp28 = new RoomPricing("KRNE_Deluxe", 150.0);
+        roomPricingSessionLocal.createRoomPricing(rp28);
+        RoomPricing rp29 = new RoomPricing("KRNE_Suite", 200.0);
+        roomPricingSessionLocal.createRoomPricing(rp29);   
+
+        RoomPricing rp30 = new RoomPricing("KRNW_Standard", 100.0);
+        roomPricingSessionLocal.createRoomPricing(rp30);
+        RoomPricing rp31 = new RoomPricing("KRNW_Premium", 120.0);
+        roomPricingSessionLocal.createRoomPricing(rp31);
+        RoomPricing rp32 = new RoomPricing("KRNW_Deluxe", 150.0);
+        roomPricingSessionLocal.createRoomPricing(rp32);
+        RoomPricing rp33 = new RoomPricing("KRNW_Suite", 200.0);
+        roomPricingSessionLocal.createRoomPricing(rp33);           
+        
+        RoomPricing rp34 = new RoomPricing("KRSE_Standard", 100.0);
+        roomPricingSessionLocal.createRoomPricing(rp34);
+        RoomPricing rp35 = new RoomPricing("KRSE_Premium", 120.0);
+        roomPricingSessionLocal.createRoomPricing(rp35);
+        RoomPricing rp36 = new RoomPricing("KRSE_Deluxe", 150.0);
+        roomPricingSessionLocal.createRoomPricing(rp36);
+        RoomPricing rp37 = new RoomPricing("KRSE_Suite", 200.0);
+        roomPricingSessionLocal.createRoomPricing(rp37);         
+        
+        RoomPricing rp38 = new RoomPricing("KRSW_Standard", 100.0);
+        roomPricingSessionLocal.createRoomPricing(rp38);
+        RoomPricing rp39 = new RoomPricing("KRSW_Premium", 120.0);
+        roomPricingSessionLocal.createRoomPricing(rp39);
+        RoomPricing rp40 = new RoomPricing("KRSW_Deluxe", 150.0);
+        roomPricingSessionLocal.createRoomPricing(rp40);
+        RoomPricing rp41 = new RoomPricing("KRSW_Suite", 200.0);
+        roomPricingSessionLocal.createRoomPricing(rp41); 
+        
         em.flush();
 
     }
@@ -1109,6 +1208,24 @@ public class DataInitializationSessionBean {
         RoomFacility rf20 = roomFacilitySessionLocal.getRoomFacilityByName("High Ceiling");
         RoomFacility rf21 = roomFacilitySessionLocal.getRoomFacilityByName("Jaccuzi");
         RoomFacility rf22 = roomFacilitySessionLocal.getRoomFacilityByName("Kitchen");
+
+        FunctionRoom KRGFR1 = new FunctionRoom("KRGFR1", 20, "Available", 20000.00, h1);
+        FunctionRoom KRGFR2 = new FunctionRoom("KRGFR2", 100, "Available", 100000.00, h1);
+        FunctionRoom KRGFR3 = new FunctionRoom("KRGFR3", 50, "Available", 50000.00, h1);
+        FunctionRoom KRGFR4 = new FunctionRoom("KRGFR4", 70, "Available", 70000.00, h1);
+        FunctionRoom KRGFR5 = new FunctionRoom("KRGFR5", 80, "Available", 80000.00, h1);
+
+        functionRoomSessionLocal.createFunctionRoom(KRGFR1);
+        functionRoomSessionLocal.createFunctionRoom(KRGFR2);
+        functionRoomSessionLocal.createFunctionRoom(KRGFR3);
+        functionRoomSessionLocal.createFunctionRoom(KRGFR4);
+        functionRoomSessionLocal.createFunctionRoom(KRGFR5);
+
+        h1.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRGFR1"));
+        h1.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRGFR2"));
+        h1.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRGFR3"));
+        h1.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRGFR4"));
+        h1.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRGFR5"));
 
         Room KRGS1 = new Room("KRG_201", "201", "Standard", 2, "Available", h1);
         KRGS1.addRoomFacility(rf1);
@@ -15041,7 +15158,7 @@ public class DataInitializationSessionBean {
 
         rm1.setEmailAddress(customer1.getEmail());
         rm1.setHasTransport(false);
-        rm1.setName(customer1.getLastName());
+        rm1.setLastName(customer1.getLastName());
         rm1.setPassportNum("A0173719Y");
         rm1.setPrice(2000.0);
         rm1.setRoomType("Standard");

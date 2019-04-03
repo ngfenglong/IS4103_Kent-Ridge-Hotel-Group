@@ -39,12 +39,15 @@ public class Hotel implements Serializable {
     @OneToMany(mappedBy = "hotel")
     private List<Room> rooms;
     @OneToMany
+    private List<FunctionRoom> functionRooms;
+    @OneToMany
     private List<HotelFacility> hotelFacilities;
     @OneToMany(mappedBy = "hotel")
     private List<Feedback> feedbacks;
 
     public Hotel() {
         rooms = new ArrayList<>();
+        functionRooms = new ArrayList<>();
         hotelFacilities = new ArrayList<>();
         feedbacks = new ArrayList<>();
     }
@@ -190,6 +193,14 @@ public class Hotel implements Serializable {
         this.rooms = rooms;
     }
 
+    public List<FunctionRoom> getFunctionRooms() {
+        return functionRooms;
+    }
+
+    public void setFunctionRooms(List<FunctionRoom> functionRooms) {
+        this.functionRooms = functionRooms;
+    }
+
     public List<Feedback> getFeedbacks() {
         return feedbacks;
     }
@@ -206,8 +217,6 @@ public class Hotel implements Serializable {
         this.hotelImage = hotelImage;
     }
 
-    
-    
     public void addHotelFacility(HotelFacility hotelFacility) throws NoResultException {
         if (hotelFacility != null && !this.getHotelFacilities().contains(hotelFacility)) {
             this.getHotelFacilities().add(hotelFacility);
@@ -253,6 +262,22 @@ public class Hotel implements Serializable {
             this.getRooms().remove(room);
         } else {
             throw new NoResultException("Room has not been added to Hotel");
+        }
+    }
+
+    public void addFunctionRoom(FunctionRoom functionRoom) throws NoResultException {
+        if (functionRoom != null && !this.getFunctionRooms().contains(functionRoom)) {
+            this.getFunctionRooms().add(functionRoom);
+        } else {
+            throw new NoResultException("Function Room already added to Hotel");
+        }
+    }
+
+    public void removeFunctionRoom(FunctionRoom functionRoom) throws NoResultException {
+        if (functionRoom != null && this.getFunctionRooms().contains(functionRoom)) {
+            this.getFunctionRooms().remove(functionRoom);
+        } else {
+            throw new NoResultException("Function Room has not been added to Hotel");
         }
     }
 
