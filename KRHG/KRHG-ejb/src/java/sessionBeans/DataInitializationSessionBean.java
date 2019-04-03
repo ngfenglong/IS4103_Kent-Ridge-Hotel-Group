@@ -13,6 +13,7 @@ import entity.HouseKeepingOrder;
 import entity.LostAndFoundReport;
 import entity.MaintainenceOrder;
 import entity.MinibarItem;
+import entity.PaymentTransaction;
 import entity.Room;
 import entity.RoomBooking;
 import entity.RoomFacility;
@@ -14834,7 +14835,7 @@ public class DataInitializationSessionBean {
         em.flush();
     }
 
-    public void intializeRoomBookingsAndCustomer() throws ParseException {
+    public void intializeRoomBookingsAndCustomer() throws ParseException,NoResultException {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
         Customer customer1 = new Customer();
@@ -14860,7 +14861,7 @@ public class DataInitializationSessionBean {
         customer2.setMobileNum("97628485");
         customer2.setFirstName("Loh");
         customer2.setLastName("Stanley");
-        customer1.setGender("Male");
+        customer2.setGender("Male");
         customer2.setPassword(encryptPassword("1234"));
         customer2.setPoints(1);
 
@@ -14875,7 +14876,7 @@ public class DataInitializationSessionBean {
         customer3.setMobileNum("9668913");
         customer3.setFirstName("Ng");
         customer3.setLastName("Feng Long");
-        customer1.setGender("Male");
+        customer3.setGender("Male");
         customer3.setPassword(encryptPassword("1234"));
         customer3.setPoints(1);
 
@@ -14893,7 +14894,7 @@ public class DataInitializationSessionBean {
         rm1.setBookInDate(new Date());
         rm1.setBookOutDate(date);
         rm1.setBookedBy(customer1);
-        rm1.setCreditCard(null);
+        
         rm1.setEmailAddress(customer1.getEmail());
         rm1.setHasTransport(false);
         rm1.setName(customer1.getLastName());
@@ -14905,6 +14906,15 @@ public class DataInitializationSessionBean {
         bookingSessionLocal.createRoomBooking(rm1);
         em.flush();
 
+        
+        PaymentTransaction PT1= new PaymentTransaction();
+        PT1.addRoomBooking(rm1);
+        PT1.setCreditCard(null);
+        PT1.setPayer(customer1);
+        PT1.setTransactionDateTime(new Date());
+       
+        //paymentTransactionSessionLocal.createPaymentTransaction(pt1);
+        
     }
 
     public void intializeRequests() throws ParseException {
@@ -14951,6 +14961,8 @@ public class DataInitializationSessionBean {
 
     }
 
+    
+    
     private static String encryptPassword(String password) {
         String sha1 = "";
         try {
