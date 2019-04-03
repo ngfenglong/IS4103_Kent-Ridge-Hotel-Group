@@ -26,6 +26,7 @@ import javax.persistence.TemporalType;
 public class Customer implements Serializable {
 
 
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -34,6 +35,7 @@ public class Customer implements Serializable {
     private String lastName;
     private String password;
     private int points;
+    private String gender;
     @OneToMany
     private List<RoomBooking> bookingHistories;
     @OneToMany
@@ -56,10 +58,11 @@ public class Customer implements Serializable {
         this.password = password;
     }
 
-    public Customer(String firstName, String lastName, String nric, String password, int points, String email, String mobileNum, Date dateJoined, String passportNum, boolean accountStatus) {
+    public Customer(String firstName, String lastName, String gender, String nric, String password, int points, String email, String mobileNum, Date dateJoined, String passportNum, boolean accountStatus) {
         this();
         this.firstName = firstName;
         this.lastName = lastName;
+        this.gender = gender;
         this.password = password;
         this.points = points;
         this.email = email;
@@ -77,32 +80,33 @@ public class Customer implements Serializable {
         this.customerID = customerID;
     }
 
-    /**
-     * @return the firstName
-     */
     public String getFirstName() {
         return firstName;
     }
 
-    /**
-     * @param firstName the firstName to set
-     */
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    /**
-     * @return the lastName
-     */
+
     public String getLastName() {
         return lastName;
     }
 
-    /**
-     * @param lastName the lastName to set
-     */
+
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+    
+
+    public String getGender() {
+        return gender;
+    }
+
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public String getPassword() {

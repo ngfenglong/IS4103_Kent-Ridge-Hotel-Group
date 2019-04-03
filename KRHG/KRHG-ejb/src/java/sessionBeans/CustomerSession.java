@@ -135,6 +135,7 @@ public class CustomerSession implements CustomerSessionLocal {
             oldC.setMobileNum(c.getMobileNum());
             oldC.setFirstName(c.getFirstName());
             oldC.setLastName(c.getLastName());
+            oldC.setGender(c.getGender());
             oldC.setAccountStatus(c.getAccountStatus());
             oldC.setMember(c.getMember());
         } else {
