@@ -14,6 +14,8 @@
 <link href="plugins/jquery-datepicker/jquery-ui.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="styles/booking.css">
 <link rel="stylesheet" type="text/css" href="styles/booking_responsive.css">
+<link rel="stylesheet" type="text/css" href="styles/style.css">
+
 </head>
 <body>
 
@@ -59,36 +61,78 @@
 
 	</div>
 
+	
+
 	<!-- Home -->
 
 	<div class="home">
 		<div class="background_image" style="background-image:url(images/booking.jpg)"></div>
-		<div class="home_container">
-			<div class="container">
-				<div class="row">
-					<div class="col">
-						<div class="home_content text-center">
-							<div class="home_title">Book a room</div>
-							<div class="">Kent Ridge North</div>
-							<div class="booking_form_container">
-								<form action="#" class="booking_form" id="booking_form">
-									<div class="d-flex flex-xl-row flex-column align-items-start justify-content-start">
-										<div class="booking_input_container d-flex flex-row align-items-start justify-content-start flex-wrap">
-											<div><input type="text" class="datepicker booking_input booking_input_a booking_in" placeholder="Check in" required="required"></div>
-											<div><input type="text" class="datepicker booking_input booking_input_a booking_out" placeholder="Check out" required="required"></div>
-											<div><input type="number" class="booking_input booking_input_b" placeholder="Guests" required="required"></div>
-											<div><input type="number" class="booking_input booking_input_b" placeholder="Room Types" required="required"></div>
-										</div>
-										<div><button class="booking_button trans_200">Check Availability</button></div>
-									</div>
-								</form>
+			<div class="section-center">
+				<div class="container">
+					<div class="row">
+						<div class="booking-form">
+							<div class="form-header">
+								<br><br><br><br><br><br><br><br>
+								<h1>Make your reservation</h1>
 							</div>
+							<form>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<span class="form-label">Check In</span>
+											<input class="form-control" type="date" required>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<span class="form-label">Check out</span>
+											<input class="form-control" type="date" required>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<span class="form-label">Number of Guests</span>
+											<select class="form-control">
+												<option>1</option>
+												<option>2</option>
+												<option>3</option>
+												<option>4</option>
+												<option>5</option>
+												<option>6</option>
+												<option>7</option>
+												<option>8</option>
+												<option>9</option>
+												<option>10</option>
+											</select>
+											<span class="select-arrow"></span>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<span class="form-label">Room Type</span>
+											<select class="form-control">
+												<option>Standard</option>
+												<option>Deluxe</option>
+												<option>Premium</option>
+												<option>Suite</option>
+												<option>Penthouse</option>
+											</select>
+											<span class="select-arrow"></span>
+										</div>
+									</div>
+								</div>
+								<div class="form-btn">
+									<button class="submit-btn">Check availability</button>
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+
 
 	<!-- Booking -->
 
