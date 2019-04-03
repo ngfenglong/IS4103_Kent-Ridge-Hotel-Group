@@ -305,26 +305,34 @@ public class requestAndServiceManagedBean implements Serializable {
         LaundryOrder LO = new LaundryOrder();
         LO.setRoom(roomSessionLocal.getRoomByName(laundryRoomNumber));
         LO.setOrderDateTime(new Date());
-        LO.setQty(laundryQuantity);
         LO.setSpecialRequest(laundrySpecialRequest);
         LO.setStatus("Pending");
         
+        laundrySessionLocal.createLaundryOrder(LO);
+
         HouseKeepingOrder HKo = new HouseKeepingOrder();
-        //HKo.setLevel(laundryQuantity); do something
+        HKo.setLevel(getLevel(roomSessionLocal.getRoomByName(laundryRoomNumber).getRoomNumber()));
         HKo.setSpecialRequest(laundrySpecialRequest);
         HKo.setStatus("incomplete");
         HKo.setRequestType("laundry");
         HKo.setRoom(roomSessionLocal.getRoomByName(laundryRoomNumber));
         HKo.setOrderDateTime(new Date());
         
-        
-        
+        houseKeepingOrderSessionLocal.createHouseKeepingOrder(HKo);
 
         out.println("<script type=\"text/javascript\">");
         out.println("alert('Laundry created Succesful!');");
         out.println("</script>");
 
         return "laundry.xhtml?faces-redirect=true";
+    }
+
+    public int getLevel(String roomnumber) {
+            if(roomnumber.length()==3){
+              return Integer.parseInt(roomnumber.substring(0,1));
+            }else{
+                return Integer.parseInt(roomnumber.substring(0,2));
+            }
     }
 
     public String editLostAndFound(LostAndFoundReport LF) {
@@ -356,8 +364,6 @@ public class requestAndServiceManagedBean implements Serializable {
 
         return "lostAndFound.xhtml?faces-redirect=true";
     }
-
-   
 
     public HouseKeepingOrder getEditHK() {
         return editHK;

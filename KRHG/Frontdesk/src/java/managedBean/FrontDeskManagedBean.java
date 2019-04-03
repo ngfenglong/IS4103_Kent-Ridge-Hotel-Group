@@ -58,6 +58,8 @@ public class FrontDeskManagedBean {
     private List<PaymentTransaction> todaysbookings;
     private List<RoomBooking> Searchbookings;
     private PaymentTransaction roombooking;
+    private Date checkinDate;
+    private Date checkoutDate;
 
     //customer check out
     private List<RoomBooking> todayCheckOutRoom;
@@ -81,12 +83,14 @@ public class FrontDeskManagedBean {
     private String CreateCustomerEmail;
     private String CreateCustomerPassword;
     private String createCustomerMobileNumber;
-    private String CreateCustomerName;
+    private String CreateCustomerFirstName;
+    private String CreateCustomerLastName;
     private String createConfirmCustomerPassword;
 
     //customer edit
     private Customer editCustomer;
-    private String editCustomerName;
+    private String editCustomerFirstName;
+    private String editCustomerLastName;
     private int editCustomerPoint;
     private String editCustomerEmail;
     private String editCustomerMobileNumber;
@@ -133,6 +137,22 @@ public class FrontDeskManagedBean {
 
     public String getPaymentCVV() {
         return paymentCVV;
+    }
+
+    public Date getCheckinDate() {
+        return checkinDate;
+    }
+
+    public void setCheckinDate(Date checkinDate) {
+        this.checkinDate = checkinDate;
+    }
+
+    public Date getCheckoutDate() {
+        return checkoutDate;
+    }
+
+    public void setCheckoutDate(Date checkoutDate) {
+        this.checkoutDate = checkoutDate;
     }
 
     public void setPaymentCVV(String paymentCVV) {
@@ -199,7 +219,10 @@ public class FrontDeskManagedBean {
 
     public String checkin(PaymentTransaction PT) {
         checkinPassportNumber = PT.getRoomsBooked().get(0).getPassportNum();
-        checkinName = PT.getPayer().getName();
+        checkinDate = PT.getRoomsBooked().get(0).getBookInDate();
+        checkoutDate = PT.getRoomsBooked().get(0).getBookOutDate();
+
+        checkinName = PT.getPayer().getFirstName() + " " + PT.getPayer().getLastName();
         roombooking = PT;
         mode = "online";
         return "checkinResult.xhtml?faces-redirect=true";
@@ -276,7 +299,8 @@ public class FrontDeskManagedBean {
             Customer c = new Customer();
             c.setEmail(CreateCustomerEmail);
             c.setMobileNum(createCustomerMobileNumber);
-            c.setName(CreateCustomerName);
+            c.setFirstName(CreateCustomerFirstName);
+            c.setLastName(CreateCustomerLastName);
             c.setPassword(encryptPassword(CreateCustomerPassword));
             c.setAccountStatus(true);
             c.setPoints(0);
@@ -285,7 +309,8 @@ public class FrontDeskManagedBean {
 
             CreateCustomerEmail = null;
             createCustomerMobileNumber = null;
-            CreateCustomerName = null;
+            CreateCustomerLastName = null;
+            CreateCustomerFirstName = null;
             CreateCustomerPassword = null;
             createConfirmCustomerPassword = null;
 
@@ -306,7 +331,8 @@ public class FrontDeskManagedBean {
 
     public String viewAccount(Customer customer) {
         editCustomer = customer;
-        editCustomerName = customer.getName();
+        editCustomerFirstName = customer.getFirstName();
+        editCustomerLastName = customer.getLastName();
 
         editCustomerPoint = customer.getPoints();
         editCustomerEmail = customer.getEmail();
@@ -316,13 +342,7 @@ public class FrontDeskManagedBean {
         return "manageAccountEdit.xhtml?faces-redirect=true";
     }
 
-    public String getEditCustomerName() {
-        return editCustomerName;
-    }
-
-    public void setEditCustomerName(String editCustomerName) {
-        this.editCustomerName = editCustomerName;
-    }
+  
 
     public int getEditCustomerPoint() {
         return editCustomerPoint;
@@ -380,14 +400,6 @@ public class FrontDeskManagedBean {
         this.createCustomerMobileNumber = createCustomerMobileNumber;
     }
 
-    public String getCreateCustomerName() {
-        return CreateCustomerName;
-    }
-
-    public void setCreateCustomerName(String CreateCustomerName) {
-        this.CreateCustomerName = CreateCustomerName;
-    }
-
     public String getCreateConfirmCustomerPassword() {
         return createConfirmCustomerPassword;
     }
@@ -408,7 +420,8 @@ public class FrontDeskManagedBean {
         HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
         PrintWriter out = response.getWriter();
         editCustomer.setAccountStatus(editCustomerStatus);
-        editCustomer.setName(editCustomerName);
+        editCustomer.setFirstName(editCustomerFirstName);
+        editCustomer.setLastName(editCustomerLastName);
         editCustomer.setEmail(editCustomerEmail);
         editCustomer.setPoints(editCustomerPoint);
         editCustomer.setMobileNum(editCustomerMobileNumber);
@@ -534,6 +547,38 @@ public class FrontDeskManagedBean {
 
     public void setCheckOutRoomResult(List<RoomBooking> checkOutRoomResult) {
         this.checkOutRoomResult = checkOutRoomResult;
+    }
+
+    public String getCreateCustomerFirstName() {
+        return CreateCustomerFirstName;
+    }
+
+    public void setCreateCustomerFirstName(String CreateCustomerFirstName) {
+        this.CreateCustomerFirstName = CreateCustomerFirstName;
+    }
+
+    public String getCreateCustomerLastName() {
+        return CreateCustomerLastName;
+    }
+
+    public void setCreateCustomerLastName(String CreateCustomerLastName) {
+        this.CreateCustomerLastName = CreateCustomerLastName;
+    }
+
+    public String getEditCustomerFirstName() {
+        return editCustomerFirstName;
+    }
+
+    public void setEditCustomerFirstName(String editCustomerFirstName) {
+        this.editCustomerFirstName = editCustomerFirstName;
+    }
+
+    public String getEditCustomerLastName() {
+        return editCustomerLastName;
+    }
+
+    public void setEditCustomerLastName(String editCustomerLastName) {
+        this.editCustomerLastName = editCustomerLastName;
     }
 
 }
