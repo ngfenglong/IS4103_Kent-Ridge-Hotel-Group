@@ -1,6 +1,6 @@
 .section {
 	position: relative;
-	height: 180vh;
+	height: 150vh;
 }
 
 .section .section-center {
@@ -14,7 +14,7 @@
 
 #booking {
 	font-family: 'Hind', sans-serif;
-	background-image: url('../images/booking.jpg');
+	background-image: url('../images/background.jpg');
 	background-size: cover;
 	background-position: center;
 }
@@ -42,7 +42,15 @@
 
 .booking-form .form-header h1 {
 	font-size: 24px;
-	color: #fff;
+	color: rgb(255, 255, 255);
+	margin-top: 0;
+	margin-bottom: 0px;
+	font-weight: 700;
+	text-transform: capitalize;
+}
+h2 {
+	font-size: 24px;
+	color: rgb(0, 0, 0);
 	margin-top: 0;
 	margin-bottom: 0px;
 	font-weight: 700;
@@ -50,7 +58,7 @@
 }
 
 .booking-form>form {
-	background-color: #1e1e1e;
+	background-color: #ffffff;
 	padding: 40px;
 	-webkit-box-shadow: 0px 5px 15px -5px rgba(0, 0, 0, 0.8);
 	box-shadow: 0px 5px 15px -5px rgba(0, 0, 0, 0.8);
@@ -62,30 +70,30 @@
 }
 
 .booking-form .form-control {
-	background-color: #2d2d2d;
+	background-color: #ffffff;
 	height: 50px;
 	padding: 0px 20px;
-	border: none;
+	border: groove;
 	-webkit-box-shadow: none;
 	box-shadow: none;
 	border-radius: 0px;
-	color: #fff;
+	color: rgb(0, 0, 0);
 }
 
 .booking-form .form-control::-webkit-input-placeholder {
-	color: rgba(255, 255, 255, 0.3);
+	color: rgba(0, 0, 0);
 }
 
 .booking-form .form-control:-ms-input-placeholder {
-	color: rgba(255, 255, 255, 0.3);
+	color: rgba(0, 0, 0);
 }
 
 .booking-form .form-control::placeholder {
-	color: rgba(255, 255, 255, 0.3);
+	color: rgba(0, 0, 0);
 }
 
 .booking-form input[type="date"].form-control:invalid {
-	color: rgba(255, 255, 255, 0.3);
+	color: rgba(0, 0, 0);
 }
 
 .booking-form select.form-control {
@@ -103,7 +111,7 @@
 	height: 32px;
 	text-align: center;
 	pointer-events: none;
-	color: #fff;
+	color: rgb(0, 0, 0);
 	font-size: 14px;
 }
 
@@ -115,7 +123,7 @@
 }
 
 .booking-form .form-label {
-	color: #fff;
+	color: rgb(0, 0, 0);
 	font-size: 14px;
 	font-weight: 400;
 	margin-bottom: 5px;
