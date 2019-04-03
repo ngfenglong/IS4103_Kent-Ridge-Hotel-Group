@@ -51,7 +51,8 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
     private String newPassword;
     private String confirmPassword;
 
-    private String regName;
+    private String regFName;
+    private String regLName;
     private String regNric;
     private String regPassword;
     private String regConfirmPassword;
@@ -93,7 +94,7 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
 
                 loggedInCustomer = customerSessionLocal.getCustomerByEmail(email);
                 id = loggedInCustomer.getCustomerID();
-                setName(loggedInCustomer.getName());
+                setName(loggedInCustomer.getLastName() + " " + loggedInCustomer.getFirstName());
 
                 Logging l = new Logging("Customer", "Login Successfuly as " + name, name);
                 logSessionLocal.createLogging(l);
@@ -123,11 +124,10 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
 
         if (regPassword.equals(regConfirmPassword)) {
             Customer c = new Customer();
-            c.setName(regName);
+            c.setFirstName(regFName);
+            c.setLastName(regLName);
             c.setEmail(regEmail);
             c.setMobileNum(regMobileNum);
-
-            c.setEmail(regEmail);
             c.setMobileNum(regMobileNum);
    
             c.setPassword(encryptPassword(regPassword));
@@ -136,12 +136,12 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
             c.setDateJoined(java.util.Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()));
             customerSessionLocal.createCustomer(c);
 
-            String tempName = regName;
+            String tempName = regLName + " " + regFName;
             Logging l = new Logging("Customer", "Register new User " + tempName, tempName);
             logSessionLocal.createLogging(l);
 
-            regName = null;
-            regNric = null;
+            regFName = null;
+            regLName = null;
             regEmail = null;
             regMobileNum = null;
             regPassportNum = null;
@@ -166,7 +166,7 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
     }
 
     public String deactivateAccount() throws NoResultException, IOException {
-        String logActivityName = loggedInCustomer.getName();
+        String logActivityName = loggedInCustomer.getLastName() + " " + loggedInCustomer.getFirstName() ;
         customerSessionLocal.deactivateAccount(loggedInCustomer.getCustomerID());
 
         Logging l = new Logging("Customer", "Deactivate " + logActivityName + " account", logActivityName);
@@ -238,7 +238,7 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
             return "/changePassword.xhtml";
         } else {
             customerSessionLocal.changePasword(loggedInCustomer, encryptPassword(newPassword));
-            Logging l = new Logging("Profile", loggedInCustomer.getName() + " has just changed password", loggedInCustomer.getName());
+            Logging l = new Logging("Profile", loggedInCustomer.getLastName() + " " + loggedInCustomer.getFirstName()+ " has just changed password", loggedInCustomer.getLastName() + " " + loggedInCustomer.getFirstName());
             logSessionLocal.createLogging(l);
 
             oldPassword = null;
@@ -308,6 +308,161 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
                     InternetAddress.parse(recipient));
             message.setSubject(subject);
             message.setText(msg);
+            message.setContent("<body>\n" +
+"\n" +
+"<div class=\"super_container\">\n" +
+"	\n" +
+"	<!-- Header -->\n" +
+"\n" +
+"	<header class=\"header\">\n" +
+"		<div class=\"header_content d-flex flex-row align-items-center justify-content-start\">\n" +
+"			<div class=\"logo\"><a href=\"#\">KRHG</a></div>\n" +
+"			<div class=\"ml-auto d-flex flex-row align-items-center justify-content-start\">\n" +
+"				<nav class=\"main_nav\">\n" +
+"					<ul class=\"d-flex flex-row align-items-start justify-content-start\">\n" +
+"						<li><a href=\"index.html\">Home</a></li>\n" +
+"						<li><a href=\"about.html\">About us</a></li>\n" +
+"						<li><a href=\"hotels.html\">Hotels</a></li>\n" +
+"						<li><a href=\"contact.html\">Contact us</a></li>\n" +
+"					</ul>\n" +
+"				</nav>\n" +
+"				<div class=\"book_button\"><a href=\"login.html\">Login/Signup</a></div>\n" +
+"\n" +
+"\n" +
+"				<!-- Hamburger Menu -->\n" +
+"				<div class=\"hamburger\"><i class=\"fa fa-bars\" aria-hidden=\"true\"></i></div>\n" +
+"			</div>\n" +
+"		</div>\n" +
+"	</header>\n" +
+"\n" +
+"	<!-- Menu -->\n" +
+"\n" +
+"	<div class=\"menu trans_400 d-flex flex-column align-items-end justify-content-start\">\n" +
+"		<div class=\"menu_close\"><i class=\"fa fa-times\" aria-hidden=\"true\"></i></div>\n" +
+"		<div class=\"menu_content\">\n" +
+"			<nav class=\"menu_nav text-right\">\n" +
+"				<ul>\n" +
+"					<li><a href=\"index.html\">Home</a></li>\n" +
+"					<li><a href=\"about.html\">About us</a></li>\n" +
+"					<li><a href=\"hotels.html\">Hotels</a></li>\n" +
+"					<li><a href=\"contact.html\">Contact us</a></li>\n" +
+"				</ul>\n" +
+"			</nav>\n" +
+"		</div>\n" +
+"		<div class=\"menu_extra\">\n" +
+"			<div class=\"menu_book text-right\"><a href=\"#\">Reserve Now</a></div>\n" +
+"			<div class=\"menu_phone d-flex flex-row align-items-center justify-content-center\">\n" +
+"				<img src=\"images/phone-2.png\" alt=\"\">\n" +
+"				<span>1234 5678</span>\n" +
+"			</div>\n" +
+"		</div>\n" +
+"	</div>\n" +
+"\n" +
+"	<!-- Home -->\n" +
+"\n" +
+"	<div class=\"home\">\n" +
+"		<div class=\"background_image\" style=\"background-image:url(images/about.jpg)\"></div>\n" +
+"		<div class=\"home_container\">\n" +
+"			<div class=\"container\">\n" +
+"				<div class=\"row\">\n" +
+"					<div class=\"col\">\n" +
+"						<div class=\"home_content text-center\">\n" +
+"							<div class=\"home_title\">About us</div>\n" +
+"\n" +
+"						</div>\n" +
+"					</div>\n" +
+"				</div>\n" +
+"			</div>\n" +
+"		</div>\n" +
+"	</div>\n" +
+"\n" +
+"	<!-- About -->\n" +
+"\n" +
+"	<div class=\"about\">\n" +
+"		<div class=\"container\">\n" +
+"			<div class=\"row\">\n" +
+"				<div class=\"col-lg-6\">\n" +
+"					<div class=\"about_title\"><h2>Welcome to Kent Ridge Hotel Group</h2></div>\n" +
+"				</div>\n" +
+"			</div>\n" +
+"			<div class=\"row about_row\">\n" +
+"				\n" +
+"				<!-- About Content -->\n" +
+"				<div class=\"col-lg-6\">\n" +
+"					<div class=\"about_content\">\n" +
+"						<div class=\"about_text\">\n" +
+"							Kent Ridge Hotels Group opened its first hotel, the now Kent Ridge Central in Ang Mo Kio in 2000. We have built a reputation over the years to provide premium service quality and affordable accommodation. Over the years, we have grown from strength to strength, opening more hotels islandwide, and opening the Group’s new flagship, Kent Ridge Grand in the heart of Singapore’s Shopping Belt, Orchard Road, in 2012. Today, the Group operates 10 hotels around Singapore and the Kent Ridge brand has become well established in the local hospitality industry.\n" +
+"									Most of our hotels are strategically located in the City, or in major regional centers of Singapore, and are easily accessible by road, buses or the MRT system. Our hotels are also located near major tourist attractions and convention centers. Equipped with good price, locations, service, cleanliness and a hassle-free booking experience, Kent Ridge Hotels will continue to be the ideal choice for travelers providing comfort to all.\n" +
+"									\n" +
+"						</div>\n" +
+"						<div class=\"about_sig\"><img src=\"images/sig.png\" alt=\"\"></div>\n" +
+"					</div>\n" +
+"				</div>\n" +
+"\n" +
+"				<!-- About Images -->\n" +
+"				<div class=\"col-lg-6\">\n" +
+"					<div class=\"about_images d-flex flex-row align-items-start justify-content-between flex-wrap\">\n" +
+"						<img src=\"images/about_1.png\" alt=\"\">\n" +
+"						<img src=\"images/about_2.png\" alt=\"\">\n" +
+"						<img src=\"images/about_3.png\" alt=\"\">\n" +
+"					</div>\n" +
+"				</div>\n" +
+"			</div>\n" +
+"		</div>\n" +
+"	</div>\n" +
+"\n" +
+"	<!-- Split Section Right -->\n" +
+"\n" +
+"	<div class=\"split_section_right container_custom\">\n" +
+"		<div class=\"container\">\n" +
+"			<div class=\"row row-xl-eq-height\">\n" +
+"				\n" +
+"				<div class=\"col-xl-6 order-xl-1 order-2\">\n" +
+"					<div class=\"split_section_image\">\n" +
+"						<div class=\"background_image\" style=\"background-image:url(images/milestones.jpg)\"></div>\n" +
+"					</div>\n" +
+"				</div>\n" +
+"\n" +
+"				<div class=\"col-xl-6 order-xl-2 order-1\">\n" +
+"					<div class=\"split_section_right_content\">\n" +
+"						<div class=\"split_section_title\"><h2>Mission</h2></div>\n" +
+"						<div class=\"split_section_text\">\n" +
+"							<p>The mission of Kent Ridge Hotels Group is to provide the highest level of hospitality services to make the stay of our guests enjoyable. We aim to make all KRHG hotels a pleasant place to stay.</p>\n" +
+"						</div>\n" +
+"\n" +
+"					</div>\n" +
+"				</div>\n" +
+"\n" +
+"			</div>\n" +
+"		</div>\n" +
+"	</div>\n" +
+"\n" +
+"	<!-- Split Section Left -->\n" +
+"\n" +
+"	<div class=\"split_section_left container_custom\">\n" +
+"		<div class=\"container\">\n" +
+"			<div class=\"row\">\n" +
+"				<div class=\"col-xl-6\">\n" +
+"					<div class=\"split_section_left_content\">\n" +
+"						<div class=\"split_section_title\"><h2>Vision</h2></div>\n" +
+"						<div class=\"split_section_text\">\n" +
+"							<p>Our vision is to apply and set the highest standards of service quality. We aim to use and constantly introduce technologically advanced processes to maintain our competitive advantage, whilst still remaining true to our core value of service quality. </p>\n" +
+"						</div>\n" +
+"\n" +
+"\n" +
+"					</div>\n" +
+"				</div>\n" +
+"\n" +
+"				<!-- Loaders Image -->\n" +
+"				<div class=\"col-xl-6\">\n" +
+"					<div class=\"split_section_image split_section_left_image\">\n" +
+"						<div class=\"background_image\" style=\"background-image:url(images/loaders.jpg)\"></div>\n" +
+"					</div>\n" +
+"				</div>\n" +
+"\n" +
+"			</div>\n" +
+"		</div>\n" +
+"	</div>","text/html");
 
             Transport.send(message);
 
@@ -421,12 +576,20 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
         this.logSessionLocal = logSessionLocal;
     }
 
-    public String getRegName() {
-        return regName;
+    public String getFName() {
+        return regFName;
     }
 
-    public void setRegName(String regName) {
-        this.regName = regName;
+    public void setRegFName(String regFName) {
+        this.regFName = regFName;
+    }
+    
+    public String getLName() {
+        return regLName;
+    }
+
+    public void setRegLName(String regLName) {
+        this.regLName = regLName;
     }
 
     public String getRegNric() {
