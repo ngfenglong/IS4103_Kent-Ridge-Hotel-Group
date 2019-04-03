@@ -14,6 +14,8 @@ import error.NoResultException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
@@ -48,10 +50,13 @@ public class requestAndServiceManagedBean implements Serializable {
     /**
      * Creates a new instance of requestAndServiceManagedBean
      */
+
+    //hotel code
+    private String hotelCode;
+
     //laundry 
     private List<LaundryOrder> allLaundryOrders;
     private String laundryRoomNumber;
-    private int laundryQuantity;
     private String laundrySpecialRequest;
 
     //Lost and found
@@ -81,6 +86,10 @@ public class requestAndServiceManagedBean implements Serializable {
     }
 
     public List<LaundryOrder> getAllLaundryOrders() {
+
+        laundryRoomNumber = null;
+        laundrySpecialRequest = null;
+
         return allLaundryOrders = laundrySessionLocal.getAllLaundryOrder();
     }
 
@@ -213,6 +222,7 @@ public class requestAndServiceManagedBean implements Serializable {
     public List<HouseKeepingOrder> getAllHousekeepingOrder() {
         hkSpecialRequest = null;
         hkroom = null;
+        hkRequestType = null;
 
         //split by hotel
         try {
@@ -226,10 +236,13 @@ public class requestAndServiceManagedBean implements Serializable {
         this.allHousekeepingOrder = allHousekeepingOrder;
     }
 
-    public List<Room> getAllOccupiedRooms() {
-        // get only those occupiedroom
-        // also by hotel
-        return allOccupiedRooms = roomSessionLocal.getAllRooms();
+    public List<Room> getAllOccupiedRooms(){
+        try {
+            return roomSessionLocal.getRoomByStatus("occupied", hotelCode);
+        } catch (NoResultException e) {
+            return null;
+        }
+
     }
 
     public void setAllOccupiedRooms(List<Room> allOccupiedRooms) {
@@ -270,7 +283,7 @@ public class requestAndServiceManagedBean implements Serializable {
         out.println("alert('Housekeeping request created Succesful!');");
         out.println("</script>");
 
-        return "housekeeping.xhtmlfaces-redirect=true";
+        return "housekeeping.xhtml?faces-redirect=true";
     }
 
     public String getLaundryRoomNumber() {
@@ -281,20 +294,17 @@ public class requestAndServiceManagedBean implements Serializable {
         this.laundryRoomNumber = laundryRoomNumber;
     }
 
-    public int getLaundryQuantity() {
-        return laundryQuantity;
-    }
-
-    public void setLaundryQuantity(int laundryQuantity) {
-        this.laundryQuantity = laundryQuantity;
-    }
-
     public String getLaundrySpecialRequest() {
         return laundrySpecialRequest;
     }
 
     public void setLaundrySpecialRequest(String laundrySpecialRequest) {
         this.laundrySpecialRequest = laundrySpecialRequest;
+    }
+
+    public String convertDateFormat(Date date) {
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        return dateFormat.format(date);
     }
 
     public String createLaundry() throws NoResultException, IOException {
@@ -307,7 +317,7 @@ public class requestAndServiceManagedBean implements Serializable {
         LO.setOrderDateTime(new Date());
         LO.setSpecialRequest(laundrySpecialRequest);
         LO.setStatus("Pending");
-        
+
         laundrySessionLocal.createLaundryOrder(LO);
 
         HouseKeepingOrder HKo = new HouseKeepingOrder();
@@ -317,7 +327,7 @@ public class requestAndServiceManagedBean implements Serializable {
         HKo.setRequestType("laundry");
         HKo.setRoom(roomSessionLocal.getRoomByName(laundryRoomNumber));
         HKo.setOrderDateTime(new Date());
-        
+
         houseKeepingOrderSessionLocal.createHouseKeepingOrder(HKo);
 
         out.println("<script type=\"text/javascript\">");
@@ -328,11 +338,11 @@ public class requestAndServiceManagedBean implements Serializable {
     }
 
     public int getLevel(String roomnumber) {
-            if(roomnumber.length()==3){
-              return Integer.parseInt(roomnumber.substring(0,1));
-            }else{
-                return Integer.parseInt(roomnumber.substring(0,2));
-            }
+        if (roomnumber.length() == 3) {
+            return Integer.parseInt(roomnumber.substring(0, 1));
+        } else {
+            return Integer.parseInt(roomnumber.substring(0, 2));
+        }
     }
 
     public String editLostAndFound(LostAndFoundReport LF) {

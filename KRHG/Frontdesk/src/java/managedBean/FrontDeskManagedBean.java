@@ -17,6 +17,8 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
@@ -29,6 +31,7 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletResponse;
 import sessionBeans.BookingSessionLocal;
 import sessionBeans.CustomerSessionLocal;
+import sessionBeans.PaymentTransactionSessionLocal;
 import sessionBeans.RoomSessionLocal;
 
 /**
@@ -48,6 +51,8 @@ public class FrontDeskManagedBean {
     private BookingSessionLocal bookSessionLocal;
     @EJB
     private CustomerSessionLocal customerSessionLocal;
+    @EJB
+    private PaymentTransactionSessionLocal paymentTransactionSessionLocal;
 
     private String mode;
 
@@ -223,6 +228,7 @@ public class FrontDeskManagedBean {
         checkoutDate = PT.getRoomsBooked().get(0).getBookOutDate();
 
         checkinName = PT.getPayer().getFirstName() + " " + PT.getPayer().getLastName();
+        checkinEmail=PT.getPayer().getEmail();
         roombooking = PT;
         mode = "online";
         return "checkinResult.xhtml?faces-redirect=true";
@@ -266,9 +272,14 @@ public class FrontDeskManagedBean {
         return "";
     }
 
-    public List<PaymentTransaction> getTodaysbookings() {
-        //bookSessionLocal.getPaymentTransactionByTodayDate(Date todaydate);
-        return null;
+    public List<PaymentTransaction> getTodaysbookings() throws NoResultException {
+        return paymentTransactionSessionLocal.getAllPaymentTransaction();
+
+    }
+
+    public String convertDateFormat(Date date) {
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        return dateFormat.format(date);
     }
 
     public void setTodaysbookings(List<PaymentTransaction> todaysbookings) {
@@ -341,8 +352,6 @@ public class FrontDeskManagedBean {
 
         return "manageAccountEdit.xhtml?faces-redirect=true";
     }
-
-  
 
     public int getEditCustomerPoint() {
         return editCustomerPoint;
@@ -426,8 +435,11 @@ public class FrontDeskManagedBean {
         editCustomer.setPoints(editCustomerPoint);
         editCustomer.setMobileNum(editCustomerMobileNumber);
         customerSessionLocal.updateCustomer(editCustomer);
+        out.println("<script type=\"text/javascript\">");
+        out.println("alert('Confirm Password doesn't match! !');");
+        out.println("</script>");
 
-        return "managedAccount.xhtml?faces-redirect=true";
+        return "manageAccount.xhtml?faces-redirect=true";
     }
 
     private static String encryptPassword(String password) {

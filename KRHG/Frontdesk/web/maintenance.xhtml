@@ -64,7 +64,7 @@
                                         <tr>
                                             <td>#{o.location}</td>
                                             <td>#{o.description}</td>
-                                            <td>#{o.dateReported}</td>
+                                            <td>#{requestAndServiceManagedBean.convertDateFormat(o.dateReported)}</td>
                                             <td>#{o.isResolved==true? 'Completed':'Incomplete'}</td>
 
 

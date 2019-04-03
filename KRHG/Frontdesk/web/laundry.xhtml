@@ -56,10 +56,10 @@
                                         <th>Room Number</th>
                                         <th>Date Ordered</th>
                                         <th>special Request </th>
-                                        <th>Quantity </th>
+
                                         <th>Status </th>
 
-                                        <th></th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -68,9 +68,9 @@
 
                                             <tr>
                                                 <td>#{o.room.roomNumber}</td>
-                                                <td>#{o.orderDateTime}</td>
+                                                <td>#{requestAndServiceManagedBean.convertDateFormat(o.orderDateTime)}</td>
                                                 <td>#{o.specialRequest}</td>
-                                                <td>#{o.qty}</td>
+
                                                 <td>#{o.status}</td>
 
                                             </tr>
@@ -83,10 +83,9 @@
                                         <th>Room Number</th>
                                         <th>Date Ordered</th>
                                         <th>special Request </th>
-                                        <th>Quantity </th>
+
                                         <th>Status </th>
 
-                                        <th></th>
                                     </tr>
                                 </tfoot>
                             </table>

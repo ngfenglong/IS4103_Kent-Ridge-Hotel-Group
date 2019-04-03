@@ -177,8 +177,8 @@
                                                 <td>#{o.roomBookingID}</td>
                                                 <td>#{o.roomType}</td>
                                                 <td>not in entity field</td>
-                                                <td>#{o.bookInDate}</td>
-                                                <td>#{o.bookOutDate}</td>
+                                                <td>#{frontDeskManagedBean.convertDateFormat(o.bookInDate)}</td>
+                                                <td>#{frontDeskManagedBean.convertDateFormat(o.bookOutDate)}</td>
                                             </tr>
                                         </ui:repeat>
 

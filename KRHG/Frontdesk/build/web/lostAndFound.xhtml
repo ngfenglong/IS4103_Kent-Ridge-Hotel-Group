@@ -70,7 +70,7 @@
                                                 <td>#{o.itemName}</td>
                                                 <td>#{o.contactNum}</td>
                                                 <td>#{o.itemDescription}</td>
-                                                <td>#{o.reportedDate}</td>
+                                                <td>#{requestAndServiceManagedBean.convertDateFormat(o.reportedDate)}</td>
                                                 <td>#{o.reportType}</td>
                                                 <td>#{o.isResolved eq true ? "Solved" : "Unresolved"}</td>
                                                 <td colspan="3"><h:commandLink  action="#{requestAndServiceManagedBean.editLostAndFound(o)}" > <i style="color:gray" class="fa fa-edit" ></i></h:commandLink></td>

@@ -71,7 +71,7 @@
                                                 <td>#{o.room.roomNumber}</td>
 
                                                 <td>#{o.status}</td>
-                                                <td>#{o.orderDateTime}</td>
+                                                <td>#{requestAndServiceManagedBean.convertDateFormat(o.orderDateTime)}</td>
                                                 <td colspan="3"><h:commandLink  action="#{requestAndServiceManagedBean.editHousekeeping(o)}" > <i style="color:gray" class="fa fa-edit" ></i></h:commandLink></td>
                                             </tr>
 

@@ -78,20 +78,6 @@
                                             </tr>
 
                                             <tr>
-                                                <div class="form-group">
-
-                                                    <td>
-                                                        <label>Quantity:</label>
-                                                    </td>
-                                                    <td>
-                                                        <h:inputText class="form-control"
-                                                            value="#{requestAndServiceManagedBean.laundryQuantity}"
-                                                            a:placeholder="Quantity" required="true"></h:inputText>
-
-                                                    </td>
-                                                </div>
-                                            </tr>
-                                            <tr>
                                                 <td>
                                                     <label>
                                                         Special Request:
@@ -113,8 +99,8 @@
                                                 </td>
                                                 <td>
                                                     <div class="form-group">
-                                                        <h:inputText id="time" class="datepicker" />
-
+                                                        <h:inputText id="time" class="datepicker">
+                                                        </h:inputText>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -128,7 +114,7 @@
                                     <!-- /.card-body -->
 
                                     <div class="card-footer">
-                                        <h:commandButton class="custom-button" value="Create Report"
+                                        <h:commandButton class="btn btn-primary" value="Create Request"
                                             action="#{requestAndServiceManagedBean.createLaundry()}"></h:commandButton>
                                     </div>
                                 </h:form>
