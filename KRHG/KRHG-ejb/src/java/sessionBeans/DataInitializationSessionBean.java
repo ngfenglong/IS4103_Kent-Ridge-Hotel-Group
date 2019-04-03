@@ -7,6 +7,7 @@ package sessionBeans;
 
 import entity.CreditCard;
 import entity.Customer;
+import entity.FoodMenuItem;
 import entity.Hotel;
 import entity.HotelFacility;
 import entity.HouseKeepingOrder;
@@ -69,6 +70,8 @@ public class DataInitializationSessionBean {
     MaintainenceOrderSessionLocal maintainenceOrderSessionLocal;
     @EJB
     LostAndFoundSessionLocal lostAndFoundSessionLocal;
+    @EJB
+    FoodMenuItemSessionLocal foodMenuItemSessionLocal;
 
     public DataInitializationSessionBean() {
     }
@@ -99,7 +102,7 @@ public class DataInitializationSessionBean {
 
     }
 
-    public void initializeData() throws NoResultException {
+    public void initializeData() throws NoResultException, ParseException {
 //*********************************************Staff Type************************************************
         StaffType st1 = new StaffType("Housekeeping Staff");
         staffSessionLocal.createStaffType(st1);
@@ -871,66 +874,207 @@ public class DataInitializationSessionBean {
         roomFacilitySessionLocal.createRoomFacility(rf22);
         rf22 = roomFacilitySessionLocal.getRoomFacilityByName("Kitchen");
 //*********************************************CUSTOMER************************************************
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
-        Calendar myCalendar = new GregorianCalendar(2019, 2, 4); 
-        Date d1 = myCalendar.getTime();
-        Customer c1 = new Customer("Zack", "Neo Guohui", "Male", encryptPassword("test"), 187, "neoguoh202@hotmail.com", "+6591321876", d1, true);
+        Customer c1 = new Customer("Zack", "Neo Guohui", "Male", encryptPassword("test"), 187, "neoguoh202@hotmail.com", "+6591321876", format.parse("2019-02-04"), true);
         customerSessionLocal.createCustomer(c1);
         c1 = customerSessionLocal.getCustomerByEmail("neoguoh202@hotmail.com");
 
-        Calendar myCalendar2 = new GregorianCalendar(2019, 1, 28);
-        Date d2 = myCalendar2.getTime();
-        Customer c2 = new Customer("Pillay", "Maureen", "Male", encryptPassword("test"), 31877, "maureenpi1@yahoo.com.sg", "+6582375237", d2, false);
+        Customer c2 = new Customer("Pillay", "Maureen", "Male", encryptPassword("test"), 31877, "maureenpi1@yahoo.com.sg", "+6582375237", format.parse("2019-01-28"), false);
         customerSessionLocal.createCustomer(c2);
         c2 = customerSessionLocal.getCustomerByEmail("maureenpi1@yahoo.com.sg");
 
-        Calendar myCalendar3 = new GregorianCalendar(2019, 3, 1);
-        Date d3 = myCalendar3.getTime();
-        Customer c3 = new Customer("Mei Fang", "Chia", "Female", encryptPassword("test"), 1023823, "chiame317@gmail.com", "+6591312719", d3, true);
+        Customer c3 = new Customer("Mei Fang", "Chia", "Female", encryptPassword("test"), 1023823, "chiame317@gmail.com", "+6591312719", format.parse("2019-03-01"), true);
         customerSessionLocal.createCustomer(c3);
         c3 = customerSessionLocal.getCustomerByEmail("chiame317@gmail.com");
 
-        Calendar myCalendar4 = new GregorianCalendar(2019, 1, 19); 
-        Date d4 = myCalendar4.getTime();
-        Customer c4 = new Customer("Randal", "Ho", "Male", encryptPassword("test"), 5099, "randalh753@gmail.com", "+6593243287", d4, false);
+        Customer c4 = new Customer("Randal", "Ho", "Male", encryptPassword("test"), 5099, "randalh753@gmail.com", "+6593243287", format.parse("2019-01-19"), false);
         customerSessionLocal.createCustomer(c4);
         c4 = customerSessionLocal.getCustomerByEmail("randalh753@gmail.com");
 
-        Calendar myCalendar5 = new GregorianCalendar(2019, 4, 5);
-        Date d5 = myCalendar5.getTime();
-        Customer c5 = new Customer("Lok Li", "Choo", "Female", encryptPassword("test"), 38271, "loklich35@hotmail.com", "+6598768896", d5,true);
+        Customer c5 = new Customer("Lok Li", "Choo", "Female", encryptPassword("test"), 38271, "loklich35@hotmail.com", "+6598768896", format.parse("2019-04-01"), true);
         customerSessionLocal.createCustomer(c5);
         c5 = customerSessionLocal.getCustomerByEmail("loklich35@hotmail.com");
 
-        Calendar myCalendar6 = new GregorianCalendar(2019, 2, 27);
-        Date d6 = myCalendar6.getTime();
-        Customer c6 = new Customer("Mervin", "Ee","Male", encryptPassword("test"), 200192, "mervinee@live.com", "+6587652376", d6, true);
+        Customer c6 = new Customer("Mervin", "Ee", "Male", encryptPassword("test"), 200192, "mervinee@live.com", "+6587652376", format.parse("2019-02-27"), true);
         customerSessionLocal.createCustomer(c6);
         c6 = customerSessionLocal.getCustomerByEmail("mervinee@live.com");
 
-        Calendar myCalendar7 = new GregorianCalendar(2019, 3, 6);
-        Date d7 = myCalendar7.getTime();
-        Customer c7 = new Customer("Galuh Jabal", "Thamrin", "Male", encryptPassword("test"), 382, "thamrinjb@live.com", "+622169195347", d7, true);
+        Customer c7 = new Customer("Galuh Jabal", "Thamrin", "Male", encryptPassword("test"), 382, "thamrinjb@live.com", "+622169195347", format.parse("2019-03-06"), true);
         customerSessionLocal.createCustomer(c7);
         c7 = customerSessionLocal.getCustomerByEmail("thamrinjb@live.com");
 
-        Calendar myCalendar8 = new GregorianCalendar(2019, 4, 14);
-        Date d8 = myCalendar8.getTime();
-        Customer c8 = new Customer("Bao Cong", "Chen", "Male", encryptPassword("test"), 4819, "chenbc@163.com", "+8613067076921", d8, true);
+        Customer c8 = new Customer("Bao Cong", "Chen", "Male", encryptPassword("test"), 4819, "chenbc@163.com", "+8613067076921", format.parse("2019-03-21"), true);
         customerSessionLocal.createCustomer(c8);
         c8 = customerSessionLocal.getCustomerByEmail("chenbc@163.com");
 
-        Calendar myCalendar9 = new GregorianCalendar(2019, 3, 31);
-        Date d9 = myCalendar9.getTime();
-        Customer c9 = new Customer("Meg Kou", "Thong", "Female", encryptPassword("test"), 2938, "thongmk@hotmail.com", "+60188617734", d9, true);
+        Customer c9 = new Customer("Meg Kou", "Thong", "Female", encryptPassword("test"), 2938, "thongmk@hotmail.com", "+60188617734", format.parse("2019-03-31"), true);
         customerSessionLocal.createCustomer(c9);
         c9 = customerSessionLocal.getCustomerByEmail("thongmk@hotmail.com");
 
-        Calendar myCalendar10 = new GregorianCalendar(2019, 4, 15);
-        Date d10 = myCalendar10.getTime();
-        Customer c10 = new Customer("Cuong Khanh", "Anh Nhiem", "Male", encryptPassword("test"), 9281, "cukhanhn@gmail.com", "+84843506870", d10, true);
+        Customer c10 = new Customer("Cuong Khanh", "Anh Nhiem", "Male", encryptPassword("test"), 9281, "cukhanhn@gmail.com", "+84843506870", format.parse("2019-04-01"), true);
         customerSessionLocal.createCustomer(c10);
         c10 = customerSessionLocal.getCustomerByEmail("cukhanhn@gmail.com");
+
+        FoodMenuItem fmi1 = new FoodMenuItem("Pancakes", "Served with maple syrup, wild berry compote and toasted almond flakes", "All Day Breakfast", true, 18.0, "pancakes.jpg");
+        foodMenuItemSessionLocal.createFoodMenuItem(fmi1);
+        fmi1 = foodMenuItemSessionLocal.getFoodMenuItemByName("Pancakes");
+
+        FoodMenuItem fmi2 = new FoodMenuItem("Scrambled Eggs", "Served with chicken sausages, bacon, grilled tomato baked beans and hash brown potato", "All Day Breakfast", true, 22.0, "scrambledeggs.jpg");
+        foodMenuItemSessionLocal.createFoodMenuItem(fmi2);
+        fmi2 = foodMenuItemSessionLocal.getFoodMenuItemByName("Scrambled Eggs");
+
+        FoodMenuItem fmi3 = new FoodMenuItem("Traditional Caesar Salad", "A classic Caesar salad with baby cos lettuce, candied back bacon, croutons, parmesan, white anchovies, Caesar dressing and freshly coddled free-range egg", "Starters", true, 14.0, "caesarsalad.jpg");
+        foodMenuItemSessionLocal.createFoodMenuItem(fmi3);
+        fmi3 = foodMenuItemSessionLocal.getFoodMenuItemByName("Traditional Caesar Salad");
+
+        FoodMenuItem fmi4 = new FoodMenuItem("Mushroom Veloute", "With truffle espuma", "Starters", true, 18.0, "mushroomveloute.jpg");
+        foodMenuItemSessionLocal.createFoodMenuItem(fmi4);
+        fmi4 = foodMenuItemSessionLocal.getFoodMenuItemByName("Mushroom Veloute");
+
+        FoodMenuItem fmi5 = new FoodMenuItem("Club Sandwich", "Chicken breast, crispy smoked back bacon, ripe tomatoes, fried free-range egg, crisp lettuce layered between toasted bread with house mayonnaise", "Sandwiches and Burgers", true, 25.0, "clubsandwich.jpg");
+        foodMenuItemSessionLocal.createFoodMenuItem(fmi5);
+        fmi5 = foodMenuItemSessionLocal.getFoodMenuItemByName("Club Sandwich");
+
+        FoodMenuItem fmi6 = new FoodMenuItem("Australian Black Angus Beef Burger", "Premium Angus patty, crispy bacon, roma tomatoes, shredded lettuce, onion marmalade and Swiss Cheese", "Sandwiches and Burgers", true, 29.0, "beefburger.jpg");
+        foodMenuItemSessionLocal.createFoodMenuItem(fmi6);
+        fmi6 = foodMenuItemSessionLocal.getFoodMenuItemByName("Australian Black Angus Beef Burger");
+
+        FoodMenuItem fmi7 = new FoodMenuItem("Butter Chicken", "Chicken simmered in fragrant creamy tomato sauce served with steamed basmati rice, naan bread and chutney", "Flavours of Asia", true, 27.0, "butterchicken.jpg");
+        foodMenuItemSessionLocal.createFoodMenuItem(fmi7);
+        fmi7 = foodMenuItemSessionLocal.getFoodMenuItemByName("Butter Chicken");
+
+        FoodMenuItem fmi8 = new FoodMenuItem("Char Kway Teow", "Wok-fried flat rice noodles with seafood, cockles, chinese pork sausage and bean sprout", "Flavours of Asia", true, 26.0, "charkwayteow.jpg");
+        foodMenuItemSessionLocal.createFoodMenuItem(fmi8);
+        fmi8 = foodMenuItemSessionLocal.getFoodMenuItemByName("Char Kway Teow");
+
+        FoodMenuItem fmi9 = new FoodMenuItem("Hainanese Chicken Rice", " Hainanese-style poached chicken, chilli sauce, ginger sauce, dark soya sauce, served with fragrant chicken rice ", "Flavours of Asia", true, 27.0, "chickenrice.jpg");
+        foodMenuItemSessionLocal.createFoodMenuItem(fmi9);
+        fmi9 = foodMenuItemSessionLocal.getFoodMenuItemByName("Hainanese Chicken Rice");
+
+        FoodMenuItem fmi10 = new FoodMenuItem("Nasi Goreng Kampung", "Fragrant fried rice with seafood, chicken satay, fried egg, acar, served with crackers", "Flavours of Asia", true, 26.0, "nasigoreng.jpg");
+        foodMenuItemSessionLocal.createFoodMenuItem(fmi10);
+        fmi10 = foodMenuItemSessionLocal.getFoodMenuItemByName("Nasi Goreng Kampung");
+
+        FoodMenuItem fmi11 = new FoodMenuItem("Fish And Chips", " Today’s catch of beer battered reef fish, fries, tartare lemon sauce and green peas on the side ", "Mains", true, 25.0, "fishandchips.jpg");
+        foodMenuItemSessionLocal.createFoodMenuItem(fmi11);
+        fmi11 = foodMenuItemSessionLocal.getFoodMenuItemByName("Fish And Chips");
+
+        FoodMenuItem fmi12 = new FoodMenuItem("Centre Cut Australian Black Angus Sirloin", " With seasonal baby vegetables, truffle celeriac mousseline, french shallot and black garlic ", "Mains", true, 48.0, "australiansirloin.jpg");
+        foodMenuItemSessionLocal.createFoodMenuItem(fmi12);
+        fmi12 = foodMenuItemSessionLocal.getFoodMenuItemByName("Centre Cut Australian Black Angus Sirloin");
+
+        FoodMenuItem fmi13 = new FoodMenuItem("Whole Wheat Spaghetti Pasta ", " With bolognaise sauce ", "Mains", true, 24.0, "spaghettipasta.jpg");
+        foodMenuItemSessionLocal.createFoodMenuItem(fmi13);
+        fmi13 = foodMenuItemSessionLocal.getFoodMenuItemByName("Whole Wheat Spaghetti Pasta");
+
+        FoodMenuItem fmi14 = new FoodMenuItem("Tiger Lager", "", "Beverages (Alcohol)", true, 16.0, "tiger.jpg");
+        foodMenuItemSessionLocal.createFoodMenuItem(fmi14);
+        fmi14 = foodMenuItemSessionLocal.getFoodMenuItemByName("Tiger Lager");
+
+        FoodMenuItem fmi15 = new FoodMenuItem("Corona Extra Beer", "", "Beverages (Alcohol)", true, 16.0, "corona.jpg");
+        foodMenuItemSessionLocal.createFoodMenuItem(fmi15);
+        fmi15 = foodMenuItemSessionLocal.getFoodMenuItemByName("Corona Extra Beer ");
+
+        FoodMenuItem fmi16 = new FoodMenuItem("Heineken", "", "Beverages (Alcohol)", true, 16.0, "heineken.jpg");
+        foodMenuItemSessionLocal.createFoodMenuItem(fmi16);
+        fmi16 = foodMenuItemSessionLocal.getFoodMenuItemByName("Heineken");
+
+        FoodMenuItem fmi17 = new FoodMenuItem("Kirin", "", "Beverages (Alcohol)", true, 16.0, "kirin.jpg");
+        foodMenuItemSessionLocal.createFoodMenuItem(fmi17);
+        fmi17 = foodMenuItemSessionLocal.getFoodMenuItemByName("Kirin");
+
+        FoodMenuItem fmi18 = new FoodMenuItem("Grey Goose (Shot Glass)", "", "Beverages (Alcohol)", true, 20.0, "greygoose.jpg");
+        foodMenuItemSessionLocal.createFoodMenuItem(fmi18);
+        fmi18 = foodMenuItemSessionLocal.getFoodMenuItemByName("Grey Goose (Shot Glass)");
+
+        FoodMenuItem fmi19 = new FoodMenuItem("Johnnie Walker Gold Label (Dram)", "", "Beverages (Alcohol)", true, 20.0, "johnniewalker.jpg");
+        foodMenuItemSessionLocal.createFoodMenuItem(fmi19);
+        fmi19 = foodMenuItemSessionLocal.getFoodMenuItemByName("Johnnie Walker Gold Label (Dram)");
+
+        FoodMenuItem fmi20 = new FoodMenuItem("Orange Juice", "", "Beverages (Chilled Juices)", true, 7.0, "orangejuice.jpg");
+        foodMenuItemSessionLocal.createFoodMenuItem(fmi20);
+        fmi20 = foodMenuItemSessionLocal.getFoodMenuItemByName("Orange Juice");
+
+        FoodMenuItem fmi21 = new FoodMenuItem("Mango Juice", "", "Beverages (Chilled Juices)", true, 7.0, "mangojuice.jpg");
+        foodMenuItemSessionLocal.createFoodMenuItem(fmi21);
+        fmi21 = foodMenuItemSessionLocal.getFoodMenuItemByName("Mango Juice");
+
+        FoodMenuItem fmi22 = new FoodMenuItem("Apple Juice", "", "Beverages (Chilled Juices)", true, 7.0, "applejuice.jpg");
+        foodMenuItemSessionLocal.createFoodMenuItem(fmi22);
+        fmi22 = foodMenuItemSessionLocal.getFoodMenuItemByName("Apple Juice");
+
+        FoodMenuItem fmi23 = new FoodMenuItem("Tomato Juice", "", "Beverages (Chilled Juices)", true, 7.0, "tomatojuice.jpg");
+        foodMenuItemSessionLocal.createFoodMenuItem(fmi23);
+        fmi23 = foodMenuItemSessionLocal.getFoodMenuItemByName("Tomato Juice");
+
+        FoodMenuItem fmi24 = new FoodMenuItem("Cranberry Juice", "", "Beverages (Chilled Juices)", true, 7.0, "cranberryjuice.jpg");
+        foodMenuItemSessionLocal.createFoodMenuItem(fmi24);
+        fmi24 = foodMenuItemSessionLocal.getFoodMenuItemByName("Cranberry Juice");
+
+        FoodMenuItem fmi25 = new FoodMenuItem("Coke", "", "Soft Drinks", true, 7.0, "coke.jpg");
+        foodMenuItemSessionLocal.createFoodMenuItem(fmi25);
+        fmi25 = foodMenuItemSessionLocal.getFoodMenuItemByName("Coke");
+
+        FoodMenuItem fmi26 = new FoodMenuItem("Coke Zero", "", "Soft Drinks", true, 7.0, "cokezero.jpg");
+        foodMenuItemSessionLocal.createFoodMenuItem(fmi26);
+        fmi26 = foodMenuItemSessionLocal.getFoodMenuItemByName("Coke Zero");
+
+        FoodMenuItem fmi27 = new FoodMenuItem("Sprite", "", "Soft Drinks", true, 7.0, "sprite.jpg");
+        foodMenuItemSessionLocal.createFoodMenuItem(fmi27);
+        fmi27 = foodMenuItemSessionLocal.getFoodMenuItemByName("Sprite");
+
+        FoodMenuItem fmi28 = new FoodMenuItem("Espresso (Hot)", "", "Coffee", true, 8.0, "espressohot.jpg");
+        foodMenuItemSessionLocal.createFoodMenuItem(fmi28);
+        fmi28 = foodMenuItemSessionLocal.getFoodMenuItemByName("Espresso (Hot)");
+
+        FoodMenuItem fmi29 = new FoodMenuItem("Espresso (Cold)", "", "Coffee", true, 10.0, "espressocold.jpg");
+        foodMenuItemSessionLocal.createFoodMenuItem(fmi29);
+        fmi29 = foodMenuItemSessionLocal.getFoodMenuItemByName("Espresso (Cold)");
+
+        FoodMenuItem fmi30 = new FoodMenuItem("Cappuccino (Hot)", "", "Coffee", true, 8.0, "cappuccinohot.jpg");
+        foodMenuItemSessionLocal.createFoodMenuItem(fmi30);
+        fmi30 = foodMenuItemSessionLocal.getFoodMenuItemByName("Cappuccino (Hot)");
+
+        FoodMenuItem fmi31 = new FoodMenuItem("Cappuccino (Cold)", "", "Coffee", true, 10.0, "cappuccinocold.jpg");
+        foodMenuItemSessionLocal.createFoodMenuItem(fmi31);
+        fmi31 = foodMenuItemSessionLocal.getFoodMenuItemByName("Cappuccino (Cold)");
+
+        FoodMenuItem fmi32 = new FoodMenuItem("Cafe Latte (Hot)", "", "Coffee", true, 8.0, "cafelattehot.jpg");
+        foodMenuItemSessionLocal.createFoodMenuItem(fmi32);
+        fmi32 = foodMenuItemSessionLocal.getFoodMenuItemByName("Cafe Latte (Hot)");
+
+        FoodMenuItem fmi33 = new FoodMenuItem("Cafe Latte (Cold)", "", "Coffee", true, 10.0, " cafelattecold.jpg");
+        foodMenuItemSessionLocal.createFoodMenuItem(fmi33);
+        fmi33 = foodMenuItemSessionLocal.getFoodMenuItemByName("Cafe Latte (Cold)");
+
+        FoodMenuItem fmi34 = new FoodMenuItem("Mocha (Hot)", "", "Coffee", true, 8.0, "mochahot.jpg");
+        foodMenuItemSessionLocal.createFoodMenuItem(fmi34);
+        fmi34 = foodMenuItemSessionLocal.getFoodMenuItemByName("Mocha (Hot)");
+
+        FoodMenuItem fmi35 = new FoodMenuItem("Mocha (Cold)", "", "Coffee", true, 10.0, "mochacold.jpg");
+        foodMenuItemSessionLocal.createFoodMenuItem(fmi35);
+        fmi35 = foodMenuItemSessionLocal.getFoodMenuItemByName("Mocha (Cold)");
+
+        FoodMenuItem fmi36 = new FoodMenuItem("English Breakfast Tea", "", "Tea", true, 8.0, "englishbreakfasttea.jpg");
+        foodMenuItemSessionLocal.createFoodMenuItem(fmi36);
+        fmi36 = foodMenuItemSessionLocal.getFoodMenuItemByName("English Breakfast Tea");
+
+        FoodMenuItem fmi37 = new FoodMenuItem("Chamomile", "", "Tea", true, 8.0, "chamomile.jpg");
+        foodMenuItemSessionLocal.createFoodMenuItem(fmi37);
+        fmi37 = foodMenuItemSessionLocal.getFoodMenuItemByName("Chamomile");
+
+        FoodMenuItem fmi38 = new FoodMenuItem("Earl Grey", "", "Tea", true, 8.0, "earlgrey.jpg");
+        foodMenuItemSessionLocal.createFoodMenuItem(fmi38);
+        fmi38 = foodMenuItemSessionLocal.getFoodMenuItemByName("Earl Grey");
+
+        FoodMenuItem fmi39 = new FoodMenuItem("Lipton", "", "Tea", true, 8.0, "lipton.jpg");
+        foodMenuItemSessionLocal.createFoodMenuItem(fmi39);
+        fmi39 = foodMenuItemSessionLocal.getFoodMenuItemByName("Lipton");
+
+        FoodMenuItem fmi40 = new FoodMenuItem("Grand Jasmine ", "", "Tea", true, 8.0, "grandjasmine.jpg");
+        foodMenuItemSessionLocal.createFoodMenuItem(fmi40);
+        fmi40 = foodMenuItemSessionLocal.getFoodMenuItemByName("Grand Jasmine");
 
         em.flush();
 
@@ -14835,7 +14979,7 @@ public class DataInitializationSessionBean {
         em.flush();
     }
 
-    public void intializeRoomBookingsAndCustomer() throws ParseException,NoResultException {
+    public void intializeRoomBookingsAndCustomer() throws ParseException, NoResultException {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
         Customer customer1 = new Customer();
@@ -14894,7 +15038,7 @@ public class DataInitializationSessionBean {
         rm1.setBookInDate(new Date());
         rm1.setBookOutDate(date);
         rm1.setBookedBy(customer1);
-        
+
         rm1.setEmailAddress(customer1.getEmail());
         rm1.setHasTransport(false);
         rm1.setName(customer1.getLastName());
@@ -14906,15 +15050,13 @@ public class DataInitializationSessionBean {
         bookingSessionLocal.createRoomBooking(rm1);
         em.flush();
 
-        
-        PaymentTransaction PT1= new PaymentTransaction();
+        PaymentTransaction PT1 = new PaymentTransaction();
         PT1.addRoomBooking(rm1);
         PT1.setCreditCard(null);
         PT1.setPayer(customer1);
         PT1.setTransactionDateTime(new Date());
-       
+
         //paymentTransactionSessionLocal.createPaymentTransaction(pt1);
-        
     }
 
     public void intializeRequests() throws ParseException {
@@ -14961,8 +15103,6 @@ public class DataInitializationSessionBean {
 
     }
 
-    
-    
     private static String encryptPassword(String password) {
         String sha1 = "";
         try {

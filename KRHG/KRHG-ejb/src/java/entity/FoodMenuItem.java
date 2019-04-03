@@ -24,6 +24,18 @@ public class FoodMenuItem implements Serializable {
     private String category;
     private String foodImage;
    
+    public FoodMenuItem() {
+        
+    }
+    
+    public FoodMenuItem(String foodMenuItemName, String foodMenuItemDescription, String category, Boolean availability, Double unitPrice, String foodImage){
+        this.foodMenuItemName = foodMenuItemName;
+        this.foodMenuItemDescription = foodMenuItemDescription;
+        this.category = category;
+        this.availability = availability;
+        this.unitPrice = unitPrice;
+        this.foodImage = foodImage; 
+    }
   
     /**
      * @return the availability

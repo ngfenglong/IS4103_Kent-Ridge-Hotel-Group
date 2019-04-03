@@ -16,9 +16,17 @@ import javax.ejb.Local;
  */
 @Local
 public interface FoodMenuItemSessionLocal {
-    public void createCustomer(FoodMenuItem fmi);
+
+    public void createFoodMenuItem(FoodMenuItem fmi);
+
     public List<FoodMenuItem> getAllFoodMenuItems();
+
     public FoodMenuItem getFoodMenuItemByID(Long fmiID) throws NoResultException;
-            
-    
+
+    public FoodMenuItem getFoodMenuItemByName(String name) throws NoResultException;
+
+    public void deleteFoodMenuItem(Long fmiID) throws NoResultException;
+
+    public void updateFoodMenuItem(FoodMenuItem fmi) throws NoResultException;
+
 }
