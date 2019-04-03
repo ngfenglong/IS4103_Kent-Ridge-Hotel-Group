@@ -42,6 +42,10 @@ public class PaymentTransaction implements Serializable {
     @OneToMany
     private ArrayList<RoomBooking> roomsBooked;
 
+    public PaymentTransaction() {
+        roomsBooked = new ArrayList<>();
+    }
+
     public Long getTransactionID() {
         return transactionID;
     }
@@ -130,7 +134,7 @@ public class PaymentTransaction implements Serializable {
         this.transportBooked = transportBooked;
     }
 
-     public void addRoomBooking(RoomBooking roomBooking) throws NoResultException {
+    public void addRoomBooking(RoomBooking roomBooking) throws NoResultException {
         if (roomBooking != null && !this.getRoomsBooked().contains(roomBooking)) {
             this.getRoomsBooked().add(roomBooking);
         } else {
@@ -146,7 +150,6 @@ public class PaymentTransaction implements Serializable {
         }
     }
 
-    
     @Override
     public int hashCode() {
         int hash = 0;
