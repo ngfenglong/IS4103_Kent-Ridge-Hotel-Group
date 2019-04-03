@@ -8,12 +8,14 @@ package sessionBeans;
 import entity.CreditCard;
 import entity.PaymentTransaction;
 import error.NoResultException;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Local;
 
 @Local
 public interface PaymentTransactionSessionLocal {
     public List<PaymentTransaction> getAllPaymentTransaction() throws NoResultException;
+    public List<PaymentTransaction> getAllPaymentTransactionByDate(Date selectedDate) throws NoResultException;
     public PaymentTransaction getPaymentTransactionByID(Long ptID) throws NoResultException;
     public void updatePaymentTransaction (PaymentTransaction pt) throws NoResultException;
     public void deletePaymentTransaction (Long ptID) throws NoResultException;

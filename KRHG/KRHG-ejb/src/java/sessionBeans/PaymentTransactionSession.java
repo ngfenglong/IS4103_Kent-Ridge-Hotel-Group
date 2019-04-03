@@ -8,6 +8,7 @@ package sessionBeans;
 import entity.CreditCard;
 import entity.PaymentTransaction;
 import error.NoResultException;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -69,6 +70,15 @@ public class PaymentTransactionSession implements PaymentTransactionSessionLocal
     @Override
     public void createPaymentTransaction(PaymentTransaction pt) {
         em.persist(pt);
+    }
+
+    @Override
+    public List<PaymentTransaction> getAllPaymentTransactionByDate(Date selectedDate) throws NoResultException {
+        Query q;
+        q = em.createQuery("SELECT pt FROM PaymentTransaction pt WHERE "
+                + "pt.transactionDateTime = :selectedDate");
+        q.setParameter("selectedDate", selectedDate);
+        return q.getResultList();
     }
 
 
