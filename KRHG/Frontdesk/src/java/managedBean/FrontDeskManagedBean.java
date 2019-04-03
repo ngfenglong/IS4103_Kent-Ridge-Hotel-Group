@@ -228,7 +228,7 @@ public class FrontDeskManagedBean {
         checkoutDate = PT.getRoomsBooked().get(0).getBookOutDate();
 
         checkinName = PT.getPayer().getFirstName() + " " + PT.getPayer().getLastName();
-        checkinEmail=PT.getPayer().getEmail();
+        checkinEmail = PT.getPayer().getEmail();
         roombooking = PT;
         mode = "online";
         return "checkinResult.xhtml?faces-redirect=true";
@@ -475,12 +475,9 @@ public class FrontDeskManagedBean {
         this.checkinPassportNumber = checkinPassportNumber;
     }
 
-    public List<RoomBooking> getTodayCheckOutRoom() {
-        //bookSessionLocal.getbookingbyCheckoutDate(new Date());
-        //to get today's date
-        //bookSessionLocal.getAllRoomBookingByStatus(String Status)
+    public List<RoomBooking> getTodayCheckOutRoom() throws NoResultException {
 
-        return null;
+        return bookSessionLocal.getAllRoomBookingByStatus("Occupied", null);
     }
 
     public void setTodayCheckOutRoom(List<RoomBooking> todayCheckOutRoom) {
