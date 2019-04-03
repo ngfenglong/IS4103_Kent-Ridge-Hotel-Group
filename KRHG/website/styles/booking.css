@@ -304,7 +304,7 @@ section
 	top: 0;
 	left: 0;
 	width: 100%;
-	background: transparent;
+	background: rgb(0, 0, 0);
 	z-index: 100;
 }
 .header::before
@@ -618,7 +618,7 @@ section
 	padding-left: 27px;
 	font-size: 14px;
 	font-weight: 500;
-	color: #797979;
+	color: #ffffff;
 	outline: none;
 }
 .booking_input_container
