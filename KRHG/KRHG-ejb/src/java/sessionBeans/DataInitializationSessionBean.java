@@ -873,63 +873,63 @@ public class DataInitializationSessionBean {
 
         Calendar myCalendar = new GregorianCalendar(2019, 2, 4); 
         Date d1 = myCalendar.getTime();
-        Customer c1 = new Customer("Zack", "Neo Guohui", "Male", "S7511901A", encryptPassword("test"), 187, "neoguoh202@hotmail.com", "+6591321876", d1, "E2342213B", true);
+        Customer c1 = new Customer("Zack", "Neo Guohui", "Male", encryptPassword("test"), 187, "neoguoh202@hotmail.com", "+6591321876", d1, true);
         customerSessionLocal.createCustomer(c1);
-        c1 = customerSessionLocal.getCustomerByPassportNum("E2342213B");
+        c1 = customerSessionLocal.getCustomerByEmail("neoguoh202@hotmail.com");
 
         Calendar myCalendar2 = new GregorianCalendar(2019, 1, 28);
         Date d2 = myCalendar2.getTime();
-        Customer c2 = new Customer("Pillay", "Maureen", "Male", "S8273571B", encryptPassword("test"), 31877, "maureenpi1@yahoo.com.sg", "+6582375237", d2, "E5323423E", false);
+        Customer c2 = new Customer("Pillay", "Maureen", "Male", encryptPassword("test"), 31877, "maureenpi1@yahoo.com.sg", "+6582375237", d2, false);
         customerSessionLocal.createCustomer(c2);
-        c2 = customerSessionLocal.getCustomerByPassportNum("E5323423E");
+        c2 = customerSessionLocal.getCustomerByEmail("maureenpi1@yahoo.com.sg");
 
         Calendar myCalendar3 = new GregorianCalendar(2019, 3, 1);
         Date d3 = myCalendar3.getTime();
-        Customer c3 = new Customer("Mei Fang", "Chia", "Female", "S1073264F", encryptPassword("test"), 1023823, "chiame317@gmail.com", "+6591312719", d3, "E2545443C", true);
+        Customer c3 = new Customer("Mei Fang", "Chia", "Female", encryptPassword("test"), 1023823, "chiame317@gmail.com", "+6591312719", d3, true);
         customerSessionLocal.createCustomer(c3);
-        c3 = customerSessionLocal.getCustomerByPassportNum("E2545443C");
+        c3 = customerSessionLocal.getCustomerByEmail("chiame317@gmail.com");
 
         Calendar myCalendar4 = new GregorianCalendar(2019, 1, 19); 
         Date d4 = myCalendar4.getTime();
-        Customer c4 = new Customer("Randal", "Ho", "S9467910I", "Male", encryptPassword("test"), 5099, "randalh753@gmail.com", "+6593243287", d4, "E4354363D", false);
+        Customer c4 = new Customer("Randal", "Ho", "Male", encryptPassword("test"), 5099, "randalh753@gmail.com", "+6593243287", d4, false);
         customerSessionLocal.createCustomer(c4);
-        c4 = customerSessionLocal.getCustomerByPassportNum("E4354363D");
+        c4 = customerSessionLocal.getCustomerByEmail("randalh753@gmail.com");
 
         Calendar myCalendar5 = new GregorianCalendar(2019, 4, 5);
         Date d5 = myCalendar5.getTime();
-        Customer c5 = new Customer("Lok Li", "Choo", "S9122868H", "Female", encryptPassword("test"), 38271, "loklich35@hotmail.com", "+6598768896", d5, "E3453353H", true);
+        Customer c5 = new Customer("Lok Li", "Choo", "Female", encryptPassword("test"), 38271, "loklich35@hotmail.com", "+6598768896", d5,true);
         customerSessionLocal.createCustomer(c5);
-        c5 = customerSessionLocal.getCustomerByPassportNum("E3453353H");
+        c5 = customerSessionLocal.getCustomerByEmail("loklich35@hotmail.com");
 
         Calendar myCalendar6 = new GregorianCalendar(2019, 2, 27);
         Date d6 = myCalendar6.getTime();
-        Customer c6 = new Customer("Mervin", "Ee", "S2419077C","Male", encryptPassword("test"), 200192, "mervinee@live.com", "+6587652376", d6, "A16436253", true);
+        Customer c6 = new Customer("Mervin", "Ee","Male", encryptPassword("test"), 200192, "mervinee@live.com", "+6587652376", d6, true);
         customerSessionLocal.createCustomer(c6);
-        c6 = customerSessionLocal.getCustomerByPassportNum("A16436253");
+        c6 = customerSessionLocal.getCustomerByEmail("mervinee@live.com");
 
         Calendar myCalendar7 = new GregorianCalendar(2019, 3, 6);
         Date d7 = myCalendar7.getTime();
-        Customer c7 = new Customer("Galuh Jabal", "Thamrin", "Male", "F0416856U", encryptPassword("test"), 382, "thamrinjb@live.com", "+622169195347", d7, "B2342869", true);
+        Customer c7 = new Customer("Galuh Jabal", "Thamrin", "Male", encryptPassword("test"), 382, "thamrinjb@live.com", "+622169195347", d7, true);
         customerSessionLocal.createCustomer(c7);
-        c7 = customerSessionLocal.getCustomerByPassportNum("B2342869");
+        c7 = customerSessionLocal.getCustomerByEmail("thamrinjb@live.com");
 
         Calendar myCalendar8 = new GregorianCalendar(2019, 4, 14);
         Date d8 = myCalendar8.getTime();
-        Customer c8 = new Customer("Bao Cong", "Chen", "Male", "F0642755M", encryptPassword("test"), 4819, "chenbc@163.com", "+8613067076921", d8, "EA2676233", true);
+        Customer c8 = new Customer("Bao Cong", "Chen", "Male", encryptPassword("test"), 4819, "chenbc@163.com", "+8613067076921", d8, true);
         customerSessionLocal.createCustomer(c8);
-        c8 = customerSessionLocal.getCustomerByPassportNum("EA2676233");
+        c8 = customerSessionLocal.getCustomerByEmail("chenbc@163.com");
 
         Calendar myCalendar9 = new GregorianCalendar(2019, 3, 31);
         Date d9 = myCalendar9.getTime();
-        Customer c9 = new Customer("Meg Kou", "Thong", "Female", "G1797808Q", encryptPassword("test"), 2938, "thongmk@hotmail.com", "+60188617734", d9, "A23782622", true);
+        Customer c9 = new Customer("Meg Kou", "Thong", "Female", encryptPassword("test"), 2938, "thongmk@hotmail.com", "+60188617734", d9, true);
         customerSessionLocal.createCustomer(c9);
-        c9 = customerSessionLocal.getCustomerByPassportNum("A23782622");
+        c9 = customerSessionLocal.getCustomerByEmail("thongmk@hotmail.com");
 
         Calendar myCalendar10 = new GregorianCalendar(2019, 4, 15);
         Date d10 = myCalendar10.getTime();
-        Customer c10 = new Customer("Cuong Khanh", "Anh Nhiem", "Male", "G0278921W", encryptPassword("test"), 9281, "cukhanhn@gmail.com", "+84843506870", d10, "B3228963", true);
+        Customer c10 = new Customer("Cuong Khanh", "Anh Nhiem", "Male", encryptPassword("test"), 9281, "cukhanhn@gmail.com", "+84843506870", d10, true);
         customerSessionLocal.createCustomer(c10);
-        c10 = customerSessionLocal.getCustomerByPassportNum("B3228963");
+        c10 = customerSessionLocal.getCustomerByEmail("cukhanhn@gmail.com");
 
         em.flush();
 

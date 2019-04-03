@@ -95,7 +95,7 @@ public class CustomerSession implements CustomerSessionLocal {
         }
     }
 
-    @Override
+    /*@Override
     public Customer getCustomerByPassportNum(String passportNum) throws NoResultException {
         Query q;
         q = em.createQuery("SELECT c FROM Customer c WHERE "
@@ -107,7 +107,7 @@ public class CustomerSession implements CustomerSessionLocal {
         } else {
             throw new NoResultException("Customer not found.");
         }
-    }
+    }*/
 
     @Override
     public void deleteCustomer(Long cID) throws NoResultException {

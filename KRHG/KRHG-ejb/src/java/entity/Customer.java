@@ -58,7 +58,7 @@ public class Customer implements Serializable {
         this.password = password;
     }
 
-    public Customer(String firstName, String lastName, String gender, String nric, String password, int points, String email, String mobileNum, Date dateJoined, String passportNum, boolean accountStatus) {
+    public Customer(String firstName, String lastName, String gender, String password, int points, String email, String mobileNum, Date dateJoined, boolean accountStatus) {
         this();
         this.firstName = firstName;
         this.lastName = lastName;
