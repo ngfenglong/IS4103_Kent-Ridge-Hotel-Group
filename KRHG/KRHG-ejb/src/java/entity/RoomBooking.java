@@ -44,7 +44,6 @@ public class RoomBooking implements Serializable {
     private Date transportTime;
     private String pickUpLocation;
     private String emailAddress;
-    private CreditCard creditCard;
     private String passportNum;
     private String name;
     private String roomType;
@@ -139,14 +138,6 @@ public class RoomBooking implements Serializable {
 
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
-    }
-
-    public CreditCard getCreditCard() {
-        return creditCard;
-    }
-
-    public void setCreditCard(CreditCard creditCard) {
-        this.creditCard = creditCard;
     }
 
     public String getPassportNum() {

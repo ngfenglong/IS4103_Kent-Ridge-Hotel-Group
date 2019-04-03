@@ -95,19 +95,7 @@ public class CustomerSession implements CustomerSessionLocal {
         }
     }
 
-    /*@Override
-    public Customer getCustomerByPassportNum(String passportNum) throws NoResultException {
-        Query q;
-        q = em.createQuery("SELECT c FROM Customer c WHERE "
-                + "LOWER(c.passportNum) = :passportNum");
-        q.setParameter("passportNum", passportNum.toLowerCase());
 
-        if (!q.getResultList().isEmpty()) {
-            return (Customer) q.getResultList().get(0);
-        } else {
-            throw new NoResultException("Customer not found.");
-        }
-    }*/
 
     @Override
     public void deleteCustomer(Long cID) throws NoResultException {
@@ -262,8 +250,6 @@ public class CustomerSession implements CustomerSessionLocal {
         c.getEmail();
         c.getMobileNum();
         c.getDateJoined();
-//       c.getNric();
- //       c.getPassportNum();
     }
 
     
