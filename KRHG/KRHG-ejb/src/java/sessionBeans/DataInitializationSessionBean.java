@@ -26,10 +26,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Formatter;
-import java.util.GregorianCalendar;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Singleton;
@@ -72,6 +70,8 @@ public class DataInitializationSessionBean {
     LostAndFoundSessionLocal lostAndFoundSessionLocal;
     @EJB
     FoodMenuItemSessionLocal foodMenuItemSessionLocal;
+    @EJB
+    PaymentTransactionSessionLocal paymentTransactionSessionLocal;
 
     public DataInitializationSessionBean() {
     }
@@ -15055,8 +15055,9 @@ public class DataInitializationSessionBean {
         PT1.setCreditCard(null);
         PT1.setPayer(customer1);
         PT1.setTransactionDateTime(new Date());
+        PT1.setInitialPayment(2000);
 
-        //paymentTransactionSessionLocal.createPaymentTransaction(pt1);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT1);
     }
 
     public void intializeRequests() throws ParseException {
