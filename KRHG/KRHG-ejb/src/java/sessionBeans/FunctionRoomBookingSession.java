@@ -5,7 +5,6 @@
  */
 package sessionBeans;
 
-
 import entity.FunctionRoomBooking;
 import error.NoResultException;
 import java.util.List;
@@ -21,7 +20,7 @@ import javax.persistence.Query;
 @Stateless
 public class FunctionRoomBookingSession implements FunctionRoomBookingSessionLocal {
 
-@PersistenceContext
+    @PersistenceContext
     private EntityManager em;
 
     @Override
@@ -45,7 +44,6 @@ public class FunctionRoomBookingSession implements FunctionRoomBookingSessionLoc
             throw new NoResultException("Function Room Booking not found.");
         }
     }
-    
 
     @Override
     public void updateFunctionRoomBooking(FunctionRoomBooking frb) throws NoResultException {
@@ -59,8 +57,4 @@ public class FunctionRoomBookingSession implements FunctionRoomBookingSessionLoc
         }
     }
 
-    @Override
-    public void deleteFoodOrder(Long foodOrderID) throws NoResultException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

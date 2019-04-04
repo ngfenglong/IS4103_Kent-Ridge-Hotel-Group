@@ -16,8 +16,8 @@ public interface FunctionRoomBookingSessionLocal {
         
     public void createFunctionRoomBooking(FunctionRoomBooking frb);
     public List<FunctionRoomBooking> getAllFunctionRoomBookings();
-    public FunctionRoomBooking getFunctionRoomBookingByID(Long frbID) throws NoResultException;
-    public void updateRoom(FunctionRoomBooking frb) throws NoResultException;
+    public FunctionRoomBooking getAllFunctionRoomBookingByID(Long frbID) throws NoResultException;
+    public void updateFunctionRoomBooking(FunctionRoomBooking frb) throws NoResultException ;
     
  
 }
