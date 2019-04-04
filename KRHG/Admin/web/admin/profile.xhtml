@@ -18,29 +18,23 @@
             <ui:define name="content">
                 <!-- Content Header (Page header) -->
                 <div class="content-header">
-                    <div class="container-fluid">
-                        <div class="row mb-2">
-                            <div class="col-sm-6">
-
-
+                        <div class="container-fluid">
+                                <div class="row mb-2">
+                                    <div class="col-sm-6">
+                                        <h1 style="font-size:xx-large; margin-bottom:20px">My Profile</h1>
+                                    </div>
+                                    <!-- /.col -->
+                                    <div class="col-sm-6">
+                                        <ol class="breadcrumb float-sm-right">
+                                            <li><a href="#"> Home</a></li>
+                                            <li><a href="#"> Profile</a></li>
+                                        </ol>
+                                    </div>
+                                    <!-- /.col -->
+                                </div>
+                                <!-- /.row -->
                             </div>
-                            <!-- /.col -->
-                            <div class="col-sm-6">
-                                <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item active">
-                                        <h:form>
-                                            <h:commandButton class="btn btn-primary" action="editProfile.xhtml?faces-redirect=true" value="Edit Profile" />
-                                            <h:commandButton class="btn btn-primary" action="changePassword.xhtml?faces-redirect=true" value="Change Password" />
-                                        </h:form>
-                                        <!--Add Btn-->
-                                    </li>
-                                </ol>
-                            </div>
-                            <!-- /.col -->
-                        </div>
-                        <!-- /.row -->
-                    </div>
-                    <!-- /.container-fluid -->
+                            <!-- /.container-fluid -->
                 </div> 
                 <!--                <section class="content">
                                     <div class="container-fluid">
@@ -58,67 +52,116 @@
                     <!-- Content Header (Page header) -->
                     <section class="content-header">
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h3 class="card-title">
-                                            <i class="fa fa-text-width"></i>
-                                            Profile
-                                        </h3>
+                            <div class="box box-success">
+                                    <div class="box-header with-border" style="text-align: center">
+                                        <h3 class="box-title" style="text-align: center; font-size:xx-large">
+                                            My Profile </h3>
+                                        <div class="box-tools pull-right">
+                                            <!--Add Btn-->
+                                            <h:commandLink action="editProfile.xhtml?faces-redirect=true"
+                                                style="font-size: large; margin-right: 5px"><i class="far fa-edit"></i>
+                                            </h:commandLink>
+    
+                                        </div>
                                     </div>
-                                    <!-- /.card-header -->
-                                    <div class="card-body">
-                                        <dl>
-                                            <dt>Name: </dt>
-                                            <dd>#{authenticationManagedBean.loggedInStaff.name}</dd>
-
-                                            <dt>Email: </dt>
-                                            <dd>#{authenticationManagedBean.loggedInStaff.email}</dd>
-
-                                            <dt>Phone Number: </dt>
-                                            <dd>#{authenticationManagedBean.loggedInStaff.phoneNumber}</dd>
-
-                                            <dt>Gender: </dt>
-                                            <dd>#{authenticationManagedBean.loggedInStaff.gender}</dd>
-
-                                            <dt>NRIC: </dt>
-                                            <dd>#{authenticationManagedBean.loggedInStaff.nric}</dd>
-
-                                            <dt>Hotel: </dt>
-                                            <dd>#{authenticationManagedBean.loggedInStaff.hotelGroup}</dd>
-
-                                            <dt>Job Title: </dt>
-                                            <dd>#{authenticationManagedBean.loggedInStaff.jobTitle}</dd>
-
-                                            <dt>Department: </dt>
-                                            <dd>#{authenticationManagedBean.loggedInStaff.department}</dd>
-
-                                            <dt>Roles </dt>
-                                            <dd>#{authenticationManagedBean.displayStaffTypesInLines()}</dd>
-
-                                            <dt>Entitled Number of Leaves</dt>
-                                            <dd>#{authenticationManagedBean.loggedInStaff.entitledLeaves} days </dd>
-
-                                            <dt>NOK's Name</dt>
-                                            <dd>#{authenticationManagedBean.loggedInStaff.nokName}</dd>
-
-                                            <dt>NOK's Address</dt>
-                                            <dd>#{authenticationManagedBean.loggedInStaff.nokAddress}</dd>
-
-                                            <dt>NOK's Phone Number</dt>
-                                            <dd>#{authenticationManagedBean.loggedInStaff.nokPhoneNumber}</dd>
-
-                                            <dt>  <h:commandButton class="btn btn-primary" action="editProfile.xhtml?faces-redirect=true" value="Edit Profile" />
-                                                <h:commandButton class="btn btn-primary" action="changePassword.xhtml?faces-redirect=true" value="Change Password" />   
-                                            </dt>
-                                        </dl>
+    
+                                    <div class="box-body no-padding" style="color:black">
+                                        <div class="row" style="margin-bottom:20px; padding:0px 5px">
+                                            <div class="col-md-4 box">
+                                                    <div class="box-header with-border" style="text-align: center">
+                                                            <h3 class="box-title" style="text-align: center; color:green; font-size: x-large">
+                                                               Personal Details </h3>
+                                                            </div>
+                                                <div class="description-block margin-bottom">
+                                                    <span class="description-text">Name</span>
+                                                    <h5 class="description-header">
+                                                            #{authenticationManagedBean.loggedInStaff.name}</h5>
+                                                </div>
+                                                <div class="description-block margin-bottom">
+                                                    <span class="description-text">NRIC</span>
+                                                    <h5 class="description-header">
+                                                            #{authenticationManagedBean.loggedInStaff.nric}</h5>
+                                                </div>
+                                                <div class="description-block margin-bottom">
+                                                    <span class="description-text">Mobile Number</span>
+                                                    <h5 class="description-header">
+                                                        #{authenticationManagedBean.loggedInStaff.phoneNumber}</h5>
+                                                </div>
+                                                <div class="description-block margin-bottom">
+                                                    <span class="description-text">email</span>
+                                                    <h5 class="description-header">
+                                                        #{authenticationManagedBean.loggedInStaff.email}</h5>
+                                                </div>
+                                                <div class="description-block margin-bottom">
+                                                    <span class="description-text">address</span>
+                                                    <h5 class="description-header">
+                                                        #{authenticationManagedBean.loggedInStaff.address}</h5>
+                                                </div>
+                                            </div>
+    
+                                            <div class="col-md-4 col-sm-4 box">
+                                                    <div class="box-header with-border" style="text-align: center">
+                                                            <h3 class="box-title" style="text-align: center; color:green;  font-size: x-large">
+                                                               Job Details </h3>
+                                                            </div>
+                                                <div class="description-block margin-bottom">
+                                                    <span class="description-text">Hotel</span>
+                                                    <h5 class="description-header">
+                                                        #{authenticationManagedBean.loggedInStaff.hotelGroup}</h5>
+                                                </div>
+                                                <div class="description-block margin-bottom">
+                                                    <span class="description-text">Job Title</span>
+                                                    <h5 class="description-header">
+                                                        #{authenticationManagedBean.loggedInStaff.jobTitle}</h5>
+                                                </div>
+                                                <div class="description-block margin-bottom">
+                                                    <span class="description-text">Department</span>
+                                                    <h5 class="description-header">
+                                                        #{authenticationManagedBean.loggedInStaff.department}</h5>
+                                                </div>
+                                                <div class="description-block margin-bottom">
+                                                    <span class="description-text">Entitled Days of Leave</span>
+                                                    <h5 class="description-header">
+                                                        #{authenticationManagedBean.loggedInStaff.entitledLeaves}</h5>
+                                                </div>
+                                                <div class="description-block margin-bottom">
+                                                    <span class="description-text">Manager In Charge</span>
+                                                    <h5 class="description-header">
+                                                        #{authenticationManagedBean.loggedInStaff.managerInCharge}</h5>
+                                                </div>
+                                            </div>
+                                            <!-- /.col -->
+                                            <div class="col-md-4 box">
+                                                    <div class="box-header with-border" style="text-align: center">
+                                                            <h3 class="box-title" style="text-align: center; color:green;  font-size: x-large">
+                                                               Next of Kin's Details </h3>
+                                                            </div>
+                                                <div class="description-block margin-bottom">
+                                                    <span class="description-text">Next-of-Kin's Name</span>
+                                                    <h5 class="description-header">
+                                                        #{authenticationManagedBean.loggedInStaff.nokName}</h5>
+                                                </div>
+                                                <div class="description-block margin-bottom">
+                                                    <span class="description-text">Next-of-Kin's Address</span>
+                                                    <h5 class="description-header">
+                                                        #{authenticationManagedBean.loggedInStaff.nokAddress}</h5>
+                                                </div>
+                                                <div class="description-block margin-bottom">
+                                                    <span class="description-text">Next-of-Kin's Contact Number</span>
+                                                    <h5 class="description-header">
+                                                        #{authenticationManagedBean.loggedInStaff.nokPhoneNumber}</h5>
+                                                </div>
+    
+    
+                                            </div>
+    
+                                        </div>
                                     </div>
-                                    <!-- /.card-body -->
+    
+                                    <div class="card-footer" style="text-align: center">
+                                            <h:commandButton class="btn btn-primary" value="Change Password" action="changePassword.xhtml?faces-redirect=true"></h:commandButton>
+                                    </div>
                                 </div>
-                                <!-- /.card -->
-                            </div>
-                        </div>
                     </section>
                 </h:form>
                 <!--                </div>

@@ -1,76 +1,86 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <body>
+<body>
 
-        <ui:composition template="./AdminTemplate.xhtml">
+    <ui:composition template="./AdminTemplate.xhtml">
 
-            <ui:define name="title">
-                KRHG Admin Console System
-            </ui:define>
+        <ui:define name="title">
+            KRHG Admin Console System
+        </ui:define>
 
-            <ui:define name="content">
-                <!-- Content Header (Page header) -->
-                <div class="content-header">
-                    <div class="container-fluid">
-                        <div class="row mb-2">
-                            <div class="col-sm-6">
-
-
-                            </div>
-                            <!-- /.col -->
-                            <div class="col-sm-6">
-                                <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item active">
-                                        <!--Add Btn-->
-
-
-                                    </li>
-                                </ol>
-                            </div>
-                            <!-- /.col -->
+        <ui:define name="content">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 style="font-size:xx-large; margin-bottom:20px">Edit Profile</h1>
                         </div>
-                        <!-- /.row -->
+                        <!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li><a href="#"> Home</a></li>
+                                <li><a href="#"> Profile</a></li>
+                                <li class="active">Edit Profile</li>
+                            </ol>
+                        </div>
+                        <!-- /.col -->
                     </div>
-                    <!-- /.container-fluid -->
-                </div> 
-                <section class="content">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <!-- left column -->
-                            <div class="col-md-10">
-                                <!-- general form elements -->
-                                <div class="card card-primary">
-                                    <div class="card-header">
-                                        <h3 class="card-title">Profile</h3>
-                                    </div>
-                                    <!-- /.card-header -->
-                                    <!-- form start -->
-                                    <h:form role="form">
-                                        <div class="card-body">
+                    <!-- /.row -->
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <section class="content-header">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box box-primary">
+                            <div class="box-header with-border" style="text-align: center">
+                                <h3 class="box-title" style="text-align: center; font-size:xx-large">
+                                    Edit Profile </h3>
+                            </div>
+                            <h:form>
+                                <div class="box-body no-padding" style="color:black">
+                                    <div class="row" style="padding:0px 5px">
+                                        <div class="col-md-4 box">
+                                            <div class="box-header with-border" style="text-align: center">
+                                                <h3 class="box-title"
+                                                    style="text-align: center; color:darkblue; font-size: x-large">
+                                                    Personal Details </h3>
+                                            </div>
                                             <div class="form-group">
                                                 <label for="name">Name: </label>
-                                                <h:inputText class="form-control" value="#{authenticationManagedBean.loggedInStaff.name}" id="name" a:placeholder="Enter Holiday" required="true" />
+                                                <h:inputText class="form-control"
+                                                    value="#{authenticationManagedBean.loggedInStaff.name}" id="name"
+                                                    a:placeholder="Enter Holiday" required="true" />
+                                                    <h:message for="name" style="color:red" />
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="email">Email: </label>
-                                                <h:inputText class="form-control" value="#{authenticationManagedBean.loggedInStaff.email}" id="email" a:placeholder="Enter Holiday" required="true" />
+                                                <h:inputText class="form-control"
+                                                    value="#{authenticationManagedBean.loggedInStaff.email}" id="email"
+                                                    a:placeholder="Enter Holiday" required="true" />
+                                                    <h:message for="email" style="color:red" />
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="phoneNum">Phone Number: </label>
-                                                <h:inputText class="form-control" value="#{authenticationManagedBean.loggedInStaff.phoneNumber}" id="phoneNum" a:placeholder="Enter Phone Number" required="true" />
+                                                <h:inputText class="form-control"
+                                                    value="#{authenticationManagedBean.loggedInStaff.phoneNumber}"
+                                                    id="phoneNum" a:placeholder="Enter Phone Number" required="true" />
+                                                    <h:message for="phoneNum" style="color:red" />
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="stGender">Gender</label> <br />
-                                                <h:selectOneMenu class="select2-selection--single" value="#{authenticationManagedBean.loggedInStaff.gender}" id="stGender">
+                                                <h:selectOneMenu class="select2-selection--single"
+                                                    value="#{authenticationManagedBean.loggedInStaff.gender}"
+                                                    id="stGender">
                                                     <f:selectItem itemValue="Male" itemLabel="Male" />
                                                     <f:selectItem itemValue="Female" itemLabel="Female" />
                                                 </h:selectOneMenu>
@@ -78,63 +88,103 @@
 
                                             <div class="form-group">
                                                 <label for="nric">NRIC: </label>
-                                                <h:inputText class="form-control" value="#{authenticationManagedBean.loggedInStaff.nric}" id="nric" a:placeholder="Enter Nric " required="true" />
+                                                <h:inputText class="form-control"
+                                                    value="#{authenticationManagedBean.loggedInStaff.nric}" id="nric"
+                                                    a:placeholder="Enter Nric " required="true" />
+                                                    <h:message for="nric" style="color:red" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 col-sm-4 box">
+                                            <div class="box-header with-border" style="text-align: center">
+                                                <h3 class="box-title"
+                                                    style="text-align: center; color:darkblue;  font-size: x-large">
+                                                    Job Details </h3>
+                                            </div>
+                                            <div class="description-block margin-bottom">
+                                                <span class="description-text">Hotel</span>
+                                                <h5 class="description-header">
+                                                    #{authenticationManagedBean.loggedInStaff.hotelGroup}</h5>
+                                            </div>
+                                            <div class="description-block margin-bottom">
+                                                <span class="description-text">Job Title</span>
+                                                <h5 class="description-header">
+                                                    #{authenticationManagedBean.loggedInStaff.jobTitle}</h5>
+                                            </div>
+                                            <div class="description-block margin-bottom">
+                                                <span class="description-text">Department</span>
+                                                <h5 class="description-header">
+                                                    #{authenticationManagedBean.loggedInStaff.department}</h5>
                                             </div>
 
-                                            <div class="form-group">
-                                                <label>Hotel: #{authenticationManagedBean.loggedInStaff.hotelGroup}</label>
+                                            <div class="description-block margin-bottom">
+                                                <span class="description-text">Roles</span>
+                                                <h5 class="description-header">
+                                                    #{authenticationManagedBean.displayStaffTypes()}</h5>
+                                            </div>
 
+                                            <div class="description-block margin-bottom">
+                                                <span class="description-text">Entitled Days of Leave</span>
+                                                <h5 class="description-header">
+                                                    #{authenticationManagedBean.loggedInStaff.entitledLeaves} days</h5>
                                             </div>
-                                            <div class="form-group">
-                                                <label>Job Title: #{authenticationManagedBean.loggedInStaff.jobTitle}</label>
-
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Department: #{authenticationManagedBean.loggedInStaff.department}</label>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Roles: #{authenticationManagedBean.displayStaffTypes()}</label>                                               
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Entitled Number of Leaves: #{authenticationManagedBean.loggedInStaff.entitledLeaves} days </label>
+                                        </div>
+                                        <!-- /.col -->
+                                        <div class="col-md-4 box">
+                                            <div class="box-header with-border" style="text-align: center">
+                                                <h3 class="box-title"
+                                                    style="text-align: center; color:darkblue;  font-size: x-large">
+                                                    Next of Kin's Details </h3>
                                             </div>
                                             <div class="form-group">
                                                 <label for="nokName">Next-of-Kin Name</label>
-                                                <h:inputText class="form-control" value="#{authenticationManagedBean.loggedInStaff.nokName}" id="nokName" a:placeholder="Enter NOK Name" required="true" />
+                                                <h:inputText class="form-control"
+                                                    value="#{authenticationManagedBean.loggedInStaff.nokName}"
+                                                    id="nokName" a:placeholder="Enter NOK Name" required="true" />
+                                                    <h:message for="nokName" style="color:red" />
                                             </div>
                                             <div class="form-group">
                                                 <label for="nokAddress">Next-of-Kin Address</label>
-                                                <h:inputText class="form-control" value="#{authenticationManagedBean.loggedInStaff.nokAddress}" id="nokAddress" a:placeholder="Enter NOK Address" required="true" />
+                                                <h:inputText class="form-control"
+                                                    value="#{authenticationManagedBean.loggedInStaff.nokAddress}"
+                                                    id="nokAddress" a:placeholder="Enter NOK Address" required="true" />
+                                                    <h:message for="nokAddress" style="color:red" />
                                             </div>
                                             <div class="form-group">
                                                 <label for="nokPhoneNumber">Next-of-Kin Phone Number</label>
-                                                <h:inputText class="form-control" value="#{authenticationManagedBean.loggedInStaff.nokPhoneNumber}" id="nokPhoneNumber" a:placeholder="Enter NOK Phone Numeber" required="true" />
+                                                <h:inputText class="form-control">
+                                                        <h:message for="oldPassword" style="color:red" />
+                                                </h:inputText>
+                                                    
                                             </div>
 
-                                        </div>
-                                        <!-- /.card-body -->
 
-                                        <div class="card-footer">
-                                            <h:commandButton class="btn btn-primary" value="Create" action="#{authenticationManagedBean.updateProfile()}"></h:commandButton>
                                         </div>
-                                    </h:form>
+
+                                    </div>
                                 </div>
-                            </div>
-                            <!-- /.col -->
+                                <div class="card-footer" style="text-align: center">
+                                    <h:commandButton class="btn btn-primary" value="Submit"
+                                        action="#{authenticationManagedBean.updateProfile()}"></h:commandButton>
+                                </div>
+                            </h:form>
+
+
+
                         </div>
-                        <!-- /.row -->
                     </div>
-                    <!-- /.container-fluid -->
-                </section>
-                <!-- /.content-header -->
-                <!-- Main content -->
-            </ui:define>
+                </div>
+            </section>
+            <!-- /.content-header -->
+            <!-- Main content -->
+        </ui:define>
 
-            <ui:define name="script">
-                script
-            </ui:define>
+        <ui:define name="script">
+            script
+        </ui:define>
 
-        </ui:composition>
+    </ui:composition>
 
-    </body>
+</body>
+
 </html>
