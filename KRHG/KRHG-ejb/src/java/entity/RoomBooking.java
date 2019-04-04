@@ -9,6 +9,7 @@ import error.NoResultException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -51,6 +52,9 @@ public class RoomBooking implements Serializable {
     private String firstName;
     private String lastName;
     private String roomType;
+    private List<LaundryOrder> listOfLaundryOrders;
+    private List<FoodOrder> listOfFoodOrders;
+    private List<MinibarItem> listOfMiniBarItem;
 
     public RoomBooking() {
 
@@ -254,4 +258,45 @@ public class RoomBooking implements Serializable {
         this.hasExtraBed = hasExtraBed;
     }
 
+    /**
+     * @return the listOfLaundryOrders
+     */
+    public List<LaundryOrder> getListOfLaundryOrders() {
+        return listOfLaundryOrders;
+    }
+
+    /**
+     * @param listOfLaundryOrders the listOfLaundryOrders to set
+     */
+    public void setListOfLaundryOrders(List<LaundryOrder> listOfLaundryOrders) {
+        this.listOfLaundryOrders = listOfLaundryOrders;
+    }
+
+    /**
+     * @return the listOfFoodOrders
+     */
+    public List<FoodOrder> getListOfFoodOrders() {
+        return listOfFoodOrders;
+    }
+
+    /**
+     * @param listOfFoodOrders the listOfFoodOrders to set
+     */
+    public void setListOfFoodOrders(List<FoodOrder> listOfFoodOrders) {
+        this.listOfFoodOrders = listOfFoodOrders;
+    }
+    
+    /**
+     * @return the listOfMiniBarItem
+     */
+    public List<MinibarItem> getListOfMiniBarItem() {
+        return listOfMiniBarItem;
+    }
+
+    /**
+     * @param listOfMiniBarItem the listOfMiniBarItem to set
+     */
+    public void setListOfMiniBarItem(List<MinibarItem> listOfMiniBarItem) {
+        this.listOfMiniBarItem = listOfMiniBarItem;
+    }
 }

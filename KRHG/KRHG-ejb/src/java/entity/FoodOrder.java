@@ -23,7 +23,7 @@ public class FoodOrder implements Serializable {
     private List<FoodMenuItem> foodOrdered;
     private Double totalPrice;
     private String specialRequest;
-    private int qty;
+
     
     public Long getFoodOrderID() {
         return foodOrderID;
@@ -98,20 +98,6 @@ public class FoodOrder implements Serializable {
      */
     public void setSpecialRequest(String specialRequest) {
         this.specialRequest = specialRequest;
-    }
-
-    /**
-     * @return the qty
-     */
-    public int getQty() {
-        return qty;
-    }
-
-    /**
-     * @param qty the qty to set
-     */
-    public void setQty(int qty) {
-        this.qty = qty;
     }
 
 }
