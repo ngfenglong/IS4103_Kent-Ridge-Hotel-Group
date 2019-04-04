@@ -57,16 +57,14 @@
                                         <div class="card-body">
                                             <div class="form-group">
                                                 <label for="roomtype">Select facility:</label>
-                                                <h:selectOneMenu value="#{user.favCoffee1}">
-                                                    <f:selectItem itemValue="Room" itemLabel="Room" />
-                                                    <f:selectItem itemValue="Ballroom" itemLabel="Ballroom" />
-                                                    <f:selectItem itemValue="Swimming Pool" itemLabel="Swimming Pool" />
-                                                    <f:selectItem itemValue="Barbeque Pit" itemLabel="Barbeque Pit" />
+                                                <h:selectOneMenu>
+                                                    <f:selectItems value="#{frontDeskManagedBean.allFunctionrooms}" var="c"
+                                                                   itemLabel="#{c.functionRoomName}" itemValue="#{c.functionRoomID}" />
                                                 </h:selectOneMenu>
                                             </div>
 
-                                        
-                                            <!--    <h:inputText value="#{bean.number}" converterMessage="Please enter digits only." /> -->
+
+<!--    <h:inputText value="#{bean.number}" converterMessage="Please enter digits only." /> -->
 
                                             <!-- /.input group -->
 
@@ -82,7 +80,7 @@
                             </div>
                         </div>
                     </div>
-                  
+
                     <!-- /.container-fluid -->
                 </section>
                 <!-- /.content-header -->
