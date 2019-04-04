@@ -37,7 +37,7 @@ public class FunctionRoomBookingSession implements FunctionRoomBookingSessionLoc
     }
 
     @Override
-    public FunctionRoomBooking getFunctionRoomBookingByID(Long frbID) throws NoResultException {
+    public FunctionRoomBooking getAllFunctionRoomBookingByID(Long frbID) throws NoResultException {
         FunctionRoomBooking frb = em.find(FunctionRoomBooking.class, frbID);
         if (frb != null) {
             return frb;
@@ -48,7 +48,7 @@ public class FunctionRoomBookingSession implements FunctionRoomBookingSessionLoc
     
 
     @Override
-    public void updateRoom(FunctionRoomBooking frb) throws NoResultException {
+    public void updateFunctionRoomBooking(FunctionRoomBooking frb) throws NoResultException {
         FunctionRoomBooking oldFRB = em.find(FunctionRoomBooking.class, frb.getFunctionRoomBookingID());
         if (oldFRB != null) {
             oldFRB.setBookedFunctionRoom(frb.getBookedFunctionRoom());
@@ -57,5 +57,10 @@ public class FunctionRoomBookingSession implements FunctionRoomBookingSessionLoc
         } else {
             throw new NoResultException("Function Room Booking Not found");
         }
+    }
+
+    @Override
+    public void deleteFoodOrder(Long foodOrderID) throws NoResultException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
