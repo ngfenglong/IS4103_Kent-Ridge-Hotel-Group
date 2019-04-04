@@ -33,6 +33,8 @@ public class RoomBooking implements Serializable {
     private Date bookInDate;
     @Temporal(TemporalType.DATE)
     private Date bookOutDate;
+    @Temporal(TemporalType.DATE)
+    private Date bookingDate;
     private String status;
     private boolean hasTransport;
     private boolean hasExtraBed;
@@ -172,6 +174,14 @@ public class RoomBooking implements Serializable {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Date getBookingDate() {
+        return bookingDate;
+    }
+
+    public void setBookingDate(Date bookingDate) {
+        this.bookingDate = bookingDate;
     }
 
 //    public void addHolidaySurcharge(HolidaySurcharge holidaySurcharge) throws NoResultException {
