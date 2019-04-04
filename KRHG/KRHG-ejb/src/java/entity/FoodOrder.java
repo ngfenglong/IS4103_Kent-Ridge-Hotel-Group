@@ -5,7 +5,9 @@
  */
 package entity;
 
+import error.NoResultException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,6 +17,7 @@ import javax.persistence.OneToOne;
 
 @Entity
 public class FoodOrder implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,7 +27,10 @@ public class FoodOrder implements Serializable {
     private Double totalPrice;
     private String specialRequest;
 
-    
+    public FoodOrder() {
+        foodOrdered = new ArrayList<>();
+    }
+
     public Long getFoodOrderID() {
         return foodOrderID;
     }
@@ -57,24 +63,31 @@ public class FoodOrder implements Serializable {
     public String toString() {
         return "entity.FoodOrder[ foodOrderID=" + foodOrderID + " ]";
     }
-    
-    /**
-     * @return the foodOrdered
-     */
+
     public List<FoodMenuItem> getFoodOrdered() {
         return foodOrdered;
     }
 
-    /**
-     * @param foodOrdered the foodOrdered to set
-     */
     public void setFoodOrdered(List<FoodMenuItem> foodOrdered) {
         this.foodOrdered = foodOrdered;
     }
 
-    /**
-     * @return the totalPrice
-     */
+    public void addFoodMenuItem(FoodMenuItem fmi) throws NoResultException {
+        if (fmi != null && !this.getFoodOrdered().contains(fmi)) {
+            this.getFoodOrdered().add(fmi);
+        } else {
+            throw new NoResultException("Food Menu Item alreaded added to Food Order");
+        }
+    }
+
+    public void removeFoodMenuItem(FoodMenuItem fmi) throws NoResultException {
+        if (fmi != null && this.getFoodOrdered().contains(fmi)) {
+            this.getFoodOrdered().remove(fmi);
+        } else {
+            throw new NoResultException("Food Menu Item alreaded added to Food Order");
+        }
+    }
+
     public Double getTotalPrice() {
         return totalPrice;
     }

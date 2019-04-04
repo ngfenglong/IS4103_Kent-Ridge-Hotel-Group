@@ -34,6 +34,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Formatter;
+import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Singleton;
@@ -3543,6 +3544,24 @@ public class DataInitializationSessionBean {
         RoomFacility rf20 = roomFacilitySessionLocal.getRoomFacilityByName("High Ceiling");
         RoomFacility rf21 = roomFacilitySessionLocal.getRoomFacilityByName("Jaccuzi");
         RoomFacility rf22 = roomFacilitySessionLocal.getRoomFacilityByName("Kitchen");
+        
+        FunctionRoom KRCFR1 = new FunctionRoom("KRCFR1", 20, "Available", 20000.00, h2);
+        FunctionRoom KRCFR2 = new FunctionRoom("KRCFR2", 100, "Available", 100000.00, h2);
+        FunctionRoom KRCFR3 = new FunctionRoom("KRCFR3", 50, "Available", 50000.00, h2);
+        FunctionRoom KRCFR4 = new FunctionRoom("KRCFR4", 70, "Available", 70000.00, h2);
+        FunctionRoom KRCFR5 = new FunctionRoom("KRCFR5", 80, "Available", 80000.00, h2);
+
+        functionRoomSessionLocal.createFunctionRoom(KRCFR1);
+        functionRoomSessionLocal.createFunctionRoom(KRCFR2);
+        functionRoomSessionLocal.createFunctionRoom(KRCFR3);
+        functionRoomSessionLocal.createFunctionRoom(KRCFR4);
+        functionRoomSessionLocal.createFunctionRoom(KRCFR5);
+
+        h2.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRCFR1"));
+        h2.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRCFR2"));
+        h2.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRCFR3"));
+        h2.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRCFR4"));
+        h2.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRCFR5"));
 
         Room KRCS1 = new Room("KRC_201", "201", "Standard", 2, "Available", h2);
         KRCS1.addRoomFacility(rf1);
@@ -5170,6 +5189,24 @@ public class DataInitializationSessionBean {
         RoomFacility rf20 = roomFacilitySessionLocal.getRoomFacilityByName("High Ceiling");
         RoomFacility rf21 = roomFacilitySessionLocal.getRoomFacilityByName("Jaccuzi");
         RoomFacility rf22 = roomFacilitySessionLocal.getRoomFacilityByName("Kitchen");
+        
+        FunctionRoom KRNFR1 = new FunctionRoom("KRNFR1", 20, "Available", 20000.00, h3);
+        FunctionRoom KRNFR2 = new FunctionRoom("KRNFR2", 100, "Available", 100000.00, h3);
+        FunctionRoom KRNFR3 = new FunctionRoom("KRNFR3", 50, "Available", 50000.00, h3);
+        FunctionRoom KRNFR4 = new FunctionRoom("KRNFR4", 70, "Available", 70000.00, h3);
+        FunctionRoom KRNFR5 = new FunctionRoom("KRNFR5", 80, "Available", 80000.00, h3);
+
+        functionRoomSessionLocal.createFunctionRoom(KRNFR1);
+        functionRoomSessionLocal.createFunctionRoom(KRNFR2);
+        functionRoomSessionLocal.createFunctionRoom(KRNFR3);
+        functionRoomSessionLocal.createFunctionRoom(KRNFR4);
+        functionRoomSessionLocal.createFunctionRoom(KRNFR5);
+
+        h3.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRNFR1"));
+        h3.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRNFR2"));
+        h3.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRNFR3"));
+        h3.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRNFR4"));
+        h3.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRNFR5"));
 
         Room KRNS1 = new Room("KRN_201", "201", "Standard", 2, "Occupied", h3);
         KRNS1.addRoomFacility(rf1);
@@ -6798,6 +6835,24 @@ public class DataInitializationSessionBean {
         RoomFacility rf20 = roomFacilitySessionLocal.getRoomFacilityByName("High Ceiling");
         RoomFacility rf21 = roomFacilitySessionLocal.getRoomFacilityByName("Jaccuzi");
         RoomFacility rf22 = roomFacilitySessionLocal.getRoomFacilityByName("Kitchen");
+        
+        FunctionRoom KRSFR1 = new FunctionRoom("KRSFR1", 20, "Available", 20000.00, h4);
+        FunctionRoom KRSFR2 = new FunctionRoom("KRSFR2", 100, "Available", 100000.00, h4);
+        FunctionRoom KRSFR3 = new FunctionRoom("KRSFR3", 50, "Available", 50000.00, h4);
+        FunctionRoom KRSFR4 = new FunctionRoom("KRSFR4", 70, "Available", 70000.00, h4);
+        FunctionRoom KRSFR5 = new FunctionRoom("KRSFR5", 80, "Available", 80000.00, h4);
+
+        functionRoomSessionLocal.createFunctionRoom(KRSFR1);
+        functionRoomSessionLocal.createFunctionRoom(KRSFR2);
+        functionRoomSessionLocal.createFunctionRoom(KRSFR3);
+        functionRoomSessionLocal.createFunctionRoom(KRSFR4);
+        functionRoomSessionLocal.createFunctionRoom(KRSFR5);
+
+        h4.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRSFR1"));
+        h4.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRSFR2"));
+        h4.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRSFR3"));
+        h4.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRSFR4"));
+        h4.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRSFR5"));
 
         Room KRSS1 = new Room("KRS_201", "201", "Standard", 2, "Available", h4);
         KRSS1.addRoomFacility(rf1);
@@ -8425,6 +8480,24 @@ public class DataInitializationSessionBean {
         RoomFacility rf20 = roomFacilitySessionLocal.getRoomFacilityByName("High Ceiling");
         RoomFacility rf21 = roomFacilitySessionLocal.getRoomFacilityByName("Jaccuzi");
         RoomFacility rf22 = roomFacilitySessionLocal.getRoomFacilityByName("Kitchen");
+        
+        FunctionRoom KREFR1 = new FunctionRoom("KREFR1", 20, "Available", 20000.00, h5);
+        FunctionRoom KREFR2 = new FunctionRoom("KREFR2", 100, "Available", 100000.00, h5);
+        FunctionRoom KREFR3 = new FunctionRoom("KREFR3", 50, "Available", 50000.00, h5);
+        FunctionRoom KREFR4 = new FunctionRoom("KREFR4", 70, "Available", 70000.00, h5);
+        FunctionRoom KREFR5 = new FunctionRoom("KREFR5", 80, "Available", 80000.00, h5);
+
+        functionRoomSessionLocal.createFunctionRoom(KREFR1);
+        functionRoomSessionLocal.createFunctionRoom(KREFR2);
+        functionRoomSessionLocal.createFunctionRoom(KREFR3);
+        functionRoomSessionLocal.createFunctionRoom(KREFR4);
+        functionRoomSessionLocal.createFunctionRoom(KREFR5);
+
+        h5.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KREFR1"));
+        h5.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KREFR2"));
+        h5.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KREFR3"));
+        h5.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KREFR4"));
+        h5.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KREFR5"));        
 
         Room KRES1 = new Room("KRE_201", "201", "Standard", 2, "Occupied", h5);
         KRES1.addRoomFacility(rf1);
@@ -9301,6 +9374,24 @@ public class DataInitializationSessionBean {
         RoomFacility rf20 = roomFacilitySessionLocal.getRoomFacilityByName("High Ceiling");
         RoomFacility rf21 = roomFacilitySessionLocal.getRoomFacilityByName("Jaccuzi");
         RoomFacility rf22 = roomFacilitySessionLocal.getRoomFacilityByName("Kitchen");
+        
+        FunctionRoom KRWFR1 = new FunctionRoom("KRWFR1", 20, "Available", 20000.00, h6);
+        FunctionRoom KRWFR2 = new FunctionRoom("KRWFR2", 100, "Available", 100000.00, h6);
+        FunctionRoom KRWFR3 = new FunctionRoom("KRWFR3", 50, "Available", 50000.00, h6);
+        FunctionRoom KRWFR4 = new FunctionRoom("KRWFR4", 70, "Available", 70000.00, h6);
+        FunctionRoom KRWFR5 = new FunctionRoom("KRWFR5", 80, "Available", 80000.00, h6);
+
+        functionRoomSessionLocal.createFunctionRoom(KRWFR1);
+        functionRoomSessionLocal.createFunctionRoom(KRWFR2);
+        functionRoomSessionLocal.createFunctionRoom(KRWFR3);
+        functionRoomSessionLocal.createFunctionRoom(KRWFR4);
+        functionRoomSessionLocal.createFunctionRoom(KRWFR5);
+
+        h6.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRWFR1"));
+        h6.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRWFR2"));
+        h6.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRWFR3"));
+        h6.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRWFR4"));
+        h6.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRWFR5"));        
 
         Room KRWS1 = new Room("KRW_201", "201", "Standard", 2, "Available", h6);
         KRWS1.addRoomFacility(rf1);
@@ -10928,6 +11019,24 @@ public class DataInitializationSessionBean {
         RoomFacility rf20 = roomFacilitySessionLocal.getRoomFacilityByName("High Ceiling");
         RoomFacility rf21 = roomFacilitySessionLocal.getRoomFacilityByName("Jaccuzi");
         RoomFacility rf22 = roomFacilitySessionLocal.getRoomFacilityByName("Kitchen");
+        
+        FunctionRoom KRNEFR1 = new FunctionRoom("KRNEFR1", 20, "Available", 20000.00, h7);
+        FunctionRoom KRNEFR2 = new FunctionRoom("KRNEFR2", 100, "Available", 100000.00, h7);
+        FunctionRoom KRNEFR3 = new FunctionRoom("KRNEFR3", 50, "Available", 50000.00, h7);
+        FunctionRoom KRNEFR4 = new FunctionRoom("KRNEFR4", 70, "Available", 70000.00, h7);
+        FunctionRoom KRNEFR5 = new FunctionRoom("KRNEFR5", 80, "Available", 80000.00, h7);
+
+        functionRoomSessionLocal.createFunctionRoom(KRNEFR1);
+        functionRoomSessionLocal.createFunctionRoom(KRNEFR2);
+        functionRoomSessionLocal.createFunctionRoom(KRNEFR3);
+        functionRoomSessionLocal.createFunctionRoom(KRNEFR4);
+        functionRoomSessionLocal.createFunctionRoom(KRNEFR5);
+
+        h7.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRNEFR1"));
+        h7.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRNEFR2"));
+        h7.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRNEFR3"));
+        h7.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRNEFR4"));
+        h7.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRNEFR5"));        
 
         Room KRNES1 = new Room("KRNE_201", "201", "Standard", 2, "Available", h7);
         KRNES1.addRoomFacility(rf1);
@@ -11992,6 +12101,24 @@ public class DataInitializationSessionBean {
         RoomFacility rf20 = roomFacilitySessionLocal.getRoomFacilityByName("High Ceiling");
         RoomFacility rf21 = roomFacilitySessionLocal.getRoomFacilityByName("Jaccuzi");
         RoomFacility rf22 = roomFacilitySessionLocal.getRoomFacilityByName("Kitchen");
+        
+        FunctionRoom KRNWFR1 = new FunctionRoom("KRNWFR1", 20, "Available", 20000.00, h8);
+        FunctionRoom KRNWFR2 = new FunctionRoom("KRNWFR2", 100, "Available", 100000.00, h8);
+        FunctionRoom KRNWFR3 = new FunctionRoom("KRNWFR3", 50, "Available", 50000.00, h8);
+        FunctionRoom KRNWFR4 = new FunctionRoom("KRNWFR4", 70, "Available", 70000.00, h8);
+        FunctionRoom KRNWFR5 = new FunctionRoom("KRNWFR5", 80, "Available", 80000.00, h8);
+
+        functionRoomSessionLocal.createFunctionRoom(KRNWFR1);
+        functionRoomSessionLocal.createFunctionRoom(KRNWFR2);
+        functionRoomSessionLocal.createFunctionRoom(KRNWFR3);
+        functionRoomSessionLocal.createFunctionRoom(KRNWFR4);
+        functionRoomSessionLocal.createFunctionRoom(KRNWFR5);
+
+        h8.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRNWFR1"));
+        h8.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRNWFR2"));
+        h8.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRNWFR3"));
+        h8.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRNWFR4"));
+        h8.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRNWFR5"));        
 
         Room KRNWS1 = new Room("KRNW_201", "201", "Standard", 2, "Available", h8);
         KRNWS1.addRoomFacility(rf1);
@@ -13055,6 +13182,24 @@ public class DataInitializationSessionBean {
         RoomFacility rf20 = roomFacilitySessionLocal.getRoomFacilityByName("High Ceiling");
         RoomFacility rf21 = roomFacilitySessionLocal.getRoomFacilityByName("Jaccuzi");
         RoomFacility rf22 = roomFacilitySessionLocal.getRoomFacilityByName("Kitchen");
+        
+        FunctionRoom KRSEFR1 = new FunctionRoom("KRSEFR1", 20, "Available", 20000.00, h9);
+        FunctionRoom KRSEFR2 = new FunctionRoom("KRSEFR2", 100, "Available", 100000.00, h9);
+        FunctionRoom KRSEFR3 = new FunctionRoom("KRSEFR3", 50, "Available", 50000.00, h9);
+        FunctionRoom KRSEFR4 = new FunctionRoom("KRSEFR4", 70, "Available", 70000.00, h9);
+        FunctionRoom KRSEFR5 = new FunctionRoom("KRSEFR5", 80, "Available", 80000.00, h9);
+
+        functionRoomSessionLocal.createFunctionRoom(KRSEFR1);
+        functionRoomSessionLocal.createFunctionRoom(KRSEFR2);
+        functionRoomSessionLocal.createFunctionRoom(KRSEFR3);
+        functionRoomSessionLocal.createFunctionRoom(KRSEFR4);
+        functionRoomSessionLocal.createFunctionRoom(KRSEFR5);
+
+        h9.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRSEFR1"));
+        h9.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRSEFR2"));
+        h9.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRSEFR3"));
+        h9.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRSEFR4"));
+        h9.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRSEFR5"));        
 
         Room KRSES1 = new Room("KRSE_201", "201", "Standard", 2, "Available", h9);
         KRSES1.addRoomFacility(rf1);
@@ -14119,6 +14264,24 @@ public class DataInitializationSessionBean {
         RoomFacility rf20 = roomFacilitySessionLocal.getRoomFacilityByName("High Ceiling");
         RoomFacility rf21 = roomFacilitySessionLocal.getRoomFacilityByName("Jaccuzi");
         RoomFacility rf22 = roomFacilitySessionLocal.getRoomFacilityByName("Kitchen");
+        
+        FunctionRoom KRSWFR1 = new FunctionRoom("KRSWFR1", 20, "Available", 20000.00, h10);
+        FunctionRoom KRSWFR2 = new FunctionRoom("KRSWFR2", 100, "Available", 100000.00, h10);
+        FunctionRoom KRSWFR3 = new FunctionRoom("KRSWFR3", 50, "Available", 50000.00, h10);
+        FunctionRoom KRSWFR4 = new FunctionRoom("KRSWFR4", 70, "Available", 70000.00, h10);
+        FunctionRoom KRSWFR5 = new FunctionRoom("KRSWFR5", 80, "Available", 80000.00, h10);
+
+        functionRoomSessionLocal.createFunctionRoom(KRSWFR1);
+        functionRoomSessionLocal.createFunctionRoom(KRSWFR2);
+        functionRoomSessionLocal.createFunctionRoom(KRSWFR3);
+        functionRoomSessionLocal.createFunctionRoom(KRSWFR4);
+        functionRoomSessionLocal.createFunctionRoom(KRSWFR5);
+
+        h10.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRSWFR1"));
+        h10.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRSWFR2"));
+        h10.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRSWFR3"));
+        h10.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRSWFR4"));
+        h10.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRSWFR5"));        
 
         Room KRSWS1 = new Room("KRSW_201", "201", "Standard", 2, "Available", h10);
         KRSWS1.addRoomFacility(rf1);
@@ -15244,6 +15407,7 @@ public class DataInitializationSessionBean {
 
         bookingSessionLocal.createRoomBooking(rm1);
         em.flush();
+
 
 
         PaymentTransaction PT1 = new PaymentTransaction();
