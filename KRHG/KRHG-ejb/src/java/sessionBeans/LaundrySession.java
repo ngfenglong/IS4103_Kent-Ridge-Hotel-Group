@@ -18,9 +18,10 @@ import javax.persistence.Query;
 
 @Stateless
 public class LaundrySession implements LaundrySessionLocal {
+
     @PersistenceContext
     private EntityManager em;
-    
+
     @Override
     public List<LaundryOrder> getAllLaundryOrder() {
         Query q;
@@ -36,7 +37,7 @@ public class LaundrySession implements LaundrySessionLocal {
         } else {
             throw new NoResultException("Laundry Order not found.");
         }
-        
+
     }
 
     @Override
@@ -49,7 +50,7 @@ public class LaundrySession implements LaundrySessionLocal {
         q.setParameter("startDate", startDate);
         q.setParameter("endDate", endDate);
         q.setParameter("status", status.toLowerCase());
-        
+
         if (!q.getResultList().isEmpty()) {
             return q.getResultList();
         } else {
@@ -67,7 +68,7 @@ public class LaundrySession implements LaundrySessionLocal {
         q.setParameter("startDate", startDate);
         q.setParameter("endDate", endDate);
         q.setParameter("status", status.toLowerCase());
-        
+
         if (!q.getResultList().isEmpty()) {
             return q.getResultList();
         } else {
@@ -76,14 +77,14 @@ public class LaundrySession implements LaundrySessionLocal {
     }
 
     @Override
-    public List<LaundryOrder> getLaundryOrderByRoom(Room r, String status) throws NoResultException{
+    public List<LaundryOrder> getLaundryOrderByRoom(Room r, String status) throws NoResultException {
         Query q;
         q = em.createQuery("SELECT lo FROM LaundryOrder lo WHERE "
                 + "lo.room = :room"
                 + " AND LOWER(lo.status) = :status");
         q.setParameter("room", r);
         q.setParameter("status", status.toLowerCase());
-        
+
         if (!q.getResultList().isEmpty()) {
             return q.getResultList();
         } else {
@@ -92,14 +93,14 @@ public class LaundrySession implements LaundrySessionLocal {
     }
 
     @Override
-    public List<LaundryOrder> getLaundryOrderByHouseKeeper(Staff s, String status) throws NoResultException{
+    public List<LaundryOrder> getLaundryOrderByHouseKeeper(Staff s, String status) throws NoResultException {
         Query q;
         q = em.createQuery("SELECT lo FROM LaundryOrder lo WHERE "
                 + "lo.houseKeeper = :houseKeeper"
                 + " AND LOWER(lo.status) = :status");
         q.setParameter("houseKeeper", s);
         q.setParameter("status", status.toLowerCase());
-        
+
         if (!q.getResultList().isEmpty()) {
             return q.getResultList();
         } else {
@@ -115,7 +116,7 @@ public class LaundrySession implements LaundrySessionLocal {
         } else {
             throw new NoResultException("Laundry Order not found");
         }
-        
+
     }
 
     @Override
@@ -139,5 +140,10 @@ public class LaundrySession implements LaundrySessionLocal {
         }
     }
 
-    
+    @Override
+    public LaundryOrder getLastLaundryOrder() {
+        Query q = em.createQuery("SELECT lo FROM LaundryOrder lo ORDER BY lo.laundryOrderID DESC");
+        return (LaundryOrder) q.getResultList().get(0);
+    }
+
 }

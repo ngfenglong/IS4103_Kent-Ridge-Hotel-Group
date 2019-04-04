@@ -154,7 +154,7 @@
                     <p class="bookinginfo" style="border:none; text-align: center; width:100%; font-size:20px; margin-top: 20px">Keycard will be issued below. Please collect your keycard.</p>
                     <div class="hotelname" style="text-align:center; width: 100%;   color:#C5B358"  id="timeElm">
                     </div>
-                    <h:form>
+                    <h:form id="formmy">
                         <h:commandButton id="clickbutton" action="#{kioskmanagedBean.continueAllocation()}" style="display:none"></h:commandButton>
                     </h:form>
                 </div>
@@ -170,8 +170,7 @@
             let timeElm = document.getElementById('timeElm');
             let timer = function (x) {
                 if (x === 0) {
-                    document.getElementById("clickbutton").click();
-                    return;
+                    document.getElementById("formmy:clickbutton").click();
                 }
 
                 timeElm.innerHTML = x;

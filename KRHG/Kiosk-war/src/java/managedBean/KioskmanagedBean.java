@@ -5,6 +5,7 @@ package managedBean;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import entity.Hotel;
 import entity.HouseKeepingOrder;
 import entity.PaymentTransaction;
 import entity.Room;
@@ -16,12 +17,21 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletResponse;
 import sessionBeans.BookingSessionLocal;
+import sessionBeans.HotelSessionLocal;
 import sessionBeans.HouseKeepingOrderSessionLocal;
 import sessionBeans.PaymentTransactionSessionLocal;
 import sessionBeans.RoomSessionLocal;
@@ -45,8 +55,15 @@ public class KioskmanagedBean implements Serializable {
     private PaymentTransactionSessionLocal paymentTransactionSessionLocal;
     @EJB
     private HouseKeepingOrderSessionLocal housekeepingOrderSessionlocal;
+    @EJB
+    private HotelSessionLocal hotelsessionlocal;
+
+    //login
+    private String loginHotelCode;
+    private String loginPassword;
 
     //self-checkin
+    private String CheckinName;
     private Long checkinBookingID;
     private String checkinLastName;
     private String checkinFirstname;
@@ -54,6 +71,7 @@ public class KioskmanagedBean implements Serializable {
     private String checkinEmail;
     private PaymentTransaction checkinPayment;
     private String checkinPassport;
+    private int checkinNumberOfRoomBooking;
 
     private int checkinStandard;
     private int checkinPremium;
@@ -63,8 +81,8 @@ public class KioskmanagedBean implements Serializable {
 
     private List<String> allocatedRoomNumbers;
 
-    private String hotelCode;
-
+    private String hotelCode = "KRN";
+// cahnge back hotelcode
     //check out
     private String checkoutRoomNumber;
     private RoomBooking checkoutRoombooking;
@@ -80,6 +98,38 @@ public class KioskmanagedBean implements Serializable {
     public KioskmanagedBean() {
     }
 
+    public String login() throws IOException {
+        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        PrintWriter out = response.getWriter();
+        if (loginHotelCode.equals(loginPassword)) {
+            if (getHotel() == null) {
+                out.println("<script type=\"text/javascript\">");
+                out.println("alert('Invalid credetial');");
+                out.println("</script>");
+                return "login.xhtml?faces-redirect=true";
+            } else {
+                hotelCode = getHotel().getHotelCodeName();
+                return "";
+            }
+
+        } else {
+            out.println("<script type=\"text/javascript\">");
+            out.println("alert('Invalid credetial');");
+            out.println("</script>");
+            return "login.xhtml?faces-redirect=true";
+        }
+
+    }
+
+    public Hotel getHotel() {
+        for (Hotel h : hotelsessionlocal.getAllHotels()) {
+            if (h.getHotelCodeName().equals(loginHotelCode)) {
+                return h;
+            }
+        }
+        return null;
+    }
+
     public String searchCheckin() throws IOException {
         HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
         PrintWriter out = response.getWriter();
@@ -93,17 +143,21 @@ public class KioskmanagedBean implements Serializable {
                 return "checkin.xhtml?faces-redirect=true";
             } else {
 
+                checkinNumberOfRoomBooking = checkinPayment.getRoomsBooked().size();
+                checkinEmail = checkinPayment.getPayer().getEmail();
+                checkinContact = checkinPayment.getPayer().getMobileNum();
+                CheckinName = checkinLastName + " " + checkinLastName;
                 for (RoomBooking rb : checkinPayment.getRoomsBooked()) {
                     if (rb.getRoomType().equalsIgnoreCase("standard")) {
-                        setCheckinStandard(checkinStandard++);
+                        checkinStandard++;
                     } else if (rb.getRoomType().equalsIgnoreCase("Premium")) {
-                        setCheckinPremium(checkinPremium++);
+                        checkinPremium++;
                     } else if (rb.getRoomType().equalsIgnoreCase("Deluxe")) {
-                        setCheckinDeluxe(checkinDeluxe++);
+                        checkinDeluxe++;
                     } else if (rb.getRoomType().equalsIgnoreCase("Suite")) {
-                        setCheckinSuite(checkinSuite++);
+                        checkinSuite++;
                     } else if (rb.getRoomType().equalsIgnoreCase("Penthouse")) {
-                        setCheckinPenthouse(checkinPenthouse++);
+                        checkinPenthouse++;
                     }
                 }
                 return "checkinResult.xhtml?faces-redirect=true";
@@ -126,16 +180,43 @@ public class KioskmanagedBean implements Serializable {
 
     }
 
-    public String searchCheckout() throws NoResultException {
-        checkoutRoombooking = bookSessionLocal.getRoomBookingByRoomNumber(checkoutRoomNumber, "Occupied", hotelCode).get(0);
-        checkoutRoom = getRoomWithRoomNumber();
-        checkoutName = checkoutRoombooking.getLastName() + " " + checkoutRoombooking.getFirstName();
-        //checkOutcharges =checkoutRoombooking.get from the food or extra stuff that happen
-        checkoutRoomType = checkoutRoombooking.getRoomType();
-        checkoutPaymentTransaction = getPaymentTransactionWithRoombookingID();
-        checkoutBookingNumber = checkoutPaymentTransaction.getTransactionID();
+    public String searchCheckout() throws IOException {
+        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        PrintWriter out = response.getWriter();
+        try {
+            //Room checkoutRoombooking = roomSessionLocal.getRoom(roomNumber,hotelcode);
+            checkoutRoom = getRoom();
+            if (checkoutRoom == null) {
+                out.println("<script type=\"text/javascript\">");
+                out.println("alert('No result found');");
+                out.println("</script>");
+                return "checkout.xhtml?faces-redirect=true";
+            }
 
-        return "checkouttimer.xhtml?faces-redirect=true";
+            checkoutRoombooking = getRoombooking();
+            if (checkoutRoombooking == null) {
+                out.println("<script type=\"text/javascript\">");
+                out.println("alert('No result found');");
+                out.println("</script>");
+                return "checkout.xhtml?faces-redirect=true";
+            }
+
+            checkoutName = checkoutRoombooking.getLastName() + " " + checkoutRoombooking.getFirstName();
+
+            //checkOutcharges =checkoutRoombooking.get from the food or extra stuff that happen
+            checkoutRoomType = checkoutRoombooking.getRoomType();
+            checkoutPaymentTransaction = getPaymentTransactionWithRoombookingID();
+            checkoutBookingNumber = checkoutPaymentTransaction.getTransactionID();
+
+            return "checkouttimer.xhtml?faces-redirect=true";
+
+        } catch (NoResultException e) {
+            System.out.println("NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo");
+            out.println("<script type=\"text/javascript\">");
+            out.println("alert('No result found');");
+            out.println("</script>");
+            return "checkout.xhtml?faces-redirect=true";
+        }
     }
 
     public PaymentTransaction getPaymentTransactionWithRoombookingID() throws NoResultException {
@@ -149,10 +230,23 @@ public class KioskmanagedBean implements Serializable {
         return null;
     }
 
-    public Room getRoomWithRoomNumber() {
-        for (Room room : roomSessionLocal.getAllRooms()) {
-            if (room.getRoomNumber().equals(checkoutRoomNumber)) {
-                return room;
+    public RoomBooking getRoombooking() {
+        try {
+            for (RoomBooking rb : bookSessionLocal.getAllRoomBookingByStatus("checkedin", hotelCode)) {
+                if (rb.getBookedRoom().getRoomID().equals(checkoutRoom.getRoomID())) {
+                    return rb;
+                }
+            }
+            return null;
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+    public Room getRoom() {
+        for (Room rm : roomSessionLocal.getAllRooms()) {
+            if (rm.getRoomNumber().equals(checkoutRoomNumber) && rm.getHotel().getHotelCodeName().equals(hotelCode)) {
+                return rm;
             }
         }
         return null;
@@ -165,10 +259,10 @@ public class KioskmanagedBean implements Serializable {
             allocatedRoomNumbers = new ArrayList<>();
             for (RoomBooking rm : checkinPayment.getRoomsBooked()) {
                 String roomtype = rm.getRoomType();
-                //Room room = roomSessionLocal.getRoomByType(roomstatus, hotelCode,roomtype);
-                //get first result on the list 
-                Room bookedRoom = null;
+
+                Room bookedRoom = roomSessionLocal.getSingleRoomByType(roomtype, hotelCode, "Available").get(0);
                 rm.setBookedRoom(bookedRoom);
+                rm.setStatus("checkedin");
                 allocatedRoomNumbers.add(bookedRoom.getRoomNumber());
                 bookSessionLocal.updateRoomBooking(rm);
                 bookedRoom.setStatus("Occupied");
@@ -185,9 +279,26 @@ public class KioskmanagedBean implements Serializable {
 
     public String continueAllocation() {
         allocatedRoomNumbers.remove(0);
-        if (allocatedRoomNumbers.size() == 0) {
+        if (allocatedRoomNumbers.isEmpty()) {
+            CheckinName = null;
+            checkinBookingID = null;
+            checkinLastName = null;
+            checkinFirstname = null;
+            checkinContact = null;
+            checkinEmail = null;
+            checkinPayment = null;
+            checkinPassport = null;
+            checkinNumberOfRoomBooking = 0;
+
+            checkinStandard = 0;
+            checkinPremium = 0;
+            checkinDeluxe = 0;
+            checkinSuite = 0;
+            checkinPenthouse = 0;
+
             return "thankyou.xhtml";
         } else {
+
             return "roomallocation.xhtml?faces-redirect=true";
         }
     }
@@ -198,6 +309,17 @@ public class KioskmanagedBean implements Serializable {
         roomSessionLocal.updateRoom(checkoutRoom);
         bookSessionLocal.updateRoomBooking(checkoutRoombooking);
         createHousekeepingRequest();
+//sEND email
+        checkoutRoomNumber = null;
+        checkoutRoombooking = null;
+
+        checkoutName = null;
+        checkOutcharges = 0;
+        checkoutRoomType = null;
+        checkoutBookingNumber = null;
+        checkoutPassport = null;
+        checkoutPaymentTransaction = null;
+        checkoutRoom = null;
         return "checkoutConfirmation.xhtml";
     }
 
@@ -390,4 +512,69 @@ public class KioskmanagedBean implements Serializable {
         this.checkoutPaymentTransaction = checkoutPaymentTransaction;
     }
 
+    public String getLoginHotelCode() {
+        return loginHotelCode;
+    }
+
+    public void setLoginHotelCode(String loginHotelCode) {
+        this.loginHotelCode = loginHotelCode;
+    }
+
+    public String getLoginPassword() {
+        return loginPassword;
+    }
+
+    public void setLoginPassword(String loginPassword) {
+        this.loginPassword = loginPassword;
+    }
+
+    public int getCheckinNumberOfRoomBooking() {
+        return checkinNumberOfRoomBooking;
+    }
+
+    public void setCheckinNumberOfRoomBooking(int checkinNumberOfRoomBooking) {
+        this.checkinNumberOfRoomBooking = checkinNumberOfRoomBooking;
+    }
+
+    public String getCheckinName() {
+        return CheckinName;
+    }
+
+    public void setCheckinName(String CheckinName) {
+        this.CheckinName = CheckinName;
+    }
+
+    public static void sendEmail(String recipient, String subject, String msg) {
+
+        String username = "automessage.kentridgehotelgroup@gmail.com";
+        String password = "krhg1234";
+
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+
+        Session session = Session.getInstance(props,
+                new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
+
+        try {
+
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("Do-not-reply@KentRidgeHotelGroup.com"));
+            message.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse(recipient));
+            message.setSubject(subject);
+            message.setText(msg);
+
+            Transport.send(message);
+
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

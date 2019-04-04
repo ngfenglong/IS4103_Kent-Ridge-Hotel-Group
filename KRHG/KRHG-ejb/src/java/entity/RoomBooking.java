@@ -57,6 +57,9 @@ public class RoomBooking implements Serializable {
     private List<MinibarItem> listOfMiniBarItem;
 
     public RoomBooking() {
+        listOfLaundryOrders = new ArrayList<>();
+        listOfFoodOrders = new ArrayList<>();
+        listOfMiniBarItem = new ArrayList<>();
 
     }
 
@@ -285,7 +288,7 @@ public class RoomBooking implements Serializable {
     public void setListOfFoodOrders(List<FoodOrder> listOfFoodOrders) {
         this.listOfFoodOrders = listOfFoodOrders;
     }
-    
+
     /**
      * @return the listOfMiniBarItem
      */
@@ -298,5 +301,53 @@ public class RoomBooking implements Serializable {
      */
     public void setListOfMiniBarItem(List<MinibarItem> listOfMiniBarItem) {
         this.listOfMiniBarItem = listOfMiniBarItem;
+    }
+
+    public void addLaundryOrder(LaundryOrder lo) throws NoResultException {
+        if (lo != null && !this.getListOfLaundryOrders().contains(lo)) {
+            this.getListOfLaundryOrders().add(lo);
+        } else {
+            throw new NoResultException("Laundry Order already added to Room Booking");
+        }
+    }
+
+    public void removeLaundryOrder(LaundryOrder lo) throws NoResultException {
+        if (lo != null && this.getListOfLaundryOrders().contains(lo)) {
+            this.getListOfLaundryOrders().remove(lo);
+        } else {
+            throw new NoResultException("Laundry Order has not been added to Room Booking");
+        }
+    }
+
+    public void addFoodOrder(FoodOrder fo) throws NoResultException {
+        if (fo != null && !this.getListOfFoodOrders().contains(fo)) {
+            this.getListOfFoodOrders().add(fo);
+        } else {
+            throw new NoResultException("Food Order already added to Room Booking");
+        }
+    }
+
+    public void removeFoodOrder(FoodOrder fo) throws NoResultException {
+        if (fo != null && this.getListOfLaundryOrders().contains(fo)) {
+            this.getListOfLaundryOrders().remove(fo);
+        } else {
+            throw new NoResultException("Food Order has not been added to Room Booking");
+        }
+    }
+
+    public void addMiniBarItem(MinibarItem mbi) throws NoResultException {
+        if (mbi != null && !this.getListOfMiniBarItem().contains(mbi)) {
+            this.getListOfMiniBarItem().add(mbi);
+        } else {
+            throw new NoResultException("Minibar Item already added to Room Booking");
+        }
+    }
+
+    public void removeMiniBarItem(MinibarItem mbi) throws NoResultException {
+        if (mbi != null && this.getListOfMiniBarItem().contains(mbi)) {
+            this.getListOfMiniBarItem().remove(mbi);
+        } else {
+            throw new NoResultException("Minibar Item has not been added to Room Booking");
+        }
     }
 }

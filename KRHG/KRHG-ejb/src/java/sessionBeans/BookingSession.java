@@ -432,5 +432,11 @@ public class BookingSession implements BookingSessionLocal {
     public void createHotelFacilityBooking(HotelFacilityBooking hotelFacilityBooking) {
         em.persist(hotelFacilityBooking);
     }
+    
+    @Override
+    public RoomBooking getLastRoomBooking() {
+        Query q = em.createQuery("SELECT rb FROM RoomBooking rb ORDER BY rb.roomBookingID DESC");
+        return (RoomBooking) q.getResultList().get(0);
+    }
 
 }

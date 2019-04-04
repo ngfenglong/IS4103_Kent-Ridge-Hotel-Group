@@ -478,3 +478,6 @@ display: none}
   cursor: pointer;
   visibility: hidden;
 }
+#comeinfront{
+     z-index: 100;
+}
