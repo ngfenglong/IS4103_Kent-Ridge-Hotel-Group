@@ -58,7 +58,7 @@ public class RoomSession implements RoomSessionLocal {
             throw new NoResultException("Room not found.");
         }
     }
-    
+
     @Override
     public List<Room> getRoomByStatus(String status, String hotelCodeName) throws NoResultException {
         Query q;
@@ -86,32 +86,56 @@ public class RoomSession implements RoomSessionLocal {
             }
         }
     }
-
+    
     @Override
-    public List<Room> getRoomByType(String roomType, String roomHotel) throws NoResultException {
+    public List<Room> getRoomByType(String roomType, String hotelCodeName, String status) throws NoResultException {
         Query q;
-        if (roomHotel.isEmpty()) {
+        if (hotelCodeName.isEmpty()) {
             q = em.createQuery("SELECT r FROM Room r WHERE "
-                    + "LOWER(r.roomType) = :roomType");
+                    + "LOWER(r.roomType) = :roomType AND "
+                    + "LOWER(r.status) = :status");
             q.setParameter("roomType", roomType.toLowerCase());
-
-            if (!q.getResultList().isEmpty()) {
-                return q.getResultList();
-            } else {
-                throw new NoResultException("Room not found.");
-            }
+            q.setParameter("status", status.toLowerCase());
         } else {
             q = em.createQuery("SELECT r FROM Room r WHERE "
-                    + "LOWER(r.roomHotel) = :roomHotel AND"
-                    + "LOWER(r.roomType) = :roomType");
-            q.setParameter("roomHotel", roomHotel.toLowerCase());
+                    + "LOWER(r.hotel.hotelCodeName) = :hotelCodeName AND "
+                    + "LOWER(r.roomType) = :roomType AND "
+                    + "LOWER(r.status) = :status");
             q.setParameter("roomType", roomType.toLowerCase());
+            q.setParameter("hotelCodeName", hotelCodeName.toLowerCase());
+            q.setParameter("status", status.toLowerCase());
 
-            if (!q.getResultList().isEmpty()) {
-                return q.getResultList();
-            } else {
-                throw new NoResultException("Room not found.");
-            }
+        }
+        if (!q.getResultList().isEmpty()) {
+            return q.getResultList();
+        } else {
+            throw new NoResultException("Room not found.");
+        }
+    }
+
+    @Override
+    public List<Room> getSingleRoomByType(String roomType, String hotelCodeName, String status) throws NoResultException {
+        Query q;
+        if (hotelCodeName.isEmpty()) {
+            q = em.createQuery("SELECT r FROM Room r WHERE "
+                    + "LOWER(r.roomType) = :roomType AND "
+                    + "LOWER(r.status) = :status");
+            q.setParameter("roomType", roomType.toLowerCase());
+            q.setParameter("status", status.toLowerCase());
+        } else {
+            q = em.createQuery("SELECT r FROM Room r WHERE "
+                    + "LOWER(r.hotel.hotelCodeName) = :hotelCodeName AND "
+                    + "LOWER(r.roomType) = :roomType AND "
+                    + "LOWER(r.status) = :status");
+            q.setParameter("roomType", roomType.toLowerCase());
+            q.setParameter("hotelCodeName", hotelCodeName.toLowerCase());
+            q.setParameter("status", status.toLowerCase());
+
+        }
+        if (!q.getResultList().isEmpty()) {
+            return q.setMaxResults(1).getResultList();
+        } else {
+            throw new NoResultException("Room not found.");
         }
     }
 
@@ -432,7 +456,7 @@ public class RoomSession implements RoomSessionLocal {
         if (!q.getResultList().isEmpty()) {
             return (MinibarItem) q.getResultList().get(0);
         } else {
-              throw new NoResultException("Minibar Item not found");
+            throw new NoResultException("Minibar Item not found");
         }
     }
 
