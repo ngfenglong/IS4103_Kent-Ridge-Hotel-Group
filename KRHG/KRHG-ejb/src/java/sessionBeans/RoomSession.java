@@ -44,6 +44,20 @@ public class RoomSession implements RoomSessionLocal {
             throw new NoResultException("Room not found.");
         }
     }
+    
+    @Override
+    public Room getRoomByRoomNumber(String roomNumber) throws NoResultException {
+        Query q;
+        q = em.createQuery("SELECT r FROM Room r WHERE "
+                + "LOWER(r.roomNumber) = :roomNumber");
+        q.setParameter("roomNumber", roomNumber.toLowerCase());
+
+        if (!q.getResultList().isEmpty()) {
+            return (Room) q.getResultList().get(0);
+        } else {
+            throw new NoResultException("Room not found.");
+        }
+    }
 
     @Override
     public Room getRoomByName(String roomName) throws NoResultException {
