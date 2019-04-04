@@ -42,7 +42,6 @@ public class FoodOrderSession implements FoodOrderSessionLocal {
             oldFoodOrder.setFoodOrdered(foodOrder.getFoodOrdered());
             oldFoodOrder.setTotalPrice(foodOrder.getTotalPrice());
             oldFoodOrder.setSpecialRequest(foodOrder.getSpecialRequest());
-            oldFoodOrder.setQty(foodOrder.getQty());
         } else {
             throw new NoResultException("Food Menu Item not found");
         }
