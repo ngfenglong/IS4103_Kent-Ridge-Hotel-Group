@@ -100,7 +100,7 @@ public class HotelStayManagedBean implements Serializable {
                         alcoholItemList.add(food);
                         break;
                     case "Beverages (Chilled Juices)":
-                        juicesItemList.add(food);  
+                        juicesItemList.add(food);
                         break;
                     case "Soft Drinks":
                         softDrinksItemList.add(food);
@@ -174,8 +174,17 @@ public class HotelStayManagedBean implements Serializable {
     }
 
     public void checkOutOrder() {
-        //ADD a total price to final payment!
+        //ADD a total price to final payment! Send email receipt!
         foodMenuOrder.clear();
+        totalPrice = 0;
+    }
+
+    public int getLevel(String roomnumber) {
+        if (roomnumber.length() == 3) {
+            return Integer.parseInt(roomnumber.substring(0, 1));
+        } else {
+            return Integer.parseInt(roomnumber.substring(0, 2));
+        }
     }
 
     public void bookHouseKeeping(SimpleDateFormat HousekeepingTime) {
@@ -183,7 +192,7 @@ public class HotelStayManagedBean implements Serializable {
         hkOrder.setOrderDateTime(new Date());
         hkOrder.setSpecialRequest(houseKeepingRequestDetails);
         hkOrder.setRoom(currentRoom);
-        hkOrder.setLevel(0); //Need to set properly
+        hkOrder.setLevel(getLevel(currentRoom.getRoomNumber())); //Need to set properly
         hkOrder.setStatus("incomplete");
         hkOrder.setRequestType("housekeeping");
         houseKeepingSessionLocal.createHouseKeepingOrder(hkOrder);
@@ -407,7 +416,7 @@ public class HotelStayManagedBean implements Serializable {
     public void setCurrentRoom(Room currentRoom) {
         this.currentRoom = currentRoom;
     }
-    
+
     /**
      * @return the breakfastItemList
      */
@@ -444,7 +453,8 @@ public class HotelStayManagedBean implements Serializable {
     }
 
     /**
-     * @param sandwichesAndBurgersItemList the sandwichesAndBurgersItemList to set
+     * @param sandwichesAndBurgersItemList the sandwichesAndBurgersItemList to
+     * set
      */
     public void setSandwichesAndBurgersItemList(List<FoodMenuItem> sandwichesAndBurgersItemList) {
         this.sandwichesAndBurgersItemList = sandwichesAndBurgersItemList;
