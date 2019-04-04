@@ -7,6 +7,7 @@ package sessionBeans;
 
 import entity.CreditCard;
 import entity.Customer;
+import entity.Feedback;
 import entity.FoodMenuItem;
 import entity.FunctionRoom;
 import entity.Hotel;
@@ -16,6 +17,7 @@ import entity.LostAndFoundReport;
 import entity.MaintainenceOrder;
 import entity.MinibarItem;
 import entity.PaymentTransaction;
+import entity.PromoCode;
 import entity.Room;
 import entity.RoomBooking;
 import entity.RoomFacility;
@@ -78,6 +80,10 @@ public class DataInitializationSessionBean {
     FunctionRoomSessionLocal functionRoomSessionLocal;
     @EJB
     RoomPricingSessionLocal roomPricingSessionLocal;
+    @EJB
+    PromoCodeSessionLocal promoCodeSessionLocal;
+    @EJB
+    FeedbackSessionLocal feedbackSessionLocal;
 
     public DataInitializationSessionBean() {
     }
@@ -1175,8 +1181,77 @@ public class DataInitializationSessionBean {
         RoomPricing rp41 = new RoomPricing("KRSW_Suite", 200.0);
         roomPricingSessionLocal.createRoomPricing(rp41); 
         
+//*********************************************PROMO CODE************************************************        
+        PromoCode pc1 = new PromoCode();
+        pc1.setPromoCode("GROUPBOOKING");
+        pc1.setStartDate(format.parse("2019-01-01"));
+        pc1.setEndDate(format.parse("2019-12-31"));
+        pc1.setStatus("Active");
+        pc1.setDiscount(0.05);
+        promoCodeSessionLocal.createPromoCode(pc1);
+  
+
+        PromoCode pc2 = new PromoCode();
+        pc2.setPromoCode("HAPPYNEWYEAR");
+        pc2.setStartDate(format.parse("2019-01-01"));
+        pc2.setEndDate(format.parse("2019-12-31"));
+        pc2.setStatus("Active");
+        pc2.setDiscount(0.1);
+        promoCodeSessionLocal.createPromoCode(pc2);
+ 
+
+        PromoCode pc3 = new PromoCode();
+        pc3.setPromoCode("DISCOUNT 015");
+        pc3.setStartDate(format.parse("2019-01-01"));
+        pc3.setEndDate(format.parse("2019-12-31"));
+        pc3.setStatus("Active");
+        pc3.setDiscount(0.15);
+        promoCodeSessionLocal.createPromoCode(pc3);
+ 
+
+        PromoCode pc4 = new PromoCode();
+        pc4.setPromoCode("SPECIALRATE");
+        pc4.setStartDate(format.parse("2019-01-01"));
+        pc4.setEndDate(format.parse("2019-12-31"));
+        pc4.setStatus("Active");
+        pc4.setDiscount(0.2);
+        promoCodeSessionLocal.createPromoCode(pc4);
+
+        PromoCode pc5 = new PromoCode();
+        pc5.setPromoCode("STAFFRATE");
+        pc5.setStartDate(format.parse("2019-01-01"));
+        pc5.setEndDate(format.parse("2019-12-31"));
+        pc5.setStatus("Active");
+        pc5.setDiscount(0.25);
+        promoCodeSessionLocal.createPromoCode(pc5);
+        
+//*********************************************FEEDBACK************************************************
+        Feedback fb1 = new Feedback();
+        fb1.setFeedBackDate(format.parse("2019-03-01"));
+        fb1.setFeedBackTitle("Good Stay");
+        fb1.setFeedBackFrom("Randal Ho");
+        fb1.setFeedBackMsg("Had a very good stay, efficent booking and comfortable rooms.");
+        fb1.setHotel(h1);
+        feedbackSessionLocal.createFeedback(fb1);
+
+        Feedback fb2 = new Feedback();
+        fb2.setFeedBackDate(format.parse("2019-03-08"));
+        fb2.setFeedBackTitle("Food could be better");
+        fb2.setFeedBackFrom("Lok Li Choo");
+        fb2.setFeedBackMsg("rooms were too cold, food was not very good");
+        fb2.setHotel(h1);
+        feedbackSessionLocal.createFeedback(fb2);
         em.flush();
 
+        Feedback fb3 = new Feedback();
+        fb3.setFeedBackDate(format.parse("2019-03-10"));
+        fb3.setFeedBackTitle("Rooms very nice");
+        fb3.setFeedBackFrom("Chia Mei Fang");
+        fb3.setFeedBackMsg("rooms were recently renovated and very comfortable, modern and nice.");
+        fb3.setHotel(h1);
+        feedbackSessionLocal.createFeedback(fb3);
+
+        em.flush();
     }
 
     public void initializeKRGRoom() throws NoResultException {
