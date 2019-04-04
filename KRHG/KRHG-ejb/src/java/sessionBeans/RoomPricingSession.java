@@ -56,4 +56,17 @@ public class RoomPricingSession implements RoomPricingSessionLocal {
         }
     }
 
+    @Override
+    public RoomPricing getRoomPricingByName(String roomPricingName) throws NoResultException {
+        Query q;
+        q = em.createQuery("SELECT r FROM RoomPricing r WHERE "
+                + "LOWER(r.pricingName) = :pricingName");
+        q.setParameter("pricingName", roomPricingName.toLowerCase());
+
+        if (!q.getResultList().isEmpty()) {
+            return (RoomPricing) q.getResultList().get(0);
+        } else {
+            throw new NoResultException("RoomPricing not found.");
+        }
+    }
 }

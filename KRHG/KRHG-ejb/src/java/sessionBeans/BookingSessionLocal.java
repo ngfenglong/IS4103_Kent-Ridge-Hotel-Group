@@ -39,5 +39,5 @@ public interface BookingSessionLocal {
     public void updateHotelFacilityBooking (HotelFacilityBooking hotelFacilityBooking) throws NoResultException;
     public void deleteHotelFacilityBooking (Long hotelFacilityBookingID) throws NoResultException;
     public void createHotelFacilityBooking (HotelFacilityBooking hotelFacilityBooking);     
-    public RoomBooking getLastRoomBooking();
+    public RoomBooking getLastRoomBooking()throws NoResultException ;
 }

@@ -1,103 +1,172 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"  xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
-    <body>
+<body>
 
-        <ui:composition template="./AdminTemplate.xhtml">
+    <ui:composition template="./AdminTemplate.xhtml">
 
-            <ui:define name="title">
-                KRHG Admin Console System
-            </ui:define>
+        <ui:define name="title">
+            KRHG Admin Console System
+        </ui:define>
 
-            <ui:define name="content">
-                <!-- Content Header (Page header) -->
-                <div class="content-header">
-                    <div class="container-fluid">
-                        <div class="row mb-2">
-                            <div class="col-sm-6">
-                            </div>
-                            <!-- /.col -->
-                            <div class="col-sm-6">
-                                <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item active">
-                                        <!--Add Btn-->
-                                    </li>
-                                </ol>
-                            </div>
-                            <!-- /.col -->
+        <ui:define name="content">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 style="font-size: x-large; margin-bottom:20px">View Staff</h1>
                         </div>
-                        <!-- /.row -->
+                        <!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li><a href="#"> Home</a></li>
+                                <li><a href="#"> Manage Staff</a></li>
+                                <li><a href="#"> View Staff - #{hotelManagedBean.selectedStaff.name} </a></li>
+                            </ol>
+                        </div>
+                        <!-- /.col -->
                     </div>
-                    <!-- /.container-fluid -->
-                </div> 
-                <!-- form start -->
-                <h:form role="form">
-                    <!-- Content Header (Page header) -->
-                    <section class="content-header">
+                    <!-- /.row -->
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- form start -->
+            <h:form role="form">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h3 class="card-title">
-                                            <i class="fa fa-text-width"></i>
-                                            #{hotelManagedBean.selectedStaff.name}'s Profile
-                                        </h3>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="box box-success">
+                                <div class="box-header with-border" style="text-align: center">
+                                    <h3 class="box-title" style="text-align: center; font-size:xx-large">
+                                        #{hotelManagedBean.selectedStaff.name}'s Profile </h3>
+                                    <div class="box-tools pull-right">
+                                        <!--Add Btn-->
+                                        <h:commandLink action="#{hotelManagedBean.editStaff(selectedStaff.staffID)}"
+                                            style="font-size: large; margin-right: 5px"><i class="far fa-edit"></i>
+                                        </h:commandLink>
+                                        <h:commandLink class="cd-popup-trigger" id="modal-2" a:data-target="#modal-1" action="#{hotelManagedBean.deleteStaff(selectedStaff.staffID)}"
+                                            style="font-size: large; margin-right: 5px"><i class="fas fa-trash-alt"></i>
+                                        </h:commandLink>
+
                                     </div>
-                                    <!-- /.card-header -->
-                                    <div class="card-body">
-                                        <dl>
-                                            <dt style="padding-left: 1rem;">Staff Name:</dt>
-                                            <dd style="padding-left:1rem;">#{hotelManagedBean.selectedStaff.name}</dd>
-                                            <dt style="padding-left: 1rem;">NRIC: </dt>
-                                            <dd style="padding-left:1rem;">#{hotelManagedBean.selectedStaff.nric}</dd>
-                                            <dt style="padding-left: 1rem;">Contact Number: </dt>
-                                            <dd style="padding-left:1rem;">#{hotelManagedBean.selectedStaff.phoneNumber}</dd>
-                                            <dt style="padding-left: 1rem;">Email: </dt>
-                                            <dd style="padding-left:1rem;">#{hotelManagedBean.selectedStaff.email}</dd>
-                                            <dt style="padding-left: 1rem;">Address: </dt>
-                                            <dd style="padding-left:1rem;">#{hotelManagedBean.selectedStaff.address}</dd>
-
-
-                                            <dt style="padding-left: 1rem;">Hotel: </dt>
-                                            <dd style="padding-left:1rem;">#{hotelManagedBean.selectedStaff.hotelGroup}</dd>
-                                            <dt style="padding-left: 1rem;">Job Title: </dt>
-                                            <dd style="padding-left:1rem;">#{hotelManagedBean.selectedStaff.jobTitle}</dd>
-                                            <dt style="padding-left: 1rem;">Department: </dt>
-                                            <dd style="padding-left:1rem;">#{hotelManagedBean.selectedStaff.department}</dd>
-                                            <dt style="padding-left: 1rem;">Entitled Number of Leave</dt>
-                                            <dd style="padding-left:1rem;">#{hotelManagedBean.selectedStaff.entitledLeaves}</dd>
-                                            <dt style="padding-left: 1rem;">Manager-In-Charged</dt>
-                                            <dd style="padding-left:1rem;">#{hotelManagedBean.selectedStaff.managerInCharge.name}</dd>
-
-
-                                            <dt style="padding-top:1rem; padding-left: 1rem;">Next-of-Kin's Name</dt>
-                                            <dd style="padding-left:1rem;">#{hotelManagedBean.selectedStaff.nokName}</dd>
-                                            <dt style="padding-top:1rem; padding-left: 1rem;">Next-of-Kin's Address</dt>
-                                            <dd style="padding-left:1rem;">#{hotelManagedBean.selectedStaff.nokAddress}</dd>
-                                            <dt style="padding-top:1rem; padding-left: 1rem;">Next-of-Kin's Contact Number</dt>
-                                            <dd style="padding-left:1rem;">#{hotelManagedBean.selectedStaff.nokPhoneNumber}</dd>
-
-                                        </dl>
-                                    </div>
-                                    <!-- /.card-body -->
                                 </div>
-                                <!-- /.card -->
+
+                                <div class="box-body no-padding" style="color:black">
+                                    <div class="row" style="margin-bottom:20px; padding:0px 5px">
+                                        <div class="col-md-4 box">
+                                                <div class="box-header with-border" style="text-align: center">
+                                                        <h3 class="box-title" style="text-align: center; color:green; font-size: x-large">
+                                                           Personal Details </h3>
+                                                        </div>
+                                            <div class="description-block margin-bottom">
+                                                <span class="description-text">Name</span>
+                                                <h5 class="description-header">
+                                                    #{hotelManagedBean.selectedStaff.name}</h5>
+                                            </div>
+                                            <div class="description-block margin-bottom">
+                                                <span class="description-text">NRIC</span>
+                                                <h5 class="description-header">
+                                                    #{hotelManagedBean.selectedStaff.nric}</h5>
+                                            </div>
+                                            <div class="description-block margin-bottom">
+                                                <span class="description-text">Mobile Number</span>
+                                                <h5 class="description-header">
+                                                    #{hotelManagedBean.selectedStaff.phoneNumber}</h5>
+                                            </div>
+                                            <div class="description-block margin-bottom">
+                                                <span class="description-text">email</span>
+                                                <h5 class="description-header">
+                                                    #{hotelManagedBean.selectedStaff.email}</h5>
+                                            </div>
+                                            <div class="description-block margin-bottom">
+                                                <span class="description-text">address</span>
+                                                <h5 class="description-header">
+                                                    #{hotelManagedBean.selectedStaff.address}</h5>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 col-sm-4 box">
+                                                <div class="box-header with-border" style="text-align: center">
+                                                        <h3 class="box-title" style="text-align: center; color:green;  font-size: x-large">
+                                                           Job Details </h3>
+                                                        </div>
+                                            <div class="description-block margin-bottom">
+                                                <span class="description-text">Hotel</span>
+                                                <h5 class="description-header">
+                                                    #{hotelManagedBean.selectedStaff.hotelGroup}</h5>
+                                            </div>
+                                            <div class="description-block margin-bottom">
+                                                <span class="description-text">Job Title</span>
+                                                <h5 class="description-header">
+                                                    #{hotelManagedBean.selectedStaff.jobTitle}</h5>
+                                            </div>
+                                            <div class="description-block margin-bottom">
+                                                <span class="description-text">Department</span>
+                                                <h5 class="description-header">
+                                                    #{hotelManagedBean.selectedStaff.department}</h5>
+                                            </div>
+                                            <div class="description-block margin-bottom">
+                                                <span class="description-text">Entitled Days of Leave</span>
+                                                <h5 class="description-header">
+                                                    #{hotelManagedBean.selectedStaff.entitledLeaves}</h5>
+                                            </div>
+                                            <div class="description-block margin-bottom">
+                                                <span class="description-text">Manager In Charge</span>
+                                                <h5 class="description-header">
+                                                    #{hotelManagedBean.selectedStaff.managerInCharge}</h5>
+                                            </div>
+                                        </div>
+                                        <!-- /.col -->
+                                        <div class="col-md-4 box">
+                                                <div class="box-header with-border" style="text-align: center">
+                                                        <h3 class="box-title" style="text-align: center; color:green;  font-size: x-large">
+                                                           Next of Kin's Details </h3>
+                                                        </div>
+                                            <div class="description-block margin-bottom">
+                                                <span class="description-text">Next-of-Kin's Name</span>
+                                                <h5 class="description-header">
+                                                    #{hotelManagedBean.selectedStaff.nokName}</h5>
+                                            </div>
+                                            <div class="description-block margin-bottom">
+                                                <span class="description-text">Next-of-Kin's Address</span>
+                                                <h5 class="description-header">
+                                                    #{hotelManagedBean.selectedStaff.nokAddress}</h5>
+                                            </div>
+                                            <div class="description-block margin-bottom">
+                                                <span class="description-text">Next-of-Kin's Contact Number</span>
+                                                <h5 class="description-header">
+                                                    #{hotelManagedBean.selectedStaff.nokPhoneNumber}</h5>
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="card-footer" style="text-align: center">
+                                        <h:commandButton class="btn btn-primary" value="Change Password" action="#"></h:commandButton>
+                                </div>
                             </div>
                         </div>
-                    </section>
-                </h:form>
-            </ui:define>
+                    </div>
+                </section>
+            </h:form>
+        </ui:define>
 
 
-            <ui:define name="script">
-                script
-            </ui:define>
+        <ui:define name="script">
+            script
+        </ui:define>
 
-        </ui:composition>
+    </ui:composition>
 
-    </body>
+</body>
+
 </html>

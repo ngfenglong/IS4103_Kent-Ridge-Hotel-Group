@@ -7,6 +7,7 @@ package managedBean;
 
 import entity.CreditCard;
 import entity.Customer;
+import entity.FunctionRoom;
 import entity.FunctionRoomBooking;
 import entity.PaymentTransaction;
 import entity.Room;
@@ -21,6 +22,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Formatter;
 import java.util.List;
@@ -31,6 +33,8 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletResponse;
 import sessionBeans.BookingSessionLocal;
 import sessionBeans.CustomerSessionLocal;
+import sessionBeans.FunctionRoomBookingSessionLocal;
+import sessionBeans.FunctionRoomSessionLocal;
 import sessionBeans.PaymentTransactionSessionLocal;
 import sessionBeans.RoomSessionLocal;
 
@@ -53,7 +57,10 @@ public class FrontDeskManagedBean {
     private CustomerSessionLocal customerSessionLocal;
     @EJB
     private PaymentTransactionSessionLocal paymentTransactionSessionLocal;
-
+    @EJB
+    private FunctionRoomBookingSessionLocal functionRoomBookingSessionLocal;
+    @EJB
+    private FunctionRoomSessionLocal functionroomSessionlocal;
     private String mode;
 
     //customer check in
@@ -108,10 +115,10 @@ public class FrontDeskManagedBean {
     private String paymentCVV;
 
     //hotel code
-    private String hotelCode;
+    private String hotelCode = "KRG";
 
     //reservation 
-    private List<FunctionRoomBooking> allFunctionrooms;
+    private List<FunctionRoom> allFunctionrooms;
 
     public FrontDeskManagedBean() {
     }
@@ -204,11 +211,22 @@ public class FrontDeskManagedBean {
         this.customerRoom = customerRoom;
     }
 
-    public List<FunctionRoomBooking> getAllFunctionrooms() {
+    public void getFunctionRoomWithHotelCode() {
+        List<FunctionRoom> functionrooms = new ArrayList<>();
+        for(FunctionRoom frb : functionroomSessionlocal.getAllFunctionRooms()) {
+           if (frb.getHotel().getHotelCodeName().equals(hotelCode)) {
+                functionrooms.add(frb);
+          }
+        }
+        setAllFunctionrooms(functionrooms);
+    }
+
+    public List<FunctionRoom> getAllFunctionrooms() {
+        getFunctionRoomWithHotelCode();
         return allFunctionrooms;
     }
 
-    public void setAllFunctionrooms(List<FunctionRoomBooking> allFunctionrooms) {
+    public void setAllFunctionrooms(List<FunctionRoom> allFunctionrooms) {
         this.allFunctionrooms = allFunctionrooms;
     }
 

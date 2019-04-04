@@ -1,55 +1,186 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+    xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
-    <body>
+<body>
 
-        <ui:composition template="./AdminTemplate.xhtml">
+    <ui:composition template="./AdminTemplate.xhtml">
 
-            <ui:define name="title">
-                KRHG Admin Console System
-            </ui:define>
+        <ui:define name="title">
+            KRHG Admin Console System
+        </ui:define>
 
-            <ui:define name="content">
-                <!-- Content Header (Page header) -->
-                <div class="content-header">
-                    <div class="container-fluid">
-                        <div class="row mb-2">
-                            <div class="col-sm-6">
-                            </div>
-                            <!-- /.col -->
-                            <div class="col-sm-6">
-                                <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item active">
-                                        <!--Add Btn-->
-                                    </li>
-                                </ol>
-                            </div>
-                            <!-- /.col -->
+        <ui:define name="content">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 style="font-size: x-large; margin-bottom:20px">View Hotel</h1>
                         </div>
-                        <!-- /.row -->
+                        <!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li><a href="#"> Home</a></li>
+                                <li><a href="#"> Manage Hotels</a></li>
+                                <li class="active">View Hotel - #{hotelManagedBean.selectedHotelObj.hotelName}</li>
+                            </ol>
+                        </div>
+                        <!-- /.col -->
                     </div>
-                    <!-- /.container-fluid -->
-                </div> 
-                <!-- form start -->
-                <h:form role="form">
-                    <!-- Content Header (Page header) -->
-                    <section class="content-header">
+                    <!-- /.row -->
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- form start -->
+            <h:form role="form">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="card">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="box box-success">
+                                <div class="box-header with-border" style="text-align: center">
+                                    <h3 class="box-title">#{hotelManagedBean.selectedHotelObj.hotelName}</h3>
+
+                                    <div class="box-tools pull-right">
+                                        <h:commandLink  action="#{hotelManagedBean.editHotel()}" style="font-size: large; margin-right: 5px"><i class="far fa-edit"></i></h:commandLink>
+                                        <h:commandLink  class="cd-popup-trigger" id="modal-2" a:data-target="#modal-1" style="font-size: large"><i class="fas fa-trash-alt"></i></h:commandLink>
+
+                                    </div>
+                                </div>
+                                <!-- /.box-header -->
+                                <div class="box-body no-padding">
+                                    <div class="row" style="margin-bottom:20px">
+
+
+                                        <!-- /.col -->
+                                        <div class="col-md-12 col-sm-4">
+                                            <img style="width:100%; height: 100%;" alt="#{rf.iconImg}"
+                                                src="http://zetegral.website/krhgImages/#{hotelManagedBean.selectedHotelObj.hotelImage}" />
+                                        </div>
+                                       
+                                    </div>
+                                    <div class="row">
+                                            <div class="col-md-6 col-sm-4">
+                                                    <div class="pad box-pane-right bg-green"
+                                                        style="min-height: 280px; height:100%">
+                                                        <div class="description-block margin-bottom">
+                                                            <span class="description-text">Hotel Code</span>
+                                                            <h5 class="description-header">
+                                                                #{hotelManagedBean.selectedHotelObj.hotelCodeName}</h5>
+                                                        </div>
+                                                        <!-- /.description-block -->
+                                                        <div class="description-block margin-bottom">
+                                                            <span class="description-text">Contact Number</span>
+                                                            <h5 class="description-header">+65
+                                                                #{hotelManagedBean.selectedHotelObj.hotelContact}</h5>
+                                                        </div>
+                                                        <!-- /.description-block -->
+                                                        <div class="description-block margin-bottom">
+                                                            <span class="description-text">Rating</span>
+                                                            <h5 class="description-header">
+                                                                #{hotelManagedBean.selectedHotelObj.hotelStar} Stars</h5>
+                                                        </div>
+                                                        <!-- /.description-block -->
+                                                        <div class="description-block margin-bottom">
+                                                            <span class="description-text">Address</span>
+                                                            <h5 class="description-header">
+                                                                #{hotelManagedBean.selectedHotelObj.hotelAddress}</h5>
+                                                        </div>
+                                                        <!-- /.description-block -->
+                                                    </div>
+                                                </div>
+                                                <!-- /.col -->
+                                                <div class="col-md-6">
+                                                        <p class="text-center">
+                                                            <strong>Hotel Facilities</strong>
+                                                        </p>
+
+                                                                <c:forEach items="${hotelManagedBean.selectedHotelObj.hotelFacilities}" style="text-align: center"
+                                                                var="f">
+                                                                <img style="width:20px; height: 20px;"
+                                                                    alt="#{f.hotelFacilityImage}"
+                                                                    src="http://zetegral.website/krhgImages/#{f.hotelFacilityImage}" />
+                                                                - #{f.hotelFacilityName} <br />
+                                                            </c:forEach>
+                                                       
+                                                    </div>
+                                    </div>
+                                    <!-- <div class="row" style="margin-top:20px">
+                                        <div class="col-md-8">
+                                            <p class="text-center">
+                                                <strong>Sales: 1 Jan, 2014 - 30 Jul, 2014</strong>
+                                            </p>
+
+                                            <div class="chart"> -->
+                                    <!-- Sales Chart Canvas -->
+                                    <!-- <canvas id="salesChart" style="height: 180px;"></canvas>
+                                            </div> -->
+                                    <!-- /.chart-responsive -->
+                                    <!-- </div> -->
+                                    <!-- /.col -->
+                                    <!-- <div class="col-md-4" style="padding-left:10px">
+                                            <p class="text-center">
+                                                <strong>Goal Completion</strong>
+                                            </p>
+
+                                            <div class="progress-group">
+                                                <span class="progress-text">Add Products to Cart</span>
+                                                <span class="progress-number"><b>160</b>/200</span>
+
+                                                <div class="progress sm">
+                                                    <div class="progress-bar progress-bar-aqua" style="width: 80%">
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                    <!-- /.progress-group -->
+                                    <!-- <div class="progress-group">
+                                                <span class="progress-text">Complete Purchase</span>
+                                                <span class="progress-number"><b>310</b>/400</span>
+
+                                                <div class="progress sm">
+                                                    <div class="progress-bar progress-bar-red" style="width: 80%"></div>
+                                                </div>
+                                            </div> -->
+                                    <!-- /.progress-group -->
+                                    <!-- <div class="progress-group">
+                                                <span class="progress-text">Visit Premium Page</span>
+                                                <span class="progress-number"><b>480</b>/800</span>
+
+                                                <div class="progress sm">
+                                                    <div class="progress-bar progress-bar-green" style="width: 80%">
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                    <!-- /.progress-group -->
+                                    <!-- <div class="progress-group">
+                                                <span class="progress-text">Send Inquiries</span>
+                                                <span class="progress-number"><b>250</b>/500</span>
+
+                                                <div class="progress sm">
+                                                    <div class="progress-bar progress-bar-yellow" style="width: 80%">
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                    <!-- /.progress-group -->
+                                    <!-- </div> -->
+                                    <!-- /.col -->
+                                    <!-- </div> -->
+                                    <!-- /.row -->
+                                </div>
+                            </div>
+                            <!-- <div class="card">
                                     <div class="card-header">
                                         <h3 class="card-title">
                                             <i class="fa fa-text-width"></i>
                                             #{hotelManagedBean.selectedHotelObj.hotelName}
                                         </h3>
-                                    </div>
-                                    <!-- /.card-header -->
-                                    <div style="padding:3rem;" class="card-body">
+                                    </div> -->
+                            <!-- /.card-header -->
+                            <!-- <div style="padding:3rem;" class="card-body">
                                         <div class="row">
                                             <div class="col-md-1">
                                             </div>
@@ -90,22 +221,34 @@
                                                 </dl>
                                             </div> 
                                         </div>
-                                    </div>
-                                    <!-- /.card-body -->
-                                </div>
-                                <!-- /.card -->
-                            </div>
+                                    </div> -->
+                            <!-- /.card-body -->
+                            <!-- </div> -->
+                            <!-- /.card -->
                         </div>
-                    </section>
-                </h:form>
-            </ui:define>
+                    </div>
+                </section>
+            </h:form>
 
+            <div id="modalVH" class="cd-popup" role="alert">
+                <div class="cd-popup-container">
+                    <p class="popup-content">Delete Hotel?</p>
 
-            <ui:define name="script">
-                script
-            </ui:define>
+                    <ul class="cd-buttons">
+                        <li><a onclick="" id="deleteHotel" class="cd-popup-confirm">Yes</a></li>
+                        <li><a onclick="" class=" cd-popup-closemodal">No</a></li>
+                    </ul>
+                </div> <!-- cd-popup-container -->
+            </div> <!-- cd-popup -->
 
-        </ui:composition>
+        </ui:define>
+        <ui:define name="script">
+            script
 
-    </body>
+        </ui:define>
+
+    </ui:composition>
+
+</body>
+
 </html>

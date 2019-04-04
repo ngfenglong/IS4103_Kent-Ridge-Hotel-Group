@@ -17,91 +17,90 @@
             <ui:define name="content">
                 <!-- Content Header (Page header) -->
                 <div class="content-header">
-                    <div class="container-fluid">
-                        <div class="row mb-2">
-                            <div class="col-sm-6">
-
-
+                        <div class="container-fluid">
+                                <div class="row mb-2">
+                                    <div class="col-sm-6">
+                                        <h1 style="font-size: x-large; margin-bottom:20px">Edit Surcharge</h1>
+                                    </div>
+                                    <!-- /.col -->
+                                    <div class="col-sm-6">
+                                        <ol class="breadcrumb float-sm-right">
+                                            <li><a href="#"> Home</a></li>
+                                            <li><a href="#"> View Surcharge</a></li>
+                                            <li><a href="#"> Edit Surcharge - #{hotelManagedBean.selectedSurcharge.surchargeName} </a></li>
+                                        </ol>
+                                    </div>
+                                    <!-- /.col -->
+                                </div>
+                                <!-- /.row -->
                             </div>
-                            <!-- /.col -->
-                            <div class="col-sm-6">
-                                <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item active">
-                                        <!--Add Btn-->
-
-                                    </li>
-                                </ol>
-                            </div>
-                            <!-- /.col -->
-                        </div>
-                        <!-- /.row -->
-                    </div>
-                    <!-- /.container-fluid -->
+                            <!-- /.container-fluid -->
                 </div> 
                 <section class="content">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <!-- left column -->
-                            <div class="col-md-10">
-                                <!-- general form elements -->
-                                <div class="card card-primary">
-                                    <h:form role="form">
-                                        <div class="card-header">
-                                            <h3 class="card-title">Edit #{hotelManagedBean.selectedSurcharge.surchargeName}</h3>
-                                        </div>
-                                        <!-- /.card-header -->
-                                        <!-- form start -->
-
-                                        <div class="card-body">
-                                            <div class="form-group">
-                                                <label for="esName">Surcharge Name</label>
-                                                <h:inputText class="form-control" value="#{hotelManagedBean.selectedSurcharge.surchargeName}" id="esName" a:placeholder="enter surcharge name" required="true" />
+                        <div class="container-fluid">
+                                <div class="row">
+                                    <!-- left column -->
+                                    <div class="col-md-12">
+                                            <div class="box box-primary" style="padding:20px 50px; margin:14px; width:98% ">
+                       
+                                                    <h3 class="box-title" style="margin-bottom:10px; text-align: center; font-size:xx-large">Add Extra Surcharge</h3>
+                                                    <div class="box-tools pull-right">
+                                                 <!--Add Btn-->
                                             </div>
-                                            <div class="form-group">
-                                                <label for="esDateFrom">From</label> <br />
-                                                <h:inputText a:type="date" class="datepicker booking_input booking_input_a booking_in" value="#{hotelManagedBean.selectedSurcharge.surchargeFrom}" id="esDateFrom" a:placeholder="From" required="true" />
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="esDateTo">To</label><br />
-                                                <h:inputText a:type="date" class="datepicker booking_input booking_input_a booking_out" value="#{hotelManagedBean.selectedSurcharge.surchargeTo}" id="esDateTo" a:placeholder="To" required="true" />
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="esPrice">Surcharge Price</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">
-                                                            <i class="fa fa-dollar"></i>
-                                                        </span>
+                                            <h:form role="form">
+                                                    <div class="card-body">
+                                                            <div class="form-group">
+                                                                    <label for="esName">Surcharge Name</label>
+                                                                    <h:inputText class="form-control" value="#{hotelManagedBean.selectedSurcharge.surchargeName}" id="esName" a:placeholder="enter surcharge name" required="true" />
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="esDateFrom">From</label> <br />
+                                                                    <h:inputText a:type="date" class="datepicker booking_input booking_input_a booking_in" value="#{hotelManagedBean.selectedSurcharge.surchargeFrom}" id="esDateFrom" a:placeholder="From" required="true" />
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="esDateTo">To</label><br />
+                                                                    <h:inputText a:type="date" class="datepicker booking_input booking_input_a booking_out" value="#{hotelManagedBean.selectedSurcharge.surchargeTo}" id="esDateTo" a:placeholder="To" required="true" />
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="esPrice">Surcharge Price</label>
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-prepend">
+                                                                            <span class="input-group-text">
+                                                                                <i class="fa fa-dollar"></i>
+                                                                            </span>
+                                                                        </div>
+                                                                        <h:inputText class="form-control" value="#{hotelManagedBean.selectedSurcharge.surchargePrice}"  a:placeholder="enter surcharge price" id="esPrice" required="true" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="esDaysToCharge">Surcharge Days</label> <br />
+                                                                <h:selectManyListbox id="esDaysToCharge" a:multiple="multiple" class="select2-selection--multiple" value = "#{hotelManagedBean.esDaysToCharge}" >
+                                                                    <f:selectItem itemValue = "SUN" itemLabel = "SUN" /> 
+                                                                    <f:selectItem itemValue = "MON" itemLabel = "MON" /> 
+                                                                    <f:selectItem itemValue = "TUE" itemLabel = "TUE" /> 
+                                                                    <f:selectItem itemValue = "WED" itemLabel = "WED" /> 
+                                                                    <f:selectItem itemValue = "THURS" itemLabel = "THURS" /> 
+                                                                    <f:selectItem itemValue = "FRT" itemLabel = "FRI" /> 
+                                                                    <f:selectItem itemValue = "SAT" itemLabel = "SAT" /> 
+                                                                </h:selectManyListbox>
+                                                            </div> 
                                                     </div>
-                                                    <h:inputText class="form-control" value="#{hotelManagedBean.selectedSurcharge.surchargePrice}"  a:placeholder="enter surcharge price" id="esPrice" required="true" />
-                                                </div>
+                                                    <!-- /.card-body -->
+            
+                                                    <div class="card-footer"style="text-align: right; background-color: white" style="margin-right:10px">
+                                                            <h:commandButton class="btn btn-danger" value="Cancel"
+                                                            action="manageSurcharge.xhtml?faces-redirect=true"></h:commandButton>
+                                                        <h:commandButton class="btn btn-primary" value="Save" action="#{hotelManagedBean.saveSurcharge()}"></h:commandButton>
+                                                    </div>
+                                                </h:form>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="esDaysToCharge">Surcharge Days</label> <br />
-                                            <h:selectManyListbox id="esDaysToCharge" a:multiple="multiple" class="select2-selection--multiple" value = "#{hotelManagedBean.esDaysToCharge}" >
-                                                <f:selectItem itemValue = "SUN" itemLabel = "SUN" /> 
-                                                <f:selectItem itemValue = "MON" itemLabel = "MON" /> 
-                                                <f:selectItem itemValue = "TUE" itemLabel = "TUE" /> 
-                                                <f:selectItem itemValue = "WED" itemLabel = "WED" /> 
-                                                <f:selectItem itemValue = "THURS" itemLabel = "THURS" /> 
-                                                <f:selectItem itemValue = "FRT" itemLabel = "FRI" /> 
-                                                <f:selectItem itemValue = "SAT" itemLabel = "SAT" /> 
-                                            </h:selectManyListbox>
-                                        </div> 
-                                        <!-- /.card-body -->
-
-                                        <div class="card-footer">
-                                            <h:commandButton class="btn btn-primary" value="Save" action="#{hotelManagedBean.saveSurcharge()}"></h:commandButton>
-                                        </div>
-                                    </h:form>
+                                    </div>
+                                    <!-- /.col -->
                                 </div>
+                                <!-- /.row -->
                             </div>
-                            <!-- /.col -->
-                        </div>
-                        <!-- /.row -->
-                    </div>
-                    <!-- /.container-fluid -->
+                            <!-- /.container-fluid -->
                 </section>
                 <!-- /.content-header -->
                 <!-- Main content -->
@@ -109,21 +108,6 @@
             </ui:define>
 
             <ui:define name="script">
-                  <script>
-                    $('option').mousedown(function (e) {
-                        e.preventDefault();
-                        var originalScrollTop = $(this).parent().scrollTop();
-                        console.log(originalScrollTop);
-                        $(this).prop('selected', $(this).prop('selected') ? false : true);
-                        var self = this;
-                        $(this).parent().focus();
-                        setTimeout(function () {
-                            $(self).parent().scrollTop(originalScrollTop);
-                        }, 0);
-
-                        return false;
-                    });
-                </script> F
             </ui:define>
 
         </ui:composition>

@@ -7,6 +7,7 @@ package sessionBeans;
 
 import entity.CreditCard;
 import entity.PaymentTransaction;
+import entity.RoomBooking;
 import error.NoResultException;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -16,10 +17,10 @@ import javax.persistence.Query;
 
 @Stateless
 public class PaymentTransactionSession implements PaymentTransactionSessionLocal {
+
     @PersistenceContext
     EntityManager em;
-    
-    
+
     @Override
     public List<PaymentTransaction> getAllPaymentTransaction() throws NoResultException {
         Query q;
@@ -71,5 +72,15 @@ public class PaymentTransactionSession implements PaymentTransactionSessionLocal
         em.persist(pt);
     }
 
+    @Override
+    public void createCreditCard(CreditCard cc) {
+        em.persist(cc);
+    }
+
+    @Override
+    public CreditCard getLastCreditCard() throws NoResultException {
+        Query q = em.createQuery("SELECT c FROM CreditCard c ORDER BY c.creditCardID DESC");
+        return (CreditCard) q.getResultList().get(0);
+    }
 
 }
