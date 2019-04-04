@@ -9,10 +9,12 @@ import entity.CreditCard;
 import entity.Customer;
 import entity.Feedback;
 import entity.FoodMenuItem;
+import entity.FoodOrder;
 import entity.FunctionRoom;
 import entity.Hotel;
 import entity.HotelFacility;
 import entity.HouseKeepingOrder;
+import entity.LaundryOrder;
 import entity.LostAndFoundReport;
 import entity.MaintainenceOrder;
 import entity.MinibarItem;
@@ -84,6 +86,10 @@ public class DataInitializationSessionBean {
     PromoCodeSessionLocal promoCodeSessionLocal;
     @EJB
     FeedbackSessionLocal feedbackSessionLocal;
+    @EJB
+    LaundrySessionLocal laundrySessionLocal;
+    @EJB
+    FoodOrderSessionLocal foodOrderSessionLocal;
 
     public DataInitializationSessionBean() {
     }
@@ -1056,7 +1062,7 @@ public class DataInitializationSessionBean {
         foodMenuItemSessionLocal.createFoodMenuItem(fmi32);
         fmi32 = foodMenuItemSessionLocal.getFoodMenuItemByName("Cafe Latte (Hot)");
 
-        FoodMenuItem fmi33 = new FoodMenuItem("Cafe Latte (Cold)", "", "Coffee", true, 10.0, " cafelattecold.jpg");
+        FoodMenuItem fmi33 = new FoodMenuItem("Cafe Latte (Cold)", "", "Coffee", true, 10.0, "cafelattecold.jpg");
         foodMenuItemSessionLocal.createFoodMenuItem(fmi33);
         fmi33 = foodMenuItemSessionLocal.getFoodMenuItemByName("Cafe Latte (Cold)");
 
@@ -1099,7 +1105,7 @@ public class DataInitializationSessionBean {
         roomPricingSessionLocal.createRoomPricing(rp4);
         RoomPricing rp5 = new RoomPricing("KRG_Penthouse", 500.0);
         roomPricingSessionLocal.createRoomPricing(rp5);
-        
+
         RoomPricing rp6 = new RoomPricing("KRC_Standard", 120.0);
         roomPricingSessionLocal.createRoomPricing(rp6);
         RoomPricing rp7 = new RoomPricing("KRC_Premium", 150.0);
@@ -1108,7 +1114,7 @@ public class DataInitializationSessionBean {
         roomPricingSessionLocal.createRoomPricing(rp8);
         RoomPricing rp9 = new RoomPricing("KRC_Suite", 250.0);
         roomPricingSessionLocal.createRoomPricing(rp9);
-        
+
         RoomPricing rp10 = new RoomPricing("KRN_Standard", 120.0);
         roomPricingSessionLocal.createRoomPricing(rp10);
         RoomPricing rp11 = new RoomPricing("KRN_Premium", 150.0);
@@ -1125,8 +1131,8 @@ public class DataInitializationSessionBean {
         RoomPricing rp16 = new RoomPricing("KRS_Deluxe", 200.0);
         roomPricingSessionLocal.createRoomPricing(rp16);
         RoomPricing rp17 = new RoomPricing("KRS_Suite", 250.0);
-        roomPricingSessionLocal.createRoomPricing(rp17);    
-        
+        roomPricingSessionLocal.createRoomPricing(rp17);
+
         RoomPricing rp18 = new RoomPricing("KRE_Standard", 120.0);
         roomPricingSessionLocal.createRoomPricing(rp18);
         RoomPricing rp19 = new RoomPricing("KRE_Premium", 150.0);
@@ -1134,8 +1140,8 @@ public class DataInitializationSessionBean {
         RoomPricing rp20 = new RoomPricing("KRE_Deluxe", 200.0);
         roomPricingSessionLocal.createRoomPricing(rp20);
         RoomPricing rp21 = new RoomPricing("KRE_Suite", 250.0);
-        roomPricingSessionLocal.createRoomPricing(rp21);   
-        
+        roomPricingSessionLocal.createRoomPricing(rp21);
+
         RoomPricing rp22 = new RoomPricing("KRW_Standard", 120.0);
         roomPricingSessionLocal.createRoomPricing(rp22);
         RoomPricing rp23 = new RoomPricing("KRW_Premium", 150.0);
@@ -1143,8 +1149,8 @@ public class DataInitializationSessionBean {
         RoomPricing rp24 = new RoomPricing("KRW_Deluxe", 200.0);
         roomPricingSessionLocal.createRoomPricing(rp24);
         RoomPricing rp25 = new RoomPricing("KRW_Suite", 250.0);
-        roomPricingSessionLocal.createRoomPricing(rp25);            
-        
+        roomPricingSessionLocal.createRoomPricing(rp25);
+
         RoomPricing rp26 = new RoomPricing("KRNE_Standard", 100.0);
         roomPricingSessionLocal.createRoomPricing(rp26);
         RoomPricing rp27 = new RoomPricing("KRNE_Premium", 120.0);
@@ -1152,7 +1158,7 @@ public class DataInitializationSessionBean {
         RoomPricing rp28 = new RoomPricing("KRNE_Deluxe", 150.0);
         roomPricingSessionLocal.createRoomPricing(rp28);
         RoomPricing rp29 = new RoomPricing("KRNE_Suite", 200.0);
-        roomPricingSessionLocal.createRoomPricing(rp29);   
+        roomPricingSessionLocal.createRoomPricing(rp29);
 
         RoomPricing rp30 = new RoomPricing("KRNW_Standard", 100.0);
         roomPricingSessionLocal.createRoomPricing(rp30);
@@ -1161,8 +1167,8 @@ public class DataInitializationSessionBean {
         RoomPricing rp32 = new RoomPricing("KRNW_Deluxe", 150.0);
         roomPricingSessionLocal.createRoomPricing(rp32);
         RoomPricing rp33 = new RoomPricing("KRNW_Suite", 200.0);
-        roomPricingSessionLocal.createRoomPricing(rp33);           
-        
+        roomPricingSessionLocal.createRoomPricing(rp33);
+
         RoomPricing rp34 = new RoomPricing("KRSE_Standard", 100.0);
         roomPricingSessionLocal.createRoomPricing(rp34);
         RoomPricing rp35 = new RoomPricing("KRSE_Premium", 120.0);
@@ -1170,8 +1176,8 @@ public class DataInitializationSessionBean {
         RoomPricing rp36 = new RoomPricing("KRSE_Deluxe", 150.0);
         roomPricingSessionLocal.createRoomPricing(rp36);
         RoomPricing rp37 = new RoomPricing("KRSE_Suite", 200.0);
-        roomPricingSessionLocal.createRoomPricing(rp37);         
-        
+        roomPricingSessionLocal.createRoomPricing(rp37);
+
         RoomPricing rp38 = new RoomPricing("KRSW_Standard", 100.0);
         roomPricingSessionLocal.createRoomPricing(rp38);
         RoomPricing rp39 = new RoomPricing("KRSW_Premium", 120.0);
@@ -1179,8 +1185,8 @@ public class DataInitializationSessionBean {
         RoomPricing rp40 = new RoomPricing("KRSW_Deluxe", 150.0);
         roomPricingSessionLocal.createRoomPricing(rp40);
         RoomPricing rp41 = new RoomPricing("KRSW_Suite", 200.0);
-        roomPricingSessionLocal.createRoomPricing(rp41); 
-        
+        roomPricingSessionLocal.createRoomPricing(rp41);
+
 //*********************************************PROMO CODE************************************************        
         PromoCode pc1 = new PromoCode();
         pc1.setPromoCode("GROUPBOOKING");
@@ -1189,7 +1195,6 @@ public class DataInitializationSessionBean {
         pc1.setStatus("Active");
         pc1.setDiscount(0.05);
         promoCodeSessionLocal.createPromoCode(pc1);
-  
 
         PromoCode pc2 = new PromoCode();
         pc2.setPromoCode("HAPPYNEWYEAR");
@@ -1198,7 +1203,6 @@ public class DataInitializationSessionBean {
         pc2.setStatus("Active");
         pc2.setDiscount(0.1);
         promoCodeSessionLocal.createPromoCode(pc2);
- 
 
         PromoCode pc3 = new PromoCode();
         pc3.setPromoCode("DISCOUNT 015");
@@ -1207,7 +1211,6 @@ public class DataInitializationSessionBean {
         pc3.setStatus("Active");
         pc3.setDiscount(0.15);
         promoCodeSessionLocal.createPromoCode(pc3);
- 
 
         PromoCode pc4 = new PromoCode();
         pc4.setPromoCode("SPECIALRATE");
@@ -1224,7 +1227,7 @@ public class DataInitializationSessionBean {
         pc5.setStatus("Active");
         pc5.setDiscount(0.25);
         promoCodeSessionLocal.createPromoCode(pc5);
-        
+
 //*********************************************FEEDBACK************************************************
         Feedback fb1 = new Feedback();
         fb1.setFeedBackDate(format.parse("2019-03-01"));
@@ -1241,7 +1244,6 @@ public class DataInitializationSessionBean {
         fb2.setFeedBackMsg("rooms were too cold, food was not very good");
         fb2.setHotel(h1);
         feedbackSessionLocal.createFeedback(fb2);
-        em.flush();
 
         Feedback fb3 = new Feedback();
         fb3.setFeedBackDate(format.parse("2019-03-10"));
@@ -15145,6 +15147,7 @@ public class DataInitializationSessionBean {
         KRSW_1202.addMinibarItem(m5);
 
         roomSessionLocal.createRoom(KRSW_1202);
+
         h10.addRoom(roomSessionLocal.getRoomByName("KRSW_1202"));
 
         em.flush();
@@ -15241,6 +15244,7 @@ public class DataInitializationSessionBean {
 
         bookingSessionLocal.createRoomBooking(rm1);
         em.flush();
+
 
         PaymentTransaction PT1 = new PaymentTransaction();
         PT1.addRoomBooking(rm1);
