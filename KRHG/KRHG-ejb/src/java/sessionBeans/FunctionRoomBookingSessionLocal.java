@@ -6,6 +6,7 @@
 package sessionBeans;
 
 import entity.FoodOrder;
+import entity.FunctionRoomBooking;
 import error.NoResultException;
 import java.util.List;
 import javax.ejb.Local;
@@ -13,9 +14,10 @@ import javax.ejb.Local;
 @Local
 public interface FunctionRoomBookingSessionLocal {
         
-    public List<FoodOrder> getAllFoodOrder();
-    public FoodOrder getAllFoodOrderByID(Long foodOrderID) throws NoResultException;
-    public void updateFoodOrder (FoodOrder foodOrder) throws NoResultException;
-    public void deleteFoodOrder (Long foodOrderID) throws NoResultException;
-    public void createFoodOrder (FoodOrder foodOrder);
+    public void createFunctionRoomBooking(FunctionRoomBooking frb);
+    public List<FunctionRoomBooking> getAllFunctionRoomBookings();
+    public FunctionRoomBooking getFunctionRoomBookingByID(Long frbID) throws NoResultException;
+    public void updateRoom(FunctionRoomBooking frb) throws NoResultException;
+    
+ 
 }
