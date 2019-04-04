@@ -50,8 +50,8 @@
                                     <thead>
                                         <tr>
 
-                                            <th>Name</th>
-
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
                                             <th>Email</th>
                                             <th>Phone</th>
                                             <th>Status</th>
@@ -64,11 +64,11 @@
                                         <c:forEach items="${frontDeskManagedBean.allCustomer}" var="o">
 
                                             <tr>
-                                                <td>#{o.name}</td>
-
+                                                <td>#{o.firstName}</td>
+                                                <td>#{o.lastName}</td>
                                                 <td>#{o.email}</td>
                                                 <td>#{o.mobileNum}</td>
-                                                <td>#{o.accountStatus}</td>
+                                                <td>#{o.accountStatus eq 'true'?'Active':'Inactive'}</td>
                                                 <td colspan="3"><h:commandLink action="#{frontDeskManagedBean.viewAccount(o)}"> <i class="fa fa-edit" style="color:gray"></i></h:commandLink></td>
 
                                             </tr>
@@ -79,8 +79,8 @@
                                     <tfoot>
                                         <tr>
 
-                                            <th>Name</th>
-
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
                                             <th>Email</th>
                                             <th>Phone</th>
                                             <th>Status</th>

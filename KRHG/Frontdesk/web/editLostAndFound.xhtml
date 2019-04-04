@@ -1,0 +1,163 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="template.xhtml">
+
+
+            <ui:define name="title">
+                KRHG front desk
+            </ui:define>
+
+            <ui:define name="content">
+                <!-- Content Header (Page header) -->
+                <div class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+
+
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li class="breadcrumb-item active">
+                                        <!--Add Btn-->
+                                    </li>
+                                </ol>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </div> 
+                <section class="content">
+
+                    <div class="container-fluid">
+                        <div class="row">
+                            <!-- left column -->
+                            <div class="col-md-10">
+
+
+
+
+                                <div class="card card-primary">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Update Lost and Found Report</h3>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <!-- form start -->
+                                    <h:form role="form">
+                                        <div class="card-body">
+                                            <table>
+                                                <tr>
+
+                                                    <div class="form-group">
+                                                        <td>
+                                                            <label>
+                                                                Report type:
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <h:selectOneMenu value="#{requestAndServiceManagedBean.lfreportType}">
+                                                                <f:selectItem itemValue="Found" itemLabel="Found" />
+                                                                <f:selectItem itemValue="Lost" itemLabel="Lost" />
+
+                                                            </h:selectOneMenu>
+                                                        </td>
+                                                    </div>
+                                                </tr>
+
+                                                <tr>
+                                                    <div class="form-group">
+
+                                                        <td>
+                                                            <label>Item name:</label>
+                                                        </td>
+                                                        <td>  
+                                                            <h:inputText class="form-control" value="#{requestAndServiceManagedBean.lfItemName}" a:placeholder="Item name" required="true"></h:inputText>
+
+                                                        </td>
+                                                    </div>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label>
+                                                            Mobile number:
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <h:inputText class="form-control" value="#{requestAndServiceManagedBean.lfContactNumber}" a:placeholder="Contact details"></h:inputText>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label>
+                                                            Desription:
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <h:inputTextarea rows="10" cols="50" value="#{requestAndServiceManagedBean.lfDescription}" a:placeholder="Item description" ></h:inputTextarea>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label>
+                                                            Status:
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <h:selectOneMenu value="#{requestAndServiceManagedBean.lfStatus}">
+                                                                <f:selectItem itemValue="#{false}" itemLabel="Unresolved" />
+                                                                <f:selectItem itemValue="#{true}" itemLabel="Solved" />
+
+                                                            </h:selectOneMenu>                                                        </div>
+                                                    </td>
+                                                </tr>
+
+
+                                                <!-- /.input group -->
+                                            </table>
+                                        </div>
+                                        <!-- /.card-body -->
+
+                                        <div class="card-footer">
+                                            <h:commandButton class="btn btn-primary" value="Update Report" action="#{requestAndServiceManagedBean.updateLFRequest()}"></h:commandButton>
+                                        </div>
+                                    </h:form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.container-fluid -->
+                </section>
+                <!-- /.content-header -->
+                <!-- Main content -->
+
+            </ui:define>
+
+            <ui:define name="script">
+                <script>
+                    $('[data-mask]').each(function () {
+                        $(this).mask($(this).attr("data-mask"));
+                    });
+                </script>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

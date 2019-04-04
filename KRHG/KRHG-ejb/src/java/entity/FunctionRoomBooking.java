@@ -17,6 +17,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 public class FunctionRoomBooking implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,6 +26,8 @@ public class FunctionRoomBooking implements Serializable {
     private Date bookedFrom;
     @Temporal(TemporalType.DATE)
     private Date bookedTo;
+    @OneToOne
+    private FunctionRoom bookedFunctionRoom;
 
 
     public Long getFunctionRoomBookingID() {
@@ -86,6 +89,16 @@ public class FunctionRoomBooking implements Serializable {
      */
     public void setBookedTo(Date bookedTo) {
         this.bookedTo = bookedTo;
+    }
+    
+
+    public FunctionRoom getBookedFunctionRoom() {
+        return bookedFunctionRoom;
+    }
+
+
+    public void setBookedFunctionRoom(FunctionRoom bookedFunctionRoom) {
+        this.bookedFunctionRoom = bookedFunctionRoom;
     }
 
 }

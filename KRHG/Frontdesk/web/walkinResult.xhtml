@@ -43,57 +43,74 @@
                         <h:form>
                             <div class="card-header">
                                 <h3 class="card-title">List of room available</h3>
+                                <h:commandButton class="btn btn-primary float-sm-right" value="Choose Room"  ></h:commandButton>
+
                             </div>
                         </h:form>
 
                         <!-- /.card-header -->
                         <div class="card-body">
+                            <h:form>
+                                <table id="example1" class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
 
-                            <table id="example1" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        
-                                        <th>Room type</th>
-                                        <th>Price/Night</th>
-                                        <th>Quantity</th>
+                                            <th>Room type</th>
+                                            <th>Price/Night</th>
+                                            <th>Quantity</th>
 
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <h:form>
-                                        <ui:repeat value="#{frontDeskManagedBean.walkinAvailableRoom}" var="o" varStatus="status">
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <ui:repeat var="o" value="#{frontDeskManagedBean.walkinAvailableRoom}"  varStatus="status">
                                             <tr>
-                                              
-                                                <td>o</td>
-                                                <td>$100</td>
-                                                <td>5</td>
-                                                <td><input type="button" value="check in" action="#{confirmWalkin(o)}"/></td>
-                                            </tr>
 
+                                                <td>#{o.roomType}</td>
+                                                <td>wait for it to return price</td>
+                                                <td>check them being group by</td>
+                                            </tr>
 
                                         </ui:repeat>
 
 
-                                    </h:form>
 
 
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>Room</th>
-                                        <th>Room type</th>
-                                        <th>Price/Night</th>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Room</th>
+                                            <th>Room type</th>
+                                            <th>Price/Night</th>
 
-                                        <th></th>
-                                    </tr>
-                                </tfoot>
-                            </table>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+
+                            </h:form>
                         </div>
                         <!-- /.card-body -->
 
                     </div>
                     <!-- /.container-fluid -->
+                    <div class="container-fluid">
+                        <div class="row">
+                            <!-- left column -->
+                            <div class="col-md-10">
+
+
+
+
+
+
+                                <!-- /.card-header -->
+                                <!-- form start -->
+                             
+
+
+                            </div>
+                        </div>
+                    </div>
                 </section>
                 <!-- /.content-header -->
                 <!-- Main content -->

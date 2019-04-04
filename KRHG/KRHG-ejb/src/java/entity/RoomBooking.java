@@ -9,6 +9,7 @@ import error.NoResultException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,8 +34,11 @@ public class RoomBooking implements Serializable {
     private Date bookInDate;
     @Temporal(TemporalType.DATE)
     private Date bookOutDate;
+    @Temporal(TemporalType.DATE)
+    private Date bookingDate;
     private String status;
     private boolean hasTransport;
+    private boolean hasExtraBed;
     private double price;
     @OneToOne
     private Room bookedRoom;
@@ -44,12 +48,18 @@ public class RoomBooking implements Serializable {
     private Date transportTime;
     private String pickUpLocation;
     private String emailAddress;
-    private CreditCard creditCard;
     private String passportNum;
-    private String name;
+    private String firstName;
+    private String lastName;
     private String roomType;
+    private List<LaundryOrder> listOfLaundryOrders;
+    private List<FoodOrder> listOfFoodOrders;
+    private List<MinibarItem> listOfMiniBarItem;
 
     public RoomBooking() {
+        listOfLaundryOrders = new ArrayList<>();
+        listOfFoodOrders = new ArrayList<>();
+        listOfMiniBarItem = new ArrayList<>();
 
     }
 
@@ -141,14 +151,6 @@ public class RoomBooking implements Serializable {
         this.emailAddress = emailAddress;
     }
 
-    public CreditCard getCreditCard() {
-        return creditCard;
-    }
-
-    public void setCreditCard(CreditCard creditCard) {
-        this.creditCard = creditCard;
-    }
-
     public String getPassportNum() {
         return passportNum;
     }
@@ -157,20 +159,36 @@ public class RoomBooking implements Serializable {
         this.passportNum = passportNum;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getRoomType() {
         return roomType;
     }
 
     public void setRoomType(String roomType) {
         this.roomType = roomType;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Date getBookingDate() {
+        return bookingDate;
+    }
+
+    public void setBookingDate(Date bookingDate) {
+        this.bookingDate = bookingDate;
     }
 
 //    public void addHolidaySurcharge(HolidaySurcharge holidaySurcharge) throws NoResultException {
@@ -229,4 +247,107 @@ public class RoomBooking implements Serializable {
         return "entity.RoomBooking[ roomBookingID=" + roomBookingID + " ]";
     }
 
+    /**
+     * @return the hasExtraBed
+     */
+    public boolean getHasExtraBed() {
+        return hasExtraBed;
+    }
+
+    /**
+     * @param hasExtraBed the hasExtraBed to set
+     */
+    public void setHasExtraBed(boolean hasExtraBed) {
+        this.hasExtraBed = hasExtraBed;
+    }
+
+    /**
+     * @return the listOfLaundryOrders
+     */
+    public List<LaundryOrder> getListOfLaundryOrders() {
+        return listOfLaundryOrders;
+    }
+
+    /**
+     * @param listOfLaundryOrders the listOfLaundryOrders to set
+     */
+    public void setListOfLaundryOrders(List<LaundryOrder> listOfLaundryOrders) {
+        this.listOfLaundryOrders = listOfLaundryOrders;
+    }
+
+    /**
+     * @return the listOfFoodOrders
+     */
+    public List<FoodOrder> getListOfFoodOrders() {
+        return listOfFoodOrders;
+    }
+
+    /**
+     * @param listOfFoodOrders the listOfFoodOrders to set
+     */
+    public void setListOfFoodOrders(List<FoodOrder> listOfFoodOrders) {
+        this.listOfFoodOrders = listOfFoodOrders;
+    }
+
+    /**
+     * @return the listOfMiniBarItem
+     */
+    public List<MinibarItem> getListOfMiniBarItem() {
+        return listOfMiniBarItem;
+    }
+
+    /**
+     * @param listOfMiniBarItem the listOfMiniBarItem to set
+     */
+    public void setListOfMiniBarItem(List<MinibarItem> listOfMiniBarItem) {
+        this.listOfMiniBarItem = listOfMiniBarItem;
+    }
+
+    public void addLaundryOrder(LaundryOrder lo) throws NoResultException {
+        if (lo != null && !this.getListOfLaundryOrders().contains(lo)) {
+            this.getListOfLaundryOrders().add(lo);
+        } else {
+            throw new NoResultException("Laundry Order already added to Room Booking");
+        }
+    }
+
+    public void removeLaundryOrder(LaundryOrder lo) throws NoResultException {
+        if (lo != null && this.getListOfLaundryOrders().contains(lo)) {
+            this.getListOfLaundryOrders().remove(lo);
+        } else {
+            throw new NoResultException("Laundry Order has not been added to Room Booking");
+        }
+    }
+
+    public void addFoodOrder(FoodOrder fo) throws NoResultException {
+        if (fo != null && !this.getListOfFoodOrders().contains(fo)) {
+            this.getListOfFoodOrders().add(fo);
+        } else {
+            throw new NoResultException("Food Order already added to Room Booking");
+        }
+    }
+
+    public void removeFoodOrder(FoodOrder fo) throws NoResultException {
+        if (fo != null && this.getListOfLaundryOrders().contains(fo)) {
+            this.getListOfLaundryOrders().remove(fo);
+        } else {
+            throw new NoResultException("Food Order has not been added to Room Booking");
+        }
+    }
+
+    public void addMiniBarItem(MinibarItem mbi) throws NoResultException {
+        if (mbi != null && !this.getListOfMiniBarItem().contains(mbi)) {
+            this.getListOfMiniBarItem().add(mbi);
+        } else {
+            throw new NoResultException("Minibar Item already added to Room Booking");
+        }
+    }
+
+    public void removeMiniBarItem(MinibarItem mbi) throws NoResultException {
+        if (mbi != null && this.getListOfMiniBarItem().contains(mbi)) {
+            this.getListOfMiniBarItem().remove(mbi);
+        } else {
+            throw new NoResultException("Minibar Item has not been added to Room Booking");
+        }
+    }
 }

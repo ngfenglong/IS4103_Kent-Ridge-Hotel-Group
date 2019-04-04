@@ -7,10 +7,8 @@ package managedBean;
 
 import entity.CreditCard;
 import entity.Customer;
-import entity.HouseKeepingOrder;
-import entity.LaundryOrder;
-import entity.LostAndFoundReport;
-import entity.MaintainenceOrder;
+import entity.FunctionRoom;
+import entity.FunctionRoomBooking;
 import entity.PaymentTransaction;
 import entity.Room;
 import entity.RoomBooking;
@@ -20,8 +18,11 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Formatter;
 import java.util.List;
@@ -32,10 +33,9 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletResponse;
 import sessionBeans.BookingSessionLocal;
 import sessionBeans.CustomerSessionLocal;
-import sessionBeans.HouseKeepingOrderSessionLocal;
-import sessionBeans.LaundrySessionLocal;
-import sessionBeans.LostAndFoundSessionLocal;
-import sessionBeans.MaintainenceOrderSessionLocal;
+import sessionBeans.FunctionRoomBookingSessionLocal;
+import sessionBeans.FunctionRoomSessionLocal;
+import sessionBeans.PaymentTransactionSessionLocal;
 import sessionBeans.RoomSessionLocal;
 
 /**
@@ -55,6 +55,13 @@ public class FrontDeskManagedBean {
     private BookingSessionLocal bookSessionLocal;
     @EJB
     private CustomerSessionLocal customerSessionLocal;
+    @EJB
+    private PaymentTransactionSessionLocal paymentTransactionSessionLocal;
+    @EJB
+    private FunctionRoomBookingSessionLocal functionRoomBookingSessionLocal;
+    @EJB
+    private FunctionRoomSessionLocal functionroomSessionlocal;
+    private String mode;
 
     //customer check in
     private String customerName;
@@ -63,6 +70,8 @@ public class FrontDeskManagedBean {
     private List<PaymentTransaction> todaysbookings;
     private List<RoomBooking> Searchbookings;
     private PaymentTransaction roombooking;
+    private Date checkinDate;
+    private Date checkoutDate;
 
     //customer check out
     private List<RoomBooking> todayCheckOutRoom;
@@ -86,12 +95,14 @@ public class FrontDeskManagedBean {
     private String CreateCustomerEmail;
     private String CreateCustomerPassword;
     private String createCustomerMobileNumber;
-    private String CreateCustomerName;
+    private String CreateCustomerFirstName;
+    private String CreateCustomerLastName;
     private String createConfirmCustomerPassword;
 
     //customer edit
     private Customer editCustomer;
-    private String editCustomerName;
+    private String editCustomerFirstName;
+    private String editCustomerLastName;
     private int editCustomerPoint;
     private String editCustomerEmail;
     private String editCustomerMobileNumber;
@@ -102,6 +113,12 @@ public class FrontDeskManagedBean {
     private Date paymentExpiryDate;
     private String paymentDigits;
     private String paymentCVV;
+
+    //hotel code
+    private String hotelCode = "KRG";
+
+    //reservation 
+    private List<FunctionRoom> allFunctionrooms;
 
     public FrontDeskManagedBean() {
     }
@@ -132,6 +149,22 @@ public class FrontDeskManagedBean {
 
     public String getPaymentCVV() {
         return paymentCVV;
+    }
+
+    public Date getCheckinDate() {
+        return checkinDate;
+    }
+
+    public void setCheckinDate(Date checkinDate) {
+        this.checkinDate = checkinDate;
+    }
+
+    public Date getCheckoutDate() {
+        return checkoutDate;
+    }
+
+    public void setCheckoutDate(Date checkoutDate) {
+        this.checkoutDate = checkoutDate;
     }
 
     public void setPaymentCVV(String paymentCVV) {
@@ -178,10 +211,28 @@ public class FrontDeskManagedBean {
         this.customerRoom = customerRoom;
     }
 
+    public void getFunctionRoomWithHotelCode() {
+        List<FunctionRoom> functionrooms = new ArrayList<>();
+        for(FunctionRoom frb : functionroomSessionlocal.getAllFunctionRooms()) {
+           if (frb.getHotel().getHotelCodeName().equals(hotelCode)) {
+                functionrooms.add(frb);
+          }
+        }
+        setAllFunctionrooms(functionrooms);
+    }
+
+    public List<FunctionRoom> getAllFunctionrooms() {
+        getFunctionRoomWithHotelCode();
+        return allFunctionrooms;
+    }
+
+    public void setAllFunctionrooms(List<FunctionRoom> allFunctionrooms) {
+        this.allFunctionrooms = allFunctionrooms;
+    }
+
     public String searchCustomerForCheckin() {
         try {
-
-            Searchbookings = bookSessionLocal.getRoomBookingByPassportNum(checkinPassportNumber);
+            Searchbookings = bookSessionLocal.getRoomBookingByPassportNum(checkinPassportNumber, hotelCode);
             checkinPassportNumber = null;
             return "checkinResult.xhtml?faces-redirect=true";
         } catch (NoResultException e) {
@@ -191,14 +242,25 @@ public class FrontDeskManagedBean {
 
     public String checkin(PaymentTransaction PT) {
         checkinPassportNumber = PT.getRoomsBooked().get(0).getPassportNum();
-        checkinName = PT.getPayer().getName();
+        checkinDate = PT.getRoomsBooked().get(0).getBookInDate();
+        checkoutDate = PT.getRoomsBooked().get(0).getBookOutDate();
+
+        checkinName = PT.getPayer().getFirstName() + " " + PT.getPayer().getLastName();
+        checkinEmail = PT.getPayer().getEmail();
         roombooking = PT;
+        mode = "online";
         return "checkinResult.xhtml?faces-redirect=true";
     }
 
     public String confirmCheckin() {
         //bookSessionLocal.assignBooking(roombooking);
-        return "checkinRoom.xhtml?faces-redirect=true";
+        //this one i DO ok .
+        //get room name and change the status to occupied 
+        //roombooking.setRoom(to the above room)
+        //change roombooking'Statuses
+        //display the room details
+        mode = "online";
+        return "summary.xhmtl?faces-redirect=true";
     }
 
     public String walkinpayment() {
@@ -216,7 +278,7 @@ public class FrontDeskManagedBean {
     }
 
     public String searchCheckout() {
-        //bookSessionLocal.getRoombookingbyRoomNumber(String roomNumber); check status, dont just anyhow get room. 
+        //bookSessionLocal.getRoombookingbyRoomNumber(String roomNumber,String status); check status, dont just anyhow get room. 
 
         //setCheckOutRoomResult(checkOutRoomResult);
         return "checkoutResult.xhtml?faces-redirect=true";
@@ -224,12 +286,18 @@ public class FrontDeskManagedBean {
 
     public String checkOut(RoomBooking rm) {
         //do check out 
+        //update check out room and change roombooking status
         return "";
     }
 
-    public List<PaymentTransaction> getTodaysbookings() {
-        //List<paymentTransaction>bookSessionLocal.getTodaysTransaction();
-        return  null;
+    public List<PaymentTransaction> getTodaysbookings() throws NoResultException {
+        return paymentTransactionSessionLocal.getAllPaymentTransaction();
+
+    }
+
+    public String convertDateFormat(Date date) {
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        return dateFormat.format(date);
     }
 
     public void setTodaysbookings(List<PaymentTransaction> todaysbookings) {
@@ -252,8 +320,6 @@ public class FrontDeskManagedBean {
         this.allCustomer = allCustomer;
     }
 
- 
-
     public String createAccount() throws IOException {
         HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
         PrintWriter out = response.getWriter();
@@ -262,7 +328,8 @@ public class FrontDeskManagedBean {
             Customer c = new Customer();
             c.setEmail(CreateCustomerEmail);
             c.setMobileNum(createCustomerMobileNumber);
-            c.setName(CreateCustomerName);
+            c.setFirstName(CreateCustomerFirstName);
+            c.setLastName(CreateCustomerLastName);
             c.setPassword(encryptPassword(CreateCustomerPassword));
             c.setAccountStatus(true);
             c.setPoints(0);
@@ -271,7 +338,8 @@ public class FrontDeskManagedBean {
 
             CreateCustomerEmail = null;
             createCustomerMobileNumber = null;
-            CreateCustomerName = null;
+            CreateCustomerLastName = null;
+            CreateCustomerFirstName = null;
             CreateCustomerPassword = null;
             createConfirmCustomerPassword = null;
 
@@ -292,7 +360,8 @@ public class FrontDeskManagedBean {
 
     public String viewAccount(Customer customer) {
         editCustomer = customer;
-        editCustomerName = customer.getName();
+        editCustomerFirstName = customer.getFirstName();
+        editCustomerLastName = customer.getLastName();
 
         editCustomerPoint = customer.getPoints();
         editCustomerEmail = customer.getEmail();
@@ -300,14 +369,6 @@ public class FrontDeskManagedBean {
         editCustomerStatus = customer.getAccountStatus();
 
         return "manageAccountEdit.xhtml?faces-redirect=true";
-    }
-
-    public String getEditCustomerName() {
-        return editCustomerName;
-    }
-
-    public void setEditCustomerName(String editCustomerName) {
-        this.editCustomerName = editCustomerName;
     }
 
     public int getEditCustomerPoint() {
@@ -366,14 +427,6 @@ public class FrontDeskManagedBean {
         this.createCustomerMobileNumber = createCustomerMobileNumber;
     }
 
-    public String getCreateCustomerName() {
-        return CreateCustomerName;
-    }
-
-    public void setCreateCustomerName(String CreateCustomerName) {
-        this.CreateCustomerName = CreateCustomerName;
-    }
-
     public String getCreateConfirmCustomerPassword() {
         return createConfirmCustomerPassword;
     }
@@ -382,17 +435,29 @@ public class FrontDeskManagedBean {
         this.createConfirmCustomerPassword = createConfirmCustomerPassword;
     }
 
+    public String getMode() {
+        return mode;
+    }
+
+    public void setMode(String mode) {
+        this.mode = mode;
+    }
+
     public String UpdateAccount() throws NoResultException, IOException {
         HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
         PrintWriter out = response.getWriter();
         editCustomer.setAccountStatus(editCustomerStatus);
-        editCustomer.setName(editCustomerName);
+        editCustomer.setFirstName(editCustomerFirstName);
+        editCustomer.setLastName(editCustomerLastName);
         editCustomer.setEmail(editCustomerEmail);
         editCustomer.setPoints(editCustomerPoint);
         editCustomer.setMobileNum(editCustomerMobileNumber);
         customerSessionLocal.updateCustomer(editCustomer);
+        out.println("<script type=\"text/javascript\">");
+        out.println("alert('Confirm Password doesn't match! !');");
+        out.println("</script>");
 
-        return "managedAccount.xhtml?faces-redirect=true";
+        return "manageAccount.xhtml?faces-redirect=true";
     }
 
     private static String encryptPassword(String password) {
@@ -428,10 +493,9 @@ public class FrontDeskManagedBean {
         this.checkinPassportNumber = checkinPassportNumber;
     }
 
-    public List<RoomBooking> getTodayCheckOutRoom() {
-        //bookSessionLocal.getbookingbyCheckoutDate(new Date());
-        //to get today's date
-        return null;
+    public List<RoomBooking> getTodayCheckOutRoom() throws NoResultException {
+
+        return bookSessionLocal.getAllRoomBookingByStatus("Occupied", null);
     }
 
     public void setTodayCheckOutRoom(List<RoomBooking> todayCheckOutRoom) {
@@ -441,6 +505,8 @@ public class FrontDeskManagedBean {
     public String searchRoomAvailable() {
         // return todayCheckOutRoom = bookSessionLocal.getAllRoomBookingByCheckOutDate(todayDate);
         //some algorithm to get availble room to view and return list of room, group by room type
+        //wait feng long 
+        mode = "walkin";
         setWalkinAvailableRoom(walkinAvailableRoom);
 
         return "walkinResult.xhtml?faces-redirect=true";
@@ -477,6 +543,8 @@ public class FrontDeskManagedBean {
     }
 
     public List<Room> getWalkinAvailableRoom() {
+
+        //need to return pricing too
         return walkinAvailableRoom;
     }
 
@@ -506,6 +574,38 @@ public class FrontDeskManagedBean {
 
     public void setCheckOutRoomResult(List<RoomBooking> checkOutRoomResult) {
         this.checkOutRoomResult = checkOutRoomResult;
+    }
+
+    public String getCreateCustomerFirstName() {
+        return CreateCustomerFirstName;
+    }
+
+    public void setCreateCustomerFirstName(String CreateCustomerFirstName) {
+        this.CreateCustomerFirstName = CreateCustomerFirstName;
+    }
+
+    public String getCreateCustomerLastName() {
+        return CreateCustomerLastName;
+    }
+
+    public void setCreateCustomerLastName(String CreateCustomerLastName) {
+        this.CreateCustomerLastName = CreateCustomerLastName;
+    }
+
+    public String getEditCustomerFirstName() {
+        return editCustomerFirstName;
+    }
+
+    public void setEditCustomerFirstName(String editCustomerFirstName) {
+        this.editCustomerFirstName = editCustomerFirstName;
+    }
+
+    public String getEditCustomerLastName() {
+        return editCustomerLastName;
+    }
+
+    public void setEditCustomerLastName(String editCustomerLastName) {
+        this.editCustomerLastName = editCustomerLastName;
     }
 
 }

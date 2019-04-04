@@ -19,12 +19,15 @@ import javax.ejb.Local;
 public interface BookingSessionLocal {
     public List<RoomBooking> getAllRoomBooking() throws NoResultException;
     public List<RoomBooking> getAllRoomBookingByDate(Date todayDate) throws NoResultException;
-    public List<RoomBooking> getAllRoomBookingByDate() throws NoResultException;
+    public List<RoomBooking> getAllRoomBookingByStatus(String status, String hotelCodeName) throws NoResultException;
+    public List<RoomBooking> getAllRoomBookingByCheckoutDate(Date checkoutDate, String hotelCodeName) throws NoResultException;
+    public List<RoomBooking> getRoomBookingByPassportNumCheckInToday(String passportNum, Date todayDate, String hotelCodeName) throws NoResultException;
     public RoomBooking getRoomBookingByID(Long roomBookingID) throws NoResultException;
-    public List<RoomBooking> getRoomBookingByPassportNum(String passportNum) throws NoResultException;
+    public List<RoomBooking> getRoomBookingByPassportNum(String passportNum, String hotelCodeName) throws NoResultException;
 //  getRoomBookingBookedBy searches for rooms booked by a specific customer  
     public List<RoomBooking> getRoomBookingByEmail(String email, Date bookInDate, Date bookOutDate, String status) throws NoResultException;
     public List<RoomBooking> getRoomBookingByDate(Date bookInDate, Date bookOutDate, String status) throws NoResultException;
+    public List<RoomBooking> getRoomBookingByRoomNumber(String roomNumber, String status, String hotelCodeName) throws NoResultException;
     public void updateRoomBooking (RoomBooking roomBooking) throws NoResultException;
     public void deleteRoomBooking (Long roomBookingID) throws NoResultException;
     public void createRoomBooking (RoomBooking roomBooking);
@@ -35,5 +38,6 @@ public interface BookingSessionLocal {
     public List<HotelFacilityBooking> getHotelFacilityBookingByDate(Date bookInDate, Date bookOutDate, String status) throws NoResultException;
     public void updateHotelFacilityBooking (HotelFacilityBooking hotelFacilityBooking) throws NoResultException;
     public void deleteHotelFacilityBooking (Long hotelFacilityBookingID) throws NoResultException;
-    public void createHotelFacilityBooking (HotelFacilityBooking hotelFacilityBooking);       
+    public void createHotelFacilityBooking (HotelFacilityBooking hotelFacilityBooking);     
+    public RoomBooking getLastRoomBooking()throws NoResultException ;
 }

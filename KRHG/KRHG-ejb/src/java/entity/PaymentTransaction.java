@@ -9,6 +9,7 @@ import error.NoResultException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -40,7 +41,11 @@ public class PaymentTransaction implements Serializable {
     @OneToOne
     private TransportBooking transportBooked;
     @OneToMany
-    private ArrayList<RoomBooking> roomsBooked;
+    private List<RoomBooking> roomsBooked;
+
+    public PaymentTransaction() {
+        roomsBooked = new ArrayList<>();
+    }
 
     public Long getTransactionID() {
         return transactionID;
@@ -106,11 +111,11 @@ public class PaymentTransaction implements Serializable {
         this.transactionDateTime = transactionDateTime;
     }
 
-    public ArrayList<RoomBooking> getRoomsBooked() {
+    public List<RoomBooking> getRoomsBooked() {
         return roomsBooked;
     }
 
-    public void setRoomsBooked(ArrayList<RoomBooking> roomsBooked) {
+    public void setRoomsBooked(List<RoomBooking> roomsBooked) {
         this.roomsBooked = roomsBooked;
     }
 
@@ -130,7 +135,7 @@ public class PaymentTransaction implements Serializable {
         this.transportBooked = transportBooked;
     }
 
-     public void addRoomBooking(RoomBooking roomBooking) throws NoResultException {
+    public void addRoomBooking(RoomBooking roomBooking) throws NoResultException {
         if (roomBooking != null && !this.getRoomsBooked().contains(roomBooking)) {
             this.getRoomsBooked().add(roomBooking);
         } else {
@@ -146,7 +151,6 @@ public class PaymentTransaction implements Serializable {
         }
     }
 
-    
     @Override
     public int hashCode() {
         int hash = 0;

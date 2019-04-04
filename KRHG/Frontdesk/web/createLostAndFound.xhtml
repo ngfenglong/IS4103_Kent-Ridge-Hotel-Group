@@ -66,11 +66,11 @@
                                                             </label>
                                                         </td>
                                                         <td>
-                                                            <h:selectOneRadio value="#{requestAndServiceManagedBean.lfreportType}">
+                                                            <h:selectOneMenu value="#{requestAndServiceManagedBean.lfreportType}">
                                                                 <f:selectItem itemValue="Found" itemLabel="Found" />
                                                                 <f:selectItem itemValue="Lost" itemLabel="Lost" />
 
-                                                            </h:selectOneRadio>
+                                                            </h:selectOneMenu>
                                                         </td>
                                                     </div>
                                                 </tr>
@@ -120,7 +120,7 @@
                                         <!-- /.card-body -->
 
                                         <div class="card-footer">
-                                            <h:commandButton class="custom-button" value="Create Report" action="#{requestAndServiceManagedBean.makeLFRequest()}"></h:commandButton>
+                                            <h:commandButton class="btn btn-primary" value="Create Report" action="#{requestAndServiceManagedBean.makeLFRequest()}"></h:commandButton>
                                         </div>
                                     </h:form>
                                 </div>

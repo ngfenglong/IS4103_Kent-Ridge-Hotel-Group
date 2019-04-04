@@ -13,6 +13,7 @@ import javax.persistence.Id;
 
 @Entity
 public class FoodMenuItem implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,7 +24,20 @@ public class FoodMenuItem implements Serializable {
     private Double unitPrice;
     private String category;
     private String foodImage;
+    private int quantity;
    
+    public FoodMenuItem() {
+        
+    }
+    
+    public FoodMenuItem(String foodMenuItemName, String foodMenuItemDescription, String category, Boolean availability, Double unitPrice, String foodImage){
+        this.foodMenuItemName = foodMenuItemName;
+        this.foodMenuItemDescription = foodMenuItemDescription;
+        this.category = category;
+        this.availability = availability;
+        this.unitPrice = unitPrice;
+        this.foodImage = foodImage; 
+    }
   
     /**
      * @return the availability
@@ -119,4 +133,17 @@ public class FoodMenuItem implements Serializable {
         this.foodImage = foodImage;
     }
     
+     /**
+     * @return the quantity
+     */
+    public int getQuantity() {
+        return quantity;
+    }
+
+    /**
+     * @param quantity the quantity to set
+     */
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 }

@@ -25,13 +25,17 @@ import javax.persistence.TemporalType;
 @Entity
 public class Customer implements Serializable {
 
+
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long customerID;
-    private String name;
+    private String firstName;
+    private String lastName;
     private String password;
     private int points;
+    private String gender;
     @OneToMany
     private List<RoomBooking> bookingHistories;
     @OneToMany
@@ -54,9 +58,11 @@ public class Customer implements Serializable {
         this.password = password;
     }
 
-    public Customer(String name, String nric, String password, int points, String email, String mobileNum, Date dateJoined, String passportNum, boolean accountStatus) {
+    public Customer(String firstName, String lastName, String gender, String password, int points, String email, String mobileNum, Date dateJoined, boolean accountStatus) {
         this();
-        this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
         this.password = password;
         this.points = points;
         this.email = email;
@@ -74,12 +80,33 @@ public class Customer implements Serializable {
         this.customerID = customerID;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+
+    public String getLastName() {
+        return lastName;
+    }
+
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+    
+
+    public String getGender() {
+        return gender;
+    }
+
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public String getPassword() {

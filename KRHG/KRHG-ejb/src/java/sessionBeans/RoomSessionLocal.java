@@ -20,8 +20,11 @@ import javax.ejb.Local;
 public interface RoomSessionLocal {
     public List<Room> getAllRooms();
     public Room getRoomByID(Long cID) throws NoResultException;
+    public Room getRoomByRoomNumber(String roomNumber) throws NoResultException;
+    public List<Room> getRoomByStatus(String status, String hotelCodeName) throws NoResultException;
     public Room getRoomByName(String roomName) throws NoResultException;
-    public List<Room> getRoomByType(String roomType, String roomHotel) throws NoResultException;
+    public List<Room> getRoomByType(String roomType, String hotelCodeName, String status) throws NoResultException;
+    public List<Room> getSingleRoomByType(String roomType, String hotelCodeName, String status) throws NoResultException;
     public List<Room> getRoomByPax(String roomPax, String roomHotel) throws NoResultException;
     public List<Room> getRoomByHotel(String roomHotel) throws NoResultException;
     public void deleteRoom(Long rID) throws NoResultException;
@@ -33,6 +36,7 @@ public interface RoomSessionLocal {
     public void removeCleaningSchedule(Long rID, CleaningSchedule cs);
     public void addMinibarItem(Long rID, MinibarItem mi);
     public void removeMinibarItem(Long rID, MinibarItem mi);
+     public List<Room> getRoomByHotelNameAndRoomType(String roomType, String hotelCodeName) throws NoResultException;
     
     public void createHolidaySurcharge(HolidaySurcharge hs);
     public void deleteHolidaySurcharge(Long hsID) throws NoResultException;

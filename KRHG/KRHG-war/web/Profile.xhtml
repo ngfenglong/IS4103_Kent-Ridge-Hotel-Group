@@ -25,41 +25,34 @@
         <div class="super_container">
 
             <!-- Header -->
-
-            <header class="header">
-                <div class="header_content d-flex flex-row align-items-center justify-content-start">
-                    <div class="logo"><a href="index.xhtml">KRHG</a></div>
-                    <div class="ml-auto d-flex flex-row align-items-center justify-content-start">
-                        <h:form>
+            <h:form>
+                <header class="header">
+                    <div class="header_content d-flex flex-row align-items-center justify-content-start">
+                        <div class="logo"><a href="index.xhtml">KRHG</a></div>
+                        <div class="ml-auto d-flex flex-row align-items-center justify-content-start">
                             <nav class="main_nav">
                                 <ul class="d-flex flex-row align-items-start justify-content-start">
                                     <li class="active"><a href="index.xhtml">Home</a></li>
                                     <li><a href="about.xhtml">About us</a></li>
                                     <li><a href="hotels.xhtml">Hotels</a></li>
-                                    <li><a href="blog.xhtml">Events</a></li>
                                     <li><a href="contact.xhtml">Contact us</a></li>
                                     <c:if test="${websiteAuthenticationManagedBean.id gt -1}">
-                                        <li class="active"><a href="Profile.xhtml">Profile</a></li>
-                                    </c:if>
+                                        <li><a href="Profile.xhtml">Profile</a></li>
+                                    </c:if> 
                                 </ul>
                             </nav>
-
-                            <div class="book_button"><a href="hotels.xhtml">Reserve Now</a></div>
                             <c:if test="${websiteAuthenticationManagedBean.id le -1}">
                                 <div class="book_button"><h:commandLink action="login.xhtml?faces-redirect=true"> Login/Signup</h:commandLink></div>  
                             </c:if>
                             <c:if test="${websiteAuthenticationManagedBean.id gt -1}">
                                 <div class="book_button"><h:commandLink action="#{websiteAuthenticationManagedBean.logout()}"> Logout</h:commandLink></div>  
                             </c:if>
-
-
-                        </h:form>
-                        <!-- Hamburger Menu -->
-                        <div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>
+                            <div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>
+                            <!-- Hamburger Menu -->
+                        </div>
                     </div>
-                </div>
-            </header>
-
+                </header>
+            </h:form>
             <!-- Menu -->
 
             <div class="menu trans_400 d-flex flex-column align-items-end justify-content-start">

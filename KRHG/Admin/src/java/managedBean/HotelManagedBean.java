@@ -14,6 +14,7 @@ import entity.Logging;
 import entity.MinibarItem;
 import entity.Room;
 import entity.RoomFacility;
+import entity.RoomPricing;
 import entity.Staff;
 import entity.StaffType;
 import error.NoResultException;
@@ -44,6 +45,7 @@ import sessionBeans.HotelSessionLocal;
 import sessionBeans.HouseKeepingOrderSessionLocal;
 import sessionBeans.LogSessionLocal;
 import sessionBeans.RoomFacilitySessionLocal;
+import sessionBeans.RoomPricingSessionLocal;
 import sessionBeans.RoomSessionLocal;
 import sessionBeans.StaffSessionLocal;
 import sun.misc.IOUtils;
@@ -72,7 +74,10 @@ public class HotelManagedBean implements Serializable {
     LogSessionLocal logSessionLocal;
     @EJB
     StaffSessionLocal staffSessionLocal;
-
+    @EJB
+    RoomPricingSessionLocal roomPricingSessionLocal;
+    
+    
     private String loggedInUser;
 
     private String logActivityName;
@@ -175,6 +180,9 @@ public class HotelManagedBean implements Serializable {
 
     public List<MinibarItem> getAllMinibarItem() {
         return roomSessionLocal.getAllMinibarItem();
+    }
+    public List<RoomPricing> getAllRoomPricing() {
+        return roomPricingSessionLocal.getAllRoomPricings();
     }
 
     public List<HotelFacility> getHotelFacilities() throws NoResultException {

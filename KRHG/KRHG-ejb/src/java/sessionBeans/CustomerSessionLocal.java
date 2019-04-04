@@ -17,7 +17,7 @@ public interface CustomerSessionLocal {
     //public Customer getCustomerByNric(String nric) throws NoResultException;
     public Customer getCustomerByEmail(String email) throws NoResultException;
     public Customer getCustomerByMobileNum(String mobileNum) throws NoResultException;
-    public Customer getCustomerByPassportNum(String passportNum) throws NoResultException;
+    //public Customer getCustomerByPassportNum(String passportNum) throws NoResultException;
     public void deleteCustomer(Long cID) throws NoResultException;
     public void createCustomer(Customer c); 
     public void updateCustomer(Customer c) throws NoResultException;
