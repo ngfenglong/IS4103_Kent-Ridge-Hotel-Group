@@ -218,16 +218,15 @@ public class HotelManagedBean implements Serializable {
 
     public String displayDateRange() {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        
+
         return (dateFormat.format(selectedSurcharge.getSurchargeFrom()) + " - " + dateFormat.format(selectedSurcharge.getSurchargeTo()));
     }
-    
+
     public String displayHolidayDate() {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        
+
         return (dateFormat.format(selectedHoliday.getHolidayDate()));
     }
-
 
     public String displayRoomFacilities() {
         List<RoomFacility> facilities = selectedRoom.getRoomFacilities();
@@ -510,15 +509,16 @@ public class HotelManagedBean implements Serializable {
         return "editMinibarItem.xhtml?faces-redirect=true";
     }
 
-    public String editHotel(Long hID) throws NoResultException {
-        selectedHotelObj = hotelSessionLocal.getHotelByID(hID);
+    public String editHotel() throws NoResultException {
 
         return "editHotel.xhtml?faces-redirect=true";
     }
 
     public String viewHotel(Long hID) throws NoResultException {
+        System.out.println("in view hotel");
+        System.out.println("ID: " + hID);
         selectedHotelObj = hotelSessionLocal.getHotelByID(hID);
-
+        
         return "viewHotel.xhtml?faces-redirect=true";
     }
 
@@ -696,9 +696,9 @@ public class HotelManagedBean implements Serializable {
         return "manageMinibarItem.xhtml?faces-redirect=true";
     }
 
-    public String deleteRoom(Long rID) throws NoResultException {
+    public String deleteRoom() throws NoResultException {
         List<Hotel> hotels = hotelSessionLocal.getAllHotels();
-        Room r = roomSessionLocal.getRoomByID(rID);
+        Room r = selectedRoom;
         String tempHotelName = "";
         for (Hotel h : hotels) {
             if (h.getRooms().contains(r)) {
@@ -709,7 +709,8 @@ public class HotelManagedBean implements Serializable {
         logActivityName = r.getRoomName();
         FacesContext context = FacesContext.getCurrentInstance();
         String loggedInName = context.getApplication().createValueBinding("#{authenticationManagedBean.name}").getValue(context).toString();
-        roomSessionLocal.deleteRoom(rID);
+        roomSessionLocal.deleteRoom(r.getRoomID());
+        selectedRoom = null;
         Logging l = new Logging("Room", "Delete " + logActivityName + " from " + tempHotelName, loggedInName);
         logSessionLocal.createLogging(l);
 
@@ -974,7 +975,7 @@ public class HotelManagedBean implements Serializable {
 
         return returnString;
     }
-    
+
     public String displayDaysForViewSelected() {
         String returnString = "";
         ArrayList<String> days = selectedSurcharge.getDaysToCharge();

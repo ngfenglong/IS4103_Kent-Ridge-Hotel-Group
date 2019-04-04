@@ -17,7 +17,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 style="font-size: xx-large; margin-bottom:20px">Manage Hotels</h1>
+                            <h1 style="font-size: x-large; margin-bottom:20px">Manage Hotels</h1>
                         </div>
                         <!-- /.col -->
                         <div class="col-sm-6">
@@ -96,7 +96,7 @@
                      <!--Add Btn-->
                      <h:form>
                             <h:commandButton class="btn btn-primary"
-                                action="addHotel.xhtml?faces-redirect=true" value="Add Hotel" />
+                                action="addHotel.xhtml?faces-redirect=true" value="+" />
                         </h:form>
                 </div>
                 <h:form>
@@ -118,15 +118,15 @@
                                     <td>#{hotel.hotelCodeName}</td>
                                     <td>+65 #{hotel.hotelContact}</td>
                                     <td>#{hotel.hotelAddress}</td>
-                                    <td>
-                                        <h:commandButton id="viewRoomBtn"
+                                    <td style="text-align: center">
+                                        <h:commandLink id="viewRoomBtn"
                                             action="#{hotelManagedBean.viewHotelRooms(hotel.hotelName)}"
-                                            value="View Rooms" class="btn btn-primary"/>
+                                           ><i class="fas fa-door-open"></i></h:commandLink>
                                     </td>
-                                    <td>
-                                        <h:commandButton id="viewDetailBtn"
-                                            action="#{hotelManagedBean.viewHotel(hotel.hotelID)}" value="View Details"
-                                            class="btn btn-primary" />
+                                    <td style="text-align: center">
+                                        <h:commandLink id="viewDetailBtn"
+                                            action="#{hotelManagedBean.viewHotel(hotel.hotelID)}" 
+                                            ><i class="fas fa-search"></i></h:commandLink>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -140,6 +140,9 @@
                 
             </section>
             <!-- /.content -->
+            
+
+
         </ui:define>
 
     </ui:composition>

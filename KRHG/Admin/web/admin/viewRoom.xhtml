@@ -2,6 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
 
@@ -16,20 +17,22 @@
                 <!-- Content Header (Page header) -->
                 <div class="content-header">
                     <div class="container-fluid">
-                        <div class="row mb-2">
-                            <div class="col-sm-6">
-                            </div>
-                            <!-- /.col -->
-                            <div class="col-sm-6">
-                                <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item active">
-                                        <!--Add Btn-->
-                                    </li>
-                                </ol>
-                            </div>
-                            <!-- /.col -->
-                        </div>
-                        <!-- /.row -->
+                            <div class="row mb-2">
+                                    <div class="col-sm-6">
+                                        <h1 style="font-size: x-large; margin-bottom:20px">View Room</h1>
+                                    </div>
+                                    <!-- /.col -->
+                                    <div class="col-sm-6">
+                                        <ol class="breadcrumb float-sm-right">
+                                                <li><a href="#"> Home</a></li>
+                                                <li><a href="#"> Manage Hotels</a></li>
+                                                <li><a href="#"> All Rooms</a></li>
+                                                <li class="active">View Room</li>
+                                        </ol>
+                                    </div>
+                                    <!-- /.col -->
+                                </div>
+                                <!-- /.row -->
                     </div>
                     <!-- /.container-fluid -->
                 </div> 
@@ -40,43 +43,109 @@
 
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h3 class="card-title">
-                                            <i class="fa fa-text-width"></i>
-                                            #{hotelManagedBean.selectedRoom.hotel.hotelName} - #{hotelManagedBean.selectedRoom.roomName}
-                                        </h3>
+                                    <div class="box box-success">
+               <div class="box-header with-border" style="text-align: center">
+                    <h3 class="box-title" style="text-align: center">Room #{hotelManagedBean.selectedRoom.roomNumber} </h3>
+                    <div class="box-tools pull-right">
+                 <!--Add Btn-->
+                 <h:commandLink action="#{hotelManagedBean.editRoom(selectedRoom.roomID)}" style="font-size: large; margin-right: 5px" ><i class="far fa-edit"></i></h:commandLink>
+                 <h:commandLink  class="cd-popup-trigger" id="modal-2" a:data-target="#modal-1" style="font-size: large; margin-right: 5px"><i class="fas fa-trash-alt"></i></h:commandLink>
+
+                </div>
+            </div>
+                                           
+                                        <div class="box-body no-padding">
+                                                <div class="row" style="margin-bottom:20px">
+                                                        <div class="col-md-4">
+                                                                <p class="text-center">
+                                                                        <strong>Minibar Items</strong>
+                                                                    </p>
+                                                                    <div style="text-align: center">
+                                                                            <c:forEach items="${hotelManagedBean.selectedRoom.miniBarItems}" var="m">    
+                                                                                    #{m.itemName} <br />
+                                                                                </c:forEach>
+                                                                    </div>
+                                                        </div>    
+                                                    <div class="col-md-4 col-sm-4">
+                                                                <div class="pad box-pane-right bg-green"
+                                                                    style="min-height: 280px; height:100%">
+                                                                    <div class="description-block margin-bottom">
+                                                                        <span class="description-text">Room Type</span>
+                                                                        <h5 class="description-header">
+                                                                                #{hotelManagedBean.selectedRoom.roomType}</h5>
+                                                                    </div>
+                                                                    <!-- /.description-block -->
+                                                                    <div class="description-block margin-bottom">
+                                                                        <span class="description-text">Max Guests</span>
+                                                                        <h5 class="description-header">
+                                                                                #{hotelManagedBean.selectedRoom.roomPax} Pax</h5>
+                                                                    </div>
+                                                                    <!-- /.description-block -->
+                                                                    <div class="description-block margin-bottom">
+                                                                        <span class="description-text">Room Status</span>
+                                                                        <h5 class="description-header">
+                                                                               Available </h5>
+                                                                    </div>
+                                                                    <!-- /.description-block -->
+                                                                </div>
+                                                            </div>
+                                                            <!-- /.col -->
+                                                            <div class="col-md-4">
+                                                                    <p class="text-center">
+                                                                        <strong>Room Facilities</strong>
+                                                                    </p>
+                                                                    <div style="text-align: center">
+                                                                        <c:forEach items="${hotelManagedBean.selectedRoom.roomFacilities}" var="rf">    
+                                                                                <img style="width:20px; height: 20px;" alt="#{rf.iconImg}" src="http://zetegral.website/krhgImages/#{rf.iconImg}" /> - #{rf.roomFacilityName}<br />
+                                                                            </c:forEach>
+                                                                    </div>
+                                                                   
+                                                                   
+                                                                </div>
+                                                                
+                                                    </div>
+                                        </div> 
+
                                     </div>
-                                    <!-- /.card-header -->
-                                    <div class="card-body">
-                                        <dl>
-                                            <dt style="padding-left: 1rem;">Room Number: </dt>
-                                            <dd style="padding-left:1rem;">#{hotelManagedBean.selectedRoom.roomNumber}</dd>
-                                            <dt style="padding-left: 1rem;">Room Type: </dt>
-                                            <dd style="padding-left:1rem;">#{hotelManagedBean.selectedRoom.roomType}</dd>
-                                            <dt style="padding-left: 1rem;">Room Pax</dt>
-                                            <dd style="padding-left:1rem;">#{hotelManagedBean.selectedRoom.roomPax} Pax</dd>
-                                            <dt style="padding-left: 1rem;">Room Facilties</dt>
-                                            <dd style="padding-left:1rem;">
-                                                <c:forEach items="${hotelManagedBean.selectedRoom.roomFacilities}" var="rf">    
-                                                    <img style="width:20px; height: 20px;" alt="#{rf.iconImg}" src="http://zetegral.website/krhgImages/#{rf.iconImg}" /> - #{rf.roomFacilityName} <br />
-                                                </c:forEach>
-                                            </dd>
-                                            <dt style="padding-left: 1rem;">Minibar Items</dt>
-                                            <dd style="padding-left:1rem;">
-                                                <c:forEach items="${hotelManagedBean.selectedRoom.miniBarItems}" var="m">    
-                                                    #{m.itemName} <br />
-                                                </c:forEach>
-                                            </dd>       
-                                        </dl>
-                                    </div>
-                                    <!-- /.card-body -->
-                                </div>
-                                <!-- /.card -->
                             </div>
                         </div>
                     </section>
                 </h:form>
+                    <!--modal-->
+    <div id="modal" class="cd-popup" role="alert">
+            <div class="cd-popup-container">
+                <p class="popup-content">Add Hotel?</p>
+    
+                <ul class="cd-buttons">
+                    <li><a onclick="" class="cd-popup-confirm">Yes</a></li>
+                    <li><a href="#0" class=" cd-popup-closemodal">No</a></li>
+                </ul>
+                
+            </div> <!-- cd-popup-container -->
+        </div> <!-- cd-popup -->
+
+<script>
+  
+        $('.cd-popup-trigger').on('click', function (event) {
+                    var message = '';
+                    var modalfunction = '';
+                    if ($(event)[0].target.id == "modal-1") {
+                        message = "Add Hotel?"
+                        modalfunction = ""
+                    }
+                    if ($(event)[0].target.id == "modal-2") {
+                        message = "Delete Room?"
+                        modalfunction = "#{hotelManagedBean.deleteRoom()}"
+                    }
+                    var modal = $('.cd-popup')
+                    console.log(message);
+                    modal.find('.cd-popup-confirm').attr("onclick", modalfunction);
+                    console.log(modal.find('.cd-popup-confirm')[0].onclick);
+                    modal.find('.popup-content').text(message);
+                })
+
+    
+</script>
             </ui:define>
 
 

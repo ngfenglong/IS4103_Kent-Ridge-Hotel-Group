@@ -16,60 +16,58 @@
             <ui:define name="content">
                 <!-- Content Header (Page header) -->
                 <div class="content-header">
-                    <div class="container-fluid">
-                        <div class="row mb-2">
-                            <div class="col-sm-6">
-
-
-                            </div>
-                            <!-- /.col -->
-                            <div class="col-sm-6">
-                                <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item active">
-                                        <!--Add Btn-->
-                                    </li>
-                                </ol>
-                            </div>
-                            <!-- /.col -->
+                        <div class="container-fluid">
+                                <div class="row mb-2">
+                                        <div class="col-sm-6">
+                                            <h1 style="font-size: x-large; margin-bottom:20px">Log Management</h1>
+                                        </div>
+                                        <!-- /.col -->
+                                        <div class="col-sm-6">
+                                            <ol class="breadcrumb float-sm-right">
+                                                    <li><a href="#"> Home</a></li>
+                                                    <li class="active">Log Management</li>
+                                            </ol>
+                                        </div>
+                                        <!-- /.col -->
+                                    </div>
+                                    <!-- /.row -->
                         </div>
-                        <!-- /.row -->
-                    </div>
-                    <!-- /.container-fluid -->
+                        <!-- /.container-fluid -->
                 </div>
                 <!-- /.content-header -->
                 <!-- Main content -->
                 <section class="content">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">All Logs </h3>
+                        <div class="box box-primary" style="padding:20px 50px; margin:14px; width:98% ">
+               
+                                <h3 class="box-title" style="margin-bottom:10px; text-align: center; font-size:x-large">All Log Entries</h3>
+                                <div class="box-tools pull-right">
+                             <!--Add Btn-->
                         </div>
-                        <!-- /.card-header -->
-                        <div class="card-body">
-                            <h:form>
-                                <table id="example1" class="table table-bordered table-striped">
-                                    <thead>
-                                        <tr>
+                        <h:form>
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
                                             <th>Logging Name</th>
                                             <th>Type</th>
                                             <th>Time</th>
                                             <th>Operator</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+                                    </tr>
+                                </thead>
+                                <tbody>
                                         <c:forEach items="${hotelManagedBean.allLogging}" var="l">
-                                            <tr>
-                                                <td>#{l.loggingName}</td>
-                                                <td>#{l.loggingType}</td>
-                                                <td>#{l.loggingDateTime.toGMTString()}</td>
-                                                <td>#{l.operatorName}</td>
-                                            </tr>
-                                        </c:forEach>
-                                    </tbody>
-                                </table>
-                            </h:form>
-                        </div>
-                        <!-- /.card-body -->
+                                                <tr>
+                                                    <td>#{l.loggingName}</td>
+                                                    <td>#{l.loggingType}</td>
+                                                    <td>#{l.loggingDateTime.toGMTString()}</td>
+                                                    <td>#{l.operatorName}</td>
+                                                </tr>
+                                            </c:forEach>
+                                </tbody>
+                            </table>
+                        </h:form>
                     </div>
+
+
                 </section>
                 <!-- /.content -->
             </ui:define>
