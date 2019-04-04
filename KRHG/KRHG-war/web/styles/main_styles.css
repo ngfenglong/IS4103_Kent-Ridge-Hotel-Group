@@ -291,7 +291,7 @@ section
 	top: 0;
 	left: 0;
 	width: 100%;
-	background: transparent;
+	background: rgba(0,0,0,0.7);
 	z-index: 100;
 }
 .header::before
@@ -372,6 +372,7 @@ section
 	-o-transition: all 200ms ease;
 	transition: all 200ms ease;
 }
+
 .book_button:hover
 {
 	background: rgba(255,255,255,0.2);
@@ -614,6 +615,7 @@ section
 	color: #ffffff;
 	line-height: 1.2;
 }
+
 .booking_form_container
 {
 	width: 100%;

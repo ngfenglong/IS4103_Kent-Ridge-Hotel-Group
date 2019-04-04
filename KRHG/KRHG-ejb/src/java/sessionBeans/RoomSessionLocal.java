@@ -36,6 +36,7 @@ public interface RoomSessionLocal {
     public void removeCleaningSchedule(Long rID, CleaningSchedule cs);
     public void addMinibarItem(Long rID, MinibarItem mi);
     public void removeMinibarItem(Long rID, MinibarItem mi);
+     public List<Room> getRoomByHotelNameAndRoomType(String roomType, String hotelCodeName) throws NoResultException;
     
     public void createHolidaySurcharge(HolidaySurcharge hs);
     public void deleteHolidaySurcharge(Long hsID) throws NoResultException;

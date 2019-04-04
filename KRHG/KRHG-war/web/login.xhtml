@@ -32,6 +32,15 @@ and open the template in the editor.
         <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css"/>
         <!--===============================================================================================-->	
         <link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css" />
+
+        <link rel="stylesheet" type="text/css" href="styles/bootstrap-4.1.2/bootstrap.min.css"/>
+        <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.3.4/owl.carousel.css"/>
+        <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.3.4/owl.theme.default.css"/>
+        <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.3.4/animate.css"/>
+        <link href="plugins/jquery-datepicker/jquery-ui.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" type="text/css" href="styles/contact.css"/>
+        <link rel="stylesheet" type="text/css" href="styles/contact_responsive.css"/>
         <!--===============================================================================================-->
         <link rel="stylesheet" type="text/css" href="css/util.css" />
         <link rel="stylesheet" type="text/css" href="css/main.css" />
@@ -39,68 +48,125 @@ and open the template in the editor.
     </head>
     <h:body>
 
-        <div class="limiter">
-            <div class="container-login100">
-                <div class="container-login100-form-btn">
-                    <h:form>
-                        <h:commandButton id="backBtn" value="Back" class="login100-form-btn" action="index.xhtml?faces-redirect=true" />
-                    </h:form>
-                </div>
-                <div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
-                    <h:form class="login100-form validate-form flex-sb flex-w">
-                        <span class="login100-form-title p-b-32">
-                            Account Login  
-                        </span>
-                        <span class="txt1 p-b-11">
-                            Email Address
-                        </span>
-                        <div class="wrap-input100 validate-input m-b-36" data-validate = "Username is required">
-                            <h:inputText class="input100" value="#{websiteAuthenticationManagedBean.email}" id="email" a:placeholder="EMAIL" required="true">
+        <div class="super_container">
 
-                            </h:inputText>
-                            <!--<input class="input100" type="text" name="username" />-->
-                            <span class="focus-input100"></span>
+            <!-- Header -->
+
+            <!-- Header -->
+            <h:form>
+                <header class="header">
+                    <div class="header_content d-flex flex-row align-items-center justify-content-start">
+                        <div class="logo"><a href="index.xhtml">KRHG</a></div>
+                        <div class="ml-auto d-flex flex-row align-items-center justify-content-start">
+                            <nav class="main_nav">
+                                <ul class="d-flex flex-row align-items-start justify-content-start">
+                                    <li class="active"><a href="index.xhtml">Home</a></li>
+                                    <li><a href="about.xhtml">About us</a></li>
+                                    <li><a href="hotels.xhtml">Hotels</a></li>
+                                    <li><a href="contact.xhtml">Contact us</a></li>
+                                </ul>
+                            </nav>
+                            <h:form>
+                                <h:commandButton id="backBtn" value="Back" class="login100-form-btn" action="index.xhtml?faces-redirect=true" />
+                            </h:form>
+                            <div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>
+                            <!-- Hamburger Menu -->
                         </div>
+                    </div>
+                </header>
+            </h:form>
 
-                        <span class="txt1 p-b-11">
-                            Password
-                        </span>
-                        <div class="wrap-input100 validate-input m-b-12" data-validate = "Password is required">
-                            <h:inputSecret class="input100"  value="#{websiteAuthenticationManagedBean.password}"  id="password" a:placeholder="PASSWORD" required="true">
-                            </h:inputSecret>
-                            <!--<input class="input100" type="password" name="pass"  />-->
-                            <span class="focus-input100"></span>
+            <!-- Menu -->
+
+            <div class="menu trans_400 d-flex flex-column align-items-end justify-content-start">
+                <h:form>
+                    <div class="menu_close"><i class="fa fa-times" aria-hidden="true"></i></div>
+                    <div class="menu_content">
+                        <nav class="menu_nav text-right">
+                            <ul>
+                                <li><a href="index.xhtml">Home</a></li>
+                                <li><a href="about.xhtml">About us</a></li>
+                                <li><a href="hotels.xhtml">Hotels</a></li>
+                                <li><a href="contact.xhtml">Contact us</a></li>
+
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="menu_extra">
+
+
+                        <div class="menu_phone d-flex flex-row align-items-center justify-content-center">
+                            <img src="images/phone-2.png" alt="" />
+                            <span>1234 5678</span>
                         </div>
+                    </div>
+                </h:form>
+            </div>
 
-                        <div class="flex-sb-m w-full p-b-48">
-                            <div>
+            <div class="limiter">
+                <div class="container-login100" style="background-color: #0F0E24;">
 
-                                Not a member yet? <a href="register.xhtml" class="txt3">
-                                    Sign up now!
+                    <div class="container-login100-form-btn">
+                        <!--                        <h:form>
+                                                    <h:commandButton id="backBtn" value="Back" class="login100-form-btn" action="index.xhtml?faces-redirect=true" />
+                                                </h:form>-->
+                    </div>
+                    <div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
+                        <h:form class="login100-form validate-form flex-sb flex-w">
+                            <span class="login100-form-title p-b-32">
+                                Account Login  
+                            </span>
+                            <span class="txt1 p-b-11">
+                                Email Address
+                            </span>
+                            <div class="wrap-input100 validate-input m-b-36" data-validate = "Username is required">
+                                <h:inputText class="input100" value="#{websiteAuthenticationManagedBean.email}" id="email" a:placeholder="EMAIL" required="true">
+
+                                </h:inputText>
+                                <!--<input class="input100" type="text" name="username" />-->
+                                <span class="focus-input100"></span>
+                            </div>
+
+                            <span class="txt1 p-b-11">
+                                Password
+                            </span>
+                            <div class="wrap-input100 validate-input m-b-12" data-validate = "Password is required">
+                                <h:inputSecret class="input100"  value="#{websiteAuthenticationManagedBean.password}"  id="password" a:placeholder="PASSWORD" required="true">
+                                </h:inputSecret>
+                                <!--<input class="input100" type="password" name="pass"  />-->
+                                <span class="focus-input100"></span>
+                            </div>
+
+                            <div class="flex-sb-m w-full p-b-48">
+                                <div>
+
+                                    Not a member yet? <a href="register.xhtml" class="txt3">
+                                        Sign up now!
+                                    </a>
+                                </div>
+                                <br />
+                                <a href="ForgetPassword.xhtml" class="txt3">
+                                    Forgot Password?
                                 </a>
-                            </div>
-                            <br />
-                            <a href="ForgetPassword.xhtml" class="txt3">
-                                Forgot Password?
-                            </a>
 
-                        </div>
-
-
-                        <div class="flex-sb-m w-full p-b-48">
-                            <div class="container-login100-form-btn">
-                                <button class="login100-form-btn">
-                                    <h:commandButton id="loginBtn" value="Login" class="login100-form-btn" action="#{websiteAuthenticationManagedBean.login()}" />
-                                </button>
                             </div>
 
-                        </div>
 
-                    </h:form>
+                            <div class="flex-sb-m w-full p-b-48">
+                                <div class="container-login100-form-btn">
+                                    <button class="login100-form-btn">
+                                        <h:commandButton id="loginBtn" value="Login" class="login100-form-btn" action="#{websiteAuthenticationManagedBean.login()}" />
+                                    </button>
+                                </div>
+
+                            </div>
+
+                        </h:form>
+                    </div>
                 </div>
             </div>
         </div>
-        <div id="dropDownSelect1"></div>
+    
 
         <!--===============================================================================================-->
         <script src="vendor/jquery/jquery-3.2.1.min.js"></script>

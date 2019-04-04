@@ -28,7 +28,6 @@
 
 
     <script type="text/javascript">
-
         function startTime2() {
             var today = new Date();
             var h = today.getHours();
@@ -54,8 +53,6 @@
             m = checkTime(m);
             s = checkTime(s);
             document.getElementById("printTime").innerHTML = "12:00 PM";
-
-
             // document.getElementById('timeinput').
             //     t = setTimeout('startTime()', 500);
         }
@@ -208,7 +205,6 @@
     <script type="text/javascript">
         var notifications = new Notifications("p.notification", {
             closeSelfOnClick: true, animationOutSelf: 'slideout 1s', startTopPosition: 8,
-
         });
         notifications.init();
     </script>
@@ -232,8 +228,6 @@
             console.log(modal.find('.cd-popup-confirm')[0].onclick);
             modal.find('.popup-content').text(message);
         })
-
-
     </script>
 
     <!--Date&Time Functions-->
@@ -243,7 +237,6 @@
         var today = new Date();
         var duedate = new Date();
         duedate.setDate(duedate.getDate() + 4);
-
         document.addEventListener('DOMContentLoaded', function () {
             var elems = document.querySelectorAll('.datepicker');
             var dateinstances = M.Datepicker.init(elems, {
@@ -253,12 +246,8 @@
                 onClose: function () {
                     datepicked = dateinstances[0].date;
                 }
-
             });
-
-
         });
-
         document.addEventListener('DOMContentLoaded', function () {
             var time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
             document.getElementById('time').value = time;
@@ -280,26 +269,21 @@
                         callModal();
                     }
                     document.getElementById("time").blur();
-
                 }
             });
             var a = M.Timepicker.getInstance(elems);
             console.log("time", instances[0]);
         });
-
         function callModal() {
             $('#modal2').addClass('is-visible');
         }
-
         function loadTime() {
             if (timepicked != undefined) {
                 document.getElementById("printTime").innerHTML = timepicked;
             } else {
                 startTime();
             }
-
         }
-
         function loadDate() {
             if (datepicked != undefined) {
                 document.getElementById("printDate").innerHTML = formatDate(datepicked);
@@ -310,7 +294,6 @@
                 document.getElementById("printDate").innerHTML = formatDate(today);
             }
         }
-
         function formatDate(date) {
             var monthNames = [
                 "January", "February", "March",
@@ -318,15 +301,12 @@
                 "August", "September", "October",
                 "November", "December"
             ];
-
             var dayNames = [
                 "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
             ];
-
             var weekday = date.getDay();
             var day = date.getDate();
             var monthIndex = date.getMonth();
-
             return dayNames[weekday] + ", " + day + ' ' + monthNames[monthIndex];
         }
     </script>
@@ -349,9 +329,6 @@
                 loadDate();
             }
         }
-
-
-
         function determinePage() {
             //if there is an existing request (from backend), show section 3
             //if there is no existing request, show section 1

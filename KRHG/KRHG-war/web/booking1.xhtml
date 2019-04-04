@@ -18,6 +18,7 @@
         <link href="plugins/jquery-datepicker/jquery-ui.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" type="text/css" href="styles/booking.css"/>
         <link rel="stylesheet" type="text/css" href="styles/booking_responsive.css"/>
+        <link rel="stylesheet" type="text/css" href="styles/style.css" />
     </head>
     <body>
 
@@ -25,39 +26,35 @@
 
             <!-- Header -->
 
-            <header class="header">
-                <div class="header_content d-flex flex-row align-items-center justify-content-start">
-                    <div class="logo"><a href="index.xhtml">KRHG</a></div>
-                    <div class="ml-auto d-flex flex-row align-items-center justify-content-start">
-                        <h:form>
+            <!-- Header -->
+            <h:form>
+                <header class="header">
+                    <div class="header_content d-flex flex-row align-items-center justify-content-start">
+                        <div class="logo"><a href="index.xhtml">KRHG</a></div>
+                        <div class="ml-auto d-flex flex-row align-items-center justify-content-start">
                             <nav class="main_nav">
                                 <ul class="d-flex flex-row align-items-start justify-content-start">
                                     <li class="active"><a href="index.xhtml">Home</a></li>
                                     <li><a href="about.xhtml">About us</a></li>
                                     <li><a href="hotels.xhtml">Hotels</a></li>
-                                    <li><a href="blog.xhtml">Events</a></li>
                                     <li><a href="contact.xhtml">Contact us</a></li>
                                     <c:if test="${websiteAuthenticationManagedBean.id gt -1}">
                                         <li><a href="Profile.xhtml">Profile</a></li>
-                                    </c:if>
+                                    </c:if> 
                                 </ul>
                             </nav>
-
-                            <div class="book_button"><a href="hotels.xhtml">Reserve Now</a></div>
                             <c:if test="${websiteAuthenticationManagedBean.id le -1}">
                                 <div class="book_button"><h:commandLink action="login.xhtml?faces-redirect=true"> Login/Signup</h:commandLink></div>  
                             </c:if>
                             <c:if test="${websiteAuthenticationManagedBean.id gt -1}">
                                 <div class="book_button"><h:commandLink action="#{websiteAuthenticationManagedBean.logout()}"> Logout</h:commandLink></div>  
                             </c:if>
-
-
-                        </h:form>
-                        <!-- Hamburger Menu -->
-                        <div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>
+                            <div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>
+                            <!-- Hamburger Menu -->
+                        </div>
                     </div>
-                </div>
-            </header>
+                </header>
+            </h:form>
 
             <!-- Menu -->
 
@@ -96,165 +93,74 @@
             </div>
 
             <!-- Home -->
-
             <div class="home">
                 <div class="background_image" style="background-image:url(images/booking.jpg)"></div>
-                <div class="home_container">
+                <div class="section-center">
                     <div class="container">
                         <div class="row">
-                            <div class="col">
-                                <div class="home_content text-center">
-                                    <div class="home_title">Book a room</div>
-                                    <div class="">Kent Ridge North</div>
-                                    <div class="booking_form_container">
-                                        <h:form>
-                                            <div class="d-flex flex-xl-row flex-column align-items-start justify-content-start">
-                                                <div class="booking_input_container d-flex flex-row align-items-start justify-content-start flex-wrap">
-                                                    <div><input type="text" class="datepicker booking_input booking_input_a booking_in" placeholder="Check in" required="required" /></div>
-                                                    <div><input type="text" class="datepicker booking_input booking_input_a booking_out" placeholder="Check out" required="required" /></div>
-                                                    <div><input type="number" class="booking_input booking_input_b" placeholder="Guests" required="required" /></div>
-                                                    <div><input type="number" class="booking_input booking_input_b" placeholder="Rooms" required="required" /></div>
-                                                    <div><h:commandButton id="checkBtn" class="booking_button trans_200" value="CheckAvailability" action="confirmation.html?faces-redirect=true" /></div>
-                                                </div>
-                                            </div>
-                                        </h:form>
-                                    </div>
+                            <div class="booking-form">
+                                <div class="form-header">
+                                    <br /><br /><br /><br /><br /><br /><br /><br />
+                                    <h1>Make your reservation</h1>
                                 </div>
+                                <h:form>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <span class="form-label">Check In</span>
+                                                <h:inputText a:type="date" class="form-control" required="required" value="#{websiteManagedBean.checkInTB}"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <span class="form-label">Check out</span>
+                                                <h:inputText a:type="date" class="form-control"  required="required" value="#{websiteManagedBean.checkOutTB}" />
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <span class="form-label">Number of Guests</span>
+                                                <h:selectOneMenu class="form-control" value="#{websiteManagedBean.guestTB}">
+                                                    <f:selectItem class="dropdown-item" itemValue="1" itemLabel="1" />
+                                                    <f:selectItem class="dropdown-item" itemValue="2" itemLabel="2" />
+                                                    <f:selectItem class="dropdown-item" itemValue="3" itemLabel="3" />
+                                                    <f:selectItem class="dropdown-item" itemValue="4" itemLabel="4" />
+                                                    <f:selectItem class="dropdown-item" itemValue="5" itemLabel="5" />
+                                                    <f:selectItem class="dropdown-item" itemValue="6" itemLabel="6" />
+                                                    <f:selectItem class="dropdown-item" itemValue="7" itemLabel="7" />
+                                                    <f:selectItem class="dropdown-item" itemValue="8" itemLabel="8" />
+                                                    <f:selectItem class="dropdown-item" itemValue="9" itemLabel="9" />
+                                                    <f:selectItem class="dropdown-item" itemValue="10" itemLabel="10" />
+                                                </h:selectOneMenu> 
+                                                <span class="select-arrow"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <span class="form-label">Room Type</span>
+                                                <h:selectOneMenu class="form-control" value="#{websiteManagedBean.roomTypeTB}">
+                                                    <f:selectItem class="dropdown-item" itemValue="Standard" itemLabel="Standard" />
+                                                    <f:selectItem class="dropdown-item" itemValue="Deluxe" itemLabel="Deluxe" />
+                                                    <f:selectItem class="dropdown-item" itemValue="Premium" itemLabel="Premium" />
+                                                    <f:selectItem class="dropdown-item" itemValue="Suite" itemLabel="Suite" />
+                                                    <f:selectItem class="dropdown-item" itemValue="Penthouse" itemLabel="Penthouse" />
+                                                </h:selectOneMenu>
+                                                <span class="select-arrow"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-btn">
+                                        <div><h:commandButton id="checkBtn" class="submit-btn" value="CheckAvailability" action="#{websiteManagedBean.checkAvailability()}" /></div>
+                                    </div>
+                                </h:form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!-- Booking -->
-
-            <!--            
-                        <div class="booking">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col">
-            
-                                         Booking Slider 
-                                      
-                        
-                                        <div class="booking_slider_container">
-                                            <div class="owl-carousel owl-theme booking_slider">
-                                                 Slide 
-                                                <div class="booking_item">
-                                                    <div class="background_image" style="background-image:url(images/booking_1.jpg)"></div>
-                                                    <div class="booking_overlay trans_200"></div>
-                                                    <div class="booking_item_content">
-                                                        <div class="booking_item_list">
-                                                            <ul>
-                                                                <li>27 m² Patio</li>
-                                                                <li>Balcony with view</li>
-                                                                <li>Garden / Mountain view</li>
-                                                                <li>Flat-screen TV</li>
-                                                                <li>Air conditioning</li>
-                                                                <li>Soundproofing</li>
-                                                                <li>Private bathroom</li>
-                                                                <li>Free WiFi</li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="booking_price">$120/Night</div>
-                                                    <div class="booking_link"><a href="booking.html">Standard Room</a></div>
-                                                </div>
-            
-                                                 Slide 
-                                                <div class="booking_item">
-                                                    <div class="background_image" style="background-image:url(images/booking_2.jpg)"></div>
-                                                    <div class="booking_overlay trans_200"></div>
-                                                    <div class="booking_item_content">
-                                                        <div class="booking_item_list">
-                                                            <ul>
-                                                                <li>27 m² Patio</li>
-                                                                <li>Balcony with view</li>
-                                                                <li>Garden / Mountain view</li>
-                                                                <li>Flat-screen TV</li>
-                                                                <li>Air conditioning</li>
-                                                                <li>Soundproofing</li>
-                                                                <li>Private bathroom</li>
-                                                                <li>Free WiFi</li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="booking_price">$120/Night</div>
-                                                    <div class="booking_link"><a href="booking.html">Deluxe Room</a></div>
-                                                </div>
-            
-                                                 Slide 
-                                                <div class="booking_item">
-                                                    <div class="background_image" style="background-image:url(images/booking_3.jpg)"></div>
-                                                    <div class="booking_overlay trans_200"></div>
-                                                    <div class="booking_item_content">
-                                                        <div class="booking_item_list">
-                                                            <ul>
-                                                                <li>27 m² Patio</li>
-                                                                <li>Balcony with view</li>
-                                                                <li>Garden / Mountain view</li>
-                                                                <li>Flat-screen TV</li>
-                                                                <li>Air conditioning</li>
-                                                                <li>Soundproofing</li>
-                                                                <li>Private bathroom</li>
-                                                                <li>Free WiFi</li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="booking_price">$120/Night</div>
-                                                    <div class="booking_link"><a href="booking.html">Premium Room</a></div>
-                                                </div>
-            
-                                                 Slide 
-                                                <div class="booking_item">
-                                                    <div class="background_image" style="background-image:url(images/booking_4.jpg)"></div>
-                                                    <div class="booking_overlay trans_200"></div>
-                                                    <div class="booking_item_content">
-                                                        <div class="booking_item_list">
-                                                            <ul>
-                                                                <li>27 m² Patio</li>
-                                                                <li>Balcony with view</li>
-                                                                <li>Garden / Mountain view</li>
-                                                                <li>Flat-screen TV</li>
-                                                                <li>Air conditioning</li>
-                                                                <li>Soundproofing</li>
-                                                                <li>Private bathroom</li>
-                                                                <li>Free WiFi</li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="booking_price">$120/Night</div>
-                                                    <div class="booking_link"><a href="booking.html">Suite</a></div>
-                                                </div>
-            
-                                                 Slide 
-                                                <div class="booking_item">
-                                                    <div class="background_image" style="background-image:url(images/booking_5.jpg)"></div>
-                                                    <div class="booking_overlay trans_200"></div>
-                                                    <div class="booking_item_content">
-                                                        <div class="booking_item_list">
-                                                            <ul>
-                                                                <li>27 m² Patio</li>
-                                                                <li>Balcony with view</li>
-                                                                <li>Garden / Mountain view</li>
-                                                                <li>Flat-screen TV</li>
-                                                                <li>Air conditioning</li>
-                                                                <li>Soundproofing</li>
-                                                                <li>Private bathroom</li>
-                                                                <li>Free WiFi</li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="booking_price">$120/Night</div>
-                                                    <div class="booking_link"><a href="booking.html">Penthouse</a></div>
-                                                </div>
-            
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>-->
 
             <!-- Special -->
             <h:form>
@@ -270,51 +176,12 @@
                                             Room Facilities: 
                                             <ul>
                                                 <c:forEach items="#{websiteManagedBean.getDisplayRoomFacilities(rt)}" var="rf">
-                                                    <li><img style="width:25px; height: 25px;" alt="#{rf.roomFacilityName}" src="https://cherr.website/krhgImages/#{rf.iconImg}" />  #{rf.roomFacilityName}</li>
+                                                    <li><img style="width:25px; height: 25px;" alt="#{rf.roomFacilityName}" src="http://zetegral.website/krhgImages/#{rf.iconImg}" />  #{rf.roomFacilityName}</li>
                                                 </c:forEach>
-                                                <!--                                                <li>27 m² Patio</li>
-                                                                                                <li>Balcony with view</li>
-                                                                                                <li>Garden / Mountain view</li>
-                                                                                                <li>Flat-screen TV</li>
-                                                                                                <li>Air conditioning</li>
-                                                                                                <li>Soundproofing</li>
-                                                                                                <li>Private bathroom</li>
-                                                                                                <li>Free WiFi</li>-->
+
                                             </ul>
                                         </div>
-                                        <!--                                        <div class="details_long_list">
-                                                                                    <ul class="d-flex flex-row align-items-start justify-content-start flex-wrap">
-                                                                                        <li>Balcony</li>
-                                                                                        <li>Mountain view</li>
-                                                                                        <li>Terrace</li>
-                                                                                        <li>TV</li>
-                                                                                        <li>Satellite Channels</li>
-                                                                                        <li>Safety Deposit Box</li>
-                                                                                        <li>Heating</li>
-                                                                                        <li>Sofa</li>
-                                                                                        <li>Tile/Marble floor</li>
-                                                                                        <li>Mosquito net</li>
-                                                                                        <li>Wardrobe/Closet</li>
-                                                                                        <li>Sofa bed</li>
-                                                                                        <li>Shower</li>
-                                                                                        <li>Hairdryer</li>
-                                                                                        <li>Free toiletries</li>
-                                                                                        <li>Toilet</li>
-                                                                                        <li>Bath or Shower</li>
-                                                                                        <li>Toilet paper</li>
-                                                                                        <li>Tea/Coffee Maker</li>
-                                                                                        <li>Minibar</li>
-                                                                                        <li>Dining area</li>
-                                                                                        <li>Electric kettle</li>
-                                                                                        <li>Dining table</li>
-                                                                                        <li>Outdoor furniture</li>
-                                                                                        <li>Outdoor dining area</li>
-                                                                                        <li>Towels</li>
-                                                                                        <li>Linen</li>
-                                                                                        <li>Upper floors accessible by lift</li>
-                                                                                    </ul>
-                                                                                </div>-->
-                                        <div class="book_now_button"><a href="#">Book Now</a></div>
+
                                     </div>
                                 </div>
                             </div>

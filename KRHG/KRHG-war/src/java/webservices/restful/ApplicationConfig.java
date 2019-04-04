@@ -31,6 +31,7 @@ public class ApplicationConfig extends Application {
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(webservices.restful.HouseKeepingCORSFilter.class);
         resources.add(webservices.restful.HousekeepingordersResource.class);
+        resources.add(webservices.restful.LostAndFoundReportResource.class);
     }
     
 }

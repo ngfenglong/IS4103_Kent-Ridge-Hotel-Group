@@ -46,7 +46,7 @@ public class BookingSession implements BookingSessionLocal {
         if (!q.getResultList().isEmpty()) {
             return q.getResultList();
         } else {
-            throw new NoResultException("Room Booking not found.");
+            return null;
         }
     }
 
@@ -432,10 +432,10 @@ public class BookingSession implements BookingSessionLocal {
     public void createHotelFacilityBooking(HotelFacilityBooking hotelFacilityBooking) {
         em.persist(hotelFacilityBooking);
     }
-    
+
     @Override
-    public RoomBooking getLastRoomBooking() {
-        Query q = em.createQuery("SELECT rb FROM RoomBooking rb ORDER BY rb.roomBookingID DESC");
+    public RoomBooking getLastRoomBooking() throws NoResultException {
+        Query q = em.createQuery("SELECT r FROM RoomBooking r ORDER BY r.roomBookingID DESC");
         return (RoomBooking) q.getResultList().get(0);
     }
 
