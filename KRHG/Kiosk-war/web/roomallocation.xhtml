@@ -1,40 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html">
 
-<h:head>
+    <h:head>
 
-    <meta charset="utf-8">
-    </meta>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    </meta>
-    <meta name="description" content="">
-    </meta>
-    <meta name="author" content="">
-    </meta>
+        <meta charset="utf-8">
+        </meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        </meta>
+        <meta name="description" content="">
+        </meta>
+        <meta name="author" content="">
+        </meta>
 
-    <link rel="icon" type="image/png" href="KRHGtablogo.png"></link>
-    <title>KRHG Kiosk</title>
+        <link rel="icon" type="image/png" href="KRHGtablogo.png"></link>
+        <title>KRHG Kiosk</title>
 
-    <link href="https://fonts.googleapis.com/css?family=News+Cycle|Poiret+One" rel="stylesheet">
-    </link>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    </link>
+        <link href="https://fonts.googleapis.com/css?family=News+Cycle|Poiret+One" rel="stylesheet">
+        </link>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+              integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+        </link>
 
-    <!-- Bootstrap core CSS -->
-    <link href="./resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    </link>
+        <!-- Bootstrap core CSS -->
+        <link href="./resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        </link>
 
-    <!-- Custom styles for this template -->
-    <link href="./resources/styles/the-big-picture.css" rel="stylesheet">
-    </link>
-    <link href="./resources/styles/main.css" rel="stylesheet">
-    </link>
-    <link href="./resources/styles/loadingpage.css" rel="stylesheet">
-</link>
+        <!-- Custom styles for this template -->
+        <link href="./resources/styles/the-big-picture.css" rel="stylesheet">
+        </link>
+        <link href="./resources/styles/main.css" rel="stylesheet">
+        </link>
+        <link href="./resources/styles/loadingpage.css" rel="stylesheet">
+        </link>
 
-    <script type="text/javaScript">
-        function startTime() {
+        <script type="text/javaScript">
+            function startTime() {
             var today = new Date();
             var h = today.getHours();
             var m = today.getMinutes();
@@ -43,56 +43,56 @@
             s = checkTime(s);
             document.getElementById('txt').innerHTML = h + ":" + m;
             t = setTimeout('startTime()', 500);
-        }
-        function checkTime(i) {
+            }
+            function checkTime(i) {
             if (i &lt; 10) {
-                i = "0" + i;
+            i = "0" + i;
             }
             return i;
-        }
-  
-        function onReady(callback) {
-  var intervalId = window.setInterval(function() {
-    if (document.getElementsByTagName('body')[0] !== undefined) {
-      window.clearInterval(intervalId);
-      callback.call(this);
-    }
-  }, 1000);
-  }
-  
-  function setVisible(selector, visible) {
-  document.querySelector(selector).style.display = visible ? 'block' : 'none';
-  }
-  
-  onReady(function() {
-    console.log("hi");
-  setVisible('#content', true);
-  setVisible('#loading', false);
-  });
-    </script>
-  
+            }
 
-</h:head>
+            function onReady(callback) {
+            var intervalId = window.setInterval(function() {
+            if (document.getElementsByTagName('body')[0] !== undefined) {
+            window.clearInterval(intervalId);
+            callback.call(this);
+            }
+            }, 1000);
+            }
 
-<body>
+            function setVisible(selector, visible) {
+            document.querySelector(selector).style.display = visible ? 'block' : 'none';
+            }
 
-    <!-- Page Content -->
-    <section class="content">
-        
+            onReady(function() {
+            console.log("hi");
+            setVisible('#content', true);
+            setVisible('#loading', false);
+            });
+        </script>
+
+
+    </h:head>
+
+    <body>
+
+        <!-- Page Content -->
+        <section class="content">
+
             <div id="loading" class="spinner">
-                    <img width="60px" height="60px" class="krhglogo"  src="resources/images/krhglogo4.svg" />
-                    <br/><br/>
+                <img width="60px" height="60px" class="krhglogo"  src="resources/images/krhglogo4.svg" />
+                <br/><br/>
                 <div class="bounce1"></div>
                 <div class="bounce2"></div>
                 <div class="bounce3"></div>
-                </div>
+            </div>
 
-        <div style='display:none' class="content" id="content">
-            <div class="row ">
-                <a href="checkinResult.xhtml"><i class="fas fa-arrow-circle-left"
-                        style="position:absolute; top:30px; left: 30px; color:white; font-size: 2em;"></i></a>
-                <div id="txt" class="time"></div>
-                <div class="theTitle active" style="width:800px; ">
+            <div style='display:none' class="content" id="content">
+                <div class="row ">
+                    <a href="checkinResult.xhtml"><i class="fas fa-arrow-circle-left"
+                                                     style="position:absolute; top:30px; left: 30px; color:white; font-size: 2em;"></i></a>
+                    <div id="txt" class="time"></div>
+                    <div class="theTitle active" style="width:800px; ">
 
                         <div class="titleleft" style="margin-right:30px">
                             <div class="row">
@@ -103,7 +103,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-2" style="padding:0px;  text-align:center; overflow-x: visible" >
-                                        <img width="80px" height="80px" style="position:absolute; bottom:0px; left:5px" src="resources/images/krhglogo4.svg" />
+                                    <img width="80px" height="80px" style="position:absolute; bottom:0px; left:5px" src="resources/images/krhglogo4.svg" />
                                 </div>
                                 <div class="col-sm-5">
                                     <div class="line">
@@ -118,51 +118,72 @@
                                 </div>
                             </div>
                             <div class="row">
-                                    <div class="col-sm-5">
-                                        <div class="line">
-                                            <hr>
-                                            </hr>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-2" style="padding:0px;  text-align:center">
-                                        <p style="position:absolute; top:0px; padding-left:10px;">KRHG</p>
-                                    </div>
-                                    <div class="col-sm-5">
-                                        <div class="line">
-                                            <hr>
-                                            </hr>
-                                        </div>
+                                <div class="col-sm-5">
+                                    <div class="line">
+                                        <hr>
+                                        </hr>
                                     </div>
                                 </div>
-    
-    
+                                <div class="col-sm-2" style="padding:0px;  text-align:center">
+                                    <p style="position:absolute; top:0px; padding-left:10px;">KRHG</p>
+                                </div>
+                                <div class="col-sm-5">
+                                    <div class="line">
+                                        <hr>
+                                        </hr>
+                                    </div>
+                                </div>
+                            </div>
+
+
                         </div>
                         <span class="separator"></span>
                         <div class="titleright" style="height:100%">
                             <p style="margin-top:50%; color:#C5B358">Welcome</p>
                         </div>
-    
+
                     </div>
 
 
-            </div>
+                </div>
 
-            <div class="row rowcontent" style="padding-bottom:500px; padding-top:140px">
+                <div class="row rowcontent" style="padding-bottom:500px; padding-top:140px">
                     <p style="font-family: ''Lora', serif', serif;; font-size:30px; display:block; width:100%;text-align: center; color:white">Your Room</p><br/>
-                    <p class="hotelname" style="color:#C5B358; display:block; width: 100%; text-align: center">1837</p>
-                    
+                    <p class="hotelname" style="color:#C5B358; display:block; width: 100%; text-align: center">#{kioskmanagedBean.allocatedRoomNumbers.get(0)}</p>
+
                     <p class="bookinginfo" style="border:none; text-align: center; width:100%; font-size:20px; margin-top: 20px">Keycard will be issued below. Please collect your keycard.</p>
-                  
+                    <div class="hotelname" style="text-align:center; width: 100%;   color:#C5B358"  id="timeElm">
+                    </div>
+                    <h:form>
+                        <h:commandButton id="clickbutton" action="#{kioskmanagedBean.continueAllocation()}" style="display:none"></h:commandButton>
+                    </h:form>
+                </div>
 
             </div>
+        </section>
 
-        </div>
-    </section>
+        <!-- Bootstrap core JavaScript -->
+        <script src="./resources/jquery/jquery.min.js"></script>
+        <script src="./resources/bootstrap/js/bootstrap.bundle.js"></script>
+        <script>
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="./resources/jquery/jquery.min.js"></script>
-    <script src="./resources/bootstrap/js/bootstrap.bundle.js"></script>
+            let timeElm = document.getElementById('timeElm');
+            let timer = function (x) {
+                if (x === 0) {
+                    document.getElementById("clickbutton").click();
+                    return;
+                }
 
-</body>
+                timeElm.innerHTML = x;
+
+                return setTimeout(() => {
+                    timer(--x)
+                }, 1000)
+            }
+
+            timer(5);
+
+        </script>
+    </body>
 
 </html>

@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"  xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
-<h:head>
+    <h:head>
 
-    <meta charset="utf-8">
-    </meta>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    </meta>
-    <meta name="description" content="">
-    </meta>
-    <meta name="author" content="">
-    </meta>
+        <meta charset="utf-8">
+        </meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        </meta>
+        <meta name="description" content="">
+        </meta>
+        <meta name="author" content="">
+        </meta>
 
-    <title>KRGH Kiosk</title>
+        <title>KRGH Kiosk</title>
 
-    <link href="https://fonts.googleapis.com/css?family=News+Cycle|Poiret+One" rel="stylesheet">
-    </link>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    </link>
+        <link href="https://fonts.googleapis.com/css?family=News+Cycle|Poiret+One" rel="stylesheet">
+        </link>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+              integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+        </link>
 
-    <!-- Bootstrap core CSS -->
-    <link href="./resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    </link>
+        <!-- Bootstrap core CSS -->
+        <link href="./resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        </link>
 
-    <!-- Custom styles for this template -->
-    <link href="./resources/styles/the-big-picture.css" rel="stylesheet">
-    </link>
-    <link href="./resources/styles/main.css" rel="stylesheet">
-    </link>
+        <!-- Custom styles for this template -->
+        <link href="./resources/styles/the-big-picture.css" rel="stylesheet">
+        </link>
+        <link href="./resources/styles/main.css" rel="stylesheet">
+        </link>
 
-    <script type="text/javaScript">
-        function startTime() {
+        <script type="text/javaScript">
+            function startTime() {
             var today = new Date();
             var h = today.getHours();
             var m = today.getMinutes();
@@ -40,28 +40,28 @@
             s = checkTime(s);
             document.getElementById('txt').innerHTML = h + ":" + m;
             t = setTimeout('startTime()', 500);
-        }
-        function checkTime(i) {
+            }
+            function checkTime(i) {
             if (i &lt; 10) {
-                i = "0" + i;
+            i = "0" + i;
             }
             return i;
-        }
-    </script>
+            }
+        </script>
 
 
-</h:head>
+    </h:head>
 
-<body onload="startTime()">
+    <body onload="startTime()">
 
-    <!-- Page Content -->
-    <section>
-        <div class="content">
-            <div class="row">
-                <a href="index.html"><i class="fas fa-arrow-circle-left"
-                        style="position:absolute; top:30px; left: 30px; color:white; font-size: 2em;"></i></a>
-                <div id="txt" class="time"></div>
-                <div class="theTitle active" style="width:800px; ">
+        <!-- Page Content -->
+        <section>
+            <div class="content">
+                <div class="row">
+                    <a href="index.html"><i class="fas fa-arrow-circle-left"
+                                            style="position:absolute; top:30px; left: 30px; color:white; font-size: 2em;"></i></a>
+                    <div id="txt" class="time"></div>
+                    <div class="theTitle active" style="width:800px; ">
 
                         <div class="titleleft" style="margin-right:30px">
                             <div class="row">
@@ -72,7 +72,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-2" style="padding:0px;  text-align:center; overflow-x: visible" >
-                                        <img width="80px" height="80px" style="position:absolute; bottom:0px; left:5px" src="resources/images/krhglogo4.svg" />
+                                    <img width="80px" height="80px" style="position:absolute; bottom:0px; left:5px" src="resources/images/krhglogo4.svg" />
                                 </div>
                                 <div class="col-sm-5">
                                     <div class="line">
@@ -87,48 +87,52 @@
                                 </div>
                             </div>
                             <div class="row">
-                                    <div class="col-sm-5">
-                                        <div class="line">
-                                            <hr>
-                                            </hr>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-2" style="padding:0px;  text-align:center">
-                                        <p style="position:absolute; top:0px; padding-left:10px;">KRHG</p>
-                                    </div>
-                                    <div class="col-sm-5">
-                                        <div class="line">
-                                            <hr>
-                                            </hr>
-                                        </div>
+                                <div class="col-sm-5">
+                                    <div class="line">
+                                        <hr>
+                                        </hr>
                                     </div>
                                 </div>
-    
-    
+                                <div class="col-sm-2" style="padding:0px;  text-align:center">
+                                    <p style="position:absolute; top:0px; padding-left:10px;">KRHG</p>
+                                </div>
+                                <div class="col-sm-5">
+                                    <div class="line">
+                                        <hr>
+                                        </hr>
+                                    </div>
+                                </div>
+                            </div>
+
+
                         </div>
                         <span class="separator"></span>
                         <div class="titleright" style="height:100%">
                             <p style="margin-top:50%; color:#C5B358">Check Out</p>
                         </div>
-    
+
                     </div>
+                </div>
+
+                <div class="rowcontent">
+                    <h:form class="mainWrap">
+
+
+                        <h:inputText a:placeholder="Room number" style="text-align: center" value="#{kioskmanagedBean.checkoutRoomNumber}" class="left" required="true"></h:inputText>
+
+                        <h:commandButton class="bigBtn" value="Search" action="#{kioskmanagedBean.searchCheckout()}">
+
+                        </h:commandButton>
+                    </h:form>
+                </div>
+
             </div>
+        </section>
 
-            <div class="rowcontent">
-                <form action="" class="mainWrap">
-                    <input placeholder="Booking Number"  style="text-align: center" type="Text" class="left" required="true" />
-                    <input placeholder="Last Name"  style="text-align: center" type="Text" class="left" required="true" />
-                    <button class="bigBtn" onclick=' location.href = "checkouttimer.xhtml";'>Search</button>
-                </form>
-            </div>
+        <!-- Bootstrap core JavaScript -->
+        <script src="./resources/jquery/jquery.min.js"></script>
+        <script src="./resources/bootstrap/js/bootstrap.bundle.js"></script>
 
-        </div>
-    </section>
-
-    <!-- Bootstrap core JavaScript -->
-    <script src="./resources/jquery/jquery.min.js"></script>
-    <script src="./resources/bootstrap/js/bootstrap.bundle.js"></script>
-
-</body>
+    </body>
 
 </html>
