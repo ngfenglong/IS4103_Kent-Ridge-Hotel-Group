@@ -10,10 +10,12 @@
     <class>entity.Feedback</class>
     <class>entity.FoodMenuItem</class>
     <class>entity.FoodOrder</class>
+    <class>entity.FunctionRoom</class>
     <class>entity.FunctionRoomBooking</class>
     <class>entity.HolidaySurcharge</class>
     <class>entity.Hotel</class>
     <class>entity.HotelFacility</class>
+    <class>entity.HotelFacilityBooking</class>
     <class>entity.HouseKeepingOrder</class>
     <class>entity.LaundryOrder</class>
     <class>entity.Logging</class>
@@ -29,11 +31,11 @@
     <class>entity.RoomBooking</class>
     <class>entity.RoomFacility</class>
     <class>entity.RoomInventory</class>
+    <class>entity.RoomPricing</class>
     <class>entity.Staff</class>
     <class>entity.StaffType</class>
     <class>entity.TransportBooking</class>
     <class>entity.WorkSchedule</class>
-    <class>entity.HotelFacilityBooking</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>

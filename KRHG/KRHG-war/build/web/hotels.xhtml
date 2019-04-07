@@ -178,7 +178,7 @@
                                                     </c:forEach>
                                                 </p>
                                             </div>
-                                            <div class="book_now_button"><h:commandLink id="redirectBtn" action="#{websiteManagedBean.viewHotel(h.hotelID)}" > Book Now</h:commandLink></div>
+                                            <div class="book_button"><h:commandLink id="redirectBtn" action="#{websiteManagedBean.viewHotel(h.hotelID)}" > Book Now</h:commandLink></div>
                                         </div>
                                     </div>
                                 </div>
@@ -199,14 +199,14 @@
                                                     Address: #{h.hotelAddress} <br />
                                                     Contact Number: #{h.hotelContact}
                                                 </p>
-                                                <p>
+                                                 <p style="color:black;">
                                                     Hotel Facilities: <br />
                                                     <c:forEach items="#{websiteManagedBean.getSelectedHotelFacility(h.hotelID)}" var="f"> 
                                                         <img style="width:20px; height: 20px;" alt="#{f.hotelFacilityName}" src="http://zetegral.website/krhgImages/#{f.hotelFacilityImage}" /> #{f.hotelFacilityName}
                                                     </c:forEach>
                                                 </p>
                                             </div>
-                                            <div class="book_now_button"><h:commandLink id="redirectBtn2" action="#{websiteManagedBean.viewHotel(h.hotelID)}" > Book Now</h:commandLink></div>
+                                            <div class="book_button"><h:commandLink id="redirectBtn2" action="#{websiteManagedBean.viewHotel(h.hotelID)}" > Book Now</h:commandLink></div>
                                         </div>
                                     </div>
 

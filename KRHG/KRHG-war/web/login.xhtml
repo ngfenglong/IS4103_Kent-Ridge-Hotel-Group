@@ -66,9 +66,15 @@ and open the template in the editor.
                                     <li><a href="contact.xhtml">Contact us</a></li>
                                 </ul>
                             </nav>
-                            <h:form>
-                                <h:commandButton id="backBtn" value="Back" class="login100-form-btn" action="index.xhtml?faces-redirect=true" />
-                            </h:form>
+                            <c:if test="${websiteAuthenticationManagedBean.id le -1}">
+                                <div class="book_button"><h:commandLink action="login.xhtml?faces-redirect=true"> Login/Signup</h:commandLink></div>  
+                            </c:if>
+                            <c:if test="${websiteAuthenticationManagedBean.id gt -1}">
+                                <div class="book_button"><h:commandLink action="#{websiteAuthenticationManagedBean.logout()}"> Logout</h:commandLink></div>  
+                            </c:if>
+                            <!--                            <h:form>
+                                                            <h:commandButton id="backBtn" value="Back" class="login100-form-btn" action="index.xhtml?faces-redirect=true" />
+                                                        </h:form>-->
                             <div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>
                             <!-- Hamburger Menu -->
                         </div>
@@ -111,8 +117,10 @@ and open the template in the editor.
                                                     <h:commandButton id="backBtn" value="Back" class="login100-form-btn" action="index.xhtml?faces-redirect=true" />
                                                 </h:form>-->
                     </div>
-                    <div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
+                    <div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55" style="margin-top: 150px;">
                         <h:form class="login100-form validate-form flex-sb flex-w">
+
+                            <br /><br /><br /><br /><br />
                             <span class="login100-form-title p-b-32">
                                 Account Login  
                             </span>
@@ -154,9 +162,7 @@ and open the template in the editor.
 
                             <div class="flex-sb-m w-full p-b-48">
                                 <div class="container-login100-form-btn">
-                                    <button class="login100-form-btn">
-                                        <h:commandButton id="loginBtn" value="Login" class="login100-form-btn" action="#{websiteAuthenticationManagedBean.login()}" />
-                                    </button>
+                                    <h:commandButton id="loginBtn" value="Login" class="book_button" action="#{websiteAuthenticationManagedBean.login()}" />
                                 </div>
 
                             </div>
@@ -166,7 +172,7 @@ and open the template in the editor.
                 </div>
             </div>
         </div>
-    
+
 
         <!--===============================================================================================-->
         <script src="vendor/jquery/jquery-3.2.1.min.js"></script>

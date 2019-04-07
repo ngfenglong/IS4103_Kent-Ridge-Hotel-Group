@@ -44,7 +44,7 @@ public class RoomSession implements RoomSessionLocal {
             throw new NoResultException("Room not found.");
         }
     }
-    
+
     @Override
     public Room getRoomByRoomNumber(String roomNumber) throws NoResultException {
         Query q;
@@ -100,7 +100,7 @@ public class RoomSession implements RoomSessionLocal {
             }
         }
     }
-    
+
     @Override
     public List<Room> getRoomByType(String roomType, String hotelCodeName, String status) throws NoResultException {
         Query q;
@@ -126,9 +126,8 @@ public class RoomSession implements RoomSessionLocal {
             throw new NoResultException("Room not found.");
         }
     }
-    
-    	
-	@Override
+
+    @Override
     public List<Room> getRoomByHotelNameAndRoomType(String roomType, String hotelCodeName) throws NoResultException {
         Query q;
         if (hotelCodeName == null) {
@@ -155,9 +154,6 @@ public class RoomSession implements RoomSessionLocal {
             }
         }
     }
-	
-	
-	
 
     @Override
     public List<Room> getSingleRoomByType(String roomType, String hotelCodeName, String status) throws NoResultException {

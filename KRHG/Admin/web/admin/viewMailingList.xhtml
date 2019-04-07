@@ -1,9 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <body>
 
@@ -19,13 +17,14 @@
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
+                                <h1 style="font-size: x-large; margin-bottom:20px">View Mailing List</h1>
                             </div>
                             <!-- /.col -->
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item active">
-                                        <!--Add Btn-->
-                                    </li>
+                                    <li><a href="#"> Home</a></li>
+                                    <li><a href="#"> Manage Mailing List</a></li>
+                                    <li class="active">View Mailing List - #{hotelManagedBean.selectedMailingList.listName}</li>
                                 </ol>
                             </div>
                             <!-- /.col -->
@@ -33,7 +32,7 @@
                         <!-- /.row -->
                     </div>
                     <!-- /.container-fluid -->
-                </div> 
+                </div>
                 <!-- form start -->
                 <h:form role="form">
                     <!-- Content Header (Page header) -->
@@ -41,52 +40,56 @@
 
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h3 class="card-title">
-                                            <i class="fa fa-text-width"></i>
-                                            #{hotelManagedBean.selectedMailingList.listName}
-                                        </h3>
-                                    </div>
-                                    <!-- /.card-header -->
-                                    <div style="padding:3rem;" class="card-body">
-                                        <div class="row">
-                                            <div class="col-md-1">
-                                            </div>
-                                            <div class="col-md-4" style="padding:2rem;">  
-                                                <dl>
-                                                    <dt>
-                                                        <img  style="width:480px; height: 360px;" alt="#{rf.iconImg}" src="http://zetegral.website/krhgImages/#{hotelManagedBean.selectedHotelObj.hotelImage}" /> 
-                                                    </dt>
-                                                </dl>
-                                            </div>
-                                            <div class="col-md-5">
-                                            </div>
+                                <div class="box box-success">
+                                    <div class="box-header with-border" style="text-align: center">
+                                        <h3 class="box-title">#{hotelManagedBean.selectedMailingList.listName}</h3>
+
+                                        <div class="box-tools pull-right">
+                                            <h:commandLink  action="#{hotelManagedBean.editMailingList(selectedMailingList.listID)}" style="font-size: large; margin-right: 5px"><i class="far fa-edit"></i></h:commandLink>
+                                            <h:commandLink  class="cd-popup-trigger" id="modal-2" a:data-target="#modal-1" style="font-size: large"><i class="fas fa-trash-alt"></i></h:commandLink>
+
                                         </div>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body no-padding">
+
                                         <div class="row">
-                                            <div class="col-md-6">
-                                                <dl>
-                                                    <dt style="padding-left: 1rem;">Mailing List Name: </dt>
-                                                    <dd style="padding-left:1rem;">#{hotelManagedBean.selectedMailingList.listName}</dd>
-                                                    <dt style="padding-left:1rem; ">Mailing List</dt>
-                                                    <c:forEach items="${hotelManagedBean.selectedMailingList.listToSend}" var="l">    
-                                                        <dd style="padding-left:2rem;">- #{l.toString()}</dd>
+                                            <div class="col-md-6 col-sm-4">
+                                                <div class="pad box-pane-right bg-green"
+                                                     style="min-height: 280px; height:100%">
+                                                    <div class="description-block margin-bottom">
+                                                        <span class="description-text">Mailing List</span>
+                                                    </div>
+                                                    <c:forEach items="${hotelManagedBean.selectedMailingList.listToSend}" var="m">
+                                                        <h5 class="description-header">
+                                                            #{m}</h5>
+                                                        <br />
                                                     </c:forEach>
-                                                </dl>
-                                            </div> 
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <!-- /.card-body -->
                                 </div>
-                                <!-- /.card -->
                             </div>
                         </div>
                     </section>
                 </h:form>
-            </ui:define>
 
+                <div id="modalVH" class="cd-popup" role="alert">
+                    <div class="cd-popup-container">
+                        <p class="popup-content">Delete Hotel?</p>
+
+                        <ul class="cd-buttons">
+                            <li><a onclick="" id="deleteHotel" class="cd-popup-confirm">Yes</a></li>
+                            <li><a onclick="" class=" cd-popup-closemodal">No</a></li>
+                        </ul>
+                    </div> <!-- cd-popup-container -->
+                </div> <!-- cd-popup -->
+
+            </ui:define>
             <ui:define name="script">
                 script
+
             </ui:define>
 
         </ui:composition>

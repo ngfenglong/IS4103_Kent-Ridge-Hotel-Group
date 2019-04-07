@@ -172,7 +172,7 @@ public class DataInitializationSessionBean {
         st12 = staffSessionLocal.getStaffTypeByName("Finance Staff");
 
 //*********************************************Staff************************************************
-        Staff s0 = new Staff("Test User", "test", encryptPassword("test"), "test@krhg.com.sg", "88244165", "male", "S9226940Z", "7 Lok Yang Vista", new Date(), "Kent Ridge North", "Laundry Staff", "Laundry", 7, true, "Ee Pui Ling", "7 Lok Yang Vista", "68701722");
+        Staff s0 = new Staff("Test User", "test", encryptPassword("test"), "zell1502@hotmail.com", "88244165", "male", "S9226940Z", "7 Lok Yang Vista", new Date(), "Kent Ridge North", "Laundry Staff", "Laundry", 7, true, "Ee Pui Ling", "7 Lok Yang Vista", "68701722");
         s0.addAccountRights(st1);
         s0.addAccountRights(st2);
         s0.addAccountRights(st3);

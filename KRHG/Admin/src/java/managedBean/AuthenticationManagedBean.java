@@ -131,16 +131,18 @@ public class AuthenticationManagedBean implements Serializable {
         }
         return status;
     }
+
     public boolean isITStaff() {
         boolean status = false;
         List<StaffType> checkList = loggedInStaff.getAccountRights();
-        for (StaffType st : checkList) {    
+        for (StaffType st : checkList) {
             if (st.getStaffTypeName().equals("IT Staff") || st.getStaffTypeName().equals("Sales and Marketing Manager")) {
                 status = true;
             }
         }
         return status;
     }
+
     public boolean isHRStaff() {
         boolean status = false;
         List<StaffType> checkList = loggedInStaff.getAccountRights();
@@ -221,7 +223,7 @@ public class AuthenticationManagedBean implements Serializable {
         Staff tempStaff;
         tempStaff = staffSessionLocal.getStaffByUsename(resetEmail);
         if (tempStaff == null) {
-            tempStaff = staffSessionLocal.getStaffByEmail(name);
+            tempStaff = staffSessionLocal.getStaffByEmail(resetEmail);
         }
 
         if (tempStaff == null) {
@@ -236,11 +238,205 @@ public class AuthenticationManagedBean implements Serializable {
             Logging l = new Logging("Staff", "Reset Password for " + tempStaff.getName(), tempStaff.getName());
             logSessionLocal.createLogging(l);
 
-            String msg = "Your password has been reset! Please login with the new password:\n\"" + newPass + "\"";
-            sendEmail(email, "Reset Password", msg);
+            String content = "<!DOCTYPE html>\n"
+                    + "<html >\n"
+                    + "  <head>\n"
+                    + "    <meta charset=\"UTF-8\">\n"
+                    + "    <title>Reset Password</title>\n"
+                    + "    \n"
+                    + "    \n"
+                    + "    \n"
+                    + "    \n"
+                    + "    \n"
+                    + "    \n"
+                    + "    \n"
+                    + "    \n"
+                    + "  </head>\n"
+                    + "\n"
+                    + "  <body>\n"
+                    + "\n"
+                    + "    <!DOCTYPE html>\n"
+                    + "<html lang=\"en\">\n"
+                    + "\n"
+                    + "<head>\n"
+                    + "  <title>Feedback Email</title>\n"
+                    + "  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n"
+                    + "  <meta name=\"viewport\" content=\"width=device-width\">\n"
+                    + "</head>\n"
+                    + "\n"
+                    + "<body style=\"margin: 0\">\n"
+                    + "  <style type=\"text/css\">\n"
+                    + "    body {\n"
+                    + "      margin: 0;\n"
+                    + "      }\n"
+                    + "      h1 a:hover {\n"
+                    + "      font-size: 30px; color: #333;\n"
+                    + "      }\n"
+                    + "      h1 a:active {\n"
+                    + "      font-size: 30px; color: #333;\n"
+                    + "      }\n"
+                    + "      h1 a:visited {\n"
+                    + "      font-size: 30px; color: #333;\n"
+                    + "      }\n"
+                    + "      a:hover {\n"
+                    + "      text-decoration: none;\n"
+                    + "      }\n"
+                    + "      a:active {\n"
+                    + "      text-decoration: none;\n"
+                    + "      }\n"
+                    + "      a:visited {\n"
+                    + "      text-decoration: none;\n"
+                    + "      }\n"
+                    + "      .button__text:hover {\n"
+                    + "      color: #fff; text-decoration: none;\n"
+                    + "      }\n"
+                    + "      .button__text:active {\n"
+                    + "      color: #fff; text-decoration: none;\n"
+                    + "      }\n"
+                    + "      .button__text:visited {\n"
+                    + "      color: #fff; text-decoration: none;\n"
+                    + "      }\n"
+                    + "      a:hover {\n"
+                    + "      color: #080e66;\n"
+                    + "      }\n"
+                    + "      a:active {\n"
+                    + "      color: #080e66;\n"
+                    + "      }\n"
+                    + "      a:visited {\n"
+                    + "      color: #080e66;\n"
+                    + "      }\n"
+                    + "      @media (max-width: 600px) {\n"
+                    + "        .container {\n"
+                    + "          width: 94% !important;\n"
+                    + "        }\n"
+                    + "        .main-action-cell {\n"
+                    + "          float: none !important; margin-right: 0 !important;\n"
+                    + "        }\n"
+                    + "        .secondary-action-cell {\n"
+                    + "          text-align: center; width: 100%;\n"
+                    + "        }\n"
+                    + "        .header {\n"
+                    + "          margin-top: 20px !important; margin-bottom: 2px !important;\n"
+                    + "        }\n"
+                    + "        .shop-name__cell {\n"
+                    + "          display: block;\n"
+                    + "        }\n"
+                    + "        .order-number__cell {\n"
+                    + "          display: block; text-align: left !important; margin-top: 20px;\n"
+                    + "        }\n"
+                    + "        .button {\n"
+                    + "          width: 100%;\n"
+                    + "        }\n"
+                    + "        .or {\n"
+                    + "          margin-right: 0 !important;\n"
+                    + "        }\n"
+                    + "        .apple-wallet-button {\n"
+                    + "          text-align: center;\n"
+                    + "        }\n"
+                    + "        .customer-info__item {\n"
+                    + "          display: block; width: 100% !important;\n"
+                    + "        }\n"
+                    + "        .spacer {\n"
+                    + "          display: none;\n"
+                    + "        }\n"
+                    + "        .subtotal-spacer {\n"
+                    + "          display: none;\n"
+                    + "        }\n"
+                    + "      }\n"
+                    + "  </style>\n"
+                    + "  <table class=\"body\" style=\"border-collapse: collapse; border-spacing: 0; height: 100% !important; width: 100% !important\">\n"
+                    + "    <tr>\n"
+                    + "      <td style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif\">\n"
+                    + "        <table class=\"header row\" style=\"border-collapse: collapse; border-spacing: 0; margin: 40px 0 20px; width: 100%\">\n"
+                    + "          <tr>\n"
+                    + "            <td class=\"header__cell\" style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif\">\n"
+                    + "              <center>\n"
+                    + "                <table class=\"container\" style=\"border-collapse: collapse; border-spacing: 0; margin: 0 auto; text-align: left; width: 560px\">\n"
+                    + "                  <tr>\n"
+                    + "                    <td style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif\">\n"
+                    + "                      <table class=\"row\" style=\"border-collapse: collapse; border-spacing: 0; width: 100%\">\n"
+                    + "                        <tr>\n"
+                    + "                          <td class=\"shop-name__cell\" style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif\">\n"
+                    + "                            <img src=\"images/KRHGblack.png\" width=\"180\">\n"
+                    + "                          </td>\n"
+                    + "                        </tr>\n"
+                    + "                      </table>\n"
+                    + "                    </td>\n"
+                    + "                  </tr>\n"
+                    + "                </table>\n"
+                    + "              </center>\n"
+                    + "            </td>\n"
+                    + "          </tr>\n"
+                    + "        </table>\n"
+                    + "\n"
+                    + "        <br><br>\n"
+                    + "        \n"
+                    + "        <table class=\"row content\" style=\"border-collapse: collapse; border-spacing: 0; width: 100%\">\n"
+                    + "          <tr>\n"
+                    + "            <td class=\"content__cell\" style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; padding-bottom: 40px\">\n"
+                    + "              <center>\n"
+                    + "                <table class=\"container\" style=\"border-collapse: collapse; border-spacing: 0; margin: 0 auto; text-align: left; width: 560px\">\n"
+                    + "                  <tr>\n"
+                    + "                    <td style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif\">\n"
+                    + "                      <h2 style=\"font-size: 24px; font-weight: normal; margin: 0 0 10px\">Dear " + tempStaff.getName() + ",</h2>\n"
+                    + "\n"
+                    + "                      <p style=\"color: #777; font-size: 16px; line-height: 150%; margin: 0\">We have received your change password request. Please click on the button to reset your password.</p>\n"
+                    + "                      <table class=\"row actions\" style=\"border-collapse: collapse; border-spacing: 0; margin-top: 20px; width: 100%\">\n"
+                    + "                        <tr>\n"  
+                    + "                          <td class=\"actions__cell\" style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif\">\n"
+                    + "                            <table class=\"button main-action-cell\" style=\"border-collapse: collapse; border-spacing: 0; float: left; margin-right: 15px\">\n"
+                    + "                              <tr>\n"
+                    + "                                <td class=\"button__cell\" style=\"background: #080e66; border-radius: 4px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; padding: 20px 25px; text-align: center\"\n"
+                    + "                                  align=\"center\" bgcolor=\"#080e66\">\n"
+                    + "                                  <a href=\"#localhost:38201/Admin/editPassword.xhtml\" class=\"button__text\" style=\"color: #fff; font-size: 16px; text-decoration: none\">Reset Password</a>\n"
+                    + "                                </td>\n"
+                    + "                              </tr>\n"
+                    + "                            </table>\n"
+                    + "                          </td>\n"
+                    + "                        </tr>\n"
+                    + "                      </table>\n"
+                    + "                    </td>\n"
+                    + "                  </tr>\n"
+                    + "                </table>\n"
+                    + "              </center>\n"
+                    + "            </td>\n"
+                    + "          </tr>\n"
+                    + "        </table>\n"
+                    + "        <table class=\"row footer\" style=\"border-collapse: collapse; border-spacing: 0; border-top-color: #e5e5e5; border-top-style: solid; border-top-width: 1px; width: 100%\">\n"
+                    + "          <tr>\n"
+                    + "            <td class=\"footer__cell\" style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; padding: 35px 0\">\n"
+                    + "              <center>\n"
+                    + "                <table class=\"container\" style=\"border-collapse: collapse; border-spacing: 0; margin: 0 auto; text-align: left; width: 560px\">\n"
+                    + "                  <tr>\n"
+                    + "                    <td style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif\">\n"
+                    + "                      <p class=\"disclaimer__subtext\" style=\"color: #999; font-size: 14px; line-height: 150%; margin: 0\">If you have any questions, contact us at\n"
+                    + "                        <a href=\"#\" style=\"color: #080e66; font-size: 14px; text-decoration: none\">contact@KRHG.com</a>\n"
+                    + "                      </p>\n"
+                    + "                    </td>\n"
+                    + "                  </tr>\n"
+                    + "                </table>\n"
+                    + "              </center>\n"
+                    + "            </td>\n"
+                    + "          </tr>\n"
+                    + "        </table>\n"
+                    + "        \n"
+                    + "      </td>\n"
+                    + "    </tr>\n"
+                    + "  </table>\n"
+                    + "</body>\n"
+                    + "\n"
+                    + "</html>\n"
+                    + "    \n"
+                    + "    \n"
+                    + "    \n"
+                    + "    \n"
+                    + "    \n"
+                    + "  </body>\n" +
+            "</html>";
+            sendWebPage(email, "Reset Password", content);
 
             out.println("<script type=\"text/javascript\">");
-            out.println("alert('New password has been sent');");
+            out.println("alert('An email has been sent');");
             out.println("</script>");
         }
     }
@@ -250,7 +446,7 @@ public class AuthenticationManagedBean implements Serializable {
         Logging l = new Logging("Staff", "Update " + loggedInStaff.getName() + "'s profile", loggedInStaff.getName());
         logSessionLocal.createLogging(l);
 
-        return "index.xhtml?faces-redirect=true";
+        return "profile.xhtml?faces-redirect=true";
     }
 
     public static void sendEmail(String recipient, String subject, String msg) {
@@ -279,6 +475,40 @@ public class AuthenticationManagedBean implements Serializable {
                     InternetAddress.parse(recipient));
             message.setSubject(subject);
             message.setText(msg);
+
+            Transport.send(message);
+
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void sendWebPage(String recipient, String subject, String content) {
+
+        String username = "automessage.kentridgehotelgroup@gmail.com";
+        String password = "krhg1234";
+
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+
+        Session session = Session.getInstance(props,
+                new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
+
+        try {
+
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("Do-not-reply@KentRidgeHotelGroup.com"));
+            message.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse(recipient));
+            message.setSubject(subject);
+            message.setContent(content, "HTML/text");
 
             Transport.send(message);
 

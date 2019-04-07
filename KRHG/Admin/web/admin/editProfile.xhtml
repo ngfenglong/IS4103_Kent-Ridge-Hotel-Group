@@ -152,8 +152,10 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="nokPhoneNumber">Next-of-Kin Phone Number</label>
-                                                <h:inputText class="form-control">
-                                                        <h:message for="oldPassword" style="color:red" />
+                                                <h:inputText class="form-control"
+                                                             value="#{authenticationManagedBean.loggedInStaff.nokPhoneNumber}"
+                                                               id="nokContact" a:placeholder="Enter NOK Phone Number" required="true" />>
+                                                        <h:message for="nokContact" style="color:red" />
                                                 </h:inputText>
                                                     
                                             </div>
