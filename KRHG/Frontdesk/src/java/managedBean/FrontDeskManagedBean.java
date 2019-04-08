@@ -19,7 +19,6 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -76,22 +75,19 @@ public class FrontDeskManagedBean {
 
     //customer check out
     private List<RoomBooking> todayCheckOutRoom;
-    private String checkoutRoomNumber;
-    private RoomBooking checkoutRoombooking;
-    private Room checkoutRoom;
+    private String checkoutRoom;
     private List<RoomBooking> checkOutRoomResult;
 
     //Cusrtomer walk in
     private String walkinRoomtype;
     private int walkinPax;
-    private String walkinNumberOfday;
-    private List<Room> walkinAvailableRoom = new ArrayList<>();
+    private int walkinNumberOfday;
+    private List<Room> walkinAvailableRoom;
 
     //walk in details
     //reuse checkinPassportNumber for walk in too
     private String checkinName;
     private String checkinEmail;
-    boolean hasRoom;
 
     //manage account
     private List<Customer> allCustomer;
@@ -217,10 +213,10 @@ public class FrontDeskManagedBean {
 
     public void getFunctionRoomWithHotelCode() {
         List<FunctionRoom> functionrooms = new ArrayList<>();
-        for (FunctionRoom frb : functionroomSessionlocal.getAllFunctionRooms()) {
-            if (frb.getHotel().getHotelCodeName().equals(hotelCode)) {
+        for(FunctionRoom frb : functionroomSessionlocal.getAllFunctionRooms()) {
+           if (frb.getHotel().getHotelCodeName().equals(hotelCode)) {
                 functionrooms.add(frb);
-            }
+          }
         }
         setAllFunctionrooms(functionrooms);
     }
@@ -288,27 +284,10 @@ public class FrontDeskManagedBean {
         return "checkoutResult.xhtml?faces-redirect=true";
     }
 
-    public String checkOut(RoomBooking rm) throws NoResultException {
-        rm.setStatus("checkedout");
-        checkoutRoom.setStatus("unavailable");
-        roomSessionLocal.updateRoom(checkoutRoom);
-        bookSessionLocal.updateRoomBooking(checkoutRoombooking);
-        bookSessionLocal.updateRoomBooking(rm);
-        
-        
-        
+    public String checkOut(RoomBooking rm) {
         //do check out 
         //update check out room and change roombooking status
         return "";
-    }
-
-    public Room getRoom() {
-        for (Room rm : roomSessionLocal.getAllRooms()) {
-            if (rm.getRoomNumber().equals(checkoutRoomNumber) && rm.getHotel().getHotelCodeName().equals(hotelCode)) {
-                return rm;
-            }
-        }
-        return null;
     }
 
     public List<PaymentTransaction> getTodaysbookings() throws NoResultException {
@@ -527,61 +506,11 @@ public class FrontDeskManagedBean {
         // return todayCheckOutRoom = bookSessionLocal.getAllRoomBookingByCheckOutDate(todayDate);
         //some algorithm to get availble room to view and return list of room, group by room type
         //wait feng long 
-        System.out.println(walkinNumberOfday);
         mode = "walkin";
         setWalkinAvailableRoom(walkinAvailableRoom);
 
         return "walkinResult.xhtml?faces-redirect=true";
 
-    }
-
-    public String checkAvailability() throws NoResultException, ParseException {
-        List<RoomBooking> allBooking = bookSessionLocal.getAllRoomBookingByStatus("checkedout", hotelCode);
-        List<RoomBooking> checkList = new ArrayList<RoomBooking>();
-        List<Room> returnList = new ArrayList<Room>();
-        hasRoom = false;
-
-        //Convert String to Date
-        Date tempCheckIn = new SimpleDateFormat("yyyy-MM-dd").parse(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
-        Date tempCheckOut = new SimpleDateFormat("yyyy-MM-dd").parse(new SimpleDateFormat("yyyy-MM-dd").format(walkinNumberOfday));
-
-        //Get roombooking by type & Status
-        if (allBooking != null) {
-            for (RoomBooking rb : allBooking) {
-                if (rb.getRoomType().equals(walkinRoomtype) && rb.getStatus().equals("checkedout")) {
-                    RoomBooking tempRoomBooking = rb;
-                    checkList.add(tempRoomBooking);
-                }
-            }
-
-            allBooking = checkList;
-            checkList.clear();
-            for (RoomBooking rb : allBooking) {
-                // Didn't Hit the Booking Date
-                if ((tempCheckIn.before(rb.getBookInDate()) && tempCheckOut.before(rb.getBookInDate())) || (tempCheckIn.after(rb.getBookInDate()) && tempCheckOut.after(rb.getBookInDate()))) {
-
-                } // Hit the booking date AKA Not Available
-                else {
-                    RoomBooking tempRoomBooking = rb;
-                    checkList.add(tempRoomBooking);
-                }
-            }
-
-            if (checkList.size() < roomSessionLocal.getRoomByHotelNameAndRoomType(walkinRoomtype, hotelCode).size()) {
-                hasRoom = true;
-                List<Room> filterList = roomSessionLocal.getRoomByHotelNameAndRoomType(walkinRoomtype, hotelCode);
-                for (Room r : filterList) {
-                    if (!r.getStatus().toLowerCase().equals("occupied")) {
-                        Room tempRoom = r;
-                        returnList.add(r);
-                    }
-                }
-                walkinAvailableRoom = returnList;
-            }
-        } else {
-            walkinAvailableRoom = roomSessionLocal.getRoomByHotelNameAndRoomType(walkinRoomtype, hotelCode);
-        }
-        return "CheckAvail.xhtml?faces-redirect=true";
     }
 
     public String confirmWalkin(Room room) {
@@ -605,11 +534,11 @@ public class FrontDeskManagedBean {
         this.walkinPax = walkinPax;
     }
 
-    public String getWalkinNumberOfday() {
+    public int getWalkinNumberOfday() {
         return walkinNumberOfday;
     }
 
-    public void setWalkinNumberOfday(String walkinNumberOfday) {
+    public void setWalkinNumberOfday(int walkinNumberOfday) {
         this.walkinNumberOfday = walkinNumberOfday;
     }
 
@@ -632,11 +561,11 @@ public class FrontDeskManagedBean {
     }
 
     public String getCheckoutRoom() {
-        return checkoutRoomNumber;
+        return checkoutRoom;
     }
 
     public void setCheckoutRoom(String checkoutRoom) {
-        this.checkoutRoomNumber = checkoutRoom;
+        this.checkoutRoom = checkoutRoom;
     }
 
     public List<RoomBooking> getCheckOutRoomResult() {

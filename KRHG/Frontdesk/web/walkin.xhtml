@@ -75,7 +75,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label>Number of Night:</label>
-                                                <h:inputText id="time" value="#{frontDeskManagedBean.walkinNumberOfday}" class="datepicker">
+                                                <h:inputText id="time" class="datepicker">
                                                 </h:inputText>                                    
                                             </div>
                                         </div>
@@ -102,19 +102,6 @@
                     $('[data-mask]').each(function () {
                         $(this).mask($(this).attr("data-mask"));
                     });
-
-
-                    document.addEventListener('DOMContentLoaded', function () {
-                        var elems = document.querySelectorAll('.datepicker');
-                        var instances = M.Datepicker.init(elems, options);
-                    });
-
-                    // Or with jQuery
-
-                    $(document).ready(function () {
-                        $('.datepicker').datepicker();
-                    });
-
                 </script>
             </ui:define>
 
