@@ -22,13 +22,16 @@ import static org.junit.Assert.assertFalse;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
+import org.junit.runners.MethodSorters;
 
-
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class BookingSessionTest {
 
     static EJBContainer container;
     static BookingSessionLocal instance;
     static CustomerSessionLocal instance2;
+    static HotelFacilitySessionLocal instance3;
 
     static Long ID1 = 10000001L;//rb1
     static Long ID2 = 10000002L;//rb2
@@ -55,6 +58,7 @@ public class BookingSessionTest {
         container = javax.ejb.embeddable.EJBContainer.createEJBContainer(properties);
         instance = (BookingSessionLocal) container.getContext().lookup("java:global/classes/BookingSession");
         instance2 = (CustomerSessionLocal) container.getContext().lookup("java:global/classes/CustomerSession");
+        instance3 = (HotelFacilitySessionLocal) container.getContext().lookup("java:global/classes/HotelFacilitySession");
 
         Customer c1 = new Customer(ID5, "test1@hotmail.com", "test1");
         Customer c2 = new Customer(ID6, "test2@hotmail.com", "test2");
@@ -82,7 +86,7 @@ public class BookingSessionTest {
     }
 
     @Test
-    public void testCreateRoomBooking() throws Exception {
+    public void a_testCreateRoomBooking() throws Exception {
         int sizeBefore = instance.getAllRoomBooking().size();
         Customer c1 = instance2.getCustomerByID(ID5);
         Customer c2 = instance2.getCustomerByID(ID6);
@@ -96,44 +100,46 @@ public class BookingSessionTest {
     }
 
     @Test
-    public void testCreateHotelFacilityBooking() throws Exception {
+    public void b_testCreateHotelFacilityBooking() throws Exception {
         Customer c1 = instance2.getCustomerByID(ID5);
         Customer c2 = instance2.getCustomerByID(ID6);        
         int sizeBefore = instance.getAllHotelFacilityBooking().size();
         HotelFacilityBooking hfb1 = new HotelFacilityBooking(ID3, d1, d2, "paid", c1);
         HotelFacilityBooking hfb2 = new HotelFacilityBooking(ID4, d1, d2, "paid", c2);
+        instance.createHotelFacilityBooking(hfb1);
+        instance.createHotelFacilityBooking(hfb2);
         int sizeAfter = instance.getAllHotelFacilityBooking().size();
         int exp = sizeBefore + 2;
         assertEquals(exp, sizeAfter);
     }
 
     @Test
-    public void testGetAllRoomBooking() throws Exception {
+    public void c_testGetAllRoomBooking() throws Exception {
         List<RoomBooking> result = instance.getAllRoomBooking();
         assertFalse(result.isEmpty());
     }
 
     @Test
-    public void testGetRoomBookingByID() throws Exception {
+    public void d_testGetRoomBookingByID() throws Exception {
         RoomBooking result = instance.getRoomBookingByID(ID1);
         String expResult = "paid";
         assertEquals(expResult, result.getStatus());
     }
 
     @Test
-    public void testGetRoomBookingByEmail() throws Exception {
+    public void e_testGetRoomBookingByEmail() throws Exception {
         List<RoomBooking> result = instance.getRoomBookingByEmail("test1@hotmail", d1, d2, "paid");
         assertFalse(result.isEmpty());
     }
 
     @Test
-    public void testGetRoomBookingByDate() throws Exception {
+    public void f_testGetRoomBookingByDate() throws Exception {
         List<RoomBooking> result = instance.getRoomBookingByDate(d1, d2, "paid");
         assertFalse(result.isEmpty());
     }
 
     @Test
-    public void testUpdateRoomBooking() throws Exception {
+    public void g_testUpdateRoomBooking() throws Exception {
         String expResult = "cancelled";
         RoomBooking result = instance.getRoomBookingByID(ID1);
         result.setStatus("cancelled");
@@ -143,7 +149,7 @@ public class BookingSessionTest {
     }
 
     @Test
-    public void testDeleteRoomBooking() throws Exception {
+    public void h_testDeleteRoomBooking() throws Exception {
         int sizeBefore = instance.getAllRoomBooking().size();
         instance.deleteRoomBooking(ID1);
         int sizeAfter = instance.getAllRoomBooking().size();
@@ -152,20 +158,20 @@ public class BookingSessionTest {
     }
 
     @Test
-    public void testGetAllHotelFacilityBooking() throws Exception {
+    public void i_testGetAllHotelFacilityBooking() throws Exception {
         List<HotelFacilityBooking> result = instance.getAllHotelFacilityBooking();
         assertFalse(result.isEmpty());
     }
 
     @Test
-    public void testGetHotelFacilityBookingByID() throws Exception {
+    public void j_testGetHotelFacilityBookingByID() throws Exception {
         HotelFacilityBooking result = instance.getHotelFacilityBookingByID(ID3);
         String expResult = "paid";
         assertEquals(expResult, result.getStatus());
     }
 //
 //    @Test
-//    public void testGetHotelFacilityBookingByEmail() throws Exception {
+//    public void k_testGetHotelFacilityBookingByEmail() throws Exception {
 //        HotelFacilityBooking result = instance.getHotelFacilityBookingByEmail("test2@hotmail.com");
 //        assertFalse(result.isEmpty());
 //    }
@@ -177,7 +183,7 @@ public class BookingSessionTest {
 //    }
 
     @Test
-    public void testUpdateHotelFacilityBooking() throws Exception {
+    public void l_testUpdateHotelFacilityBooking() throws Exception {
         String expResult = "cancelled";
         HotelFacilityBooking result = instance.getHotelFacilityBookingByID(ID5);
         result.setStatus("cancelled");
@@ -187,7 +193,7 @@ public class BookingSessionTest {
     }
 
     @Test
-    public void testDeleteHotelFacilityBooking() throws Exception {
+    public void m_testDeleteHotelFacilityBooking() throws Exception {
         int sizeBefore = instance.getAllHotelFacilityBooking().size();
         instance.deleteHotelFacilityBooking(ID5);
         int sizeAfter = instance.getAllHotelFacilityBooking().size();

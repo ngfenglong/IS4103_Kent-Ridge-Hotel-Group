@@ -15426,6 +15426,40 @@ public class DataInitializationSessionBean {
         rb1.setHasExtraBed(false);
         bookingSessionLocal.createRoomBooking(rb1);
         RoomBooking newrb1 = bookingSessionLocal.getLastRoomBooking();
+        
+        RoomBooking rb2 = new RoomBooking();
+        rb2.setBookInDate(format.parse("2019-01-10"));
+        rb2.setBookOutDate(format.parse("2019-01-13"));
+        rb2.setStatus("checkedOut");
+        rb2.setPrice(450.0);
+        rb2.setBookedRoom(roomSessionLocal.getRoomByName("KRG_402"));
+        rb2.setHasTransport(false);
+        rb2.setBookedBy(customerSessionLocal.getCustomerByEmail("neoguoh202@hotmail.com"));
+        rb2.setEmailAddress("neoguoh202@hotmail.com");
+        rb2.setPassportNum("E2342213B");
+        rb2.setRoomType("Standard");
+        rb2.setFirstName("Zack");
+        rb2.setLastName("Neo Guohui");
+        rb2.setHasExtraBed(true);
+        bookingSessionLocal.createRoomBooking(rb2);
+        RoomBooking newrb2 = bookingSessionLocal.getLastRoomBooking();
+        
+        RoomBooking rb3 = new RoomBooking();
+        rb3.setBookInDate(format.parse("2019-05-10"));
+        rb3.setBookOutDate(format.parse("2019-05-13"));
+        rb3.setStatus("reserved");
+        rb3.setPrice(450.0);
+        rb3.setBookedRoom(roomSessionLocal.getRoomByName("KRG_302"));
+        rb3.setHasTransport(false);
+        rb3.setBookedBy(customerSessionLocal.getCustomerByEmail("neoguoh202@hotmail.com"));
+        rb3.setEmailAddress("neoguoh202@hotmail.com");
+        rb3.setPassportNum("E2342213B");
+        rb3.setRoomType("Standard");
+        rb3.setFirstName("Zack");
+        rb3.setLastName("Neo Guohui");
+        rb3.setHasExtraBed(true);
+        bookingSessionLocal.createRoomBooking(rb3);
+        RoomBooking newrb3 = bookingSessionLocal.getLastRoomBooking();        
 //***************Laundry Order***************
         LaundryOrder lo1 = new LaundryOrder();
         lo1.setRoom(roomSessionLocal.getRoomByName("KRG_202"));
@@ -15437,6 +15471,19 @@ public class DataInitializationSessionBean {
         lo1.setQty(1);
         laundrySessionLocal.createLaundryOrder(lo1);
         newrb1.addLaundryOrder(laundrySessionLocal.getLastLaundryOrder());
+        
+        LaundryOrder lo2 = new LaundryOrder();
+        lo2.setRoom(roomSessionLocal.getRoomByName("KRG_402"));
+        lo2.setOrderDateTime(format.parse("2019-01-10"));
+        lo2.setStatus("Delivered");
+        lo2.setCompleteDateTime(format.parse("2019-01-12"));
+        lo2.setHouseKeeper(staffSessionLocal.getStaffByNric("S1730049J"));
+        lo2.setSpecialRequest("nil");
+        lo2.setQty(2);
+        laundrySessionLocal.createLaundryOrder(lo2);
+        newrb2.addLaundryOrder(laundrySessionLocal.getLastLaundryOrder());        
+        
+        
 
 //***************Food Order***************        
         FoodOrder fo1 = new FoodOrder();
@@ -15464,6 +15511,25 @@ public class DataInitializationSessionBean {
         newfo1.setTotalPrice(54.0);
         newrb1.addFoodOrder(newfo1);
         
+        FoodOrder fo2 = new FoodOrder();
+        foodMenuItemSessionLocal.createFoodOrder(fo2);
+        FoodOrder newfo2 = foodMenuItemSessionLocal.getLastFoodOrder();    
+        
+        FoodOrderedItem foi4 = new FoodOrderedItem();
+        foi4.setQty(2);
+        foi4.setFood(foodMenuItemSessionLocal.getFoodMenuItemByName("Coke"));
+        foodMenuItemSessionLocal.createFoodOrderedItem(foi4);
+        newfo2.addFoodOrderedItem(foodMenuItemSessionLocal.getLastFoodOrderedItem());
+
+        FoodOrderedItem foi5 = new FoodOrderedItem();
+        foi5.setQty(1);
+        foi5.setFood(foodMenuItemSessionLocal.getFoodMenuItemByName("Pancakes"));
+        foodMenuItemSessionLocal.createFoodOrderedItem(foi5);
+        newfo2.addFoodOrderedItem(foodMenuItemSessionLocal.getLastFoodOrderedItem());  
+        
+        newfo2.setTotalPrice(32.0);
+        newrb2.addFoodOrder(newfo2);
+        
 //***************Minibar Order***************        
         MinibarOrder mo1 = new MinibarOrder();
         houseKeepingOrderSessionLocal.createMinibarOrder(mo1);
@@ -15484,6 +15550,20 @@ public class DataInitializationSessionBean {
         newmo1.setTotalPrice(89.0);
         newrb1.addMinibarOrder(newmo1);     	
 		
+        MinibarOrder mo2 = new MinibarOrder();
+        houseKeepingOrderSessionLocal.createMinibarOrder(mo2);
+        MinibarOrder newmo2 = houseKeepingOrderSessionLocal.getLastMinibarOrder();
+        
+        MinibarOrderedItem moi3 = new MinibarOrderedItem();
+        moi3.setQty(2);
+        moi3.setMinibarItem(houseKeepingOrderSessionLocal.getMinibarItemByItemName("Coke"));
+        houseKeepingOrderSessionLocal.createMinibarOrderedItem(moi3);
+        newmo2.addMinibarOrderedItem(houseKeepingOrderSessionLocal.getLastMinibarOrderedItem());
+        
+        newmo2.setTotalPrice(14.0);
+        newrb2.addMinibarOrder(newmo2);
+        
+        
         
         em.flush();
 
