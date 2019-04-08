@@ -38,7 +38,7 @@ public class Hotel implements Serializable {
 
     @OneToMany(mappedBy = "hotel")
     private List<Room> rooms;
-    @OneToMany
+    @OneToMany(mappedBy = "hotel")
     private List<FunctionRoom> functionRooms;
     @OneToMany
     private List<HotelFacility> hotelFacilities;
@@ -61,6 +61,17 @@ public class Hotel implements Serializable {
         this.hotelContact = hotelContact;
         this.hotelImage = hotelImage;
     }
+    
+    public Hotel(Long hotelID, String hotelName, String hotelCodeName, String hotelAddress, int hotelStar, String hotelContact, String hotelImage) {
+        this();
+        this.hotelID = hotelID;
+        this.hotelName = hotelName;
+        this.hotelCodeName = hotelCodeName;
+        this.hotelAddress = hotelAddress;
+        this.hotelStar = hotelStar;
+        this.hotelContact = hotelContact;
+        this.hotelImage = hotelImage;
+    }    
 
     public Long getHotelID() {
         return hotelID;

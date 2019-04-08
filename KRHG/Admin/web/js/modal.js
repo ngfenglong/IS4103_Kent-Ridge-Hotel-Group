@@ -11,9 +11,12 @@ jQuery(document).ready(function($){
   //open popup
 	$('.cd-popup-trigger').on('click', function(event){
 		event.preventDefault();
-    $('.cd-popup').addClass('is-visible');
+    $('#modalVH').addClass('is-visible');
+    console.log($('#modalVH'));
+    console.log($('#modalVH').attr('class'));
     
-    return false;
+    
+    return true;
 	});
   
 	//close popup

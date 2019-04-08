@@ -18,6 +18,11 @@ public class StaffType implements Serializable {
 
     public StaffType() {
     }
+    
+    public StaffType(Long staffTypeID, String staffTypeName) {
+        this.staffTypeID = staffTypeID;
+        this.staffTypeName = staffTypeName;
+    }
 
     public StaffType(String staffTypeName) {
         this.staffTypeName = staffTypeName;

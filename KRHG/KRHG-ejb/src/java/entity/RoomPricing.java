@@ -32,7 +32,7 @@ public class RoomPricing implements Serializable {
         this.pricingName = pricingName;
         this.price = price;
     }
-    
+
     public Long getRoomPricingID() {
         return roomPricingID;
     }
@@ -81,5 +81,17 @@ public class RoomPricing implements Serializable {
     public String toString() {
         return "entity.RoomPricing[ roomPricingID=" + roomPricingID + " ]";
     }
+
+    public String hotelCode() {
+        String s = pricingName;
+        String[] data = s.split("_", 2);
+        return data[0]; 
+    }
     
+    public String roomType(){
+        String s = pricingName;
+        String[] data = s.split("_", 2);
+        return data[1]; 
+    }
+
 }

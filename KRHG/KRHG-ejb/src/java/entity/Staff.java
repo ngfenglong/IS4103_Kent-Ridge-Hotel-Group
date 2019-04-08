@@ -89,6 +89,28 @@ public class Staff implements Serializable {
         this.nokPhoneNumber = nokPhoneNumber;
     }
     
+        public Staff(Long staffID, String name, String userName, String password, String email, String phoneNumber, String gender, String nric, String address, Date joinDate, String hotelGroup, String jobTitle, String department, int entitledLeaves, boolean accountStatus, String nokName, String nokAddress, String nokPhoneNumber) {
+        this();
+        this.staffID = staffID;
+        this.name = name;
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.gender = gender;
+        this.nric = nric;
+        this.address = address;
+        this.joinDate = joinDate;
+        this.hotelGroup = hotelGroup;
+        this.jobTitle = jobTitle;
+        this.department = department;
+        this.entitledLeaves = entitledLeaves;
+        this.accountStatus = accountStatus;
+        this.nokName = nokName;
+        this.nokAddress = nokAddress;
+        this.nokPhoneNumber = nokPhoneNumber;
+    }
+    
     
     
     public Long getStaffID() {

@@ -7,9 +7,12 @@ package sessionBeans;
 
 import entity.HouseKeepingOrder;
 import entity.MinibarItem;
+import entity.MinibarOrder;
+import entity.MinibarOrderedItem;
 import error.NoResultException;
 import java.util.List;
 import javax.ejb.Local;
+import javax.persistence.Query;
 
 /**
  *
@@ -34,4 +37,9 @@ public interface HouseKeepingOrderSessionLocal {
     public void updateMinibarItem (MinibarItem m) throws NoResultException;
     public void deleteMinibarItem (Long mID) throws NoResultException;
     public void createMinibarItem (MinibarItem m);
+    public void createMinibarOrder(MinibarOrder mo);
+    public void createMinibarOrderedItem (MinibarOrderedItem moi);
+    public MinibarOrder getLastMinibarOrder() throws NoResultException; 
+    public MinibarOrderedItem getLastMinibarOrderedItem() throws NoResultException; 
+    
 }

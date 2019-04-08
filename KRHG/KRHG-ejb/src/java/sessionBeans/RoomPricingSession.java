@@ -69,4 +69,14 @@ public class RoomPricingSession implements RoomPricingSessionLocal {
             throw new NoResultException("RoomPricing not found.");
         }
     }
+
+    @Override
+    public RoomPricing getRoomPricingByID(Long rpID) throws NoResultException {
+        RoomPricing rp = em.find(RoomPricing.class, rpID);
+        if (rp != null) {
+            return rp;
+        } else {
+            throw new NoResultException("Room Pricing not found.");
+        }
+    }
 }

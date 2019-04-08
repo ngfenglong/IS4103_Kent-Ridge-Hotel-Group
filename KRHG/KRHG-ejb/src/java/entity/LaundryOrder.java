@@ -38,6 +38,10 @@ public class LaundryOrder implements Serializable {
     private String specialRequest;
     private int qty;
 
+    public LaundryOrder(){
+        
+    }
+    
     public Long getLaundryOrderID() {
         return laundryOrderID;
     }

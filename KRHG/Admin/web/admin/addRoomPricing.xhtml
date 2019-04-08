@@ -1,25 +1,142 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <body>
 
         <ui:composition template="./AdminTemplate.xhtml">
-
             <ui:define name="title">
-                title
+                KRHG Admin Console System
             </ui:define>
 
             <ui:define name="content">
-                content
-            </ui:define>
+                <!-- Content Header (Page header) -->
+                <div class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <h1 style="font-size: x-large; margin-bottom:20px">Add New Room Pricing</h1>
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li><a href="adminIndex.xhtml">Home</a></li>
+                                    <li><a href='manageRoomPrice.xhtml'>Manage Room Pricing</a></li>
+                                    <li class="active">Add Room Pricing</li>
+                                </ol>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </div>
+                <section class="content">
+                    <div class="container-fluid">
+                        <h:form id="form">
+                            <div class="row">
+                                <!-- left column -->
+                                <div class="col-lg-12">
 
+                                    <!-- general form elements -->
+                                    <div class="box box-primary" style="padding:20px 50px;">
+                                        <div class="box-header with-border" style="text-align: center; font-size:xx-large">
+                                            <h3 class="box-title"  style="font-size:xx-large">Room Pricing Details</h3>
+                                        </div>
+                                        <!-- /.box-header -->
+                                        <!-- form start -->
+                                        <div class="box-body">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label for="hotelName">Hotel</label>
+                                                        <h:selectOneMenu class="form-control select2"
+                                                                         value="#{hotelManagedBean.rpHotelTB}">
+                                                            <c:forEach items="${hotelManagedBean.allHotels}" var="h">
+                                                                <f:selectItem itemValue="#{h.hotelCodeName}" itemLabel="#{h.hotelCodeName}" />
+                                                            </c:forEach>
+                                                        </h:selectOneMenu>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="roomType">Room Type</label>
+                                                        <h:selectOneMenu class="form-control select2"
+                                                                         value="#{hotelManagedBean.rpRoomTypeTB}">
+                                                            <f:selectItem itemValue="Standard" itemLabel="Standard" />
+                                                            <f:selectItem itemValue="Deluxe" itemLabel="Deluxe" />
+                                                            <f:selectItem itemValue="Premium" itemLabel="Premium" />
+                                                            <f:selectItem itemValue="Suite" itemLabel="Suite" />
+                                                            <f:selectItem itemValue="Penthouse" itemLabel="Penthouse" />
+                                                        </h:selectOneMenu>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="price">Price</label>
+                                                        <h:inputText class="form-control"
+                                                                     value="#{hotelManagedBean.rpPriceTb}" id="price"
+                                                                     a:placeholder="Enter Price" required="true">
+                                                        </h:inputText>
+                                                        <h:message for="price" style="color:red" />
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <!-- /.box-body -->
+
+                                        <div class="box-footer" style="text-align: right">
+                                            <h:commandButton class="btn btn-danger" style="margin-right:10px" value="Cancel"
+                                                             action="manageRoomPrice.xhtml?faces-redirect=true"></h:commandButton>
+                                            <h:commandButton class="btn btn-primary" value="Add hotel"
+                                                             action="#{hotelManagedBean.createRoomPricing()}">
+                                            </h:commandButton>
+                                        </div>
+                                    </div>
+                                    <!-- /.box -->
+                                    <!-- general form elements -->
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            <!-- /.row -->
+                        </h:form>
+                    </div>
+                    <!-- /.container-fluid -->
+                </section>
+                <!-- /.content-header -->
+                <!-- Main content -->
+
+                <script>
+                    function starfunction(event) {
+                        console.log("starfunction");
+                        console.log(event.value);
+                        document.getElementById("starvalue").innerHTML = event.value;
+                        document.getElementById("form:y").value = event.value;
+
+                    }
+                    $(document).ready(function () {
+
+                        console.log("in select2");
+
+                    }
+
+
+                    );
+
+
+                </script>
+            </ui:define>
             <ui:define name="script">
-                script
+
             </ui:define>
 
         </ui:composition>
+
 
     </body>
 </html>

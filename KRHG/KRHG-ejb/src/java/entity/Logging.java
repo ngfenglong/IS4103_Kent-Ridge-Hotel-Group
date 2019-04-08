@@ -39,7 +39,14 @@ public class Logging implements Serializable {
         this.loggingDateTime = java.util.Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
         this.operatorName = operatorName;
     }
-    
+ 
+        public Logging(Long loggingID, String loggingType, String loggingName, String operatorName) {
+        this.loggingID = loggingID;
+        this.loggingType = loggingType;
+        this.loggingName = loggingName;
+        this.loggingDateTime = java.util.Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
+        this.operatorName = operatorName;
+    }
     
     public Long getLoggingID() {
         return loggingID;

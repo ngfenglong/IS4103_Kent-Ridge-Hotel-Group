@@ -7,6 +7,8 @@ package sessionBeans;
 
 import entity.HouseKeepingOrder;
 import entity.MinibarItem;
+import entity.MinibarOrder;
+import entity.MinibarOrderedItem;
 import error.NoResultException;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -180,5 +182,27 @@ public class HouseKeepingOrderSession implements HouseKeepingOrderSessionLocal {
     public void createMinibarItem(MinibarItem m) {
         em.persist(m);
     }
+    
+    @Override 
+    public void createMinibarOrder(MinibarOrder mo) {
+        em.persist(mo);
+    }
+    
+    @Override
+    public void createMinibarOrderedItem (MinibarOrderedItem moi) {
+        em.persist(moi);
+    }
+    
+    @Override 
+    public MinibarOrder getLastMinibarOrder() throws NoResultException {
+        Query q = em.createQuery("SELECT mo FROM MinibarOrder mo ORDER BY mo.minibarOrderID DESC");
+        return (MinibarOrder) q.getResultList().get(0);
+    }
+    
+    @Override
+    public MinibarOrderedItem getLastMinibarOrderedItem() throws NoResultException {
+        Query q = em.createQuery("SELECT moi FROM MinibarOrderedItem moi ORDER BY moi.minibarOrderedItemID DESC");
+        return (MinibarOrderedItem) q.getResultList().get(0);
+    }         
 
 }

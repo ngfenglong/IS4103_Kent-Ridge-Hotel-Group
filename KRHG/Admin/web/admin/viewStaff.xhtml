@@ -47,10 +47,10 @@
                                         #{hotelManagedBean.selectedStaff.name}'s Profile </h3>
                                     <div class="box-tools pull-right">
                                         <!--Add Btn-->
-                                        <h:commandLink action="#{hotelManagedBean.editStaff(selectedStaff.staffID)}"
+                                        <h:commandLink action="#{hotelManagedBean.editStaff(hotelManagedBean.selectedStaff.staffID)}"
                                             style="font-size: large; margin-right: 5px"><i class="far fa-edit"></i>
                                         </h:commandLink>
-                                        <h:commandLink class="cd-popup-trigger" id="modal-2" a:data-target="#modal-1" action="#{hotelManagedBean.deleteStaff(selectedStaff.staffID)}"
+                                        <h:commandLink class="cd-popup-trigger" id="modal-2" a:data-target="#modal-1" action="#{hotelManagedBean.deleteStaff(hotelManagedBean.selectedStaff.staffID)}"
                                             style="font-size: large; margin-right: 5px"><i class="fas fa-trash-alt"></i>
                                         </h:commandLink>
 
@@ -148,10 +148,6 @@
                                         </div>
 
                                     </div>
-                                </div>
-
-                                <div class="card-footer" style="text-align: center">
-                                        <h:commandButton class="btn btn-primary" value="Change Password" action="#"></h:commandButton>
                                 </div>
                             </div>
                         </div>

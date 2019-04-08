@@ -64,7 +64,7 @@
                                                 <td>#{f.feedBackDate}</td>
                                                 <td>#{f.feedBackFrom}</td>
                                                 <td><h:commandButton id="viewBtn" action="#{hotelManagedBean.viewFeedback(f.feedBackID)}" value="View" class="btn btn-primary"  /></td>
-                                                <td><h:commandButton id="deletelBtn" value="Delete" action="#{hotelManagedBean.deleteFeedback(f.feedBackIDe)}"  onclick="return confirm('Are you sure?');" class="btn btn-danger"  /></td>
+                                                <td><h:commandButton id="deletelBtn" value="Delete" action="#{hotelManagedBean.deleteFeedback(f.feedBackID)}"  onclick="return confirm('Are you sure?');" class="btn btn-danger"  /></td>
                                             </tr>
                                         </c:forEach>
                                 </tbody>

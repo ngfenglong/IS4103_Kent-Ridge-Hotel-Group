@@ -18,13 +18,13 @@
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <h1 style="font-size: xx-large; margin-bottom:20px">Manage Hotels</h1>
+                                <h1 style="font-size: xx-large; margin-bottom:20px">Manage Room Pricings</h1>
                             </div>
                             <!-- /.col -->
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li><a href="#"> Home</a></li>
-                                    <li class="active">Manage Hotels</li>
+                                    <li class="active">Manage Room Price</li>
                                 </ol>
                             </div>
                             <!-- /.col -->
@@ -51,28 +51,25 @@
                                 <thead>
                                     <tr>
                                         <th>Hotel Name</th>
-                                        <th>Hotel Code</th>
-                                        <th>Contact</th>
-                                        <th>Address</th>
-                                        <th>View Rooms</th>
-                                        <th>View Details</th>
+                                        <th>Room Pricing</th>
+                                        <th>Edit</th>
+                                        <th>Delete</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <c:forEach items="${hotelManagedBean.allr}" var="hotel">
+                                    <c:forEach items="${hotelManagedBean.allRoomPricing}" var="pricing">
                                         <tr>
-                                            <td>#{hotel.hotelName}</td>
-                                            <td>#{hotel.hotelCodeName}</td>
-                                            <td>+65 #{hotel.hotelContact}</td>
-                                            <td>#{hotel.hotelAddress}</td>
-                                            <td>
-                                                <h:commandButton id="viewRoomBtn"
-                                                                 action="#{hotelManagedBean.viewHotelRooms(hotel.hotelName)}"
-                                                                 value="View Rooms" class="btn btn-primary"/>
-                                            </td>
+                                            <td>#{pricing.pricingName}</td>
+                                            <td>$#{pricing.price}0</td>
                                             <td>
                                                 <h:commandButton id="viewDetailBtn"
-                                                                 action="#{hotelManagedBean.viewHotel(hotel.hotelID)}" value="View Details"
+                                                                 action="#{hotelManagedBean.editRoomPricing(pricing.roomPricingID)}" value="Edit"
+                                                                 class="btn btn-primary" />
+                                            </td>
+                                             <td>
+                                                <h:commandButton id="viewDetailBtn"
+                                                                 action="#{hotelManagedBean.deleteRoomPricing(pricing.roomPricingID)}" value="Edit"
                                                                  class="btn btn-primary" />
                                             </td>
                                         </tr>

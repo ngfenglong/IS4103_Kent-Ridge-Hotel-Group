@@ -39,6 +39,15 @@ public class HotelFacility implements Serializable {
     }
     
     
+    public HotelFacility(Long hotelFacilityID, String hotelFacilityName, String hotelFacilityDescription, String hotelFacilityImage) {
+        this();
+        this.hotelFacilityID = hotelFacilityID;
+        this.hotelFacilityName = hotelFacilityName;
+        this.hotelFacilityDescription = hotelFacilityDescription;
+        this.hotelFacilityImage = hotelFacilityImage;
+    }
+    
+    
 
     @Override
     public int hashCode() {

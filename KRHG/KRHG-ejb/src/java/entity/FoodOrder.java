@@ -13,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -22,13 +23,13 @@ public class FoodOrder implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long foodOrderID;
-    @OneToOne
-    private List<FoodMenuItem> foodOrdered;
+    @OneToMany
+    private List<FoodOrderedItem> foodOrdered;
     private Double totalPrice;
     private String specialRequest;
 
     public FoodOrder() {
-        foodOrdered = new ArrayList<>();
+        foodOrdered = new ArrayList<FoodOrderedItem>();
     }
 
     public Long getFoodOrderID() {
@@ -64,27 +65,27 @@ public class FoodOrder implements Serializable {
         return "entity.FoodOrder[ foodOrderID=" + foodOrderID + " ]";
     }
 
-    public List<FoodMenuItem> getFoodOrdered() {
+    public List<FoodOrderedItem> getFoodOrdered() {
         return foodOrdered;
     }
 
-    public void setFoodOrdered(List<FoodMenuItem> foodOrdered) {
+    public void setFoodOrdered(List<FoodOrderedItem> foodOrdered) {
         this.foodOrdered = foodOrdered;
     }
 
-    public void addFoodMenuItem(FoodMenuItem fmi) throws NoResultException {
+    public void addFoodOrderedItem(FoodOrderedItem fmi) throws NoResultException {
         if (fmi != null && !this.getFoodOrdered().contains(fmi)) {
             this.getFoodOrdered().add(fmi);
         } else {
-            throw new NoResultException("Food Menu Item alreaded added to Food Order");
+            throw new NoResultException("Food already added to Food Order");
         }
     }
 
-    public void removeFoodMenuItem(FoodMenuItem fmi) throws NoResultException {
+    public void removeFoodOrderedItem(FoodOrderedItem fmi) throws NoResultException {
         if (fmi != null && this.getFoodOrdered().contains(fmi)) {
             this.getFoodOrdered().remove(fmi);
         } else {
-            throw new NoResultException("Food Menu Item alreaded added to Food Order");
+            throw new NoResultException("Food already added to Food Order");
         }
     }
 

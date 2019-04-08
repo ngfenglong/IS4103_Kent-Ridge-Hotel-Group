@@ -31,8 +31,20 @@ public class RoomFacility implements Serializable {
         this.roomFacilityName = roomFacilityName;
         this.roomFacilityCategory = roomFacilityCategory;
         this.iconImg = iconImg;
-
     }
+    
+    public RoomFacility(Long roomFacilityID, String roomFacilityName, String roomFacilityCategory, String iconImg) {
+        this();
+        this.roomFacilityID = roomFacilityID;
+        this.roomFacilityName = roomFacilityName;
+        this.roomFacilityCategory = roomFacilityCategory;
+        this.iconImg = iconImg;
+    }//for junit
+	    public RoomFacility(Long roomFacilityID, String roomFacilityName) {
+        this();
+        this.roomFacilityID = roomFacilityID;
+        this.roomFacilityName = roomFacilityName;
+    }//for junit    
 
     public Long getRoomFacilityID() {
         return roomFacilityID;
