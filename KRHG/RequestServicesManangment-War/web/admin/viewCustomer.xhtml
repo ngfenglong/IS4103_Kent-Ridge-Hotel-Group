@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./AdminTemplate.xhtml">
+
+            <ui:define name="title">
+                KRHG Admin Console System
+            </ui:define>
+
+            <ui:define name="content">
+                <!-- Content Header (Page header) -->
+                <div class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li class="breadcrumb-item active">
+                                        <!--Add Btn-->
+                                    </li>
+                                </ol>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </div> 
+                <!-- form start -->
+                <h:form role="form">
+                    <!-- Content Header (Page header) -->
+                    <section class="content-header">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">
+                                            <i class="fa fa-text-width"></i>
+                                            #{hotelManagedBean.selectedCustomer.name}'s Profile
+                                        </h3>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <div class="card-body">
+                                        <dl>
+                                            <dt style="padding-left: 1rem;">First Name:</dt>
+                                            <dd style="padding-left:1rem;">#{hotelManagedBean.selectedCustomer.name}</dd>
+                                            <dt style="padding-left: 1rem;">Last Name: </dt>
+                                            <dd style="padding-left:1rem;">#{hotelManagedBean.selectedCustomer.name}</dd>
+                                            <dt style="padding-left: 1rem;">Email: </dt>
+                                            <dd style="padding-left:1rem;">#{hotelManagedBean.selectedCustomer.email}</dd>
+                                            <dt style="padding-left: 1rem;">Contact Number: </dt>
+                                            <dd style="padding-left:1rem;">#{hotelManagedBean.selectedCustomer.mobileNum}</dd>
+                                            <dt style="padding-left: 1rem;">Points: </dt>
+                                            <dd style="padding-left:1rem;">#{hotelManagedBean.selectedCustomer.points}</dd>
+                                        </dl>
+                                    </div>
+                                    <!-- /.card-body -->
+                                </div>
+                                <!-- /.card -->
+                            </div>
+                        </div>
+                    </section>
+                </h:form>
+            </ui:define>
+
+
+            <ui:define name="script">
+                script
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
