@@ -10,6 +10,7 @@ import entity.Customer;
 import entity.Feedback;
 import entity.FoodMenuItem;
 import entity.FoodOrder;
+import entity.FoodOrderedItem;
 import entity.FunctionRoom;
 import entity.Hotel;
 import entity.HotelFacility;
@@ -18,6 +19,8 @@ import entity.LaundryOrder;
 import entity.LostAndFoundReport;
 import entity.MaintainenceOrder;
 import entity.MinibarItem;
+import entity.MinibarOrder;
+import entity.MinibarOrderedItem;
 import entity.PaymentTransaction;
 import entity.PromoCode;
 import entity.Room;
@@ -34,7 +37,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Formatter;
-import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Singleton;
@@ -15406,9 +15408,84 @@ public class DataInitializationSessionBean {
         rm1.setStatus("Incomplete");
 
         bookingSessionLocal.createRoomBooking(rm1);
+        
+        
+        RoomBooking rb1 = new RoomBooking();
+        rb1.setBookInDate(format.parse("2019-03-10"));
+        rb1.setBookOutDate(format.parse("2019-03-13"));
+        rb1.setStatus("checkedOut");
+        rb1.setPrice(450.0);
+        rb1.setBookedRoom(roomSessionLocal.getRoomByName("KRG_202"));
+        rb1.setHasTransport(false);
+        rb1.setBookedBy(customerSessionLocal.getCustomerByEmail("neoguoh202@hotmail.com"));
+        rb1.setEmailAddress("neoguoh202@hotmail.com");
+        rb1.setPassportNum("E2342213B");
+        rb1.setRoomType("Standard");
+        rb1.setFirstName("Zack");
+        rb1.setLastName("Neo Guohui");
+        rb1.setHasExtraBed(false);
+        bookingSessionLocal.createRoomBooking(rb1);
+        RoomBooking newrb1 = bookingSessionLocal.getLastRoomBooking();
+//***************Laundry Order***************
+        LaundryOrder lo1 = new LaundryOrder();
+        lo1.setRoom(roomSessionLocal.getRoomByName("KRG_202"));
+        lo1.setOrderDateTime(format.parse("2019-03-10"));
+        lo1.setStatus("Delivered");
+        lo1.setCompleteDateTime(format.parse("2019-03-12"));
+        lo1.setHouseKeeper(staffSessionLocal.getStaffByNric("S1730049J"));
+        lo1.setSpecialRequest("you may come in and collect the coat if I'm not in the room");
+        lo1.setQty(1);
+        laundrySessionLocal.createLaundryOrder(lo1);
+        newrb1.addLaundryOrder(laundrySessionLocal.getLastLaundryOrder());
+
+//***************Food Order***************        
+        FoodOrder fo1 = new FoodOrder();
+        foodMenuItemSessionLocal.createFoodOrder(fo1);
+        FoodOrder newfo1 = foodMenuItemSessionLocal.getLastFoodOrder();
+
+        FoodOrderedItem foi1 = new FoodOrderedItem();
+        foi1.setQty(2);
+        foi1.setFood(foodMenuItemSessionLocal.getFoodMenuItemByName("Coke"));
+        foodMenuItemSessionLocal.createFoodOrderedItem(foi1);
+        newfo1.addFoodOrderedItem(foodMenuItemSessionLocal.getLastFoodOrderedItem());
+
+        FoodOrderedItem foi2 = new FoodOrderedItem();
+        foi2.setQty(1);
+        foi2.setFood(foodMenuItemSessionLocal.getFoodMenuItemByName("Pancakes"));
+        foodMenuItemSessionLocal.createFoodOrderedItem(foi2);
+        newfo1.addFoodOrderedItem(foodMenuItemSessionLocal.getLastFoodOrderedItem());
+
+        FoodOrderedItem foi3 = new FoodOrderedItem();
+        foi3.setQty(1);
+        foi3.setFood(foodMenuItemSessionLocal.getFoodMenuItemByName("Scrambled Eggs"));
+        foodMenuItemSessionLocal.createFoodOrderedItem(foi3);
+        newfo1.addFoodOrderedItem(foodMenuItemSessionLocal.getLastFoodOrderedItem());
+
+        newfo1.setTotalPrice(54.0);
+        newrb1.addFoodOrder(newfo1);
+        
+//***************Minibar Order***************        
+        MinibarOrder mo1 = new MinibarOrder();
+        houseKeepingOrderSessionLocal.createMinibarOrder(mo1);
+        MinibarOrder newmo1 = houseKeepingOrderSessionLocal.getLastMinibarOrder();
+
+        MinibarOrderedItem moi1 = new MinibarOrderedItem();
+        moi1.setQty(2);
+        moi1.setMinibarItem(houseKeepingOrderSessionLocal.getMinibarItemByItemName("Coke"));
+        houseKeepingOrderSessionLocal.createMinibarOrderedItem(moi1);
+        newmo1.addMinibarOrderedItem(houseKeepingOrderSessionLocal.getLastMinibarOrderedItem());
+
+        MinibarOrderedItem moi2 = new MinibarOrderedItem();
+        moi2.setQty(5);
+        moi2.setMinibarItem(houseKeepingOrderSessionLocal.getMinibarItemByItemName("Beer"));
+        houseKeepingOrderSessionLocal.createMinibarOrderedItem(moi2);
+        newmo1.addMinibarOrderedItem(houseKeepingOrderSessionLocal.getLastMinibarOrderedItem());
+
+        newmo1.setTotalPrice(89.0);
+        newrb1.addMinibarOrder(newmo1);     	
+		
+        
         em.flush();
-
-
 
         PaymentTransaction PT1 = new PaymentTransaction();
         PT1.addRoomBooking(rm1);
