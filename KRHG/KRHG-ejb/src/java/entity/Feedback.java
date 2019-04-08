@@ -37,6 +37,14 @@ public class Feedback implements Serializable {
     public Feedback() {
     }
 
+    public Feedback(Long feedBackID, String feedBackTitle, String feedBackFrom, String feedBackMsg) {
+        this();
+        this.feedBackID = feedBackID;
+        this.feedBackTitle = feedBackTitle;
+        this.feedBackFrom = feedBackFrom;
+        this.feedBackMsg = feedBackMsg;
+    }//for junit    
+
     public Long getFeedBackID() {
         return feedBackID;
     }

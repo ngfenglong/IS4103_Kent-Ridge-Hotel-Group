@@ -34,8 +34,19 @@ public class HotelFacilityBooking implements Serializable {
     private HotelFacility bookedHotelFacility;
     @OneToOne
     private Customer bookedBy;
+    
+    public HotelFacilityBooking(){
+        
+    }
 
-
+    public HotelFacilityBooking(Long hotelFacilityBookingID, Date startDate, Date endDate, String status, Customer bookedBy) {
+        this.hotelFacilityBookingID = hotelFacilityBookingID;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.status = status;
+        this.bookedBy = bookedBy;
+    }//for junit
+    
     public Long getHotelFacilityBookingID() {
         return hotelFacilityBookingID;
     }

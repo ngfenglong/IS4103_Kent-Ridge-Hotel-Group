@@ -57,6 +57,13 @@ public class Customer implements Serializable {
         this.email = email;
         this.password = password;
     }
+    
+    public Customer(Long customerID, String email, String password){
+        this();
+        this.customerID = customerID;
+        this.email = email;
+        this.password = password;
+    }//for junit    
 
     public Customer(String firstName, String lastName, String gender, String password, int points, String email, String mobileNum, Date dateJoined, boolean accountStatus) {
         this();
@@ -70,6 +77,20 @@ public class Customer implements Serializable {
         this.dateJoined = dateJoined;
         this.accountStatus = accountStatus;
     }
+    
+    public Customer(Long customerID, String firstName, String lastName, String gender, String password, int points, String email, String mobileNum, Date dateJoined, boolean accountStatus) {
+        this();
+        this.customerID = customerID;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.password = password;
+        this.points = points;
+        this.email = email;
+        this.mobileNum = mobileNum;
+        this.dateJoined = dateJoined;
+        this.accountStatus = accountStatus;
+    }    
     
     
     public Long getCustomerID() {

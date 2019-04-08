@@ -68,9 +68,7 @@ public class FeedbackSession implements FeedbackSessionLocal {
             oldF.setFeedBackFrom(f.getFeedBackFrom());
             oldF.setFeedBackMsg(f.getFeedBackMsg());
         }
-        if (f != null) {
-            em.remove(f);
-        } else {
+        else {
             throw new NoResultException("Not found");
         }
     }

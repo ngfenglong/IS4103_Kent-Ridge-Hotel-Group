@@ -6,6 +6,8 @@
 package sessionBeans;
 
 import entity.FoodMenuItem;
+import entity.FoodOrder;
+import entity.FoodOrderedItem;
 import error.NoResultException;
 import java.util.List;
 import javax.ejb.Local;
@@ -18,6 +20,10 @@ import javax.ejb.Local;
 public interface FoodMenuItemSessionLocal {
 
     public void createFoodMenuItem(FoodMenuItem fmi);
+    
+    public void createFoodOrderedItem(FoodOrderedItem foi);
+    
+    public void createFoodOrder(FoodOrder fo);   
 
     public List<FoodMenuItem> getAllFoodMenuItems();
 
@@ -28,5 +34,9 @@ public interface FoodMenuItemSessionLocal {
     public void deleteFoodMenuItem(Long fmiID) throws NoResultException;
 
     public void updateFoodMenuItem(FoodMenuItem fmi) throws NoResultException;
+    
+    public FoodOrder getLastFoodOrder() throws NoResultException;
+    
+    public FoodOrderedItem getLastFoodOrderedItem() throws NoResultException;
 
 }

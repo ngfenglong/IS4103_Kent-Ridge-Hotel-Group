@@ -6,9 +6,10 @@
 package sessionBeans;
 
 import entity.FoodMenuItem;
+import entity.FoodOrder;
+import entity.FoodOrderedItem;
 import error.NoResultException;
 import java.util.List;
-import java.util.Set;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -23,6 +24,16 @@ public class FoodMenuItemSession implements FoodMenuItemSessionLocal {
     @Override
     public void createFoodMenuItem(FoodMenuItem fmi) {
         em.persist(fmi);
+    }
+    
+    @Override
+    public void createFoodOrderedItem(FoodOrderedItem foi) {
+        em.persist(foi);
+    }
+
+    @Override
+    public void createFoodOrder(FoodOrder fo) {
+        em.persist(fo);
     }
     
     @Override
@@ -82,7 +93,16 @@ public class FoodMenuItemSession implements FoodMenuItemSessionLocal {
         }
     }
     
+    @Override
+    public FoodOrder getLastFoodOrder() throws NoResultException {
+        Query q = em.createQuery("SELECT fo FROM FoodOrder fo ORDER BY fo.foodOrderID DESC");
+        return (FoodOrder) q.getResultList().get(0);
+    }    
     
-    
+    @Override
+    public FoodOrderedItem getLastFoodOrderedItem() throws NoResultException {
+        Query q = em.createQuery("SELECT foi FROM FoodOrderedItem foi ORDER BY foi.foodOrderedItemID DESC");
+        return (FoodOrderedItem) q.getResultList().get(0);
+    }        
  
 }

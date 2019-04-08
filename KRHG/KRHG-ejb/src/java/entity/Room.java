@@ -52,6 +52,16 @@ public class Room implements Serializable {
         this.status = status;
         this.hotel = hotel;
     }
+    
+    public Room(Long roomID, String roomName, String roomNumber, String roomType, int roomPax, String status) {
+        this();
+        this.roomID = roomID;
+        this.roomName = roomName;
+        this.roomNumber = roomNumber;
+        this.roomType = roomType;
+        this.roomPax = roomPax;
+        this.status = status;
+    }//for junit    
 
     public Long getRoomID() {
         return roomID;

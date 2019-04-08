@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package entity;
 
 import error.NoResultException;
@@ -14,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -52,16 +48,25 @@ public class RoomBooking implements Serializable {
     private String firstName;
     private String lastName;
     private String roomType;
-    private List<LaundryOrder> listOfLaundryOrders;
-    private List<FoodOrder> listOfFoodOrders;
-    private List<MinibarItem> listOfMiniBarItem;
+    @OneToMany
+    private List<LaundryOrder> listOfLaundryOrders = new ArrayList<>();
+    @OneToMany
+    private List<FoodOrder> listOfFoodOrders = new ArrayList<>();
+    @OneToMany
+    private List<MinibarOrder> listOfMinibarOrders = new ArrayList<>();
 
     public RoomBooking() {
-        listOfLaundryOrders = new ArrayList<>();
-        listOfFoodOrders = new ArrayList<>();
-        listOfMiniBarItem = new ArrayList<>();
 
     }
+    
+    public RoomBooking(Long roomBookingID, Date bookInDate, Date bookOutDate, String status, Customer bookedBy) {
+        this();
+        this.roomBookingID = roomBookingID;
+        this.bookInDate = bookInDate;
+        this.bookOutDate = bookOutDate;
+        this.status = status;
+        this.bookedBy = bookedBy;
+    } //for junit    
 
     public Long getRoomBookingID() {
         return roomBookingID;
@@ -191,37 +196,6 @@ public class RoomBooking implements Serializable {
         this.bookingDate = bookingDate;
     }
 
-//    public void addHolidaySurcharge(HolidaySurcharge holidaySurcharge) throws NoResultException {
-//        if (holidaySurcharge != null && !this.getHolidaySurcharges().contains(holidaySurcharge)) {
-//            this.getHolidaySurcharges().add(holidaySurcharge);
-//        } else {
-//            throw new NoResultException("Holiday Surhcarge already added to Room Booking");
-//        }
-//    }
-//
-//    public void removeHolidaySurcharge(HolidaySurcharge holidaySurcharge) throws NoResultException {
-//        if (holidaySurcharge != null && this.getHolidaySurcharges().contains(holidaySurcharge)) {
-//            this.getHolidaySurcharges().remove(holidaySurcharge);
-//        } else {
-//            throw new NoResultException("Holiday Surcharge has not been added to Room Booking");
-//        }
-//    }
-//
-//    public void addExtraSurcharge(ExtraSurcharge extraSurcharge) throws NoResultException {
-//        if (extraSurcharge != null && !this.getExtraSurcharge().contains(extraSurcharge)) {
-//            this.getExtraSurcharge().add(extraSurcharge);
-//        } else {
-//            throw new NoResultException("Extra Surcharge is already added to Room Booking");
-//        }
-//    }
-//
-//    public void removeExtraSurcharge(ExtraSurcharge extraSurcharge) throws NoResultException {
-//        if (extraSurcharge != null && this.getExtraSurcharge().contains(extraSurcharge)) {
-//            this.getExtraSurcharge().remove(extraSurcharge);
-//        } else {
-//            throw new NoResultException("Extra Surcharge has not been added to Room Booking");
-//        }
-//    }
     @Override
     public int hashCode() {
         int hash = 0;
@@ -231,7 +205,6 @@ public class RoomBooking implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof RoomBooking)) {
             return false;
         }
@@ -247,60 +220,36 @@ public class RoomBooking implements Serializable {
         return "entity.RoomBooking[ roomBookingID=" + roomBookingID + " ]";
     }
 
-    /**
-     * @return the hasExtraBed
-     */
     public boolean getHasExtraBed() {
         return hasExtraBed;
     }
 
-    /**
-     * @param hasExtraBed the hasExtraBed to set
-     */
     public void setHasExtraBed(boolean hasExtraBed) {
         this.hasExtraBed = hasExtraBed;
     }
 
-    /**
-     * @return the listOfLaundryOrders
-     */
     public List<LaundryOrder> getListOfLaundryOrders() {
         return listOfLaundryOrders;
     }
 
-    /**
-     * @param listOfLaundryOrders the listOfLaundryOrders to set
-     */
     public void setListOfLaundryOrders(List<LaundryOrder> listOfLaundryOrders) {
         this.listOfLaundryOrders = listOfLaundryOrders;
     }
 
-    /**
-     * @return the listOfFoodOrders
-     */
     public List<FoodOrder> getListOfFoodOrders() {
         return listOfFoodOrders;
     }
 
-    /**
-     * @param listOfFoodOrders the listOfFoodOrders to set
-     */
     public void setListOfFoodOrders(List<FoodOrder> listOfFoodOrders) {
         this.listOfFoodOrders = listOfFoodOrders;
     }
 
-    /**
-     * @return the listOfMiniBarItem
-     */
-    public List<MinibarItem> getListOfMiniBarItem() {
-        return listOfMiniBarItem;
+    public List<MinibarOrder> getListOfMinibarOrders() {
+        return listOfMinibarOrders;
     }
 
-    /**
-     * @param listOfMiniBarItem the listOfMiniBarItem to set
-     */
-    public void setListOfMiniBarItem(List<MinibarItem> listOfMiniBarItem) {
-        this.listOfMiniBarItem = listOfMiniBarItem;
+    public void setListOfMinibarOrders(List<MinibarOrder> listOfMinibarOrders) {
+        this.listOfMinibarOrders = listOfMinibarOrders;
     }
 
     public void addLaundryOrder(LaundryOrder lo) throws NoResultException {
@@ -328,26 +277,26 @@ public class RoomBooking implements Serializable {
     }
 
     public void removeFoodOrder(FoodOrder fo) throws NoResultException {
-        if (fo != null && this.getListOfLaundryOrders().contains(fo)) {
-            this.getListOfLaundryOrders().remove(fo);
+        if (fo != null && this.getListOfFoodOrders().contains(fo)) {
+            this.getListOfFoodOrders().remove(fo);
         } else {
             throw new NoResultException("Food Order has not been added to Room Booking");
         }
     }
 
-    public void addMiniBarItem(MinibarItem mbi) throws NoResultException {
-        if (mbi != null && !this.getListOfMiniBarItem().contains(mbi)) {
-            this.getListOfMiniBarItem().add(mbi);
+    public void addMinibarOrder(MinibarOrder mbi) throws NoResultException {
+        if (mbi != null && !this.getListOfMinibarOrders().contains(mbi)) {
+            this.getListOfMinibarOrders().add(mbi);
         } else {
-            throw new NoResultException("Minibar Item already added to Room Booking");
+            throw new NoResultException("Minibar Order already added to Room Booking");
         }
     }
 
-    public void removeMiniBarItem(MinibarItem mbi) throws NoResultException {
-        if (mbi != null && this.getListOfMiniBarItem().contains(mbi)) {
-            this.getListOfMiniBarItem().remove(mbi);
+    public void removeMinibarOrder(MinibarOrder mbi) throws NoResultException {
+        if (mbi != null && this.getListOfMinibarOrders().contains(mbi)) {
+            this.getListOfMinibarOrders().remove(mbi);
         } else {
-            throw new NoResultException("Minibar Item has not been added to Room Booking");
+            throw new NoResultException("Minibar Order has not been added to Room Booking");
         }
     }
 }
