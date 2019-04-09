@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 
     <body>
@@ -37,41 +38,46 @@
                 <!-- /.content-header -->
                 <!-- Main content -->
                 <section class="content">
-                    <div class="box box-primary" style="padding:20px 50px; margin:14px; width:98% ">
+                    <h:form id="form">
+                        <div class="box box-primary" style="padding:20px 50px; margin:14px; width:98% ">
 
-                        <h3 class="box-title" style="margin-bottom:10px; text-align: center; font-size:x-large">KRHG Hotels</h3>
-                        <div class="box-tools pull-right">
-                            <!--Add Btn-->
-                            <h:form>
-                                <h:commandButton class="btn btn-primary"
-                                                 action="addMailingList.xhtml?faces-redirect=true" value="Add Mailing List" />
-                            </h:form>
-                        </div>
-                        <h:form>
+                            <h3 class="box-title" style="margin-bottom:10px; text-align: center; font-size:x-large">KRHG Hotels</h3>
+                            <div class="box-tools pull-right">
+                                <!--Add Btn-->
+
+                                <a id="addMailingList" class="btn btn-primary" href="addMailingList.xhtml">Add Mailing List</a>
+
+
+                            </div>
+
+
+
+
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>Mailing List</th>
-                                        <th>View</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <c:forEach items="${hotelManagedBean.allMailingList}" var="mailingList">
+                                    <c:forEach items="${hotelManagedBean.allMailingList}" var="m">
                                         <tr>
-                                            <td>#{mailingList.listName}</td>
+                                            <td>#{m.listName}</td>
                                             <td>
-                                                <h:commandButton id="viewDetailBtn"
-                                                                 action="#{hotelManagedBean.viewMailingList(mailingList.listID)}" value="View List"
-                                                                 class="btn btn-primary" />
+                                                <h:commandLink action="#{hotelManagedBean.selectMailingList(m)}"><i class="fas fa-edit"></i> </h:commandLink>
+                                            </td>
+                                            <td>
+                                                <h:commandLink action="#{hotelManagedBean.deleteMailingList(m.listID)}"><i class="fas fa-trash-alt"></i> </h:commandLink>
                                             </td>
                                         </tr>
                                     </c:forEach>
+
                                 </tbody>
                             </table>
-                        </h:form>
-                    </div>
 
-
+                        </div>
+                    </h:form>
                 </section>
                 <!-- /.content -->
             </ui:define>

@@ -5,6 +5,8 @@
  */
 package sessionBeans;
 
+import entity.Feedback;
+import entity.FunctionRoom;
 import entity.Hotel;
 import entity.HotelFacility;
 import entity.Room;
@@ -59,6 +61,25 @@ public class HotelSession implements HotelSessionLocal {
     public void deleteHotel(Long hID) throws NoResultException {
         Hotel h = em.find(Hotel.class, hID);
         if (h != null) {
+            List<Feedback> listofFeedBacks = h.getFeedbacks();
+            List<FunctionRoom> listofFunctionRooms = h.getFunctionRooms();
+            List<Room> listofRooms = h.getRooms();
+            List<HotelFacility> listofHotelFacility = h.getHotelFacilities();
+            
+            for(int i = 0; i < listofFeedBacks.size(); i++){
+                h.removeFeedback(listofFeedBacks.get(i));
+            }
+            for(int i = 0; i < listofFunctionRooms.size(); i++){
+                h.removeFunctionRoom(listofFunctionRooms.get(i));
+            }
+            for(int i = 0; i < listofRooms.size(); i++){
+                h.removeRoom(listofRooms.get(i));
+            }
+            
+            for(int i = 0; i < listofHotelFacility.size(); i++){
+                h.removeHotelFacility(listofHotelFacility.get(i));
+            }
+            
             em.remove(h);
         } else {
             throw new NoResultException("Hotel not found");

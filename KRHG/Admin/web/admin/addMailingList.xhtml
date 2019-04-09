@@ -38,18 +38,19 @@
                 </div>
                 <section class="content">
                     <div class="container-fluid">
-                        <h:form id="form">
-                            <div class="row">
-                                <!-- left column -->
-                                <div class="col-lg-12">
 
-                                    <!-- general form elements -->
-                                    <div class="box box-primary" style="padding:20px 50px;">
-                                        <div class="box-header with-border" style="text-align: center; font-size:xx-large">
-                                            <h3 class="box-title"  style="font-size:xx-large">Mailing List Details</h3>
-                                        </div>
-                                        <!-- /.box-header -->
-                                        <!-- form start -->
+                        <div class="row">
+                            <!-- left column -->
+                            <div class="col-lg-12">
+
+                                <!-- general form elements -->
+                                <div class="box box-primary" style="padding:20px 50px;">
+                                    <div class="box-header with-border" style="text-align: center; font-size:xx-large">
+                                        <h3 class="box-title"  style="font-size:xx-large">Mailing List Details</h3>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <!-- form start -->
+                                    <h:form id="form">
                                         <div class="box-body">
                                             <div class="row">
                                                 <div class="col-lg-6">
@@ -66,21 +67,40 @@
                                         </div>
                                         <!-- /.box-body -->
 
+                                        <table id="example1" class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Email Address</th>
+                                                    <th>Add/Remove</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <c:forEach items="${hotelManagedBean.allCustomer}" var="c">
+                                                    <tr>
+                                                        <td>#{c.email}</td>
+                                                        <td>
+                                                            <h:commandButton id="btnInfo"
+                                                                             action="#{hotelManagedBean.addOrRemoveEmailForAdding(c.email)}" value="#{hotelManagedBean.checkIfEmailExistForAdding(c.email) eq true? 'Remove' : 'Add'}"
+                                                                             class="#{hotelManagedBean.checkIfEmailExistForAdding(c.email) eq true? 'btn btn-danger' : 'btn btn-primary'}">
+                                                                <f:ajax immediate="true" execute="btnInfo" render=":form"/>
+                                                            </h:commandButton>
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
+                                            </tbody>
+                                        </table>
                                         <div class="box-footer" style="text-align: right">
-                                            <h:commandButton class="btn btn-danger" style="margin-right:10px" value="Cancel"
-                                                             action="manageRoomPrice.xhtml?faces-redirect=true"></h:commandButton>
-                                            <h:commandButton class="btn btn-primary" value="Add hotel"
-                                                             action="#{hotelManagedBean.createRoomPricing()}">
-                                            </h:commandButton>
+                                            <h:commandButton id="addBtn" value="Add Mailing List" class="btn btn-primary" action="#{hotelManagedBean.addNewMailingList()}" />
                                         </div>
-                                    </div>
-                                    <!-- /.box -->
-                                    <!-- general form elements -->
+                                    </h:form>
                                 </div>
-                                <!-- /.col -->
+                                <!-- /.box -->
+                                <!-- general form elements -->
                             </div>
-                            <!-- /.row -->
-                        </h:form>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+
                     </div>
                     <!-- /.container-fluid -->
                 </section>

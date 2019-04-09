@@ -74,11 +74,27 @@
                                                         <h5 class="description-header">
                                                             #{hotelManagedBean.selectedHotelObj.hotelCodeName}</h5>
                                                     </div>
+
                                                     <!-- /.description-block -->
                                                     <div class="description-block margin-bottom">
                                                         <span class="description-text">Contact Number</span>
                                                         <h5 class="description-header">+65
                                                             #{hotelManagedBean.selectedHotelObj.hotelContact}</h5>
+
+                                                </div>
+                                                <!-- /.col -->
+                                                <div class="col-md-6">
+                                                        <p class="text-center">
+                                                            <strong>Hotel Facilities</strong>
+                                                        </p>
+
+                                                                <c:forEach items="${hotelManagedBean.selectedHotelObj.hotelFacilities}" style="text-align: center" var="f">
+                                                                <img style="width:20px; height: 20px;"
+                                                                    alt="#{f.hotelFacilityImage}"
+                                                                    src="http://zetegral.website/krhgImages/#{f.hotelFacilityImage}" />
+                                                                - #{f.hotelFacilityName} <br />
+                                                            </c:forEach>
+                                                       
                                                     </div>
                                                     <!-- /.description-block -->
                                                     <div class="description-block margin-bottom">
