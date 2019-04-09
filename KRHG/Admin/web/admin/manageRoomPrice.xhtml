@@ -1,93 +1,611 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
-    <body>
+<body>
 
-        <ui:composition template="./AdminTemplate.xhtml">
-            <ui:define name="title">
-                KRHG Admin Console System
-            </ui:define>
+    <ui:composition template="./AdminTemplate.xhtml">
+        <ui:define name="title">
+            KRHG Admin Console System
+        </ui:define>
 
-            <ui:define name="content">
-                <!-- Content Header (Page header) -->
-                <div class="content-header">
-                    <div class="container-fluid">
-                        <div class="row mb-2">
-                            <div class="col-sm-6">
-                                <h1 style="font-size: xx-large; margin-bottom:20px">Manage Room Pricings</h1>
-                            </div>
-                            <!-- /.col -->
-                            <div class="col-sm-6">
-                                <ol class="breadcrumb float-sm-right">
-                                    <li><a href="#"> Home</a></li>
-                                    <li class="active">Manage Room Price</li>
-                                </ol>
-                            </div>
-                            <!-- /.col -->
+        <ui:define name="content">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 style="font-size: xx-large; margin-bottom:20px">Manage Room Pricings</h1>
                         </div>
-                        <!-- /.row -->
+                        <!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li><a href="#"> Home</a></li>
+                                <li class="active">Manage Room Price</li>
+                            </ol>
+                        </div>
+                        <!-- /.col -->
                     </div>
-                    <!-- /.container-fluid -->
+                    <!-- /.row -->
                 </div>
-                <!-- /.content-header -->
-                <!-- Main content -->
-                <section class="content">
-                    <div class="box box-primary" style="padding:20px 50px; margin:14px; width:98% ">
-
-                        <h3 class="box-title" style="margin-bottom:10px; text-align: center; font-size:x-large">KRHG Hotels</h3>
-                        <div class="box-tools pull-right">
-                            <!--Add Btn-->
-                            <h:form>
-                                <h:commandButton class="btn btn-primary"
-                                                 action="addRoomPricing.xhtml?faces-redirect=true" value="Add RoomPricing" />
-                            </h:form>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+            <!-- Main content -->
+            <section class="content">
+                <div class="row" style="margin-left:15px">
+                    <div class="col-md-5 col-sm-12 box box-solid bg-teal-gradient "
+                        style="padding:20px 40px; margin-right:10px; ">
+                        <div class="box-header">
+                            <i class="fa fa-th"></i>
+                            <h3 class="box-title">Price History</h3>
                         </div>
-                        <h:form>
-                            <table id="example1" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Hotel Name</th>
-                                        <th>Room Pricing</th>
-                                        <th>Edit</th>
-                                        <th>Delete</th>
+                        <div class="box-body border-radius-none">
+                            <canvas id="canvas" height="450" width="600"></canvas>
+                        </div>
+                    </div>
 
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <c:forEach items="${hotelManagedBean.allRoomPricing}" var="pricing">
-                                        <tr>
-                                            <td>#{pricing.pricingName}</td>
-                                            <td>$#{pricing.price}0</td>
-                                            <td>
-                                                <h:commandButton id="viewDetailBtn"
-                                                                 action="#{hotelManagedBean.editRoomPricing(pricing.roomPricingID)}" value="Edit"
-                                                                 class="btn btn-primary" />
-                                            </td>
-                                             <td>
-                                                <h:commandButton id="viewDetailBtn"
-                                                                 action="#{hotelManagedBean.deleteRoomPricing(pricing.roomPricingID)}" value="Edit"
-                                                                 class="btn btn-primary" />
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
-                                </tbody>
-                            </table>
-                        </h:form>
+                    <div class="col-md-3 col-sm-12" style=" margin-right:10px; padding:0px">
+                        <div class=" box box-solid bg-navy-gradient " style="padding:20px 50px;">
+                            <div class="box-header">
+                                <i class="fa fa-th"></i>
+                                <h3 class="box-title">Sales Contribution</h3>
+                            </div>
+                            <div class="row">
+                                <div class="box-body border-radius-none col-md-12" style="margin-bottom: 30px">
+                                    <div id="canvas-holder">
+                                        <canvas id="chart-area" width="500" height="500"></canvas>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6">
+                                    <ul class="chart-legend clearfix">
+                                        <li><i class="far fa-circle text-green"></i> IE</li>
+                                        <li><i class="far fa-circle text-yellow"></i> FireFox</li>
+                                        <li><i class="far fa-circle text-aqua"></i> Safari</li>
+                                        <li><i class="far fa-circle text-light-blue"></i> Opera</li>
+                                        <li><i class="far fa-circle text-gray"></i> Navigator</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <ul class="chart-legend clearfix">
+                                        <li><i class="far fa-circle text-red"></i> Chrome</li>
+                                        <li><i class="far fa-circle text-green"></i> IE</li>
+                                        <li><i class="far fa-circle text-yellow"></i> FireFox</li>
+                                        <li><i class="far fa-circle text-aqua"></i> Safari</li>
+                                        <li><i class="far fa-circle text-light-blue"></i> Opera</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+
+
                     </div>
 
 
-                </section>
-                <!-- /.content -->
-            </ui:define>
+                    <div class="col-md-3 col-sm-11" style="padding-bottom:10px;">
+                        <div class="small-box bg-aqua" style="width:120%; margin-bottom: 25px !important;">
+                            <div class="inner">
+                                <h3>150</h3>
 
-        </ui:composition>
+                                <p>New Orders</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-bag"></i>
+                            </div>
+                            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                        </div>
 
-    </body>
+                        <div class="small-box bg-red" style="width:120%; margin-bottom: 25px !important;">
+                            <div class="inner">
+                                <h3>150</h3>
 
-</html>
+                                <p>New Orders</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-bag"></i>
+                            </div>
+                            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                        </div>
+
+                        <div class="small-box bg-yellow" style="width:120%">
+                            <div class="inner">
+                                <h3>150</h3>
+
+                                <p>New Orders</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-bag"></i>
+                            </div>
+                            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="nav-tabs-custom">
+                    <!-- Tabs within a box -->
+                    
+                    <ul class="nav nav-tabs pull-right">
+                        <li class="pull-left header" ><i class="fa fa-inbox"></i> Sales</li>
+                        <li class="active pull-right" id="tabs"><a href="#KRG" data-toggle="tab">KRG</a></li>
+                        <li class="pull-right" id="tabs"><a  href="#KRC" data-toggle="tab">KRC</a></li>
+                        <li class="pull-right" id="tabs"><a  href="#KRN" data-toggle="tab">KRN</a></li>
+                        <li class="pull-right" id="tabs"><a  href="#KRS" data-toggle="tab">KRS</a></li>
+                        <li class="pull-right" id="tabs"><a  href="#KRE" data-toggle="tab">KRE</a></li>
+                        <li class="pull-right" id="tabs"><a  href="#KRW" data-toggle="tab">KRW</a></li>
+                        <li class="pull-right" id="tabs"><a  href="#KRNE" data-toggle="tab">KRNE</a></li>
+                        <li class="pull-right" id="tabs"><a  href="#KRNW" data-toggle="tab">KRNW</a></li>
+                        <li class="pull-right" id="tabs"><a  href="#KRSE" data-toggle="tab">KRSE</a></li>
+                        <li class="pull-right" id="tabs"><a  href="#KRSW" data-toggle="tab">KRSW</a></li>
+                       
+                    </ul>
+                    <div class="tab-content no-padding">
+                        <div class="tab-pane active" id="KRG" style="position: relative; height: 300px;">
+                            <div class="box box-primary" style="padding:20px 50px; margin:14px; width:98% ">
+                                    <h3 class="box-title" style="margin-bottom:10px; text-align: center; font-size:x-large">KRHG Grand
+                                    </h3>
+                                    <h:form>
+                                        <table id="example1" class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Hotel Name</th>
+                                                    <th>Room Pricing</th>
+                                                    <th>Edit</th>
+                                                    <th>Delete</th>
+                
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <c:forEach items="${hotelManagedBean.allRoomPricing}" var="pricing">
+                                                    <tr>
+                                                        <td>#{pricing.pricingName}</td>
+                                                        <td>$#{pricing.price}0</td>
+                                                        <td>
+                                                            <h:commandLink id="viewDetailBtn" style="text-align: center"
+                                                                action="#{hotelManagedBean.editRoomPricing(pricing.roomPricingID)}"><i
+                                                                    class="fas fa-edit"></i></h:commandLink>
+                                                        </td>
+                                                        <td>
+                                                            <h:commandLink id="viewDetailBtn" style="text-align: center"
+                                                                action="#{hotelManagedBean.deleteRoomPricing(pricing.roomPricingID)}"><i
+                                                                    class="fas fa-trash-alt"></i></h:commandLink>
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
+                                            </tbody>
+                                        </table>
+                                    </h:form>
+                                </div>
+                        </div>
+                        <div class="tab-pane" id="KRC" style="position: relative; height: 300px;">
+                                <div class="box box-primary" style="padding:20px 50px; margin:14px; width:98% ">
+                                        <h3 class="box-title" style="margin-bottom:10px; text-align: center; font-size:x-large">KRHG Central
+                                        </h3>
+                                        <h:form>
+                                            <table id="example1" class="table table-bordered table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Hotel Name</th>
+                                                        <th>Room Pricing</th>
+                                                        <th>Edit</th>
+                                                        <th>Delete</th>
+                    
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <c:forEach items="${hotelManagedBean.allRoomPricing}" var="pricing">
+                                                        <tr>
+                                                            <td>#{pricing.pricingName}</td>
+                                                            <td>$#{pricing.price}0</td>
+                                                            <td>
+                                                                <h:commandLink id="viewDetailBtn" style="text-align: center"
+                                                                    action="#{hotelManagedBean.editRoomPricing(pricing.roomPricingID)}"><i
+                                                                        class="fas fa-edit"></i></h:commandLink>
+                                                            </td>
+                                                            <td>
+                                                                <h:commandLink id="viewDetailBtn" style="text-align: center"
+                                                                    action="#{hotelManagedBean.deleteRoomPricing(pricing.roomPricingID)}"><i
+                                                                        class="fas fa-trash-alt"></i></h:commandLink>
+                                                            </td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                </tbody>
+                                            </table>
+                                        </h:form>
+                                    </div>
+                        </div>
+                        <div class="tab-pane" id="KRN" style="position: relative; height: 300px;">
+                                <div class="box box-primary" style="padding:20px 50px; margin:14px; width:98% ">
+                                        <h3 class="box-title" style="margin-bottom:10px; text-align: center; font-size:x-large">KRHG North
+                                        </h3>
+                                        <h:form>
+                                            <table id="example1" class="table table-bordered table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Hotel Name</th>
+                                                        <th>Room Pricing</th>
+                                                        <th>Edit</th>
+                                                        <th>Delete</th>
+                    
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <c:forEach items="${hotelManagedBean.allRoomPricing}" var="pricing">
+                                                        <tr>
+                                                            <td>#{pricing.pricingName}</td>
+                                                            <td>$#{pricing.price}0</td>
+                                                            <td>
+                                                                <h:commandLink id="viewDetailBtn" style="text-align: center"
+                                                                    action="#{hotelManagedBean.editRoomPricing(pricing.roomPricingID)}"><i
+                                                                        class="fas fa-edit"></i></h:commandLink>
+                                                            </td>
+                                                            <td>
+                                                                <h:commandLink id="viewDetailBtn" style="text-align: center"
+                                                                    action="#{hotelManagedBean.deleteRoomPricing(pricing.roomPricingID)}"><i
+                                                                        class="fas fa-trash-alt"></i></h:commandLink>
+                                                            </td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                </tbody>
+                                            </table>
+                                        </h:form>
+                                    </div>
+                        </div>
+                        <div class="tab-pane" id="KRS" style="position: relative; height: 300px;">
+                                <div class="box box-primary" style="padding:20px 50px; margin:14px; width:98% ">
+                                        <h3 class="box-title" style="margin-bottom:10px; text-align: center; font-size:x-large">KRHG South
+                                        </h3>
+                                        <h:form>
+                                            <table id="example1" class="table table-bordered table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Hotel Name</th>
+                                                        <th>Room Pricing</th>
+                                                        <th>Edit</th>
+                                                        <th>Delete</th>
+                    
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <c:forEach items="${hotelManagedBean.allRoomPricing}" var="pricing">
+                                                        <tr>
+                                                            <td>#{pricing.pricingName}</td>
+                                                            <td>$#{pricing.price}0</td>
+                                                            <td>
+                                                                <h:commandLink id="viewDetailBtn" style="text-align: center"
+                                                                    action="#{hotelManagedBean.editRoomPricing(pricing.roomPricingID)}"><i
+                                                                        class="fas fa-edit"></i></h:commandLink>
+                                                            </td>
+                                                            <td>
+                                                                <h:commandLink id="viewDetailBtn" style="text-align: center"
+                                                                    action="#{hotelManagedBean.deleteRoomPricing(pricing.roomPricingID)}"><i
+                                                                        class="fas fa-trash-alt"></i></h:commandLink>
+                                                            </td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                </tbody>
+                                            </table>
+                                        </h:form>
+                                    </div>
+                        </div>
+                        <div class="tab-pane" id="KRE" style="position: relative; height: 300px;">
+                                <div class="box box-primary" style="padding:20px 50px; margin:14px; width:98% ">
+                                        <h3 class="box-title" style="margin-bottom:10px; text-align: center; font-size:x-large">KRHG East
+                                        </h3>
+                                        <h:form>
+                                            <table id="example1" class="table table-bordered table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Hotel Name</th>
+                                                        <th>Room Pricing</th>
+                                                        <th>Edit</th>
+                                                        <th>Delete</th>
+                    
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <c:forEach items="${hotelManagedBean.allRoomPricing}" var="pricing">
+                                                        <tr>
+                                                            <td>#{pricing.pricingName}</td>
+                                                            <td>$#{pricing.price}0</td>
+                                                            <td>
+                                                                <h:commandLink id="viewDetailBtn" style="text-align: center"
+                                                                    action="#{hotelManagedBean.editRoomPricing(pricing.roomPricingID)}"><i
+                                                                        class="fas fa-edit"></i></h:commandLink>
+                                                            </td>
+                                                            <td>
+                                                                <h:commandLink id="viewDetailBtn" style="text-align: center"
+                                                                    action="#{hotelManagedBean.deleteRoomPricing(pricing.roomPricingID)}"><i
+                                                                        class="fas fa-trash-alt"></i></h:commandLink>
+                                                            </td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                </tbody>
+                                            </table>
+                                        </h:form>
+                                    </div>
+                        </div>
+                        <div class="tab-pane" id="KRW" style="position: relative; height: 300px;">
+                                <div class="box box-primary" style="padding:20px 50px; margin:14px; width:98% ">
+                                        <h3 class="box-title" style="margin-bottom:10px; text-align: center; font-size:x-large">KRHG West
+                                        </h3>
+                                        <h:form>
+                                            <table id="example1" class="table table-bordered table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Hotel Name</th>
+                                                        <th>Room Pricing</th>
+                                                        <th>Edit</th>
+                                                        <th>Delete</th>
+                    
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <c:forEach items="${hotelManagedBean.allRoomPricing}" var="pricing">
+                                                        <tr>
+                                                            <td>#{pricing.pricingName}</td>
+                                                            <td>$#{pricing.price}0</td>
+                                                            <td>
+                                                                <h:commandLink id="viewDetailBtn" style="text-align: center"
+                                                                    action="#{hotelManagedBean.editRoomPricing(pricing.roomPricingID)}"><i
+                                                                        class="fas fa-edit"></i></h:commandLink>
+                                                            </td>
+                                                            <td>
+                                                                <h:commandLink id="viewDetailBtn" style="text-align: center"
+                                                                    action="#{hotelManagedBean.deleteRoomPricing(pricing.roomPricingID)}"><i
+                                                                        class="fas fa-trash-alt"></i></h:commandLink>
+                                                            </td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                </tbody>
+                                            </table>
+                                        </h:form>
+                                    </div>
+                        </div>
+                        <div class="tab-pane" id="KRNE" style="position: relative; height: 300px;">
+                                <div class="box box-primary" style="padding:20px 50px; margin:14px; width:98% ">
+                                        <h3 class="box-title" style="margin-bottom:10px; text-align: center; font-size:x-large">KRHG Northeast
+                                        </h3>
+                                        <h:form>
+                                            <table id="example1" class="table table-bordered table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Hotel Name</th>
+                                                        <th>Room Pricing</th>
+                                                        <th>Edit</th>
+                                                        <th>Delete</th>
+                    
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <c:forEach items="${hotelManagedBean.allRoomPricing}" var="pricing">
+                                                        <tr>
+                                                            <td>#{pricing.pricingName}</td>
+                                                            <td>$#{pricing.price}0</td>
+                                                            <td>
+                                                                <h:commandLink id="viewDetailBtn" style="text-align: center"
+                                                                    action="#{hotelManagedBean.editRoomPricing(pricing.roomPricingID)}"><i
+                                                                        class="fas fa-edit"></i></h:commandLink>
+                                                            </td>
+                                                            <td>
+                                                                <h:commandLink id="viewDetailBtn" style="text-align: center"
+                                                                    action="#{hotelManagedBean.deleteRoomPricing(pricing.roomPricingID)}"><i
+                                                                        class="fas fa-trash-alt"></i></h:commandLink>
+                                                            </td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                </tbody>
+                                            </table>
+                                        </h:form>
+                                    </div>
+                        </div>
+                        <div class="tab-pane" id="KRNW" style="position: relative; height: 300px;">
+                                <div class="box box-primary" style="padding:20px 50px; margin:14px; width:98% ">
+                                        <h3 class="box-title" style="margin-bottom:10px; text-align: center; font-size:x-large">KRHG Northwest
+                                        </h3>
+                                        <h:form>
+                                            <table id="example1" class="table table-bordered table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Hotel Name</th>
+                                                        <th>Room Pricing</th>
+                                                        <th>Edit</th>
+                                                        <th>Delete</th>
+                    
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <c:forEach items="${hotelManagedBean.allRoomPricing}" var="pricing">
+                                                        <tr>
+                                                            <td>#{pricing.pricingName}</td>
+                                                            <td>$#{pricing.price}0</td>
+                                                            <td>
+                                                                <h:commandLink id="viewDetailBtn" style="text-align: center"
+                                                                    action="#{hotelManagedBean.editRoomPricing(pricing.roomPricingID)}"><i
+                                                                        class="fas fa-edit"></i></h:commandLink>
+                                                            </td>
+                                                            <td>
+                                                                <h:commandLink id="viewDetailBtn" style="text-align: center"
+                                                                    action="#{hotelManagedBean.deleteRoomPricing(pricing.roomPricingID)}"><i
+                                                                        class="fas fa-trash-alt"></i></h:commandLink>
+                                                            </td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                </tbody>
+                                            </table>
+                                        </h:form>
+                                    </div>
+                        </div>
+                        <div class="tab-pane" id="KRSE" style="position: relative; height: 300px;">
+                                <div class="box box-primary" style="padding:20px 50px; margin:14px; width:98% ">
+                                        <h3 class="box-title" style="margin-bottom:10px; text-align: center; font-size:x-large">KRHG Southeast
+                                        </h3>
+                                        <h:form>
+                                            <table id="example1" class="table table-bordered table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Hotel Name</th>
+                                                        <th>Room Pricing</th>
+                                                        <th>Edit</th>
+                                                        <th>Delete</th>
+                    
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <c:forEach items="${hotelManagedBean.allRoomPricing}" var="pricing">
+                                                        <tr>
+                                                            <td>#{pricing.pricingName}</td>
+                                                            <td>$#{pricing.price}0</td>
+                                                            <td>
+                                                                <h:commandLink id="viewDetailBtn" style="text-align: center"
+                                                                    action="#{hotelManagedBean.editRoomPricing(pricing.roomPricingID)}"><i
+                                                                        class="fas fa-edit"></i></h:commandLink>
+                                                            </td>
+                                                            <td>
+                                                                <h:commandLink id="viewDetailBtn" style="text-align: center"
+                                                                    action="#{hotelManagedBean.deleteRoomPricing(pricing.roomPricingID)}"><i
+                                                                        class="fas fa-trash-alt"></i></h:commandLink>
+                                                            </td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                </tbody>
+                                            </table>
+                                        </h:form>
+                                    </div>
+                        </div>
+                        <div class="tab-pane" id="KRSW" style="position: relative; height: 300px;">
+                                <div class="box box-primary" style="padding:20px 50px; margin:14px; width:98% ">
+                                        <h3 class="box-title" style="margin-bottom:10px; text-align: center; font-size:x-large">KRHG Southwest
+                                        </h3>
+                                        <h:form>
+                                            <table id="example1" class="table table-bordered table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Hotel Name</th>
+                                                        <th>Room Pricing</th>
+                                                        <th>Edit</th>
+                                                        <th>Delete</th>
+                    
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <c:forEach items="${hotelManagedBean.allRoomPricing}" var="pricing">
+                                                        <tr>
+                                                            <td>#{pricing.pricingName}</td>
+                                                            <td>$#{pricing.price}0</td>
+                                                            <td>
+                                                                <h:commandLink id="viewDetailBtn" style="text-align: center"
+                                                                    action="#{hotelManagedBean.editRoomPricing(pricing.roomPricingID)}"><i
+                                                                        class="fas fa-edit"></i></h:commandLink>
+                                                            </td>
+                                                            <td>
+                                                                <h:commandLink id="viewDetailBtn" style="text-align: center"
+                                                                    action="#{hotelManagedBean.deleteRoomPricing(pricing.roomPricingID)}"><i
+                                                                        class="fas fa-trash-alt"></i></h:commandLink>
+                                                            </td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                </tbody>
+                                            </table>
+                                        </h:form>
+                                    </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.nav-tabs-custom -->
+
+
+
+
+            </section>
+            <!-- /.content -->
+
+            <script>
+                var randomScalingFactor = function () { return Math.round(Math.random() * 100) };
+                var lineChartData = {
+                    labels: ["January", "February", "March", "April", "May", "June", "July"],
+                    datasets: [
+                        {
+                            label: "My First dataset",
+                            fillColor: "rgba(220,220,220,0.2)",
+                            strokeColor: "rgba(220,220,220,1)",
+                            pointColor: "rgba(220,220,220,1)",
+                            pointStrokeColor: "#fff",
+                            pointHighlightFill: "#fff",
+                            pointHighlightStroke: "rgba(220,220,220,1)",
+                            data: [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor()]
+                        }
+                    ]
+
+                }
+
+                var doughnutData = [
+                    {
+                        value: 300,
+                        color: "#F7464A",
+                        highlight: "#FF5A5E",
+                        label: "Red"
+                    },
+                    {
+                        value: 50,
+                        color: "#46BFBD",
+                        highlight: "#5AD3D1",
+                        label: "Green"
+                    },
+                    {
+                        value: 100,
+                        color: "#FDB45C",
+                        highlight: "#FFC870",
+                        label: "Yellow"
+                    },
+                    {
+                        value: 40,
+                        color: "#949FB1",
+                        highlight: "#A8B3C5",
+                        label: "Grey"
+                    },
+                    {
+                        value: 120,
+                        color: "#4D5360",
+                        highlight: "#616774",
+                        label: "Dark Grey"
+                    }
+
+                ];
+
+                window.onload = function () {
+                    var ctx = document.getElementById("canvas").getContext("2d");
+                    window.myLine = new Chart(ctx).Line(lineChartData, {
+                        responsive: true
+                    });
+
+
+                    var dnt = document.getElementById("chart-area").getContext("2d");
+                    window.myDoughnut = new Chart(dnt).Doughnut(doughnutData, { responsive: true });
+             
+                }
+                
+              
+                // document.getElementsById("tab").click(function(){
+                //     console.log("hello clicked tab");
+                // })
+              
+
+
+
+
+            </script>
+        </ui:define>
+
+    </ui:composition>
+
+
 </body>
+
 </html>

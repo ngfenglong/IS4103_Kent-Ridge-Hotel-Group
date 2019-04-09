@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
@@ -60,11 +61,13 @@
                                         <c:forEach items="${hotelManagedBean.allFeedbacks}" var="f">
                                             <tr>
                                                 <td>#{f.feedBackTitle}</td>
-                                                <td>#{f.feedBackMsg.length() gt 30 ? f.feedBackMsg.substring(0, 30)+ '.....' : f.feedBackMsg }</td>
+                                                <td>#{f.feedBackMsg.length() gt 30 ? f.feedBackMsg.substring(0, 30): f.feedBackMsg }</td>
                                                 <td>#{f.feedBackDate}</td>
                                                 <td>#{f.feedBackFrom}</td>
-                                                <td><h:commandButton id="viewBtn" action="#{hotelManagedBean.viewFeedback(f.feedBackID)}" value="View" class="btn btn-primary"  /></td>
-                                                <td><h:commandButton id="deletelBtn" value="Delete" action="#{hotelManagedBean.deleteFeedback(f.feedBackID)}"  onclick="return confirm('Are you sure?');" class="btn btn-danger"  /></td>
+                                                <td style="text-align: center"><h:commandLink id="viewBtn" action="#{hotelManagedBean.viewFeedback(f.feedBackID)}" ><i class="fas fa-search"></i></h:commandLink></td>
+                                                <td style="text-align: center"><h:commandLink class="cd-popup-trigger" action="#{hotelManagedBean.selectFeedback(f)}"  ><i class="fas fa-trash-alt"></i>
+                                                    <f:ajax execute="@form" render='@none'/>
+                                                </h:commandLink></td>
                                             </tr>
                                         </c:forEach>
                                 </tbody>
@@ -74,6 +77,30 @@
 
                 </section>
                 <!-- /.content -->
+
+                <!-- Modal -->
+                <h:form>
+                        <div id="modal" class="cd-popup" role="alert">
+                                <div class="cd-popup-container">
+                                    <p class="popup-content">Delete Feedback?</p>
+                
+                                    <ul class="cd-buttons" style="padding-inline-start: unset; padding:0px">
+                                            <li><h:commandLink id="deleteFeedback" action="#{hotelManagedBean.deleteFeedback()}" class="cd-popup-confirm" value="Yes">
+                                                    <f:ajax execute="@form" render='@none'/>
+                                            </h:commandLink></li>
+                                        <li style="background-color:lightslategray"><a onclick="" class=" cd-popup-closemodal">No</a></li>
+                                    </ul>
+                                </div> <!-- cd-popup-container -->
+                            </div> <!-- cd-popup -->
+                </h:form>
+              
+               
+                <script>
+                function clickclick(){
+                    window.alert("boooo");
+                    document.getElementById('formy:buttony').click();
+                }
+                </script>
             </ui:define>
 
             <ui:define name="script">

@@ -7,13 +7,14 @@ jQuery(document).ready(function($){
   //   console.log("number1");
   //   $('#modalVH').addClass('is-visible');
   // });
-  
-  //open popup
+
+         
+      //open popup
 	$('.cd-popup-trigger').on('click', function(event){
 		event.preventDefault();
-    $('#modalVH').addClass('is-visible');
-    console.log($('#modalVH'));
-    console.log($('#modalVH').attr('class'));
+    $('#modal').addClass('is-visible');
+    console.log($('#modal'));
+    console.log($('#modal').attr('class'));
     
     
     return true;
@@ -49,9 +50,9 @@ jQuery(document).ready(function($){
           el.classList.add('notification');
           var text = '';
           if($(event.target).attr("id")=="deleteHotel"){
-            text = "You have deleted the hotel"
-          } else if ($(event.target).attr("id")=="housekeeping"){
-            text = "Your housekeeping request has been cancelled"
+            text = "Hotel has been deleted"
+          } else if ($(event.target).attr("id")=="deleteFeedback"){
+            text = "Feedback has been deleted"
           }
 
           switch (typeValue) {
