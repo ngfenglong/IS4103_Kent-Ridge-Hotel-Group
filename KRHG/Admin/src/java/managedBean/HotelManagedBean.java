@@ -97,6 +97,9 @@ public class HotelManagedBean implements Serializable {
     private Part iconFile;
     private Part hotelIconFile;
 
+    public Long selectedMailingListID;
+    public List<String> tempMailingList = new ArrayList<String>();
+
     public String selectedHotel;
     public Staff selectedStaff;
     public HotelFacility selectedFacilityObj;
@@ -126,7 +129,10 @@ public class HotelManagedBean implements Serializable {
     public String mtNameTB;
     public int mtPointsTB;
     
+    Long selectedRoomID;
+
     //Create Room
+    public String tempHotelNameTB;
     public String roomName;
     public String roomNumber;
     public String roomType;
@@ -140,6 +146,8 @@ public class HotelManagedBean implements Serializable {
     public String hfName;
     public String hfImage;
     public String hfDescription;
+
+    public String mlListNameTB;
 
     public String holName;
     public String holDate;
@@ -205,6 +213,17 @@ public class HotelManagedBean implements Serializable {
         return mailingListSessionLocal.getAllMailingList();
     }
 
+    public List<String> getAllCustomerEmail() throws NoResultException {
+        List<String> returnList = new ArrayList<String>();
+
+        for (Customer c : getAllCustomer()) {
+            String tempEmail = c.getEmail();
+            returnList.add(tempEmail);
+        }
+
+        return returnList;
+    }
+
     public List<HolidaySurcharge> getAllHolidaySurcharge() {
         return roomSessionLocal.getAllHolidaySurcharge();
     }
@@ -250,8 +269,8 @@ public class HotelManagedBean implements Serializable {
     public List<Staff> getAllStaff() {
         return staffSessionLocal.getAllStaffs();
     }
-    
-    public List<Customer> getAllCustomer(){
+
+    public List<Customer> getAllCustomer() {
         return customerSessionLocal.getAllCustomers();
     }
 
@@ -271,6 +290,13 @@ public class HotelManagedBean implements Serializable {
         }
 
         return ((occupiedRooms.size() / rooms.size()) * 100) + "";
+    }
+
+    public String selectMailingList(MailingList m) {
+        selectedMailingList = m;
+        tempMailingList = selectedMailingList.getListToSend();
+        
+        return "editMailingList.xthml?faces-redirect=true";
     }
 
     public String displayDateRange() {
@@ -321,6 +347,10 @@ public class HotelManagedBean implements Serializable {
         selectedFacilityObj = null;
 
         return "ViewAllFacility.xhtml?faces-redirect=true";
+    }
+
+    public void displayMailingList() throws NoResultException {
+        selectedMailingList = mailingListSessionLocal.getMailingListByID(selectedMailingListID);
     }
 
     public String saveHoliday() throws NoResultException, ParseException {
@@ -379,6 +409,87 @@ public class HotelManagedBean implements Serializable {
         selectedMinibarItem = null;
 
         return "manageMinibarItem.xhtml?faces-redirect=true";
+    }
+
+    public boolean checkIfEmailExist(String e) throws NoResultException {
+        //  selectedMailingList = mailingListSessionLocal.getMailingListByID(selectedMailingListID);
+        boolean emailExist = false;
+        for (String check : tempMailingList) {
+            if (check.equals(e)) {
+                emailExist = true;
+            }
+        }
+
+        return emailExist;
+    }
+
+    public void addOrRemoveEmail(String e) throws NoResultException {
+        //selectedMailingList = mailingListSessionLocal.getMailingListByID(selectedMailingListID);
+        boolean notExist = true;
+        for (String check : tempMailingList) {
+            if (check.equals(e)) {
+                notExist = false;
+            }
+        }
+
+        if (notExist == true) {
+            tempMailingList.add(e);
+        } else {
+            tempMailingList.remove(e);
+        }
+
+       // mailingListSessionLocal.updateMailingList(selectedMailingList);
+    }
+
+    public boolean checkIfEmailExistForAdding(String e) throws NoResultException {
+        boolean emailExist = false;
+        if (tempMailingList != null) {
+            for (String check : tempMailingList) {
+                if (check.equals(e)) {
+                    emailExist = true;
+                }
+            }
+        }
+        return emailExist;
+    }
+
+    public void addOrRemoveEmailForAdding(String e) throws NoResultException {
+        boolean notExist = true;
+        if (tempMailingList != null) {
+            for (String check : tempMailingList) {
+                if (check.equals(e)) {
+                    notExist = false;
+                }
+            }
+        }
+        if (notExist == true) {
+            tempMailingList.add(e);
+        } else {
+            tempMailingList.remove(e);
+        }
+    }
+
+    public String updateMailingList() throws NoResultException {
+        
+        selectedMailingList.setListToSend(tempMailingList);
+        mailingListSessionLocal.updateMailingList(selectedMailingList);
+
+        mlListNameTB = null;
+        tempMailingList = new ArrayList<String>();
+
+        return "manageMailingList.xhtml?faces-redirect=true";
+    }
+
+    public String addNewMailingList() {
+        MailingList ml = new MailingList();
+        ml.setListName(mlListNameTB);
+        ml.setListToSend(tempMailingList);
+        mailingListSessionLocal.createMailingList(ml);
+
+        mlListNameTB = null;
+        tempMailingList = new ArrayList<String>();;
+
+        return "manageMailingList.xhtml?faces-redirect=true";
     }
 
     public String saveMemberTier() throws NoResultException {
@@ -563,14 +674,8 @@ public class HotelManagedBean implements Serializable {
         return "editStaff.xhtml?faces-redirect=true";
     }
 
-    public String editRoomFacility(Long rfID) throws NoResultException {
-        selectedRoomFacility = roomFacilitySessionLocal.getRoomFacilityByID(rfID);
-
-        return "editRoomFacility.xhtml?faces-redirect=true";
-    }
-
-    public String editRoom(Long rID) throws NoResultException {
-        selectedRoom = roomSessionLocal.getRoomByID(rID);
+    public String editRoom() throws NoResultException {
+        selectedRoom = roomSessionLocal.getRoomByID(selectedRoomID);
         List<RoomFacility> tempRoomFacilities = selectedRoom.getRoomFacilities();
         List<MinibarItem> tempMinibarItems = selectedRoom.getMiniBarItems();
         if (!tempRoomFacilities.isEmpty()) {
@@ -586,15 +691,23 @@ public class HotelManagedBean implements Serializable {
                 minibarItems[i] = tempMinibarItems.get(i).getItemName();
             }
         }
-
+        tempHotelNameTB = selectedRoom.getHotel().getHotelName();
         return "editRoom.xhtml?faces-redirect=true";
+    }
+
+    public String editRoomFacility(Long rfID) throws NoResultException {
+        selectedRoomFacility = roomFacilitySessionLocal.getRoomFacilityByID(rfID);
+
+        return "editRoomFacility.xhtml?faces-redirect=true";
     }
 
     public String viewRoom(Long rID) throws NoResultException {
         System.out.println("in view Room");
         System.out.println("ID: " + rID);
         selectedRoom = roomSessionLocal.getRoomByID(rID);
-
+        selectedRoomID = rID;
+        
+        String selectedRoomTxt = selectedRoom.getRoomName();
         return "viewRoom.xhtml?faces-redirect=true";
     }
 
@@ -671,8 +784,6 @@ public class HotelManagedBean implements Serializable {
         return "viewCustomer.xhtml?faces-redirect=true";
     }
 
-    
-    
     public String editHolidaySurcharge(Long hID) throws NoResultException {
         selectedHoliday = roomSessionLocal.getHolidaySurchargeByID(hID);
         DateFormat dateFormat = new SimpleDateFormat("mm/dd/yyyy");
@@ -1103,8 +1214,8 @@ public class HotelManagedBean implements Serializable {
 
         return "manageHolidaySurcharge.xhtml?faces-redirect=true";
     }
-    
-     public String createMemberTier() {
+
+    public String createMemberTier() {
         MemberTier mt = new MemberTier();
         mt.setTierName(mtNameTB);
         mt.setTierPoints(mtPointsTB);
@@ -1121,8 +1232,6 @@ public class HotelManagedBean implements Serializable {
 
         return "manageMemberTier.xhtml?faces-redirect=true";
     }
-
-    
 
     public String createMinibarItem() {
         MinibarItem mi = new MinibarItem();
@@ -2008,6 +2117,46 @@ public class HotelManagedBean implements Serializable {
 
     public void setMtPointsTB(int mtPointsTB) {
         this.mtPointsTB = mtPointsTB;
+    }
+
+    public CustomerSessionLocal getCustomerSessionLocal() {
+        return customerSessionLocal;
+    }
+
+    public void setCustomerSessionLocal(CustomerSessionLocal customerSessionLocal) {
+        this.customerSessionLocal = customerSessionLocal;
+    }
+
+    public String getTempHotelNameTB() {
+        return tempHotelNameTB;
+    }
+
+    public void setTempHotelNameTB(String tempHotelNameTB) {
+        this.tempHotelNameTB = tempHotelNameTB;
+    }
+
+    public Long getSelectedMailingListID() {
+        return selectedMailingListID;
+    }
+
+    public void setSelectedMailingListID(Long selectedMailingListID) {
+        this.selectedMailingListID = selectedMailingListID;
+    }
+
+    public List<String> getTempMailingList() {
+        return tempMailingList;
+    }
+
+    public void setTempMailingList(List<String> tempMailingList) {
+        this.tempMailingList = tempMailingList;
+    }
+
+    public String getMlListNameTB() {
+        return mlListNameTB;
+    }
+
+    public void setMlListNameTB(String mlListNameTB) {
+        this.mlListNameTB = mlListNameTB;
     }
 
 }
