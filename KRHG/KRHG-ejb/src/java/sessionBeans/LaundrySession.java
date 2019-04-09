@@ -6,6 +6,8 @@
 package sessionBeans;
 
 import entity.LaundryOrder;
+import entity.LaundryOrderedItem;
+import entity.LaundryType;
 import entity.Room;
 import entity.Staff;
 import error.NoResultException;
@@ -134,7 +136,6 @@ public class LaundrySession implements LaundrySessionLocal {
             oldLo.setCompleteDateTime(lo.getCompleteDateTime());
             oldLo.setHouseKeeper(lo.getHouseKeeper());
             oldLo.setSpecialRequest(lo.getSpecialRequest());
-            oldLo.setQty(lo.getQty());
         } else {
             throw new NoResultException("Laundry Order Not found");
         }
@@ -146,4 +147,78 @@ public class LaundrySession implements LaundrySessionLocal {
         return (LaundryOrder) q.getResultList().get(0);
     }
 
+    @Override
+    public void createLaundryType(LaundryType lt) {
+        em.persist(lt);
+    }
+    
+    @Override
+    public List<LaundryType> getAllLaundryTypes() {
+        Query q;
+        q = em.createQuery("SELECT lt FROM LaundryType lt");
+        return q.getResultList();
+    }
+    
+    @Override
+    public void deleteLaundryType(LaundryType lt) throws NoResultException {
+        LaundryType laundryType = em.find(LaundryType.class, lt.getLaundryTypeID());
+        if (laundryType != null) {
+            em.remove(laundryType);
+        } else {
+            throw new NoResultException("Laundry Type not found");
+        }
+    }
+    
+    @Override
+    public void updateLaundryType(LaundryType lt) throws NoResultException {
+        LaundryType oldLt = em.find(LaundryType.class, lt.getLaundryTypeID());
+        if (oldLt != null) {
+            oldLt.setLaundryName(lt.getLaundryName());
+            oldLt.setPrice(lt.getPrice());
+        } else {
+            throw new NoResultException("Laundry Type Not found");
+        }
+    }    
+
+    @Override
+    public void createLaundryOrderedItem(LaundryOrderedItem loi) {
+        em.persist(loi);
+    }
+    
+    @Override
+    public void deleteLaundryOrderedItem(LaundryOrderedItem loi) throws NoResultException {
+        LaundryOrderedItem laundryOrderedItem = em.find(LaundryOrderedItem.class, loi.getLaundryOrderedItemID());
+        if (laundryOrderedItem != null) {
+            em.remove(laundryOrderedItem);
+        } else {
+            throw new NoResultException("Laundry Ordered Item not found");
+        }
+    }            
+
+    @Override
+    public LaundryType getLastLaundryType() throws NoResultException {
+        Query q = em.createQuery("SELECT lt FROM LaundryType lt ORDER BY lt.laundryTypeID DESC");
+        return (LaundryType) q.getResultList().get(0);
+    }
+    
+    @Override
+    public LaundryOrderedItem getLastLaundryOrderedItem() throws NoResultException {
+        Query q = em.createQuery("SELECT loi FROM LaundryOrderedItem loi ORDER BY loi.laundryOrderedItemID DESC");
+        return (LaundryOrderedItem) q.getResultList().get(0);        
+    }
+    
+    @Override
+    public LaundryType getLaundryTypeByName(String laundryName) throws NoResultException {
+        Query q;
+        q = em.createQuery("SELECT ln FROM LaundryType ln WHERE "
+                + "LOWER(ln.laundryName) = :laundryName");
+        q.setParameter("laundryName", laundryName.toLowerCase());
+
+        if (!q.getResultList().isEmpty()) {
+            return (LaundryType) q.getResultList().get(0);
+        } else {
+            throw new NoResultException("Laundry Type not found.");
+        }
+    }    
+    
 }

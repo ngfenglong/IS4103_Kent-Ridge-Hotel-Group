@@ -6,6 +6,8 @@
 package sessionBeans;
 
 import entity.LaundryOrder;
+import entity.LaundryOrderedItem;
+import entity.LaundryType;
 import entity.Room;
 import entity.Staff;
 import error.NoResultException;
@@ -39,4 +41,23 @@ public interface LaundrySessionLocal {
     public void updateLaundryOrder(LaundryOrder lo) throws NoResultException;
 
     public LaundryOrder getLastLaundryOrder();
+    
+    public void createLaundryOrderedItem(LaundryOrderedItem loi);
+    
+    public void deleteLaundryOrderedItem(LaundryOrderedItem loi) throws NoResultException;
+    
+    public void createLaundryType(LaundryType lt);
+    
+    public List<LaundryType> getAllLaundryTypes();
+    
+    public void deleteLaundryType(LaundryType lt) throws NoResultException;
+    
+    public void updateLaundryType(LaundryType lt) throws NoResultException;
+    
+    public LaundryType getLastLaundryType() throws NoResultException;
+    
+    public LaundryOrderedItem getLastLaundryOrderedItem() throws NoResultException;
+    
+    public LaundryType getLaundryTypeByName(String laundryName) throws NoResultException;    
+    
 }

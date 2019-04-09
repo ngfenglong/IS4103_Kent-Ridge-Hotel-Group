@@ -8,6 +8,7 @@ package sessionBeans;
 import entity.FoodMenuItem;
 import entity.FoodOrder;
 import entity.FoodOrderedItem;
+import entity.LaundryType;
 import error.NoResultException;
 import java.util.List;
 import javax.ejb.Local;
@@ -38,5 +39,6 @@ public interface FoodMenuItemSessionLocal {
     public FoodOrder getLastFoodOrder() throws NoResultException;
     
     public FoodOrderedItem getLastFoodOrderedItem() throws NoResultException;
+   
 
 }

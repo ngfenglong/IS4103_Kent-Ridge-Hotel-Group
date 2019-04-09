@@ -5,12 +5,16 @@
  */
 package entity;
 
+import error.NoResultException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -36,10 +40,13 @@ public class LaundryOrder implements Serializable {
     @OneToOne
     private Staff houseKeeper;
     private String specialRequest;
-    private int qty;
+    @OneToMany
+    private List<LaundryOrderedItem> laundryOrderedItems;
+    private double totalPrice;
+
 
     public LaundryOrder(){
-        
+        laundryOrderedItems = new ArrayList<LaundryOrderedItem>();
     }
     
     public Long getLaundryOrderID() {
@@ -122,13 +129,37 @@ public class LaundryOrder implements Serializable {
     public void setSpecialRequest(String specialRequest) {
         this.specialRequest = specialRequest;
     }
-
-    public int getQty() {
-        return qty;
+    
+    public List<LaundryOrderedItem> getLaundryOrderedItems() {
+        return laundryOrderedItems;
     }
 
-    public void setQty(int qty) {
-        this.qty = qty;
+    public void setLaundryOrderedItems(List<LaundryOrderedItem> laundryOrderedItems) {
+        this.laundryOrderedItems = laundryOrderedItems;
     }
+    
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }    
+    
+    public void addLaundryOrderedItem(LaundryOrderedItem loi) throws NoResultException {
+        if (loi != null && !this.getLaundryOrderedItems().contains(loi)) {
+            this.getLaundryOrderedItems().add(loi);
+        } else {
+            throw new NoResultException("Laundry Item already added to Laundry Order");
+        }
+    }
+
+    public void removeLaundryOrderedItem(LaundryOrderedItem loi) throws NoResultException {
+        if (loi != null && this.getLaundryOrderedItems().contains(loi)) {
+            this.getLaundryOrderedItems().add(loi);
+        } else {
+            throw new NoResultException("Laundry Item not inside Laundry Order");
+        }
+    } 
 
 }

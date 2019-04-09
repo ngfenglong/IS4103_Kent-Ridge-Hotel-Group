@@ -25,7 +25,15 @@ public class RoomInventory implements Serializable {
     private String inventoryName;
     private int qty;
     private String hotelName;
-    private String roomNumber;
+    private String category;
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
     public String getHotelName() {
         return hotelName;
@@ -33,14 +41,6 @@ public class RoomInventory implements Serializable {
 
     public void setHotelName(String hotelName) {
         this.hotelName = hotelName;
-    }
-
-    public String getRoomNumber() {
-        return roomNumber;
-    }
-
-    public void setRoomNumber(String roomNumber) {
-        this.roomNumber = roomNumber;
     }
 
     public Long getroomInventoryID() {
