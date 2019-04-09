@@ -323,6 +323,10 @@ public class HotelManagedBean implements Serializable {
         return "ViewAllFacility.xhtml?faces-redirect=true";
     }
 
+    public void selectFeedback(Feedback f){
+        selectedFeedback = f;
+    }
+    
     public String saveHoliday() throws NoResultException, ParseException {
 //        hs.setHolidayDate(new SimpleDateFormat("yyyy-MM-dd").parse(holDate));
         selectedHoliday.setHolidayDate(new SimpleDateFormat("yyyy-MM-dd").parse(holDate));
@@ -776,11 +780,12 @@ public class HotelManagedBean implements Serializable {
         return "ViewFacility.xhtml?faces-redirect=true";
     }
 
-    public String deleteHotel(Long hID) throws NoResultException {
-        logActivityName = hotelSessionLocal.getHotelByID(hID).getHotelName();
+    public String deleteHotel() throws NoResultException {
+        Long hotelID = selectedHotelObj.getHotelID();
+        logActivityName = hotelSessionLocal.getHotelByID(hotelID).getHotelName();
         FacesContext context = FacesContext.getCurrentInstance();
         String loggedInName = context.getApplication().createValueBinding("#{authenticationManagedBean.name}").getValue(context).toString();
-        hotelSessionLocal.deleteHotel(hID);
+        hotelSessionLocal.deleteHotel(hotelID);
 
         Logging l = new Logging("Hotel", "Delete " + logActivityName + " from System", loggedInName);
         logSessionLocal.createLogging(l);
@@ -807,11 +812,12 @@ public class HotelManagedBean implements Serializable {
         return "ViewRoomFacility.xhtml?faces-redirect=true";
     }
 
-    public String deleteFeedback(Long fID) throws NoResultException {
-        logActivityName = feedbackSessionLocal.getFeedbackByID(fID).getFeedBackTitle();
+    public String deleteFeedback() throws NoResultException {
+        Long feedBackID = selectedFeedback.getFeedBackID();
+        logActivityName = feedbackSessionLocal.getFeedbackByID(feedBackID).getFeedBackTitle();
         FacesContext context = FacesContext.getCurrentInstance();
         String loggedInName = context.getApplication().createValueBinding("#{authenticationManagedBean.name}").getValue(context).toString();
-        feedbackSessionLocal.deleteFeedback(fID);
+        feedbackSessionLocal.deleteFeedback(feedBackID);
         Logging l = new Logging("Feedback", "Delete " + logActivityName + " from System", loggedInName);
         logSessionLocal.createLogging(l);
 
