@@ -134,7 +134,7 @@
                                                     <div class="form-group">
                                                         <label for=".select2-multiple-input-lg"
                                                                class="control-label">Hotel Facilities</label><br/>
-                                                               <h:selectManyListbox id="select2-multiple-input-lg" placeholder="Select Hotel Facilities" value="#{hotelManagedBean.hotelFacilitiesArr}"
+                                                               <h:selectManyListbox id="select2-multiple-input-lg" value="#{hotelManagedBean.hotelFacilitiesArr}"
                                                                              class="select2-multiple-input-lg" a:multiple="multiple">
                                                             <c:forEach items="${hotelManagedBean.allHotelFacility}" var="h">
                                                                 <f:selectItem itemValue = "#{h.hotelFacilityName}" itemLabel = "#{h.hotelFacilityName}" /> 
