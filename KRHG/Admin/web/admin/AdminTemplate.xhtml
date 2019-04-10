@@ -302,51 +302,6 @@
                                     </ul>
                                 </li>
 
-                                <li class="nav-item has-treeview">
-                                    <a href="#" class="nav-link">
-                                        <i class="fa fa-credit-card"></i>
-                                        <p>
-                                            Extra Surcharges
-                                        </p>
-                                    </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item has-treeview">
-                                            <a href="#{request.contextPath}/admin/addSurcharge.xhtml" class="nav-link">
-                                                <i class="fa fa-plus nav-icon"></i>
-                                                <p>Add Extra Surcharge</p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="#{request.contextPath}/admin/manageSurcharge.xhtml" class="nav-link">
-                                                <i class="nav-icon fa fa-bars"></i>
-                                                <p>Manage Extra Surcharge</p>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item has-treeview">
-                                    <a href="#" class="nav-link">
-                                        <i class="fa fa-credit-card"></i>
-                                        <p>
-                                            Holiday Surcharges
-                                        </p>
-                                    </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item has-treeview">
-                                            <a href="#{request.contextPath}/admin/addHolidaySurcharge.xhtml" class="nav-link">
-                                                <i class="fa fa-plus nav-icon"></i>
-                                                <p>Add Holiday Surcharge</p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="#{request.contextPath}/admin/manageHolidaySurcharge.xhtml" class="nav-link">
-                                                <i class="nav-icon fa fa-bars"></i>
-                                                <p>Manage Holiday Surcharge</p>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-
                                 <!-- Add icons to the links using the .nav-icon class
                                 with font-awesome or any other icon font library -->
                                 <li class="nav-item has-treeview">
@@ -535,6 +490,128 @@
                 $("#example1").DataTable();
 
                 $('#example2').DataTable({
+                    "paging": true,
+                    "lengthChange": false,
+                    "searching": true,
+                    "columns": [
+                        {"orderData": [0, 1], "targets": 0},
+                        {"orderData": 0, "targets": 1},
+                        {"orderData": [2, 3, 4], "targets": 2}
+                    ],
+                    "info": true,
+                    "autoWidth": false
+                });
+
+                $('#rp1').DataTable({
+                    "paging": true,
+                    "lengthChange": false,
+                    "searching": true,
+                    "columns": [
+                        {"orderData": [0, 1], "targets": 0},
+                        {"orderData": 0, "targets": 1},
+                        {"orderData": [2, 3, 4], "targets": 2}
+                    ],
+                    "info": true,
+                    "autoWidth": false
+                });
+                $('#rp2').DataTable({
+                    "paging": true,
+                    "lengthChange": false,
+                    "searching": true,
+                    "columns": [
+                        {"orderData": [0, 1], "targets": 0},
+                        {"orderData": 0, "targets": 1},
+                        {"orderData": [2, 3, 4], "targets": 2}
+                    ],
+                    "info": true,
+                    "autoWidth": false
+                });
+                $('#rp3').DataTable({
+                    "paging": true,
+                    "lengthChange": false,
+                    "searching": true,
+                    "columns": [
+                        {"orderData": [0, 1], "targets": 0},
+                        {"orderData": 0, "targets": 1},
+                        {"orderData": [2, 3, 4], "targets": 2}
+                    ],
+                    "info": true,
+                    "autoWidth": false
+                });
+                $('#rp4').DataTable({
+                    "paging": true,
+                    "lengthChange": false,
+                    "searching": true,
+                    "columns": [
+                        {"orderData": [0, 1], "targets": 0},
+                        {"orderData": 0, "targets": 1},
+                        {"orderData": [2, 3, 4], "targets": 2}
+                    ],
+                    "info": true,
+                    "autoWidth": false
+                });
+                $('#rp5').DataTable({
+                    "paging": true,
+                    "lengthChange": false,
+                    "searching": true,
+                    "columns": [
+                        {"orderData": [0, 1], "targets": 0},
+                        {"orderData": 0, "targets": 1},
+                        {"orderData": [2, 3, 4], "targets": 2}
+                    ],
+                    "info": true,
+                    "autoWidth": false
+                });
+                $('#rp6').DataTable({
+                    "paging": true,
+                    "lengthChange": false,
+                    "searching": true,
+                    "columns": [
+                        {"orderData": [0, 1], "targets": 0},
+                        {"orderData": 0, "targets": 1},
+                        {"orderData": [2, 3, 4], "targets": 2}
+                    ],
+                    "info": true,
+                    "autoWidth": false
+                });
+                $('#rp7').DataTable({
+                    "paging": true,
+                    "lengthChange": false,
+                    "searching": true,
+                    "columns": [
+                        {"orderData": [0, 1], "targets": 0},
+                        {"orderData": 0, "targets": 1},
+                        {"orderData": [2, 3, 4], "targets": 2}
+                    ],
+                    "info": true,
+                    "autoWidth": false
+                });
+                $('#rp8').DataTable({
+                    "paging": true,
+                    "lengthChange": false,
+                    "searching": true,
+                    "columns": [
+                        {"orderData": [0, 1], "targets": 0},
+                        {"orderData": 0, "targets": 1},
+                        {"orderData": [2, 3, 4], "targets": 2}
+                    ],
+                    "info": true,
+                    "autoWidth": false
+                });
+                $('#rp9').DataTable({
+                    "paging": true,
+                    "lengthChange": false,
+                    "searching": true,
+                    "columns": [
+                        {"orderData": [0, 1], "targets": 0},
+                        {"orderData": 0, "targets": 1},
+                        {"orderData": [2, 3, 4], "targets": 2}
+                    ],
+                    "info": true,
+                    "autoWidth": false
+                });
+
+                $('#rp10').DataTable({
                     "paging": true,
                     "lengthChange": false,
                     "searching": true,
