@@ -3,6 +3,8 @@ jQuery(document).ready(function($){
 	$('.cd-popup-trigger').on('click', function(event){
 		event.preventDefault();
 		$('#modal').addClass('is-visible');
+                console.log($('#modal'));
+                console.log($('#modal').attr('class'));
 	});
   
 	//close popup

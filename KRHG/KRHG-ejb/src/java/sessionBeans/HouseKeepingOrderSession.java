@@ -64,16 +64,18 @@ public class HouseKeepingOrderSession implements HouseKeepingOrderSessionLocal {
     }
     
     @Override
-    public List<HouseKeepingOrder> getHouseKeepingOrderByLevelAndHotelCodeNameAndStatus(int level, String hotelCodeName, String status) throws NoResultException {
+    public List<HouseKeepingOrder> getHouseKeepingOrderByLevelAndHotelCodeNameAndStatus(int level, String hotelCodeName, String status, boolean isSpecialRequest) throws NoResultException {
         Query q;
         q = em.createQuery("SELECT ho FROM HouseKeepingOrder ho WHERE "
                 + "ho.level = :level AND "
                 + "LOWER(ho.room.hotel.hotelCodeName) = :hotelCodeName AND "
-                + "LOWER(ho.status) != :status"
+                + "LOWER(ho.status) != :status AND "
+                + "ho.isSpecialRequest = :isSpecialRequest"
                 + " ORDER BY ho.room.roomNumber ASC");
         q.setParameter("level", level);
         q.setParameter("hotelCodeName", hotelCodeName.toLowerCase());
         q.setParameter("status", status.toLowerCase());
+        q.setParameter("isSpecialRequest", isSpecialRequest);
         System.out.println("Status is: " + status.toLowerCase());
         if (!q.getResultList().isEmpty()) {
             return q.getResultList();
@@ -102,6 +104,7 @@ public class HouseKeepingOrderSession implements HouseKeepingOrderSessionLocal {
             oldHouseKeepingOrder.setCompleteDateTime(houseKeepingOrder.getCompleteDateTime());
             oldHouseKeepingOrder.setHouseKeeper(houseKeepingOrder.getHouseKeeper());
             oldHouseKeepingOrder.setSpecialRequest(houseKeepingOrder.getSpecialRequest());
+            oldHouseKeepingOrder.setIsSpecialRequest(houseKeepingOrder.getIsSpecialRequest());
         } else {
             throw new NoResultException("HouseKeeping Order not found");
         }

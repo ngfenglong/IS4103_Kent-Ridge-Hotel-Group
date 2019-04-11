@@ -98,9 +98,9 @@
                     </div>
 
                     <h:form class="mainWrap" style="position: absolute; top:400px; padding-left:20px; width:85%">
-                        <h:inputText style="text-align: center" a:placeholder="Hotel Code" class="loginleft" required="required" />
-                        <h:inputText style="text-align: center" a:placeholder="Password" class="loginleft" required="required" />
-                        <h:commandButton class="bigBtn" value="Login"></h:commandButton>
+                        <h:inputText value="#{hotelStayManagedBean.username}" style="text-align: center" a:placeholder="Hotel Code" class="loginleft" required="required" />
+                        <h:inputSecret value="#{hotelStayManagedBean.password}" style="text-align: center" a:placeholder="Password" class="loginleft" required="required" />
+                        <h:commandButton value="LOGIN" class="bigBtn" action="#{hotelStayManagedBean.login()}"></h:commandButton>
                     </h:form>
 
                 </div>

@@ -23,7 +23,7 @@ public interface HouseKeepingOrderSessionLocal {
     public List<HouseKeepingOrder> getAllHouseKeepingOrder() throws NoResultException;
     public List<HouseKeepingOrder> getHouseKeepingOrderByLevel(int level) throws NoResultException;
     public List<HouseKeepingOrder> getHouseKeepingOrderByLevelAndHotelCodeName(int level, String hotelCodeName) throws NoResultException;
-    public List<HouseKeepingOrder> getHouseKeepingOrderByLevelAndHotelCodeNameAndStatus(int level, String hotelCodeName, String status) throws NoResultException;
+    public List<HouseKeepingOrder> getHouseKeepingOrderByLevelAndHotelCodeNameAndStatus(int level, String hotelCodeName, String status, boolean isSpecialRequest) throws NoResultException;
     public HouseKeepingOrder getHouseKeepingOrderID(Long houseKeepingOrderID) throws NoResultException;
     public void updateHouseKeepingOrder (HouseKeepingOrder houseKeepingOrder) throws NoResultException;
     public void deleteHouseKeepingOrder (Long houseKeepingOrderID) throws NoResultException;
