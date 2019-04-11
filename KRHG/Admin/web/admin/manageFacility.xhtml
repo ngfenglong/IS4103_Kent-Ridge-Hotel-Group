@@ -3,7 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
@@ -15,64 +17,70 @@
             <ui:define name="content">
                 <!-- Content Header (Page header) -->
                 <div class="content-header">
-                        <div class="container-fluid">
-                                <div class="row mb-2">
-                                        <div class="col-sm-6">
-                                            <h1 style="font-size: x-large; margin-bottom:20px">Manage All Facilities</h1>
-                                        </div>
-                                        <!-- /.col -->
-                                        <div class="col-sm-6">
-                                            <ol class="breadcrumb float-sm-right">
-                                                    <li><a href="#"> Home</a></li>
-                                                    <li class="active">Manage Facility</li>
-                                            </ol>
-                                        </div>
-                                        <!-- /.col -->
-                                    </div>
-                                    <!-- /.row -->
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <h1 style="font-size: x-large; margin-bottom:20px">Manage All Facilities</h1>
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li><a href="#"> Home</a></li>
+                                    <li class="active">Manage Facility</li>
+                                </ol>
+                            </div>
+                            <!-- /.col -->
                         </div>
-                        <!-- /.container-fluid -->
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.container-fluid -->
                 </div>
                 <!-- /.content-header -->
                 <!-- Main content -->
                 <section class="content">
-                        <div class="box box-primary" style="padding:20px 50px; margin:14px; width:98% ">
-               
-                                <h3 class="box-title" style="margin-bottom:10px; text-align: center; font-size:x-large">All Hotel Facilities</h3>
-                                <div class="box-tools pull-right">
-                             <!--Add Btn-->
-                             <h:form>
-                                    <h:commandButton class="btn btn-primary"
-                                        action="addFacility.xhtml?faces-redirect=true" value="+" />
-                                </h:form>
+                    <div class="box box-primary" style="padding:20px 50px; margin:14px; width:98% ">
+
+                        <h3 class="box-title" style="margin-bottom:10px; text-align: center; font-size:x-large">All Hotel Facilities</h3>
+                        <div class="box-tools pull-right">
+                            <!--Add Btn-->
+                            <h:form>
+                                <h:commandButton class="btn btn-primary"
+                                                 action="addFacility.xhtml?faces-redirect=true" value="+" />
+                                </h:form> 
                         </div>
                         <h:form>
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                            <th>Hotel Facility</th>
-                                            <th>Description</th>
-                                            <th>Icon Image</th>
-                                            <th>Edit</th>
-                                            <th>Delete</th>
+                                        <th>Hotel Facility</th>
+                                        <th>Description</th>
+                                        <th>Icon Image</th>
+                                        <th>Edit</th>
+                                        <th>Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                        <c:forEach items="${hotelManagedBean.allHotelFacility}" var="hf">
-                                                <tr>
-                                                    <td>#{hf.hotelFacilityName}</td>
-                                                    <td>#{hf.hotelFacilityDescription}</td>
-                                                    <td><img style="width:20px; height: 20px;" alt="#{f.hotelFacilityName}" src="http://zetegral.website/krhgImages/#{hf.hotelFacilityImage}" /> </td>
-                                                    <td><h:commandButton id="editBtn" action="#{hotelManagedBean.editHotelFacility(hf.hotelFacilityID)}" value="Edit" class="btn btn-secondary"  /></td>
-                                                    <td><h:commandButton id="deleteBtn"  onclick="return confirm('Are you sure?');" action="#{hotelManagedBean.deleteHotelFacility(hf.hotelFacilityID)}" value="Delete" class="btn btn-danger"  /></td>
-                                                </tr>
-                                            </c:forEach>
+                                    <c:forEach items="${hotelManagedBean.allHotelFacility}" var="hf">
+                                        <tr>
+                                            <td>#{hf.hotelFacilityName}</td>
+                                            <td>#{hf.hotelFacilityDescription}</td>
+                                            <td><img style="width:20px; height: 20px;" alt="#{f.hotelFacilityName}" src="http://zetegral.website/krhgImages/#{hf.hotelFacilityImage}" /> </td>
+                                            <td><h:commandLink  action="#{hotelManagedBean.editHotelFacility(hf.hotelFacilityID)}" style="font-size: large; margin-right: 5px"><i class="far fa-edit"></i></h:commandLink></td>
+                                            <td><h:commandButton id="deleteBtn"  onclick="return confirm('Are you sure?');" action="#{hotelManagedBean.deleteHotelFacility(hf.hotelFacilityID)}" value="Delete" class="btn btn-danger"  /></td>
+                                            <!--<td><h:commandLink  class="cd-popup-trigger" id="modal-2" a:data-target="#modal-1" style="font-size: large"><i class="fas fa-trash-alt"></i>
+                                                        <f:ajax execute="@form" render='@none'/>
+                                                </h:commandLink></td>
+-->
+                                        </tr>
+                                    </c:forEach>
                                 </tbody>
                             </table>
                         </h:form>
                     </div>
                 </section>
+                
                 <!-- /.content -->
+
             </ui:define>
             <ui:define name="script">
                 script

@@ -79,10 +79,11 @@ public class LostAndFoundReportResource {
         newReport.setItemName(itemName);
         newReport.setReportType("Found");
         newReport.setReportedDate(new Date());
+       
 
         try {
             lostAndFoundSession.createLostAndFoundReport(newReport);
-            return Response.status(204).build();
+            return Response.status(204).entity(Json.createObjectBuilder().build()).build();
         } catch (Exception e) {
             JsonObject exception = Json.createObjectBuilder()
                     .add("error", "Failed to create Lost and Found Report")

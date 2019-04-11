@@ -22,6 +22,7 @@ import javax.persistence.TemporalType;
 @Entity
 public class HouseKeepingOrder implements Serializable {
 
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -37,11 +38,26 @@ public class HouseKeepingOrder implements Serializable {
     private String specialRequest;
     private int level;
     private String requestType;
+    private boolean isSpecialRequest;
     public HouseKeepingOrder() {
         
     }
     
-    public HouseKeepingOrder(Room room, String status, int level, Date orderDateTime, Date completeDateTime, Staff houseKeeper, String specialRequest, String requestType) {
+    /**
+     * @return the isSpecialRequest
+     */
+    public boolean getIsSpecialRequest() {
+        return isSpecialRequest;
+    }
+
+    /**
+     * @param isSpecialRequest the isSpecialRequest to set
+     */
+    public void setIsSpecialRequest(boolean isSpecialRequest) {
+        this.isSpecialRequest = isSpecialRequest;
+    }
+    
+    public HouseKeepingOrder(Room room, String status, int level, Date orderDateTime, Date completeDateTime, Staff houseKeeper, String specialRequest, String requestType, boolean isSpecialRequest) {
         this();
         this.room = room;
         this.status = status;
@@ -51,6 +67,7 @@ public class HouseKeepingOrder implements Serializable {
         this.houseKeeper = houseKeeper;
         this.specialRequest = specialRequest;
         this.requestType = requestType;
+        this.isSpecialRequest = isSpecialRequest;
     }
     
     

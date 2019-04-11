@@ -8,6 +8,7 @@ package entity;
 import error.NoResultException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,7 +22,17 @@ public class MailingList implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long listID;
     private String listName;
-    private ArrayList<String> listToSend;
+    private List<String> listToSend;
+
+    public MailingList() {
+        listToSend = new ArrayList<String>();
+    }
+
+    public MailingList(String listName, ArrayList<String> listToSend) {
+        this();
+        this.listName = listName;
+        this.listToSend = listToSend;
+    }
 
     public Long getListID() {
         return listID;
@@ -70,22 +81,22 @@ public class MailingList implements Serializable {
         this.listName = listName;
     }
 
+    public List<String> getListToSend() {
+        return listToSend;
+    }
+
     /**
      * @return the listToSend
      */
-    public ArrayList<String> getListToSend() {
-        return listToSend;
+    public void setListToSend(List<String> listToSend) {
+        this.listToSend = listToSend;
     }
 
     /**
      * @param listToSend the listToSend to set
      */
-    public void setListToSend(ArrayList<String> listToSend) {
-        this.listToSend = listToSend;
-    }
-
     public void addList(String newEntry) throws NoResultException {
-        if (newEntry.equals("") && !this.getListToSend().contains(newEntry)) {
+        if (!newEntry.equals("") && !this.getListToSend().contains(newEntry)) {
             this.getListToSend().add(newEntry);
         } else {
             throw new NoResultException("Entry already added to Hotel");
@@ -93,7 +104,7 @@ public class MailingList implements Serializable {
     }
 
     public void removeList(String newEntry) throws NoResultException {
-        if (newEntry.equals("") && this.getListToSend().contains(newEntry)) {
+        if (!newEntry.equals("") && this.getListToSend().contains(newEntry)) {
             this.getListToSend().remove(newEntry);
         } else {
             throw new NoResultException("Entry has not been added to MailingList");

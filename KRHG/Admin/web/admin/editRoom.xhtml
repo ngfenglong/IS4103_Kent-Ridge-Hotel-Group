@@ -50,7 +50,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="selectHotel">Hotel</label><br />
-                                            <h:selectOneMenu value="#{hotelManagedBean.selectedRoom.roomName}"
+                                            <h:selectOneMenu value="#{hotelManagedBean.tempHotelNameTB}"
                                                 id="selectHotel" class="select2-selection--single">
                                                 <c:forEach items="${hotelManagedBean.allHotels}" var="h">
                                                     <f:selectItem itemValue="#{h.hotelName}"

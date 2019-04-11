@@ -7,13 +7,14 @@ jQuery(document).ready(function($){
   //   console.log("number1");
   //   $('#modalVH').addClass('is-visible');
   // });
-  
-  //open popup
+
+         
+      //open popup
 	$('.cd-popup-trigger').on('click', function(event){
 		event.preventDefault();
-    $('#modalVH').addClass('is-visible');
-    console.log($('#modalVH'));
-    console.log($('#modalVH').attr('class'));
+    $('#modal').addClass('is-visible');
+    console.log($('#modal'));
+    console.log($('#modal').attr('class'));
     
     
     return true;
@@ -42,16 +43,23 @@ jQuery(document).ready(function($){
     	//close popup
 	$('.cd-popup').on('click', function(event){
 		if( $(event.target).is('.cd-popup-confirm') || $(event.target).is('.cd-popup') ) {
+      console.log($(event.target).attr("id").substring(8));
       console.log("number4");
+
           var behaviorValue = 'yes';
           var typeValue = 'info';
           var el = document.createElement('p');
           el.classList.add('notification');
           var text = '';
-          if($(event.target).attr("id")=="deleteHotel"){
-            text = "You have deleted the hotel"
-          } else if ($(event.target).attr("id")=="housekeeping"){
-            text = "Your housekeeping request has been cancelled"
+          if($(event.target).attr("id").substring(8)=="deleteHotel"){
+            text = "Hotel has been deleted"
+          } else if ($(event.target).attr("id").substring(8)=="deleteFeedback"){
+            text = "Feedback has been deleted"
+          } else if ($(event.target).attr("id").substring(8)=="deleteStaff"){
+            text = "Staff has been deleted"
+          }else if ($(event.target).attr("id").substring(8)=="deleteRoom"){
+            text = "Room has been deleted"
+        
           }
 
           switch (typeValue) {

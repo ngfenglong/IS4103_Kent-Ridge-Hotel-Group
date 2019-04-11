@@ -63,9 +63,7 @@ public class HousekeepingordersResource {
                 tempRoom.setStatus(h.getRoom().getStatus());
                 tempHouseKeepingOrder.setRoom(tempRoom);
                 tempHouseKeepingOrder.setStatus(h.getStatus());
-//                tempHouseKeepingOrder.setOrderDateTime(h.getOrderDateTime());
-//                tempHouseKeepingOrder.setCompleteDateTime(h.getCompleteDateTime());
-//                tempHouseKeepingOrder.setHouseKeeper(h.getHouseKeeper());
+                tempHouseKeepingOrder.setIsSpecialRequest(h.getIsSpecialRequest());
                 tempHouseKeepingOrder.setSpecialRequest(h.getSpecialRequest());
                 tempHouseKeepingOrder.setLevel(h.getLevel());
                 returnList.add(tempHouseKeepingOrder);
@@ -93,12 +91,12 @@ public class HousekeepingordersResource {
     @GET
     @Path("/query")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response searchHouseKeepingOrder(@QueryParam("level") String level, @QueryParam("hotelCodeName") String hotelCodeName) throws NoResultException {
-        System.out.println("444Searching based on level: " + level + " Hotel Codename: " + hotelCodeName);
+    public Response searchHouseKeepingOrder(@QueryParam("level") String level, @QueryParam("hotelCodeName") String hotelCodeName, @QueryParam("isSpecialRequest") boolean isSpecialRequest) throws NoResultException {
+        System.out.println("444Searching based on level: " + level + " Hotel Codename: " + hotelCodeName + " Special request: " + isSpecialRequest);
         if (level != null) {
 //            List<HouseKeepingOrder> getList = houseKeepingOrderSession.getHouseKeepingOrderByLevel(Integer.parseInt(level));
 //              List<HouseKeepingOrder> getList = houseKeepingOrderSession.getHouseKeepingOrderByLevelAndHotelCodeName(Integer.parseInt(level), hotelCodeName);
-            List<HouseKeepingOrder> getList = houseKeepingOrderSession.getHouseKeepingOrderByLevelAndHotelCodeNameAndStatus(Integer.parseInt(level), hotelCodeName, "complete");
+            List<HouseKeepingOrder> getList = houseKeepingOrderSession.getHouseKeepingOrderByLevelAndHotelCodeNameAndStatus(Integer.parseInt(level), hotelCodeName, "complete", isSpecialRequest);
 //            List<HouseKeepingOrder> returnList = new ArrayList<>();
             List<HouseKeepingOrder> returnList = new ArrayList<>();
             for (HouseKeepingOrder h : getList) {
@@ -114,6 +112,7 @@ public class HousekeepingordersResource {
                 tempHouseKeepingOrder.setSpecialRequest(h.getSpecialRequest());
                 tempHouseKeepingOrder.setLevel(h.getLevel());
                 tempHouseKeepingOrder.setRequestType(h.getRequestType());
+                tempHouseKeepingOrder.setIsSpecialRequest(h.getIsSpecialRequest());
                 returnList.add(tempHouseKeepingOrder);
             }
             GenericEntity<List<HouseKeepingOrder>> entity = new GenericEntity<List<HouseKeepingOrder>>(returnList) {
@@ -128,7 +127,7 @@ public class HousekeepingordersResource {
     @PUT
     @Path("/update")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response editCustomer(@QueryParam("id") String hoID) {
+    public Response updateHouseKeepingOrder(@QueryParam("id") String hoID) {
         try {
 
             HouseKeepingOrder ho = houseKeepingOrderSession.getHouseKeepingOrderID(Long.parseLong(hoID));
