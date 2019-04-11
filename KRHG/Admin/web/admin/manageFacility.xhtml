@@ -66,11 +66,10 @@
                                             <td>#{hf.hotelFacilityDescription}</td>
                                             <td><img style="width:20px; height: 20px;" alt="#{f.hotelFacilityName}" src="http://zetegral.website/krhgImages/#{hf.hotelFacilityImage}" /> </td>
                                             <td><h:commandLink  action="#{hotelManagedBean.editHotelFacility(hf.hotelFacilityID)}" style="font-size: large; margin-right: 5px"><i class="far fa-edit"></i></h:commandLink></td>
-                                            <td><h:commandButton id="deleteBtn"  onclick="return confirm('Are you sure?');" action="#{hotelManagedBean.deleteHotelFacility(hf.hotelFacilityID)}" value="Delete" class="btn btn-danger"  /></td>
-                                            <!--<td><h:commandLink  class="cd-popup-trigger" id="modal-2" a:data-target="#modal-1" style="font-size: large"><i class="fas fa-trash-alt"></i>
-                                                        <f:ajax execute="@form" render='@none'/>
-                                                </h:commandLink></td>
--->
+                                            
+                                            
+                                            <td><h:commandLink actionListener="#{hotelManagedBean.selectedDeleteHotelFacility(hf.hotelFacilityID)}" class="cd-popup-trigger" id="modal-2" a:data-target="#modal-1" style="font-size: large"><i class="fas fa-trash-alt"></i>
+                                                            <f:ajax execute="@form" render='@none'/> </h:commandLink></td>
                                         </tr>
                                     </c:forEach>
                                 </tbody>
@@ -80,6 +79,21 @@
                 </section>
                 
                 <!-- /.content -->
+                <h:form>
+                    <div id="modal" class="cd-popup" role="alert">
+                        <div class="cd-popup-container">
+                            <p class="popup-content">Delete Facility?</p>
+
+                            <ul class="cd-buttons" style="padding-inline-start: unset; padding:0px">
+                                
+                                <li ><h:commandLink id="removeFacilityFromHotel" action="#{hotelManagedBean.deleteHotelFacility()}" class="cd-popup-confirm" value="Yes">
+                                </h:commandLink></li>
+                                <li style="background-color:lightslategray"><a onclick="" class=" cd-popup-closemodal">No</a></li>
+
+                            </ul>
+                        </div> <!-- cd-popup-container -->
+                    </div> <!-- cd-popup -->
+                </h:form>
 
             </ui:define>
             <ui:define name="script">

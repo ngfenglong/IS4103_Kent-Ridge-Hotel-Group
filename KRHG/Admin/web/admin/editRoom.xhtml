@@ -97,11 +97,11 @@
                                                 <f:selectItem itemValue="Penthouse" itemLabel="Penthouse" />
                                             </h:selectOneMenu><br />
                                         </div>
-
+                                        
                                         <div class="form-group">
                                             <label for="roomFacilities">Room Facilities</label> <br />
                                             <h:selectManyListbox id="roomFacilities" size="10" a:multiple="multiple"
-                                                class="select2-selection--multiple"
+                                                class="select2-multiple-input-lg"
                                                 value="#{hotelManagedBean.roomFacilities}">
                                                 <c:forEach items="${hotelManagedBean.roomFacilityList}" var="r">
                                                     <f:selectItem itemValue="#{r.roomFacilityName}"
@@ -110,9 +110,9 @@
                                             </h:selectManyListbox>
                                         </div>
                                         <div class="form-group">
-                                            <label for="minibarItems">Minibar Items</label> <br />
-                                            <h:selectManyListbox id="minibarItems" size="5" a:multiple="multiple"
-                                                class="select2-selection--multiple"
+                                            <label for=".select2-multiple-input-lg">Minibar Items</label> <br />
+                                            <h:selectManyListbox id="select2-multiple-input-lg" size="5" a:multiple="multiple"
+                                                class="select2-multiple-input-lg"
                                                 value="#{hotelManagedBean.minibarItems}">
                                                 <c:forEach items="${hotelManagedBean.minibarItemList}" var="m">
                                                     <f:selectItem itemValue="#{m.itemName}" itemLabel="#{m.itemName}" />

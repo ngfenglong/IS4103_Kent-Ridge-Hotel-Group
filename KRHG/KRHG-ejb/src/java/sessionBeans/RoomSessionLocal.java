@@ -57,7 +57,9 @@ public interface RoomSessionLocal {
     public void deleteMinibarItem(Long miID) throws NoResultException;
     public void updateMinibarItem(MinibarItem mi) throws NoResultException;
     public List<MinibarItem> getAllMinibarItem();
+    public List<MinibarItem> getAllMinibarItemWithAvailable();
     public MinibarItem getMinibarItemByID(Long miID) throws NoResultException;
     public MinibarItem getMinibarItemByName(String name) throws NoResultException;
+    
     
 }
