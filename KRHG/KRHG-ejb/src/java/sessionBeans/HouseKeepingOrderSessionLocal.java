@@ -9,6 +9,7 @@ import entity.HouseKeepingOrder;
 import entity.MinibarItem;
 import entity.MinibarOrder;
 import entity.MinibarOrderedItem;
+import entity.MinibarStock;
 import error.NoResultException;
 import java.util.List;
 import javax.ejb.Local;
@@ -41,5 +42,9 @@ public interface HouseKeepingOrderSessionLocal {
     public void createMinibarOrderedItem (MinibarOrderedItem moi);
     public MinibarOrder getLastMinibarOrder() throws NoResultException; 
     public MinibarOrderedItem getLastMinibarOrderedItem() throws NoResultException; 
-    
+    public void createMinibarStock(MinibarStock ms);
+    public List<MinibarStock> getAllMinibarStock();
+    public MinibarStock getMinibarStockByNameAndHotelCode(String minibarItemName, String hotelCodeName) throws NoResultException;
+    public void updateMinibarStock(MinibarStock ms) throws NoResultException;
+    public void deleteMinibarStock(Long msID) throws NoResultException;
 }
