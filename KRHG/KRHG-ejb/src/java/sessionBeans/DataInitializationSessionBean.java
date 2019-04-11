@@ -175,25 +175,25 @@ public class DataInitializationSessionBean {
         StaffType st12 = new StaffType("Finance Staff");
         staffSessionLocal.createStaffType(st12);
         st12 = staffSessionLocal.getStaffTypeByName("Finance Staff");
-        
+
         StaffType st13 = new StaffType("Finance Manager");
         staffSessionLocal.createStaffType(st13);
         st13 = staffSessionLocal.getStaffTypeByName("Finance Manager");
-        
+
         StaffType st14 = new StaffType("HR Staff");
         staffSessionLocal.createStaffType(st14);
-        st14 = staffSessionLocal.getStaffTypeByName("Finance Staff");        
+        st14 = staffSessionLocal.getStaffTypeByName("HR Staff");
 
         StaffType st15 = new StaffType("General Manager");
         staffSessionLocal.createStaffType(st15);
-        st15 = staffSessionLocal.getStaffTypeByName("General Manager");  
+        st15 = staffSessionLocal.getStaffTypeByName("General Manager");
 
         StaffType st16 = new StaffType("Testing");
         staffSessionLocal.createStaffType(st16);
-        st16 = staffSessionLocal.getStaffTypeByName("Testing");  
+        st16 = staffSessionLocal.getStaffTypeByName("Testing");
 
 //*********************************************Staff************************************************
-Staff s0 = new Staff("Test User", "test", encryptPassword("test"), "zell1502@hotmail.com", "88244165", "male", "S9226940Z", "7 Lok Yang Vista", new Date(), "Kent Ridge North", "Laundry Staff", "Laundry", 7, true, "Ee Pui Ling", "7 Lok Yang Vista", "68701722");
+        Staff s0 = new Staff("Test User", "test", encryptPassword("test"), "zell1502@hotmail.com", "88244165", "male", "S9226940Z", "7 Lok Yang Vista", new Date(), "Kent Ridge North", "Laundry Staff", "Laundry", 7, true, "Ee Pui Ling", "7 Lok Yang Vista", "68701722");
         s0.addAccountRights(st1);
         s0.addAccountRights(st2);
         s0.addAccountRights(st3);
@@ -858,19 +858,19 @@ Staff s0 = new Staff("Test User", "test", encryptPassword("test"), "zell1502@hot
         MinibarStock ms3 = new MinibarStock("Potato Chips", "KRN", 600, 150);
         houseKeepingOrderSessionLocal.createMinibarStock(ms3);
         MinibarStock ms4 = new MinibarStock("Potato Chips", "KRS", 600, 150);
-        houseKeepingOrderSessionLocal.createMinibarStock(ms4);  
+        houseKeepingOrderSessionLocal.createMinibarStock(ms4);
         MinibarStock ms5 = new MinibarStock("Potato Chips", "KRE", 600, 150);
-        houseKeepingOrderSessionLocal.createMinibarStock(ms5);  
+        houseKeepingOrderSessionLocal.createMinibarStock(ms5);
         MinibarStock ms6 = new MinibarStock("Potato Chips", "KRW", 600, 150);
         houseKeepingOrderSessionLocal.createMinibarStock(ms6);
         MinibarStock ms7 = new MinibarStock("Potato Chips", "KRNE", 400, 100);
-        houseKeepingOrderSessionLocal.createMinibarStock(ms7);  
+        houseKeepingOrderSessionLocal.createMinibarStock(ms7);
         MinibarStock ms8 = new MinibarStock("Potato Chips", "KRNS", 400, 100);
         houseKeepingOrderSessionLocal.createMinibarStock(ms8);
         MinibarStock ms9 = new MinibarStock("Potato Chips", "KRSE", 400, 100);
         houseKeepingOrderSessionLocal.createMinibarStock(ms9);
         MinibarStock ms10 = new MinibarStock("Potato Chips", "KRSW", 400, 100);
-        houseKeepingOrderSessionLocal.createMinibarStock(ms10);        
+        houseKeepingOrderSessionLocal.createMinibarStock(ms10);
 
         MinibarItem m2 = new MinibarItem("Chocolate", 5, 8.00);
         houseKeepingOrderSessionLocal.createMinibarItem(m2);
@@ -881,20 +881,20 @@ Staff s0 = new Staff("Test User", "test", encryptPassword("test"), "zell1502@hot
         MinibarStock ms13 = new MinibarStock("Chocolate", "KRN", 600, 150);
         houseKeepingOrderSessionLocal.createMinibarStock(ms13);
         MinibarStock ms14 = new MinibarStock("Chocolate", "KRS", 600, 150);
-        houseKeepingOrderSessionLocal.createMinibarStock(ms14);  
+        houseKeepingOrderSessionLocal.createMinibarStock(ms14);
         MinibarStock ms15 = new MinibarStock("Chocolate", "KRE", 600, 150);
-        houseKeepingOrderSessionLocal.createMinibarStock(ms15);  
+        houseKeepingOrderSessionLocal.createMinibarStock(ms15);
         MinibarStock ms16 = new MinibarStock("Chocolate", "KRW", 600, 150);
         houseKeepingOrderSessionLocal.createMinibarStock(ms16);
         MinibarStock ms17 = new MinibarStock("Chocolate", "KRNE", 400, 100);
-        houseKeepingOrderSessionLocal.createMinibarStock(ms17);  
+        houseKeepingOrderSessionLocal.createMinibarStock(ms17);
         MinibarStock ms18 = new MinibarStock("Chocolate", "KRNS", 400, 100);
         houseKeepingOrderSessionLocal.createMinibarStock(ms18);
         MinibarStock ms19 = new MinibarStock("Chocolate", "KRSE", 400, 100);
         houseKeepingOrderSessionLocal.createMinibarStock(ms19);
         MinibarStock ms20 = new MinibarStock("Chocolate", "KRSW", 400, 100);
-        houseKeepingOrderSessionLocal.createMinibarStock(ms20);  
-        
+        houseKeepingOrderSessionLocal.createMinibarStock(ms20);
+
         m2 = houseKeepingOrderSessionLocal.getMinibarItemByItemName("Chocolate");
 
         MinibarItem m3 = new MinibarItem("Mineral Water", 3, 5.00);
@@ -906,20 +906,20 @@ Staff s0 = new Staff("Test User", "test", encryptPassword("test"), "zell1502@hot
         MinibarStock ms23 = new MinibarStock("Mineral Water", "KRN", 600, 150);
         houseKeepingOrderSessionLocal.createMinibarStock(ms23);
         MinibarStock ms24 = new MinibarStock("Mineral Water", "KRS", 600, 150);
-        houseKeepingOrderSessionLocal.createMinibarStock(ms24);  
+        houseKeepingOrderSessionLocal.createMinibarStock(ms24);
         MinibarStock ms25 = new MinibarStock("Mineral Water", "KRE", 600, 150);
-        houseKeepingOrderSessionLocal.createMinibarStock(ms25);  
+        houseKeepingOrderSessionLocal.createMinibarStock(ms25);
         MinibarStock ms26 = new MinibarStock("Mineral Water", "KRW", 600, 150);
         houseKeepingOrderSessionLocal.createMinibarStock(ms26);
         MinibarStock ms27 = new MinibarStock("Mineral Water", "KRNE", 400, 100);
-        houseKeepingOrderSessionLocal.createMinibarStock(ms27);  
+        houseKeepingOrderSessionLocal.createMinibarStock(ms27);
         MinibarStock ms28 = new MinibarStock("Mineral Water", "KRNS", 400, 100);
         houseKeepingOrderSessionLocal.createMinibarStock(ms28);
         MinibarStock ms29 = new MinibarStock("Mineral Water", "KRSE", 400, 100);
         houseKeepingOrderSessionLocal.createMinibarStock(ms29);
         MinibarStock ms30 = new MinibarStock("Mineral Water", "KRSW", 400, 100);
-        houseKeepingOrderSessionLocal.createMinibarStock(ms30); 
-        
+        houseKeepingOrderSessionLocal.createMinibarStock(ms30);
+
         m3 = houseKeepingOrderSessionLocal.getMinibarItemByItemName("Mineral Water");
 
         MinibarItem m4 = new MinibarItem("Coke", 3, 7.00);
@@ -931,19 +931,19 @@ Staff s0 = new Staff("Test User", "test", encryptPassword("test"), "zell1502@hot
         MinibarStock ms33 = new MinibarStock("Coke", "KRN", 600, 150);
         houseKeepingOrderSessionLocal.createMinibarStock(ms33);
         MinibarStock ms34 = new MinibarStock("Coke", "KRS", 600, 150);
-        houseKeepingOrderSessionLocal.createMinibarStock(ms34);  
+        houseKeepingOrderSessionLocal.createMinibarStock(ms34);
         MinibarStock ms35 = new MinibarStock("Coke", "KRE", 600, 150);
-        houseKeepingOrderSessionLocal.createMinibarStock(ms35);  
+        houseKeepingOrderSessionLocal.createMinibarStock(ms35);
         MinibarStock ms36 = new MinibarStock("Coke", "KRW", 600, 150);
         houseKeepingOrderSessionLocal.createMinibarStock(ms36);
         MinibarStock ms37 = new MinibarStock("Coke", "KRNE", 400, 100);
-        houseKeepingOrderSessionLocal.createMinibarStock(ms37);  
+        houseKeepingOrderSessionLocal.createMinibarStock(ms37);
         MinibarStock ms38 = new MinibarStock("Coke", "KRNS", 400, 100);
         houseKeepingOrderSessionLocal.createMinibarStock(ms38);
         MinibarStock ms39 = new MinibarStock("Coke", "KRSE", 400, 100);
         houseKeepingOrderSessionLocal.createMinibarStock(ms39);
         MinibarStock ms40 = new MinibarStock("Coke", "KRSW", 400, 100);
-        houseKeepingOrderSessionLocal.createMinibarStock(ms40);          
+        houseKeepingOrderSessionLocal.createMinibarStock(ms40);
         m4 = houseKeepingOrderSessionLocal.getMinibarItemByItemName("Coke");
 
         MinibarItem m5 = new MinibarItem("Wine", 5, 60.00);
@@ -955,20 +955,20 @@ Staff s0 = new Staff("Test User", "test", encryptPassword("test"), "zell1502@hot
         MinibarStock ms43 = new MinibarStock("Wine", "KRN", 600, 150);
         houseKeepingOrderSessionLocal.createMinibarStock(ms43);
         MinibarStock ms44 = new MinibarStock("Wine", "KRS", 600, 150);
-        houseKeepingOrderSessionLocal.createMinibarStock(ms44);  
+        houseKeepingOrderSessionLocal.createMinibarStock(ms44);
         MinibarStock ms45 = new MinibarStock("Wine", "KRE", 600, 150);
-        houseKeepingOrderSessionLocal.createMinibarStock(ms45);  
+        houseKeepingOrderSessionLocal.createMinibarStock(ms45);
         MinibarStock ms46 = new MinibarStock("Wine", "KRW", 600, 150);
         houseKeepingOrderSessionLocal.createMinibarStock(ms46);
         MinibarStock ms47 = new MinibarStock("Wine", "KRNE", 400, 100);
-        houseKeepingOrderSessionLocal.createMinibarStock(ms47);  
+        houseKeepingOrderSessionLocal.createMinibarStock(ms47);
         MinibarStock ms48 = new MinibarStock("Wine", "KRNS", 400, 100);
         houseKeepingOrderSessionLocal.createMinibarStock(ms48);
         MinibarStock ms49 = new MinibarStock("Wine", "KRSE", 400, 100);
         houseKeepingOrderSessionLocal.createMinibarStock(ms49);
         MinibarStock ms50 = new MinibarStock("Wine", "KRSW", 400, 100);
-        houseKeepingOrderSessionLocal.createMinibarStock(ms50);         
-        
+        houseKeepingOrderSessionLocal.createMinibarStock(ms50);
+
         m5 = houseKeepingOrderSessionLocal.getMinibarItemByItemName("Wine");
 
         MinibarItem m6 = new MinibarItem("Beer", 5, 15.00);
@@ -980,20 +980,20 @@ Staff s0 = new Staff("Test User", "test", encryptPassword("test"), "zell1502@hot
         MinibarStock ms53 = new MinibarStock("Beer", "KRN", 600, 150);
         houseKeepingOrderSessionLocal.createMinibarStock(ms53);
         MinibarStock ms54 = new MinibarStock("Beer", "KRS", 600, 150);
-        houseKeepingOrderSessionLocal.createMinibarStock(ms54);  
+        houseKeepingOrderSessionLocal.createMinibarStock(ms54);
         MinibarStock ms55 = new MinibarStock("Beer", "KRE", 600, 150);
-        houseKeepingOrderSessionLocal.createMinibarStock(ms55);  
+        houseKeepingOrderSessionLocal.createMinibarStock(ms55);
         MinibarStock ms56 = new MinibarStock("Beer", "KRW", 600, 150);
         houseKeepingOrderSessionLocal.createMinibarStock(ms56);
         MinibarStock ms57 = new MinibarStock("Beer", "KRNE", 400, 100);
-        houseKeepingOrderSessionLocal.createMinibarStock(ms57);  
+        houseKeepingOrderSessionLocal.createMinibarStock(ms57);
         MinibarStock ms58 = new MinibarStock("Beer", "KRNS", 400, 100);
         houseKeepingOrderSessionLocal.createMinibarStock(ms58);
         MinibarStock ms59 = new MinibarStock("Beer", "KRSE", 400, 100);
         houseKeepingOrderSessionLocal.createMinibarStock(ms59);
         MinibarStock ms60 = new MinibarStock("Beer", "KRSW", 400, 100);
-        houseKeepingOrderSessionLocal.createMinibarStock(ms60);  
-        
+        houseKeepingOrderSessionLocal.createMinibarStock(ms60);
+
         m6 = houseKeepingOrderSessionLocal.getMinibarItemByItemName("Beer");
 
 //*********************************************ROOM FACILIY************************************************
@@ -1445,19 +1445,18 @@ Staff s0 = new Staff("Test User", "test", encryptPassword("test"), "zell1502@hot
         fb3.setFeedBackMsg("rooms were recently renovated and very comfortable, modern and nice.");
         fb3.setHotel(h1);
         feedbackSessionLocal.createFeedback(fb3);
-        
-        
+
 //*********************************************LAUNDRY TYPE************************************************        
         LaundryType lt1 = new LaundryType();
         lt1.setLaundryName("Top (Dry-Wash)");
         lt1.setPrice(15.0);
         laundrySessionLocal.createLaundryType(lt1);
-        
+
         LaundryType lt2 = new LaundryType();
         lt2.setLaundryName("Top (Wash)");
         lt2.setPrice(12.0);
-        laundrySessionLocal.createLaundryType(lt2);        
-        
+        laundrySessionLocal.createLaundryType(lt2);
+
         LaundryType lt3 = new LaundryType();
         lt3.setLaundryName("Bottom (Dry-Wash)");
         lt3.setPrice(15.0);
@@ -1467,12 +1466,12 @@ Staff s0 = new Staff("Test User", "test", encryptPassword("test"), "zell1502@hot
         lt4.setLaundryName("Bottom (Wash)");
         lt4.setPrice(12.0);
         laundrySessionLocal.createLaundryType(lt4);
-        
+
         LaundryType lt5 = new LaundryType();
         lt5.setLaundryName("Inner Wear (Dry-Wash)");
         lt5.setPrice(8.0);
         laundrySessionLocal.createLaundryType(lt5);
-        
+
         LaundryType lt6 = new LaundryType();
         lt6.setLaundryName("Inner Wear (Wash)");
         lt6.setPrice(6.0);
@@ -1482,12 +1481,12 @@ Staff s0 = new Staff("Test User", "test", encryptPassword("test"), "zell1502@hot
         lt7.setLaundryName("Outer Wear (Dry-Wash)");
         lt7.setPrice(20.0);
         laundrySessionLocal.createLaundryType(lt7);
-        
+
         LaundryType lt8 = new LaundryType();
         lt8.setLaundryName("Outer Wear (Wash)");
         lt8.setPrice(18.0);
         laundrySessionLocal.createLaundryType(lt8);
-        
+
         em.flush();
     }
 
@@ -3778,7 +3777,7 @@ Staff s0 = new Staff("Test User", "test", encryptPassword("test"), "zell1502@hot
         RoomFacility rf20 = roomFacilitySessionLocal.getRoomFacilityByName("High Ceiling");
         RoomFacility rf21 = roomFacilitySessionLocal.getRoomFacilityByName("Jaccuzi");
         RoomFacility rf22 = roomFacilitySessionLocal.getRoomFacilityByName("Kitchen");
-        
+
         FunctionRoom KRCFR1 = new FunctionRoom("KRCFR1", 20, "Available", 20000.00, h2);
         FunctionRoom KRCFR2 = new FunctionRoom("KRCFR2", 100, "Available", 100000.00, h2);
         FunctionRoom KRCFR3 = new FunctionRoom("KRCFR3", 50, "Available", 50000.00, h2);
@@ -5423,7 +5422,7 @@ Staff s0 = new Staff("Test User", "test", encryptPassword("test"), "zell1502@hot
         RoomFacility rf20 = roomFacilitySessionLocal.getRoomFacilityByName("High Ceiling");
         RoomFacility rf21 = roomFacilitySessionLocal.getRoomFacilityByName("Jaccuzi");
         RoomFacility rf22 = roomFacilitySessionLocal.getRoomFacilityByName("Kitchen");
-        
+
         FunctionRoom KRNFR1 = new FunctionRoom("KRNFR1", 20, "Available", 20000.00, h3);
         FunctionRoom KRNFR2 = new FunctionRoom("KRNFR2", 100, "Available", 100000.00, h3);
         FunctionRoom KRNFR3 = new FunctionRoom("KRNFR3", 50, "Available", 50000.00, h3);
@@ -7069,7 +7068,7 @@ Staff s0 = new Staff("Test User", "test", encryptPassword("test"), "zell1502@hot
         RoomFacility rf20 = roomFacilitySessionLocal.getRoomFacilityByName("High Ceiling");
         RoomFacility rf21 = roomFacilitySessionLocal.getRoomFacilityByName("Jaccuzi");
         RoomFacility rf22 = roomFacilitySessionLocal.getRoomFacilityByName("Kitchen");
-        
+
         FunctionRoom KRSFR1 = new FunctionRoom("KRSFR1", 20, "Available", 20000.00, h4);
         FunctionRoom KRSFR2 = new FunctionRoom("KRSFR2", 100, "Available", 100000.00, h4);
         FunctionRoom KRSFR3 = new FunctionRoom("KRSFR3", 50, "Available", 50000.00, h4);
@@ -8714,7 +8713,7 @@ Staff s0 = new Staff("Test User", "test", encryptPassword("test"), "zell1502@hot
         RoomFacility rf20 = roomFacilitySessionLocal.getRoomFacilityByName("High Ceiling");
         RoomFacility rf21 = roomFacilitySessionLocal.getRoomFacilityByName("Jaccuzi");
         RoomFacility rf22 = roomFacilitySessionLocal.getRoomFacilityByName("Kitchen");
-        
+
         FunctionRoom KREFR1 = new FunctionRoom("KREFR1", 20, "Available", 20000.00, h5);
         FunctionRoom KREFR2 = new FunctionRoom("KREFR2", 100, "Available", 100000.00, h5);
         FunctionRoom KREFR3 = new FunctionRoom("KREFR3", 50, "Available", 50000.00, h5);
@@ -8731,7 +8730,7 @@ Staff s0 = new Staff("Test User", "test", encryptPassword("test"), "zell1502@hot
         h5.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KREFR2"));
         h5.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KREFR3"));
         h5.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KREFR4"));
-        h5.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KREFR5"));        
+        h5.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KREFR5"));
 
         Room KRES1 = new Room("KRE_201", "201", "Standard", 2, "Occupied", h5);
         KRES1.addRoomFacility(rf1);
@@ -9608,7 +9607,7 @@ Staff s0 = new Staff("Test User", "test", encryptPassword("test"), "zell1502@hot
         RoomFacility rf20 = roomFacilitySessionLocal.getRoomFacilityByName("High Ceiling");
         RoomFacility rf21 = roomFacilitySessionLocal.getRoomFacilityByName("Jaccuzi");
         RoomFacility rf22 = roomFacilitySessionLocal.getRoomFacilityByName("Kitchen");
-        
+
         FunctionRoom KRWFR1 = new FunctionRoom("KRWFR1", 20, "Available", 20000.00, h6);
         FunctionRoom KRWFR2 = new FunctionRoom("KRWFR2", 100, "Available", 100000.00, h6);
         FunctionRoom KRWFR3 = new FunctionRoom("KRWFR3", 50, "Available", 50000.00, h6);
@@ -9625,7 +9624,7 @@ Staff s0 = new Staff("Test User", "test", encryptPassword("test"), "zell1502@hot
         h6.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRWFR2"));
         h6.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRWFR3"));
         h6.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRWFR4"));
-        h6.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRWFR5"));        
+        h6.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRWFR5"));
 
         Room KRWS1 = new Room("KRW_201", "201", "Standard", 2, "Available", h6);
         KRWS1.addRoomFacility(rf1);
@@ -11253,7 +11252,7 @@ Staff s0 = new Staff("Test User", "test", encryptPassword("test"), "zell1502@hot
         RoomFacility rf20 = roomFacilitySessionLocal.getRoomFacilityByName("High Ceiling");
         RoomFacility rf21 = roomFacilitySessionLocal.getRoomFacilityByName("Jaccuzi");
         RoomFacility rf22 = roomFacilitySessionLocal.getRoomFacilityByName("Kitchen");
-        
+
         FunctionRoom KRNEFR1 = new FunctionRoom("KRNEFR1", 20, "Available", 20000.00, h7);
         FunctionRoom KRNEFR2 = new FunctionRoom("KRNEFR2", 100, "Available", 100000.00, h7);
         FunctionRoom KRNEFR3 = new FunctionRoom("KRNEFR3", 50, "Available", 50000.00, h7);
@@ -11270,7 +11269,7 @@ Staff s0 = new Staff("Test User", "test", encryptPassword("test"), "zell1502@hot
         h7.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRNEFR2"));
         h7.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRNEFR3"));
         h7.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRNEFR4"));
-        h7.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRNEFR5"));        
+        h7.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRNEFR5"));
 
         Room KRNES1 = new Room("KRNE_201", "201", "Standard", 2, "Available", h7);
         KRNES1.addRoomFacility(rf1);
@@ -12335,7 +12334,7 @@ Staff s0 = new Staff("Test User", "test", encryptPassword("test"), "zell1502@hot
         RoomFacility rf20 = roomFacilitySessionLocal.getRoomFacilityByName("High Ceiling");
         RoomFacility rf21 = roomFacilitySessionLocal.getRoomFacilityByName("Jaccuzi");
         RoomFacility rf22 = roomFacilitySessionLocal.getRoomFacilityByName("Kitchen");
-        
+
         FunctionRoom KRNWFR1 = new FunctionRoom("KRNWFR1", 20, "Available", 20000.00, h8);
         FunctionRoom KRNWFR2 = new FunctionRoom("KRNWFR2", 100, "Available", 100000.00, h8);
         FunctionRoom KRNWFR3 = new FunctionRoom("KRNWFR3", 50, "Available", 50000.00, h8);
@@ -12352,7 +12351,7 @@ Staff s0 = new Staff("Test User", "test", encryptPassword("test"), "zell1502@hot
         h8.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRNWFR2"));
         h8.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRNWFR3"));
         h8.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRNWFR4"));
-        h8.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRNWFR5"));        
+        h8.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRNWFR5"));
 
         Room KRNWS1 = new Room("KRNW_201", "201", "Standard", 2, "Available", h8);
         KRNWS1.addRoomFacility(rf1);
@@ -13416,7 +13415,7 @@ Staff s0 = new Staff("Test User", "test", encryptPassword("test"), "zell1502@hot
         RoomFacility rf20 = roomFacilitySessionLocal.getRoomFacilityByName("High Ceiling");
         RoomFacility rf21 = roomFacilitySessionLocal.getRoomFacilityByName("Jaccuzi");
         RoomFacility rf22 = roomFacilitySessionLocal.getRoomFacilityByName("Kitchen");
-        
+
         FunctionRoom KRSEFR1 = new FunctionRoom("KRSEFR1", 20, "Available", 20000.00, h9);
         FunctionRoom KRSEFR2 = new FunctionRoom("KRSEFR2", 100, "Available", 100000.00, h9);
         FunctionRoom KRSEFR3 = new FunctionRoom("KRSEFR3", 50, "Available", 50000.00, h9);
@@ -13433,7 +13432,7 @@ Staff s0 = new Staff("Test User", "test", encryptPassword("test"), "zell1502@hot
         h9.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRSEFR2"));
         h9.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRSEFR3"));
         h9.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRSEFR4"));
-        h9.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRSEFR5"));        
+        h9.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRSEFR5"));
 
         Room KRSES1 = new Room("KRSE_201", "201", "Standard", 2, "Available", h9);
         KRSES1.addRoomFacility(rf1);
@@ -14498,7 +14497,7 @@ Staff s0 = new Staff("Test User", "test", encryptPassword("test"), "zell1502@hot
         RoomFacility rf20 = roomFacilitySessionLocal.getRoomFacilityByName("High Ceiling");
         RoomFacility rf21 = roomFacilitySessionLocal.getRoomFacilityByName("Jaccuzi");
         RoomFacility rf22 = roomFacilitySessionLocal.getRoomFacilityByName("Kitchen");
-        
+
         FunctionRoom KRSWFR1 = new FunctionRoom("KRSWFR1", 20, "Available", 20000.00, h10);
         FunctionRoom KRSWFR2 = new FunctionRoom("KRSWFR2", 100, "Available", 100000.00, h10);
         FunctionRoom KRSWFR3 = new FunctionRoom("KRSWFR3", 50, "Available", 50000.00, h10);
@@ -14515,7 +14514,7 @@ Staff s0 = new Staff("Test User", "test", encryptPassword("test"), "zell1502@hot
         h10.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRSWFR2"));
         h10.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRSWFR3"));
         h10.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRSWFR4"));
-        h10.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRSWFR5"));        
+        h10.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRSWFR5"));
 
         Room KRSWS1 = new Room("KRSW_201", "201", "Standard", 2, "Available", h10);
         KRSWS1.addRoomFacility(rf1);
@@ -15640,8 +15639,7 @@ Staff s0 = new Staff("Test User", "test", encryptPassword("test"), "zell1502@hot
         rm1.setStatus("Incomplete");
 
         bookingSessionLocal.createRoomBooking(rm1);
-        
-        
+
         RoomBooking rb1 = new RoomBooking();
         rb1.setBookInDate(format.parse("2019-03-10"));
         rb1.setBookOutDate(format.parse("2019-03-13"));
@@ -15658,7 +15656,7 @@ Staff s0 = new Staff("Test User", "test", encryptPassword("test"), "zell1502@hot
         rb1.setHasExtraBed(false);
         bookingSessionLocal.createRoomBooking(rb1);
         RoomBooking newrb1 = bookingSessionLocal.getLastRoomBooking();
-        
+
         RoomBooking rb2 = new RoomBooking();
         rb2.setBookInDate(format.parse("2019-01-10"));
         rb2.setBookOutDate(format.parse("2019-01-13"));
@@ -15675,7 +15673,7 @@ Staff s0 = new Staff("Test User", "test", encryptPassword("test"), "zell1502@hot
         rb2.setHasExtraBed(true);
         bookingSessionLocal.createRoomBooking(rb2);
         RoomBooking newrb2 = bookingSessionLocal.getLastRoomBooking();
-        
+
         RoomBooking rb3 = new RoomBooking();
         rb3.setBookInDate(format.parse("2019-05-10"));
         rb3.setBookOutDate(format.parse("2019-05-13"));
@@ -15691,7 +15689,7 @@ Staff s0 = new Staff("Test User", "test", encryptPassword("test"), "zell1502@hot
         rb3.setLastName("Neo Guohui");
         rb3.setHasExtraBed(true);
         bookingSessionLocal.createRoomBooking(rb3);
-        RoomBooking newrb3 = bookingSessionLocal.getLastRoomBooking();        
+        RoomBooking newrb3 = bookingSessionLocal.getLastRoomBooking();
 //***************Laundry Order***************
         LaundryOrder lo1 = new LaundryOrder();
         lo1.setRoom(roomSessionLocal.getRoomByName("KRG_202"));
@@ -15702,24 +15700,23 @@ Staff s0 = new Staff("Test User", "test", encryptPassword("test"), "zell1502@hot
         lo1.setSpecialRequest("you may come in and collect the coat if I'm not in the room");
         laundrySessionLocal.createLaundryOrder(lo1);
         LaundryOrder newlo1 = laundrySessionLocal.getLastLaundryOrder();
-        
+
         LaundryOrderedItem loi1 = new LaundryOrderedItem();
         loi1.setQty(2);
         loi1.setLaundryType(laundrySessionLocal.getLaundryTypeByName("Top (Dry-Wash)"));
         loi1.setDescription("2x Black Coat");
         laundrySessionLocal.createLaundryOrderedItem(loi1);
         newlo1.addLaundryOrderedItem(laundrySessionLocal.getLastLaundryOrderedItem());
-        
+
         LaundryOrderedItem loi2 = new LaundryOrderedItem();
         loi2.setQty(1);
         loi2.setLaundryType(laundrySessionLocal.getLaundryTypeByName("Top (Wash)"));
         loi2.setDescription("1x Coat");
-        laundrySessionLocal.createLaundryOrderedItem(loi2);        
+        laundrySessionLocal.createLaundryOrderedItem(loi2);
         newlo1.addLaundryOrderedItem(laundrySessionLocal.getLastLaundryOrderedItem());
         newlo1.setTotalPrice(42.0);
         newrb1.addLaundryOrder(newlo1);
-        
-        
+
         LaundryOrder lo5 = new LaundryOrder();
         lo5.setRoom(roomSessionLocal.getRoomByName("KRG_402"));
         lo5.setOrderDateTime(format.parse("2019-01-10"));
@@ -15729,18 +15726,17 @@ Staff s0 = new Staff("Test User", "test", encryptPassword("test"), "zell1502@hot
         lo5.setSpecialRequest("");
         laundrySessionLocal.createLaundryOrder(lo5);
         LaundryOrder newlo2 = laundrySessionLocal.getLastLaundryOrder();
-        
+
         LaundryOrderedItem loi5 = new LaundryOrderedItem();
         loi5.setQty(1);
         loi5.setLaundryType(laundrySessionLocal.getLaundryTypeByName("Top (Dry-Wash)"));
         loi5.setDescription("1x Black Coat");
         laundrySessionLocal.createLaundryOrderedItem(loi5);
         newlo2.addLaundryOrderedItem(laundrySessionLocal.getLastLaundryOrderedItem());
-        
+
         newlo2.setTotalPrice(15.0);
-        newrb1.addLaundryOrder(newlo2);       
-        
-       
+        newrb1.addLaundryOrder(newlo2);
+
 //***************Food Order***************        
         FoodOrder fo1 = new FoodOrder();
         foodMenuItemSessionLocal.createFoodOrder(fo1);
@@ -15766,11 +15762,11 @@ Staff s0 = new Staff("Test User", "test", encryptPassword("test"), "zell1502@hot
 
         newfo1.setTotalPrice(54.0);
         newrb1.addFoodOrder(newfo1);
-        
+
         FoodOrder fo2 = new FoodOrder();
         foodMenuItemSessionLocal.createFoodOrder(fo2);
-        FoodOrder newfo2 = foodMenuItemSessionLocal.getLastFoodOrder();    
-        
+        FoodOrder newfo2 = foodMenuItemSessionLocal.getLastFoodOrder();
+
         FoodOrderedItem foi4 = new FoodOrderedItem();
         foi4.setQty(2);
         foi4.setFood(foodMenuItemSessionLocal.getFoodMenuItemByName("Coke"));
@@ -15781,11 +15777,11 @@ Staff s0 = new Staff("Test User", "test", encryptPassword("test"), "zell1502@hot
         foi5.setQty(1);
         foi5.setFood(foodMenuItemSessionLocal.getFoodMenuItemByName("Pancakes"));
         foodMenuItemSessionLocal.createFoodOrderedItem(foi5);
-        newfo2.addFoodOrderedItem(foodMenuItemSessionLocal.getLastFoodOrderedItem());  
-        
+        newfo2.addFoodOrderedItem(foodMenuItemSessionLocal.getLastFoodOrderedItem());
+
         newfo2.setTotalPrice(32.0);
         newrb2.addFoodOrder(newfo2);
-        
+
 //***************Minibar Order***************        
         MinibarOrder mo1 = new MinibarOrder();
         houseKeepingOrderSessionLocal.createMinibarOrder(mo1);
@@ -15804,22 +15800,21 @@ Staff s0 = new Staff("Test User", "test", encryptPassword("test"), "zell1502@hot
         newmo1.addMinibarOrderedItem(houseKeepingOrderSessionLocal.getLastMinibarOrderedItem());
 
         newmo1.setTotalPrice(89.0);
-        newrb1.addMinibarOrder(newmo1);     	
-		
+        newrb1.addMinibarOrder(newmo1);
+
         MinibarOrder mo2 = new MinibarOrder();
         houseKeepingOrderSessionLocal.createMinibarOrder(mo2);
         MinibarOrder newmo2 = houseKeepingOrderSessionLocal.getLastMinibarOrder();
-        
+
         MinibarOrderedItem moi3 = new MinibarOrderedItem();
         moi3.setQty(2);
         moi3.setMinibarItem(houseKeepingOrderSessionLocal.getMinibarItemByItemName("Coke"));
         houseKeepingOrderSessionLocal.createMinibarOrderedItem(moi3);
         newmo2.addMinibarOrderedItem(houseKeepingOrderSessionLocal.getLastMinibarOrderedItem());
-        
+
         newmo2.setTotalPrice(14.0);
         newrb2.addMinibarOrder(newmo2);
-        
-        
+
         em.flush();
 
         PaymentTransaction PT1 = new PaymentTransaction();
