@@ -3,7 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
     <body>
 
@@ -61,8 +63,11 @@
                                                 <tr>
                                                     <td>#{mi.itemName}</td>
                                                     <td>$#{mi.price}0</td>
-                                                    <td><h:commandButton id="editBtn" value="Edit" action="#{hotelManagedBean.editMinibarItem(mi.minibarItemID)}" class="btn btn-secondary"  /></td>
+                                                    <!--<h:commandButton id="editBtn" value="Edit" action="#{hotelManagedBean.editMinibarItem(mi.minibarItemID)}" class="btn btn-secondary"  />-->
+                                                    <td><h:commandLink  action="#{hotelManagedBean.editMinibarItem(mi.minibarItemID)}" style="font-size: large; margin-right: 5px"><i class="far fa-edit"></i></h:commandLink></td>
                                                     <td><h:commandButton id="deleteBtn" onclick="return confirm('Are you sure?');" value="Delete" action="#{hotelManagedBean.deleteMinibarItem(mi.minibarItemID)}" class="btn btn-danger"  /></td>
+                                                    <td><h:commandLink  class="cd-popup-trigger" id="modal-2" a:data-target="#modal-1" style="font-size: large"><i class="fas fa-trash-alt"></i>
+                                                            <f:ajax execute="@form" render='@none'/> </h:commandLink></td>
                                                 </tr>
                                             </c:forEach>
                                 </tbody>
@@ -72,6 +77,21 @@
 
                 </section>
                 <!-- /.content -->
+                <h:form>
+                    <div id="modal" class="cd-popup" role="alert">
+                        <div class="cd-popup-container">
+                            <p class="popup-content">Delete Minibar Item?</p>
+
+                            <ul class="cd-buttons" style="padding-inline-start: unset; padding:0px">
+                                <li ><h:commandLink id="deleteMinibarItem" action="#{hotelManagedBean.deleteMinibarItem(mi.MinibarItemID)}" class="cd-popup-confirm" value="Yes">
+                                        <f:ajax execute="@form" render='@none'/>
+                                </h:commandLink></li>
+                                <li style="background-color:lightslategray"><a onclick="" class=" cd-popup-closemodal">No</a></li>
+
+                            </ul>
+                        </div> <!-- cd-popup-container -->
+                    </div> <!-- cd-popup -->
+                </h:form>
             </ui:define>
             <ui:define name="script">
                 script
