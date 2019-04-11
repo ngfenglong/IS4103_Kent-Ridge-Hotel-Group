@@ -3,7 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core">
 
     <body>
 
@@ -37,51 +39,52 @@
                     </div>
                     <!-- /.container-fluid -->
                 </div> 
-                       <section class="content">
+                <section class="content">
                     <div class="card">
-                      
-                            <h:form>
-                                <div class="card-header">
-                                    <h:commandButton class="btn btn-primary float-sm-right" action="createHouseKeepingRequest.xhtml?faces-redirect=true" value="Add New Housekeeping request" />
-                                    <h3 class="card-title">List of requests</h3>
-                                </div>
-                            </h:form>
-                        
+
+                        <h:form>
+                            <div class="card-header">
+                                <h:commandButton class="btn btn-primary float-sm-right" action="createHouseKeepingRequest.xhtml?faces-redirect=true" value="Add New Housekeeping request" />
+                                <h3 class="card-title">List of requests</h3>
+                            </div>
+                        </h:form>
+
                         <!-- /.card-header -->
                         <div class="card-body">
-
-                            <table id="example1" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Room</th>
-                                        <th>Status</th>
-                                        <th>DateTime Requested</th>
-
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
+                            <h:form>
+                                <table id="example1" class="table table-bordered table-striped">
+                                    <thead>
                                         <tr>
-                                            <td>602</td>
-                                            <td>Incomplete</td>
-                                            <td>27 March 2019</td>
-                                            <td><input type="button" value="update"/></td>
+                                            <th>Room</th>
+                                            <th>Description</th>
+                                            <th>Time Requested</th>
+                                            <th>Housekeeper</th>
+                                            <th></th>
                                         </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach items="#{requestServicesManagedBean.getIncompleteHousekeepingOrders}" var="o"> 
 
-                                 
+                                            <tr>
+                                                <td>#{o.room.roomNumber}</td>
+                                                <td>#{o.specialRequest}</td>
+                                                <td>#{requestServicesManagedBean.convertDateFormat(o.orderDateTime)}</td>
+                                                <td><h:selectOneMenu onchange="update()"  value="#{requestServicesManagedBean.assignedHouseKeeper}">
+                                                       <f:selectItem  itemValue="" itemLabel="Select" />
+                                                        <c:forEach items="#{requestServicesManagedBean.getHousekeepingStaff}" var="hk"> 
+                                                            <f:selectItem itemValue="#{hk.staffID}" itemLabel="#{hk.name}" />
+                                                        
+                                                        </c:forEach>
+                                                    </h:selectOneMenu></td>
+                                                <td><input type="button" value="update"/></td>
+                                            </tr>
 
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>Room</th>
-                                        <th>Status</th>
-                                        <th>DateTime Requested</th>
+                                        </c:forEach>
 
-                                        <th></th>
-                                    </tr>
-                                </tfoot>
-                            </table>
+                                    </tbody>
+
+                                </table>
+                            </h:form>
                         </div>
                         <!-- /.card-body -->
 
@@ -98,6 +101,10 @@
                     $('[data-mask]').each(function () {
                         $(this).mask($(this).attr("data-mask"));
                     });
+                    
+                    function update(){
+                        document.getElementById("").value=
+                    }
                 </script>
             </ui:define>
 

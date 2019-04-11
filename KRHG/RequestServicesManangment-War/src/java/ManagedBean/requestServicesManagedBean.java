@@ -78,10 +78,11 @@ public class requestServicesManagedBean implements Serializable {
 
     public List<HouseKeepingOrder> getIncompleteHousekeepingOrders() throws NoResultException {
         List<HouseKeepingOrder> newList = new ArrayList<>();
-
+        System.out.println("hi");
         for (HouseKeepingOrder ho : housekeepingsessionlocal.getAllHouseKeepingOrder()) {
             if (ho.getStatus().equalsIgnoreCase("incomplete")) {
                 newList.add(ho);
+                System.out.println(ho.getRoom().getRoomNumber());
             }
         }
         return newList;
@@ -91,8 +92,8 @@ public class requestServicesManagedBean implements Serializable {
         this.allHousekeepingOrders = allHousekeepingOrders;
     }
 
-    public List<HouseKeepingOrder> getGetIncompleteHousekeepingOrders() {
-        return getIncompleteHousekeepingOrders;
+    public List<HouseKeepingOrder> getGetIncompleteHousekeepingOrders() throws NoResultException {
+        return getIncompleteHousekeepingOrders = getIncompleteHousekeepingOrders();
     }
 
     public void setGetIncompleteHousekeepingOrders(List<HouseKeepingOrder> getIncompleteHousekeepingOrders) {
