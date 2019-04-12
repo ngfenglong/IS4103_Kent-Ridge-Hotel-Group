@@ -137,13 +137,16 @@ public class KioskmanagedBean implements Serializable {
             checkinPayment = getPaymentTransactionWithbookingID();
 
             if (checkinPayment == null) {
+                checkinBookingID = null;
+                checkinLastName = null;
                 out.println("<script type=\"text/javascript\">");
                 out.println("alert('No result found');");
                 out.println("</script>");
-                return "checkin.xhtml?faces-redirect=true";
-            } else {
-
+                return "checkin.xhtml";
+            }
+            if (nevercheckCheckinBefore() == true) {
                 checkinNumberOfRoomBooking = checkinPayment.getRoomsBooked().size();
+                checkinPassport = hidepassport(checkinPayment.getRoomsBooked().get(0).getPassportNum());
                 checkinEmail = checkinPayment.getPayer().getEmail();
                 checkinContact = checkinPayment.getPayer().getMobileNum();
                 CheckinName = checkinLastName + " " + checkinLastName;
@@ -161,13 +164,29 @@ public class KioskmanagedBean implements Serializable {
                     }
                 }
                 return "checkinResult.xhtml?faces-redirect=true";
+            } else {
+                checkinBookingID = null;
+                checkinLastName = null;
+                out.println("<script type=\"text/javascript\">");
+                out.println("alert('Room checked in');");
+                out.println("</script>");
+                return "checkin.xhtml";
             }
         } catch (NoResultException e) {
+            checkinBookingID = null;
+            checkinLastName = null;
             out.println("<script type=\"text/javascript\">");
             out.println("alert('No result found');");
             out.println("</script>");
-            return "checkin.xhtml?faces-redirect=true";
+            return "checkin.xhtml";
         }
+    }
+
+    public boolean nevercheckCheckinBefore() {
+        if (checkinPayment.getRoomsBooked().get(0).getBookedRoom() == null) {
+            return true;
+        }
+        return false;
     }
 
     public PaymentTransaction getPaymentTransactionWithbookingID() throws NoResultException {
@@ -187,18 +206,20 @@ public class KioskmanagedBean implements Serializable {
             //Room checkoutRoombooking = roomSessionLocal.getRoom(roomNumber,hotelcode);
             checkoutRoom = getRoom();
             if (checkoutRoom == null) {
+                 checkoutRoomNumber=null;
                 out.println("<script type=\"text/javascript\">");
                 out.println("alert('No result found');");
                 out.println("</script>");
-                return "checkout.xhtml?faces-redirect=true";
+                return "checkout.xhtml";
             }
 
             checkoutRoombooking = getRoombooking();
             if (checkoutRoombooking == null) {
+                 checkoutRoomNumber=null;
                 out.println("<script type=\"text/javascript\">");
                 out.println("alert('No result found');");
                 out.println("</script>");
-                return "checkout.xhtml?faces-redirect=true";
+                return "checkout.xhtml";
             }
 
             checkoutName = checkoutRoombooking.getLastName() + " " + checkoutRoombooking.getFirstName();
@@ -211,7 +232,7 @@ public class KioskmanagedBean implements Serializable {
             return "checkouttimer.xhtml?faces-redirect=true";
 
         } catch (NoResultException e) {
-            System.out.println("NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo");
+            checkoutRoomNumber=null;
             out.println("<script type=\"text/javascript\">");
             out.println("alert('No result found');");
             out.println("</script>");
@@ -230,6 +251,12 @@ public class KioskmanagedBean implements Serializable {
         return null;
     }
 
+    public String hidepassport(String passport) {
+        String newstring = "****";
+        newstring += passport.substring((passport.length() - 1) / 2, passport.length() - 1);
+        return newstring;
+    }
+
     public RoomBooking getRoombooking() {
         try {
             for (RoomBooking rb : bookSessionLocal.getAllRoomBookingByStatus("checkedin", hotelCode)) {
@@ -245,7 +272,7 @@ public class KioskmanagedBean implements Serializable {
 
     public Room getRoom() {
         for (Room rm : roomSessionLocal.getAllRooms()) {
-            if (rm.getRoomNumber().equals(checkoutRoomNumber) && rm.getHotel().getHotelCodeName().equals(hotelCode)) {
+            if (rm.getRoomNumber().equals(checkoutRoomNumber) && rm.getHotel().getHotelCodeName().equals(hotelCode)&&rm.getStatus().equalsIgnoreCase("occupied")) {
                 return rm;
             }
         }
@@ -255,26 +282,21 @@ public class KioskmanagedBean implements Serializable {
     public String allocateRoom() throws NoResultException, IOException {
         HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
         PrintWriter out = response.getWriter();
-        if (checkinPassport.equals(checkinPayment.getRoomsBooked().get(0).getPassportNum())) {
-            allocatedRoomNumbers = new ArrayList<>();
-            for (RoomBooking rm : checkinPayment.getRoomsBooked()) {
-                String roomtype = rm.getRoomType();
 
-                Room bookedRoom = roomSessionLocal.getSingleRoomByType(roomtype, hotelCode, "Available").get(0);
-                rm.setBookedRoom(bookedRoom);
-                rm.setStatus("checkedin");
-                allocatedRoomNumbers.add(bookedRoom.getRoomNumber());
-                bookSessionLocal.updateRoomBooking(rm);
-                bookedRoom.setStatus("Occupied");
-                roomSessionLocal.updateRoom(bookedRoom);
-            }
-            return "roomallocation.xhtml?faces-redirect=true";
-        } else {
-            out.println("<script type=\"text/javascript\">");
-            out.println("alert('Invalid passport Number');");
-            out.println("</script>");
-            return "checkinresult.xhtml?faces-redirect=true";
+        allocatedRoomNumbers = new ArrayList<>();
+        for (RoomBooking rm : checkinPayment.getRoomsBooked()) {
+            String roomtype = rm.getRoomType();
+
+            Room bookedRoom = roomSessionLocal.getSingleRoomByType(roomtype, hotelCode, "Available").get(0);
+            rm.setBookedRoom(bookedRoom);
+            rm.setStatus("checkedin");
+            allocatedRoomNumbers.add(bookedRoom.getRoomNumber());
+            bookSessionLocal.updateRoomBooking(rm);
+            bookedRoom.setStatus("Occupied");
+            roomSessionLocal.updateRoom(bookedRoom);
         }
+        return "roomallocation.xhtml?faces-redirect=true";
+
     }
 
     public String continueAllocation() {
