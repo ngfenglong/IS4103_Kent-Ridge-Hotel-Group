@@ -23,6 +23,7 @@ import entity.MaintainenceOrder;
 import entity.MinibarItem;
 import entity.MinibarOrder;
 import entity.MinibarOrderedItem;
+import entity.MinibarStock;
 import entity.PaymentTransaction;
 import entity.PromoCode;
 import entity.Room;
@@ -135,29 +136,29 @@ public class DataInitializationSessionBean {
         staffSessionLocal.createStaffType(st2);
         st2 = staffSessionLocal.getStaffTypeByName("Housekeeping Manager");
 
-        StaffType st3 = new StaffType("HR Staff");
+        StaffType st3 = new StaffType("Laundry Staff");
         staffSessionLocal.createStaffType(st3);
-        st3 = staffSessionLocal.getStaffTypeByName("HR Staff");
+        st3 = staffSessionLocal.getStaffTypeByName("Laundry Staff");
 
-        StaffType st4 = new StaffType("HR Manager");
+        StaffType st4 = new StaffType("Laundry Manager");
         staffSessionLocal.createStaffType(st4);
-        st4 = staffSessionLocal.getStaffTypeByName("HR Manager");
+        st4 = staffSessionLocal.getStaffTypeByName("Laundry Manager");
 
-        StaffType st5 = new StaffType("Sales and Marketing Staff");
+        StaffType st5 = new StaffType("Kitchen Staff");
         staffSessionLocal.createStaffType(st5);
-        st5 = staffSessionLocal.getStaffTypeByName("Sales and Marketing Staff");
+        st5 = staffSessionLocal.getStaffTypeByName("Kitchen Staff");
 
-        StaffType st6 = new StaffType("Sales and Marketing Manager");
+        StaffType st6 = new StaffType("Kitchen Manager");
         staffSessionLocal.createStaffType(st6);
-        st6 = staffSessionLocal.getStaffTypeByName("Sales and Marketing Manager");
+        st6 = staffSessionLocal.getStaffTypeByName("Kitchen Manager");
 
-        StaffType st7 = new StaffType("IT Staff");
+        StaffType st7 = new StaffType("Sales and Marketing Staff");
         staffSessionLocal.createStaffType(st7);
-        st7 = staffSessionLocal.getStaffTypeByName("IT Staff");
+        st7 = staffSessionLocal.getStaffTypeByName("Sales and Marketing Staff");
 
-        StaffType st8 = new StaffType("IT Manager");
+        StaffType st8 = new StaffType("Sales and Marketing Manager");
         staffSessionLocal.createStaffType(st8);
-        st8 = staffSessionLocal.getStaffTypeByName("IT Manager");
+        st8 = staffSessionLocal.getStaffTypeByName("Sales and Marketing Manager");
 
         StaffType st9 = new StaffType("Front Desk Staff");
         staffSessionLocal.createStaffType(st9);
@@ -167,13 +168,29 @@ public class DataInitializationSessionBean {
         staffSessionLocal.createStaffType(st10);
         st10 = staffSessionLocal.getStaffTypeByName("Front Desk Manager");
 
-        StaffType st11 = new StaffType("Finance Manager");
+        StaffType st11 = new StaffType("IT Staff");
         staffSessionLocal.createStaffType(st11);
-        st11 = staffSessionLocal.getStaffTypeByName("Finance Manager");
+        st11 = staffSessionLocal.getStaffTypeByName("IT Staff");
 
         StaffType st12 = new StaffType("Finance Staff");
         staffSessionLocal.createStaffType(st12);
         st12 = staffSessionLocal.getStaffTypeByName("Finance Staff");
+
+        StaffType st13 = new StaffType("Finance Manager");
+        staffSessionLocal.createStaffType(st13);
+        st13 = staffSessionLocal.getStaffTypeByName("Finance Manager");
+
+        StaffType st14 = new StaffType("HR Staff");
+        staffSessionLocal.createStaffType(st14);
+        st14 = staffSessionLocal.getStaffTypeByName("HR Staff");
+
+        StaffType st15 = new StaffType("General Manager");
+        staffSessionLocal.createStaffType(st15);
+        st15 = staffSessionLocal.getStaffTypeByName("General Manager");
+
+        StaffType st16 = new StaffType("Testing");
+        staffSessionLocal.createStaffType(st16);
+        st16 = staffSessionLocal.getStaffTypeByName("Testing");
 
 //*********************************************Staff************************************************
         Staff s0 = new Staff("Test User", "test", encryptPassword("test"), "zell1502@hotmail.com", "88244165", "male", "S9226940Z", "7 Lok Yang Vista", new Date(), "Kent Ridge North", "Laundry Staff", "Laundry", 7, true, "Ee Pui Ling", "7 Lok Yang Vista", "68701722");
@@ -189,18 +206,24 @@ public class DataInitializationSessionBean {
         s0.addAccountRights(st10);
         s0.addAccountRights(st11);
         s0.addAccountRights(st12);
+        s0.addAccountRights(st13);
+        s0.addAccountRights(st14);
+        s0.addAccountRights(st15);
+        s0.addAccountRights(st16);
         staffSessionLocal.createStaff(s0);
 
         Staff s1 = new Staff("Kenny Ee", "kennyee", encryptPassword("password"), "kennyee@krhg.com.sg", "88244165", "Male", "S9226940Z", "7 Lok Yang Vista", new Date(), "Kent Ridge West", "Laundry Staff", "Laundry", 7, true, "Ee Pui Ling", "7 Lok Yang Vista", "68701722");
-        s1.addAccountRights(st1);
+        s1.addAccountRights(st3);
         staffSessionLocal.createStaff(s1);
 
         Staff s2 = new Staff("David Chia Zhi Jie", "davidchia", encryptPassword("password"), "davidchia@krhg.com.sg", "98861094", "Male", "S6831300G", "Blk 226 Lorong 7 Pasir Ris, #04-32", new Date(), "Kent Ridge Grand", "Kitchen Manager", "Kitchen", 14, true, "Chia Xian Siew", "Blk 226 Lorong 7 Pasir Ris, #04-32", "67494068");
-        s2.addAccountRights(st2);
+        s2.addAccountRights(st6);
+        s2.addAccountRights(st5);
         staffSessionLocal.createStaff(s2);
 
         Staff s3 = new Staff("Alice Chai", "alicechai", encryptPassword("password"), "alicechai@krhg.com.sg", "93070252", "Female", "S3543767C", "Blk 377 Serangoon North Street 88, #15-09", new Date(), "Kent Ridge Central", "Housekeeping Manager", "Housekeeping", 14, true, "Chai Li Ting", "Blk 377 Serangoon North Street 88, #15-09", "61935979");
         s3.addAccountRights(st2);
+        s3.addAccountRights(st1);
         staffSessionLocal.createStaff(s3);
 
         Staff s4 = new Staff("Siti Riduan", "sitiriduan", encryptPassword("password"), "sitiriduan@krhg.com.sg", "93497066", "Female", "S1730049J", "Blk 29 Geylang Street 21, #01-27", new Date(), "Kent Ridge Central", "Housekeeping Staff", "Housekeeping", 7, true, "Riduan Mohd Yaccob", "Blk 29 Geylang Street 21, #01-27", "67603364");
@@ -209,22 +232,26 @@ public class DataInitializationSessionBean {
 
         Staff s5 = new Staff("Geoffrey Gan", "geoffreygan", encryptPassword("password"), "geoffreygan@krhg.com.sg", "91574480", "Male", "F9117753Q", "Blk 364 Geylang Street 17, #18-06", new Date(), "Kent Ridge North East", "Housekeeping Manager", "Housekeeping", 14, true, "Gan Kim Hock", "Blk 364 Geylang Street 17, #18-06", "61446071");
         s5.addAccountRights(st2);
+        s5.addAccountRights(st1);
         staffSessionLocal.createStaff(s5);
 
         Staff s6 = new Staff("Khor Yuanruo Gene", "genekhor", encryptPassword("password"), "genekhor@krhg.com.sg", "95189616", "Male", "S7665201E", "Blk 34 Tampines Street 74, #11-44", new Date(), "Kent Ridge West", "Laundry Manager", "Laundry", 14, true, "Khor Ru Shan", "Blk 34 Tampines Street 74, #11-44", "66910568");
-        s6.addAccountRights(st2);
+        s6.addAccountRights(st4);
+        s6.addAccountRights(st3);
         staffSessionLocal.createStaff(s6);
 
         Staff s7 = new Staff("Dakota Chee", "dakotachee", encryptPassword("password"), "dakotachee@krhg.com.sg", "94094757", "Female", "S0297606D", "Blk 38 Lorong 8 Rochor, #01-04", new Date(), "Kent Ridge South East", "Housekeeping Manager", "Housekeeping", 14, true, "Chee Hong Chye", "Blk 38 Lorong 8 Rochor, #01-04", "68669896");
         s7.addAccountRights(st2);
+        s7.addAccountRights(st1);
         staffSessionLocal.createStaff(s7);
 
         Staff s8 = new Staff("Winston Shum", "winstonshum", encryptPassword("password"), "winstonshum@krhg.com.sg", "96531553", "Male", "S8400752H", "6 Dover Green, #02-31", new Date(), "Kent Ridge North", "Laundry Staff", "Laundry", 7, true, "Shum Chee Ping", "6 Dover Green, #02-31", "64907198");
-        s8.addAccountRights(st1);
+        s8.addAccountRights(st3);
         staffSessionLocal.createStaff(s8);
 
         Staff s9 = new Staff("Jonathan Loy", "jonathanloy", encryptPassword("password"), "jonathanloy@krhg.com.sg", "96717486", "Male", "S8017091B", "6 Innova Estate", new Date(), "Kent Ridge East", "Kitchen Manager", "Kitchen", 14, true, "Loy Tian Kiew", "6 Innova Estate", "65353918");
-        s9.addAccountRights(st2);
+        s9.addAccountRights(st6);
+        s9.addAccountRights(st5);
         staffSessionLocal.createStaff(s9);
 
         Staff s10 = new Staff("Anabelle Loh", "anabelleloh", encryptPassword("password"), "anabelleloh@krhg.com.sg", "91526387", "Female", "F7623475L", "57 Jalan Damai", new Date(), "Kent Ridge West", "Housekeeping Staff", "Housekeeping", 7, true, "Loh Siew Kim", "57 Jalan Damai", "67262650");
@@ -237,34 +264,40 @@ public class DataInitializationSessionBean {
 
         Staff s12 = new Staff("Esther Chai", "estherchai", encryptPassword("password"), "estherchai@krhg.com.sg", "87698197", "Female", "S8765702G", "1 Bukit Ho Swee Crescent", new Date(), "Kent Ridge West", "Front Desk Manager", "Front Desk", 14, true, "Chai Sum Ping", "1 Bukit Ho Swee Crescent", "67143224");
         s12.addAccountRights(st10);
+        s12.addAccountRights(st9);
         staffSessionLocal.createStaff(s12);
 
         Staff s13 = new Staff("Eric Ong", "ericong", encryptPassword("password"), "ericong@krhg.com.sg", "92237097", "Male", "F8880046W", "7 Bukit Gombak Park, #15-04", new Date(), "HQ", "Admin Staff", "Admin/HR", 7, true, "Ong Tian Cheng", "7 Bukit Gombak Park, #15-04", "60899072");
-        s13.addAccountRights(st3);
+        s13.addAccountRights(st14);
         staffSessionLocal.createStaff(s13);
 
         Staff s14 = new Staff("Tan Qing Yi Fatin", "fatintan", encryptPassword("password"), "fatintan@krhg.com.sg", "96228753", "Female", "S8499523A", "4 Tanjong Pagar Lane, #15-15", new Date(), "Kent Ridge East", "Front Desk Manager", "Front Desk", 14, true, "Tan Kim Heng", "4 Tanjong Pagar Lane, #15-15", "66669098");
         s14.addAccountRights(st10);
+        s14.addAccountRights(st9);
         staffSessionLocal.createStaff(s14);
 
         Staff s15 = new Staff("Julia Khim", "juliakhim", encryptPassword("password"), "juliakhim@krhg.com.sg", "96790401", "Female", "S0465886H", "Blk 13 Bedok Street 70, #06-02", new Date(), "Kent Ridge East", "Kitchen Staff", "Kitchen", 7, true, "Khim Seng Chye", "Blk 13 Bedok Street 70, #06-02", "68716399");
-        s15.addAccountRights(st1);
+        s15.addAccountRights(st5);
         staffSessionLocal.createStaff(s15);
 
         Staff s16 = new Staff("Kim Goh", "kimgoh", encryptPassword("password"), "kimgoh@krhg.com.sg", "88646281", "Female", "S8213938I", "Blk 144 Pasir Ris Street 76, #05-12", new Date(), "Kent Ridge Grand", "Housekeeping Manager", "Housekeeping", 14, true, "Goh Kum Swee", "Blk 144 Pasir Ris Street 76, #05-12", "61972198");
         s16.addAccountRights(st2);
+        s16.addAccountRights(st1);
         staffSessionLocal.createStaff(s16);
 
         Staff s17 = new Staff("Hudson Lazaroo", "hudsonlazaroo", encryptPassword("password"), "hudsonlazaroo@krhg.com.sg", "96880485", "Male", "S0478883D", "6 Cairnhill Crescent", new Date(), "HQ", "Finance/ Operations Director", "Senior Management", 21, true, "Lazaroo Adam", "6 Cairnhill Crescent", "62651389");
-        s17.addAccountRights(st11);
+        s17.addAccountRights(st13);
+        s17.addAccountRights(st12);
         staffSessionLocal.createStaff(s17);
 
         Staff s18 = new Staff("Theo Liew Weide", "theoliewweide", encryptPassword("password"), "theoliewweide@krhg.com.sg", "94343719", "Male", "S7394844D", "4 Serangoon North Center", new Date(), "Kent Ridge North", "Kitchen Manager", "Kitchen", 14, true, "Liew Siew Guan", "4 Serangoon North Center", "68614319");
-        s18.addAccountRights(st2);
+        s18.addAccountRights(st6);
+        s18.addAccountRights(st5);
         staffSessionLocal.createStaff(s18);
 
         Staff s19 = new Staff("Nettie Loh", "nettieloh", encryptPassword("password"), "nettieloh@krhg.com.sg", "96739136", "Female", "S8223938C", "9 Farrer Walk, #01-32", new Date(), "Kent Ridge Central", "Front Desk Manager", "Front Desk", 14, true, "Loh Tian Hock", "9 Farrer Walk, #01-32", "68907701");
         s19.addAccountRights(st10);
+        s19.addAccountRights(st9);
         staffSessionLocal.createStaff(s19);
 
         Staff s20 = new Staff("Foo Wei Sonny", "sonnyfoo", encryptPassword("password"), "sonnyfoo@krhg.com.sg", "93945308", "Male", "S2846900D", "43 Jalan Ria", new Date(), "Kent Ridge Central", "Maintenance", "Maintenance", 7, true, "Foo Chuan Tao", "43 Jalan Ria", "69597789");
@@ -280,11 +313,13 @@ public class DataInitializationSessionBean {
         staffSessionLocal.createStaff(s22);
 
         Staff s23 = new Staff("Ron Liew Jinrong", "ronliew", encryptPassword("password"), "ronliew@krhg.com.sg", "98796331", "Male", "S7773316G", "Blk 42 Sengkang Street 28, #05-33", new Date(), "Kent Ridge East", "Laundry Manager", "Laundry", 14, true, "Liew Yao Chue", "Blk 42 Sengkang Street 28, #05-33", "68740597");
-        s23.addAccountRights(st2);
+        s23.addAccountRights(st4);
+        s23.addAccountRights(st3);
         staffSessionLocal.createStaff(s23);
 
         Staff s24 = new Staff("Adlina Chye Wan Yee", "adlinachye", encryptPassword("password"), "adlinachye@krhg.com.sg", "99337234", "Female", "S7748702F", "Blk 183 Sengkang Street 76, #13-17", new Date(), "Kent Ridge North", "Front Desk Manager", "Front Desk", 14, true, "Chye Siew Hun", "Blk 183 Sengkang Street 76, #13-17", "65276645");
         s24.addAccountRights(st10);
+        s24.addAccountRights(st9);
         staffSessionLocal.createStaff(s24);
 
         Staff s25 = new Staff("Kimberly Soin", "kimberlysoin", encryptPassword("password"), "kimberlysoin@krhg.com.sg", "90910322", "Female", "F7040165R", "41 Bidadari Road", new Date(), "Kent Ridge North East", "Maintenance", "Maintenance", 7, true, "Soin Ang Yue", "41 Bidadari Road", "68111147");
@@ -292,11 +327,11 @@ public class DataInitializationSessionBean {
         staffSessionLocal.createStaff(s25);
 
         Staff s26 = new Staff("Betty Ho", "bettyho", encryptPassword("password"), "bettyho@krhg.com.sg", "86707383", "Female", "S8302585I", "Blk 30 Bukit Panjang Street 70, #16-17", new Date(), "Kent Ridge South", "Laundry Staff", "Laundry", 7, true, "Ho Chin Yup", "Blk 30 Bukit Panjang Street 70, #16-17", "62678519");
-        s26.addAccountRights(st1);
+        s26.addAccountRights(st3);
         staffSessionLocal.createStaff(s26);
 
         Staff s27 = new Staff("Stephen Chua", "stephenchua", encryptPassword("password"), "stephenchua@krhg.com.sg", "98687431", "Male", "S7603298Z", "9 Dunearn Lane", new Date(), "HQ", "Sales and Marketing Staff", "Sales and Marketing", 7, true, "Chua Hock Oei", "9 Dunearn Lane", "61991461");
-        s27.addAccountRights(st5);
+        s27.addAccountRights(st7);
         staffSessionLocal.createStaff(s27);
 
         Staff s28 = new Staff("Samson Lum", "samsonlum", encryptPassword("password"), "samsonlum@krhg.com.sg", "95985187", "Male", "S9823405E", "Blk 148 Pasir Ris Street 25, #14-33", new Date(), "Kent Ridge Central", "Front Desk Staff", "Front Desk", 7, true, "Lum Siew Hun", "Blk 148 Pasir Ris Street 25, #14-33", "60262406");
@@ -304,7 +339,8 @@ public class DataInitializationSessionBean {
         staffSessionLocal.createStaff(s28);
 
         Staff s29 = new Staff("Dave Kwok Yiew Hsien", "davekwok", encryptPassword("password"), "davekwok@krhg.com.sg", "82523699", "Male", "S7548652I", "4 Jalan Kuang", new Date(), "Kent Ridge Central", "Kitchen Manager", "Kitchen", 14, true, "Kwok Chee Siew", "4 Jalan Kuang", "63818471");
-        s29.addAccountRights(st2);
+        s29.addAccountRights(st6);
+        s29.addAccountRights(st5);
         staffSessionLocal.createStaff(s29);
 
         Staff s30 = new Staff("Lawrence Goh Weida", "lawrencegoh", encryptPassword("password"), "lawrencegoh@krhg.com.sg", "97112720", "Male", "S1992887Z", "Blk 13 Lorong 7 Chong Boon, #06-08", new Date(), "Kent Ridge Grand", "Maintenance", "Maintenance", 7, true, "Goh Mei Ting", "Blk 13 Lorong 7 Chong Boon, #06-08", "68376309");
@@ -312,7 +348,7 @@ public class DataInitializationSessionBean {
         staffSessionLocal.createStaff(s30);
 
         Staff s31 = new Staff("Joshua Lam", "joshualam", encryptPassword("password"), "joshualam@krhg.com.sg", "97315439", "Male", "S0246547G", "48 Telok Blangah View", new Date(), "Kent Ridge Grand", "Kitchen Staff", "Kitchen", 7, true, "Lam Hue Ting", "48 Telok Blangah View", "66601252");
-        s31.addAccountRights(st1);
+        s31.addAccountRights(st5);
         staffSessionLocal.createStaff(s31);
 
         Staff s32 = new Staff("Emma Choo", "emmachoo", encryptPassword("password"), "emmachoo@krhg.com.sg", "97010952", "Female", "S3009421B", "13 Jalan Lye Kwee", new Date(), "Kent Ridge North West", "Maintenance", "Maintenance", 7, true, "Choo Mong Lam", "13 Jalan Lye Kwee", "66816679");
@@ -321,10 +357,11 @@ public class DataInitializationSessionBean {
 
         Staff s33 = new Staff("Ava Fong", "avafong", encryptPassword("password"), "avafong@krhg.com.sg", "95990306", "Female", "S9556331G", "16 Ghim Moh Park", new Date(), "Kent Ridge North East", "Front Desk Manager", "Front Desk", 14, true, "Fong Siew Fong", "16 Ghim Moh Park", "60822895");
         s33.addAccountRights(st10);
+        s33.addAccountRights(st9);
         staffSessionLocal.createStaff(s33);
 
         Staff s34 = new Staff("Chin Hwee Hoon Phoebe", "phoebechin", encryptPassword("password"), "phoebechin@krhg.com.sg", "95014355", "Female", "S7558969G", "7 Boon Keng View", new Date(), "Kent Ridge North West", "General Manager", "Front Desk", 18, true, "Chin Fok Lam", "7 Boon Keng View", "61316647");
-        s34.addAccountRights(st10);
+        s34.addAccountRights(st15);
         staffSessionLocal.createStaff(s34);
 
         Staff s35 = new Staff("Mike Chin", "mikechin", encryptPassword("password"), "mikechin@krhg.com.sg", "99985141", "Male", "S9004555E", "Blk 12 Lorong 5 Chong Boon, #09-18", new Date(), "Kent Ridge North West", "Front Desk Staff", "Front Desk", 7, true, "Chin Beng Chun", "Blk 12 Lorong 5 Chong Boon, #09-18", "68272848");
@@ -332,27 +369,31 @@ public class DataInitializationSessionBean {
         staffSessionLocal.createStaff(s35);
 
         Staff s36 = new Staff("Vanessa Sathyalingam", "vanessasathya", encryptPassword("password"), "vanessasathya@krhg.com.sg", "84122183", "Female", "S4498733C", "47 Chin Bee View, #01-40", new Date(), "Kent Ridge North East", "Laundry Manager", "Laundry", 14, true, "Sathyalingam Shanugam", "47 Chin Bee View, #01-40", "65954146");
-        s36.addAccountRights(st2);
+        s36.addAccountRights(st4);
+        s36.addAccountRights(st3);
         staffSessionLocal.createStaff(s36);
 
         Staff s37 = new Staff("Renie Yang", "renieyang", encryptPassword("password"), "renieyang@krhg.com.sg", "99227891", "Female", "S7890299Z", "Blk 26 Kallang Street 81, #18-03", new Date(), "Kent Ridge North West", "Kitchen Manager", "Kitchen", 14, true, "Yang Hui Ting", "Blk 26 Kallang Street 81, #18-03", "65996087");
-        s37.addAccountRights(st2);
+        s37.addAccountRights(st6);
+        s37.addAccountRights(st5);
         staffSessionLocal.createStaff(s37);
 
         Staff s38 = new Staff("Felicia Loy", "felicialoy", encryptPassword("password"), "felicialoy@krhg.com.sg", "95186486", "Female", "S6998351J", "Blk 383 Lorong 1 Mattar, #18-15", new Date(), "Kent Ridge South", "Kitchen Manager", "Kitchen", 14, true, "Loy Num Hee", "Blk 383 Lorong 1 Mattar, #18-15", "69092851");
-        s38.addAccountRights(st2);
+        s38.addAccountRights(st6);
+        s38.addAccountRights(st5);
         staffSessionLocal.createStaff(s38);
 
         Staff s39 = new Staff("Janice Critchley", "janicecritchley", encryptPassword("password"), "janicecritchley@krhg.com.sg", "83084182", "Female", "S6998114C", "Blk 49 Yishun Street 32, #13-17", new Date(), "Kent Ridge Grand", "General Manager", "Front Desk", 7, true, "Critchley Joseph", "Blk 49 Yishun Street 32, #13-17", "64108229");
-        s39.addAccountRights(st10);
+        s39.addAccountRights(st15);
         staffSessionLocal.createStaff(s39);
 
         Staff s40 = new Staff("Low Si Ting", "lowsiting", encryptPassword("password"), "lowsiting@krhg.com.sg", "82237276", "Female", "S7461407H", "Blk 40 Jurong East Street 82, #01-31", new Date(), "Kent Ridge South East", "Front Desk Manager", "Front Desk", 14, true, "Low Li Hung", "Blk 40 Jurong East Street 82, #01-31", "64214229");
         s40.addAccountRights(st10);
+        s40.addAccountRights(st9);
         staffSessionLocal.createStaff(s40);
 
         Staff s41 = new Staff("Irwin Hong Kok Hwee", "irwinhong", encryptPassword("password"), "irwinhong@krhg.com.sg", "94538996", "Male", "S6832133F", "Blk 379 Clementi Street 32, #02-04", new Date(), "Kent Ridge North", "General Manager", "Front Desk", 18, true, "Hong Tong Gek", "Blk 379 Clementi Street 32, #02-04", "61142355");
-        s41.addAccountRights(st10);
+        s41.addAccountRights(st15);
         staffSessionLocal.createStaff(s41);
 
         Staff s42 = new Staff("Ling Min Qi Connie", "connieling", encryptPassword("password"), "connieling@krhg.com.sg", "84964685", "Female", "S1834949C", "Blk 486 Ang Mo Kio Street 83, #13-22", new Date(), "Kent Ridge North", "Maintenance", "Maintenance", 7, true, "Ling Siew King", "Blk 486 Ang Mo Kio Street 83, #13-22", "64274870");
@@ -360,35 +401,39 @@ public class DataInitializationSessionBean {
         staffSessionLocal.createStaff(s42);
 
         Staff s43 = new Staff("Joel To Yueh", "joelyueh", encryptPassword("password"), "joelyueh@krhg.com.sg", "99021935", "Male", "S7268516D", "28 Dover Field", new Date(), "Kent Ridge North", "Laundry Manager", "Laundry", 14, true, "To Gek King", "28 Dover Field", "62657357");
-        s43.addAccountRights(st2);
+        s43.addAccountRights(st4);
+        s43.addAccountRights(st3);
         staffSessionLocal.createStaff(s43);
 
         Staff s44 = new Staff("Eileen Yao", "eileenyao", encryptPassword("password"), "eileenyao@krhg.com.sg", "90355949", "Female", "F3218960K", "Blk 430 Toa Payoh Street 33, #18-16", new Date(), "Kent Ridge North", "Kitchen Staff", "Kitchen", 7, true, "Yao Beh Peo", "Blk 430 Toa Payoh Street 33, #18-16", "65871688");
-        s44.addAccountRights(st1);
+        s44.addAccountRights(st5);
         staffSessionLocal.createStaff(s44);
 
         Staff s45 = new Staff("Devi Yao", "deviyao", encryptPassword("password"), "deviyao@krhg.com.sg", "93790021", "Female", "S2063617C", "Blk 30 Aljunied Street 73, #07-17", new Date(), "Kent Ridge West", "Housekeeping Manager", "Housekeeping", 14, true, "Yao Cheng Ji", "Blk 30 Aljunied Street 73, #07-17", "60930788");
         s45.addAccountRights(st2);
+        s45.addAccountRights(st1);
         staffSessionLocal.createStaff(s45);
 
         Staff s46 = new Staff("Ooi Wei Quan Chris", "chrisooi", encryptPassword("password"), "chrisooi@krhg.com.sg", "90301549", "Male", "F0402355L", "Blk 29 Geylang Street 80, #09-15", new Date(), "Kent Ridge Grand", "Kitchen Staff", "Kitchen", 7, true, "Ooi Beng Chin", "Blk 29 Geylang Street 80, #09-15", "62736175");
-        s46.addAccountRights(st1);
+        s46.addAccountRights(st5);
         staffSessionLocal.createStaff(s46);
 
         Staff s47 = new Staff("Siti Mohamed", "sitimohamed", encryptPassword("password"), "sitimohamed@krhg.com.sg", "93224894", "Female", "S3776248B", "77 Chong Pang Avenue North", new Date(), "Kent Ridge South East", "General Manager", "Front Desk", 18, true, "Mohamed Rahid", "77 Chong Pang Avenue North", "62491275");
-        s47.addAccountRights(st10);
+        s47.addAccountRights(st15);
         staffSessionLocal.createStaff(s47);
 
         Staff s48 = new Staff("Gabriel Kumar", "gabrielkumar", encryptPassword("password"), "gabrielkumar@krhg.com.sg", "94466436", "Male", "S7093840E", "5 Pioneer Heights", new Date(), "Kent Ridge South West", "Kitchen Manager", "Kitchen", 14, true, "Kumar Joseph", "5 Pioneer Heights", "69160906");
-        s48.addAccountRights(st2);
+        s48.addAccountRights(st6);
+        s48.addAccountRights(st5);
         staffSessionLocal.createStaff(s48);
 
         Staff s49 = new Staff("Stephen Keller", "stephenkeller", encryptPassword("password"), "stephenkeller@krhg.com.sg", "80099266", "Male", "S7438436F", "Blk 17 Tampines Street 14, #09-10", new Date(), "Kent Ridge South West", "Front Desk Manager", "Front Desk", 14, true, "Keller Henry", "Blk 17 Tampines Street 14, #09-10", "60459076");
         s49.addAccountRights(st10);
+        s49.addAccountRights(st9);
         staffSessionLocal.createStaff(s49);
 
         Staff s50 = new Staff("Elisa Lim", "elisalim", encryptPassword("password"), "elisalim@krhg.com.sg", "86218501", "Female", "S0407098D", "52 Jalan Jambo Ayer", new Date(), "HQ", "Managing Director", "Senior Management", 21, true, "Lim Chuan Hoo", "52 Jalan Jambo Ayer", "62282110");
-        s50.addAccountRights(st11);
+        s50.addAccountRights(st15);
         staffSessionLocal.createStaff(s50);
 
         Staff s51 = new Staff("Harrison Lopez", "harrisonlopez", encryptPassword("password"), "harrisonlopez@krhg.com.sg", "90979239", "Male", "F7710098U", "8 Sungei Gedong Garden", new Date(), "Kent Ridge South", "Maintenance", "Maintenance", 7, true, "Lopez Maria", "8 Sungei Gedong Garden", "66200708");
@@ -396,7 +441,8 @@ public class DataInitializationSessionBean {
         staffSessionLocal.createStaff(s51);
 
         Staff s52 = new Staff("Adrian To", "adrianto", encryptPassword("password"), "adrianto@krhg.com.sg", "94828126", "Male", "S7870185D", "Blk 46 Toa Payoh Street 32, #18-13", new Date(), "Kent Ridge North West", "Laundry Manager", "Laundry", 14, true, "To Seep Koo", "Blk 46 Toa Payoh Street 32, #18-13", "67740236");
-        s52.addAccountRights(st2);
+        s52.addAccountRights(st4);
+        s52.addAccountRights(st3);
         staffSessionLocal.createStaff(s52);
 
         Staff s53 = new Staff("Kyle Neo", "kyleneo", encryptPassword("password"), "kyleneo@krhg.com.sg", "88892891", "Male", "S9713064G", "5 Admiralty Terrace, #09-39", new Date(), "Kent Ridge West", "Front Desk Staff", "Front Desk", 7, true, "Neo Beng Young", "5 Admiralty Terrace, #09-39", "64285195");
@@ -404,11 +450,12 @@ public class DataInitializationSessionBean {
         staffSessionLocal.createStaff(s53);
 
         Staff s54 = new Staff("Gladys Ee", "gladysee", encryptPassword("password"), "gladysee@krhg.com.sg", "89038687", "Female", "F1447887Q", "7 Bugis Walk", new Date(), "Kent Ridge Central", "Kitchen Staff", "Kitchen", 7, true, "Ee Yung Hun", "7 Bugis Walk", "62498487");
-        s54.addAccountRights(st1);
+        s54.addAccountRights(st5);
         staffSessionLocal.createStaff(s54);
 
         Staff s55 = new Staff("Fong Su Wei", "fongsuwei", encryptPassword("password"), "fongsuwei@krhg.com.sg", "86278601", "Female", "S4540945G", "3 Pasir Ris View", new Date(), "Kent Ridge South West", "Laundry Manager", "Laundry", 14, true, "Fong Mooi Chi", "3 Pasir Ris View", "60984582");
-        s55.addAccountRights(st2);
+        s55.addAccountRights(st4);
+        s55.addAccountRights(st3);
         staffSessionLocal.createStaff(s55);
 
         Staff s56 = new Staff("Preeti Khor", "preetikhor", encryptPassword("password"), "preetikhor@krhg.com.sg", "99525185", "Female", "S8957735G", "9 Pioneer Heights", new Date(), "Kent Ridge South", "Front Desk Staff", "Front Desk", 7, true, "Khor Chee Poh", "9 Pioneer Heights", "63459295");
@@ -417,10 +464,11 @@ public class DataInitializationSessionBean {
 
         Staff s57 = new Staff("Kim Kok Bok Ai", "kimkok", encryptPassword("password"), "kimkok@krhg.com.sg", "80942114", "Female", "S7445023G", "Blk 16 Lorong 6 MacPherson, #10-38", new Date(), "Kent Ridge South", "Front Desk Manager", "Front Desk", 14, true, "Kok Peh Cheah", "Blk 16 Lorong 6 MacPherson, #10-38", "69276817");
         s57.addAccountRights(st10);
+        s57.addAccountRights(st9);
         staffSessionLocal.createStaff(s57);
 
         Staff s58 = new Staff("Choy Beng Mooi", "choybengmooi", encryptPassword("password"), "choybengmooi@krhg.com.sg", "90509346", "Female", "F3435864T", "Blk 14 Ang Mo Kio Street 87, #05-45", new Date(), "HQ", "Admin Manager", "Admin/HR", 14, true, "Choy Wee Tat", "Blk 14 Ang Mo Kio Street 87, #05-45", "60260999");
-        s58.addAccountRights(st4);
+        s58.addAccountRights(st14);
         staffSessionLocal.createStaff(s58);
 
         Staff s59 = new Staff("Amy Chee", "amychee", encryptPassword("password"), "amychee@krhg.com.sg", "87116256", "Female", "S8868188F", "73 Buona Vista Point", new Date(), "Kent Ridge North", "Front Desk Staff", "Front Desk", 7, true, "Chee Chien Boo", "73 Buona Vista Point", "69194607");
@@ -428,19 +476,21 @@ public class DataInitializationSessionBean {
         staffSessionLocal.createStaff(s59);
 
         Staff s60 = new Staff("Maria Poh", "mariapoh", encryptPassword("password"), "mariapoh@krhg.com.sg", "96564109", "Female", "S9708115H", "Blk 44 Lorong 6 Serangoon Gardens, #09-25", new Date(), "Kent Ridge East", "Laundry Staff", "Laundry", 7, true, "Poh Tuan Siew", "Blk 44 Lorong 6 Serangoon Gardens, #09-25", "68165135");
-        s60.addAccountRights(st1);
+        s60.addAccountRights(st3);
         staffSessionLocal.createStaff(s60);
 
         Staff s61 = new Staff("Charles Boo", "charlesboo", encryptPassword("password"), "charlesboo@krhg.com.sg", "97940015", "Male", "S2433605J", "5 Tai Seng Green, #02-40", new Date(), "Kent Ridge South", "Laundry Manager", "Laundry", 14, true, "Boo Lieu Ling", "5 Tai Seng Green, #02-40", "61282380");
-        s61.addAccountRights(st2);
+        s61.addAccountRights(st4);
+        s61.addAccountRights(st3);
         staffSessionLocal.createStaff(s61);
 
         Staff s62 = new Staff("Zhang Chi Chien", "zhangchichien", encryptPassword("password"), "zhangchichien@krhg.com.sg", "99597384", "Female", "S8421189C", "Blk 435 Geylang Street 87, #10-19", new Date(), "Kent Ridge West", "Kitchen Manager", "Kitchen", 14, true, "Zhang Cheng Yue", "Blk 435 Geylang Street 87, #10-19", "66068027");
-        s62.addAccountRights(st2);
+        s62.addAccountRights(st6);
+        s62.addAccountRights(st5);
         staffSessionLocal.createStaff(s62);
 
         Staff s63 = new Staff("Ahmad Mohamad", "ahmadmohamad", encryptPassword("password"), "ahmadmohamad@krhg.com.sg", "93489085", "Male", "S0471497J", "Blk 31 Geylang East Street 82, #11-20", new Date(), "Kent Ridge Grand", "Laundry Staff", "Laundry", 7, true, "Mohamad Khalid", "Blk 31 Geylang East Street 82, #11-20", "69096201");
-        s63.addAccountRights(st1);
+        s63.addAccountRights(st3);
         staffSessionLocal.createStaff(s63);
 
         Staff s64 = new Staff("Caleb Peh", "calebpeh", encryptPassword("password"), "calebpeh@krhg.com.sg", "91293623", "Male", "F6965199L", "Blk 41 Aljunied Street 13, #10-08", new Date(), "Kent Ridge South", "Housekeeping Staff", "Housekeeping", 7, true, "Peh Chuan Nam", "Blk 41 Aljunied Street 13, #10-08", "63717937");
@@ -448,7 +498,7 @@ public class DataInitializationSessionBean {
         staffSessionLocal.createStaff(s64);
 
         Staff s65 = new Staff("Victor Khor Wee Tat", "victorkhor", encryptPassword("password"), "victorkhor@krhg.com.sg", "99183262", "Male", "S7779810B", "86 Pasir Panjang Terrace", new Date(), "HQ", "Finance Staff", "Finance", 7, true, "Khor Leow Sun", "86 Pasir Panjang Terrace", "62833234");
-        s65.addAccountRights(st3);
+        s65.addAccountRights(st12);
         staffSessionLocal.createStaff(s65);
 
         Staff s66 = new Staff("Adrian Cheah", "adriancheah", encryptPassword("password"), "adriancheah@krhg.com.sg", "80716031", "Male", "S7880506D", "Blk 143 Jurong East Terrace", new Date(), "Kent Ridge South West", "Front Desk Staff", "Front Desk", 7, true, "Cheah Hui Ling", "Blk 143 Jurong East Terrace", "60068470");
@@ -456,19 +506,21 @@ public class DataInitializationSessionBean {
         staffSessionLocal.createStaff(s66);
 
         Staff s67 = new Staff("Elwin Ling", "elwinling", encryptPassword("password"), "elwinling@krhg.com.sg", "90800799", "Male", "F3374906Q", "1 Boon Lay View, #11-42", new Date(), "Kent Ridge West", "Kitchen Staff", "Kitchen", 7, true, "Ling Soon Kit", "1 Boon Lay View, #11-42", "63364630");
-        s67.addAccountRights(st1);
+        s67.addAccountRights(st5);
         staffSessionLocal.createStaff(s67);
 
         Staff s68 = new Staff("Walter Lieu", "walterlieu", encryptPassword("password"), "walterlieu@krhg.com.sg", "84778283", "Male", "S3010260F", "Blk 230 Hougang Street 70, #05-22", new Date(), "Kent Ridge South West", "General Manager", "Front Desk", 18, true, "Lieu Toong Hut", "Blk 230 Hougang Street 70, #05-22", "69534452");
-        s68.addAccountRights(st10);
+        s68.addAccountRights(st15);
         staffSessionLocal.createStaff(s68);
 
         Staff s69 = new Staff("Nia Lieu", "nialieu", encryptPassword("password"), "nialieu@krhg.com.sg", "99091599", "Female", "S7531244Z", "Blk 47 Serangoon North Street 19, #16-15", new Date(), "Kent Ridge Central", "Laundry Manager", "Laundry", 14, true, "Lieu Hung Cheng", "Blk 47 Serangoon North Street 19, #16-15", "60770079");
-        s69.addAccountRights(st2);
+        s69.addAccountRights(st4);
+        s69.addAccountRights(st3);
         staffSessionLocal.createStaff(s69);
 
         Staff s70 = new Staff("Dave Boo", "daveboo", encryptPassword("password"), "daveboo@krhg.com.sg", "85461304", "Male", "S2316051Z", "84 Woodlands Hill, #15-20", new Date(), "Kent Ridge North", "Housekeeping Manager", "Housekeeping", 14, true, "Boo Yu Poh", "84 Woodlands Hill, #15-20", "65798399");
         s70.addAccountRights(st2);
+        s70.addAccountRights(st1);
         staffSessionLocal.createStaff(s70);
 
         Staff s71 = new Staff("Garry Scully", "garryscully", encryptPassword("password"), "garryscully@krhg.com.sg", "99946025", "Male", "S9250025Z", "2 Jurong East Walk, #06-28", new Date(), "Kent Ridge Grand", "Front Desk Staff", "Front Desk", 7, true, "Scully Freddy", "2 Jurong East Walk, #06-28", "67793245");
@@ -476,15 +528,17 @@ public class DataInitializationSessionBean {
         staffSessionLocal.createStaff(s71);
 
         Staff s72 = new Staff("Farida Kadir", "faridakadir", encryptPassword("password"), "faridakadir@krhg.com.sg", "98728893", "Female", "S7400526H", "Blk 425 Geylang Street 14, #02-27", new Date(), "Kent Ridge South East", "Kitchen Manager", "Kitchen", 14, true, "Kadir Yaakob", "Blk 425 Geylang Street 14, #02-27", "67834848");
-        s72.addAccountRights(st2);
+        s72.addAccountRights(st6);
+        s72.addAccountRights(st5);
         staffSessionLocal.createStaff(s72);
 
         Staff s73 = new Staff("Khalil Ismail", "khalilismail", encryptPassword("password"), "khalilismail@krhg.com.sg", "84919099", "Male", "S2302951J", "9 Jalan Lim Tai See", new Date(), "Kent Ridge South", "General Manager", "Front Desk", 18, true, "Ismail Danial", "9 Jalan Lim Tai See", "68202843");
-        s73.addAccountRights(st10);
+        s73.addAccountRights(st15);
         staffSessionLocal.createStaff(s73);
 
         Staff s74 = new Staff("Haziq Mohamed", "haziqmohamed", encryptPassword("password"), "haziqmohamed@krhg.com.sg", "92448615", "Male", "F9226149L", "4 Jalan Ayer", new Date(), "Kent Ridge South", "Housekeeping Manager", "Housekeeping", 14, true, "Mohamed Jihan", "4 Jalan Ayer", "69960072");
         s74.addAccountRights(st2);
+        s74.addAccountRights(st1);
         staffSessionLocal.createStaff(s74);
 
         Staff s75 = new Staff("Gemmie Yu", "gemmieyu", encryptPassword("password"), "gemmieyu@krhg.com.sg", "96387568", "Female", "S9350425I", "Blk 375 Serangoon Gardens Street 31, #10-12", new Date(), "Kent Ridge Grand", "Front Desk Staff", "Front Desk", 7, true, "Yu Chi Loh", "Blk 375 Serangoon Gardens Street 31, #10-12", "61657615");
@@ -496,15 +550,16 @@ public class DataInitializationSessionBean {
         staffSessionLocal.createStaff(s76);
 
         Staff s77 = new Staff("Benjamin Choi", "benjaminchoi", encryptPassword("password"), "benjaminchoi@krhg.com.sg", "81887812", "Male", "S6921042B", "Blk 14 Bedok Street 82, #09-43", new Date(), "Kent Ridge Central", "General Manager", "Front Desk", 18, true, "Choi Steven", "Blk 14 Bedok Street 82, #09-43", "62297369");
-        s77.addAccountRights(st10);
+        s77.addAccountRights(st15);
         staffSessionLocal.createStaff(s77);
 
         Staff s78 = new Staff("Aisha Tan", "aishatan", encryptPassword("password"), "aishatan@krhg.com.sg", "99527233", "Female", "S8952070C", "55 Jalan Tenteram", new Date(), "Kent Ridge Grand", "Laundry Staff", "Laundry", 7, true, "Tan Ah Kow", "55 Jalan Tenteram", "67823754");
-        s78.addAccountRights(st1);
+        s78.addAccountRights(st3);
         staffSessionLocal.createStaff(s78);
 
         Staff s79 = new Staff("Luke Cheng", "lukecheng", encryptPassword("password"), "lukecheng@krhg.com.sg", "88764415", "Male", "S8097994J", "Blk 19 Marine Parade Street 77, #02-04", new Date(), "Kent Ridge North West", "Front Desk Manager", "Front Desk", 14, true, "Cheng Low Hung", "Blk 19 Marine Parade Street 77, #02-04", "60245816");
         s79.addAccountRights(st10);
+        s79.addAccountRights(st9);
         staffSessionLocal.createStaff(s79);
 
         Staff s80 = new Staff("Marcia Loh", "marcialoh", encryptPassword("password"), "marcialoh@krhg.com.sg", "91720323", "Female", "F9478179P", "Blk 30 Lorong 2 Seletar, #12-38", new Date(), "Kent Ridge South East", "Maintenance", "Maintenance", 7, true, "Loh Tan Low", "Blk 30 Lorong 2 Seletar, #12-38", "64228680");
@@ -513,10 +568,12 @@ public class DataInitializationSessionBean {
 
         Staff s81 = new Staff("Ari Salim", "arisalim", encryptPassword("password"), "arisalim@krhg.com.sg", "97022200", "Male", "S2765749D", "9 Watten Center, #02-25", new Date(), "Kent Ridge South West", "Housekeeping Manager", "Housekeeping", 14, true, "Salim Adam", "9 Watten Center, #02-25", "63860258");
         s81.addAccountRights(st2);
+        s81.addAccountRights(st1);
         staffSessionLocal.createStaff(s81);
 
         Staff s82 = new Staff("Frederique Leong", "frederiqueleong", encryptPassword("password"), "frederiqueleong@krhg.com.sg", "81452127", "Female", "S7312804H", "Blk 359 Aljunied Street 39, #16-09", new Date(), "Kent Ridge South East", "Laundry Manager", "Laundry", 14, true, "Leong Yew Fatt", "Blk 359 Aljunied Street 39, #16-09", "63563648");
-        s82.addAccountRights(st2);
+        s82.addAccountRights(st4);
+        s82.addAccountRights(st3);
         staffSessionLocal.createStaff(s82);
 
         Staff s83 = new Staff("Samson Lin", "samsonlin", encryptPassword("password"), "samsonlin@krhg.com.sg", "93263527", "Male", "S3488482Z", "Blk 11 Marine Parade Street 14, #18-22", new Date(), "Kent Ridge Grand", "Housekeeping Staff", "Housekeeping", 7, true, "Lin Yue Chan", "Blk 11 Marine Parade Street 14, #18-22", "67928717");
@@ -524,11 +581,12 @@ public class DataInitializationSessionBean {
         staffSessionLocal.createStaff(s83);
 
         Staff s84 = new Staff("Roman Oh Wei-Lun", "romanoh", encryptPassword("password"), "romanoh@krhg.com.sg", "87723481", "Male", "S8226907Z", "Blk 279 Lorong 7 Chin Bee, #08-19", new Date(), "Kent Ridge Central", "Laundry Staff", "Laundry", 7, true, "Oh Lih Bin", "Blk 279 Lorong 7 Chin Bee, #08-19", "62306331");
-        s84.addAccountRights(st1);
+        s84.addAccountRights(st3);
         staffSessionLocal.createStaff(s84);
 
         Staff s85 = new Staff("Amar Salleh", "amarsalleh", encryptPassword("password"), "amarsalleh@krhg.com.sg", "83530914", "Male", "S7329826A", "5 Bukit Gombak Point, #15-41", new Date(), "HQ", "Sales and Marketing Manager", "Sales and Marketing", 14, true, "Salleh Farizan", "5 Bukit Gombak Point, #15-41", "66604735");
-        s85.addAccountRights(st6);
+        s85.addAccountRights(st8);
+        s85.addAccountRights(st7);
         staffSessionLocal.createStaff(s85);
 
         Staff s86 = new Staff("Tong Teng Kiat Irving", "irvingtong", encryptPassword("password"), "irvingtong@krhg.com.sg", "86293792", "Male", "S9260331H", "Blk 12 Boon Lay Street 72, #12-12", new Date(), "Kent Ridge South East", "Front Desk Staff", "Front Desk", 7, true, "Tong Long Kung", "Blk 12 Boon Lay Street 72, #12-12", "69235006");
@@ -536,11 +594,12 @@ public class DataInitializationSessionBean {
         staffSessionLocal.createStaff(s86);
 
         Staff s87 = new Staff("Geoffrey Tan", "geoffreytan", encryptPassword("password"), "geoffreytan@krhg.com.sg", "91077218", "Male", "F6947231K", "3 Chong Pang Drive, #08-38", new Date(), "Kent Ridge South", "Kitchen Staff", "Kitchen", 7, true, "Tan Geok Lin", "3 Chong Pang Drive, #08-38", "68583265");
-        s87.addAccountRights(st1);
+        s87.addAccountRights(st5);
         staffSessionLocal.createStaff(s87);
 
         Staff s88 = new Staff("Gemmie Ramaswamy", "gemmierama", encryptPassword("password"), "gemmierama@krhg.com.sg", "83716773", "Female", "S3711992Z", "Blk 45 Aljunied Street 71, #10-42", new Date(), "Kent Ridge East", "Housekeeping Manager", "Housekeeping", 14, true, "Ramaswamy Stephen", "Blk 45 Aljunied Street 71, #10-42", "67111197");
         s88.addAccountRights(st2);
+        s88.addAccountRights(st1);
         staffSessionLocal.createStaff(s88);
 
         Staff s89 = new Staff("Jaclyn Ong", "jaclynong", encryptPassword("password"), "jaclynong@krhg.com.sg", "85919244", "Female", "S1924229C", "Blk 246 Hougang Street 34, #17-10", new Date(), "Kent Ridge South West", "Maintenance", "Maintenance", 7, true, "Ong Loh Whye", "Blk 246 Hougang Street 34, #17-10", "64449483");
@@ -552,23 +611,27 @@ public class DataInitializationSessionBean {
         staffSessionLocal.createStaff(s90);
 
         Staff s91 = new Staff("Nigel Fong", "nigelfong", encryptPassword("password"), "nigelfong@krhg.com.sg", "97490268", "Male", "S2846520C", "6 Woodlands Point, #01-06", new Date(), "Kent Ridge North East", "General Manager", "Front Desk", 18, true, "Fong Lin Ting", "6 Woodlands Point, #01-06", "66647150");
-        s91.addAccountRights(st10);
+        s91.addAccountRights(st15);
         staffSessionLocal.createStaff(s91);
 
         Staff s92 = new Staff("Rena Lim", "renalim", encryptPassword("password"), "renalim@krhg.com.sg", "99032688", "Female", "S7100209H", "Blk 19 Serangoon Gardens Street 21, #16-23", new Date(), "Kent Ridge North East", "Kitchen Manager", "Kitchen", 14, true, "Lim Thing Boong", "Blk 19 Serangoon Gardens Street 21, #16-23", "61412476");
-        s92.addAccountRights(st2);
+        s92.addAccountRights(st6);
+        s92.addAccountRights(st5);
         staffSessionLocal.createStaff(s92);
 
         Staff s93 = new Staff("Hiram Mohamad", "hirammohamad", encryptPassword("password"), "hirammohamad@krhg.com.sg", "95844103", "Male", "S7153893A", "44 Jalan Sampurna", new Date(), "Kent Ridge Grand", "Maintenance Manager", "Maintenance", 14, true, "Mohamad Shah", "44 Jalan Sampurna", "66169332");
         s93.addAccountRights(st2);
+        s93.addAccountRights(st1);
         staffSessionLocal.createStaff(s93);
 
         Staff s94 = new Staff("Larissa Low", "larissalow", encryptPassword("password"), "larissalow@krhg.com.sg", "80316248", "Female", "S6927334C", "49 Geylang East Heights", new Date(), "Kent Ridge Grand", "Laundry Manager", "Laundry", 14, true, "Low Si Hung", "49 Geylang East Heights", "60679559");
-        s94.addAccountRights(st2);
+        s94.addAccountRights(st4);
+        s94.addAccountRights(st3);
         staffSessionLocal.createStaff(s94);
 
         Staff s95 = new Staff("Adrienne Chye Chern Nee", "adriennechye", encryptPassword("password"), "adriennechye@krhg.com.sg", "94228920", "Female", "S7123873C", "6 Jalan Kemboja", new Date(), "Kent Ridge North West", "Housekeeping Manager", "Housekeeping", 14, true, "Chye Kim Chew", "6 Jalan Kemboja", "66454464");
         s95.addAccountRights(st2);
+        s95.addAccountRights(st1);
         staffSessionLocal.createStaff(s95);
 
         Staff s96 = new Staff("Lynn Tan", "lynntan", encryptPassword("password"), "lynntan@krhg.com.sg", "87401940", "Female", "S9849384J", "Blk 127 Buona Vista Field, #09-23", new Date(), "Kent Ridge East", "Front Desk Staff", "Front Desk", 7, true, "Tan Bock Chye", "Blk 127 Buona Vista Field, #09-23", "67718013");
@@ -577,14 +640,15 @@ public class DataInitializationSessionBean {
 
         Staff s97 = new Staff("Sydnie Gafoor", "sydniegafoor", encryptPassword("password"), "sydniegafoor@krhg.com.sg", "94450056", "Female", "S7800121F", "Blk 31 Sengkang Street 21, #17-41", new Date(), "Kent Ridge Grand", "Front Desk Manager", "Front Desk", 14, true, "Gafoor Joseph", "Blk 31 Sengkang Street 21, #17-41", "67835078");
         s97.addAccountRights(st10);
+        s97.addAccountRights(st9);
         staffSessionLocal.createStaff(s97);
 
         Staff s98 = new Staff("Stanton Lee", "stantonlee", encryptPassword("password"), "stantonlee@krhg.com.sg", "98574752", "Male", "S2969652G", "37 Jalan Lembah Bedok", new Date(), "Kent Ridge West", "General Manager", "Front Desk", 18, true, "Lee Chin Loy", "37 Jalan Lembah Bedok", "65266377");
-        s98.addAccountRights(st10);
+        s98.addAccountRights(st15);
         staffSessionLocal.createStaff(s98);
 
         Staff s99 = new Staff("Jackson Zhen", "jacksonzhen", encryptPassword("password"), "jacksonzhen@krhg.com.sg", "97238443", "Male", "S3987612D", "Blk 201 Lorong 3 Hougang, #10-11", new Date(), "Kent Ridge East", "General Manager", "Front Desk", 18, true, "Zhen Shao Liang", "Blk 201 Lorong 3 Hougang, #10-11", "66964374");
-        s99.addAccountRights(st10);
+        s99.addAccountRights(st15);
         staffSessionLocal.createStaff(s99);
 
         Staff s100 = new Staff("Tiffany Teo", "tiffanyteo", encryptPassword("password"), "tiffanyteo@krhg.com.sg", "91832153", "Female", "F8656804R", "45 Serangoon Gardens Park, #18-18", new Date(), "Kent Ridge North", "Housekeeping Staff", "Housekeeping", 7, true, "Teo Mei Zhen", "45 Serangoon Gardens Park, #18-18", "64022273");
@@ -592,7 +656,7 @@ public class DataInitializationSessionBean {
         staffSessionLocal.createStaff(s100);
 
         Staff s101 = new Staff("Jonas Chye", "jonasc144", encryptPassword("password"), "jonaschye@krhg.com.sg", "86674988", "Male", "S2301378E", "Blk 48 Lorong 7 Boon Keng, #14-01", new Date(), "HQ", "IT Staff", "IT", 7, true, "Chye Hun Soon", "Blk 48 Lorong 7 Boon Keng, #14-01", "68997170");
-        s101.addAccountRights(st7);
+        s101.addAccountRights(st11);
         staffSessionLocal.createStaff(s101);
 
         Staff s102 = new Staff("Victor Yong", "victoryon", encryptPassword("password"), "victoryong@krhg.com.sg", "98334463", "Male", "S7617697D", "1 Boon Keng Garden", new Date(), "HQ", "IT Manager", "IT", 14, true, "Meryvyn Yong", "1 Boon Keng Garden", "69768091");
@@ -600,7 +664,7 @@ public class DataInitializationSessionBean {
         staffSessionLocal.createStaff(s102);
 
         Staff s103 = new Staff("Sammy Sim Jinrong", "sammysi306", encryptPassword("password"), "sammysim@krhg.com.sg", "97581486", "Male", "S8054421F", "17 Tampines Lane", new Date(), "HQ", "IT Staff", "IT", 7, true, "Sim Iew Leak", "17 Tampines Lane", "61617202");
-        s103.addAccountRights(st7);
+        s103.addAccountRights(st11);
         staffSessionLocal.createStaff(s103);
 
 //*********************************************HOTEL FACILIY************************************************
@@ -787,25 +851,149 @@ public class DataInitializationSessionBean {
         MinibarItem m1 = new MinibarItem("Potato Chips", 5, 10.00);
         houseKeepingOrderSessionLocal.createMinibarItem(m1);
         m1 = houseKeepingOrderSessionLocal.getMinibarItemByItemName("Potato Chips");
+        MinibarStock ms1 = new MinibarStock("Potato Chips", "KRG", 1000, 300);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms1);
+        MinibarStock ms2 = new MinibarStock("Potato Chips", "KRC", 800, 200);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms2);
+        MinibarStock ms3 = new MinibarStock("Potato Chips", "KRN", 600, 150);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms3);
+        MinibarStock ms4 = new MinibarStock("Potato Chips", "KRS", 600, 150);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms4);
+        MinibarStock ms5 = new MinibarStock("Potato Chips", "KRE", 600, 150);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms5);
+        MinibarStock ms6 = new MinibarStock("Potato Chips", "KRW", 600, 150);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms6);
+        MinibarStock ms7 = new MinibarStock("Potato Chips", "KRNE", 400, 100);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms7);
+        MinibarStock ms8 = new MinibarStock("Potato Chips", "KRNS", 400, 100);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms8);
+        MinibarStock ms9 = new MinibarStock("Potato Chips", "KRSE", 400, 100);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms9);
+        MinibarStock ms10 = new MinibarStock("Potato Chips", "KRSW", 400, 100);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms10);
 
         MinibarItem m2 = new MinibarItem("Chocolate", 5, 8.00);
         houseKeepingOrderSessionLocal.createMinibarItem(m2);
+        MinibarStock ms11 = new MinibarStock("Chocolate", "KRG", 1000, 300);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms11);
+        MinibarStock ms12 = new MinibarStock("Chocolate", "KRC", 800, 200);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms12);
+        MinibarStock ms13 = new MinibarStock("Chocolate", "KRN", 600, 150);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms13);
+        MinibarStock ms14 = new MinibarStock("Chocolate", "KRS", 600, 150);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms14);
+        MinibarStock ms15 = new MinibarStock("Chocolate", "KRE", 600, 150);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms15);
+        MinibarStock ms16 = new MinibarStock("Chocolate", "KRW", 600, 150);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms16);
+        MinibarStock ms17 = new MinibarStock("Chocolate", "KRNE", 400, 100);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms17);
+        MinibarStock ms18 = new MinibarStock("Chocolate", "KRNS", 400, 100);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms18);
+        MinibarStock ms19 = new MinibarStock("Chocolate", "KRSE", 400, 100);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms19);
+        MinibarStock ms20 = new MinibarStock("Chocolate", "KRSW", 400, 100);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms20);
+
         m2 = houseKeepingOrderSessionLocal.getMinibarItemByItemName("Chocolate");
 
         MinibarItem m3 = new MinibarItem("Mineral Water", 3, 5.00);
         houseKeepingOrderSessionLocal.createMinibarItem(m3);
+        MinibarStock ms21 = new MinibarStock("Mineral Water", "KRG", 1000, 300);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms21);
+        MinibarStock ms22 = new MinibarStock("Mineral Water", "KRC", 800, 200);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms22);
+        MinibarStock ms23 = new MinibarStock("Mineral Water", "KRN", 600, 150);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms23);
+        MinibarStock ms24 = new MinibarStock("Mineral Water", "KRS", 600, 150);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms24);
+        MinibarStock ms25 = new MinibarStock("Mineral Water", "KRE", 600, 150);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms25);
+        MinibarStock ms26 = new MinibarStock("Mineral Water", "KRW", 600, 150);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms26);
+        MinibarStock ms27 = new MinibarStock("Mineral Water", "KRNE", 400, 100);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms27);
+        MinibarStock ms28 = new MinibarStock("Mineral Water", "KRNS", 400, 100);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms28);
+        MinibarStock ms29 = new MinibarStock("Mineral Water", "KRSE", 400, 100);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms29);
+        MinibarStock ms30 = new MinibarStock("Mineral Water", "KRSW", 400, 100);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms30);
+
         m3 = houseKeepingOrderSessionLocal.getMinibarItemByItemName("Mineral Water");
 
         MinibarItem m4 = new MinibarItem("Coke", 3, 7.00);
         houseKeepingOrderSessionLocal.createMinibarItem(m4);
+        MinibarStock ms31 = new MinibarStock("Coke", "KRG", 1000, 300);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms31);
+        MinibarStock ms32 = new MinibarStock("Coke", "KRC", 800, 200);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms32);
+        MinibarStock ms33 = new MinibarStock("Coke", "KRN", 600, 150);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms33);
+        MinibarStock ms34 = new MinibarStock("Coke", "KRS", 600, 150);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms34);
+        MinibarStock ms35 = new MinibarStock("Coke", "KRE", 600, 150);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms35);
+        MinibarStock ms36 = new MinibarStock("Coke", "KRW", 600, 150);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms36);
+        MinibarStock ms37 = new MinibarStock("Coke", "KRNE", 400, 100);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms37);
+        MinibarStock ms38 = new MinibarStock("Coke", "KRNS", 400, 100);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms38);
+        MinibarStock ms39 = new MinibarStock("Coke", "KRSE", 400, 100);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms39);
+        MinibarStock ms40 = new MinibarStock("Coke", "KRSW", 400, 100);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms40);
         m4 = houseKeepingOrderSessionLocal.getMinibarItemByItemName("Coke");
 
         MinibarItem m5 = new MinibarItem("Wine", 5, 60.00);
         houseKeepingOrderSessionLocal.createMinibarItem(m5);
+        MinibarStock ms41 = new MinibarStock("Wine", "KRG", 1000, 300);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms41);
+        MinibarStock ms42 = new MinibarStock("Wine", "KRC", 800, 200);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms42);
+        MinibarStock ms43 = new MinibarStock("Wine", "KRN", 600, 150);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms43);
+        MinibarStock ms44 = new MinibarStock("Wine", "KRS", 600, 150);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms44);
+        MinibarStock ms45 = new MinibarStock("Wine", "KRE", 600, 150);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms45);
+        MinibarStock ms46 = new MinibarStock("Wine", "KRW", 600, 150);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms46);
+        MinibarStock ms47 = new MinibarStock("Wine", "KRNE", 400, 100);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms47);
+        MinibarStock ms48 = new MinibarStock("Wine", "KRNS", 400, 100);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms48);
+        MinibarStock ms49 = new MinibarStock("Wine", "KRSE", 400, 100);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms49);
+        MinibarStock ms50 = new MinibarStock("Wine", "KRSW", 400, 100);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms50);
+
         m5 = houseKeepingOrderSessionLocal.getMinibarItemByItemName("Wine");
 
         MinibarItem m6 = new MinibarItem("Beer", 5, 15.00);
         houseKeepingOrderSessionLocal.createMinibarItem(m6);
+        MinibarStock ms51 = new MinibarStock("Beer", "KRG", 1000, 300);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms51);
+        MinibarStock ms52 = new MinibarStock("Beer", "KRC", 800, 200);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms52);
+        MinibarStock ms53 = new MinibarStock("Beer", "KRN", 600, 150);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms53);
+        MinibarStock ms54 = new MinibarStock("Beer", "KRS", 600, 150);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms54);
+        MinibarStock ms55 = new MinibarStock("Beer", "KRE", 600, 150);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms55);
+        MinibarStock ms56 = new MinibarStock("Beer", "KRW", 600, 150);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms56);
+        MinibarStock ms57 = new MinibarStock("Beer", "KRNE", 400, 100);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms57);
+        MinibarStock ms58 = new MinibarStock("Beer", "KRNS", 400, 100);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms58);
+        MinibarStock ms59 = new MinibarStock("Beer", "KRSE", 400, 100);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms59);
+        MinibarStock ms60 = new MinibarStock("Beer", "KRSW", 400, 100);
+        houseKeepingOrderSessionLocal.createMinibarStock(ms60);
+
         m6 = houseKeepingOrderSessionLocal.getMinibarItemByItemName("Beer");
 
 //*********************************************ROOM FACILIY************************************************
@@ -1257,19 +1445,18 @@ public class DataInitializationSessionBean {
         fb3.setFeedBackMsg("rooms were recently renovated and very comfortable, modern and nice.");
         fb3.setHotel(h1);
         feedbackSessionLocal.createFeedback(fb3);
-        
-        
+
 //*********************************************LAUNDRY TYPE************************************************        
         LaundryType lt1 = new LaundryType();
         lt1.setLaundryName("Top (Dry-Wash)");
         lt1.setPrice(15.0);
         laundrySessionLocal.createLaundryType(lt1);
-        
+
         LaundryType lt2 = new LaundryType();
         lt2.setLaundryName("Top (Wash)");
         lt2.setPrice(12.0);
-        laundrySessionLocal.createLaundryType(lt2);        
-        
+        laundrySessionLocal.createLaundryType(lt2);
+
         LaundryType lt3 = new LaundryType();
         lt3.setLaundryName("Bottom (Dry-Wash)");
         lt3.setPrice(15.0);
@@ -1279,12 +1466,12 @@ public class DataInitializationSessionBean {
         lt4.setLaundryName("Bottom (Wash)");
         lt4.setPrice(12.0);
         laundrySessionLocal.createLaundryType(lt4);
-        
+
         LaundryType lt5 = new LaundryType();
         lt5.setLaundryName("Inner Wear (Dry-Wash)");
         lt5.setPrice(8.0);
         laundrySessionLocal.createLaundryType(lt5);
-        
+
         LaundryType lt6 = new LaundryType();
         lt6.setLaundryName("Inner Wear (Wash)");
         lt6.setPrice(6.0);
@@ -1294,12 +1481,12 @@ public class DataInitializationSessionBean {
         lt7.setLaundryName("Outer Wear (Dry-Wash)");
         lt7.setPrice(20.0);
         laundrySessionLocal.createLaundryType(lt7);
-        
+
         LaundryType lt8 = new LaundryType();
         lt8.setLaundryName("Outer Wear (Wash)");
         lt8.setPrice(18.0);
         laundrySessionLocal.createLaundryType(lt8);
-        
+
         em.flush();
     }
 
@@ -3590,7 +3777,7 @@ public class DataInitializationSessionBean {
         RoomFacility rf20 = roomFacilitySessionLocal.getRoomFacilityByName("High Ceiling");
         RoomFacility rf21 = roomFacilitySessionLocal.getRoomFacilityByName("Jaccuzi");
         RoomFacility rf22 = roomFacilitySessionLocal.getRoomFacilityByName("Kitchen");
-        
+
         FunctionRoom KRCFR1 = new FunctionRoom("KRCFR1", 20, "Available", 20000.00, h2);
         FunctionRoom KRCFR2 = new FunctionRoom("KRCFR2", 100, "Available", 100000.00, h2);
         FunctionRoom KRCFR3 = new FunctionRoom("KRCFR3", 50, "Available", 50000.00, h2);
@@ -5235,7 +5422,7 @@ public class DataInitializationSessionBean {
         RoomFacility rf20 = roomFacilitySessionLocal.getRoomFacilityByName("High Ceiling");
         RoomFacility rf21 = roomFacilitySessionLocal.getRoomFacilityByName("Jaccuzi");
         RoomFacility rf22 = roomFacilitySessionLocal.getRoomFacilityByName("Kitchen");
-        
+
         FunctionRoom KRNFR1 = new FunctionRoom("KRNFR1", 20, "Available", 20000.00, h3);
         FunctionRoom KRNFR2 = new FunctionRoom("KRNFR2", 100, "Available", 100000.00, h3);
         FunctionRoom KRNFR3 = new FunctionRoom("KRNFR3", 50, "Available", 50000.00, h3);
@@ -6881,7 +7068,7 @@ public class DataInitializationSessionBean {
         RoomFacility rf20 = roomFacilitySessionLocal.getRoomFacilityByName("High Ceiling");
         RoomFacility rf21 = roomFacilitySessionLocal.getRoomFacilityByName("Jaccuzi");
         RoomFacility rf22 = roomFacilitySessionLocal.getRoomFacilityByName("Kitchen");
-        
+
         FunctionRoom KRSFR1 = new FunctionRoom("KRSFR1", 20, "Available", 20000.00, h4);
         FunctionRoom KRSFR2 = new FunctionRoom("KRSFR2", 100, "Available", 100000.00, h4);
         FunctionRoom KRSFR3 = new FunctionRoom("KRSFR3", 50, "Available", 50000.00, h4);
@@ -8526,7 +8713,7 @@ public class DataInitializationSessionBean {
         RoomFacility rf20 = roomFacilitySessionLocal.getRoomFacilityByName("High Ceiling");
         RoomFacility rf21 = roomFacilitySessionLocal.getRoomFacilityByName("Jaccuzi");
         RoomFacility rf22 = roomFacilitySessionLocal.getRoomFacilityByName("Kitchen");
-        
+
         FunctionRoom KREFR1 = new FunctionRoom("KREFR1", 20, "Available", 20000.00, h5);
         FunctionRoom KREFR2 = new FunctionRoom("KREFR2", 100, "Available", 100000.00, h5);
         FunctionRoom KREFR3 = new FunctionRoom("KREFR3", 50, "Available", 50000.00, h5);
@@ -8543,7 +8730,7 @@ public class DataInitializationSessionBean {
         h5.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KREFR2"));
         h5.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KREFR3"));
         h5.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KREFR4"));
-        h5.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KREFR5"));        
+        h5.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KREFR5"));
 
         Room KRES1 = new Room("KRE_201", "201", "Standard", 2, "Occupied", h5);
         KRES1.addRoomFacility(rf1);
@@ -9420,7 +9607,7 @@ public class DataInitializationSessionBean {
         RoomFacility rf20 = roomFacilitySessionLocal.getRoomFacilityByName("High Ceiling");
         RoomFacility rf21 = roomFacilitySessionLocal.getRoomFacilityByName("Jaccuzi");
         RoomFacility rf22 = roomFacilitySessionLocal.getRoomFacilityByName("Kitchen");
-        
+
         FunctionRoom KRWFR1 = new FunctionRoom("KRWFR1", 20, "Available", 20000.00, h6);
         FunctionRoom KRWFR2 = new FunctionRoom("KRWFR2", 100, "Available", 100000.00, h6);
         FunctionRoom KRWFR3 = new FunctionRoom("KRWFR3", 50, "Available", 50000.00, h6);
@@ -9437,7 +9624,7 @@ public class DataInitializationSessionBean {
         h6.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRWFR2"));
         h6.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRWFR3"));
         h6.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRWFR4"));
-        h6.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRWFR5"));        
+        h6.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRWFR5"));
 
         Room KRWS1 = new Room("KRW_201", "201", "Standard", 2, "Available", h6);
         KRWS1.addRoomFacility(rf1);
@@ -11065,7 +11252,7 @@ public class DataInitializationSessionBean {
         RoomFacility rf20 = roomFacilitySessionLocal.getRoomFacilityByName("High Ceiling");
         RoomFacility rf21 = roomFacilitySessionLocal.getRoomFacilityByName("Jaccuzi");
         RoomFacility rf22 = roomFacilitySessionLocal.getRoomFacilityByName("Kitchen");
-        
+
         FunctionRoom KRNEFR1 = new FunctionRoom("KRNEFR1", 20, "Available", 20000.00, h7);
         FunctionRoom KRNEFR2 = new FunctionRoom("KRNEFR2", 100, "Available", 100000.00, h7);
         FunctionRoom KRNEFR3 = new FunctionRoom("KRNEFR3", 50, "Available", 50000.00, h7);
@@ -11082,7 +11269,7 @@ public class DataInitializationSessionBean {
         h7.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRNEFR2"));
         h7.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRNEFR3"));
         h7.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRNEFR4"));
-        h7.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRNEFR5"));        
+        h7.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRNEFR5"));
 
         Room KRNES1 = new Room("KRNE_201", "201", "Standard", 2, "Available", h7);
         KRNES1.addRoomFacility(rf1);
@@ -12147,7 +12334,7 @@ public class DataInitializationSessionBean {
         RoomFacility rf20 = roomFacilitySessionLocal.getRoomFacilityByName("High Ceiling");
         RoomFacility rf21 = roomFacilitySessionLocal.getRoomFacilityByName("Jaccuzi");
         RoomFacility rf22 = roomFacilitySessionLocal.getRoomFacilityByName("Kitchen");
-        
+
         FunctionRoom KRNWFR1 = new FunctionRoom("KRNWFR1", 20, "Available", 20000.00, h8);
         FunctionRoom KRNWFR2 = new FunctionRoom("KRNWFR2", 100, "Available", 100000.00, h8);
         FunctionRoom KRNWFR3 = new FunctionRoom("KRNWFR3", 50, "Available", 50000.00, h8);
@@ -12164,7 +12351,7 @@ public class DataInitializationSessionBean {
         h8.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRNWFR2"));
         h8.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRNWFR3"));
         h8.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRNWFR4"));
-        h8.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRNWFR5"));        
+        h8.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRNWFR5"));
 
         Room KRNWS1 = new Room("KRNW_201", "201", "Standard", 2, "Available", h8);
         KRNWS1.addRoomFacility(rf1);
@@ -13228,7 +13415,7 @@ public class DataInitializationSessionBean {
         RoomFacility rf20 = roomFacilitySessionLocal.getRoomFacilityByName("High Ceiling");
         RoomFacility rf21 = roomFacilitySessionLocal.getRoomFacilityByName("Jaccuzi");
         RoomFacility rf22 = roomFacilitySessionLocal.getRoomFacilityByName("Kitchen");
-        
+
         FunctionRoom KRSEFR1 = new FunctionRoom("KRSEFR1", 20, "Available", 20000.00, h9);
         FunctionRoom KRSEFR2 = new FunctionRoom("KRSEFR2", 100, "Available", 100000.00, h9);
         FunctionRoom KRSEFR3 = new FunctionRoom("KRSEFR3", 50, "Available", 50000.00, h9);
@@ -13245,7 +13432,7 @@ public class DataInitializationSessionBean {
         h9.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRSEFR2"));
         h9.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRSEFR3"));
         h9.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRSEFR4"));
-        h9.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRSEFR5"));        
+        h9.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRSEFR5"));
 
         Room KRSES1 = new Room("KRSE_201", "201", "Standard", 2, "Available", h9);
         KRSES1.addRoomFacility(rf1);
@@ -14310,7 +14497,7 @@ public class DataInitializationSessionBean {
         RoomFacility rf20 = roomFacilitySessionLocal.getRoomFacilityByName("High Ceiling");
         RoomFacility rf21 = roomFacilitySessionLocal.getRoomFacilityByName("Jaccuzi");
         RoomFacility rf22 = roomFacilitySessionLocal.getRoomFacilityByName("Kitchen");
-        
+
         FunctionRoom KRSWFR1 = new FunctionRoom("KRSWFR1", 20, "Available", 20000.00, h10);
         FunctionRoom KRSWFR2 = new FunctionRoom("KRSWFR2", 100, "Available", 100000.00, h10);
         FunctionRoom KRSWFR3 = new FunctionRoom("KRSWFR3", 50, "Available", 50000.00, h10);
@@ -14327,7 +14514,7 @@ public class DataInitializationSessionBean {
         h10.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRSWFR2"));
         h10.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRSWFR3"));
         h10.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRSWFR4"));
-        h10.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRSWFR5"));        
+        h10.addFunctionRoom(functionRoomSessionLocal.getFunctionRoomByName("KRSWFR5"));
 
         Room KRSWS1 = new Room("KRSW_201", "201", "Standard", 2, "Available", h10);
         KRSWS1.addRoomFacility(rf1);
@@ -15361,15 +15548,15 @@ public class DataInitializationSessionBean {
 
         em.flush();
 
-        HouseKeepingOrder ho1 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_401"), "incomplete", 4, new Date(), new Date(), null, "Toothpaste and hairnet", "toiletries");
-        HouseKeepingOrder ho2 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_402"), "incomplete", 4, new Date(), new Date(), null, "Spoilt TV", "maintenance");
-        HouseKeepingOrder ho3 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_405"), "incomplete", 4, new Date(), new Date(), null, "Spilled drinks", "housekeeping");
-        HouseKeepingOrder ho4 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_406"), "incomplete", 4, new Date(), new Date(), null, "Dusty table", "housekeeping");
-        HouseKeepingOrder ho5 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_402"), "incomplete", 4, new Date(), new Date(), null, "Tv not working", "maintenance");
-        HouseKeepingOrder ho6 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_403"), "incomplete", 4, new Date(), new Date(), null, "1 pants & 1 shirt", "laundry");
-        HouseKeepingOrder ho7 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_409"), "incomplete", 4, new Date(), new Date(), null, "5 pants & 5 shirts", "laundry");
-        HouseKeepingOrder ho8 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_408"), "incomplete", 4, new Date(), new Date(), null, "Mineral water refill", "housekeeping");
-        HouseKeepingOrder ho9 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_407"), "incomplete", 4, new Date(), new Date(), null, "Clogged Sink", "maintenance");
+        HouseKeepingOrder ho1 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_401"), "incomplete", 4, new Date(), new Date(), null, "Toothpaste and hairnet", "toiletries", true);
+        HouseKeepingOrder ho2 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_402"), "incomplete", 4, new Date(), new Date(), null, "Spoilt TV", "maintenance", false);
+        HouseKeepingOrder ho3 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_405"), "incomplete", 4, new Date(), new Date(), null, "Spilled drinks", "housekeeping", true);
+        HouseKeepingOrder ho4 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_406"), "incomplete", 4, new Date(), new Date(), null, "Dusty table", "housekeeping", true);
+        HouseKeepingOrder ho5 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_402"), "incomplete", 4, new Date(), new Date(), null, "Tv not working", "maintenance", true);
+        HouseKeepingOrder ho6 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_403"), "incomplete", 4, new Date(), new Date(), null, "1 pants & 1 shirt", "laundry", true);
+        HouseKeepingOrder ho7 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_409"), "incomplete", 4, new Date(), new Date(), null, "5 pants & 5 shirts", "laundry", true);
+        HouseKeepingOrder ho8 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_408"), "incomplete", 4, new Date(), new Date(), null, "Mineral water refill", "housekeeping", true);
+        HouseKeepingOrder ho9 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_407"), "incomplete", 4, new Date(), new Date(), null, "Clogged Sink", "maintenance", true);
 
         houseKeepingOrderSessionLocal.createHouseKeepingOrder(ho1);
         houseKeepingOrderSessionLocal.createHouseKeepingOrder(ho2);
@@ -15452,8 +15639,7 @@ public class DataInitializationSessionBean {
         rm1.setStatus("Incomplete");
 
         bookingSessionLocal.createRoomBooking(rm1);
-        
-        
+
         RoomBooking rb1 = new RoomBooking();
         rb1.setBookInDate(format.parse("2019-03-10"));
         rb1.setBookOutDate(format.parse("2019-03-13"));
@@ -15470,7 +15656,7 @@ public class DataInitializationSessionBean {
         rb1.setHasExtraBed(false);
         bookingSessionLocal.createRoomBooking(rb1);
         RoomBooking newrb1 = bookingSessionLocal.getLastRoomBooking();
-        
+
         RoomBooking rb2 = new RoomBooking();
         rb2.setBookInDate(format.parse("2019-01-10"));
         rb2.setBookOutDate(format.parse("2019-01-13"));
@@ -15487,7 +15673,7 @@ public class DataInitializationSessionBean {
         rb2.setHasExtraBed(true);
         bookingSessionLocal.createRoomBooking(rb2);
         RoomBooking newrb2 = bookingSessionLocal.getLastRoomBooking();
-        
+
         RoomBooking rb3 = new RoomBooking();
         rb3.setBookInDate(format.parse("2019-05-10"));
         rb3.setBookOutDate(format.parse("2019-05-13"));
@@ -15503,7 +15689,7 @@ public class DataInitializationSessionBean {
         rb3.setLastName("Neo Guohui");
         rb3.setHasExtraBed(true);
         bookingSessionLocal.createRoomBooking(rb3);
-        RoomBooking newrb3 = bookingSessionLocal.getLastRoomBooking();        
+        RoomBooking newrb3 = bookingSessionLocal.getLastRoomBooking();
 //***************Laundry Order***************
         LaundryOrder lo1 = new LaundryOrder();
         lo1.setRoom(roomSessionLocal.getRoomByName("KRG_202"));
@@ -15514,24 +15700,23 @@ public class DataInitializationSessionBean {
         lo1.setSpecialRequest("you may come in and collect the coat if I'm not in the room");
         laundrySessionLocal.createLaundryOrder(lo1);
         LaundryOrder newlo1 = laundrySessionLocal.getLastLaundryOrder();
-        
+
         LaundryOrderedItem loi1 = new LaundryOrderedItem();
         loi1.setQty(2);
         loi1.setLaundryType(laundrySessionLocal.getLaundryTypeByName("Top (Dry-Wash)"));
         loi1.setDescription("2x Black Coat");
         laundrySessionLocal.createLaundryOrderedItem(loi1);
         newlo1.addLaundryOrderedItem(laundrySessionLocal.getLastLaundryOrderedItem());
-        
+
         LaundryOrderedItem loi2 = new LaundryOrderedItem();
         loi2.setQty(1);
         loi2.setLaundryType(laundrySessionLocal.getLaundryTypeByName("Top (Wash)"));
         loi2.setDescription("1x Coat");
-        laundrySessionLocal.createLaundryOrderedItem(loi2);        
+        laundrySessionLocal.createLaundryOrderedItem(loi2);
         newlo1.addLaundryOrderedItem(laundrySessionLocal.getLastLaundryOrderedItem());
         newlo1.setTotalPrice(42.0);
         newrb1.addLaundryOrder(newlo1);
-        
-        
+
         LaundryOrder lo5 = new LaundryOrder();
         lo5.setRoom(roomSessionLocal.getRoomByName("KRG_402"));
         lo5.setOrderDateTime(format.parse("2019-01-10"));
@@ -15541,18 +15726,17 @@ public class DataInitializationSessionBean {
         lo5.setSpecialRequest("");
         laundrySessionLocal.createLaundryOrder(lo5);
         LaundryOrder newlo2 = laundrySessionLocal.getLastLaundryOrder();
-        
+
         LaundryOrderedItem loi5 = new LaundryOrderedItem();
         loi5.setQty(1);
         loi5.setLaundryType(laundrySessionLocal.getLaundryTypeByName("Top (Dry-Wash)"));
         loi5.setDescription("1x Black Coat");
         laundrySessionLocal.createLaundryOrderedItem(loi5);
         newlo2.addLaundryOrderedItem(laundrySessionLocal.getLastLaundryOrderedItem());
-        
+
         newlo2.setTotalPrice(15.0);
-        newrb1.addLaundryOrder(newlo2);       
-        
-       
+        newrb1.addLaundryOrder(newlo2);
+
 //***************Food Order***************        
         FoodOrder fo1 = new FoodOrder();
         foodMenuItemSessionLocal.createFoodOrder(fo1);
@@ -15578,11 +15762,11 @@ public class DataInitializationSessionBean {
 
         newfo1.setTotalPrice(54.0);
         newrb1.addFoodOrder(newfo1);
-        
+
         FoodOrder fo2 = new FoodOrder();
         foodMenuItemSessionLocal.createFoodOrder(fo2);
-        FoodOrder newfo2 = foodMenuItemSessionLocal.getLastFoodOrder();    
-        
+        FoodOrder newfo2 = foodMenuItemSessionLocal.getLastFoodOrder();
+
         FoodOrderedItem foi4 = new FoodOrderedItem();
         foi4.setQty(2);
         foi4.setFood(foodMenuItemSessionLocal.getFoodMenuItemByName("Coke"));
@@ -15593,11 +15777,11 @@ public class DataInitializationSessionBean {
         foi5.setQty(1);
         foi5.setFood(foodMenuItemSessionLocal.getFoodMenuItemByName("Pancakes"));
         foodMenuItemSessionLocal.createFoodOrderedItem(foi5);
-        newfo2.addFoodOrderedItem(foodMenuItemSessionLocal.getLastFoodOrderedItem());  
-        
+        newfo2.addFoodOrderedItem(foodMenuItemSessionLocal.getLastFoodOrderedItem());
+
         newfo2.setTotalPrice(32.0);
         newrb2.addFoodOrder(newfo2);
-        
+
 //***************Minibar Order***************        
         MinibarOrder mo1 = new MinibarOrder();
         houseKeepingOrderSessionLocal.createMinibarOrder(mo1);
@@ -15616,22 +15800,21 @@ public class DataInitializationSessionBean {
         newmo1.addMinibarOrderedItem(houseKeepingOrderSessionLocal.getLastMinibarOrderedItem());
 
         newmo1.setTotalPrice(89.0);
-        newrb1.addMinibarOrder(newmo1);     	
-		
+        newrb1.addMinibarOrder(newmo1);
+
         MinibarOrder mo2 = new MinibarOrder();
         houseKeepingOrderSessionLocal.createMinibarOrder(mo2);
         MinibarOrder newmo2 = houseKeepingOrderSessionLocal.getLastMinibarOrder();
-        
+
         MinibarOrderedItem moi3 = new MinibarOrderedItem();
         moi3.setQty(2);
         moi3.setMinibarItem(houseKeepingOrderSessionLocal.getMinibarItemByItemName("Coke"));
         houseKeepingOrderSessionLocal.createMinibarOrderedItem(moi3);
         newmo2.addMinibarOrderedItem(houseKeepingOrderSessionLocal.getLastMinibarOrderedItem());
-        
+
         newmo2.setTotalPrice(14.0);
         newrb2.addMinibarOrder(newmo2);
-        
-        
+
         em.flush();
 
         PaymentTransaction PT1 = new PaymentTransaction();

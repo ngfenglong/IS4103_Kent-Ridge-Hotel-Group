@@ -55,7 +55,7 @@
                                     </div>
                                     <!-- /.box-header -->
                                     <div class="box-body no-padding">
-                                        <div class="row" style="margin-bottom:20px">
+                                        <div class="row">
 
 
                                             <!-- /.col -->
@@ -82,20 +82,6 @@
                                                             #{hotelManagedBean.selectedHotelObj.hotelContact}</h5>
 
                                                 </div>
-                                                <!-- /.col -->
-                                                <div class="col-md-6">
-                                                        <p class="text-center">
-                                                            <strong>Hotel Facilities</strong>
-                                                        </p>
-
-                                                                <c:forEach items="${hotelManagedBean.selectedHotelObj.hotelFacilities}" style="text-align: center" var="f">
-                                                                <img style="width:20px; height: 20px;"
-                                                                    alt="#{f.hotelFacilityImage}"
-                                                                    src="http://zetegral.website/krhgImages/#{f.hotelFacilityImage}" />
-                                                                - #{f.hotelFacilityName} <br />
-                                                            </c:forEach>
-                                                       
-                                                    </div>
                                                     <!-- /.description-block -->
                                                     <div class="description-block margin-bottom">
                                                         <span class="description-text">Rating</span>
@@ -112,7 +98,7 @@
                                                 </div>
                                             </div>
                                             <!-- /.col -->
-                                            <div class="col-md-6" style="text-align: center">
+                                            <div class="col-md-6" style="text-align: center; padding:10px 0px">
                                                 <p class="text-center">
                                                     <strong>Hotel Facilities</strong>
                                                 </p>

@@ -9,6 +9,7 @@ import entity.HouseKeepingOrder;
 import entity.MinibarItem;
 import entity.MinibarOrder;
 import entity.MinibarOrderedItem;
+import entity.MinibarStock;
 import error.NoResultException;
 import java.util.List;
 import javax.ejb.Local;
@@ -23,7 +24,7 @@ public interface HouseKeepingOrderSessionLocal {
     public List<HouseKeepingOrder> getAllHouseKeepingOrder() throws NoResultException;
     public List<HouseKeepingOrder> getHouseKeepingOrderByLevel(int level) throws NoResultException;
     public List<HouseKeepingOrder> getHouseKeepingOrderByLevelAndHotelCodeName(int level, String hotelCodeName) throws NoResultException;
-    public List<HouseKeepingOrder> getHouseKeepingOrderByLevelAndHotelCodeNameAndStatus(int level, String hotelCodeName, String status) throws NoResultException;
+    public List<HouseKeepingOrder> getHouseKeepingOrderByLevelAndHotelCodeNameAndStatus(int level, String hotelCodeName, String status, boolean isSpecialRequest) throws NoResultException;
     public HouseKeepingOrder getHouseKeepingOrderID(Long houseKeepingOrderID) throws NoResultException;
     public void updateHouseKeepingOrder (HouseKeepingOrder houseKeepingOrder) throws NoResultException;
     public void deleteHouseKeepingOrder (Long houseKeepingOrderID) throws NoResultException;
@@ -41,5 +42,9 @@ public interface HouseKeepingOrderSessionLocal {
     public void createMinibarOrderedItem (MinibarOrderedItem moi);
     public MinibarOrder getLastMinibarOrder() throws NoResultException; 
     public MinibarOrderedItem getLastMinibarOrderedItem() throws NoResultException; 
-    
+    public void createMinibarStock(MinibarStock ms);
+    public List<MinibarStock> getAllMinibarStock();
+    public MinibarStock getMinibarStockByNameAndHotelCode(String minibarItemName, String hotelCodeName) throws NoResultException;
+    public void updateMinibarStock(MinibarStock ms) throws NoResultException;
+    public void deleteMinibarStock(Long msID) throws NoResultException;
 }

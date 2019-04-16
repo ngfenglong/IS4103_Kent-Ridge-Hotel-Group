@@ -25,9 +25,10 @@ public class MinibarItem implements Serializable {
     private String itemName;
     private int qty;
     private double price;
+    public boolean status;
 
     public MinibarItem(){
-        
+        status = true;
     }
     
     public MinibarItem(String itemName, int qty, double price) {
@@ -93,6 +94,14 @@ public class MinibarItem implements Serializable {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
 }

@@ -50,7 +50,9 @@
                                         <div class="box-tools pull-right">
                                             <!--Add Btn-->
                                             <h:commandLink id="editBtn" action="#{hotelManagedBean.editRoom()}" style="font-size: large; margin-right: 5px" ><i class="far fa-edit"></i></h:commandLink>
-                                            <h:commandLink class="cd-popup-trigger" id="modal-2" a:data-target="#modal-1" style="font-size: large; margin-right: 5px"><i class="fas fa-trash-alt"></i></h:commandLink>
+                                            <h:commandLink class="cd-popup-trigger" id="modal-2" a:data-target="#modal-1" style="font-size: large; margin-right: 5px"><i class="fas fa-trash-alt"></i>
+                                            <f:ajax execute="@form" render='@none'/>
+                                        </h:commandLink>
 
                                         </div>
                                     </div>
@@ -113,17 +115,6 @@
                     </section>
                 </h:form>
                 <!--modal-->
-                <div id="modal" class="cd-popup" role="alert">
-                    <div class="cd-popup-container">
-                        <p class="popup-content">Add Hotel?</p>
-
-                        <ul class="cd-buttons">
-                            <li><a onclick="" class="cd-popup-confirm">Yes</a></li>
-                            <li><a href="#0" class=" cd-popup-closemodal">No</a></li>
-                        </ul>
-
-                    </div> <!-- cd-popup-container -->
-                </div> <!-- cd-popup -->
 
                 <h:form>
                     <div id="modal" class="cd-popup" role="alert">
@@ -131,7 +122,7 @@
                             <p class="popup-content">Delete Room?</p>
 
                             <ul class="cd-buttons" style="padding-inline-start: unset; padding:0px">
-                                <li ><h:commandLink id="deleteHotel" action="#{hotelManagedBean.deleteRoom()}" class="cd-popup-confirm" value="Yes">
+                                <li ><h:commandLink id="deleteRoom" action="#{hotelManagedBean.deleteRoom()}" class="cd-popup-confirm" value="Yes">
                                         <f:ajax execute="@form" render='@none'/>
                                     </h:commandLink></li>
                                 <li style="background-color:lightslategray"><a onclick="" class=" cd-popup-closemodal">No</a></li>

@@ -248,25 +248,100 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.3/es6-shim.min.js"></script>
+        <script src="/vendors/formvalidation/dist/js/FormValidation.min.js"></script>
+        <script src="/vendors/formvalidation/dist/js/plugins/Tachyons.min.js"></script>        
         <script>
             $('.collapse').collapse();
         </script>
         <!-- page script -->
         <script>
             $(function () {
-                $("#example1").DataTable();
-                $('#example2').DataTable({
-                    "paging": true,
+            $("#example1").DataTable();
+            $('#example2').DataTable({
+            "paging": true,
                     "lengthChange": false,
                     "searching": false,
                     "ordering": true,
                     "info": true,
                     "autoWidth": false
-                });
             });
+            });
+            
+            $('[data-mask]').each(function () {
+            $(this).mask($(this).attr("data-mask"));
+            });
+            document.addEventListener('DOMContentLoaded', function (e) {
+            FormValidation.formValidation(
+                    document.getElementById('demoForm'),
+            {
+            fields: {
+            cc: {
+            validators: {
+            notEmpty: {
+            message: 'The credit card number is required'
+            },
+                    creditCard: {
+                    message: 'The credit card number is not valid'
+                    },
+            }
+            }
+            },
+                    plugins: {
+                    trigger: new FormValidation.plugins.Trigger(),
+                            tachyons: new FormValidation.plugins.Tachyons(),
+                            submitButton: new FormValidation.plugins.SubmitButton(),
+                            icon: new FormValidation.plugins.Icon({
+                            valid: 'fa fa-check',
+                                    invalid: 'fa fa-times',
+                                    validating: 'fa fa-refresh'
+                            }),
+                    },
+            }
+            )
+                    .on('core.validator.validated', function (e) {
+                    if (e.field === 'cc' &amp; &amp; e.validator === 'creditCard' &amp; &amp; e.result.valid) {
+                    let icon = '';
+                    // e.result.meta.type can be one of
+                    // AMERICAN_EXPRESS, DINERS_CLUB, DINERS_CLUB_US, DISCOVER, JCB, LASER,
+                    // MAESTRO, MASTERCARD, SOLO, UNIONPAY, VISA
+                    switch (e.result.meta.type) {
+                    case 'AMERICAN_EXPRESS':
+                            icon = 'fa fa-cc-amex';
+                    break;
+                    case 'DISCOVER':
+                            icon = 'fa-cc-discover';
+                    break;
+                    case 'MASTERCARD':
+                            case 'DINERS_CLUB_US':
+                            icon = 'fa-cc-mastercard';
+                    break;
+                    case 'VISA':
+                            icon = 'fa-cc-visa';
+                    break;
+                    default:
+                            icon = 'fa-credit-card';
+                    break;
+                    }
 
+                    // Query the icon element
+                    const iconEle = e.element.nextSibling;
+                    iconEle.setAttribute('class', 'fv-plugins-icon ' + icon);
+                    }
+                    })
+                    .on('core.element.validated', function (e) {
+                    if (e.field === 'cc' &amp; &amp; !e.valid) {
+                    const iconEle = e.element.nextSibling;
+                    iconEle.setAttribute('class', 'fv-plugins-icon fa fa-times');
+                    }
+                    });
+            });
             $('.sidebar-toggle-btn').pushMenu(options)
-        </script> 
+        </script>
+
+        <script>
+
+        </script>        
         <ui:insert name="script">Script</ui:insert>
     </h:body>
 </html>

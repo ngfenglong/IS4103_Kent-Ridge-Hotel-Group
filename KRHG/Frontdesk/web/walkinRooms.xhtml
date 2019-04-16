@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="template.xhtml">
+
+
+            <ui:define name="title">
+                KRHG front desk
+            </ui:define>
+
+            <ui:define name="content">
+                <!-- Content Header (Page header) -->
+                <div class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+
+
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li class="breadcrumb-item active">
+                                        <!--Add Btn-->
+                                    </li>
+                                </ol>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </div> 
+                <section class="content">
+
+
+                    <div class="container-fluid">
+                        <div class="row">
+                            <!-- left column -->
+                            <div class="col-md-10">
+
+
+
+
+                                <div class="card card-primary">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Walk in Customer</h3>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <!-- form start -->
+                                    <h:form role="form">
+                                        <div class="card-body">
+
+                                            <form id="reservation" method="post" action="test.php">
+                                                <section id="seats">
+                                                    <input id="seat-1" class="seat-select" type="checkbox" value="1" name="seat[]" />
+                                                    <label for="seat-1" class="seat"></label>
+                                                    <input id="seat-2" class="seat-select" type="checkbox" value="2" name="seat[]" />
+                                                    <label for="seat-2" class="seat"></label>
+                                                    <input id="seat-3" class="seat-select" type="checkbox" value="3" name="seat[]" />
+                                                    <label for="seat-3" class="seat"></label>
+                                                    <input id="seat-4" class="seat-select" type="checkbox" value="4" name="seat[]" />
+                                                    <label for="seat-4" class="seat"></label>
+                                                </section>
+                                            </form>
+
+
+
+
+                                        </div>
+                                        <!-- /.card-body -->
+
+                                        <div class="card-footer">
+                                            <h:commandButton class="btn btn-primary" value="Back"      ></h:commandButton>
+
+                                            <h:commandButton class="btn btn-primary" value="Next" ></h:commandButton>
+                                        </div>
+                                    </h:form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.container-fluid -->
+                </section>
+                <!-- /.content-header -->
+                <!-- Main content -->
+
+            </ui:define>
+
+            <ui:define name="script">
+                <script>
+                    $('[data-mask]').each(function () {
+                        $(this).mask($(this).attr("data-mask"));
+                    });
+                </script>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

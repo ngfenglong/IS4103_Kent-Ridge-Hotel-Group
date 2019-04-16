@@ -134,7 +134,7 @@
                                                     <div class="form-group">
                                                         <label for=".select2-multiple-input-lg"
                                                                class="control-label">Hotel Facilities</label><br/>
-                                                               <h:selectManyListbox id="select2-multiple-input-lg" placeholder="Select Hotel Facilities" value="#{hotelManagedBean.hotelFacilitiesArr}"
+                                                               <h:selectManyListbox id="select2-multiple-input-lg" a:placeholder="Select Hotel Facilities" value="#{hotelManagedBean.hotelFacilitiesArr}"
                                                                              class="select2-multiple-input-lg" a:multiple="multiple">
                                                             <c:forEach items="${hotelManagedBean.allHotelFacility}" var="h">
                                                                 <f:selectItem itemValue = "#{h.hotelFacilityName}" itemLabel = "#{h.hotelFacilityName}" /> 
@@ -162,8 +162,8 @@
                                         <!-- /.box-body -->
 
                                         <div class="box-footer" style="text-align: right">
-                                            <h:commandButton class="btn btn-danger" style="margin-right:10px" value="Cancel"
-                                                             action="manageHotel.xhtml?faces-redirect=true"></h:commandButton>
+                                            <a class="btn btn-danger" style="margin-right:10px"
+                                                             href="manageHotel.xhtml">Cancel</a>
                                             <h:commandButton class="btn btn-primary" value="Add hotel"
                                                              action="#{hotelManagedBean.createNewHotel()}">
                                             </h:commandButton>
@@ -188,11 +188,6 @@
                         console.log(event.value);
                         document.getElementById("starvalue").innerHTML = event.value;
                         document.getElementById("form:y").value = event.value;
-
-                    }
-                    $(document).ready(function () {
-
-                        console.log("in select2");
 
                     }
 

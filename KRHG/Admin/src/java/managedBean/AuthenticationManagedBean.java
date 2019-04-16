@@ -16,10 +16,15 @@ import java.io.PrintWriter;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
+import java.util.Enumeration;
 import java.util.Formatter;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -32,6 +37,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import sessionBeans.LogSessionLocal;
 import sessionBeans.StaffSessionLocal;
@@ -51,6 +57,8 @@ public class AuthenticationManagedBean implements Serializable {
     private String oldPassword;
     private String newPassword;
     private String confirmPassword;
+
+    private String testSt;
 
     private String resetEmail;
 
@@ -118,15 +126,17 @@ public class AuthenticationManagedBean implements Serializable {
 
         Logging l = new Logging("Staff", "Logout from " + tempName, tempName);
         logSessionLocal.createLogging(l);
-        return "../login.xhtml?faces-redirect=true";
+        return "profile.xhtml?faces-redirect=true";
     }
 
     public boolean isFinanceStaff() {
         boolean status = false;
-        List<StaffType> checkList = loggedInStaff.getAccountRights();
-        for (StaffType st : checkList) {
-            if (st.getStaffTypeName().equals("Sales and Marketing Staff") || st.getStaffTypeName().equals("Sales and Marketing Manager")) {
-                status = true;
+        if (loggedInStaff != null) {
+            List<StaffType> checkList = loggedInStaff.getAccountRights();
+            for (StaffType st : checkList) {
+                if (st.getStaffTypeName().equals("Finance Staff") || st.getStaffTypeName().equals("Finance Manager")) {
+                    status = true;
+                }
             }
         }
         return status;
@@ -134,10 +144,12 @@ public class AuthenticationManagedBean implements Serializable {
 
     public boolean isITStaff() {
         boolean status = false;
-        List<StaffType> checkList = loggedInStaff.getAccountRights();
-        for (StaffType st : checkList) {
-            if (st.getStaffTypeName().equals("IT Staff") || st.getStaffTypeName().equals("Sales and Marketing Manager")) {
-                status = true;
+        if (loggedInStaff != null) {
+            List<StaffType> checkList = loggedInStaff.getAccountRights();
+            for (StaffType st : checkList) {
+                if (st.getStaffTypeName().equals("IT Staff") || st.getStaffTypeName().equals("Sales and Marketing Manager")) {
+                    status = true;
+                }
             }
         }
         return status;
@@ -145,10 +157,12 @@ public class AuthenticationManagedBean implements Serializable {
 
     public boolean isHRStaff() {
         boolean status = false;
-        List<StaffType> checkList = loggedInStaff.getAccountRights();
-        for (StaffType st : checkList) {
-            if (st.getStaffTypeName().equals("HR Staff") || st.getStaffTypeName().equals("HR Manager")) {
-                status = true;
+        if (loggedInStaff != null) {
+            List<StaffType> checkList = loggedInStaff.getAccountRights();
+            for (StaffType st : checkList) {
+                if (st.getStaffTypeName().equals("HR Staff") || st.getStaffTypeName().equals("HR Manager")) {
+                    status = true;
+                }
             }
         }
         return status;
@@ -156,10 +170,12 @@ public class AuthenticationManagedBean implements Serializable {
 
     public boolean isSMAdmin() {
         boolean status = false;
-        List<StaffType> checkList = loggedInStaff.getAccountRights();
-        for (StaffType st : checkList) {
-            if (st.getStaffTypeName().equals("Sales and Marketing Staff") || st.getStaffTypeName().equals("Sales and Marketing Manager")) {
-                status = true;
+        if (loggedInStaff != null) {
+            List<StaffType> checkList = loggedInStaff.getAccountRights();
+            for (StaffType st : checkList) {
+                if (st.getStaffTypeName().equals("Sales and Marketing Staff") || st.getStaffTypeName().equals("Sales and Marketing Manager")) {
+                    status = true;
+                }
             }
         }
         return status;
@@ -216,51 +232,89 @@ public class AuthenticationManagedBean implements Serializable {
         }
     }
 
-    public void resetPassword() throws NoResultException, IOException {
+    public boolean getResetPasswordStatus() throws NoResultException {
+        String base64decodedString = Base64.getDecoder().decode(testSt).toString();
+        Long userID = Long.parseLong(base64decodedString);
+
+        Staff tempStaff = staffSessionLocal.getStaffByID(userID);
+        if (tempStaff != null) {
+            if (tempStaff.isCanReset() == true) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public String resetNewPassword() throws UnsupportedEncodingException, NoResultException, IOException {
+        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        PrintWriter out = response.getWriter();
+
+        if (newPassword.equals(confirmPassword)) {
+            System.out.println(testSt);
+            String testingbase64decodedString = new String(Base64.getDecoder().decode("MTY="));
+            String base64decodedString = new String(Base64.getDecoder().decode(testSt));
+            Long userID = Long.parseLong(base64decodedString);
+            System.out.println(userID);
+
+            Staff tempStaff = staffSessionLocal.getStaffByID(userID);
+
+            if (tempStaff.isCanReset() == true) {
+                staffSessionLocal.changePasword(tempStaff, encryptPassword(newPassword));
+
+                newPassword = null;
+                confirmPassword = null;
+                testSt = null;
+                return "login.xhtml?faces-redirect=true";
+            } else {
+                out.println("<script type=\"text/javascript\">");
+                out.println("alert('Unauthorize Request!');");
+                out.println("</script>");
+
+            }
+        }
+
+        out.println("<script type=\"text/javascript\">");
+        out.println("alert('Confirm password is incorrect!');");
+        out.println("</script>");
+
+        newPassword = null;
+        testSt = null;
+        confirmPassword = null;
+        return "resetPassword.xhtml?faces-redirect=true";
+    }
+
+    public String resetPassword() throws NoResultException, IOException {
         HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
         PrintWriter out = response.getWriter();
 
         Staff tempStaff;
-        tempStaff = staffSessionLocal.getStaffByUsename(resetEmail);
-        if (tempStaff == null) {
-            tempStaff = staffSessionLocal.getStaffByEmail(resetEmail);
-        }
+//        tempStaff = staffSessionLocal.getStaffByUsename(resetEmail);
+//        if (tempStaff == null) {
+        tempStaff = staffSessionLocal.getStaffByEmail(resetEmail);
+//        }
 
         if (tempStaff == null) {
             out.println("<script type=\"text/javascript\">");
             out.println("alert('Wrong Email or Username is input!');");
             out.println("</script>");
         } else {
-            String newPass = new RandomPassword().generateRandomPassword();
+            //String newPass = new RandomPassword().generateRandomPassword();
             String email = tempStaff.getEmail();
 
-            staffSessionLocal.changePasword(tempStaff, encryptPassword(newPass));
-            Logging l = new Logging("Staff", "Reset Password for " + tempStaff.getName(), tempStaff.getName());
+//            staffSessionLocal.changePasword(tempStaff, encryptPassword(newPass));
+            Logging l = new Logging("Staff", "Request Password Reset for " + tempStaff.getName(), tempStaff.getName());
             logSessionLocal.createLogging(l);
+            String encodedID = URLEncoder.encode(tempStaff.getStaffID().toString(), "UTF-8");
+            String base64encodedString = Base64.getEncoder().encodeToString(
+                    tempStaff.getStaffID().toString().getBytes("utf-8"));
+            tempStaff.setCanReset(true);
+            staffSessionLocal.updateStaff(tempStaff);
 
             String content = "<!DOCTYPE html>\n"
-                    + "<html >\n"
-                    + "  <head>\n"
-                    + "    <meta charset=\"UTF-8\">\n"
-                    + "    <title>Reset Password</title>\n"
-                    + "    \n"
-                    + "    \n"
-                    + "    \n"
-                    + "    \n"
-                    + "    \n"
-                    + "    \n"
-                    + "    \n"
-                    + "    \n"
-                    + "  </head>\n"
-                    + "\n"
-                    + "  <body>\n"
-                    + "\n"
-                    + "    <!DOCTYPE html>\n"
-                    + "<html lang=\"en\">\n"
-                    + "\n"
+                    + "<html>\n"
                     + "<head>\n"
-                    + "  <title>Feedback Email</title>\n"
-                    + "  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n"
+                    + "  <title>Reset Password</title>\n"
+                    + "  <meta http-equiv=\"Content-Type\" content=\"text/html\"; charset=utf-8\">\n"
                     + "  <meta name=\"viewport\" content=\"width=device-width\">\n"
                     + "</head>\n"
                     + "\n"
@@ -356,8 +410,8 @@ public class AuthenticationManagedBean implements Serializable {
                     + "                    <td style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif\">\n"
                     + "                      <table class=\"row\" style=\"border-collapse: collapse; border-spacing: 0; width: 100%\">\n"
                     + "                        <tr>\n"
-                    + "                          <td class=\"shop-name__cell\" style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif\">\n"
-                    + "                            <img src=\"images/KRHGblack.png\" width=\"180\">\n"
+                    + "                          <td class=\"shop-name__cell\" style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; text-align: -webkit-center;\"\" >\n"
+                    + "                            <img src=\"http://zetegral.website/krhgImages/KRHGblack.png\" width=\"240px\">\n"
                     + "                          </td>\n"
                     + "                        </tr>\n"
                     + "                      </table>\n"
@@ -380,15 +434,15 @@ public class AuthenticationManagedBean implements Serializable {
                     + "                    <td style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif\">\n"
                     + "                      <h2 style=\"font-size: 24px; font-weight: normal; margin: 0 0 10px\">Dear " + tempStaff.getName() + ",</h2>\n"
                     + "\n"
-                    + "                      <p style=\"color: #777; font-size: 16px; line-height: 150%; margin: 0\">We have received your change password request. Please click on the button to reset your password.</p>\n"
+                    + "                      <p style=\"color: #777; font-size: 14px; line-height: 150%; margin: 0\">We have received your change password request. Please click on the button to reset your password.</p>\n"
                     + "                      <table class=\"row actions\" style=\"border-collapse: collapse; border-spacing: 0; margin-top: 20px; width: 100%\">\n"
-                    + "                        <tr>\n"  
+                    + "                        <tr>\n"
                     + "                          <td class=\"actions__cell\" style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif\">\n"
-                    + "                            <table class=\"button main-action-cell\" style=\"border-collapse: collapse; border-spacing: 0; float: left; margin-right: 15px\">\n"
+                    + "                            <table class=\"button main-action-cell\" style=\"border-collapse: collapse; border-spacing: 0; float: right; margin-right: 15px\">\n"
                     + "                              <tr>\n"
-                    + "                                <td class=\"button__cell\" style=\"background: #080e66; border-radius: 4px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; padding: 20px 25px; text-align: center\"\n"
+                    + "                                <td class=\"button__cell\" style=\"background: #080e66; border-radius: 4px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; padding: 12px 15px; text-align: center\"\n"
                     + "                                  align=\"center\" bgcolor=\"#080e66\">\n"
-                    + "                                  <a href=\"#localhost:38201/Admin/editPassword.xhtml\" class=\"button__text\" style=\"color: #fff; font-size: 16px; text-decoration: none\">Reset Password</a>\n"
+                    + "                                  <a href=\"http://localhost:38201/Admin/resetPassword.xhtml?userID=" + base64encodedString + "\" class=\"button__text\" style=\"color: #fff; font-size: 14px; text-decoration: none\">Reset Password</a>\n"
                     + "                                </td>\n"
                     + "                              </tr>\n"
                     + "                            </table>\n"
@@ -424,21 +478,15 @@ public class AuthenticationManagedBean implements Serializable {
                     + "    </tr>\n"
                     + "  </table>\n"
                     + "</body>\n"
-                    + "\n"
-                    + "</html>\n"
-                    + "    \n"
-                    + "    \n"
-                    + "    \n"
-                    + "    \n"
-                    + "    \n"
-                    + "  </body>\n" +
-            "</html>";
+                    + "</html>";
             sendWebPage(email, "Reset Password", content);
 
             out.println("<script type=\"text/javascript\">");
             out.println("alert('An email has been sent');");
             out.println("</script>");
         }
+
+        return "login.xhtml?faces-redirect=true";
     }
 
     public String updateProfile() throws NoResultException {
@@ -451,8 +499,8 @@ public class AuthenticationManagedBean implements Serializable {
 
     public static void sendEmail(String recipient, String subject, String msg) {
 
-        String username = "automessage.kentridgehotelgroup@gmail.com";
-        String password = "krhg1234";
+        final String username = "automessage.kentridgehotelgroup@gmail.com";
+        final String password = "krhg1234";
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -485,8 +533,8 @@ public class AuthenticationManagedBean implements Serializable {
 
     public static void sendWebPage(String recipient, String subject, String content) {
 
-        String username = "automessage.kentridgehotelgroup@gmail.com";
-        String password = "krhg1234";
+        final String username = "automessage.kentridgehotelgroup@gmail.com";
+        final String password = "krhg1234";
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -508,7 +556,7 @@ public class AuthenticationManagedBean implements Serializable {
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(recipient));
             message.setSubject(subject);
-            message.setContent(content, "HTML/text");
+            message.setContent(content, "text/html");
 
             Transport.send(message);
 
@@ -628,6 +676,14 @@ public class AuthenticationManagedBean implements Serializable {
 
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
+    }
+
+    public String getTestSt() {
+        return testSt;
+    }
+
+    public void setTestSt(String testSt) {
+        this.testSt = testSt;
     }
 
 }

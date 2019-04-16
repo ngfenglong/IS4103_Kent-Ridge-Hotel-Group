@@ -15,6 +15,7 @@ import entity.Logging;
 import entity.MailingList;
 import entity.MemberTier;
 import entity.MinibarItem;
+import entity.MinibarOrderedItem;
 import entity.Room;
 import entity.RoomFacility;
 import entity.RoomPricing;
@@ -89,6 +90,7 @@ public class HotelManagedBean implements Serializable {
     @EJB
     CustomerSessionLocal customerSessionLocal;
 
+
     private String loggedInUser;
 
     private String logActivityName;
@@ -114,6 +116,8 @@ public class HotelManagedBean implements Serializable {
     public MemberTier selectedMemberTier;
     public MailingList selectedMailingList;
     public Customer selectedCustomer;
+    public Long selectedRFID;
+    public Long selectedHFID;
 
     public String hotelName;
     public String hotelCode;
@@ -121,6 +125,7 @@ public class HotelManagedBean implements Serializable {
     public int hotelStar;
     public String contactNumber;
     public String[] hotelFacilitiesArr;
+    private String[] selectedHotelFacilities;
 
     public String rpHotelTB;
     public String rpRoomTypeTB;
@@ -128,8 +133,9 @@ public class HotelManagedBean implements Serializable {
 
     public String mtNameTB;
     public int mtPointsTB;
-    
+
     Long selectedRoomID;
+    Long selectedHotelID;
 
     //Create Room
     public String tempHotelNameTB;
@@ -229,7 +235,7 @@ public class HotelManagedBean implements Serializable {
     }
 
     public List<MinibarItem> getAllMinibarItem() {
-        return roomSessionLocal.getAllMinibarItem();
+        return roomSessionLocal.getAllMinibarItemWithAvailable();
     }
 
     public List<RoomPricing> getAllRoomPricing() {
@@ -295,7 +301,7 @@ public class HotelManagedBean implements Serializable {
     public String selectMailingList(MailingList m) {
         selectedMailingList = m;
         tempMailingList = selectedMailingList.getListToSend();
-        
+
         return "editMailingList.xthml?faces-redirect=true";
     }
 
@@ -349,8 +355,7 @@ public class HotelManagedBean implements Serializable {
         return "ViewAllFacility.xhtml?faces-redirect=true";
     }
 
-
-    public void selectFeedback(Feedback f){
+    public void selectFeedback(Feedback f) {
         selectedFeedback = f;
     }
 
@@ -443,7 +448,7 @@ public class HotelManagedBean implements Serializable {
             tempMailingList.remove(e);
         }
 
-       // mailingListSessionLocal.updateMailingList(selectedMailingList);
+        // mailingListSessionLocal.updateMailingList(selectedMailingList);
     }
 
     public boolean checkIfEmailExistForAdding(String e) throws NoResultException {
@@ -475,7 +480,7 @@ public class HotelManagedBean implements Serializable {
     }
 
     public String updateMailingList() throws NoResultException {
-        
+
         selectedMailingList.setListToSend(tempMailingList);
         mailingListSessionLocal.updateMailingList(selectedMailingList);
 
@@ -711,7 +716,7 @@ public class HotelManagedBean implements Serializable {
         System.out.println("ID: " + rID);
         selectedRoom = roomSessionLocal.getRoomByID(rID);
         selectedRoomID = rID;
-        
+
         String selectedRoomTxt = selectedRoom.getRoomName();
         return "viewRoom.xhtml?faces-redirect=true";
     }
@@ -724,6 +729,9 @@ public class HotelManagedBean implements Serializable {
         selectedMinibarItem = roomSessionLocal.getMinibarItemByID(miID);
 
         return "editMinibarItem.xhtml?faces-redirect=true";
+    }
+    public void selectMinibarItem(Long miID) throws NoResultException {
+        selectedMinibarItem = roomSessionLocal.getMinibarItemByID(miID);
     }
 
     public String editHotel() throws NoResultException {
@@ -778,8 +786,21 @@ public class HotelManagedBean implements Serializable {
     public String viewHotel(Long hID) throws NoResultException {
         System.out.println("in view hotel");
         System.out.println("ID: " + hID);
-        selectedHotelObj = hotelSessionLocal.getHotelByID(hID);
-
+        
+              selectedHotelObj = hotelSessionLocal.getHotelByID(hID);
+              selectedHotelID = hID;
+        List<HotelFacility> tempHotelFacilities = selectedHotelObj.getHotelFacilities();
+        if (!tempHotelFacilities.isEmpty()) {
+            setSelectedHotelFacilities(new String[tempHotelFacilities.size()]);
+            for (int i = 0; i < tempHotelFacilities.size(); i++) {
+            selectedHotelFacilities[i] = tempHotelFacilities.get(i).getHotelFacilityName();
+//                System.out.println(hotelFacilities[i] = tempHotelFacilities.get(i).getHotelFacilityName());
+            }
+            
+            for(int r=0; r< getSelectedHotelFacilities().length; r++){
+                System.out.println(getSelectedHotelFacilities()[r]);
+            }
+        }
         return "viewHotel.xhtml?faces-redirect=true";
     }
 
@@ -852,9 +873,9 @@ public class HotelManagedBean implements Serializable {
         return "AddStaff.xhtml?faces-redirect=true";
     }
 
-    public String deleteHotelFacility(Long hfID) throws NoResultException {
+    public String deleteHotelFacility() throws NoResultException {
         List<Hotel> hotels = hotelSessionLocal.getAllHotels();
-        HotelFacility hf = hotelFacilitySessionLocal.getHotelFacilityByID(hfID);
+        HotelFacility hf = hotelFacilitySessionLocal.getHotelFacilityByID(selectedHFID);
         logActivityName = hf.getHotelFacilityName();
         FacesContext context = FacesContext.getCurrentInstance();
         String loggedInName = context.getApplication().createValueBinding("#{authenticationManagedBean.name}").getValue(context).toString();
@@ -864,12 +885,15 @@ public class HotelManagedBean implements Serializable {
                 hotelSessionLocal.removeHotelFacility(h.getHotelID(), hf);
             }
         }
-        hotelFacilitySessionLocal.deleteHotelFacility(hfID);
+        hotelFacilitySessionLocal.deleteHotelFacility(selectedHFID);
         Logging l = new Logging("Hotel Facility", "Delete " + logActivityName + " from Hotel Facility", loggedInName);
         logSessionLocal.createLogging(l);
 
         return "manageFacility.xhtml?faces-redirect=true";
     }
+        public void selectedDeleteHotelFacility(Long tempHFID){
+        selectedHFID = tempHFID;
+        }
 
     public String deleteLog(Long lID) throws NoResultException {
         logSessionLocal.deleteLogging(lID);
@@ -879,7 +903,7 @@ public class HotelManagedBean implements Serializable {
 
     public String removeFacilityFromHotel(Long hfID) throws NoResultException {
         Hotel h = hotelSessionLocal.getHotelByName(selectedHotel);
-        HotelFacility hf = hotelFacilitySessionLocal.getHotelFacilityByID(hfID);
+        HotelFacility hf = hotelFacilitySessionLocal.getHotelFacilityByID(selectedHFID);
         logActivityName = hf.getHotelFacilityName();
         FacesContext context = FacesContext.getCurrentInstance();
         String loggedInName = context.getApplication().createValueBinding("#{authenticationManagedBean.name}").getValue(context).toString();
@@ -905,9 +929,16 @@ public class HotelManagedBean implements Serializable {
         return "manageHotel.xhtml?faces-redirect=true";
     }
 
-    public String deleteRoomFacility(Long rfID) throws NoResultException {
+        
+    public void selectedDeleteRoomFacility(Long tempID){
+        selectedRFID = tempID;
+    }
+    
+    
+    public String deleteRoomFacility() throws NoResultException {
+
         List<Room> rooms = roomSessionLocal.getAllRooms();
-        RoomFacility rf = roomFacilitySessionLocal.getRoomFacilityByID(rfID);
+        RoomFacility rf = roomFacilitySessionLocal.getRoomFacilityByID(selectedRFID);
 
         for (Room r : rooms) {
             if (r.getRoomFacilities().contains(rf)) {
@@ -917,11 +948,11 @@ public class HotelManagedBean implements Serializable {
         logActivityName = rf.getRoomFacilityName();
         FacesContext context = FacesContext.getCurrentInstance();
         String loggedInName = context.getApplication().createValueBinding("#{authenticationManagedBean.name}").getValue(context).toString();
-        roomFacilitySessionLocal.deleteRoomFacility(rfID);
+        roomFacilitySessionLocal.deleteRoomFacility(selectedRFID);
         Logging l = new Logging("Room Facility", "Delete " + logActivityName + " from Room Facility", loggedInName);
         logSessionLocal.createLogging(l);
 
-        return "ViewRoomFacility.xhtml?faces-redirect=true";
+        return "manageRoomFacility.xhtml?faces-redirect=true";
     }
 
     public String deleteFeedback() throws NoResultException {
@@ -944,22 +975,19 @@ public class HotelManagedBean implements Serializable {
         Logging l = new Logging("Holiday Surcharge", "Delete " + logActivityName + " from System", loggedInName);
         logSessionLocal.createLogging(l);
 
-        return "ViewHolidays.xhtml?faces-redirect=true";
+        return "manageRoomPrice.xhtml?faces-redirect=true";
     }
 
-    public String deleteMinibarItem(Long miID) throws NoResultException {
-        List<Room> rooms = roomSessionLocal.getAllRooms();
-        MinibarItem mi = roomSessionLocal.getMinibarItemByID(miID);
-        for (Room r : rooms) {
-            if (r.getMiniBarItems().contains(mi)) {
-                roomSessionLocal.removeMinibarItem(r.getRoomID(), mi);
-            }
-        }
+    public String deleteMinibarItem() throws NoResultException {
+
+        MinibarItem mi = selectedMinibarItem;
+        mi.setStatus(false);
+        roomSessionLocal.updateMinibarItem(mi);
+ 
         logActivityName = mi.getItemName();
         FacesContext context = FacesContext.getCurrentInstance();
         String loggedInName = context.getApplication().createValueBinding("#{authenticationManagedBean.name}").getValue(context).toString();
-        roomSessionLocal.deleteMinibarItem(miID);
-        Logging l = new Logging("Minibar", "Delete " + logActivityName + " from System", loggedInName);
+        Logging l = new Logging("Minibar", "Soft Delete " + logActivityName + " from System", loggedInName);
         logSessionLocal.createLogging(l);
 
         return "manageMinibarItem.xhtml?faces-redirect=true";
@@ -994,7 +1022,7 @@ public class HotelManagedBean implements Serializable {
         Logging l = new Logging("Extra Surcharge", "Delete " + logActivityName + " from System", loggedInName);
         logSessionLocal.createLogging(l);
 
-        return "manageSucharge.xhtml?faces-redirect=true";
+        return "manageRoomPrice.xhtml?faces-redirect=true";
     }
 
     public String deleteStaff(Long sID) throws NoResultException {
@@ -1004,6 +1032,11 @@ public class HotelManagedBean implements Serializable {
         staffSessionLocal.deleteStaff(sID);
         Logging l = new Logging("Staff", "Delete " + logActivityName + " from System", loggedInName);
         logSessionLocal.createLogging(l);
+        try {
+            Thread.sleep(4000);
+        } catch (Exception ex) {
+
+        }
 
         return "manageStaff.xhtml?faces-redirect=true";
     }
@@ -1219,7 +1252,7 @@ public class HotelManagedBean implements Serializable {
         holPrice = 0.0;
         holDate = null;
 
-        return "manageHolidaySurcharge.xhtml?faces-redirect=true";
+        return "manageRoomPrice.xhtml?faces-redirect=true";
     }
 
     public String createMemberTier() {
@@ -1321,6 +1354,7 @@ public class HotelManagedBean implements Serializable {
                 e.printStackTrace(System.out);
             }
         }
+
         rf.setIconImg(imgFile);
         roomFacilitySessionLocal.createRoomFacility(rf);
 
@@ -1364,7 +1398,7 @@ public class HotelManagedBean implements Serializable {
         esPrice = 0.0;
         daysList = null;
 
-        return "manageSurcharge.xhtml?faces-redirect=true";
+        return "manageRoomPrice.xhtml?faces-redirect=true";
     }
 
     public String createRoomPricing() throws ParseException {
@@ -2164,6 +2198,52 @@ public class HotelManagedBean implements Serializable {
 
     public void setMlListNameTB(String mlListNameTB) {
         this.mlListNameTB = mlListNameTB;
+    }
+
+    /**
+     * @return the selectedHotelFacilities
+     */
+    public String[] getSelectedHotelFacilities() {
+        return selectedHotelFacilities;
+    }
+
+    /**
+     * @param selectedHotelFacilities the selectedHotelFacilities to set
+     */
+    public void setSelectedHotelFacilities(String[] selectedHotelFacilities) {
+        this.selectedHotelFacilities = selectedHotelFacilities;
+    }
+
+        public Long getSelectedHFID() {
+        return selectedHFID;
+    }
+
+    public void setSelectedHFID(Long selectedHFID) {
+        this.selectedHFID = selectedHFID;
+    }
+        
+    public Long getSelectedRFID() {
+        return selectedRFID;
+    }
+
+    public void setSelectedRFID(Long selectedRFID) {
+        this.selectedRFID = selectedRFID;
+    }
+
+    public Long getSelectedRoomID() {
+        return selectedRoomID;
+    }
+
+    public void setSelectedRoomID(Long selectedRoomID) {
+        this.selectedRoomID = selectedRoomID;
+    }
+
+    public Long getSelectedHotelID() {
+        return selectedHotelID;
+    }
+
+    public void setSelectedHotelID(Long selectedHotelID) {
+        this.selectedHotelID = selectedHotelID;
     }
 
 }

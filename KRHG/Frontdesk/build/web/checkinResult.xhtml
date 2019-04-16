@@ -175,8 +175,8 @@
 
                                             <tr>
                                                 <td>#{o.roomBookingID}</td>
-                                                <td>#{o.roomType}</td>
-                                                <td>not in entity field</td>
+                                                <td>#{o.bookedRoom.roomType}</td>
+                                                <td>#{o.bookedRoom.roomPax}</td>
                                                 <td>#{frontDeskManagedBean.convertDateFormat(o.bookInDate)}</td>
                                                 <td>#{frontDeskManagedBean.convertDateFormat(o.bookOutDate)}</td>
                                             </tr>
@@ -184,16 +184,6 @@
 
 
                                     </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Booking Id</th>
-                                            <th>Room Type</th>
-                                            <th>Number of pax</th>
-                                            <th>Check in date</th>
-                                            <th>Check out date</th>
-
-                                        </tr>
-                                    </tfoot>
                                 </table>
                             </h:form>
                         </div>

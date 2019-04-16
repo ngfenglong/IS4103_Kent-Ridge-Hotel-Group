@@ -50,6 +50,7 @@ public class AnnualLeave implements Serializable {
         int hash = 0;
         hash += (annualLeaveID != null ? annualLeaveID.hashCode() : 0);
         return hash;
+        
     }
 
     @Override

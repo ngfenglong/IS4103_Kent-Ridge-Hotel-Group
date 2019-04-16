@@ -2,7 +2,8 @@
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-    xmlns:h="http://xmlns.jcp.org/jsf/html"  xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"  xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <body>
 
@@ -50,9 +51,9 @@
                                         <h:commandLink action="#{hotelManagedBean.editStaff(hotelManagedBean.selectedStaff.staffID)}"
                                             style="font-size: large; margin-right: 5px"><i class="far fa-edit"></i>
                                         </h:commandLink>
-                                        <h:commandLink class="cd-popup-trigger" id="modal-2" a:data-target="#modal-1" action="#{hotelManagedBean.deleteStaff(hotelManagedBean.selectedStaff.staffID)}"
-                                            style="font-size: large; margin-right: 5px"><i class="fas fa-trash-alt"></i>
-                                        </h:commandLink>
+                                        <h:commandLink  class="cd-popup-trigger" id="modal-2" a:data-target="#modal-1" style="font-size: large"><i class="fas fa-trash-alt"></i>
+                                        <f:ajax execute="@form" render='@none'/>
+                                    </h:commandLink>
 
                                     </div>
                                 </div>
@@ -154,6 +155,24 @@
                     </div>
                 </section>
             </h:form>
+
+            <h:form>
+                    <div id="modal" class="cd-popup" role="alert">
+                            <div class="cd-popup-container">
+                                <p class="popup-content">Delete Staff?</p>
+        
+                                <ul class="cd-buttons" style="padding-inline-start: unset; padding:0px">
+                                    <li><h:commandLink id="deleteStaff" action="#{hotelManagedBean.deleteStaff(hotelManagedBean.selectedStaff.staffID)}" class="cd-popup-confirm" value="Yes">
+                                            <f:ajax execute="@form" render='@none'/>
+                                    </h:commandLink></li>
+                                    <li style="background-color:lightslategray"><a onclick="" class=" cd-popup-closemodal">No</a></li>
+        
+                                </ul>
+                            </div> <!-- cd-popup-container -->
+                        </div> <!-- cd-popup -->
+            </h:form>
+
+
         </ui:define>
 
 

@@ -13,6 +13,7 @@ import entity.MinibarItem;
 import entity.Room;
 import entity.RoomFacility;
 import error.NoResultException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -465,6 +466,7 @@ public class RoomSession implements RoomSessionLocal {
             oldMI.setItemName(mi.getItemName());
             oldMI.setPrice(mi.getPrice());
             oldMI.setQty(mi.getQty());
+            oldMI.setStatus(mi.isStatus());
             em.flush();
         } else {
             throw new NoResultException("Minibar Item not found");
@@ -476,6 +478,23 @@ public class RoomSession implements RoomSessionLocal {
         Query q;
         q = em.createQuery("SELECT mi FROM MinibarItem mi");
         return q.getResultList();
+    }
+    
+    @Override
+    public List<MinibarItem> getAllMinibarItemWithAvailable() {
+        Query q;
+        q = em.createQuery("SELECT mi FROM MinibarItem mi");
+        List<MinibarItem> filterList =  q.getResultList();
+        List<MinibarItem> returnList = new ArrayList<MinibarItem>();
+        
+        for(MinibarItem mi: filterList){
+            if(mi.status == true){
+                MinibarItem tempMI = mi;
+                returnList.add(tempMI);
+            }
+        }
+        
+        return returnList;
     }
 
     @Override

@@ -96,7 +96,7 @@
                     <p style=" margin-top:12%; color:#C5B358">
                         <div id="txt" style="text-align:left;color: #C5B358; font-size: 150%; font-weight: 500;"></div>
                     </p>
-                    <p style=" color:#C5B358; font-size:150%">0256</p>
+                    <p style=" color:#C5B358; font-size:150%">#{hotelStayManagedBean.roomNumber}</p>
                 </div>
 
             </div>
@@ -183,7 +183,7 @@
             <p class="popup-content">Submit Laundry Request?</p>
 
             <ul class="cd-buttons">
-                <li><a onclick="" id="laundry" class="cd-popup-confirm">Yes</a></li>
+                <li><a action="#{hotelStayManagedBean.bookLaundryService()}" onclick="" id="laundry" class="cd-popup-confirm">Yes</a></li>
                 <li><a href="#0" class=" cd-popup-closemodal">No</a></li>
             </ul>
             <a href="#0" class="cd-popup-close img-replace">Close</a>

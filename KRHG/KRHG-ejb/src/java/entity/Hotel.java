@@ -62,16 +62,16 @@ public class Hotel implements Serializable {
         this.hotelImage = hotelImage;
     }
     
-    public Hotel(Long hotelID, String hotelName, String hotelCodeName, String hotelAddress, int hotelStar, String hotelContact, String hotelImage) {
-        this();
-        this.hotelID = hotelID;
-        this.hotelName = hotelName;
-        this.hotelCodeName = hotelCodeName;
-        this.hotelAddress = hotelAddress;
-        this.hotelStar = hotelStar;
-        this.hotelContact = hotelContact;
-        this.hotelImage = hotelImage;
-    }    
+//    public Hotel(Long hotelID, String hotelName, String hotelCodeName, String hotelAddress, int hotelStar, String hotelContact, String hotelImage) {
+//        this();
+//        this.hotelID = hotelID;
+//        this.hotelName = hotelName;
+//        this.hotelCodeName = hotelCodeName;
+//        this.hotelAddress = hotelAddress;
+//        this.hotelStar = hotelStar;
+//        this.hotelContact = hotelContact;
+//        this.hotelImage = hotelImage;
+//    }    
 
     public Long getHotelID() {
         return hotelID;
