@@ -8,13 +8,14 @@ package managedBean;
 import entity.CreditCard;
 import entity.Customer;
 import entity.FunctionRoom;
-import entity.FunctionRoomBooking;
 import entity.PaymentTransaction;
 import entity.Room;
 import entity.RoomBooking;
+import entity.RoomPricing;
 import error.NoResultException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -23,6 +24,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Formatter;
 import java.util.List;
@@ -36,6 +38,7 @@ import sessionBeans.CustomerSessionLocal;
 import sessionBeans.FunctionRoomBookingSessionLocal;
 import sessionBeans.FunctionRoomSessionLocal;
 import sessionBeans.PaymentTransactionSessionLocal;
+import sessionBeans.RoomPricingSessionLocal;
 import sessionBeans.RoomSessionLocal;
 
 /**
@@ -44,7 +47,7 @@ import sessionBeans.RoomSessionLocal;
  */
 @ManagedBean
 @SessionScoped
-public class FrontDeskManagedBean {
+public class FrontDeskManagedBean implements Serializable {
 
     /**
      * Creates a new instance of FrontDeskManagedBean
@@ -61,17 +64,24 @@ public class FrontDeskManagedBean {
     private FunctionRoomBookingSessionLocal functionRoomBookingSessionLocal;
     @EJB
     private FunctionRoomSessionLocal functionroomSessionlocal;
+    @EJB
+    private RoomPricingSessionLocal roomPricingSessionLocal;
     private String mode;
 
     //customer check in
     private String customerName;
+    private String customerFirstName;
+    private String customerLastName;
     private String customerRoom;
     private String checkinPassportNumber;
     private List<PaymentTransaction> todaysbookings;
     private List<RoomBooking> Searchbookings;
     private PaymentTransaction roombooking;
-    private Date checkinDate;
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); 
+    private Date checkinDate = new Date();
     private Date checkoutDate;
+    private String checkinDateString = sdf.format(checkinDate);
+    private String checkoutDateString;
 
     //customer check out
     private List<RoomBooking> todayCheckOutRoom;
@@ -83,6 +93,11 @@ public class FrontDeskManagedBean {
     private int walkinPax;
     private int walkinNumberOfday;
     private List<Room> walkinAvailableRoom;
+    private double roomPrice;
+    private Room selectedRoom;
+    private int numOfNights;
+    private double totalPrice;
+    private boolean hasExtraBed;
 
     //walk in details
     //reuse checkinPassportNumber for walk in too
@@ -119,6 +134,9 @@ public class FrontDeskManagedBean {
 
     //reservation 
     private List<FunctionRoom> allFunctionrooms;
+
+    //room pricing 
+    private List<RoomPricing> listofPricing;
 
     public FrontDeskManagedBean() {
     }
@@ -213,10 +231,10 @@ public class FrontDeskManagedBean {
 
     public void getFunctionRoomWithHotelCode() {
         List<FunctionRoom> functionrooms = new ArrayList<>();
-        for(FunctionRoom frb : functionroomSessionlocal.getAllFunctionRooms()) {
-           if (frb.getHotel().getHotelCodeName().equals(hotelCode)) {
+        for (FunctionRoom frb : functionroomSessionlocal.getAllFunctionRooms()) {
+            if (frb.getHotel().getHotelCodeName().equals(hotelCode)) {
                 functionrooms.add(frb);
-          }
+            }
         }
         setAllFunctionrooms(functionrooms);
     }
@@ -228,6 +246,13 @@ public class FrontDeskManagedBean {
 
     public void setAllFunctionrooms(List<FunctionRoom> allFunctionrooms) {
         this.allFunctionrooms = allFunctionrooms;
+    }
+    
+    public String checkAvailability() {
+        //SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        //checkinDate = new Date();
+        //System.out.println(checkoutDateString);
+        return "walkinState.xhtml?faces-redirect=true";
     }
 
     public String searchCustomerForCheckin() {
@@ -252,29 +277,98 @@ public class FrontDeskManagedBean {
         return "checkinResult.xhtml?faces-redirect=true";
     }
 
-    public String confirmCheckin() {
+    public String walkinSelectRoom(Room rm) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Calendar c = Calendar.getInstance();
+        selectedRoom = rm;
+        totalPrice = roomPrice * numOfNights;
+        checkinDate = new Date();
+        c.setTime(checkinDate);
+        c.add(Calendar.DATE, numOfNights); //this is to add the number of nights with the numOfNights variable (not used anymore)
+        checkoutDate = c.getTime();
+        checkinDateString = sdf.format(checkinDate);
+        checkoutDateString = sdf.format(checkoutDate);
+        return "walkinEnterCustDetails.xhtml?faces-redirect=true";
+    }
+
+    public String confirmPage() {
+        return "walkinResultCustomerDetails.xhtml?faces-redirect=true";
+    }
+
+    public String confirmCheckin() throws ParseException, java.text.ParseException, NoResultException {
         //bookSessionLocal.assignBooking(roombooking);
         //this one i DO ok .
         //get room name and change the status to occupied 
         //roombooking.setRoom(to the above room)
         //change roombooking'Statuses
         //display the room details
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        RoomBooking rb1 = new RoomBooking();
+        rb1.setBookInDate(new Date());
+        rb1.setBookOutDate(format.parse("2019-03-13"));
+        rb1.setStatus("checkedIn");
+        rb1.setPrice(450.0);
+        rb1.setBookedRoom(selectedRoom);
+        rb1.setEmailAddress(checkinEmail);
+        rb1.setPassportNum(checkinPassportNumber);
+        rb1.setRoomType(selectedRoom.getRoomType());
+        rb1.setFirstName(customerFirstName);
+        rb1.setLastName(customerLastName);
+        rb1.setHasExtraBed(false);
+        bookSessionLocal.createRoomBooking(rb1);
+        Room rm = roomSessionLocal.getRoomByName(selectedRoom.getRoomName());
+        rm.setStatus("Occupied");
+        roomSessionLocal.updateRoom(rm);
+
         mode = "online";
-        return "summary.xhmtl?faces-redirect=true";
+        return "summary.xhtml?faces-redirect=true";
     }
 
     public String walkinpayment() {
         return "payment.xhtml?faces-redirect=true";
     }
 
-    public String makePayment() {
+    public String walkinReturnToMenu() {
+        return "index.xhtml?faces-redirect=true";
+    }
+
+    public String makePayment() throws ParseException, java.text.ParseException, NoResultException {
         CreditCard cc = new CreditCard();
         cc.setCardNum(encryptPassword(paymentDigits));
         cc.setCvv(encryptPassword(paymentCVV));
         cc.setExpiryDate(paymentExpiryDate);
+        paymentTransactionSessionLocal.createCreditCard(cc);
+
+        PaymentTransaction pt = new PaymentTransaction();
+        pt.setCreditCard(paymentTransactionSessionLocal.getLastCreditCard());
+        pt.setTotalPrice(totalPrice);
+        pt.setInitialPayment(totalPrice);
+        pt.setFinalPayment(totalPrice);
+        pt.setPaymentType("Credit Card");
+        pt.setTransactionDateTime(new Date());
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        RoomBooking rb1 = new RoomBooking();
+        rb1.setBookInDate(checkinDate);
+        rb1.setBookOutDate(checkoutDate);
+        rb1.setStatus("checkedIn");
+        rb1.setPrice(totalPrice);
+        rb1.setBookedRoom(selectedRoom);
+        rb1.setEmailAddress(checkinEmail);
+        rb1.setPassportNum(checkinPassportNumber);
+        rb1.setRoomType(selectedRoom.getRoomType());
+        rb1.setFirstName(customerFirstName);
+        rb1.setLastName(customerLastName);
+        rb1.setHasExtraBed(false);
+        bookSessionLocal.createRoomBooking(rb1);
+        Room rm = roomSessionLocal.getRoomByName(selectedRoom.getRoomName());
+        rm.setStatus("Occupied");
+        roomSessionLocal.updateRoom(rm);
+
+        mode = "online";
+        return "summary.xhtml?faces-redirect=true";
         //payment complete and roombooking is done here
 
-        return null;
     }
 
     public String searchCheckout() {
@@ -291,6 +385,11 @@ public class FrontDeskManagedBean {
     }
 
     public List<PaymentTransaction> getTodaysbookings() throws NoResultException {
+        return paymentTransactionSessionLocal.getAllPaymentTransaction();
+
+    }
+
+    public List<PaymentTransaction> getAllBookings() throws NoResultException {
         return paymentTransactionSessionLocal.getAllPaymentTransaction();
 
     }
@@ -502,13 +601,20 @@ public class FrontDeskManagedBean {
         this.todayCheckOutRoom = todayCheckOutRoom;
     }
 
-    public String searchRoomAvailable() {
-        // return todayCheckOutRoom = bookSessionLocal.getAllRoomBookingByCheckOutDate(todayDate);
-        //some algorithm to get availble room to view and return list of room, group by room type
-        //wait feng long 
-        mode = "walkin";
+    public String searchRoomAvailable() throws NoResultException {
+        List<Room> resultList = new ArrayList<Room>();
+        for (Room r : roomSessionLocal.getAllRooms()) {
+            if (r.getStatus().equals("Available") && r.getRoomType().equals(walkinRoomtype) && r.getRoomName().startsWith(hotelCode)) {
+                Room temp = r;
+                resultList.add(temp);
+            }
+        }
+        String roomPriceName = hotelCode + "_" + getWalkinRoomtype();
+        setRoomPrice(roomPricingSessionLocal.getRoomPricingByName(roomPriceName).getPrice());
+        walkinAvailableRoom = resultList;
         setWalkinAvailableRoom(walkinAvailableRoom);
-
+        setHasExtraBed(false);
+        //mode = "walkin";        
         return "walkinResult.xhtml?faces-redirect=true";
 
     }
@@ -608,4 +714,107 @@ public class FrontDeskManagedBean {
         this.editCustomerLastName = editCustomerLastName;
     }
 
+    public double getRoomPrice() {
+        return roomPrice;
+    }
+
+    public void setRoomPrice(double roomPrice) {
+        this.roomPrice = roomPrice;
+    }
+
+    public String getHotelCode() {
+        return hotelCode;
+    }
+
+    public void setHotelCode(String hotelCode) {
+        this.hotelCode = hotelCode;
+    }
+
+    public Room getSelectedRoom() {
+        return selectedRoom;
+    }
+
+    public void setSelectedRoom(Room selectedRoom) {
+        this.selectedRoom = selectedRoom;
+    }
+
+    public String getCustomerFirstName() {
+        return customerFirstName;
+    }
+
+    public void setCustomerFirstName(String customerFirstName) {
+        this.customerFirstName = customerFirstName;
+    }
+
+    public String getCustomerLastName() {
+        return customerLastName;
+    }
+
+    public void setCustomerLastName(String customerLastName) {
+        this.customerLastName = customerLastName;
+    }
+
+    public int getNumOfNights() {
+        return numOfNights;
+    }
+
+    public void setNumOfNights(int numOfNights) {
+        this.numOfNights = numOfNights;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public String getCheckinDateString() {
+        return checkinDateString;
+    }
+
+    public void setCheckinDateString(String checkinDateString) {
+        this.checkinDateString = checkinDateString;
+    }
+
+    public String getCheckoutDateString() {
+        return checkoutDateString;
+    }
+
+    public void setCheckoutDateString(String checkoutDateString) {
+        this.checkoutDateString = checkoutDateString;
+    }
+
+    public boolean getHasExtraBed() {
+        return hasExtraBed;
+    }
+
+    public void setHasExtraBed(boolean hasExtraBed) {
+        this.hasExtraBed = hasExtraBed;
+    }
+
+    public List<RoomPricing> getListofPricing() {
+        return listofPricing = getRoompricingbasedHotelCode();
+    }
+
+    public void setListofPricing(List<RoomPricing> listofPricing) {
+        this.listofPricing = listofPricing;
+    }
+
+    public List<RoomPricing> getRoompricingbasedHotelCode() {
+        List<RoomPricing> RPL = new ArrayList<>();
+        for (RoomPricing rp : roomPricingSessionLocal.getAllRoomPricings()) {
+            String[] roomsplit = rp.getPricingName().split("_");
+            if (roomsplit[0].equalsIgnoreCase(hotelCode)) {
+                RPL.add(rp);
+            }
+
+        }
+        return RPL;
+    }
+
+    public String editNameAway(String value) {
+        return value.split("_")[1];
+    }
 }

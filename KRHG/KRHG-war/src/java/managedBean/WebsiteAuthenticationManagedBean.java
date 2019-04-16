@@ -279,6 +279,8 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
     public String updateProfile() throws NoResultException {
         customerSessionLocal.updateCustomer(loggedInCustomer);
 
+        
+        
         return "Profile.xhtml?faces-redirect=true";
     }
 
@@ -576,15 +578,15 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
         this.logSessionLocal = logSessionLocal;
     }
 
-    public String getFName() {
+    public String getRegFName() {
         return regFName;
     }
 
     public void setRegFName(String regFName) {
         this.regFName = regFName;
     }
-    
-    public String getLName() {
+
+    public String getRegLName() {
         return regLName;
     }
 
@@ -592,6 +594,7 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
         this.regLName = regLName;
     }
 
+ 
     public String getRegNric() {
         return regNric;
     }

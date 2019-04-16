@@ -9,20 +9,20 @@
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title><ui:insert name="title">Title</ui:insert></title>
-        
+
         <!-- ChartJS -->
         <script src="./AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/chart.js/Chart.js"></script>
- <!-- Ionicons -->
- <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/Ionicons/css/ionicons.min.css"/>
-          <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/bootstrap/dist/css/bootstrap.min.css"></link>
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/font-awesome/css/font-awesome.min.css"></link>
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/Ionicons/css/ionicons.min.css"></link>
-  <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/select2/dist/css/select2.min.css"/>
-    <!-- Morris chart -->
-    <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/morris.js/morris.css"></link>
+        <!-- Ionicons -->
+        <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/Ionicons/css/ionicons.min.css"/>
+        <!-- Bootstrap 3.3.7 -->
+        <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/bootstrap/dist/css/bootstrap.min.css"></link>
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/font-awesome/css/font-awesome.min.css"></link>
+        <!-- Ionicons -->
+        <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/Ionicons/css/ionicons.min.css"></link>
+        <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/select2/dist/css/select2.min.css"/>
+        <!-- Morris chart -->
+        <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/morris.js/morris.css"></link>
 
 
         <!-- Tell the browser to be responsive to screen width -->
@@ -79,7 +79,7 @@
 
     </h:head>
     <h:body class="hold-transition sidebar-mini">
-         <div class="wrapper">
+        <div class="wrapper">
             <!-- Navbar -->
             <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
                 <!-- Left navbar links -->
@@ -140,7 +140,7 @@
                                     </p>
                                 </a>
                             </li>
-                            
+
                             <li class="nav-header">Food</li>
                             <li class="nav-item" >
                                 <a href="foodMenu.xhtml" class="nav-link" >
@@ -273,11 +273,11 @@
             //]]>
         </script>
         <script>
-            
-             $('.select2-multiple-input-lg').select2({
-                            containerCssClass: ':all:',
-                            closeOnSelect: 'false'
-                        });
+
+            $('.select2-multiple-input-lg').select2({
+                containerCssClass: ':all:',
+                closeOnSelect: 'false'
+            });
 
 
 
@@ -419,7 +419,11 @@
                     "autoWidth": false
                 });
             });
+            function update(o) {
 
+           
+                document.getElementById("formy:housekeeper").value = o;
+            }
             // $('.sidebar-toggle-btn').pushMenu(options)
         </script> 
 

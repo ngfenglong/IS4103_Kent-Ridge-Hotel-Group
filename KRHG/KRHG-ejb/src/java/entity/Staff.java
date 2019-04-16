@@ -1,4 +1,4 @@
-    /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -7,6 +7,8 @@ package entity;
 
 import error.NoResultException;
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -54,15 +56,17 @@ public class Staff implements Serializable {
     @OneToMany
     private List<StaffType> accountRights;
     @OneToOne
-    private WorkSchedule workSchedule;
+    private List<WeeklySchedule> workSchedules;
+    private boolean canReset;
 
-    
-    public Staff(){
+    public Staff() {
         appliedLeave = new ArrayList<AnnualLeave>();
         accountRights = new ArrayList<StaffType>();
+        workSchedules = new ArrayList<WeeklySchedule>();
+        canReset = false;
     }
-    
-    public Staff(String userName, String password){
+
+    public Staff(String userName, String password) {
         this();
         this.userName = userName;
         this.password = password;
@@ -88,8 +92,8 @@ public class Staff implements Serializable {
         this.nokAddress = nokAddress;
         this.nokPhoneNumber = nokPhoneNumber;
     }
-    
-        public Staff(Long staffID, String name, String userName, String password, String email, String phoneNumber, String gender, String nric, String address, Date joinDate, String hotelGroup, String jobTitle, String department, int entitledLeaves, boolean accountStatus, String nokName, String nokAddress, String nokPhoneNumber) {
+
+    public Staff(Long staffID, String name, String userName, String password, String email, String phoneNumber, String gender, String nric, String address, Date joinDate, String hotelGroup, String jobTitle, String department, int entitledLeaves, boolean accountStatus, String nokName, String nokAddress, String nokPhoneNumber) {
         this();
         this.staffID = staffID;
         this.name = name;
@@ -110,9 +114,7 @@ public class Staff implements Serializable {
         this.nokAddress = nokAddress;
         this.nokPhoneNumber = nokPhoneNumber;
     }
-    
-    
-    
+
     public Long getStaffID() {
         return staffID;
     }
@@ -426,14 +428,22 @@ public class Staff implements Serializable {
         this.nokPhoneNumber = nokPhoneNumber;
     }
 
-    public WorkSchedule getWorkSchedule() {
-        return workSchedule;
+    public List<WeeklySchedule> getWorkSchedules() {
+        return workSchedules;
     }
 
-    public void setWorkSchedule(WorkSchedule workSchedule) {
-        this.workSchedule = workSchedule;
+    public void setWorkSchedules(List<WeeklySchedule> workSchedules) {
+        this.workSchedules = workSchedules;
     }
-    
+
+    public boolean isCanReset() {
+        return canReset;
+    }
+
+    public void setCanReset(boolean canReset) {
+        this.canReset = canReset;
+    }
+
     public void addAccountRights(StaffType staffType) throws NoResultException {
         if (staffType != null && !this.getAccountRights().contains(staffType)) {
             this.getAccountRights().add(staffType);
@@ -449,4 +459,39 @@ public class Staff implements Serializable {
             throw new NoResultException("Staff type has not been added to Staff");
         }
     }
+
+    public WeeklySchedule getScheduleByDate(String selectedDate) throws ParseException {
+        if (selectedDate != null && !selectedDate.equals("")) {
+            Date tempDate = (new SimpleDateFormat("dd-MM-yyyy").parse(selectedDate));
+            for (WeeklySchedule w : workSchedules) {
+                if (w.getStartDate().compareTo(tempDate) == 0) {
+                    WeeklySchedule tempWeeklySchedule = w;
+                    return tempWeeklySchedule;
+                }
+            }
+        }
+        return null;
+    }
+
+    public String getStaffTypeString(){
+        String returnStr = "";
+        for(StaffType s: accountRights){
+            returnStr += s.getStaffTypeName() + ", ";
+        }
+        if (returnStr.length() > 0){
+            returnStr = returnStr.substring(0, returnStr.length() - 2);
+        }
+        return returnStr;
+    }
+    
+    public String genderTitle(){
+        if(gender.contains("Female")){
+            return "Ms";
+        }
+        
+        else{
+            return "Mr";
+        }
+    }
+    
 }

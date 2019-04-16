@@ -110,11 +110,17 @@ public class StaffSession implements StaffSessionLocal {
             oldS.setNokName(s.getNokName());
             oldS.setNokAddress(s.getNokAddress());
             oldS.setNokPhoneNumber(s.getNokPhoneNumber());
+            oldS.setCanReset(s.isCanReset());
+            em.flush();
         } else {
             throw new NoResultException("Hotel Not found");
         }
     }
 
+    
+    
+    
+    
     @Override
     public boolean Login(Staff s) {
         Query q = em.createQuery("SELECT s FROM Staff s WHERE "
@@ -136,6 +142,7 @@ public class StaffSession implements StaffSessionLocal {
     public void changePasword(Staff s, String newPass) {
         Staff staff = em.find(Staff.class, s.getStaffID());
         staff.setPassword(newPass);
+        staff.setCanReset(false);
         em.flush();
     }
 

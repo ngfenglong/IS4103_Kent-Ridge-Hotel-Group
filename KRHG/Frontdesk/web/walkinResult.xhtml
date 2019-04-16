@@ -40,51 +40,30 @@
                 <section class="content">
                     <div class="card">
 
-                        <h:form>
-                            <div class="card-header">
-                                <h3 class="card-title">List of room available</h3>
-                                <h:commandButton class="btn btn-primary float-sm-right" value="Choose Room"  ></h:commandButton>
-
-                            </div>
-                        </h:form>
-
                         <!-- /.card-header -->
                         <div class="card-body">
                             <h:form>
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-
+                                            <th>Room Name</th>
                                             <th>Room type</th>
                                             <th>Price/Night</th>
-                                            <th>Quantity</th>
-
+                                            <th>Room Pax</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-
                                         <ui:repeat var="o" value="#{frontDeskManagedBean.walkinAvailableRoom}"  varStatus="status">
                                             <tr>
-
+                                                <td>#{o.roomName}</td>
                                                 <td>#{o.roomType}</td>
-                                                <td>wait for it to return price</td>
-                                                <td>check them being group by</td>
+                                                <td>#{frontDeskManagedBean.roomPrice}</td>
+                                                <td>#{o.roomPax}</td>
+                                                <td><h:commandLink action="#{frontDeskManagedBean.walkinSelectRoom(o)}" > <h:commandButton class="btn btn-primary float-sm-right" value="Choose Room"  ></h:commandButton></h:commandLink></td>  
                                             </tr>
 
                                         </ui:repeat>
-
-
-
-
                                     </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Room</th>
-                                            <th>Room type</th>
-                                            <th>Price/Night</th>
-
-                                        </tr>
-                                    </tfoot>
                                 </table>
 
                             </h:form>
@@ -97,17 +76,8 @@
                         <div class="row">
                             <!-- left column -->
                             <div class="col-md-10">
-
-
-
-
-
-
                                 <!-- /.card-header -->
                                 <!-- form start -->
-                             
-
-
                             </div>
                         </div>
                     </div>
