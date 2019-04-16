@@ -3,15 +3,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://java.sun.com/jsf/core">
 
     <body>
 
-        <ui:composition template="./AdminTemplate.xhtml">
+        <ui:composition template="template.xhtml">
 
 
             <ui:define name="title">
-                KRHG Admin Console System
+                KRHG front desk
             </ui:define>
 
             <ui:define name="content">
@@ -38,57 +39,54 @@
                     <!-- /.container-fluid -->
                 </div> 
                 <section class="content">
+
+
                     <div class="container-fluid">
                         <div class="row">
                             <!-- left column -->
                             <div class="col-md-10">
-                                <!-- general form elements -->
+
+
+
+
                                 <div class="card card-primary">
                                     <div class="card-header">
-                                        <h3 class="card-title">Add Holiday Surcharge</h3>
+                                        <h3 class="card-title">Walk in Customer</h3>
                                     </div>
                                     <!-- /.card-header -->
                                     <!-- form start -->
                                     <h:form role="form">
                                         <div class="card-body">
-                                            <div class="form-group">
-                                                <label for="holName">Holiday Name</label>
-                                                <h:inputText class="form-control" value="#{hotelManagedBean.holName}" id="holName" a:placeholder="Enter Holiday" required="true" />
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Date</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text"><i class="fa fa-calendar"></i></span>
-                                                    </div>
-                                                    <h:inputText value="#{hotelManagedBean.holDate}" class="form-control" a:data-inputmask="'alias': 'dd/mm/yyyy'" required="true" a:placeholder="e.g 01/01/2019"  />
-                                                </div>
-                                            </div>
-                                            <!-- /.input group -->
-                                            <div class="price">
-                                                <label for="price">Price</label>
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">
-                                                                <i class="fa fa-dollar"></i>
-                                                            </span>
-                                                        </div>
-                                                        <h:inputText class="form-control" value="#{hotelManagedBean.holPrice}" id="price" required="true" />
-                                                    </div>
 
-                                            </div>
+                                            <form id="reservation" method="post" action="test.php">
+                                                <section id="seats">
+                                                    <input id="seat-1" class="seat-select" type="checkbox" value="1" name="seat[]" />
+                                                    <label for="seat-1" class="seat"></label>
+                                                    <input id="seat-2" class="seat-select" type="checkbox" value="2" name="seat[]" />
+                                                    <label for="seat-2" class="seat"></label>
+                                                    <input id="seat-3" class="seat-select" type="checkbox" value="3" name="seat[]" />
+                                                    <label for="seat-3" class="seat"></label>
+                                                    <input id="seat-4" class="seat-select" type="checkbox" value="4" name="seat[]" />
+                                                    <label for="seat-4" class="seat"></label>
+                                                </section>
+                                            </form>
+
+
+
+
                                         </div>
                                         <!-- /.card-body -->
 
                                         <div class="card-footer">
-                                          <h:commandButton class="btn btn-primary" value="Create" action="#{hotelManagedBean.createHolidaySurcharge()}"></h:commandButton>
+                                            <h:commandButton class="btn btn-primary" value="Back"      ></h:commandButton>
+
+                                            <h:commandButton class="btn btn-primary" value="Next" ></h:commandButton>
                                         </div>
                                     </h:form>
                                 </div>
+
                             </div>
-                            <!-- /.col -->
                         </div>
-                        <!-- /.row -->
                     </div>
                     <!-- /.container-fluid -->
                 </section>

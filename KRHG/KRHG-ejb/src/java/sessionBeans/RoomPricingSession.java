@@ -31,7 +31,7 @@ public class RoomPricingSession implements RoomPricingSessionLocal {
     @Override
     public List<RoomPricing> getAllRoomPricings() {
         Query q;
-        q = em.createQuery("SELECT rp FROM RoomPricing rp");
+        q = em.createQuery("SELECT rp FROM RoomPricing rp ORDER BY rp.price ASC");
         return q.getResultList();
     }
 

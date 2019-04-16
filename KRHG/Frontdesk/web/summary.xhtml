@@ -61,61 +61,43 @@
                                                     <div class="form-group">
                                                         <td>
                                                             <label>
-                                                                Name:
+                                                                First Name:
                                                             </label>
                                                         </td>
                                                         <td>
-
-                                                            <h:inputText value="#{frontDeskManagedBean.checkinName}"></h:inputText>
+                                                            <h:outputText value="#{frontDeskManagedBean.customerFirstName}"></h:outputText>
                                                         </td>
                                                     </div>
                                                 </tr>
-                                                <tr>
-
-                                                    <div class="form-group">
-                                                        <td>
-                                                            <label>
-                                                                Email:
-                                                            </label>
-                                                        </td>
-                                                        <td>
-
-                                                            <h:inputText value="#{frontDeskManagedBean.checkinEmail}"></h:inputText>
-                                                        </td>
-                                                    </div>
-                                                </tr>
-                                                <tr>
-
-                                                    <div class="form-group">
-                                                        <td>
-                                                            <label>
-                                                                Passport:
-                                                            </label>
-                                                        </td>
-                                                        <td>
-
-                                                            <h:inputText value="#{frontDeskManagedBean.checkinPassportNumber}"></h:inputText>
-                                                        </td>
-                                                    </div>
-                                                </tr>
-
-
                                                 <tr>
                                                     <td>
                                                         <label>
-                                                            Check in date:
+                                                            Last Name:
                                                         </label>
                                                     </td>
                                                     <td>
                                                         <div class="form-group">
-                                                            <h:outputText value="#{frontDeskManagedBean.checkinDate}">
+                                                            <h:outputText value="#{frontDeskManagedBean.customerLastName}">
 
                                                             </h:outputText>
                                                         </div>
                                                     </td>
                                                 </tr>
 
+                                                <tr>
+                                                    <td>
+                                                        <label>
+                                                            Checkin date:
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <h:outputText value="#{frontDeskManagedBean.checkinDateString}">
 
+                                                            </h:outputText>
+                                                        </div>
+                                                    </td>
+                                                </tr>
 
                                                 <tr>
                                                     <td>
@@ -125,7 +107,7 @@
                                                     </td>
                                                     <td>
                                                         <div class="form-group">
-                                                            <h:outputText value="#{frontDeskManagedBean.checkoutDate}">
+                                                            <h:outputText value="#{frontDeskManagedBean.checkoutDateString}">
 
                                                             </h:outputText>
                                                         </div>
@@ -142,8 +124,7 @@
                                                     </td>
                                                     <td>
                                                         <div class="form-group">
-                                                            <h:outputText >
-
+                                                            <h:outputText value="#{frontDeskManagedBean.selectedRoom.roomNumber}">
                                                             </h:outputText>
                                                         </div>
                                                     </td>
@@ -157,7 +138,7 @@
                                         <div class="card-footer">
                                             <c:choose>
                                                 <c:when test="${frontDeskManagedBean.mode eq 'online'}">
-                                                    <h:commandButton class="btn btn-primary" value="Back to Menu"  ></h:commandButton>
+                                                    <h:commandButton class="btn btn-primary" value="Back to Menu" action="#{frontDeskManagedBean.walkinReturnToMenu()}"></h:commandButton>
 
                                                 </c:when>    
                                                 <c:otherwise>

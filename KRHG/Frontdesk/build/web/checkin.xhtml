@@ -97,28 +97,19 @@
                                     </thead>
                                     <tbody>
 
-                                        <ui:repeat var="o" value="#{frontDeskManagedBean.todaysbookings}" varStatus="status">
+                                        <ui:repeat var="o" value="#{frontDeskManagedBean.allBookings}" varStatus="status">
 
                                             <tr>
                                                 <td>#{o.transactionID}</td>
                                                 <td>#{o.payer.firstName} #{o.payer.lastName} </td>
                                                 <td>#{o.roomsBooked[0].passportNum}</td>
                                                 <td>#{o.roomsBooked.size()}</td>
-                                                <td colspan="3"><h:commandLink action="#{frontDeskManagedBean.checkin(o)}" > <i class="fa fa-arrow-circle-down" style="color:gray" ></i></h:commandLink></td>                                            </tr>
+                                                <td colspan="3"><h:commandLink action="#{frontDeskManagedBean.checkin(o)}" > <i class="fa fa-arrow-circle-down" style="color:gray" ></i></h:commandLink></td>                                            
+                                            </tr>
                                         </ui:repeat>
 
 
                                     </tbody>
-                                    <tfoot>
-                                        <tr>
-                                             <th>Transaction ID</th>
-                                            <th>Name</th>
-                                            <th>Passport Number</th>
-                                            <th>Rooms booked</th>
-
-                                            <th></th>
-                                        </tr>
-                                    </tfoot>
                                 </table>
                             </h:form>
                         </div>
