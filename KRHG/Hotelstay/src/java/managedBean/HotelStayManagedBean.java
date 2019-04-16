@@ -183,16 +183,25 @@ public class HotelStayManagedBean implements Serializable {
         return "login.xhtml";
     }
 
-    public void addToCart(FoodMenuItem foodMenuItem) {
+    public void addToCart(FoodMenuItem foodMenuItem, int qty) {
+        System.out.println("-------------------------------------");
+        System.out.println("ADD TO CART");
         if (foodMenuOrder.containsKey(foodMenuItem.getFoodMenuItemID())) {
+            System.out.println("Existing Item");
             int currentQty = foodMenuOrder.get(foodMenuItem.getFoodMenuItemID());
-            foodMenuOrder.replace(foodMenuItem.getFoodMenuItemID(), currentQty + 1);
+            System.out.println("Current Quantity: " + currentQty);
+            foodMenuOrder.replace(foodMenuItem.getFoodMenuItemID(), currentQty + qty);
         } else {
-            foodMenuOrder.put(foodMenuItem.getFoodMenuItemID(), 1);
+            System.out.println("New Item");
+            foodMenuOrder.put(foodMenuItem.getFoodMenuItemID(), qty);
         }
 
-        totalPrice = totalPrice + foodMenuItem.getUnitPrice();
-
+        System.out.println("Total Price: " + totalPrice);
+        System.out.println("Unit Price: " + foodMenuItem.getUnitPrice());
+        System.out.println("Quantity: " + qty);
+        totalPrice = totalPrice + (foodMenuItem.getUnitPrice() * qty);
+        System.out.println("Total Price: " + totalPrice);
+        System.out.println("-------------------------------------");
     }
 
     public void updateQty(FoodMenuItem foodMenuItem, int quantity) {
@@ -203,8 +212,11 @@ public class HotelStayManagedBean implements Serializable {
 
     public void checkOutOrder() {
         //ADD a total price to final payment! Send email receipt!
+        System.out.println("-------------------------------------");
+        System.out.println("CHECKOUT ORDER");
         foodMenuOrder.clear();
         totalPrice = 0;
+        System.out.println("-------------------------------------");
     }
 
     public int getLevel(String roomnumber) {

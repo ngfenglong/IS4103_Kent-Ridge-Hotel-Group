@@ -73,35 +73,25 @@
                 <div class="row" style="position:absolute; top:50px; left:50px; margin-bottom:50px; text-align: center; width:100%">
 
                     <a href="index.xhtml"><img height="50px" width="50px" src="resources/images/krhglogo5.svg" />
-                        <h1 style="color: #fff; font-family: 'Lora',serif; font-size:40px">
-                            In-Room Dining</h1>
-
+                        <h1 style="color: #fff; font-family: 'Lora',serif; font-size:40px">In-Room Dining</h1>
                     </a>
                     <div class="theTitle active" style="width:400px; top:50px; height:100px; left:48%">
-
                         <span class="separator" style="height:100%; "></span>
                         <div class="titleright" style="width:40%">
                             <p style=" margin-top:12%; color:#C5B358"><div id="txt" style="text-align:left;color: #C5B358; font-size: 150%; font-weight: 500;"></div></p>
-                            <p style=" color:#C5B358; font-size:150%">0256</p>
+                            <p style=" color:#C5B358; font-size:150%"><h:outputText value="#{hotelStayManagedBean.roomNumber}" /></p>
                         </div>
                         <button class="bigBtn" style="width:50%; font-size: 1.5em; position:absolute; margin:0px;  left:400px; bottom:10px" onclick="location.href = 'roomservice.xhtml';">Back to Menu</button>
                     </div>
-
                 </div>
-
-
-
             </div>
             <div class="rowcontent" style="height:580px;overflow-y: scroll;">
-
                 <div class="container">
-
                     <section id="cart"> 
                         <article class="product">
                             <header>
                                 <a class="remove">
                                     <img src="./resources/images/ClassicToastedWesternSandwhiches.jpg" alt="" />
-
                                     <h3>Remove</h3>
                                 </a>
                             </header>
