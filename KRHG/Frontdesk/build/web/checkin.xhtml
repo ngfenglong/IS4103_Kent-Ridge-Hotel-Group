@@ -39,47 +39,10 @@
                 </div> 
                 <section class="content">
 
-                    <div class="container-fluid">
-                        <div class="row">
-                            <!-- left column -->
-                            <div class="col-md-10">
-
-
-
-
-                                <div class="card card-primary">
-                                    <div class="card-header">
-                                        <h3 class="card-title">Check in Customer</h3>
-                                    </div>
-                                    <!-- /.card-header -->
-                                    <!-- form start -->
-                                    <h:form role="form">
-                                        <div class="card-body">
-                                            <div class="form-group">
-
-                                                <h:inputText class="form-control" value="#{frontDeskManagedBean.checkinPassportNumber}" id="passportnumber" a:placeholder="passport Number" required="true" />
-
-                                            </div>
-
-
-                                            <!-- /.input group -->
-
-                                        </div>
-                                        <!-- /.card-body -->
-
-                                        <div class="card-footer">
-                                            <h:commandButton class="btn btn-primary" value="Search" action="#{frontDeskManagedBean.searchCustomerForCheckin()}" ></h:commandButton>
-                                        </div>
-                                    </h:form>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
                     <!-- /.container-fluid -->
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Room bookings for today</h3>
+                            <h3 class="card-title">Room bookings</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -91,21 +54,19 @@
                                             <th>Name</th>
                                             <th>Passport Number</th>
                                             <th>Rooms booked</th>
-
-                                            <th></th>
-                                        </tr>
+                                            <th>Check In Date</th>
+                                            <th></th> 
+                                       </tr>
                                     </thead>
                                     <tbody>
-
-                                        <ui:repeat var="o" value="#{frontDeskManagedBean.allBookings}" varStatus="status">
-
+                                        <ui:repeat var="o" value="#{frontDeskManagedBean.todayOrLaterBookings}" varStatus="status">
                                             <tr>
                                                 <td>#{o.transactionID}</td>
-                                                <td>#{o.payer.firstName} #{o.payer.lastName} </td>
+                                                <td>#{o.firstName} #{o.lastName} </td>
                                                 <td>#{o.roomsBooked[0].passportNum}</td>
                                                 <td>#{o.roomsBooked.size()}</td>
-                                                <td colspan="3"><h:commandLink action="#{frontDeskManagedBean.checkin(o)}" > <i class="fa fa-arrow-circle-down" style="color:gray" ></i></h:commandLink></td>                                            
-                                            </tr>
+                                                <td>#{frontDeskManagedBean.getBookingDateStr(o)}</td>
+                                                <td colspan="3"><h:commandLink action="#{frontDeskManagedBean.checkin(o)}" > <i class="fa fa-arrow-circle-down" style="color:gray" ></i></h:commandLink></td>                                            </tr>
                                         </ui:repeat>
 
 

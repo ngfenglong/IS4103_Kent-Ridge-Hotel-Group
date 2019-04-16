@@ -15,12 +15,13 @@ import entity.Logging;
 import entity.MailingList;
 import entity.MemberTier;
 import entity.MinibarItem;
-import entity.MinibarOrderedItem;
 import entity.Room;
 import entity.RoomFacility;
 import entity.RoomPricing;
+import entity.Shift;
 import entity.Staff;
 import entity.StaffType;
+import entity.WeeklySchedule;
 import error.NoResultException;
 import etc.RandomPassword;
 import java.io.InputStream;
@@ -36,11 +37,19 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
+import java.util.Properties;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.Part;
 import sessionBeans.CustomerSessionLocal;
 import sessionBeans.FeedbackSessionLocal;
@@ -54,7 +63,9 @@ import sessionBeans.MemberTierSessionLocal;
 import sessionBeans.RoomFacilitySessionLocal;
 import sessionBeans.RoomPricingSessionLocal;
 import sessionBeans.RoomSessionLocal;
+import sessionBeans.ShiftSessionLocal;
 import sessionBeans.StaffSessionLocal;
+import sessionBeans.WeeklyScheduleSessionLocal;
 import sun.misc.IOUtils;
 
 /**
@@ -89,7 +100,10 @@ public class HotelManagedBean implements Serializable {
     MailingListSessionLocal mailingListSessionLocal;
     @EJB
     CustomerSessionLocal customerSessionLocal;
-
+    @EJB
+    WeeklyScheduleSessionLocal weeklyScheduleSessionLocal;
+    @EJB
+    ShiftSessionLocal shiftSessionLocal;
 
     private String loggedInUser;
 
@@ -187,6 +201,18 @@ public class HotelManagedBean implements Serializable {
     public String stNokAddress;
     public String stNokPhoneNumber;
     public String[] stStaffType;
+
+    public String emailText;
+
+    public String subjectTB;
+    public String emailMsg;
+    public String[] mailingListToSend;
+
+    public String[][] hqSchedule;
+
+    public String scheduleDate;
+
+    public String selectedDateDropDown;
 
     @ManagedProperty(value = "#{authenticationManagedBean}")
     private AuthenticationManagedBean authBean;
@@ -730,6 +756,7 @@ public class HotelManagedBean implements Serializable {
 
         return "editMinibarItem.xhtml?faces-redirect=true";
     }
+
     public void selectMinibarItem(Long miID) throws NoResultException {
         selectedMinibarItem = roomSessionLocal.getMinibarItemByID(miID);
     }
@@ -786,18 +813,18 @@ public class HotelManagedBean implements Serializable {
     public String viewHotel(Long hID) throws NoResultException {
         System.out.println("in view hotel");
         System.out.println("ID: " + hID);
-        
-              selectedHotelObj = hotelSessionLocal.getHotelByID(hID);
-              selectedHotelID = hID;
+
+        selectedHotelObj = hotelSessionLocal.getHotelByID(hID);
+        selectedHotelID = hID;
         List<HotelFacility> tempHotelFacilities = selectedHotelObj.getHotelFacilities();
         if (!tempHotelFacilities.isEmpty()) {
             setSelectedHotelFacilities(new String[tempHotelFacilities.size()]);
             for (int i = 0; i < tempHotelFacilities.size(); i++) {
-            selectedHotelFacilities[i] = tempHotelFacilities.get(i).getHotelFacilityName();
+                selectedHotelFacilities[i] = tempHotelFacilities.get(i).getHotelFacilityName();
 //                System.out.println(hotelFacilities[i] = tempHotelFacilities.get(i).getHotelFacilityName());
             }
-            
-            for(int r=0; r< getSelectedHotelFacilities().length; r++){
+
+            for (int r = 0; r < getSelectedHotelFacilities().length; r++) {
                 System.out.println(getSelectedHotelFacilities()[r]);
             }
         }
@@ -891,9 +918,10 @@ public class HotelManagedBean implements Serializable {
 
         return "manageFacility.xhtml?faces-redirect=true";
     }
-        public void selectedDeleteHotelFacility(Long tempHFID){
+
+    public void selectedDeleteHotelFacility(Long tempHFID) {
         selectedHFID = tempHFID;
-        }
+    }
 
     public String deleteLog(Long lID) throws NoResultException {
         logSessionLocal.deleteLogging(lID);
@@ -929,12 +957,10 @@ public class HotelManagedBean implements Serializable {
         return "manageHotel.xhtml?faces-redirect=true";
     }
 
-        
-    public void selectedDeleteRoomFacility(Long tempID){
+    public void selectedDeleteRoomFacility(Long tempID) {
         selectedRFID = tempID;
     }
-    
-    
+
     public String deleteRoomFacility() throws NoResultException {
 
         List<Room> rooms = roomSessionLocal.getAllRooms();
@@ -983,7 +1009,7 @@ public class HotelManagedBean implements Serializable {
         MinibarItem mi = selectedMinibarItem;
         mi.setStatus(false);
         roomSessionLocal.updateMinibarItem(mi);
- 
+
         logActivityName = mi.getItemName();
         FacesContext context = FacesContext.getCurrentInstance();
         String loggedInName = context.getApplication().createValueBinding("#{authenticationManagedBean.name}").getValue(context).toString();
@@ -1473,6 +1499,343 @@ public class HotelManagedBean implements Serializable {
         logSessionLocal.createLogging(l);
 
         return "manageStaff.xhtml?faces-redirect=true";
+    }
+
+    public List<WeeklySchedule> getAllWeeklySchedule() {
+        return weeklyScheduleSessionLocal.getAllWeeklySchedule();
+    }
+
+    public List<Shift> getAllShift() {
+        return shiftSessionLocal.getAllShift();
+    }
+
+    public List<RoomPricing> getHotelRoomPricings(String hotelCode) {
+        List<RoomPricing> returnList = roomPricingSessionLocal.getAllRoomPricingsByHotel(hotelCode);
+
+        return returnList;
+    }
+
+    public List<Staff> getHQStaff() {
+        List<Staff> checkList = getAllStaff();
+        List<Staff> returnList = new ArrayList<Staff>();
+        for (Staff s : checkList) {
+            if (s.getHotelGroup().equals("HQ")) {
+                Staff tempStaff = s;
+                returnList.add(s);
+            }
+        }
+        return returnList;
+    }
+
+    public List<WeeklySchedule> getAllWeeklyScheduleByWeek(String WeeklySchedule) throws ParseException {
+        Date tempDate = (new SimpleDateFormat("dd-MM-yyyy").parse(WeeklySchedule));
+
+        List<WeeklySchedule> returnList = new ArrayList<WeeklySchedule>();
+        List<WeeklySchedule> checkList = weeklyScheduleSessionLocal.getAllWeeklySchedule();
+        for (WeeklySchedule w : checkList) {
+            if (w.getStartDate().compareTo(tempDate) == 0) {
+                WeeklySchedule tempWeekSchdule = w;
+                returnList.add(tempWeekSchdule);
+            }
+        }
+
+        return returnList;
+    }
+
+    public String directCreateHQSchedule() {
+
+        hqSchedule = new String[getHQStaff().size()][7];
+        for (int i = 0; i < getHQStaff().size(); i++) {
+            for (int j = 0; j < 7; j++) {
+                hqSchedule[i][j] = "";
+            }
+        }
+
+        return "createSchedule.xhtml?faces-redirect=true";
+    }
+
+    public static void sendEmail(String recipient, String subject, String msg) {
+
+        final String username = "automessage.kentridgehotelgroup@gmail.com";
+        final String password = "krhg1234";
+
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+
+        Session session = Session.getInstance(props,
+                new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
+
+        try {
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("Do-not-reply@KentRidgeHotelGroup.com"));
+            message.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse(recipient));
+            message.setSubject(subject);
+            message.setText(msg);
+            Transport.send(message);
+
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void sendMailingListEmail(String recipient, String subject, String content) {
+
+        final String username = "automessage.kentridgehotelgroup@gmail.com";
+        final String password = "krhg1234";
+
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+
+        Session session = Session.getInstance(props,
+                new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
+
+        try {
+
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("Do-not-reply@KentRidgeHotelGroup.com"));
+            message.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse(recipient));
+            message.setSubject(subject);
+            message.setContent(content, "text/html");
+            Transport.send(message);
+
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public String sendMailingList() throws NoResultException {
+        List<String> listToSend = new ArrayList<String>();
+        if (mailingListToSend != null) {
+            for (int i = 0; i < mailingListToSend.length; i++) {
+                listToSend.add(mailingListToSend[i]);
+            }
+        }
+
+        if (listToSend.contains("Silver Member")) {
+            for (Customer c : getAllCustomer()) {
+                if (c.getPoints() >= 5000 && c.getPoints() < 20000) {
+                    listToSend.add(c.getEmail());
+                }
+            }
+        }
+        if (listToSend.contains("Gold Member")) {
+            for (Customer c : getAllCustomer()) {
+                if (c.getPoints() >= 20000 && c.getPoints() < 50000) {
+                    listToSend.add(c.getEmail());
+                }
+            }
+        }
+        if (listToSend.contains("Platinum Member")) {
+            for (Customer c : getAllCustomer()) {
+                if (c.getPoints() >= 50000) {
+                    listToSend.add(c.getEmail());
+                }
+            }
+        }
+
+        for (int i = 0; i < listToSend.size(); i++) {
+            if (!listToSend.get(i).equals("Silver Member") && !listToSend.get(i).equals("Gold Member") && !listToSend.get(i).equals("Platinum Member")) {
+                String content = "<!DOCTYPE html>\n"
+                        + "<html lang=\"en\">\n"
+                        + "<head>\n"
+                        + "  <title>Mailing List </title>\n"
+                        + "  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n"
+                        + "  <meta name=\"viewport\" content=\"width=device-width\">\n"
+                        + "</head>\n"
+                        + "<body style=\"margin: 0\">\n"
+                        + "  <style type=\"text/css\">\n"
+                        + "    body {\n"
+                        + "      margin: 0;\n"
+                        + "      }\n"
+                        + "      h1 a:hover {\n"
+                        + "      font-size: 30px; color: #333;\n"
+                        + "      }\n"
+                        + "      h1 a:active {\n"
+                        + "      font-size: 30px; color: #333;\n"
+                        + "      }\n"
+                        + "      h1 a:visited {\n"
+                        + "      font-size: 30px; color: #333;\n"
+                        + "      }\n"
+                        + "      a:hover {\n"
+                        + "      text-decoration: none;\n"
+                        + "      }\n"
+                        + "      a:active {\n"
+                        + "      text-decoration: none;\n"
+                        + "      }\n"
+                        + "      a:visited {\n"
+                        + "      text-decoration: none;\n"
+                        + "      }\n"
+                        + "      .button__text:hover {\n"
+                        + "      color: #fff; text-decoration: none;\n"
+                        + "      }\n"
+                        + "      .button__text:active {\n"
+                        + "      color: #fff; text-decoration: none;\n"
+                        + "      }\n"
+                        + "      .button__text:visited {\n"
+                        + "      color: #fff; text-decoration: none;\n"
+                        + "      }\n"
+                        + "      a:hover {\n"
+                        + "      color: #080e66;\n"
+                        + "      }\n"
+                        + "      a:active {\n"
+                        + "      color: #080e66;\n"
+                        + "      }\n"
+                        + "      a:visited {\n"
+                        + "      color: #080e66;\n"
+                        + "      }\n"
+                        + "      @media (max-width: 600px) {\n"
+                        + "        .container {\n"
+                        + "          width: 94% !important;\n"
+                        + "        }\n"
+                        + "        .main-action-cell {\n"
+                        + "          float: none !important; margin-right: 0 !important;\n"
+                        + "        }\n"
+                        + "        .secondary-action-cell {\n"
+                        + "          text-align: center; width: 100%;\n"
+                        + "        }\n"
+                        + "        .header {\n"
+                        + "          margin-top: 20px !important; margin-bottom: 2px !important;\n"
+                        + "        }\n"
+                        + "        .shop-name__cell {\n"
+                        + "          display: block;\n"
+                        + "        }\n"
+                        + "        .order-number__cell {\n"
+                        + "          display: block; text-align: left !important; margin-top: 20px;\n"
+                        + "        }\n"
+                        + "        .button {\n"
+                        + "          width: 100%;\n"
+                        + "        }\n"
+                        + "        .or {\n"
+                        + "          margin-right: 0 !important;\n"
+                        + "        }\n"
+                        + "        .apple-wallet-button {\n"
+                        + "          text-align: center;\n"
+                        + "        }\n"
+                        + "        .customer-info__item {\n"
+                        + "          display: block; width: 100% !important;\n"
+                        + "        }\n"
+                        + "        .spacer {\n"
+                        + "          display: none;\n"
+                        + "        }\n"
+                        + "        .subtotal-spacer {\n"
+                        + "          display: none;\n"
+                        + "        }\n"
+                        + "      }\n"
+                        + "  </style>\n"
+                        + "  <table class=\"body\" style=\"border-collapse: collapse; border-spacing: 0; height: 100% !important; width: 100% !important\">\n"
+                        + "    <tr>\n"
+                        + "      <td style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif\">\n"
+                        + "        <table class=\"row content\" style=\"border-collapse: collapse; border-spacing: 0; width: 100%\">\n"
+                        + "          <tr>\n"
+                        + "            <td class=\"content__cell\" style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; padding-bottom: 40px\">\n"
+                        + "              <center>\n"
+                        + "                <table class=\"container\" style=\"border-collapse: collapse; border-spacing: 0; margin: 0 auto; text-align: left; width: 560px\">\n"
+                        + "                  <tr>\n"
+                        + "                    <td style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif\">\n"
+                        + "\n"
+                        + "                      <p style=\"color: #777; font-size: 16px; line-height: 150%; margin: 0\">Dear " + customerSessionLocal.getCustomerByEmail(listToSend.get(i)).getFirstName() + ",<br><br>\n"
+                        + "                       " + emailMsg + "</p>\n"
+                        + "                     </tr>\n"
+                        + "                </table>\n"
+                        + "              </center>\n"
+                        + "            </td>\n"
+                        + "          </tr>\n"
+                        + "        </table>\n"
+                        + "       <table class=\"row section\" style=\"border-collapse: collapse; border-spacing: 0; border-top-color: #e5e5e5; border-top-style: solid; border-top-width: 1px; width: 100%\">\n"
+                        + "          <tr>\n"
+                        + "            <td class=\"section__cell\" style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; padding: 40px 0\">\n"
+                        + "              <center>\n"
+                        + "\n"
+                        + "                <table class=\"container\" style=\"border-collapse: collapse; border-spacing: 0; margin: 0 auto; text-align: left; width: 560px\">\n"
+                        + "                  <tr>\n"
+                        + "                    <td style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif\">\n"
+                        + "                      <table class=\"row\" style=\"border-collapse: collapse; border-spacing: 0; width: 100%\">\n"
+                        + "                        <tr class=\"order-list__item order-list__item--single\" style=\"border-bottom-color: #e5e5e5; border-bottom-style: none !important; border-bottom-width: 1px; width: 100%\">\n"
+                        + "                          <td class=\"order-list__item__cell\" style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; padding: 0\">\n"
+                        + "                            <table style=\"border-collapse: collapse; border-spacing: 0\">\n"
+                        + "                            \n"
+                        + "                              <td style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif\">\n"
+                        + "                                <img src=\"http://zetegral.website/krhgImages/KRHGblack.png\" align=\"left\" width=\"130\" height=\"100\" class=\"order-list__product-image\">\n"
+                        + "                              </td>\n"
+                        + "                              <td class=\"order-list__product-description-cell\" style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; width: 100%\"> \n"
+                        + "                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n"
+                        + "                                <span class=\"order-list__item-title\" style=\"color: rgb(0, 0, 0); font-size: 12px; font-weight: 600; line-height: 1.4\"><b>" + authBean.getLoggedInStaff().getName() + "(" + authBean.getLoggedInStaff().genderTitle() + ")</b></span>\n"
+                        + "                                <br />\n"
+                        + "                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n"
+                        + "                                <span class=\"order-list__item-title\" style=\"color: rgb(0, 0, 0); font-size: 10px; font-weight: 600; line-height: 1.4\">" + authBean.getLoggedInStaff().getJobTitle() + "</span>\n"
+                        + "                                <br />\n"
+                        + "                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n"
+                        + "                                <span class=\"order-list__item-title\" style=\"color: rgb(0, 0, 0); font-size: 10px; font-weight: 600; line-height: 1.4\">+65 6123 2000</span>\n"
+                        + "                                <span class=\"order-list__item-title\" style=\"color: rgb(250, 0, 0); font-size: 10px; font-weight: 600; line-height: 1.4\">|</span>\n"
+                        + "                                <span class=\"order-list__item-title\" style=\"color: rgb(0, 0, 0); font-size: 10px; font-weight: 600; line-height: 1.4\">" + authBean.getLoggedInStaff().getEmail() + "</span>\n"
+                        + "                                <br />\n"
+                        + "                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n"
+                        + "                                <span class=\"order-list__item-title\" style=\"color: rgb(0, 0, 0); font-size: 10px; font-weight: 600; line-height: 1.4\">Kent Ridge Grand</span>\n"
+                        + "                                <span class=\"order-list__item-title\" style=\"color: rgb(250, 0, 0); font-size: 10px; font-weight: 600; line-height: 1.4\">|</span>\n"
+                        + "                                <span class=\"order-list__item-title\" style=\"color: rgb(0, 0, 0); font-size: 10px; font-weight: 600; line-height: 1.4\">63 Somerset Road, Singapore 238163</span>\n"
+                        + "                                <br />\n"
+                        + "                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n"
+                        + "                                <span class=\"order-list__item-title\" style=\"color: rgb(0, 0, 0); font-size: 10px; font-weight: 600; line-height: 1.4\">If you have any questions, contact us at <a href=\"#\" style=\"color: #080e66; font-size: 12px; text-decoration: none\">reservations@KRHG.com</a></span>\n"
+                        + "                                <br />\n"
+                        + "                              </td>\n"
+                        + "                                           \n"
+                        + "                            </table>\n"
+                        + "                          </td>\n"
+                        + "                        </tr>\n"
+                        + "                      </table>\n"
+                        + "                    </td>\n"
+                        + "                    </tr>\n"
+                        + "                </table>    \n"
+                        + "            </center>\n"
+                        + "        </td>\n"
+                        + "    </tr>\n"
+                        + "  </table>\n"
+                        + "  <table class=\"row footer\" style=\"border-collapse: collapse; border-spacing: 0; border-top-color: #e5e5e5; border-top-style: solid; border-top-width: 1px; width: 100%\">\n"
+                        + "          <tr>\n"
+                        + "            <td class=\"footer__cell\" style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; padding: 35px 0\">\n"
+                        + "              <center>\n"
+                        + "                <table class=\"container\" style=\"border-collapse: collapse; border-spacing: 0; margin: 0 auto; text-align: left; width: 560px\">\n"
+                        + "                  \n"
+                        + "                </table>\n"
+                        + "              </center>\n"
+                        + "            </td>\n"
+                        + "          </tr>\n"
+                        + "        </table>\n"
+                        + "      </td>\n"
+                        + "    </tr>\n"
+                        + "  </table>\n"
+                        + "</body>\n"
+                        + "</html>";
+                sendMailingListEmail(listToSend.get(i), subjectTB, content);
+                System.out.println(listToSend.get(i));
+            }
+        }
+
+        subjectTB = null;
+        emailMsg = null;
+        mailingListToSend = null;
+
+        return "sendMail.xhtml?faces-redirect=true";
+    }
+
+    public List<String> getDistinctDate() {
+        return weeklyScheduleSessionLocal.getDistinctDate();
     }
 
     public String viewStaffDetail(Long sID) throws NoResultException {
@@ -2214,14 +2577,14 @@ public class HotelManagedBean implements Serializable {
         this.selectedHotelFacilities = selectedHotelFacilities;
     }
 
-        public Long getSelectedHFID() {
+    public Long getSelectedHFID() {
         return selectedHFID;
     }
 
     public void setSelectedHFID(Long selectedHFID) {
         this.selectedHFID = selectedHFID;
     }
-        
+
     public Long getSelectedRFID() {
         return selectedRFID;
     }

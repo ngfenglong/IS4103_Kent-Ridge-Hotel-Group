@@ -64,7 +64,7 @@
                                                             </label>
                                                         </td>
                                                         <td>
-                                                            <h:outputText value="#{frontDeskManagedBean.checkinName}"></h:outputText>
+                                                      	<h:outputText value="#{frontDeskManagedBean.selectedCheckInTransaction.firstName} #{frontDeskManagedBean.selectedCheckInTransaction.lastName}"></h:outputText>
                                                         </td>
                                                     </div>
                                                 </tr>
@@ -76,7 +76,7 @@
                                                             <label>Email:</label>
                                                         </td>
                                                         <td> 
-                                                            <h:outputText value="#{frontDeskManagedBean.roombooking.payer.email}">
+                                      <h:outputText value="#{frontDeskManagedBean.selectedCheckInTransaction.email}">
                                                             </h:outputText>
                                                         </td>
                                                     </div>

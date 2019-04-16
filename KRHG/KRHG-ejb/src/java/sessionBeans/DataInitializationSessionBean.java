@@ -20,6 +20,7 @@ import entity.LaundryOrderedItem;
 import entity.LaundryType;
 import entity.LostAndFoundReport;
 import entity.MaintainenceOrder;
+import entity.MemberTier;
 import entity.MinibarItem;
 import entity.MinibarOrder;
 import entity.MinibarOrderedItem;
@@ -96,6 +97,8 @@ public class DataInitializationSessionBean {
     LaundrySessionLocal laundrySessionLocal;
     @EJB
     FoodOrderSessionLocal foodOrderSessionLocal;
+    @EJB
+    MemberTierSessionLocal memberTierSessionLocal;
 
     public DataInitializationSessionBean() {
     }
@@ -127,6 +130,14 @@ public class DataInitializationSessionBean {
     }
 
     public void initializeData() throws NoResultException, ParseException {
+        //********************************************* Member Tier ************************************************
+        MemberTier mt1 = new MemberTier("Silver Member", 5000);
+        memberTierSessionLocal.createMemberTier(mt1);
+        MemberTier mt2 = new MemberTier("Gold Member", 20000);
+        memberTierSessionLocal.createMemberTier(mt2);
+        MemberTier mt3 = new MemberTier("Platinum Member", 50000);
+        memberTierSessionLocal.createMemberTier(mt3);
+
 //*********************************************Staff Type************************************************
         StaffType st1 = new StaffType("Housekeeping Staff");
         staffSessionLocal.createStaffType(st1);
@@ -1087,13 +1098,16 @@ public class DataInitializationSessionBean {
 //*********************************************CUSTOMER************************************************
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
-        Customer c1 = new Customer("Zack", "Neo Guohui", "Male", encryptPassword("test"), 187, "neoguoh202@hotmail.com", "+6591321876", format.parse("2019-02-04"), true);
+        Customer c1 = new Customer("Zack", "Neo Guohui", "Male", encryptPassword("test"), 187, "zell1502@hotmail.com", "+6591321876", format.parse("2019-02-04"), true);
         customerSessionLocal.createCustomer(c1);
-        c1 = customerSessionLocal.getCustomerByEmail("neoguoh202@hotmail.com");
+        //        c1 = customerSessionLocal.getCustomerByEmail("neoguoh202@hotmail.com");
+        c1 = customerSessionLocal.getCustomerByEmail("zell1502@hotmail.com");
 
-        Customer c2 = new Customer("Pillay", "Maureen", "Male", encryptPassword("test"), 31877, "maureenpi1@yahoo.com.sg", "+6582375237", format.parse("2019-01-28"), false);
+        Customer c2 = new Customer("Pillay", "Maureen", "Male", encryptPassword("test"), 31877, "anselm.dm@gmail.com", "+6582375237", format.parse("2019-01-28"), false);
+        c2.setPoints(6000);
         customerSessionLocal.createCustomer(c2);
-        c2 = customerSessionLocal.getCustomerByEmail("maureenpi1@yahoo.com.sg");
+        c2 = customerSessionLocal.getCustomerByEmail("anselm.dm@gmail.com");
+        //        c2 = customerSessionLocal.getCustomerByEmail("maureenpi1@yahoo.com.sg");
 
         Customer c3 = new Customer("Mei Fang", "Chia", "Female", encryptPassword("test"), 1023823, "chiame317@gmail.com", "+6591312719", format.parse("2019-03-01"), true);
         customerSessionLocal.createCustomer(c3);
@@ -15640,15 +15654,16 @@ public class DataInitializationSessionBean {
 
         bookingSessionLocal.createRoomBooking(rm1);
 
-        RoomBooking rb1 = new RoomBooking();
+         RoomBooking rb1 = new RoomBooking();
         rb1.setBookInDate(format.parse("2019-03-10"));
         rb1.setBookOutDate(format.parse("2019-03-13"));
         rb1.setStatus("checkedOut");
         rb1.setPrice(450.0);
         rb1.setBookedRoom(roomSessionLocal.getRoomByName("KRG_202"));
         rb1.setHasTransport(false);
-        rb1.setBookedBy(customerSessionLocal.getCustomerByEmail("neoguoh202@hotmail.com"));
-        rb1.setEmailAddress("neoguoh202@hotmail.com");
+//        rb1.setBookedBy(customerSessionLocal.getCustomerByEmail("neoguoh202@hotmail.com"));
+        rb1.setBookedBy(customerSessionLocal.getCustomerByEmail("zell1502@hotmail.com"));
+        rb1.setEmailAddress("zell1502@hotmail.com");
         rb1.setPassportNum("E2342213B");
         rb1.setRoomType("Standard");
         rb1.setFirstName("Zack");
@@ -15656,7 +15671,7 @@ public class DataInitializationSessionBean {
         rb1.setHasExtraBed(false);
         bookingSessionLocal.createRoomBooking(rb1);
         RoomBooking newrb1 = bookingSessionLocal.getLastRoomBooking();
-
+        
         RoomBooking rb2 = new RoomBooking();
         rb2.setBookInDate(format.parse("2019-01-10"));
         rb2.setBookOutDate(format.parse("2019-01-13"));
@@ -15664,8 +15679,8 @@ public class DataInitializationSessionBean {
         rb2.setPrice(450.0);
         rb2.setBookedRoom(roomSessionLocal.getRoomByName("KRG_402"));
         rb2.setHasTransport(false);
-        rb2.setBookedBy(customerSessionLocal.getCustomerByEmail("neoguoh202@hotmail.com"));
-        rb2.setEmailAddress("neoguoh202@hotmail.com");
+        rb2.setBookedBy(customerSessionLocal.getCustomerByEmail("zell1502@hotmail.com"));
+        rb2.setEmailAddress("zell1502@hotmail.com");
         rb2.setPassportNum("E2342213B");
         rb2.setRoomType("Standard");
         rb2.setFirstName("Zack");
@@ -15673,7 +15688,7 @@ public class DataInitializationSessionBean {
         rb2.setHasExtraBed(true);
         bookingSessionLocal.createRoomBooking(rb2);
         RoomBooking newrb2 = bookingSessionLocal.getLastRoomBooking();
-
+        
         RoomBooking rb3 = new RoomBooking();
         rb3.setBookInDate(format.parse("2019-05-10"));
         rb3.setBookOutDate(format.parse("2019-05-13"));
@@ -15681,15 +15696,16 @@ public class DataInitializationSessionBean {
         rb3.setPrice(450.0);
         rb3.setBookedRoom(roomSessionLocal.getRoomByName("KRG_302"));
         rb3.setHasTransport(false);
-        rb3.setBookedBy(customerSessionLocal.getCustomerByEmail("neoguoh202@hotmail.com"));
-        rb3.setEmailAddress("neoguoh202@hotmail.com");
+        rb3.setBookedBy(customerSessionLocal.getCustomerByEmail("zell1502@hotmail.com"));
+        rb3.setEmailAddress("zell1502@hotmail.com");
         rb3.setPassportNum("E2342213B");
         rb3.setRoomType("Standard");
         rb3.setFirstName("Zack");
         rb3.setLastName("Neo Guohui");
         rb3.setHasExtraBed(true);
         bookingSessionLocal.createRoomBooking(rb3);
-        RoomBooking newrb3 = bookingSessionLocal.getLastRoomBooking();
+        RoomBooking newrb3 = bookingSessionLocal.getLastRoomBooking();        
+
 //***************Laundry Order***************
         LaundryOrder lo1 = new LaundryOrder();
         lo1.setRoom(roomSessionLocal.getRoomByName("KRG_202"));

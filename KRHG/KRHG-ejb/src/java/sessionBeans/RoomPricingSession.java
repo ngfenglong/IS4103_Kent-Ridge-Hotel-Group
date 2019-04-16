@@ -7,6 +7,7 @@ package sessionBeans;
 
 import entity.RoomPricing;
 import error.NoResultException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -79,4 +80,19 @@ public class RoomPricingSession implements RoomPricingSessionLocal {
             throw new NoResultException("Room Pricing not found.");
         }
     }
+
+    @Override
+    public List<RoomPricing> getAllRoomPricingsByHotel(String hotelCode) {
+        List<RoomPricing> returnList = new ArrayList<RoomPricing>();
+        List<RoomPricing> filterList = getAllRoomPricings();
+        for (RoomPricing rp : filterList) {
+            if (rp.getPricingName().substring(0, hotelCode.length()).equals(hotelCode)) {
+                RoomPricing tempRP = rp;
+                returnList.add(tempRP);
+            }
+        }
+        return returnList;
+    }
 }
+
+

@@ -77,7 +77,7 @@ public class FrontDeskManagedBean implements Serializable {
     private List<PaymentTransaction> todaysbookings;
     private List<RoomBooking> Searchbookings;
     private PaymentTransaction roombooking;
-    private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); 
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     private Date checkinDate = new Date();
     private Date checkoutDate;
     private String checkinDateString = sdf.format(checkinDate);
@@ -122,6 +122,8 @@ public class FrontDeskManagedBean implements Serializable {
     private String editCustomerEmail;
     private String editCustomerMobileNumber;
     private boolean editCustomerStatus;
+
+    private PaymentTransaction selectedCheckInTransaction;
 
     //payment
     private String paymentNameOnCard;
@@ -247,7 +249,7 @@ public class FrontDeskManagedBean implements Serializable {
     public void setAllFunctionrooms(List<FunctionRoom> allFunctionrooms) {
         this.allFunctionrooms = allFunctionrooms;
     }
-    
+
     public String checkAvailability() {
         //SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         //checkinDate = new Date();
@@ -817,4 +819,105 @@ public class FrontDeskManagedBean implements Serializable {
     public String editNameAway(String value) {
         return value.split("_")[1];
     }
+
+    public List<PaymentTransaction> getTodayOrLaterBookings() throws NoResultException {
+        Date todayDate = java.util.Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
+        List<PaymentTransaction> returnList = new ArrayList<PaymentTransaction>();
+        List<PaymentTransaction> filterList = paymentTransactionSessionLocal.getAllPaymentTransaction();
+        for (PaymentTransaction pt : filterList) {
+            if (pt.getFunctionRoomBooked() != null) {
+                if (pt.getFunctionRoomBooked().getBookedFrom().compareTo(todayDate) >= 0) {
+                    PaymentTransaction tempPT = pt;
+                    returnList.add(tempPT);
+                }
+            } else {
+                if (pt.getRoomsBooked().get(0).getBookInDate().compareTo(todayDate) >= 0) {
+                    PaymentTransaction tempPT = pt;
+                    returnList.add(tempPT);
+                }
+            }
+        }
+        return returnList;
+    }
+
+    public String getBookingDateStr(PaymentTransaction pt) throws NoResultException {
+        Date todayDate = java.util.Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+        if (pt.getFunctionRoomBooked() != null) {
+            if (pt.getFunctionRoomBooked().getBookedFrom().compareTo(todayDate) >= 0) {
+                return dateFormat.format(pt.getFunctionRoomBooked().getBookedFrom());
+            }
+        } else {
+            if (pt.getRoomsBooked().get(0).getBookInDate().compareTo(todayDate) >= 0) {
+                return dateFormat.format(pt.getRoomsBooked().get(0).getBookInDate());
+            }
+        }
+        return "";
+    }
+
+    public RoomSessionLocal getRoomSessionLocal() {
+        return roomSessionLocal;
+    }
+
+    public void setRoomSessionLocal(RoomSessionLocal roomSessionLocal) {
+        this.roomSessionLocal = roomSessionLocal;
+    }
+
+    public BookingSessionLocal getBookSessionLocal() {
+        return bookSessionLocal;
+    }
+
+    public void setBookSessionLocal(BookingSessionLocal bookSessionLocal) {
+        this.bookSessionLocal = bookSessionLocal;
+    }
+
+    public CustomerSessionLocal getCustomerSessionLocal() {
+        return customerSessionLocal;
+    }
+
+    public void setCustomerSessionLocal(CustomerSessionLocal customerSessionLocal) {
+        this.customerSessionLocal = customerSessionLocal;
+    }
+
+    public PaymentTransactionSessionLocal getPaymentTransactionSessionLocal() {
+        return paymentTransactionSessionLocal;
+    }
+
+    public void setPaymentTransactionSessionLocal(PaymentTransactionSessionLocal paymentTransactionSessionLocal) {
+        this.paymentTransactionSessionLocal = paymentTransactionSessionLocal;
+    }
+
+    public FunctionRoomBookingSessionLocal getFunctionRoomBookingSessionLocal() {
+        return functionRoomBookingSessionLocal;
+    }
+
+    public void setFunctionRoomBookingSessionLocal(FunctionRoomBookingSessionLocal functionRoomBookingSessionLocal) {
+        this.functionRoomBookingSessionLocal = functionRoomBookingSessionLocal;
+    }
+
+    public FunctionRoomSessionLocal getFunctionroomSessionlocal() {
+        return functionroomSessionlocal;
+    }
+
+    public void setFunctionroomSessionlocal(FunctionRoomSessionLocal functionroomSessionlocal) {
+        this.functionroomSessionlocal = functionroomSessionlocal;
+    }
+
+    public Customer getEditCustomer() {
+        return editCustomer;
+    }
+
+    public void setEditCustomer(Customer editCustomer) {
+        this.editCustomer = editCustomer;
+    }
+
+    public PaymentTransaction getSelectedCheckInTransaction() {
+        return selectedCheckInTransaction;
+    }
+
+    public void setSelectedCheckInTransaction(PaymentTransaction selectedCheckInTransaction) {
+        this.selectedCheckInTransaction = selectedCheckInTransaction;
+    }
+
 }
