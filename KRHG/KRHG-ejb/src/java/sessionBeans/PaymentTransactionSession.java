@@ -24,7 +24,7 @@ public class PaymentTransactionSession implements PaymentTransactionSessionLocal
     @Override
     public List<PaymentTransaction> getAllPaymentTransaction() throws NoResultException {
         Query q;
-        q = em.createQuery("SELECT pt FROM PaymentTransaction pt ");
+        q = em.createQuery("SELECT pt FROM PaymentTransaction pt");
         return q.getResultList();
     }
 

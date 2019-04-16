@@ -14,7 +14,11 @@ import entity.LaundryOrder;
 import entity.LaundryOrderedItem;
 import entity.LaundryType;
 import entity.MinibarItem;
+
 import entity.RoomBooking;
+
+import entity.MinibarStock;
+
 import entity.Staff;
 import error.NoResultException;
 import java.io.InputStream;
@@ -94,7 +98,7 @@ public class requestServicesManagedBean implements Serializable {
     private Staff assignedHouseKeeper;
 
     //inventory 
-    private List<MinibarItem> getMiniBarItems;
+    private List<MinibarStock> getMiniBarItems;
 
     //foodMenu
     private FoodMenuItem selectedFoodItem;
@@ -836,11 +840,11 @@ public class requestServicesManagedBean implements Serializable {
 
     public List<HouseKeepingOrder> getIncompleteHousekeepingOrders() throws NoResultException {
         List<HouseKeepingOrder> newList = new ArrayList<>();
-        System.out.println("hi");
+
         for (HouseKeepingOrder ho : housekeepingsessionlocal.getAllHouseKeepingOrder()) {
             if (ho.getStatus().equalsIgnoreCase("incomplete")) {
                 newList.add(ho);
-                System.out.println(ho.getRoom().getRoomNumber());
+
             }
         }
         return newList;
@@ -859,7 +863,9 @@ public class requestServicesManagedBean implements Serializable {
     }
 
     public List<Staff> getGetHousekeepingStaff() {
-        return getHousekeepingStaff = getStaffBasedOnDepartmentAndHotelCode("Housekeeping");
+        getHousekeepingStaff = getStaffBasedOnDepartmentAndHotelCode("Housekeeping");
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("converter.StaffConverterv.staffs", getHousekeepingStaff);
+        return getHousekeepingStaff;
     }
 
     public void setGetHousekeepingStaff(List<Staff> getHousekeepingStaff) {
@@ -883,13 +889,17 @@ public class requestServicesManagedBean implements Serializable {
         System.out.println("hello");
     }
 
-    public void update(HouseKeepingOrder ho) throws NoResultException {
-        if (ho != null) {
-
-            //Staff staff = staffsession.getStaffByID(assignedHouseKeeper);
-            ho.setHouseKeeper(assignedHouseKeeper);
+    public void update(HouseKeepingOrder housekeeping) throws NoResultException {
+        System.err.println("house: " + housekeeping);
+        System.out.println("weifughweuiguwebguwbegwe");
+        if (assignedHouseKeeper != null) {
+            System.err.println("in");
             System.out.println(assignedHouseKeeper.getName());
-            housekeepingsessionlocal.updateHouseKeepingOrder(ho);
+            //Staff staff = staffsession.getStaffByID(assignedHouseKeeper);
+
+            housekeeping.setHouseKeeper(assignedHouseKeeper);
+
+            housekeepingsessionlocal.updateHouseKeepingOrder(housekeeping);
         }
     }
 
@@ -917,12 +927,23 @@ public class requestServicesManagedBean implements Serializable {
         }
     }
 
-    public List<MinibarItem> getGetMiniBarItems() {
-        return getMiniBarItems = roomsessionlocal.getAllMinibarItem();
+    public List<MinibarStock> getGetMiniBarItems() {
+        return getMiniBarItems = getMinibarByHotelCode();
     }
 
-    public void setGetMiniBarItems(List<MinibarItem> getMiniBarItems) {
+    public void setGetMiniBarItems(List<MinibarStock> getMiniBarItems) {
         this.getMiniBarItems = getMiniBarItems;
+    }
+
+    public List<MinibarStock> getMinibarByHotelCode() {
+        List<MinibarStock> newlist = new ArrayList<>();
+        for (MinibarStock ms : housekeepingsessionlocal.getAllMinibarStock()) {
+            if (ms.getHotelCodeName().equals(hotelCode)) {
+                newlist.add(ms);
+                
+            }
+        }
+        return newlist;
     }
 
     public double calculation(int number) {
@@ -931,6 +952,7 @@ public class requestServicesManagedBean implements Serializable {
 
         return result;
     }
+
 
     /**
      * @return the logActivityName
@@ -1390,5 +1412,15 @@ public class requestServicesManagedBean implements Serializable {
         this.selectedLaundryStaff = selectedLaundryStaff;
     }
 
+
+
+    
+    public double defineTheNumber(int alert , int stock){
+        Double alertChange = new Double(alert);
+        Double stockChange = new Double(stock);
+        double stockDiff =stockChange - alertChange;
+        
+        return (stockDiff/stockChange * 100);
+    }
 
 }

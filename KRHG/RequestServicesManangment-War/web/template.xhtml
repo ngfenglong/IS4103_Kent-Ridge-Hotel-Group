@@ -23,8 +23,10 @@
         <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/select2/dist/css/select2.min.css"/>
         <!-- Morris chart -->
         <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/morris.js/morris.css"></link>
+
         <!-- iCheck for checkboxes and radio inputs -->
         <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/plugins/iCheck/all.css"></link>
+
 
 
         <!-- Tell the browser to be responsive to screen width -->
@@ -444,6 +446,13 @@ $(function(){
                 });
 
             });
+            function update(o) {
+
+
+           
+                document.getElementById("formy:housekeeper").value = o;
+            }
+            // $('.sidebar-toggle-btn').pushMenu(options)
 
         </script> 
         <script>

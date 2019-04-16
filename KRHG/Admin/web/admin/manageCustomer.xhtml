@@ -24,7 +24,7 @@
                             <!-- /.col -->
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
-                                    <li><a href="#"> Home</a></li>
+                                    <li><a href="adminIndex.xhtml"> Home</a></li>
                                     <li class="active">Manage Customer List</li>
                                 </ol>
                             </div>
@@ -65,11 +65,11 @@
                                             <td>#{cust.gender}</td>
                                             <td>#{cust.email}</td>
                                             <td>#{cust.mobileNum}</td>
-                                            <td>#{cust.dateJoined}</td>
+                                            <td>#{cust.displayDateJoined()}</td>
                                             <td>
                                                 <h:commandButton id="viewDetailBtn"
                                                                  action="#{hotelManagedBean.viewCustomer(cust.customerID)}" value="View Customer"
-                                                                 class="btn btn-primary" />
+                                                                 class="btn btn-primary" />x
                                             </td>
                                         </tr>
                                     </c:forEach>

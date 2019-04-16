@@ -183,9 +183,9 @@
                         <h:outputText value="#{hotelStayManagedBean.roomNumber}" />
                         <h:inputHidden  id="houseKeepingTime" value="#{hotelStayManagedBean.houseKeepingCollectionTime}" />
 
-                        <h:commandLink class="cd-popup-closemodal" id="yesbutton" value="Commandbutton"  action="#{hotelStayManagedBean.bookHouseKeeping}">
+                        <h:commandLink class="cd-popup-confirm" id="yesbutton" value="Commandbutton"  action="#{hotelStayManagedBean.bookHouseKeeping()}" >
                             <f:ajax execute="@form" render="@none" />
-                        </h:commandLink><br/>
+                        </h:commandLink>
                     </h:form>
                     <li><a href="#0"  class=" cd-popup-closemodal">No</a></li>
                 </ul>
@@ -217,6 +217,12 @@
 
 
         <script type="text/javascript">
+            
+            function test(){
+                console.log("Yes button is clicked.");
+            }
+            
+            
                             var timepicked;
                             document.addEventListener('DOMContentLoaded', function () {
                             var time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
@@ -258,7 +264,7 @@
                             console.log("inloadtime");
                             console.log(timepicked);
                             document.getElementById("printtime").innerHTML = timepicked;
-                            document.getElementById('laundryForm:houseKeepingTime').value = document.getElementById("printtime");
+//                            document.getElementById('laundryForm:houseKeepingTime').value = document.getElementById("printtime");
                             } else {
                             console.log("timestart");
                             startTime();

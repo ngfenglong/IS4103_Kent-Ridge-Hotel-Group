@@ -25,6 +25,15 @@ public class MemberTier implements Serializable {
     private String tierName;
     private int tierPoints;
 
+    public MemberTier() {
+    }
+
+    public MemberTier(String tierName, int tierPoints) {
+        this();
+        this.tierName = tierName;
+        this.tierPoints = tierPoints;
+    }
+
     public Long getTierID() {
         return tierID;
     }

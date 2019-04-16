@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <body>
 
@@ -38,7 +39,97 @@
                     <!-- /.container-fluid -->
                 </div> 
                 <section class="content">
-              
+                    <div class="col-md-9">
+                        <div class="card">
+                            <div class="card-header p-2">
+                                <ul class="nav nav-pills">
+                                    <li class="nav-item"><a class="nav-link active" href="#Toiletries" data-toggle="tab">Toiletries</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#MiniBar" data-toggle="tab">MiniBar</a></li>
+                                 
+                                </ul>
+                            </div><!-- /.card-header -->
+                            <div class="card-body">
+                                <div class="tab-content">
+                                    <div class="active tab-pane" id="Toiletries">
+                                        <div class="col-md-12">
+                                            <div class="card">
+
+                                                <!-- /.card-header -->
+                                                <div class="card-body p-0">
+                                                    <table class="table">
+                                                        <tr>
+                                                            <th style="width: 10px">#</th>
+                                                            <th>Task</th>
+                                                            <th>Progress</th>
+                                                            <th style="width: 40px">Label</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>1.</td>
+                                                            <td>Update software</td>
+                                                            <td>
+                                                                <div class="progress progress-xs">
+                                                                    <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                                                                </div>
+                                                            </td>
+                                                            <td><span class="badge bg-danger">55%</span></td>
+                                                        </tr>
+
+                                                    </table>
+                                                </div>
+                                                <!-- /.card-body -->
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="tab-pane" id="MiniBar">
+                                        <div class="col-md-12">
+                                            <div class="card">
+
+                                                <!-- /.card-header -->
+                                                <div class="card-body p-0">
+                                                    <h:form>
+                                                        <table class="table">
+                                                            <tr>
+
+                                                                <th>Items</th>
+                                                                <th>Status</th>
+                                                                <th width="0%"></th>
+
+                                                            </tr>
+                                                            <c:forEach items="#{requestServicesManagedBean.getMiniBarItems}" var="o">
+
+                                                                <tr>
+
+                                                                    <td>#{o.minibarItemName}</td>
+                                                                    <c:if test="#{requestServicesManagedBean.defineTheNumber(o.alert,o.currentStock) lt 30}"> 
+                                                                        <td><span class="badge bg-danger">#{requestServicesManagedBean.defineTheNumber(o.alert,o.currentStock)}%</span></td>
+                                                                    </c:if> 
+                                                                    <c:if test="#{requestServicesManagedBean.defineTheNumber(o.alert,o.currentStock) lt 70}">
+                                                                        <td><span class="badge bg-warning">#{requestServicesManagedBean.defineTheNumber(o.alert,o.currentStock)}%</span></td>
+                                                                    </c:if>
+                                                                    <c:if test="#{requestServicesManagedBean.defineTheNumber(o.alert,o.currentStock) gt 70}">
+                                                                        <td><span class="badge bg-success">#{requestServicesManagedBean.defineTheNumber(o.alert,o.currentStock)}%</span></td>
+                                                                    </c:if>
+                                                                    <td><h:commandLink class="fa fa-plus"></h:commandLink></td>
+                                                                </tr>
+                                                            </c:forEach>
+                                                        </table>
+                                                    </h:form>
+                                                </div>
+                                                <!-- /.card-body -->
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                  
+
+                                </div>
+
+                            </div><!-- /.card-body -->
+                        </div>
+                        <!-- /.nav-tabs-custom -->
+                    </div>
                     <!-- /.container-fluid -->
                 </section>
                 <!-- /.content-header -->

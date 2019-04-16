@@ -9,20 +9,20 @@
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title><ui:insert name="title">Title</ui:insert></title>
-        
+
         <!-- ChartJS -->
         <script src="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/chart.js/Chart.js"></script>
- <!-- Ionicons -->
- <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/Ionicons/css/ionicons.min.css"/>
-          <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/bootstrap/dist/css/bootstrap.min.css"></link>
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/font-awesome/css/font-awesome.min.css"></link>
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/Ionicons/css/ionicons.min.css"></link>
-  <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/select2/dist/css/select2.min.css"/>
-    <!-- Morris chart -->
-    <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/morris.js/morris.css"></link>
+        <!-- Ionicons -->
+        <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/Ionicons/css/ionicons.min.css"/>
+        <!-- Bootstrap 3.3.7 -->
+        <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/bootstrap/dist/css/bootstrap.min.css"></link>
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/font-awesome/css/font-awesome.min.css"></link>
+        <!-- Ionicons -->
+        <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/Ionicons/css/ionicons.min.css"></link>
+        <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/select2/dist/css/select2.min.css"/>
+        <!-- Morris chart -->
+        <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/morris.js/morris.css"></link>
 
 
         <!-- Tell the browser to be responsive to screen width -->
@@ -116,6 +116,24 @@
                     <nav class="mt-2 ">
                         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                             data-accordion="false">
+
+                            <li class="nav-item" >
+                                <a href="#{request.contextPath}/admin/profile.xhtml" class="nav-link" >
+                                    <i class="fas fa-user"></i>
+                                    <p>
+                                        Profile
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item" >
+                                <a href="#{request.contextPath}/admin/applyLeave.xhtml" class="nav-link" >
+                                    <i class="fas fa-user"></i>
+                                    <p>
+                                        Apply Leave
+                                    </p>
+                                </a>
+                            </li>
+
                             <c:if test="#{authenticationManagedBean.financeStaff eq true}">
                                 <li class="nav-header">Admin System</li>
                                 <li class="nav-item has-treeview">
@@ -189,7 +207,7 @@
 
                                 <li class="nav-item has-treeview">
                                     <a href="#" class="nav-link">
-                                        <i class="fa fa-hotel"></i>
+                                        <i class="fa fa-concierge-bell"></i>
                                         <p>
                                             Room Facilities 
                                         </p>
@@ -211,7 +229,7 @@
                                 </li>
                                 <li class="nav-item has-treeview">
                                     <a href="#" class="nav-link">
-                                        <i class="fa fa-hotel"></i>
+                                        <i class="fa fa-cookie-bite"></i>
                                         <p>
                                             Minibar Items
                                         </p>
@@ -281,7 +299,7 @@
 
                                 <li class="nav-item has-treeview">
                                     <a href="#" class="nav-link">
-                                        <i class="fa fa-user-tie"></i>
+                                        <i class="fa fa-tag"></i>
                                         <p>
                                             Room Pricing
                                         </p>
@@ -316,7 +334,7 @@
 
                                 <li class="nav-item has-treeview">
                                     <a href="#" class="nav-link">
-                                        <i class="fa fa-user-tie"></i>
+                                        <i class="fa fa-users"></i>
                                         <p>
                                             Member Tiers
                                         </p>
@@ -338,38 +356,19 @@
                                 </li>
 
                                 <li class="nav-item has-treeview">
-                                    <a href="#" class="nav-link">
-                                        <i class="fa fa-user-tie"></i>
+
+                                    <a href="#{request.contextPath}/admin/sendMail.xhtml" class="nav-link" >
+                                        <i class="fas fa-envelope"></i>
                                         <p>
-                                            Mailing List
+
+                                            Send Mail
                                         </p>
                                     </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item has-treeview">
-                                            <a href="#{request.contextPath}/admin/addMailingList.xhtml" class="nav-link">
-                                                <i class="fa fa-plus nav-icon"></i>
-                                                <p>Add Mailing List</p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="#{request.contextPath}/admin/manageMailingList.xhtml" class="nav-link">
-                                                <i class="nav-icon fa fa-bars"></i>
-                                                <p>Manage Mailing List</p>
-                                            </a>
-                                        </li>
-                                    </ul>
                                 </li>
-                                <li class="nav-item has-treeview">
-                                        <a href="#{request.contextPath}/admin/sendMail.xhtml" class="nav-link" >
-                                            <i class="fas fa-swimming-pool"></i>
-                                            <p>
-                                                Send Mail
-                                            </p>
-                                        </a>
-                                    </li>
+
                                 <li class="nav-item has-treeview">
                                     <a href="#{request.contextPath}/admin/manageFeedback.xhtml" class="nav-link" >
-                                        <i class="fas fa-swimming-pool"></i>
+                                        <i class="fas fa-comment-dots"></i>
                                         <p>
                                             Feedback Management
                                         </p>
@@ -478,11 +477,11 @@
             //]]>
         </script>
         <script>
-            
-             $('.select2-multiple-input-lg').select2({
-                            containerCssClass: ':all:',
-                            closeOnSelect: 'false'
-                        });
+
+            $('.select2-multiple-input-lg').select2({
+                containerCssClass: ':all:',
+                closeOnSelect: 'false'
+            });
 
 
 
@@ -501,129 +500,147 @@
                     "info": true,
                     "autoWidth": false
                 });
-
-                $('#rp1').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": true,
-                    "columns": [
-                        {"orderData": [0, 1], "targets": 0},
-                        {"orderData": 0, "targets": 1},
-                        {"orderData": [2, 3, 4], "targets": 2}
-                    ],
-                    "info": true,
-                    "autoWidth": false
-                });
-                $('#rp2').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": true,
-                    "columns": [
-                        {"orderData": [0, 1], "targets": 0},
-                        {"orderData": 0, "targets": 1},
-                        {"orderData": [2, 3, 4], "targets": 2}
-                    ],
-                    "info": true,
-                    "autoWidth": false
-                });
-                $('#rp3').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": true,
-                    "columns": [
-                        {"orderData": [0, 1], "targets": 0},
-                        {"orderData": 0, "targets": 1},
-                        {"orderData": [2, 3, 4], "targets": 2}
-                    ],
-                    "info": true,
-                    "autoWidth": false
-                });
-                $('#rp4').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": true,
-                    "columns": [
-                        {"orderData": [0, 1], "targets": 0},
-                        {"orderData": 0, "targets": 1},
-                        {"orderData": [2, 3, 4], "targets": 2}
-                    ],
-                    "info": true,
-                    "autoWidth": false
-                });
-                $('#rp5').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": true,
-                    "columns": [
-                        {"orderData": [0, 1], "targets": 0},
-                        {"orderData": 0, "targets": 1},
-                        {"orderData": [2, 3, 4], "targets": 2}
-                    ],
-                    "info": true,
-                    "autoWidth": false
-                });
-                $('#rp6').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": true,
-                    "columns": [
-                        {"orderData": [0, 1], "targets": 0},
-                        {"orderData": 0, "targets": 1},
-                        {"orderData": [2, 3, 4], "targets": 2}
-                    ],
-                    "info": true,
-                    "autoWidth": false
-                });
-                $('#rp7').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": true,
-                    "columns": [
-                        {"orderData": [0, 1], "targets": 0},
-                        {"orderData": 0, "targets": 1},
-                        {"orderData": [2, 3, 4], "targets": 2}
-                    ],
-                    "info": true,
-                    "autoWidth": false
-                });
-                $('#rp8').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": true,
-                    "columns": [
-                        {"orderData": [0, 1], "targets": 0},
-                        {"orderData": 0, "targets": 1},
-                        {"orderData": [2, 3, 4], "targets": 2}
-                    ],
-                    "info": true,
-                    "autoWidth": false
-                });
-                $('#rp9').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": true,
-                    "columns": [
-                        {"orderData": [0, 1], "targets": 0},
-                        {"orderData": 0, "targets": 1},
-                        {"orderData": [2, 3, 4], "targets": 2}
-                    ],
-                    "info": true,
-                    "autoWidth": false
-                });
-
-                $('#rp10').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": true,
-                    "columns": [
-                        {"orderData": [0, 1], "targets": 0},
-                        {"orderData": 0, "targets": 1},
-                        {"orderData": [2, 3, 4], "targets": 2}
-                    ],
-                    "info": true,
-                    "autoWidth": false
-                });
             });
+
+            $('#example3').DataTable({
+                "paging": false,
+                "lengthChange": false,
+                "searching": true,
+                "columns": [
+                    {"orderData": [0, 1], "targets": 0},
+                    {"orderData": 0, "targets": 1},
+                    {"orderData": [2, 3, 4], "targets": 2}
+                ],
+                "info": true,
+                "autoWidth": false
+            });
+
+
+            // $('.sidebar-toggle-btn').pushMenu(options)
+
+            $('#rp1').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "columns": [
+                    {"orderData": [0, 1], "targets": 0},
+                    {"orderData": 0, "targets": 1},
+                    {"orderData": [2, 3, 4], "targets": 2}
+                ],
+                "info": true,
+                "autoWidth": false
+            });
+            $('#rp2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "columns": [
+                    {"orderData": [0, 1], "targets": 0},
+                    {"orderData": 0, "targets": 1},
+                    {"orderData": [2, 3, 4], "targets": 2}
+                ],
+                "info": true,
+                "autoWidth": false
+            });
+            $('#rp3').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "columns": [
+                    {"orderData": [0, 1], "targets": 0},
+                    {"orderData": 0, "targets": 1},
+                    {"orderData": [2, 3, 4], "targets": 2}
+                ],
+                "info": true,
+                "autoWidth": false
+            });
+            $('#rp4').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "columns": [
+                    {"orderData": [0, 1], "targets": 0},
+                    {"orderData": 0, "targets": 1},
+                    {"orderData": [2, 3, 4], "targets": 2}
+                ],
+                "info": true,
+                "autoWidth": false
+            });
+            $('#rp5').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "columns": [
+                    {"orderData": [0, 1], "targets": 0},
+                    {"orderData": 0, "targets": 1},
+                    {"orderData": [2, 3, 4], "targets": 2}
+                ],
+                "info": true,
+                "autoWidth": false
+            });
+            $('#rp6').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "columns": [
+                    {"orderData": [0, 1], "targets": 0},
+                    {"orderData": 0, "targets": 1},
+                    {"orderData": [2, 3, 4], "targets": 2}
+                ],
+                "info": true,
+                "autoWidth": false
+            });
+            $('#rp7').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "columns": [
+                    {"orderData": [0, 1], "targets": 0},
+                    {"orderData": 0, "targets": 1},
+                    {"orderData": [2, 3, 4], "targets": 2}
+                ],
+                "info": true,
+                "autoWidth": false
+            });
+            $('#rp8').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "columns": [
+                    {"orderData": [0, 1], "targets": 0},
+                    {"orderData": 0, "targets": 1},
+                    {"orderData": [2, 3, 4], "targets": 2}
+                ],
+                "info": true,
+                "autoWidth": false
+            });
+            $('#rp9').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "columns": [
+                    {"orderData": [0, 1], "targets": 0},
+                    {"orderData": 0, "targets": 1},
+                    {"orderData": [2, 3, 4], "targets": 2}
+                ],
+                "info": true,
+                "autoWidth": false
+            });
+
+            $('#rp10').DataTable({
+            "paging": true,
+                    "lengthChange": false,
+                    "searching": true,
+                    "columns": [
+                    {"orderData": [0, 1], "targets": 0},
+                    {"orderData": 0, "targets": 1},
+                    {"orderData": [2, 3, 4], "targets": 2}
+                    ],
+                    "info": true,
+                    "autoWidth": false
+            });
+            }
+            );
 
             // $('.sidebar-toggle-btn').pushMenu(options)
         </script> 

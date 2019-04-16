@@ -44,14 +44,13 @@
 
                         <h:form>
                             <div class="card-header">
-                                <h:commandButton class="btn btn-primary float-sm-right" action="createHouseKeepingRequest.xhtml?faces-redirect=true" value="Add New Housekeeping request" />
                                 <h3 class="card-title">List of requests</h3>
                             </div>
                         </h:form>
 
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <h:form>
+                            <h:form id="formy">
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
@@ -69,18 +68,17 @@
                                                 <td>#{o.room.roomNumber}</td>
                                                 <td>#{o.specialRequest}</td>
                                                 <td>#{requestServicesManagedBean.convertDateFormat(o.orderDateTime)}</td>
-                                                <td><h:selectOneMenu onchange="update()"  value="#{requestServicesManagedBean.assignedHouseKeeper}">
-                                                       <f:selectItem  itemValue="" itemLabel="Select" />
+                                                <td><h:selectOneMenu converter="StaffConverter" onchange="update(this.value)" value="#{o.houseKeeper}">
+                                                        <f:selectItem  itemValue="" itemLabel="Select" ></f:selectItem>
                                                         <c:forEach items="#{requestServicesManagedBean.getHousekeepingStaff}" var="hk"> 
-                                                            <f:selectItem itemValue="#{hk.staffID}" itemLabel="#{hk.name}" />
-                                                        
+                                                            <f:selectItem itemValue="#{hk}" itemLabel="#{hk.name}" ></f:selectItem>
                                                         </c:forEach>
                                                     </h:selectOneMenu></td>
-                                                <td><input type="button" value="update"/></td>
+                                                <td><h:commandButton value="update" action="#{requestServicesManagedBean.update(o)}"></h:commandButton></td>
                                             </tr>
 
                                         </c:forEach>
-
+                                        <h:inputHidden id="housekeeper" converter="StaffConverter" value="#{requestServicesManagedBean.assignedHouseKeeper}"></h:inputHidden>
                                     </tbody>
 
                                 </table>
@@ -102,9 +100,7 @@
                         $(this).mask($(this).attr("data-mask"));
                     });
                     
-                    function update(){
-                        document.getElementById("").value=
-                    }
+                  
                 </script>
             </ui:define>
 
