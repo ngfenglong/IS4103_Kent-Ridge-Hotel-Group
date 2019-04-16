@@ -4,10 +4,26 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title><ui:insert name="title">Title</ui:insert></title>
+
+        <!-- ChartJS -->
+        <script src="./AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/chart.js/Chart.js"></script>
+        <!-- Ionicons -->
+        <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/Ionicons/css/ionicons.min.css"/>
+        <!-- Bootstrap 3.3.7 -->
+        <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/bootstrap/dist/css/bootstrap.min.css"></link>
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/font-awesome/css/font-awesome.min.css"></link>
+        <!-- Ionicons -->
+        <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/Ionicons/css/ionicons.min.css"></link>
+        <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/select2/dist/css/select2.min.css"/>
+        <!-- Morris chart -->
+        <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/morris.js/morris.css"></link>
+
 
         <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -21,15 +37,22 @@
         <link rel="stylesheet" href="#{request.contextPath}/plugins/datatables/dataTables.bootstrap4.css" />
         <!-- Theme style (comes with Bootstrap) -->
         <link rel="stylesheet" href="#{request.contextPath}/dist/css/adminlte.min.css" />
+        <link rel="stylesheet" href="#{request.contextPath}/dist/css/adminlte.css" />
+        <link rel="stylesheet" href="./AdminLTE-2.4.10/AdminLTE-2.4.10/dist/css/AdminLTE.min.css" />
+        <link rel="stylesheet" href="./dist/css/main.css" />
+        <link rel="stylesheet" href="#{request.contextPath}/resources/notifications/dist/Notifications.unmin.css" />
+
+
         <!-- Google Font: Source Sans Pro -->
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet" />
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous"></link>
+        <link rel="stylesheet" href="#{request.contextPath}/styles/modal.css"/>
         <!-- Bootstrap 4.0 -->
         <!--<link rel="stylesheet" href="#{request.contextPath}/plugins/bootstrap/css/bootstrap.min.css" />-->
         <!--<link rel="stylesheet" href="#{request.contextPath}/dist/js/plugins/bootstrap/css/bootstrap.min.css" />-->
         <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />-->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
-        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"></link>
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/> -->
+        <!-- <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"></link> -->
         <style>
             input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
                 -webkit-appearance: none;
@@ -39,7 +62,21 @@
             input[type="number"] {
                 -moz-appearance: textfield;
             }
+
+            body{
+                font-size:1.1em;
+            }
+
+
+
+            .sidebar::-webkit-scrollbar { width: 0px; } .sidebar::-webkit-scrollbar-track { /* -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); */ background-color:transparent; } .sidebar::-webkit-scrollbar-thumb { background-color: transparent; } .sidebar:hover::-webkit-scrollbar-thumb{ background-color: #808080; }
+
+
+
+
         </style>
+
+
     </h:head>
     <h:body class="hold-transition sidebar-mini">
         <div class="wrapper">
@@ -103,7 +140,7 @@
                                     </p>
                                 </a>
                             </li>
-                            
+
                             <li class="nav-header">Food</li>
                             <li class="nav-item" >
                                 <a href="foodMenu.xhtml" class="nav-link" >
@@ -166,12 +203,10 @@
             </footer>
         </div>
 
+
         <!-- jQuery -->
         <script src="#{request.contextPath}/plugins/jquery/jquery.min.js"></script>
-        <!-- jQuery UI 1.11.4 -->
-        <script src="https://code.jquery.com/ui/1.12.1/jqueryui.min.js"></script>
-        <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-        <script>$.widget.bridge('uibutton', $.ui.button);</script>
+        <script src="#{request.contextPath}/js/modal.js"></script>
         <!-- Bootstrap 4 -->
         <script src="#{request.contextPath}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
         <!-- datepicker -->
@@ -181,10 +216,7 @@
         <script src="#{request.contextPath}/plugins/iCheck/icheck.min.js"></script>
         <!-- AdminLTE App -->
         <script src="#{request.contextPath}/dist/js/adminlte.js"></script>
-        <!-- jQuery -->
-        <script src="#{request.contextPath}/plugins/jquery/jquery.min.js"></script>
-        <!-- Bootstrap 4 -->
-        <script src="#{request.contextPath}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- <script src="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/dist/js/adminlte.min.js"></script> -->
         <!-- DataTables -->
         <script src="#{request.contextPath}/plugins/datatables/jquery.dataTables.js"></script>
         <script src="#{request.contextPath}/plugins/datatables/dataTables.bootstrap4.js"></script>
@@ -193,26 +225,207 @@
         <!-- FastClick -->
         <script src="#{request.contextPath}/plugins/fastclick/fastclick.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/select2/dist/js/select2.full.js"></script>
+        <!-- ChartJS -->
+        <script src="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/chart.js/Chart.js"></script>
+
+        <!-- Notifications -->
+        <script src="#{request.contextPath}/resources/notifications/dist/Notifications.js"></script>
+
+        <!-- jQuery UI 1.11.4 -->
+        <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+        <script src="#{request.contextPath}/dist/js/demo.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+        <script src="#{request.contextPath}/plugins/fullcalendar/fullcalendar.min.js"></script>
+
+
         <script>
             $('.collapse').collapse();
         </script>
         <!-- page script -->
+        <script type="text/javascript">
+            var notifications = new Notifications("p.notification", {
+                closeSelfOnClick: true, animationOutSelf: 'slideout 1s', startTopPosition: 8,
+
+            });
+            notifications.init();
+        </script>
+
         <script>
+            //<![CDATA[
+            $('option').mousedown(function (e) {
+
+                console.log("test");
+                console.log(e);
+                e.preventDefault();
+                var originalScrollTop = $(this).parent().scrollTop();
+                console.log(originalScrollTop);
+                $(this).prop('selected', $(this).prop('selected') ? false : true);
+                var self = this;
+                console.log(self);
+                $(this).parent().focus();
+                setTimeout(function () {
+                    $(self).parent().scrollTop(originalScrollTop);
+                }, 0);
+
+                return false;
+            });
+            //]]>
+        </script>
+        <script>
+
+            $('.select2-multiple-input-lg').select2({
+                containerCssClass: ':all:',
+                closeOnSelect: 'false'
+            });
+
+
+
             $(function () {
                 $("#example1").DataTable();
+
                 $('#example2').DataTable({
                     "paging": true,
                     "lengthChange": false,
-                    "searching": false,
-                    "ordering": true,
+                    "searching": true,
+                    "columns": [
+                        {"orderData": [0, 1], "targets": 0},
+                        {"orderData": 0, "targets": 1},
+                        {"orderData": [2, 3, 4], "targets": 2}
+                    ],
+                    "info": true,
+                    "autoWidth": false
+                });
+
+                $('#rp1').DataTable({
+                    "paging": true,
+                    "lengthChange": false,
+                    "searching": true,
+                    "columns": [
+                        {"orderData": [0, 1], "targets": 0},
+                        {"orderData": 0, "targets": 1},
+                        {"orderData": [2, 3, 4], "targets": 2}
+                    ],
+                    "info": true,
+                    "autoWidth": false
+                });
+                $('#rp2').DataTable({
+                    "paging": true,
+                    "lengthChange": false,
+                    "searching": true,
+                    "columns": [
+                        {"orderData": [0, 1], "targets": 0},
+                        {"orderData": 0, "targets": 1},
+                        {"orderData": [2, 3, 4], "targets": 2}
+                    ],
+                    "info": true,
+                    "autoWidth": false
+                });
+                $('#rp3').DataTable({
+                    "paging": true,
+                    "lengthChange": false,
+                    "searching": true,
+                    "columns": [
+                        {"orderData": [0, 1], "targets": 0},
+                        {"orderData": 0, "targets": 1},
+                        {"orderData": [2, 3, 4], "targets": 2}
+                    ],
+                    "info": true,
+                    "autoWidth": false
+                });
+                $('#rp4').DataTable({
+                    "paging": true,
+                    "lengthChange": false,
+                    "searching": true,
+                    "columns": [
+                        {"orderData": [0, 1], "targets": 0},
+                        {"orderData": 0, "targets": 1},
+                        {"orderData": [2, 3, 4], "targets": 2}
+                    ],
+                    "info": true,
+                    "autoWidth": false
+                });
+                $('#rp5').DataTable({
+                    "paging": true,
+                    "lengthChange": false,
+                    "searching": true,
+                    "columns": [
+                        {"orderData": [0, 1], "targets": 0},
+                        {"orderData": 0, "targets": 1},
+                        {"orderData": [2, 3, 4], "targets": 2}
+                    ],
+                    "info": true,
+                    "autoWidth": false
+                });
+                $('#rp6').DataTable({
+                    "paging": true,
+                    "lengthChange": false,
+                    "searching": true,
+                    "columns": [
+                        {"orderData": [0, 1], "targets": 0},
+                        {"orderData": 0, "targets": 1},
+                        {"orderData": [2, 3, 4], "targets": 2}
+                    ],
+                    "info": true,
+                    "autoWidth": false
+                });
+                $('#rp7').DataTable({
+                    "paging": true,
+                    "lengthChange": false,
+                    "searching": true,
+                    "columns": [
+                        {"orderData": [0, 1], "targets": 0},
+                        {"orderData": 0, "targets": 1},
+                        {"orderData": [2, 3, 4], "targets": 2}
+                    ],
+                    "info": true,
+                    "autoWidth": false
+                });
+                $('#rp8').DataTable({
+                    "paging": true,
+                    "lengthChange": false,
+                    "searching": true,
+                    "columns": [
+                        {"orderData": [0, 1], "targets": 0},
+                        {"orderData": 0, "targets": 1},
+                        {"orderData": [2, 3, 4], "targets": 2}
+                    ],
+                    "info": true,
+                    "autoWidth": false
+                });
+                $('#rp9').DataTable({
+                    "paging": true,
+                    "lengthChange": false,
+                    "searching": true,
+                    "columns": [
+                        {"orderData": [0, 1], "targets": 0},
+                        {"orderData": 0, "targets": 1},
+                        {"orderData": [2, 3, 4], "targets": 2}
+                    ],
+                    "info": true,
+                    "autoWidth": false
+                });
+
+                $('#rp10').DataTable({
+                    "paging": true,
+                    "lengthChange": false,
+                    "searching": true,
+                    "columns": [
+                        {"orderData": [0, 1], "targets": 0},
+                        {"orderData": 0, "targets": 1},
+                        {"orderData": [2, 3, 4], "targets": 2}
+                    ],
                     "info": true,
                     "autoWidth": false
                 });
             });
+            function update(o) {
 
-            $('.sidebar-toggle-btn').pushMenu(options)
+           
+                document.getElementById("formy:housekeeper").value = o;
+            }
+            // $('.sidebar-toggle-btn').pushMenu(options)
         </script> 
-        <ui:insert name="script">Script</ui:insert>
+
     </h:body>
 </html>
