@@ -16,7 +16,7 @@ import javax.faces.convert.FacesConverter;
  *
  * @author Congx2
  */
-@FacesConverter(value = "converter.StaffConverter")
+@FacesConverter(value = "StaffConverter")
 public class StaffConverter implements Converter {
 
     @Override
@@ -24,6 +24,7 @@ public class StaffConverter implements Converter {
         if (value == null || value.trim().isEmpty() || value.equals("null")) {
             return null;
         }
+        System.err.println(value);
         List<Staff> staffs = (List<Staff>) context.getExternalContext().getSessionMap().get("converter.StaffConverterv.staffs");
         for (Staff staff : staffs) {
             if (staff.getStaffID().toString().equals(value)) {

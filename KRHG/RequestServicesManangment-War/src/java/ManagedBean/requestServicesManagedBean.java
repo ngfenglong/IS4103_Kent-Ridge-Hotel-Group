@@ -8,6 +8,7 @@ package ManagedBean;
 import entity.Hotel;
 import entity.HouseKeepingOrder;
 import entity.MinibarItem;
+import entity.MinibarStock;
 import entity.Staff;
 import error.NoResultException;
 import java.io.Serializable;
@@ -19,6 +20,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 import sessionBeans.HotelSessionLocal;
 import sessionBeans.HouseKeepingOrderSessionLocal;
@@ -57,7 +59,7 @@ public class requestServicesManagedBean implements Serializable {
     private Staff assignedHouseKeeper;
 
     //inventory 
-    private List<MinibarItem> getMiniBarItems;
+    private List<MinibarStock> getMiniBarItems;
 
     public requestServicesManagedBean() {
 
@@ -78,11 +80,11 @@ public class requestServicesManagedBean implements Serializable {
 
     public List<HouseKeepingOrder> getIncompleteHousekeepingOrders() throws NoResultException {
         List<HouseKeepingOrder> newList = new ArrayList<>();
-        System.out.println("hi");
+
         for (HouseKeepingOrder ho : housekeepingsessionlocal.getAllHouseKeepingOrder()) {
             if (ho.getStatus().equalsIgnoreCase("incomplete")) {
                 newList.add(ho);
-                System.out.println(ho.getRoom().getRoomNumber());
+
             }
         }
         return newList;
@@ -101,7 +103,9 @@ public class requestServicesManagedBean implements Serializable {
     }
 
     public List<Staff> getGetHousekeepingStaff() {
-        return getHousekeepingStaff = getStaffBasedOnDepartmentAndHotelCode("Housekeeping");
+        getHousekeepingStaff = getStaffBasedOnDepartmentAndHotelCode("Housekeeping");
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("converter.StaffConverterv.staffs", getHousekeepingStaff);
+        return getHousekeepingStaff;
     }
 
     public void setGetHousekeepingStaff(List<Staff> getHousekeepingStaff) {
@@ -121,17 +125,21 @@ public class requestServicesManagedBean implements Serializable {
 
     public void valueChangeMethod(ValueChangeEvent e) {
         System.out.println(e.getNewValue());
-        
+
         System.out.println("hello");
     }
 
-    public void update(HouseKeepingOrder ho) throws NoResultException {
-        if (ho != null) {
-
-            //Staff staff = staffsession.getStaffByID(assignedHouseKeeper);
-            ho.setHouseKeeper(assignedHouseKeeper);
+    public void update(HouseKeepingOrder housekeeping) throws NoResultException {
+        System.err.println("house: " + housekeeping);
+        System.out.println("weifughweuiguwebguwbegwe");
+        if (assignedHouseKeeper != null) {
+            System.err.println("in");
             System.out.println(assignedHouseKeeper.getName());
-            housekeepingsessionlocal.updateHouseKeepingOrder(ho);
+            //Staff staff = staffsession.getStaffByID(assignedHouseKeeper);
+
+            housekeeping.setHouseKeeper(assignedHouseKeeper);
+
+            housekeepingsessionlocal.updateHouseKeepingOrder(housekeeping);
         }
     }
 
@@ -159,12 +167,23 @@ public class requestServicesManagedBean implements Serializable {
         }
     }
 
-    public List<MinibarItem> getGetMiniBarItems() {
-        return getMiniBarItems = roomsessionlocal.getAllMinibarItem();
+    public List<MinibarStock> getGetMiniBarItems() {
+        return getMiniBarItems = getMinibarByHotelCode();
     }
 
-    public void setGetMiniBarItems(List<MinibarItem> getMiniBarItems) {
+    public void setGetMiniBarItems(List<MinibarStock> getMiniBarItems) {
         this.getMiniBarItems = getMiniBarItems;
+    }
+
+    public List<MinibarStock> getMinibarByHotelCode() {
+        List<MinibarStock> newlist = new ArrayList<>();
+        for (MinibarStock ms : housekeepingsessionlocal.getAllMinibarStock()) {
+            if (ms.getHotelCodeName().equals(hotelCode)) {
+                newlist.add(ms);
+                
+            }
+        }
+        return newlist;
     }
 
     public double calculation(int number) {
@@ -172,5 +191,13 @@ public class requestServicesManagedBean implements Serializable {
         double result = (change / 1000) * 10;
 
         return result;
+    }
+    
+    public double defineTheNumber(int alert , int stock){
+        Double alertChange = new Double(alert);
+        Double stockChange = new Double(stock);
+        double stockDiff =stockChange - alertChange;
+        
+        return (stockDiff/stockChange * 100);
     }
 }
