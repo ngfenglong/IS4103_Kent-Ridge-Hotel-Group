@@ -9,20 +9,22 @@
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title><ui:insert name="title">Title</ui:insert></title>
-        
+
         <!-- ChartJS -->
         <script src="./AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/chart.js/Chart.js"></script>
- <!-- Ionicons -->
- <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/Ionicons/css/ionicons.min.css"/>
-          <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/bootstrap/dist/css/bootstrap.min.css"></link>
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/font-awesome/css/font-awesome.min.css"></link>
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/Ionicons/css/ionicons.min.css"></link>
-  <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/select2/dist/css/select2.min.css"/>
-    <!-- Morris chart -->
-    <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/morris.js/morris.css"></link>
+        <!-- Ionicons -->
+        <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/Ionicons/css/ionicons.min.css"/>
+        <!-- Bootstrap 3.3.7 -->
+        <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/bootstrap/dist/css/bootstrap.min.css"></link>
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/font-awesome/css/font-awesome.min.css"></link>
+        <!-- Ionicons -->
+        <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/Ionicons/css/ionicons.min.css"></link>
+        <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/select2/dist/css/select2.min.css"/>
+        <!-- Morris chart -->
+        <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/morris.js/morris.css"></link>
+        <!-- iCheck for checkboxes and radio inputs -->
+        <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/plugins/iCheck/all.css"></link>
 
 
         <!-- Tell the browser to be responsive to screen width -->
@@ -39,7 +41,7 @@
         <link rel="stylesheet" href="#{request.contextPath}/dist/css/adminlte.min.css" />
         <link rel="stylesheet" href="#{request.contextPath}/dist/css/adminlte.css" />
         <link rel="stylesheet" href="./AdminLTE-2.4.10/AdminLTE-2.4.10/dist/css/AdminLTE.min.css" />
-        <link rel="stylesheet" href="./dist/css/main.css" />
+        <link rel="stylesheet" href="./styles/main.css" />
         <link rel="stylesheet" href="#{request.contextPath}/resources/notifications/dist/Notifications.unmin.css" />
 
 
@@ -76,10 +78,38 @@
 
         </style>
 
+        <script>
+            function selectFood(foID) {
+                console.log(foID);
+            }
+        </script>
+
+        <script type="text/javascript">
+             //<![CDATA[
+            function getFOList(id) {
+                console.log("hi");
+                var orders = document.getElementsByClassName("item");
+                for(i=0;i<orders.length;i++){
+                    orders[i].style.backgroundColor = '';
+                }
+                    console.log(id);
+                    console.log(document.getElementById('myForm:selectfID'));
+                    document.getElementById('myForm:selectfID').value = id;
+                    document.getElementById(id).style.backgroundColor="aliceblue"
+                  
+//                        console.log(orders[i].id);
+                        console.log(document.getElementById(id).style.backgroundColor);
+
+                }
+       
+ //]]>
+
+        </script>
+
 
     </h:head>
     <h:body class="hold-transition sidebar-mini">
-         <div class="wrapper">
+        <div class="wrapper">
             <!-- Navbar -->
             <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
                 <!-- Left navbar links -->
@@ -140,13 +170,13 @@
                                     </p>
                                 </a>
                             </li>
-                            
+
                             <li class="nav-header">Food</li>
                             <li class="nav-item" >
                                 <a href="foodMenu.xhtml" class="nav-link" >
                                     <i class="fa fa-credit-card"></i>
                                     <p>
-                                        Food Menu
+                                         Food Menu
                                     </p>
                                 </a>
                             </li>
@@ -155,7 +185,16 @@
                                 <a href="foodOrder.xhtml" class="nav-link" >
                                     <i class="fas fa-swimming-pool"></i>
                                     <p>
-                                        Food Orders
+                                         Food Orders
+                                    </p>
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" >
+                                <a href="foodDelivery.xhtml" class="nav-link" >
+                                    <i class="fas fa-swimming-pool"></i>
+                                    <p>
+                                        Food Delivery
                                     </p>
                                 </a>
                             </li>
@@ -228,9 +267,11 @@
         <script src="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/select2/dist/js/select2.full.js"></script>
         <!-- ChartJS -->
         <script src="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/chart.js/Chart.js"></script>
-
+        <!-- iCheck 1.0.1 -->
+        <script src="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/plugins/iCheck/icheck.min.js"></script>
         <!-- Notifications -->
         <script src="#{request.contextPath}/resources/notifications/dist/Notifications.js"></script>
+        <script src="#{request.contextPath}/js/numberpicker.js"></script>
 
         <!-- jQuery UI 1.11.4 -->
         <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
@@ -240,19 +281,116 @@
 
 
         <script>
-            $('.collapse').collapse();
+                    $('.collapse').collapse();
         </script>
         <!-- page script -->
         <script type="text/javascript">
             var notifications = new Notifications("p.notification", {
                 closeSelfOnClick: true, animationOutSelf: 'slideout 1s', startTopPosition: 8,
-
             });
             notifications.init();
         </script>
 
         <script>
             //<![CDATA[
+
+//            function popMenu(e) {
+//                console.log(e);
+//                document.querySelector(e).onclick = function (e) {
+//                    e.preventDefault();
+//                    console.log(e);
+//                    document.querySelector('.circle').classList.toggle('open');
+//                }
+//
+//
+
+
+            //}
+            //]]>
+
+$(function(){
+	$('#scroll').slimScroll({
+		height: 'calc(100vh - 100px);'
+	});
+});
+
+            function test(data) {
+                var status = data.status; // Can be "begin", "complete" or "success".
+                var source = data.source; // The parent HTML DOM element.
+
+                switch (status) {
+                    case "begin": // Before the ajax request is sent.
+                        console.log("abc")
+                        break;
+
+                    case "complete": // After the ajax response is arrived.
+                        console.log("def")
+                        break;
+
+                    case "success": // After update of HTML DOM based on ajax response.
+                        // ...
+                        console.log("ghi")
+                        break;
+                }
+            }
+            
+              window.onload = function() {
+
+    document.getElementById("clothingForm").style.display = "none";
+     document.getElementById("deliveryDetails").style.display = "none"
+
+ document.getElementById("laundryDetails").style.display = "none";
+  };
+
+  function showform(a) {
+  
+    if (a == 0) {
+         console.log(a);
+         document.getElementById("laundryDetails").style.display = "none";
+          document.getElementById("deliveryDetails").style.display = "none"
+      document.getElementById("clothingForm").style.display = "block";
+    } else if (a==1) {
+        console.log(a);
+      document.getElementById("clothingForm").style.display = "none";
+      document.getElementById("deliveryDetails").style.display = "none"
+      document.getElementById("laundryDetails").style.display = "block";
+    } else if (a==2){
+         console.log(a);
+       document.getElementById("deliveryDetails").style.display = "block"
+       document.getElementById("clothingForm").style.display = "none";
+        document.getElementById("laundryDetails").style.display = "none";
+    }
+      
+  }
+        </script>
+
+        <script>
+
+
+            //<![CDATA[
+            var coll = document.getElementsByClassName("collapsible");
+            var i;
+
+            for (i = 0; i < coll.length; i++) {
+                coll[i].addEventListener("click", function () {
+                    console.log("collapsible clicked")
+                    this.classList.toggle("active");
+                    var content = this.nextElementSibling;
+                    if (content.style.maxHeight) {
+                        content.style.maxHeight = null;
+                        this.id = "plus";
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + "px";
+
+                        console.log("hiya");
+                        this.id = "minus";
+                        console.log(this);
+                    }
+                });
+            }
+
+
+
             $('option').mousedown(function (e) {
 
                 console.log("test");
@@ -273,16 +411,24 @@
             //]]>
         </script>
         <script>
-            
-             $('.select2-multiple-input-lg').select2({
-                            containerCssClass: ':all:',
-                            closeOnSelect: 'false'
-                        });
+
+            $('.select2-multiple-input-lg').select2({
+                containerCssClass: ':all:',
+                closeOnSelect: 'false'
+            });
 
 
+
+            //Flat red color scheme for iCheck
+            $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+                checkboxClass: 'icheckbox_flat-green',
+                radioClass: 'iradio_flat-green'
+            })
 
             $(function () {
                 $("#example1").DataTable();
+                $("#example3").DataTable();
+                $("#example4").DataTable();
 
                 $('#example2').DataTable({
                     "paging": true,
@@ -297,131 +443,13 @@
                     "autoWidth": false
                 });
 
-                $('#rp1').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": true,
-                    "columns": [
-                        {"orderData": [0, 1], "targets": 0},
-                        {"orderData": 0, "targets": 1},
-                        {"orderData": [2, 3, 4], "targets": 2}
-                    ],
-                    "info": true,
-                    "autoWidth": false
-                });
-                $('#rp2').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": true,
-                    "columns": [
-                        {"orderData": [0, 1], "targets": 0},
-                        {"orderData": 0, "targets": 1},
-                        {"orderData": [2, 3, 4], "targets": 2}
-                    ],
-                    "info": true,
-                    "autoWidth": false
-                });
-                $('#rp3').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": true,
-                    "columns": [
-                        {"orderData": [0, 1], "targets": 0},
-                        {"orderData": 0, "targets": 1},
-                        {"orderData": [2, 3, 4], "targets": 2}
-                    ],
-                    "info": true,
-                    "autoWidth": false
-                });
-                $('#rp4').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": true,
-                    "columns": [
-                        {"orderData": [0, 1], "targets": 0},
-                        {"orderData": 0, "targets": 1},
-                        {"orderData": [2, 3, 4], "targets": 2}
-                    ],
-                    "info": true,
-                    "autoWidth": false
-                });
-                $('#rp5').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": true,
-                    "columns": [
-                        {"orderData": [0, 1], "targets": 0},
-                        {"orderData": 0, "targets": 1},
-                        {"orderData": [2, 3, 4], "targets": 2}
-                    ],
-                    "info": true,
-                    "autoWidth": false
-                });
-                $('#rp6').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": true,
-                    "columns": [
-                        {"orderData": [0, 1], "targets": 0},
-                        {"orderData": 0, "targets": 1},
-                        {"orderData": [2, 3, 4], "targets": 2}
-                    ],
-                    "info": true,
-                    "autoWidth": false
-                });
-                $('#rp7').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": true,
-                    "columns": [
-                        {"orderData": [0, 1], "targets": 0},
-                        {"orderData": 0, "targets": 1},
-                        {"orderData": [2, 3, 4], "targets": 2}
-                    ],
-                    "info": true,
-                    "autoWidth": false
-                });
-                $('#rp8').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": true,
-                    "columns": [
-                        {"orderData": [0, 1], "targets": 0},
-                        {"orderData": 0, "targets": 1},
-                        {"orderData": [2, 3, 4], "targets": 2}
-                    ],
-                    "info": true,
-                    "autoWidth": false
-                });
-                $('#rp9').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": true,
-                    "columns": [
-                        {"orderData": [0, 1], "targets": 0},
-                        {"orderData": 0, "targets": 1},
-                        {"orderData": [2, 3, 4], "targets": 2}
-                    ],
-                    "info": true,
-                    "autoWidth": false
-                });
-
-                $('#rp10').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": true,
-                    "columns": [
-                        {"orderData": [0, 1], "targets": 0},
-                        {"orderData": 0, "targets": 1},
-                        {"orderData": [2, 3, 4], "targets": 2}
-                    ],
-                    "info": true,
-                    "autoWidth": false
-                });
             });
 
-            // $('.sidebar-toggle-btn').pushMenu(options)
         </script> 
-
+        <script>
+            $('.item').click(function () {
+                getFOList(this.id);
+            });
+        </script>
     </h:body>
 </html>

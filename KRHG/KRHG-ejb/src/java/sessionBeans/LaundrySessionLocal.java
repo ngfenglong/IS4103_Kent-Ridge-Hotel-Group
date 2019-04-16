@@ -59,5 +59,7 @@ public interface LaundrySessionLocal {
     public LaundryOrderedItem getLastLaundryOrderedItem() throws NoResultException;
     
     public LaundryType getLaundryTypeByName(String laundryName) throws NoResultException;    
+
+    public List<LaundryOrderedItem> getAllLaundryOrderedItemByLaundryOrderID(Long loID) throws NoResultException;
     
 }

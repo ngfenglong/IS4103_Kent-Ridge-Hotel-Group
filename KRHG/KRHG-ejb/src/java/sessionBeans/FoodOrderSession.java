@@ -7,6 +7,7 @@ package sessionBeans;
 
 import entity.FoodOrder;
 import error.NoResultException;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -41,6 +42,7 @@ public class FoodOrderSession implements FoodOrderSessionLocal {
         if (oldFoodOrder != null) {
             oldFoodOrder.setFoodOrdered(foodOrder.getFoodOrdered());
             oldFoodOrder.setTotalPrice(foodOrder.getTotalPrice());
+            oldFoodOrder.setStatus(foodOrder.getStatus());
             oldFoodOrder.setSpecialRequest(foodOrder.getSpecialRequest());
         } else {
             throw new NoResultException("Food Menu Item not found");
@@ -62,3 +64,4 @@ public class FoodOrderSession implements FoodOrderSessionLocal {
         em.persist(foodOrder);
     }
 }
+ 
