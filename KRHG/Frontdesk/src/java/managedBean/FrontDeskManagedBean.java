@@ -8,6 +8,7 @@ package managedBean;
 import entity.CreditCard;
 import entity.Customer;
 import entity.FunctionRoom;
+import entity.Hotel;
 import entity.PaymentTransaction;
 import entity.Room;
 import entity.RoomBooking;
@@ -37,6 +38,7 @@ import sessionBeans.BookingSessionLocal;
 import sessionBeans.CustomerSessionLocal;
 import sessionBeans.FunctionRoomBookingSessionLocal;
 import sessionBeans.FunctionRoomSessionLocal;
+import sessionBeans.HotelSessionLocal;
 import sessionBeans.PaymentTransactionSessionLocal;
 import sessionBeans.RoomPricingSessionLocal;
 import sessionBeans.RoomSessionLocal;
@@ -66,6 +68,9 @@ public class FrontDeskManagedBean implements Serializable {
     private FunctionRoomSessionLocal functionroomSessionlocal;
     @EJB
     private RoomPricingSessionLocal roomPricingSessionLocal;
+    @EJB
+    private HotelSessionLocal hotelSessionLocal;
+
     private String mode;
 
     //customer check in
@@ -78,9 +83,9 @@ public class FrontDeskManagedBean implements Serializable {
     private List<RoomBooking> Searchbookings;
     private PaymentTransaction roombooking;
     private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-    private Date checkinDate = new Date();
+    private Date checkinDate;
     private Date checkoutDate;
-    private String checkinDateString = sdf.format(checkinDate);
+    private String checkinDateString;
     private String checkoutDateString;
 
     //customer check out
@@ -133,6 +138,12 @@ public class FrontDeskManagedBean implements Serializable {
 
     //hotel code
     private String hotelCode = "KRG";
+
+    private int numOfStandardRooms;
+    private int numOfDeluxeRooms;
+    private int numOfPremiumRooms;
+    private int numOfSuiteRooms;
+    private int numOfPentHouseRooms;
 
     //reservation 
     private List<FunctionRoom> allFunctionrooms;
@@ -250,11 +261,112 @@ public class FrontDeskManagedBean implements Serializable {
         this.allFunctionrooms = allFunctionrooms;
     }
 
-    public String checkAvailability() {
-        //SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        //checkinDate = new Date();
-        //System.out.println(checkoutDateString);
+    public String checkAvailability() throws java.text.ParseException, NoResultException {
+        Date currentdate = java.util.Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        checkinDate = new SimpleDateFormat("yyyy-MM-dd").parse(dateFormat.format(currentdate));
+        checkoutDate = new SimpleDateFormat("yyyy-MM-dd").parse(checkoutDateString);
+        numOfStandardRooms = 0;
+        numOfDeluxeRooms = 0;
+        numOfPremiumRooms = 0;
+        numOfSuiteRooms = 0;
+        numOfPentHouseRooms = 0;
+
+        int numberOfRoomTypes = 0;
+        for (RoomPricing rp : roomPricingSessionLocal.getAllRoomPricings()) {
+            if (rp.hotelCode().equals(hotelCode)) {
+                numberOfRoomTypes++;
+            }
+        }
+
+        if (numberOfRoomTypes >= 3) {
+            numOfStandardRooms = checkNumberOfRoomAvail("Standard", checkinDate, checkoutDate, hotelCode);
+            numOfDeluxeRooms = checkNumberOfRoomAvail("Deluxe", checkinDate, checkoutDate, hotelCode);
+            numOfPremiumRooms = checkNumberOfRoomAvail("Premium", checkinDate, checkoutDate, hotelCode);
+        }
+        if (numberOfRoomTypes >= 4) {
+            numOfSuiteRooms = checkNumberOfRoomAvail("Suite", checkinDate, checkoutDate, hotelCode);
+        }
+        if (numberOfRoomTypes == 5) {
+            numOfPentHouseRooms = checkNumberOfRoomAvail("Penthouse", checkinDate, checkoutDate, hotelCode);
+        }
+
         return "walkinState.xhtml?faces-redirect=true";
+    }
+
+    public int getNightStay() {
+        long diff = checkoutDate.getTime() - checkinDate.getTime();
+        int daysDiff = (int) (diff / (1000 * 60 * 60 * 24)) - 1;
+
+        return daysDiff;
+    }
+
+    public String getTodayDate() {
+        Date currentdate = java.util.Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        return (dateFormat.format(currentdate));
+    }
+
+    public String getTomorrowDate() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(java.util.Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()));
+        cal.add(Calendar.DATE, 1);
+        Date modifiedDate = cal.getTime();
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        return (dateFormat.format(modifiedDate));
+    }
+
+    public int checkNumberOfRoomAvail(String roomType, Date checkIn, Date checkOut, String hotelName) throws NoResultException {
+        Hotel tempHotel = hotelSessionLocal.getHotelByCode(hotelCode);
+        List<Room> allRooms = roomSessionLocal.getRoomByHotelNameAndRoomType(roomType, hotelCode);
+        int totalRoomSizeForType = allRooms.size();
+
+        if (checkOut.compareTo(checkIn) > 0) {
+
+            List<RoomBooking> allBooking = bookSessionLocal.getAllRoomBookingByHotel(hotelCode);
+            List<RoomBooking> checkList = new ArrayList<RoomBooking>();
+            List<Room> returnList = new ArrayList<Room>();
+
+            //Convert String to Date
+            //Get roombooking by type & Status
+            if (allBooking != null) {
+                for (RoomBooking rb : allBooking) {
+                    if (rb.getRoomType().equals(roomType) && !rb.getStatus().equals("checkedout")) {
+                        RoomBooking tempRoomBooking = rb;
+                        checkList.add(tempRoomBooking);
+                    }
+                }
+
+                allBooking = checkList;
+                checkList.clear();
+                for (RoomBooking rb : allBooking) {
+                    // Didn't Hit the Booking Date
+                    if ((checkIn.before(rb.getBookInDate()) && checkOut.before(rb.getBookInDate())) || (checkIn.after(rb.getBookInDate()) && checkOut.after(rb.getBookInDate()))) {
+
+                    } // Hit the booking date AKA Not Available
+                    else {
+                        RoomBooking tempRoomBooking = rb;
+                        checkList.add(tempRoomBooking);
+                    }
+                }
+
+                if (checkList.size() < roomSessionLocal.getRoomByHotelNameAndRoomType(roomType, hotelCode).size()) {
+                    List<Room> filterList = roomSessionLocal.getRoomByHotelNameAndRoomType(roomType, tempHotel.getHotelCodeName());
+                    for (Room r : filterList) {
+                        if (!r.getStatus().toLowerCase().equals("occupied") && !r.getStatus().toLowerCase().equals("unavailable")) {
+                            Room tempRoom = r;
+                            returnList.add(r);
+                        }
+                    }
+                    return returnList.size();
+                }
+            }
+        }
+        return 0;
     }
 
     public String searchCustomerForCheckin() {
@@ -264,6 +376,27 @@ public class FrontDeskManagedBean implements Serializable {
             return "checkinResult.xhtml?faces-redirect=true";
         } catch (NoResultException e) {
             return "checkinResult.xhtml?faces-redirect=true";
+        }
+    }
+
+    public List<String> getRoomTypesListStr() throws NoResultException {
+        Hotel tempHotel = hotelSessionLocal.getHotelByCode(hotelCode);
+        List<String> returnList = hotelSessionLocal.getRoomTypes(tempHotel.getHotelID());
+
+        return returnList;
+    }
+
+    public int getNumberOfAvailByRoomType(String roomType) {
+        if (roomType.equals("Standard")) {
+            return numOfStandardRooms;
+        } else if (roomType.equals("Deluxe")) {
+            return numOfDeluxeRooms;
+        } else if (roomType.equals("Premium")) {
+            return numOfPremiumRooms;
+        } else if (roomType.equals("Suite")) {
+            return numOfSuiteRooms;
+        } else {
+            return numOfPentHouseRooms;
         }
     }
 
@@ -277,6 +410,11 @@ public class FrontDeskManagedBean implements Serializable {
         roombooking = PT;
         mode = "online";
         return "checkinResult.xhtml?faces-redirect=true";
+    }
+
+    public String checkRooms() {
+
+        return "walkinRooms.xhtml?faces-redirect=true";
     }
 
     public String walkinSelectRoom(Room rm) {
@@ -918,6 +1056,62 @@ public class FrontDeskManagedBean implements Serializable {
 
     public void setSelectedCheckInTransaction(PaymentTransaction selectedCheckInTransaction) {
         this.selectedCheckInTransaction = selectedCheckInTransaction;
+    }
+
+    public RoomPricingSessionLocal getRoomPricingSessionLocal() {
+        return roomPricingSessionLocal;
+    }
+
+    public void setRoomPricingSessionLocal(RoomPricingSessionLocal roomPricingSessionLocal) {
+        this.roomPricingSessionLocal = roomPricingSessionLocal;
+    }
+
+    public SimpleDateFormat getSdf() {
+        return sdf;
+    }
+
+    public void setSdf(SimpleDateFormat sdf) {
+        this.sdf = sdf;
+    }
+
+    public int getNumOfStandardRooms() {
+        return numOfStandardRooms;
+    }
+
+    public void setNumOfStandardRooms(int numOfStandardRooms) {
+        this.numOfStandardRooms = numOfStandardRooms;
+    }
+
+    public int getNumOfDeluxeRooms() {
+        return numOfDeluxeRooms;
+    }
+
+    public void setNumOfDeluxeRooms(int numOfDeluxeRooms) {
+        this.numOfDeluxeRooms = numOfDeluxeRooms;
+    }
+
+    public int getNumOfPremiumRooms() {
+        return numOfPremiumRooms;
+    }
+
+    public void setNumOfPremiumRooms(int numOfPremiumRooms) {
+        this.numOfPremiumRooms = numOfPremiumRooms;
+    }
+
+    public int getNumOfSuiteRooms() {
+        return numOfSuiteRooms;
+    }
+
+    public void setNumOfSuiteRooms(int numOfSuiteRooms) {
+        this.numOfSuiteRooms = numOfSuiteRooms;
+    }
+
+    public int getNumOfPentHouseRooms() {
+        return numOfPentHouseRooms;
+    }
+
+    public void setNumOfPentHouseRooms(int numOfPentHouseRooms) {
+        this.numOfPentHouseRooms = numOfPentHouseRooms;
     }
 
 }

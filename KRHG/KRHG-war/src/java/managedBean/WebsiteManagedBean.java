@@ -151,7 +151,7 @@ public class WebsiteManagedBean implements Serializable {
 
         if (tempCheckOut.compareTo(tempCheckIn) > 0) {
 
-            List<RoomBooking> allBooking = bookingSessionLocal.getAllRoomBookingByStatus("checkedout", selectedHotel.getHotelCodeName());
+            List<RoomBooking> allBooking = bookingSessionLocal.getAllRoomBookingByHotel(selectedHotel.getHotelCodeName());
             List<RoomBooking> checkList = new ArrayList<RoomBooking>();
             List<Room> returnList = new ArrayList<Room>();
             hasRoom = false;
@@ -160,7 +160,7 @@ public class WebsiteManagedBean implements Serializable {
             //Get roombooking by type & Status
             if (allBooking != null) {
                 for (RoomBooking rb : allBooking) {
-                    if (rb.getRoomType().equals(roomTypeTB) && rb.getStatus().equals("checkedout")) {
+                    if (rb.getRoomType().equals(roomTypeTB) && !rb.getStatus().equals("checkedout")) {
                         RoomBooking tempRoomBooking = rb;
                         checkList.add(tempRoomBooking);
                     }

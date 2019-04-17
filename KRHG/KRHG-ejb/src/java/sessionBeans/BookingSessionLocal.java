@@ -20,6 +20,7 @@ public interface BookingSessionLocal {
     public List<RoomBooking> getAllRoomBooking() throws NoResultException;
     public List<RoomBooking> getAllRoomBookingByDate(Date todayDate) throws NoResultException;
     public List<RoomBooking> getAllRoomBookingByStatus(String status, String hotelCodeName) throws NoResultException;
+    public List<RoomBooking> getAllRoomBookingByHotel(String hotelCodeName) throws NoResultException;
     public List<RoomBooking> getAllRoomBookingByCheckoutDate(Date checkoutDate, String hotelCodeName) throws NoResultException;
     public List<RoomBooking> getRoomBookingByPassportNumCheckInToday(String passportNum, Date todayDate, String hotelCodeName) throws NoResultException;
     public RoomBooking getRoomBookingByID(Long roomBookingID) throws NoResultException;
