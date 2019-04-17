@@ -21,6 +21,7 @@ public interface HotelSessionLocal {
     public List<Hotel> getAllHotels();
     public Hotel getHotelByID(Long hID) throws NoResultException;
     public Hotel getHotelByName(String hotelName) throws NoResultException;
+    public Hotel getHotelByCode(String hotelName) throws NoResultException;
     public void deleteHotel(Long hID) throws NoResultException;
     public void createHotel(Hotel h);
     public void updateHotel(Hotel h) throws NoResultException;

@@ -1,17 +1,18 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <body>
 
         <ui:composition template="template.xhtml">
 
-
             <ui:define name="title">
-                KRHG Admin Console System
+                KRHG Request Services Management System
             </ui:define>
 
             <ui:define name="content">
@@ -20,15 +21,13 @@
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-
-
+                                <h1 style="font-size: x-large; margin-bottom:20px">Manage Food Menu</h1>
                             </div>
                             <!-- /.col -->
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item active">
-                                        <!--Add Btn-->
-                                    </li>
+                                    <li><a href="#"> Home</a></li>
+                                    <li class="active">Food Menu</li>
                                 </ol>
                             </div>
                             <!-- /.col -->
@@ -38,27 +37,691 @@
                     <!-- /.container-fluid -->
                 </div> 
                 <section class="content">
+                   
                     <div class="container-fluid">
-
-
                     
-                        <!-- /.row -->
-                    </div>
-                    <!-- /.container-fluid -->
+                        <div class="box box-primary" style="padding:20px">
+                            <div class="box-header" style="text-align:center; padding:10px">
+                                <h1>Room Service Menu</h1>
+                            </div>
+                            <div>
+                            <button class="collapsible" id="" >All-Day Breakfast</button>
+                            <div class="row menucontent">
+
+                                <h:form enctype="multipart/form-data" id="form1" style="width:100%">
+                                    <c:forEach items="#{requestServicesManagedBean.allDayBreakfastMenu}" var="i">
+
+                                        <div class="col-lg-2" style="height:350px; border:1px solid darkgrey;  margin:20px">                
+
+                                            <div class="row" style="height:100% ">
+                                                <div class="col-lg-12" style="text-align:right; font-size: calc((100% + 0.25vw))"> 
+                                                    <h:commandLink style="margin:10px 2px 0px 10px;" actionListener="#{requestServicesManagedBean.setUnavailable(i.foodMenuItemID)}" class="fas fa-minus" >
+                                                        <f:ajax execute="@form" render="form1 form8"></f:ajax>
+                                                    </h:commandLink>
+                                                    
+                                                </div>
+
+                                                <div class="col-lg-12" style="padding:5px; text-align: center" >
+                                                    <h:commandLink >
+                                                        <img height="150px" width="150px" src="http://zetegral.website/krhgImages/#{i.foodImage}"/>
+                                                        <f:ajax execute="@form" render="@none" />
+                                                    </h:commandLink>
+
+                                                </div>
+                                                <div class="col-lg-12" style="padding-bottom:10px; text-align: center ">
+                                                    <span style="font-weight: bold;font-size: calc((100% + 0.25vw));height:22px">#{i.foodMenuItemName}</span>
+                                                </div>
+                                                <div class="col-lg-12" style=" text-align: center">
+                                                    <span style="font-size: calc((100% + 0.25vw));">#{i.unitPrice}</span>
+                                                </div>
+
+                                                <div class="col-lg-12">
+                                                    <span>#{i.foodMenuItemDescription}</span>
+                                                </div>
+
+
+                                                <div class="col-lg-12" style="text-align:right; font-size: calc((100% + 0.25vw)) " >
+                                                    <h:commandLink style="margin:10px 2px 0px 10px" actionListener="#{requestServicesManagedBean.selectFoodMenuItem2(i.foodMenuItemID)}" class="fas fa-edit" >
+                                                        <f:ajax execute="@form" render=":formmodal2"></f:ajax>
+                                                    </h:commandLink>
+                                                    <h:commandLink style="margin:10px 2px 0px 10px" actionListener="#{requestServicesManagedBean.selectFoodMenuItem(i.foodMenuItemID)}" class="fas fa-trash-alt" >
+                                                        <f:ajax execute="@form" render=":formmodal"></f:ajax>
+                                                    </h:commandLink>
+
+                                                </div>
+
+
+
+
+                                            </div>
+
+
+
+
+                                        </div>
+
+                                    </c:forEach>
+
+                                    <h:commandButton class="col-lg-2 fas fa-plus" value="+" style="height:350px; background-color:transparent; color:grey; font-size:60px; font-weight: bolder;margin:20px;border:5px dashed lightgrey" actionListener="#{requestServicesManagedBean.addFoodMenuItemToggle1()}">
+                                     <f:ajax execute="@form" render=":formmodal3"></f:ajax>
+                                    </h:commandButton>
+                                </h:form>
+
+                            </div>
+                        </div>
+
+
+                        <div>
+                          
+                            <button class="collapsible" >Starters</button>
+                            <div class="row menucontent" >
+
+                                <h:form enctype="multipart/form-data" id="form2"  style="width:100%">
+                                    <c:forEach items="#{requestServicesManagedBean.startersMenu}" var="i">
+
+
+                                        <div class="col-lg-2" style="height:350px; border:1px solid darkgrey;  margin:20px">                
+
+                                            <div class="row" style="height:100%">
+                                                <div class="col-lg-12" style="text-align:right; font-size: calc((100% + 0.25vw))"> 
+                                                    <h:commandLink style="margin:10px 2px 0px 10px;" actionListener="#{requestServicesManagedBean.setUnavailable(i.foodMenuItemID)}" class="fas fa-minus" >
+                                                        <f:ajax execute="@form" render="form2 form8"></f:ajax>
+                                                    </h:commandLink>
+                                                    
+                                                </div>
+
+                                                <div class="col-lg-12" style="padding:5px; text-align: center" >
+                                                    <h:commandLink >
+                                                        <img height="150px" width="150px" src="http://zetegral.website/krhgImages/#{i.foodImage}"/>
+                                                        <f:ajax execute="@form" render="@none" />
+                                                    </h:commandLink>
+
+                                                </div>
+                                                <div class="col-lg-12" style="padding-bottom:10px; text-align: center ">
+                                                    <span style="font-weight: bold;font-size: calc((100% + 0.25vw));height:22px">#{i.foodMenuItemName}</span>
+                                                </div>
+                                                <div class="col-lg-12" style=" text-align: center">
+                                                    <span style="font-size: calc((100% + 0.25vw));">#{i.unitPrice}</span>
+                                                </div>
+
+                                                <div class="col-lg-12">
+                                                    <span>#{i.foodMenuItemDescription}</span>
+                                                </div>
+
+
+                                              <div class="col-lg-12" style="text-align:right; font-size: calc((100% + 0.25vw)) " >
+                                                    <h:commandLink style="margin:10px 2px 0px 10px" actionListener="#{requestServicesManagedBean.selectFoodMenuItem2(i.foodMenuItemID)}" class="fas fa-edit" >
+                                                        <f:ajax execute="@form" render=":formmodal2"></f:ajax>
+                                                    </h:commandLink>
+                                                    <h:commandLink style="margin:10px 2px 0px 10px" actionListener="#{requestServicesManagedBean.selectFoodMenuItem(i.foodMenuItemID)}" class="fas fa-trash-alt" >
+                                                        <f:ajax execute="@form" render=":formmodal"></f:ajax>
+                                                    </h:commandLink>
+
+                                                </div>
+
+
+
+
+                                            </div>
+
+
+
+
+                                        </div>
+
+                                    </c:forEach>
+                                <h:commandButton class="col-lg-2 fas fa-plus" value="+" style="height:350px; background-color:transparent; color:grey; font-size:60px; font-weight: bolder;margin:20px;border:5px dashed lightgrey" actionListener="#{requestServicesManagedBean.addFoodMenuItemToggle2()}">
+                                     <f:ajax execute="@form" render=":formmodal3"></f:ajax>
+                                    </h:commandButton>
+                               
+                               
+                                </h:form>
+
+                            </div>
+                        </div>
+
+                        <div>
+                             <button class="collapsible" >Mains</button>
+                            <div class="row menucontent" >
+
+                                <h:form enctype="multipart/form-data" id="form3"  style="width:100%">
+                                    <c:forEach items="#{requestServicesManagedBean.mainsMenu}" var="i">
+
+
+                                        <div class="col-lg-2" style="height:350px; border:1px solid darkgrey;  margin:20px">                
+
+                                            <div class="row" style="height:100%">
+                                                <div class="col-lg-12" style="text-align:right; font-size: calc((100% + 0.25vw))"> 
+                                                    <h:commandLink style="margin:10px 2px 0px 10px;" actionListener="#{requestServicesManagedBean.setUnavailable(i.foodMenuItemID)}" class="fas fa-minus" >
+                                                        <f:ajax execute="@form" render=":form2 form8"></f:ajax>
+                                                    </h:commandLink>
+                                                    
+                                                </div>
+
+                                                <div class="col-lg-12" style="padding:5px; text-align: center" >
+                                                    <h:commandLink >
+                                                        <img height="150px" width="150px" src="http://zetegral.website/krhgImages/#{i.foodImage}"/>
+                                                        <f:ajax execute="@form" render="@none" />
+                                                    </h:commandLink>
+
+                                                </div>
+                                                <div class="col-lg-12" style="padding-bottom:10px; text-align: center ">
+                                                    <span style="font-weight: bold;font-size: calc((100% + 0.25vw));height:22px">#{i.foodMenuItemName}</span>
+                                                </div>
+                                                <div class="col-lg-12" style=" text-align: center">
+                                                    <span style="font-size: calc((100% + 0.25vw));">#{i.unitPrice}</span>
+                                                </div>
+
+                                                <div class="col-lg-12">
+                                                    <span>#{i.foodMenuItemDescription}</span>
+                                                </div>
+
+
+                                                                     <div class="col-lg-12" style="text-align:right; font-size: calc((100% + 0.25vw)) " >
+                                                    <h:commandLink style="margin:10px 2px 0px 10px" actionListener="#{requestServicesManagedBean.selectFoodMenuItem2(i.foodMenuItemID)}" class="fas fa-edit" >
+                                                        <f:ajax execute="@form" render=":formmodal2"></f:ajax>
+                                                    </h:commandLink>
+                                                    <h:commandLink style="margin:10px 2px 0px 10px" actionListener="#{requestServicesManagedBean.selectFoodMenuItem(i.foodMenuItemID)}" class="fas fa-trash-alt" >
+                                                        <f:ajax execute="@form" render=":formmodal"></f:ajax>
+                                                    </h:commandLink>
+
+                                                </div>
+
+
+
+
+                                            </div>
+
+
+
+
+                                        </div>
+
+                                    </c:forEach>
+                                 <h:commandButton class="col-lg-2 fas fa-plus" value="+" style="height:350px; background-color:transparent; color:grey; font-size:60px; font-weight: bolder;margin:20px;border:5px dashed lightgrey" actionListener="#{requestServicesManagedBean.addFoodMenuItemToggle3()}">
+                                     <f:ajax execute="@form" render=":formmodal3"></f:ajax>
+                                    </h:commandButton>
+                                </h:form>
+
+                            </div>
+                        </div>
+
+                        <div>
+                     <button class="collapsible" >Flavours of Asia</button>
+                            <div class="row menucontent" >
+
+                                <h:form enctype="multipart/form-data" id="form4" style="width:100%">
+                                    <c:forEach items="#{requestServicesManagedBean.FOAMenu}" var="i">
+
+                                        <div class="col-lg-2" style="height:350px; border:1px solid darkgrey;  margin:20px">                
+
+                                            <div class="row" style="height:100%">
+                                             <div class="col-lg-12" style="text-align:right; font-size: calc((100% + 0.25vw))"> 
+                                                    <h:commandLink style="margin:10px 2px 0px 10px;" actionListener="#{requestServicesManagedBean.setUnavailable(i.foodMenuItemID)}" class="fas fa-minus" >
+                                                        <f:ajax execute="@form" render="form2 form8"></f:ajax>
+                                                    </h:commandLink>
+                                                    
+                                                </div>
+
+                                                <div class="col-lg-12" style="padding:5px; text-align: center" >
+                                                    <h:commandLink >
+                                                        <img height="150px" width="150px" src="http://zetegral.website/krhgImages/#{i.foodImage}"/>
+                                                        <f:ajax execute="@form" render="@none" />
+                                                    </h:commandLink>
+
+                                                </div>
+                                                <div class="col-lg-12" style="padding-bottom:10px; text-align: center ">
+                                                    <span style="font-weight: bold;font-size: calc((100% + 0.25vw));height:22px">#{i.foodMenuItemName}</span>
+                                                </div>
+                                                <div class="col-lg-12" style=" text-align: center">
+                                                    <span style="font-size: calc((100% + 0.25vw));">#{i.unitPrice}</span>
+                                                </div>
+
+                                                <div class="col-lg-12">
+                                                    <span>#{i.foodMenuItemDescription}</span>
+                                                </div>
+
+
+                                                                      <div class="col-lg-12" style="text-align:right; font-size: calc((100% + 0.25vw)) " >
+                                                    <h:commandLink style="margin:10px 2px 0px 10px" actionListener="#{requestServicesManagedBean.selectFoodMenuItem2(i.foodMenuItemID)}" class="fas fa-edit" >
+                                                        <f:ajax execute="@form" render=":formmodal2"></f:ajax>
+                                                    </h:commandLink>
+                                                    <h:commandLink style="margin:10px 2px 0px 10px" actionListener="#{requestServicesManagedBean.selectFoodMenuItem(i.foodMenuItemID)}" class="fas fa-trash-alt" >
+                                                        <f:ajax execute="@form" render=":formmodal"></f:ajax>
+                                                    </h:commandLink>
+
+                                                </div>
+
+
+
+
+                                            </div>
+
+
+
+
+                                        </div>
+
+                                    </c:forEach>
+                                <h:commandButton class="col-lg-2 fas fa-plus" value="+" style="height:350px; background-color:transparent; color:grey; font-size:60px; font-weight: bolder;margin:20px;border:5px dashed lightgrey" actionListener="#{requestServicesManagedBean.addFoodMenuItemToggle4()}">
+                                     <f:ajax execute="@form" render=":formmodal3"></f:ajax>
+                                    </h:commandButton>
+                               
+                                </h:form>
+
+                            </div>
+                        </div>
+
+                        <div>
+                           <button class="collapsible" >Sandwiches and Burgers</button>
+                            <div class="row menucontent" >
+
+                                <h:form enctype="multipart/form-data" id="form5"  style="width:100%">
+                                    <c:forEach items="#{requestServicesManagedBean.SABMenu}" var="i">
+
+                                        <div class="col-lg-2" style="height:350px; border:1px solid darkgrey;  margin:20px">                
+
+                                            <div class="row" style="height:100%">
+                                               <div class="col-lg-12" style="text-align:right; font-size: calc((100% + 0.25vw))"> 
+                                                    <h:commandLink style="margin:10px 2px 0px 10px;" actionListener="#{requestServicesManagedBean.setUnavailable(i.foodMenuItemID)}" class="fas fa-minus" >
+                                                        <f:ajax execute="@form" render="form2 form8"></f:ajax>
+                                                    </h:commandLink>
+                                                    
+                                                </div>
+
+                                                <div class="col-lg-12" style="padding:5px; text-align: center" >
+                                                    <h:commandLink >
+                                                        <img height="150px" width="150px" src="http://zetegral.website/krhgImages/#{i.foodImage}"/>
+                                                        <f:ajax execute="@form" render="@none" />
+                                                    </h:commandLink>
+
+                                                </div>
+                                                <div class="col-lg-12" style="padding-bottom:10px; text-align: center ">
+                                                    <span style="font-weight: bold;font-size: calc((100% + 0.25vw));height:22px">#{i.foodMenuItemName}</span>
+                                                </div>
+                                                <div class="col-lg-12" style=" text-align: center">
+                                                    <span style="font-size: calc((100% + 0.25vw));">#{i.unitPrice}</span>
+                                                </div>
+
+                                                <div class="col-lg-12">
+                                                    <span>#{i.foodMenuItemDescription}</span>
+                                                </div>
+
+
+                                                                 <div class="col-lg-12" style="text-align:right; font-size: calc((100% + 0.25vw)) " >
+                                                    <h:commandLink style="margin:10px 2px 0px 10px" actionListener="#{requestServicesManagedBean.selectFoodMenuItem2(i.foodMenuItemID)}" class="fas fa-edit" >
+                                                        <f:ajax execute="@form" render=":formmodal2"></f:ajax>
+                                                    </h:commandLink>
+                                                    <h:commandLink style="margin:10px 2px 0px 10px" actionListener="#{requestServicesManagedBean.selectFoodMenuItem(i.foodMenuItemID)}" class="fas fa-trash-alt" >
+                                                        <f:ajax execute="@form" render=":formmodal"></f:ajax>
+                                                    </h:commandLink>
+
+                                                </div>
+
+
+
+
+                                            </div>
+
+
+
+
+                                        </div>
+
+                                    </c:forEach>
+                               <h:commandButton class="col-lg-2 fas fa-plus" value="+" style="height:350px; background-color:transparent; color:grey; font-size:60px; font-weight: bolder;margin:20px;border:5px dashed lightgrey" actionListener="#{requestServicesManagedBean.addFoodMenuItemToggle5()}">
+                                     <f:ajax execute="@form" render=":formmodal3"></f:ajax>
+                                    </h:commandButton>
+                              
+                                </h:form>
+
+                            </div>
+                        </div>
+
+
+                        <div>
+                              <button class="collapsible" >Alcoholic Beverages</button>
+                            <div class="row menucontent" >
+
+                                <h:form enctype="multipart/form-data" id="form6"  style="width:100%">
+                                    <c:forEach items="#{requestServicesManagedBean.alcBeverageMenu}" var="i">
+                                        <div class="col-lg-2" style="height:280px; border:1px solid darkgrey;  margin:20px">                
+
+                                            <div class="row" style="height:100%">
+                                                <div class="col-lg-12" style="text-align:right; font-size: calc((100% + 0.25vw))"> 
+                                                    <h:commandLink style="margin:10px 2px 0px 10px;" actionListener="#{requestServicesManagedBean.setUnavailable(i.foodMenuItemID)}" class="fas fa-minus" >
+                                                        <f:ajax execute="@form" render="form2 form8"></f:ajax>
+                                                    </h:commandLink>
+                                                    
+                                                </div>
+
+                                                <div class="col-lg-12" style="padding:5px; text-align: center" >
+                                                    <h:commandLink >
+                                                        <img height="150px" width="150px" src="http://zetegral.website/krhgImages/#{i.foodImage}"/>
+                                                        <f:ajax execute="@form" render="@none" />
+                                                    </h:commandLink>
+
+                                                </div>
+                                                <div class="col-lg-12" style="padding-bottom:10px; text-align: center ">
+                                                    <span style="font-weight: bold;font-size: calc((100% + 0.25vw));height:22px">#{i.foodMenuItemName}</span>
+                                                </div>
+                                                <div class="col-lg-12" style=" text-align: center">
+                                                    <span style="font-size: calc((100% + 0.25vw));">#{i.unitPrice}</span>
+                                                </div>
+
+                                                <div class="col-lg-12">
+                                                    <span>#{i.foodMenuItemDescription}</span>
+                                                </div>
+
+
+                                                                      <div class="col-lg-12" style="text-align:right; font-size: calc((100% + 0.25vw)) " >
+                                                    <h:commandLink style="margin:10px 2px 0px 10px" actionListener="#{requestServicesManagedBean.selectFoodMenuItem2(i.foodMenuItemID)}" class="fas fa-edit" >
+                                                        <f:ajax execute="@form" render=":formmodal2"></f:ajax>
+                                                    </h:commandLink>
+                                                    <h:commandLink style="margin:10px 2px 0px 10px" actionListener="#{requestServicesManagedBean.selectFoodMenuItem(i.foodMenuItemID)}" class="fas fa-trash-alt" >
+                                                        <f:ajax execute="@form" render=":formmodal"></f:ajax>
+                                                    </h:commandLink>
+
+                                                </div>
+
+
+
+
+                                            </div>
+
+
+
+
+                                        </div>
+
+
+                                    </c:forEach>
+                                <h:commandButton class="col-lg-2 fas fa-plus" value="+" style="height:280px; background-color:transparent; color:grey; font-size:60px; font-weight: bolder;margin:20px;border:5px dashed lightgrey" actionListener="#{requestServicesManagedBean.addFoodMenuItemToggle6()}">
+                                     <f:ajax execute="@form" render=":formmodal3"></f:ajax>
+                                    </h:commandButton>
+                               
+                                </h:form>
+
+                            </div>
+                        </div>
+
+                        <div>
+                              <button class="collapsible" >Non-Alcoholic Beverages</button>
+                            <div class="row menucontent" >
+
+                                <h:form enctype="multipart/form-data" id="form7"  style="width:100%">
+                                    <c:forEach  items="#{requestServicesManagedBean.beverageMenu}" var="i">
+
+
+                                        <div class="col-lg-2" style="height:280px; border:1px solid darkgrey;  margin:20px">                
+
+                                            <div class="row" style="height:100%">
+                                                <div class="col-lg-12" style="text-align:right; font-size: calc((100% + 0.25vw))"> 
+                                                    <h:commandLink style="margin:10px 2px 0px 10px;" actionListener="#{requestServicesManagedBean.setUnavailable(i.foodMenuItemID)}" class="fas fa-minus" >
+                                                        <f:ajax execute="@form" render="form2 form8"></f:ajax>
+                                                    </h:commandLink>
+                                                    
+                                                </div>
+
+                                                <div class="col-lg-12" style="padding:5px; text-align: center" >
+                                                    <h:commandLink >
+                                                        <img height="150px" width="150px" src="http://zetegral.website/krhgImages/#{i.foodImage}"/>
+                                                        <f:ajax execute="@form" render="@none" />
+                                                    </h:commandLink>
+
+                                                </div>
+                                                <div class="col-lg-12" style="padding-bottom:10px; text-align: center ">
+                                                    <span style="font-weight: bold;font-size: calc((100% + 0.25vw));height:22px">#{i.foodMenuItemName}</span>
+                                                </div>
+                                                <div class="col-lg-12" style=" text-align: center">
+                                                    <span style="font-size: calc((100% + 0.25vw));">#{i.unitPrice}</span>
+                                                </div>
+
+                                                <div class="col-lg-12">
+                                                    <span>#{i.foodMenuItemDescription}</span>
+                                                </div>
+
+
+                                                                    <div class="col-lg-12" style="text-align:right; font-size: calc((100% + 0.25vw)) " >
+                                                    <h:commandLink style="margin:10px 2px 0px 10px" actionListener="#{requestServicesManagedBean.selectFoodMenuItem2(i.foodMenuItemID)}" class="fas fa-edit" >
+                                                        <f:ajax execute="@form" render=":formmodal2"></f:ajax>
+                                                    </h:commandLink>
+                                                    <h:commandLink style="margin:10px 2px 0px 10px" actionListener="#{requestServicesManagedBean.selectFoodMenuItem(i.foodMenuItemID)}" class="fas fa-trash-alt" >
+                                                        <f:ajax execute="@form" render=":formmodal"></f:ajax>
+                                                    </h:commandLink>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </c:forEach>
+                                     <h:commandButton class="col-lg-2 fas fa-plus" value="+" style="height:280px; background-color:transparent; color:grey; font-size:60px; font-weight: bolder;margin:20px;border:5px dashed lightgrey" actionListener="#{requestServicesManagedBean.addFoodMenuItemToggle7()}">
+                                     <f:ajax execute="@form" render=":formmodal3"></f:ajax>
+                                    </h:commandButton>
+                                </h:form>
+
+                            </div>
+                        </div>
+                        
+                         <div>
+                            <button class="collapsible" >Dishes out of stock</button>
+                            <div class="row menucontent" >
+
+                                <h:form enctype="multipart/form-data" id="form8"  style="width:100%">
+                                    <c:forEach items="#{requestServicesManagedBean.OOSMenu}" var="i">
+
+
+                                        <div class="col-lg-2" style="height:350px; border:1px solid darkgrey;  margin:20px">                
+
+                                            <div class="row" style="height:100%">
+                                                <div class="col-lg-12" style="text-align:right; font-size: calc((100% + 0.25vw))"> 
+                                                    <h:commandLink style="margin:10px 2px 0px 10px;" actionListener="#{requestServicesManagedBean.setAvailable(i.foodMenuItemID)}" class="fas fa-plus" >
+                                                        <f:ajax execute="@form" render="form1 form2 form3 form4 form5 form6 form 7 form8"></f:ajax>
+                                                    </h:commandLink>
+                                                    
+                                                </div>
+
+                                                <div class="col-lg-12" style="padding:5px; text-align: center" >
+                                                    <h:commandLink >
+                                                        <img height="150px" width="150px" src="http://zetegral.website/krhgImages/#{i.foodImage}"/>
+                                                        <f:ajax execute="@form" render="@none" />
+                                                    </h:commandLink>
+
+                                                </div>
+                                                <div class="col-lg-12" style="padding-bottom:10px; text-align: center ">
+                                                    <span style="font-weight: bold;font-size: calc((100% + 0.25vw));height:22px">#{i.foodMenuItemName}</span>
+                                                </div>
+                                                <div class="col-lg-12" style=" text-align: center">
+                                                    <span style="font-size: calc((100% + 0.25vw));">#{i.unitPrice}</span>
+                                                </div>
+
+                                                <div class="col-lg-12">
+                                                    <span>#{i.foodMenuItemDescription}</span>
+                                                </div>
+
+
+                                                                      <div class="col-lg-12" style="text-align:right; font-size: calc((100% + 0.25vw)) " >
+                                                    <h:commandLink style="margin:10px 2px 0px 10px" actionListener="#{requestServicesManagedBean.selectFoodMenuItem2(i.foodMenuItemID)}" class="fas fa-edit" >
+                                                        <f:ajax execute="@form" render=":formmodal2"></f:ajax>
+                                                    </h:commandLink>
+                                                    <h:commandLink style="margin:10px 2px 0px 10px" actionListener="#{requestServicesManagedBean.selectFoodMenuItem(i.foodMenuItemID)}" class="fas fa-trash-alt" >
+                                                        <f:ajax execute="@form" render=":formmodal"></f:ajax>
+                                                    </h:commandLink>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </c:forEach>
+                                   
+                                </h:form>
+
+                            </div>
+                        </div>
+                        </div>
+
+                    </div>         
+                    <!-- /.container-fluid -->           
+
+
+                    <h:form id="formmodal">
+                        <div id="modal" class="#{requestServicesManagedBean.styleClass}" role="alert">
+                            <div class="cd-popup-container">
+                                <p class="popup-content">Delete #{requestServicesManagedBean.selectedFoodItem.foodMenuItemName}?</p>
+
+                                <ul class="cd-buttons" style="padding-inline-start: unset; padding:0px">
+
+                                    <li ><h:commandLink id="deleteFoodItemFromMenu" action="#{requestServicesManagedBean.deleteFoodItem()}" class="cd-popup-confirm" value="Yes">
+                                            <f:ajax execute="@form" render="@none"></f:ajax>
+                                        </h:commandLink></li>
+                                    <li style="background-color:lightslategray"><h:commandLink id="cancelFoodItemFromMenu" action="#{requestServicesManagedBean.cancelingDeleteFoodItem()}" class="cd-popup-closemodal" value="No">
+                                            <f:ajax execute="@form" render="@none"></f:ajax>
+                                        </h:commandLink></li>
+                                    <!--<li style="background-color:lightslategray"><a onclick="changeStyleCheck()" class="cd-popup-closemodal">No</a></li>-->
+                                    <h:inputHidden id="styleCheckID" value="#{requestServicesManagedBean.styleCheck}" />
+                                </ul>
+                            </div> <!-- cd-popup-container -->
+                        </div> <!-- cd-popup -->
+                    </h:form>
+
+                    <h:form id="formmodal2" enctype="multipart/form-data">
+                        <div id="modal2" class="#{requestServicesManagedBean.styleClass2}" role="alert">
+                            <div class="cd-popup-container" style="max-width:700px; height:60%;">
+                                <div class="popup-content" style="padding:20px">
+                                    <h1 style="text-align: center; margin-bottom: 30px">Edit Food Item</h1>
+                                    <div class="form-group" style="font-size: calc((100% + 0.25vw))!important; text-align: left">
+                                        <label  for="fiName">Food Item</label>
+                                        <h:inputText  class="form-control" value="#{requestServicesManagedBean.selectedFoodItem.foodMenuItemName}" id="fiName" required="true" />
+                                    </div>
+                                    <div class="form-group" style="font-size: calc((100% + 0.25vw))!important;  text-align: left">
+                                        <label for="fiDesc">Food Description</label>
+                                        <h:inputTextarea  class="form-control" value="#{requestServicesManagedBean.selectedFoodItem.foodMenuItemDescription}" id="fiDesc" required="true" />
+                                    </div>
+                                    <div class="form-group" style="font-size: calc((100% + 0.25vw))!important;  text-align: left">
+                                            <label for="selectFoodCategory">Food Category</label><br />
+                                            <h:selectOneMenu  value="#{requestServicesManagedBean.selectedFoodItem.category}"
+                                                class="form-control" id="selectFoodCategory">
+                                                <f:selectItem itemValue="All Day Breakfast" itemLabel="All Day Breakfast" />
+                                                <f:selectItem itemValue="Starters" itemLabel="Starters" />
+                                                <f:selectItem itemValue="Sandwiches and Burgers" itemLabel="Sandwiches and Burgers" />
+                                                <f:selectItem itemValue="Flavours of Asia" itemLabel="Flavours of Asia" />
+                                                <f:selectItem itemValue="Mains" itemLabel="Mains" />
+                                                <f:selectItem itemValue="Beverages (Alcohol)" itemLabel="Beverages (Alcohol)" />
+                                                <f:selectItem itemValue="Beverages (Chilled Juices)" itemLabel="Non-Alcoholic Beverages" />
+                                            </h:selectOneMenu><br />
+                                        </div>
+                                    <div class="row">
+                                        <div class="form-group col-lg-6" style="font-size: calc((100% + 0.25vw))!important;  text-align: left">
+                                            <label  for="fiPrice">Price</label>
+                                            <div class="input-group" >
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        <i class="fa fa-dollar"></i>
+                                                    </span>
+                                                </div>
+                                                <h:inputText  class="form-control" value="#{requestServicesManagedBean.selectedFoodItem.unitPrice}" id="fiPrice" required="true" />
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group col-lg-6" style="font-size: calc((100% + 0.25vw))!important;  text-align: left">
+                                            <label for="foodImage">Food Image</label><br/>
+
+
+                                            <h:inputFile id="foodImage" value="#{requestServicesManagedBean.foodImage}">
+                                                <f:passThroughAttribute name="accept" value="image/jpeg" />
+                                            </h:inputFile>
+                                        </div>
+
+                                    </div>
+
+
+
+                                </div> <!-- cd-popup-container -->
+                                <ul class="cd-buttons" style="padding-inline-start: unset; padding:0px; font-size: calc((100% + 0.25vw))!important; margin-top:30px">
+
+                                    <li ><h:commandLink id="saveFoodMenuItem" action="#{requestServicesManagedBean.saveFoodMenuItem()}" class="cd-popup-confirm" value="Update">
+                                            <f:ajax execute="@form" render="@none"></f:ajax>
+                                        </h:commandLink></li>
+                                    <li style="background-color:lightslategray"><h:commandLink id="cancelFoodItemFromMenu2" action="#{requestServicesManagedBean.cancelingDeleteFoodItem2()}" class="cd-popup-closemodal" value="Cancel">
+                                            <f:ajax execute="@form" render="@none"></f:ajax>
+                                        </h:commandLink></li>
+
+                                </ul>
+                            </div> <!-- cd-popup -->
+                        </div>
+                    </h:form>
+
+                    <h:form id="formmodal3" enctype="multipart/form-data">
+                        <div id="modal3" class="#{requestServicesManagedBean.styleClass3}" role="alert">
+                            <div class="cd-popup-container" style="max-width:700px; height:50%;">
+                                <div class="popup-content" style="padding:20px">
+                                    <h1 style="text-align: center; margin-bottom: 30px">Add Food Item</h1>
+                                    <div class="form-group" style="font-size: calc((100% + 0.25vw))!important; text-align: left">
+                                        <label  for="fiName">Food Name</label>
+                                        <h:inputText  class="form-control" value="#{requestServicesManagedBean.newFoodName}" id="fiName" />
+                                    </div>
+                                    <div class="form-group" style="font-size: calc((100% + 0.25vw))!important;  text-align: left">
+                                        <label for="fiDesc">Food Description</label>
+                                        <h:inputTextarea  class="form-control" value="#{requestServicesManagedBean.newFoodDescription}" id="fiDesc"  />
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-lg-6" style="font-size: calc((100% + 0.25vw))!important;  text-align: left">
+                                            <label  for="fiPrice">Price</label>
+                                            <div class="input-group" >
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        <i class="fa fa-dollar"></i>
+                                                    </span>
+                                                </div>
+                                                <h:inputText  class="form-control" value="#{requestServicesManagedBean.newFoodPrice}" id="fiPrice"  />
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group col-lg-6" style="font-size: calc((100% + 0.25vw))!important;  text-align: left">
+                                            <label for="foodImage">Food Image</label><br/>
+
+
+                                            <h:inputFile id="foodImage" value="#{requestServicesManagedBean.foodImage}">
+                                                <f:passThroughAttribute name="accept" value="image/jpeg" />
+                                            </h:inputFile>
+                                        </div>
+
+                                    </div>
+
+
+
+                                </div> <!-- cd-popup-container -->
+                                <ul class="cd-buttons" style="padding-inline-start: unset; padding:0px; font-size: calc((100% + 0.25vw))!important; margin-top:30px">
+
+                                    <li ><h:commandLink id="saveFoodMenuItem" action="#{requestServicesManagedBean.addFoodMenuItem()}" class="cd-popup-confirm" value="Add">
+                                            <f:ajax execute="@form" render="@none"></f:ajax>
+                                        </h:commandLink></li>
+                                    <li style="background-color:lightslategray"><h:commandLink id="cancelAddFoodItem" action="#{requestServicesManagedBean.cancelingAddFoodItem()}" class="cd-popup-closemodal" value="Cancel">
+                                            <f:ajax execute="@form" render="@none"></f:ajax>
+                                        </h:commandLink></li>
+
+                                </ul>
+                            </div> <!-- cd-popup -->
+                        </div>
+                    </h:form>
+
                 </section>
-                <!-- /.content-header -->
-                <!-- Main content -->
 
-            </ui:define>
 
-            <ui:define name="script">
+
+
                 <script>
-                    $('[data-mask]').each(function () {
-                        $(this).mask($(this).attr("data-mask"));
-                    });
-                </script>
-            </ui:define>
+                    function changeStyleCheck() {
+                        console.log("Changing style check");
+                        document.getElementById("styleCheckID").value = false;
+                    }
 
+                </script>
+                <!-- /.content -->
+            </ui:define>
+            <ui:define name="script">
+                script
+            </ui:define>
         </ui:composition>
 
     </body>

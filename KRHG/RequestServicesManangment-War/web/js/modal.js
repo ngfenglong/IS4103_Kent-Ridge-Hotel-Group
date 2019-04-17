@@ -11,10 +11,23 @@ jQuery(document).ready(function($){
          
       //open popup
 	$('.cd-popup-trigger').on('click', function(event){
+            
 		event.preventDefault();
-    $('#modal').addClass('is-visible');
+    $('#modal').delay( 800 ).addClass('is-visible');
     console.log($('#modal'));
     console.log($('#modal').attr('class'));
+    
+    
+    return true;
+	});
+        
+        //open popup
+	$('.cd-popup-trigger').on('click', function(event){
+            
+		event.preventDefault();
+    $('#modal').delay( 800 ).addClass('is-visible');
+    console.log($('#formModal'));
+    console.log($('#formModal').attr('class'));
     
     
     return true;

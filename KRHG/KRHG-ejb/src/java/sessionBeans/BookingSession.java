@@ -49,6 +49,20 @@ public class BookingSession implements BookingSessionLocal {
             return null;
         }
     }
+    @Override
+    public List<RoomBooking> getAllRoomBookingByHotel(String hotelCodeName) throws NoResultException {
+        Query q;
+      
+            q = em.createQuery("SELECT rb FROM RoomBooking rb WHERE "
+                    + "LOWER(rb.bookedRoom.hotel.hotelCodeName) = :hotelCodeName");
+            q.setParameter("hotelCodeName", hotelCodeName.toLowerCase());
+        
+        if (!q.getResultList().isEmpty()) {
+            return q.getResultList();
+        } else {
+            return null;
+        }
+    }
 
     @Override
     public List<RoomBooking> getAllRoomBookingByDate(Date todayDate) throws NoResultException {

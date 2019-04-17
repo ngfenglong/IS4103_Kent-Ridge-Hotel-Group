@@ -109,6 +109,12 @@ public class LaundrySession implements LaundrySessionLocal {
             throw new NoResultException("Laundry Order not found.");
         }
     }
+    
+    @Override
+    public List<LaundryOrderedItem> getAllLaundryOrderedItemByLaundryOrderID(Long loID)throws NoResultException{
+        LaundryOrder laundryOrder = em.find(LaundryOrder.class, loID);
+        return laundryOrder.getLaundryOrderedItems();
+    }
 
     @Override
     public void deleteLaundryOrder(LaundryOrder lo) throws NoResultException {
@@ -136,6 +142,8 @@ public class LaundrySession implements LaundrySessionLocal {
             oldLo.setCompleteDateTime(lo.getCompleteDateTime());
             oldLo.setHouseKeeper(lo.getHouseKeeper());
             oldLo.setSpecialRequest(lo.getSpecialRequest());
+            oldLo.setTotalPrice(lo.getTotalPrice());
+            oldLo.setLaundryOrderedItems(lo.getLaundryOrderedItems());
         } else {
             throw new NoResultException("Laundry Order Not found");
         }

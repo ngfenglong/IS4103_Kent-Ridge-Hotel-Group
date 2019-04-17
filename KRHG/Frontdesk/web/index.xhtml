@@ -39,7 +39,7 @@
                     <!-- /.container-fluid -->
                 </div> 
                 <section class="content">
-                    <table>
+                    <table id="example3" class="table table-bordered table-striped">
                         <tr>
                             <td><b>Room type</b></td>
                             <td><b>Price</b></td>
@@ -53,11 +53,7 @@
                                     $ #{o.price} 
                                 </td>
                             </tr> 
-
                         </c:forEach>
-
-
-
                     </table>
                     <div class="card card-primary">
                         <div class="section-center">
@@ -69,13 +65,13 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <span class="form-label">Check In</span>
-                                                        <h:inputText id="todays-date" a:type="date" value = "#{frontDeskManagedBean.checkinDateString}" required="true"></h:inputText>
+                                                        <h:inputText id="todays-date" a:type="date" value = "#{frontDeskManagedBean.todayDate}" readonly="true"></h:inputText>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <span class="form-label">Check out</span>
-                                                        <h:inputText value="#{frontDeskManagedBean.checkoutDateString}" a:type="date" required = "true" ></h:inputText>
+                                                        <h:inputText value="#{frontDeskManagedBean.checkoutDateString}" a:type="date" a:min="#{frontDeskManagedBean.tomorrowDate}" required = "true" ></h:inputText>
                                                     </div>
                                                 </div>
                                             </div>

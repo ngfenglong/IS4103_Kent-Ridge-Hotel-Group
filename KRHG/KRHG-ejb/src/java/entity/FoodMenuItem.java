@@ -20,16 +20,16 @@ public class FoodMenuItem implements Serializable {
     private Long foodMenuItemID;
     private String foodMenuItemName;
     private String foodMenuItemDescription;
-    private Boolean availability;
+    private boolean availability;
     private Double unitPrice;
     private String category;
     private String foodImage;
-
-   
-    public FoodMenuItem() {
-        
-    }
+    private boolean status;
     
+    public FoodMenuItem(){
+        status = true;
+    }
+
     public FoodMenuItem(String foodMenuItemName, String foodMenuItemDescription, String category, Boolean availability, Double unitPrice, String foodImage){
         this.foodMenuItemName = foodMenuItemName;
         this.foodMenuItemDescription = foodMenuItemDescription;
@@ -37,6 +37,7 @@ public class FoodMenuItem implements Serializable {
         this.availability = availability;
         this.unitPrice = unitPrice;
         this.foodImage = foodImage; 
+        this.status = true;
     }
   
     /**
@@ -131,6 +132,20 @@ public class FoodMenuItem implements Serializable {
 
     public void setFoodImage(String foodImage) {
         this.foodImage = foodImage;
+    }
+
+    /**
+     * @return the status
+     */
+    public boolean getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(boolean status) {
+        this.status = status;
     }
     
 }

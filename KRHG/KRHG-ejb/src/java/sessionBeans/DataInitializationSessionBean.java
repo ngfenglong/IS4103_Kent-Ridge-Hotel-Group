@@ -15716,6 +15716,7 @@ public class DataInitializationSessionBean {
         lo1.setSpecialRequest("you may come in and collect the coat if I'm not in the room");
         laundrySessionLocal.createLaundryOrder(lo1);
         LaundryOrder newlo1 = laundrySessionLocal.getLastLaundryOrder();
+       
 
         LaundryOrderedItem loi1 = new LaundryOrderedItem();
         loi1.setQty(2);
@@ -15752,6 +15753,96 @@ public class DataInitializationSessionBean {
 
         newlo2.setTotalPrice(15.0);
         newrb1.addLaundryOrder(newlo2);
+        
+        LaundryOrder lo6 = new LaundryOrder();
+        lo6.setRoom(roomSessionLocal.getRoomByName("KRG_501"));
+        lo6.setOrderDateTime(format.parse("2019-04-21"));
+        lo6.setStatus("Pending");
+        lo6.setCompleteDateTime(format.parse("2019-04-25"));
+        lo6.setSpecialRequest("");
+        laundrySessionLocal.createLaundryOrder(lo6);
+        
+        LaundryOrder lo7 = new LaundryOrder();
+        lo7.setRoom(roomSessionLocal.getRoomByName("KRG_801"));
+        lo7.setOrderDateTime(format.parse("2019-04-21"));
+        lo7.setStatus("Pending");
+        lo7.setCompleteDateTime(format.parse("2019-04-25"));
+        lo7.setSpecialRequest("");
+        laundrySessionLocal.createLaundryOrder(lo7);        
+        
+        LaundryOrder lo8 = new LaundryOrder();
+        lo8.setRoom(roomSessionLocal.getRoomByName("KRG_704"));
+        lo8.setOrderDateTime(format.parse("2019-04-20"));
+        lo8.setStatus("In Progress");
+        lo8.setCompleteDateTime(format.parse("2019-04-24"));
+        lo8.setHouseKeeper(staffSessionLocal.getStaffByNric("S1730049J"));
+        lo8.setSpecialRequest("");
+        laundrySessionLocal.createLaundryOrder(lo8);
+        LaundryOrder newlo3 = laundrySessionLocal.getLastLaundryOrder();
+        
+        LaundryOrderedItem loi6 = new LaundryOrderedItem();
+        loi6.setQty(1);
+        loi6.setLaundryType(laundrySessionLocal.getLaundryTypeByName("Bottom (Dry-Wash)"));
+        loi6.setDescription("1x Yoga Pants");
+        laundrySessionLocal.createLaundryOrderedItem(loi6);
+        newlo3.addLaundryOrderedItem(laundrySessionLocal.getLastLaundryOrderedItem());
+        newlo3.setTotalPrice(15.0);
+        
+        LaundryOrder lo9 = new LaundryOrder();
+        lo9.setRoom(roomSessionLocal.getRoomByName("KRG_603"));
+        lo9.setOrderDateTime(format.parse("2019-04-20"));
+        lo9.setStatus("In Progress");
+        lo9.setCompleteDateTime(format.parse("2019-04-24"));
+        lo9.setHouseKeeper(staffSessionLocal.getStaffByNric("S1730049J"));
+        lo9.setSpecialRequest("");
+        laundrySessionLocal.createLaundryOrder(lo9);
+        LaundryOrder newlo4 = laundrySessionLocal.getLastLaundryOrder();
+        
+        LaundryOrderedItem loi7 = new LaundryOrderedItem();
+        loi7.setQty(1);
+        loi7.setLaundryType(laundrySessionLocal.getLaundryTypeByName("Top (Dry-Wash)"));
+        loi7.setDescription("1x Coat");
+        laundrySessionLocal.createLaundryOrderedItem(loi7);
+        newlo4.addLaundryOrderedItem(laundrySessionLocal.getLastLaundryOrderedItem());
+        newlo4.setTotalPrice(15.0); 
+        
+        LaundryOrder lo10 = new LaundryOrder();
+        lo10.setRoom(roomSessionLocal.getRoomByName("KRG_608"));
+        lo10.setOrderDateTime(format.parse("2019-04-19"));
+        lo10.setStatus("Ready for Delivery");
+        lo10.setCompleteDateTime(format.parse("2019-04-22"));
+        lo10.setHouseKeeper(staffSessionLocal.getStaffByNric("S1730049J"));
+        lo10.setSpecialRequest("");
+        laundrySessionLocal.createLaundryOrder(lo10);
+        LaundryOrder newlo5 = laundrySessionLocal.getLastLaundryOrder();
+        
+        LaundryOrderedItem loi8 = new LaundryOrderedItem();
+        loi8.setQty(1);
+        loi8.setLaundryType(laundrySessionLocal.getLaundryTypeByName("Top (Dry-Wash)"));
+        loi8.setDescription("1x Jacket");
+        laundrySessionLocal.createLaundryOrderedItem(loi8);
+        newlo5.addLaundryOrderedItem(laundrySessionLocal.getLastLaundryOrderedItem());
+        newlo5.setTotalPrice(15.0);
+        
+        LaundryOrder lo11 = new LaundryOrder();
+        lo11.setRoom(roomSessionLocal.getRoomByName("KRG_704"));
+        lo11.setOrderDateTime(format.parse("2019-04-19"));
+        lo11.setStatus("Ready for Delivery");
+        lo11.setCompleteDateTime(format.parse("2019-04-22"));
+        lo11.setHouseKeeper(staffSessionLocal.getStaffByNric("S1730049J"));
+        lo11.setSpecialRequest("");
+        laundrySessionLocal.createLaundryOrder(lo11);
+        LaundryOrder newlo6 = laundrySessionLocal.getLastLaundryOrder();
+        
+        LaundryOrderedItem loi9 = new LaundryOrderedItem();
+        loi9.setQty(1);
+        loi9.setLaundryType(laundrySessionLocal.getLaundryTypeByName("Top (Dry-Wash)"));
+        loi9.setDescription("1x Suit");
+        laundrySessionLocal.createLaundryOrderedItem(loi9);
+        newlo6.addLaundryOrderedItem(laundrySessionLocal.getLastLaundryOrderedItem());
+        newlo6.setTotalPrice(15.0);            
+        
+        
 
 //***************Food Order***************        
         FoodOrder fo1 = new FoodOrder();
