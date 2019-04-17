@@ -132,35 +132,34 @@
                                 <h:form>
                                     <table>
                                         <tr>
-                                            <td colspan="2">Name:  </td>
-                                            <td colspan="8"> <h:inputText class="form-control" value="#{websiteAuthenticationManagedBean.loggedInCustomer.name}" id="name" a:placeholder="NAME" required="true" /></td>
+                                            <td colspan="2">First Name:  </td>
+                                            <td colspan="8"> <h:inputText class="form-control" value="#{websiteAuthenticationManagedBean.loggedInCustomer.firstName}" id="fName" a:placeholder="Enter First Name" required="true" /></td>
                                         </tr>
+                                        <tr>
+                                            <td colspan="2">Last Name:  </td>
+                                            <td colspan="8"> <h:inputText class="form-control" value="#{websiteAuthenticationManagedBean.loggedInCustomer.lastName}" id="lName" a:placeholder="Enter Last Name" required="true" /></td>
+                                        </tr>
+
                                         <tr>
                                             <td colspan="2">Email: </td>
-                                            <td colspan="8"> <h:inputText class="form-control" value="#{websiteAuthenticationManagedBean.loggedInCustomer.email}" id="email" a:placeholder="EMAIL" required="true" /></td>
+                                            <td colspan="8"><h:inputText class="form-control" value="#{websiteAuthenticationManagedBean.loggedInCustomer.email}" id="email" a:placeholder="Enter email" required="true" /></td>
 
                                         </tr>
-
-                                        <tr>
-                                            <td colspan="2">NRIC: </td>
-                                            <td colspan="8"><h:inputText class="form-control" value="#{websiteAuthenticationManagedBean.loggedInCustomer.nric}" id="nric" a:placeholder="NRIC" required="true" /></td>
-
-                                        </tr>
-
                                         <tr>
                                             <td colspan="2">Contact Number: </td>
-                                            <td colspan="8"><h:inputText class="form-control" value="#{websiteAuthenticationManagedBean.loggedInCustomer.mobileNum}" id="mobileNumber" a:placeholder="CONTACT NUMBER" required="true" /></td>
-                                        </tr>
-
-                                        <tr>
-                                            <td colspan="2">Passport Number: </td>
-                                            <td colspan="8"><h:inputText class="form-control" value="#{websiteAuthenticationManagedBean.loggedInCustomer.passportNum}" id="passportNumber" a:placeholder="PASSPORT NUMBER" required="true" /></td>
+                                            <td colspan="8"><h:inputText class="form-control" value="#{websiteAuthenticationManagedBean.loggedInCustomer.mobileNum}" id="mobileNumber" a:placeholder="Enter Contact Number" required="true" /></td>
                                         </tr>
                                     </table>
                                     <div>
                                         <h:commandButton id="saveBtn" class="btn btn-primary" action="#{websiteAuthenticationManagedBean.updateProfile()}" value="Save" />
                                     </div>
                                 </h:form>
+
+
+
+
+
+
                             </div>
                         </div>
                     </div>

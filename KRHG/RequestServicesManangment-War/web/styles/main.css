@@ -1,0 +1,148 @@
+/* Style the button that is used to open and close the collapsible content */
+.collapsible {
+  background-color: transparent;
+  color: #444;
+  cursor: pointer;
+  width: 100%;
+  border:none;
+  border-bottom: 1px solid lightsteelblue;
+  text-align: left;
+  outline: none;
+  font-size: 2em;
+}
+.collapsible:after {
+    content: '\002B';
+  color: lightsteelblue;
+  font-weight: bold;
+  font-size:calc((100% + 0.25vw)*1.2);
+  float: right;
+  margin-left: 5px;
+}
+
+
+#minus:after{
+  
+     content: "\2212";
+}
+
+#minus{
+      border-bottom: 2px solid steelblue;
+}
+
+#plus:after{
+    content: '\002B';
+}
+
+button:focus{
+    outline:none!important;
+}
+
+/* Style the collapsible content. Note: hidden by default */
+.menucontent {
+  margin: 0 2px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background-color: transparent;
+  border-bottom: 1px dotted lightgrey;
+}
+
+/*------------------------------------------------------------------------------*/
+
+ .plusminus {
+	 display: inline-block;
+	 position: relative;
+	 font-size: 1;
+	 overflow: hidden;
+	 border-radius: 3px;
+	 width: 44px;
+         height:32px;
+         vertical-align: middle;
+}
+ .plusminusbutton {
+	 display: inline-block;
+	 width: 44px;
+	 height: 44px;
+         line-height:1.2;
+	 margin: 0;
+	 padding: 0;
+	 border: 0;
+	 background: #000;
+	 color: #fff;
+	 font-size: 30.8px;
+	 font-family: bonds, sans-serif;
+	 cursor: pointer;
+}
+ .plusminusbutton:focus {
+	 outline: none;
+	 color: #2bebaf;
+}
+ .plusminusbutton:disabled {
+	 background: #999;
+	 color: #ccc;
+	 cursor: default;
+}
+ .plusminusbutton:first-child {
+	 bottom: 0;
+}
+#minus .plusminusbutton:before {
+	 content: "-";
+}
+ .plusminusbutton:last-child {
+	 top: 0;
+}
+ #minus:before {
+	 content: "+";
+}
+ .plusminusbutton:last-child:focus {
+	 color: #ff6367;
+}
+ .plusminus input[type="number"] {
+	 position: absolute;
+	 width: 44px;
+	 height: 44px;
+	 top: 44px;
+	 margin: 0;
+	 padding: 0 0 16.9230769231px;
+	 border: 0;
+	 font-size: 17.6px;
+	 font-weight: bold;
+	 text-align: center;
+	 -moz-appearance: textfield;
+}
+ .plusminus input[type="number"]::-webkit-outer-spin-button, .plusminus input[type="number"]::-webkit-inner-spin-button {
+	 -webkit-appearance: none;
+	 margin: 0;
+}
+ .plusminus:after {
+	 content: "QTY";
+	 position: absolute;
+	 font-size: 9.68px;
+	 left: 0;
+	 right: 0;
+	 line-height: 1;
+	 width: 44px;
+	 margin: 0 auto;
+	 border-top: 1px solid #ccc;
+	 color: #888;
+	 text-align: center;
+	 bottom: 14%;
+}
+ .plusminus.horiz {
+	 width: 132px;
+	 height: 44px;
+}
+ .plusminus.horiz button:first-child {
+	 left: 0;
+}
+ .plusminus.horiz button:last-child {
+	 right: 0;
+}
+ .plusminus.horiz:after {
+	 bottom: 0;
+}
+ .plusminus.horiz input[type="number"] {
+	 position: absolute;
+	 top: 0;
+	 left: 44px;
+}

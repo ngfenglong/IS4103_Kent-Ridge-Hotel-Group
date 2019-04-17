@@ -12,16 +12,16 @@
         <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <!-- Font Awesome -->
-        <link rel="stylesheet" href="plugins/font-awesome/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="#{request.contextPath}/plugins/font-awesome/css/font-awesome.min.css" />
         <!-- iCheck for checkboxes and radio inputs -->
-        <link rel="stylesheet" href="plugins/iCheck/all.css" />
+        <link rel="stylesheet" href="#{request.contextPath}/plugins/iCheck/all.css" />
         <!-- Date Picker -->
-        <link rel="stylesheet" href="plugins/datepicker/datepicker3.css" />
+        <link rel="stylesheet" href="#{request.contextPath}/plugins/datepicker/datepicker3.css" />
         <!-- DataTables -->
-        <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap4.css" />
+        <link rel="stylesheet" href="#{request.contextPath}/plugins/datatables/dataTables.bootstrap4.css" />
         <!-- Theme style (comes with Bootstrap) -->
-        <link rel="stylesheet" href="css/adminlte.min.css" />
-        <link rel="stylesheet" href="css/adminlte.css" />
+        <link rel="stylesheet" href="#{request.contextPath}/css/adminlte.min.css" />
+        <link rel="stylesheet" href="#{request.contextPath}/css/adminlte.css" />
         <!-- Google Font: Source Sans Pro -->
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet" />
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous"></link>
@@ -82,124 +82,104 @@
                             data-accordion="false">
 
                             <li class="nav-header">Frontdesk System</li>
-                            <li class="nav-item has-treeview">
-                                <a href="#" class="nav-link">
-                                    <i class="fa fa-book-open"></i>
-                                    <p>
-                                        Bookings 
-                                    </p>
+                            <li class="nav-item">
+                                <a href="index.xhtml" class="nav-link">
+                                    <i class="nav-icon fa fa-walking"></i>
+                                    <p>Check In(Walk-in)</p>
                                 </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item has-treeview">
-                                        <a href="checkin.xhtml" class="nav-link">
-                                            <i class="fa fa-vote-yea"></i>
-                                            <p>Online Booking </p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="walkin.xhtml" class="nav-link">
-                                            <i class="nav-icon fa fa-plus"></i>
-                                            <p>Walk-in</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="checkout.xhtml" class="nav-link">
-                                            <i class="nav-icon fa fa-minus"></i>
-                                            <p>Check Out</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="nav-item has-treeview">
-                                <a href="#" class="nav-link">
-                                    <i class="fa fa-user-tie"></i>
-                                    <p>
-                                        Customer
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item has-treeview">
-                                        <a href="customerAccount.xhtml" class="nav-link">
-                                            <i class="fa fa-plus nav-icon"></i>
-                                            <p> Create Account</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="manageAccount.xhtml" class="nav-link">
-                                            <i class="fa nav-icon fa-bars"></i>
-                                            <p>Manage Account</p>
-                                        </a>
-                                    </li>
-                                </ul>
                             </li>
 
-                            <li class="nav-item has-treeview">
-                                <a href="#" class="nav-link">
-                                    <i class="fa fa-concierge-bell"></i>
-                                    <p>
-                                        Requests and Services
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item has-treeview">
-                                        <a href="laundry.xhtml" class="nav-link">
-                                            <i class="fa fa-plus nav-icon"></i>
-                                            <p>Laundry </p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="lostAndFound.xhtml" class="nav-link">
-                                            <i class="fa fa-plus nav-icon"></i>
-                                            <p> Lost and Found</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href=" roomService.xhtml" class="nav-link">
-                                            <i class="fa fa-plus nav-icon"></i>
-                                            <p>  Room Service</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href=" housekeeping.xhtml" class="nav-link">
-                                            <i class="fa fa-plus nav-icon"></i>
-                                            <p>  Housekeeping </p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href=" maintenance.xhtml" class="nav-link">
-                                            <i class="fa fa-plus nav-icon"></i>
-                                            <p>  Maintenance </p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="nav-item has-treeview">
-                                <a href="#" class="nav-link">
+
+                            <li class="nav-item">
+                                <a href="checkin.xhtml" class="nav-link">
                                     <i class="fa fa-vote-yea"></i>
-                                    <p>
-                                        Reservation 
-                                    </p>
+                                    <p>Check-In (Online)</p>
                                 </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item has-treeview">
-                                        <a href="makeReservation.xhtml" class="nav-link">
-                                            <i class="fa fa-plus nav-icon"></i>
-                                            <p>Make Reservation</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="cancelReservation.xhtml" class="nav-link">
-                                            <i class="nav-icon fa fa-minus"></i>
-                                            <p>Cancel Reservation</p>
-                                        </a>
-                                    </li>
-                                </ul>
                             </li>
-                            <li class="nav-item" >
-                                <h:form class="nav-link">
-                                    <h:commandButton class="btn btn-danger" action="#{authenticationManagedBean.logout()}" value="Logout" />
-                                </h:form>
+
+                            <li class="nav-item">
+                                <a href="checkout.xhtml" class="nav-link">
+                                    <i class="nav-icon fa fa-minus"></i>
+                                    <p>Check Out</p>
+                                </a>
                             </li>
+                            <li class="nav-item">
+
+                                <li class="nav-item">
+                                    <a href="manageAccount.xhtml" class="nav-link">
+                                        <i class="fa nav-user fa-user"></i>
+                                        <p>Manage Customer Account</p>
+                                    </a>
+                                </li>
+                        </li>
+
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="fa fa-concierge-bell"></i>
+                                <p>
+                                    Requests and Services
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item has-treeview">
+                                    <a href="laundry.xhtml" class="nav-link">
+                                        <i class="fa fa-tshirt nav-icon"></i>
+                                        <p>Laundry </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="lostAndFound.xhtml" class="nav-link">
+                                        <i class="fa fa-box-open nav-icon"></i>
+                                        <p> Lost and Found</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href=" roomService.xhtml" class="nav-link">
+                                        <i class="fa fa-door-open nav-icon"></i>
+                                        <p>  Room Service</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href=" housekeeping.xhtml" class="nav-link">
+                                        <i class="fa fa-toilet-paper nav-icon"></i>
+                                        <p>  Housekeeping </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href=" maintenance.xhtml" class="nav-link">
+                                        <i class="fa fa-tools nav-icon"></i>
+                                        <p>  Maintenance </p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="fa fa-cllipBoard"></i>
+                                <p>
+                                    Reservation 
+                                </p>
+                            </a>`
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item has-treeview">
+                                    <a href="makeReservation.xhtml" class="nav-link">
+                                        <i class="fa fa-plus nav-icon"></i>
+                                        <p>Make Reservation</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="cancelReservation.xhtml" class="nav-link">
+                                        <i class="nav-icon fa fa-ban"></i>
+                                        <p>Cancel Reservation</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item" >
+                            <h:form class="nav-link">
+                                <h:commandButton class="btn btn-danger" action="#{authenticationManagedBean.logout()}" value="Logout" />
+                            </h:form>
+                        </li>
                         </ul>
 
 
@@ -220,53 +200,134 @@
         </div>
 
         <!-- jQuery -->
-        <script src="plugins/jquery/jquery.min.js"></script>
+        <script src="#{request.contextPath}/plugins/jquery/jquery.min.js"></script>
         <!-- jQuery UI 1.11.4 -->
         <script src="https://code.jquery.com/ui/1.12.1/jqueryui.min.js"></script>
         <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
         <script>$.widget.bridge('uibutton', $.ui.button);</script>
         <!-- Bootstrap 4 -->
-        <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="#{request.contextPath}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
         <!-- datepicker -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
-        <script src="plugins/datepicker/bootstrap-datepicker.js"></script>
+        <script src="#{request.contextPath}/plugins/datepicker/bootstrap-datepicker.js"></script>
         <!-- iCheck 1.0.1 -->
-        <script src="plugins/iCheck/icheck.min.js"></script>
+        <script src="#{request.contextPath}/plugins/iCheck/icheck.min.js"></script>
         <!-- AdminLTE App -->
-        <script src="dist/js/adminlte.js"></script>
+        <script src="#{request.contextPath}/dist/js/adminlte.js"></script>
         <!-- jQuery -->
-        <script src="plugins/jquery/jquery.min.js"></script>
+        <script src="#{request.contextPath}/plugins/jquery/jquery.min.js"></script>
         <!-- Bootstrap 4 -->
-        <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="#{request.contextPath}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
         <!-- DataTables -->
-        <script src="plugins/datatables/jquery.dataTables.js"></script>
-        <script src="plugins/datatables/dataTables.bootstrap4.js"></script>
+        <script src="#{request.contextPath}/plugins/datatables/jquery.dataTables.js"></script>
+        <script src="#{request.contextPath}/plugins/datatables/dataTables.bootstrap4.js"></script>
         <!-- SlimScroll -->
-        <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
+        <script src="#{request.contextPath}/plugins/slimScroll/jquery.slimscroll.min.js"></script>
         <!-- FastClick -->
-        <script src="plugins/fastclick/fastclick.js"></script>
+        <script src="#{request.contextPath}/plugins/fastclick/fastclick.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.3/es6-shim.min.js"></script>
+
         <script>
             $('.collapse').collapse();
         </script>
         <!-- page script -->
         <script>
             $(function () {
-                $("#example1").DataTable();
-                $('#example2').DataTable({
-                    "paging": true,
+            $("#example1").DataTable();
+            $('#example2').DataTable({
+            "paging": true,
                     "lengthChange": false,
                     "searching": false,
                     "ordering": true,
                     "info": true,
                     "autoWidth": false
-                });
             });
+            $('#example3').DataTable({
+            "paging": true,
+                    "lengthChange": false,
+                    "searching": false,
+                    "ordering": false,
+                    "info": true,
+                    "autoWidth": false
+            });
+            });
+            $('[data-mask]').each(function () {
+            $(this).mask($(this).attr("data-mask"));
+            });
+            document.addEventListener('DOMContentLoaded', function (e) {
+            FormValidation.formValidation(
+                    document.getElementById('demoForm'),
+            {
+            fields: {
+            cc: {
+            validators: {
+            notEmpty: {
+            message: 'The credit card number is required'
+            },
+                    creditCard: {
+                    message: 'The credit card number is not valid'
+                    },
+            }
+            }
+            },
+                    plugins: {
+                    trigger: new FormValidation.plugins.Trigger(),
+                            tachyons: new FormValidation.plugins.Tachyons(),
+                            submitButton: new FormValidation.plugins.SubmitButton(),
+                            icon: new FormValidation.plugins.Icon({
+                            valid: 'fa fa-check',
+                                    invalid: 'fa fa-times',
+                                    validating: 'fa fa-refresh'
+                            }),
+                    },
+            }
+            )
+                    .on('core.validator.validated', function (e) {
+                    if (e.field === 'cc' &amp;&amp; e.validator === 'creditCard' &amp;&amp;e.result.valid) {
+                    let icon = '';
+                    // e.result.meta.type can be one of
+                    // AMERICAN_EXPRESS, DINERS_CLUB, DINERS_CLUB_US, DISCOVER, JCB, LASER,
+                    // MAESTRO, MASTERCARD, SOLO, UNIONPAY, VISA
+                    switch (e.result.meta.type) {
+                    case 'AMERICAN_EXPRESS':
+                            icon = 'fa fa-cc-amex';
+                    break;
+                    case 'DISCOVER':
+                            icon = 'fa-cc-discover';
+                    break;
+                    case 'MASTERCARD':
+                            case 'DINERS_CLUB_US':
+                            icon = 'fa-cc-mastercard';
+                    break;
+                    case 'VISA':
+                            icon = 'fa-cc-visa';
+                    break;
+                    default:
+                            icon = 'fa-credit-card';
+                    break;
+                    }
 
+                    // Query the icon element
+                    const iconEle = e.element.nextSibling;
+                    iconEle.setAttribute('class', 'fv-plugins-icon ' + icon);
+                    }
+                    })
+                    .on('core.element.validated', function (e) {
+                    if (e.field === 'cc' &amp; &amp; !e.valid) {
+                    const iconEle = e.element.nextSibling;
+                    iconEle.setAttribute('class', 'fv-plugins-icon fa fa-times');
+                    }
+                    });
+            });
             $('.sidebar-toggle-btn').pushMenu(options)
-        </script> 
+        </script>
+
+        <script>
+
+        </script>        
         <ui:insert name="script">Script</ui:insert>
     </h:body>
 </html>

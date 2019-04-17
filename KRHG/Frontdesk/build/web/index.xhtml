@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <body>
 
@@ -38,7 +39,54 @@
                     <!-- /.container-fluid -->
                 </div> 
                 <section class="content">
-              
+                    <table id="example3" class="table table-bordered table-striped">
+                        <tr>
+                            <td><b>Room type</b></td>
+                            <td><b>Price</b></td>
+                        </tr>
+                        <c:forEach items="#{frontDeskManagedBean.listofPricing}" var="o">
+                            <tr>
+                                <td>
+                                    #{frontDeskManagedBean.editNameAway(o.pricingName)}
+                                </td>
+                                <td>
+                                    $ #{o.price} 
+                                </td>
+                            </tr> 
+                        </c:forEach>
+                    </table>
+                    <div class="card card-primary">
+                        <div class="section-center">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="booking-form">
+                                        <h:form>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <span class="form-label">Check In</span>
+                                                        <h:inputText id="todays-date" a:type="date" value = "#{frontDeskManagedBean.todayDate}" readonly="true"></h:inputText>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <span class="form-label">Check out</span>
+                                                        <h:inputText value="#{frontDeskManagedBean.checkoutDateString}" a:type="date" a:min="#{frontDeskManagedBean.tomorrowDate}" required = "true" ></h:inputText>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-btn">
+                                                <h:commandButton class="btn btn-primary" value = "Check Availability" action='#{frontDeskManagedBean.checkAvailability()}'></h:commandButton>
+                                            </div>
+                                        </h:form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+
+                    </div>
                     <!-- /.container-fluid -->
                 </section>
                 <!-- /.content-header -->
@@ -51,6 +99,13 @@
                     $('[data-mask]').each(function () {
                         $(this).mask($(this).attr("data-mask"));
                     });
+
+                    var today = new Date();
+                    var dd = ("0" + (today.getDate())).slice(-2);
+                    var mm = ("0" + (today.getMonth() + 　1)).slice(-2);
+                    var yyyy = today.getFullYear();
+                    today = yyyy + '-' + mm + '-' + dd;
+                    $("#todays-date").attr("value", today);
                 </script>
             </ui:define>
 

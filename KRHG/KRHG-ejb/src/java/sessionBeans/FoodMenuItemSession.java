@@ -86,6 +86,7 @@ public class FoodMenuItemSession implements FoodMenuItemSessionLocal {
             oldFmi.setFoodMenuItemDescription(fmi.getFoodMenuItemDescription());
             oldFmi.setUnitPrice(fmi.getUnitPrice());
             oldFmi.setFoodImage(fmi.getFoodImage());
+            oldFmi.setStatus(fmi.getStatus());
 
  
         } else {

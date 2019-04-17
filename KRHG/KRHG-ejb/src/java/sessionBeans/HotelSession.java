@@ -58,6 +58,20 @@ public class HotelSession implements HotelSessionLocal {
     }
 
     @Override
+    public Hotel getHotelByCode(String hotelCode) throws NoResultException {
+        Query q;
+        q = em.createQuery("SELECT h FROM Hotel h WHERE "
+                + "LOWER(h.hotelCodeName) = :hotelCode");
+        q.setParameter("hotelCode", hotelCode.toLowerCase());
+
+        if (!q.getResultList().isEmpty()) {
+            return (Hotel) q.getResultList().get(0);
+        } else {
+            throw new NoResultException("Hotel not found.");
+        }
+    }
+
+    @Override
     public void deleteHotel(Long hID) throws NoResultException {
         Hotel h = em.find(Hotel.class, hID);
         if (h != null) {
@@ -65,21 +79,21 @@ public class HotelSession implements HotelSessionLocal {
             List<FunctionRoom> listofFunctionRooms = h.getFunctionRooms();
             List<Room> listofRooms = h.getRooms();
             List<HotelFacility> listofHotelFacility = h.getHotelFacilities();
-            
-            for(int i = 0; i < listofFeedBacks.size(); i++){
+
+            for (int i = 0; i < listofFeedBacks.size(); i++) {
                 h.removeFeedback(listofFeedBacks.get(i));
             }
-            for(int i = 0; i < listofFunctionRooms.size(); i++){
+            for (int i = 0; i < listofFunctionRooms.size(); i++) {
                 h.removeFunctionRoom(listofFunctionRooms.get(i));
             }
-            for(int i = 0; i < listofRooms.size(); i++){
+            for (int i = 0; i < listofRooms.size(); i++) {
                 h.removeRoom(listofRooms.get(i));
             }
-            
-            for(int i = 0; i < listofHotelFacility.size(); i++){
+
+            for (int i = 0; i < listofHotelFacility.size(); i++) {
                 h.removeHotelFacility(listofHotelFacility.get(i));
             }
-            
+
             em.remove(h);
         } else {
             throw new NoResultException("Hotel not found");
@@ -170,7 +184,7 @@ public class HotelSession implements HotelSessionLocal {
         roomTypes.add("Standard");
         for (Room r : roomList) {
             if (!roomTypes.contains(r.getRoomType())) {
-                 roomTypes.add(r.getRoomType());
+                roomTypes.add(r.getRoomType());
             }
         }
         return roomTypes;

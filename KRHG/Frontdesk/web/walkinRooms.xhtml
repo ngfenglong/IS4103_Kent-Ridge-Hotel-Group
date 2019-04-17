@@ -1,0 +1,319 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="template.xhtml">
+
+
+            <ui:define name="title">
+                KRHG front desk
+            </ui:define>
+
+            <ui:define name="content">
+                <!-- Content Header (Page header) -->
+                <div class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+
+
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li class="breadcrumb-item active">
+                                        <!--Add Btn-->
+                                    </li>
+                                </ol>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </div> 
+                <section class="content">
+
+
+                    <div class="container-fluid">
+                        <div class="row">
+                            <!-- left column -->
+                            <div class="col-md-10">
+                                <div class="card card-primary">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Walk in Customer</h3>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <!-- form start -->
+                                    <h:form role="form">
+                                        <div class="card-body">
+                                            <section id="seats">
+                                                <input id="seat-1" class="seat-select" type="checkbox" value="1" name="seat[]" />
+                                                <label for="seat-1" class="seat"></label>
+                                                <input id="seat-2" class="seat-select" type="checkbox" value="2" name="seat[]" />
+                                                <label for="seat-2" class="seat"></label>
+                                                <input id="seat-3" class="seat-select" type="checkbox" value="3" name="seat[]" />
+                                                <label for="seat-3" class="seat"></label>
+                                                <input id="seat-4" class="seat-select" type="checkbox" value="4" name="seat[]" />
+                                                <label for="seat-4" class="seat"></label>
+                                            </section>
+                                        </div>
+                                        <!-- /.card-body -->
+
+                                        <div class="card-footer">
+                                            <h:commandButton class="btn btn-primary" value="Back"></h:commandButton>
+
+                                            <h:commandButton class="btn btn-primary" value="Next" ></h:commandButton>
+                                        </div>
+                                    </h:form>
+
+
+
+                                    <h1 style="color:black;">Rooms Selection</h1>
+                                    <div class="container">
+
+                                        <div class="w3ls-reg" style="background:        ">
+                                            <!-- input fields -->
+                                            <div class="inputForm">
+                                                <h2>Fill in Number of Rooms Required</h2>
+                                                <div class="mr_agilemain">
+                                                    <div class="agileits-left">
+                                                        <label> Number of Rooms
+                                                            <span>*</span>
+                                                        </label>
+                                                        <input type="number" id="Numseats" required="true" min="1" />
+                                                    </div>
+                                                </div>
+                                                <button onclick="takeData()">Confirm</button>
+                                            </div>
+                                            <!-- //input fields -->
+                                            <!-- seat availabilty list -->
+                                            <ul class="seat_w3ls">
+                                                <li class="smallBox greenBox">Selected Room</li>
+
+                                                <li class="smallBox redBox">Reserved Room</li>
+
+                                                <li class="smallBox emptyBox">Empty Room</li>
+                                            </ul>
+                                            <!-- seat availabilty list -->
+                                            <!-- seat layout -->
+                                            <div class="seatStructure txt-center" style="overflow-x:auto;">
+                                                <table id="seatsBlock">
+                                                    <p id="notification"></p>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td>1</td>
+                                                        <td>2</td>
+                                                        <td>3</td>
+                                                        <td>4</td>
+                                                        <td>5</td>
+                                                        <td></td>
+                                                        <td>6</td>
+                                                        <td>7</td>
+                                                        <td>8</td>
+                                                        <td>9</td>
+                                                        <td>10</td>
+                                                        <td>11</td>
+                                                        <td>12</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>A</td>
+                                                        <td>
+                                                            <input type="checkbox" class="seats" value="A1" />
+                                                        </td>
+                                                        <td>
+                                                            <input type="checkbox" class="seats" value="A2" />
+                                                        </td>
+                                                        <td>
+                                                            <input type="checkbox" class="seats" value="A3" />
+                                                        </td>
+                                                        <td>
+                                                            <input type="checkbox" class="seats" value="A4" />
+                                                        </td>
+                                                        <td>
+                                                            <input type="checkbox" class="seats" value="A5" />
+                                                        </td>
+                                                        <td class="seatGap"></td>
+                                                        <td>
+                                                            <input type="checkbox" class="seats" value="A6" />
+                                                        </td>
+                                                        <td>
+                                                            <input type="checkbox" class="seats" value="A7" />
+                                                        </td>
+                                                        <td>
+                                                            <input type="checkbox" class="seats" value="A8" />
+                                                        </td>
+                                                        <td>
+                                                            <input type="checkbox" class="seats" value="A9" />
+                                                        </td>
+                                                        <td>
+                                                            <input type="checkbox" class="seats" value="A10" />  
+                                                        </td>
+                                                        <td>
+                                                            <input type="checkbox" class="seats" value="A11" /> 
+                                                        </td>
+                                                        <td>
+                                                            <input type="checkbox" class="seats" value="A12" />
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>B</td>
+                                                        <td>
+                                                            <input type="checkbox" class="seats" value="B1" />
+                                                        </td>
+                                                        <td>
+                                                            <input type="checkbox" class="seats" value="B2" /> 
+                                                        </td>
+                                                        <td>
+                                                            <input type="checkbox" class="seats" value="B3" />
+                                                        </td>
+                                                        <td>
+                                                            <input type="checkbox" class="seats" value="B4" />
+                                                        </td>
+                                                        <td>
+                                                            <input type="checkbox" class="seats" value="B5" />
+                                                        </td>
+                                                        <td></td>
+                                                        <td>
+                                                            <input type="checkbox" class="seats" value="B6" />
+                                                        </td>
+                                                        <td>
+                                                            <input type="checkbox" class="seats" value="B7" />
+                                                        </td>
+                                                        <td>
+                                                            <input type="checkbox" class="seats" value="B8" />
+                                                        </td>
+                                                        <td>
+                                                            <input type="checkbox" class="seats" value="B9" />
+                                                        </td>
+                                                        <td>
+                                                            <input type="checkbox" class="seats" value="B10" />
+                                                        </td>
+                                                        <td>
+                                                            <input type="checkbox" class="seats" value="B11" />
+                                                        </td>
+                                                        <td>
+                                                            <input type="checkbox" class="seats" value="B12" />
+                                                        </td>
+                                                    </tr>
+
+
+                                                </table>
+
+                                                <br /><br />
+
+                                                <button onclick="updateTextArea()">Confirm Selection</button>
+                                            </div>
+                                            <!-- //seat layout -->
+                                            <!-- details after booking displayed here -->
+                                            <div class="displayerBoxes txt-center" style="overflow-x:auto;">
+                                                <table class="Displaytable w3ls-table" width="100%">
+                                                    <tr>
+                                                        <th>Number of Rooms</th>
+                                                        <th>Rooms</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <textarea id="NumberDisplay"></textarea>
+                                                        </td>
+                                                        <td>
+                                                            <textarea id="seatsDisplay"></textarea>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+
+                                            <!-- //details after booking displayed here -->
+                                        </div>
+
+                                    </div>
+                                    <!-- js -->
+                                    <script src="js/jquery-2.2.3.min.js"></script>
+                                    <!-- //js -->
+                                    <!-- script for seat selection -->
+                                    <script>
+                                        function onLoaderFunc() {
+                                            $(".seatStructure *").prop("disabled", true);
+                                            $(".displayerBoxes *").prop("disabled", true);
+                                        }
+
+                                        function takeData() {
+                                            if (($("#Numseats").val().length == 0)) {
+                                                alert("Please Select Number of Rooms");
+                                            } else {
+                                                $(".inputForm *").prop("disabled", true);
+                                                $(".seatStructure *").prop("disabled", false);
+                                                document.getElementById("notification").innerHTML =
+                                                        "<b style='margin-bottom:0px;background:#ff9800;letter-spacing:1px;'>Select Room(s)</b>";
+                                            }
+                                        }
+
+
+                                        function updateTextArea() {
+
+                                            if ($("input:checked").length == ($("#Numseats").val())) {
+                                                $(".seatStructure *").prop("disabled", true);
+
+                                                var allNumberVals = [];
+                                                var allSeatsVals = [];
+
+                                                //Storing in Array
+                                                allNumberVals.push($("#Numseats").val());
+                                                $('#seatsBlock :checked').each(function () {
+                                                    allSeatsVals.push($(this).val());
+                                                });
+
+                                                //Displaying 
+                                                $('#NumberDisplay').val(allNumberVals);
+                                                $('#seatsDisplay').val(allSeatsVals);
+                                            } else {
+                                                alert("Please select " + ($("#Numseats").val()) + " seats")
+                                            }
+                                        }
+
+
+                                        function myFunction() {
+                                            alert($("input:checked").length);
+                                        }
+
+                                        $(":checkbox").click(function () {
+                                            if ($("input:checked").length == ($("#Numseats").val())) {
+                                                $(":checkbox").prop('disabled', true);
+                                                $(':checked').prop('disabled', false);
+                                            } else {
+                                                $(":checkbox").prop('disabled', false);
+                                            }
+                                        });
+                                    </script>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.container-fluid -->
+                </section>
+                <!-- /.content-header -->
+                <!-- Main content -->
+
+            </ui:define>
+
+            <ui:define name="script">
+                <script>
+                    $('[data-mask]').each(function () {
+                        $(this).mask($(this).attr("data-mask"));
+                    });
+                </script>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

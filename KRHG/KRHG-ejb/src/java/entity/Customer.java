@@ -7,6 +7,8 @@ package entity;
 
 import error.NoResultException;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -24,8 +26,6 @@ import javax.persistence.TemporalType;
  */
 @Entity
 public class Customer implements Serializable {
-
-
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -46,19 +46,21 @@ public class Customer implements Serializable {
     private Date dateJoined;
     private boolean accountStatus;
     private boolean member;
+    private boolean canResetPassword;
 
     public Customer() {
         bookingHistories = new ArrayList<RoomBooking>();
         currentBookings = new ArrayList<RoomBooking>();
     }
-    
-    public Customer(String email, String password){
+
+    public Customer(String email, String password) {
         this();
         this.email = email;
         this.password = password;
+        canResetPassword = false;
     }
-    
-    public Customer(Long customerID, String email, String password){
+
+    public Customer(Long customerID, String email, String password) {
         this();
         this.customerID = customerID;
         this.email = email;
@@ -77,7 +79,7 @@ public class Customer implements Serializable {
         this.dateJoined = dateJoined;
         this.accountStatus = accountStatus;
     }
-    
+
     public Customer(Long customerID, String firstName, String lastName, String gender, String password, int points, String email, String mobileNum, Date dateJoined, boolean accountStatus) {
         this();
         this.customerID = customerID;
@@ -90,9 +92,8 @@ public class Customer implements Serializable {
         this.mobileNum = mobileNum;
         this.dateJoined = dateJoined;
         this.accountStatus = accountStatus;
-    }    
-    
-    
+    }
+
     public Long getCustomerID() {
         return customerID;
     }
@@ -105,26 +106,21 @@ public class Customer implements Serializable {
         return firstName;
     }
 
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
-
 
     public String getLastName() {
         return lastName;
     }
 
-
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-    
 
     public String getGender() {
         return gender;
     }
-
 
     public void setGender(String gender) {
         this.gender = gender;
@@ -161,6 +157,7 @@ public class Customer implements Serializable {
     public void setCurrentBookings(List<RoomBooking> currentBookings) {
         this.currentBookings = currentBookings;
     }
+
     public String getEmail() {
         return email;
     }
@@ -192,7 +189,6 @@ public class Customer implements Serializable {
     public void setMember(boolean member) {
         this.member = member;
     }
-    
 
     public boolean getAccountStatus() {
         return accountStatus;
@@ -200,6 +196,14 @@ public class Customer implements Serializable {
 
     public void setAccountStatus(boolean accountStatus) {
         this.accountStatus = accountStatus;
+    }
+
+    public boolean isCanResetPassword() {
+        return canResetPassword;
+    }
+
+    public void setCanResetPassword(boolean canResetPassword) {
+        this.canResetPassword = canResetPassword;
     }
 
     @Override
@@ -241,5 +245,11 @@ public class Customer implements Serializable {
         } else {
             throw new NoResultException("Room booking has already been done");
         }
+    }
+
+    public String displayDateJoined() {
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        
+        return (dateFormat.format(dateJoined));
     }
 }

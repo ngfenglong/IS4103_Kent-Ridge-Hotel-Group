@@ -30,6 +30,9 @@ public class PaymentTransaction implements Serializable {
     private double initialPayment;
     private double finalPayment;
     private String paymentType;
+    private String firstName;
+    private String lastName;
+    private String email;
     @Temporal(TemporalType.DATE)
     private Date transactionDateTime;
     @OneToOne
@@ -151,6 +154,31 @@ public class PaymentTransaction implements Serializable {
         }
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    
     @Override
     public int hashCode() {
         int hash = 0;

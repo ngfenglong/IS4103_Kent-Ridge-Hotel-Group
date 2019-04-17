@@ -17,13 +17,17 @@ import entity.Room;
 import entity.RoomBooking;
 import entity.RoomFacility;
 import error.NoResultException;
+import java.io.IOException;
+import java.io.PrintWriter;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
@@ -31,6 +35,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -38,6 +43,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletResponse;
 import sessionBeans.BookingSessionLocal;
 import sessionBeans.FeedbackSessionLocal;
 import sessionBeans.HotelFacilitySessionLocal;
@@ -138,53 +144,66 @@ public class WebsiteManagedBean implements Serializable {
         }
     }
 
-    public String checkAvailability() throws NoResultException, ParseException {
-        List<RoomBooking> allBooking = bookingSessionLocal.getAllRoomBookingByStatus("checkedout", selectedHotel.getHotelCodeName());
-        List<RoomBooking> checkList = new ArrayList<RoomBooking>();
-        List<Room> returnList = new ArrayList<Room>();
-        hasRoom = false;
+    public String checkAvailability() throws NoResultException, ParseException, IOException {
 
-        //Convert String to Date
         Date tempCheckIn = new SimpleDateFormat("yyyy-MM-dd").parse(checkInTB);
         Date tempCheckOut = new SimpleDateFormat("yyyy-MM-dd").parse(checkOutTB);
 
-        //Get roombooking by type & Status
-        if (allBooking != null) {
-            for (RoomBooking rb : allBooking) {
-                if (rb.getRoomType().equals(roomTypeTB) && rb.getStatus().equals("checkedout")) {
-                    RoomBooking tempRoomBooking = rb;
-                    checkList.add(tempRoomBooking);
-                }
-            }
+        if (tempCheckOut.compareTo(tempCheckIn) > 0) {
 
-            allBooking = checkList;
-            checkList.clear();
-            for (RoomBooking rb : allBooking) {
-                // Didn't Hit the Booking Date
-                if ((tempCheckIn.before(rb.getBookInDate()) && tempCheckOut.before(rb.getBookInDate())) || (tempCheckIn.after(rb.getBookInDate()) && tempCheckOut.after(rb.getBookInDate()))) {
+            List<RoomBooking> allBooking = bookingSessionLocal.getAllRoomBookingByHotel(selectedHotel.getHotelCodeName());
+            List<RoomBooking> checkList = new ArrayList<RoomBooking>();
+            List<Room> returnList = new ArrayList<Room>();
+            hasRoom = false;
 
-                } // Hit the booking date AKA Not Available
-                else {
-                    RoomBooking tempRoomBooking = rb;
-                    checkList.add(tempRoomBooking);
-                }
-            }
-
-            if (checkList.size() < roomSessionLocal.getRoomByHotelNameAndRoomType(roomTypeTB, selectedHotel.getHotelCodeName()).size()) {
-                hasRoom = true;
-                List<Room> filterList = roomSessionLocal.getRoomByHotelNameAndRoomType(roomTypeTB, selectedHotel.getHotelCodeName());
-                for (Room r : filterList) {
-                    if (!r.getStatus().toLowerCase().equals("occupied")) {
-                        Room tempRoom = r;
-                        returnList.add(r);
+            //Convert String to Date
+            //Get roombooking by type & Status
+            if (allBooking != null) {
+                for (RoomBooking rb : allBooking) {
+                    if (rb.getRoomType().equals(roomTypeTB) && !rb.getStatus().equals("checkedout")) {
+                        RoomBooking tempRoomBooking = rb;
+                        checkList.add(tempRoomBooking);
                     }
                 }
-                roomAvailable = returnList;
+
+                allBooking = checkList;
+                checkList.clear();
+                for (RoomBooking rb : allBooking) {
+                    // Didn't Hit the Booking Date
+                    if ((tempCheckIn.before(rb.getBookInDate()) && tempCheckOut.before(rb.getBookInDate())) || (tempCheckIn.after(rb.getBookInDate()) && tempCheckOut.after(rb.getBookInDate()))) {
+
+                    } // Hit the booking date AKA Not Available
+                    else {
+                        RoomBooking tempRoomBooking = rb;
+                        checkList.add(tempRoomBooking);
+                    }
+                }
+
+                if (checkList.size() < roomSessionLocal.getRoomByHotelNameAndRoomType(roomTypeTB, selectedHotel.getHotelCodeName()).size()) {
+                    hasRoom = true;
+                    List<Room> filterList = roomSessionLocal.getRoomByHotelNameAndRoomType(roomTypeTB, selectedHotel.getHotelCodeName());
+                    for (Room r : filterList) {
+                        if (!r.getStatus().toLowerCase().equals("occupied")) {
+                            Room tempRoom = r;
+                            returnList.add(r);
+                        }
+                    }
+                    roomAvailable = returnList;
+                }
+            } else {
+                roomAvailable = roomSessionLocal.getRoomByHotelNameAndRoomType(roomTypeTB, selectedHotel.getHotelCodeName());
             }
+            return "CheckAvail.xhtml?faces-redirect=true";
         } else {
-            roomAvailable = roomSessionLocal.getRoomByHotelNameAndRoomType(roomTypeTB, selectedHotel.getHotelCodeName());
+            HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+            PrintWriter out = response.getWriter();
+            out.println("<script type=\"text/javascript\">");
+            out.println("alert('Checkout date is invalid!');");
+            out.println("</script>");
+
+            return "booking1.xhtml?faces-redirect=true";
         }
-        return "CheckAvail.xhtml?faces-redirect=true";
+
     }
 
     public String makePayment() throws ParseException, NoResultException {
@@ -232,7 +251,9 @@ public class WebsiteManagedBean implements Serializable {
         p.setCreditCard(cc);
         p.setTotalPrice(totalPrice);
         p.setInitialPayment(totalPrice);
-
+        p.setFirstName(fNameTB);
+        p.setLastName(lNameTB);
+        p.setEmail(emailAddressTB);
         p.setPaymentType(paymentMethod);
         p.setRoomsBooked(roomsBooked);
         paymentTransactionSessionLocal.createPaymentTransaction(p);
@@ -989,6 +1010,61 @@ public class WebsiteManagedBean implements Serializable {
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public String getCheckinMinDate() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(java.util.Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()));
+        cal.add(Calendar.DATE, 1);
+        Date modifiedDate = cal.getTime();
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        return (dateFormat.format(modifiedDate));
+    }
+
+    public String getCheckinMaxDate() {
+//        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//
+//        Date dt = new Date();
+//        return (dateFormat.format(LocalDateTime.from(dt.toInstant()).plusDays(2)));
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(java.util.Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()));
+        cal.add(Calendar.YEAR, 1);
+        Date modifiedDate = cal.getTime();
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        return (dateFormat.format(modifiedDate));
+    }
+
+    public String getCheckOutMinDate() {
+//        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//
+//        Date dt = new Date();
+//        return (dateFormat.format(LocalDateTime.from(dt.toInstant()).plusDays(1)));
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(java.util.Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()));
+        cal.add(Calendar.DATE, 2);
+        Date modifiedDate = cal.getTime();
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        return (dateFormat.format(modifiedDate));
+
+    }
+
+    public String getCheckOutMaxDate() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(java.util.Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()));
+        cal.add(Calendar.DATE, 1);
+        cal.add(Calendar.YEAR, 1);
+        Date modifiedDate = cal.getTime();
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        return (dateFormat.format(modifiedDate));
     }
 
     public String goConfirmation() {
