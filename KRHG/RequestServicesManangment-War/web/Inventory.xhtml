@@ -4,7 +4,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core">
 
     <body>
 
@@ -27,7 +28,7 @@
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li><a href="index.xhtml">Home</a></li>
-                                    
+
                                     <li class="active">Inventory</li>
                                 </ol>
                             </div>
@@ -37,103 +38,89 @@
                     </div>
                     <!-- /.container-fluid -->
                 </div> 
-                <section class="content">
+              <section class="content">
                     <div class="col-md-9">
-                        <div class="card">
-                            <div class="card-header p-2">
-                                <ul class="nav nav-pills">
-                                    <li class="nav-item"><a class="nav-link active" href="#Toiletries" data-toggle="tab">Toiletries</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#MiniBar" data-toggle="tab">MiniBar</a></li>
-                                 
-                                </ul>
-                            </div><!-- /.card-header -->
-                            <div class="card-body">
-                                <div class="tab-content">
-                                    <div class="active tab-pane" id="Toiletries">
-                                        <div class="col-md-12">
-                                            <div class="card">
+                    
+                      
+                           
 
-                                                <!-- /.card-header -->
-                                                <div class="card-body p-0">
-                                                    <table class="table">
+
+
+                                <div class="col-md-12">
+                                    <div class="box box-primary" style="padding:20px">
+
+                                        <!-- /.card-header -->
+                                     
+                                            <h:form id="inventoryFrom">
+                                                <table class="table">
+                                                    <tr>
+
+                                                        <th>Items</th>
+                                                        <th>Status</th>
+                                                    
+                                                        <th width="0%"></th>
+
+                                                    </tr>
+                                                    <c:forEach items="#{requestServicesManagedBean.getMiniBarItems}" var="o" varStatus="count">
+
                                                         <tr>
-                                                            <th style="width: 10px">#</th>
-                                                            <th>Task</th>
-                                                            <th>Progress</th>
-                                                            <th style="width: 40px">Label</th>
+
+                                                            <td>#{o.minibarItemName}</td>
+                                                            <c:if test="#{requestServicesManagedBean.defineTheNumber(o.alert,o.currentStock) lt 30}"> 
+                                                                <td><span class="badge bg-danger">#{requestServicesManagedBean.defineTheNumber(o.alert,o.currentStock)}%</span></td>
+                                                            </c:if> 
+                                                            <c:if test="#{requestServicesManagedBean.defineTheNumber(o.alert,o.currentStock) lt 70 and requestServicesManagedBean.defineTheNumber(o.alert,o.currentStock) gt 30}">
+                                                                <td><span class="badge bg-warning">#{requestServicesManagedBean.defineTheNumber(o.alert,o.currentStock)}%</span></td>
+                                                            </c:if>
+                                                            <c:if test="#{requestServicesManagedBean.defineTheNumber(o.alert,o.currentStock) gt 70}">
+                                                                <td><span class="badge bg-success">#{requestServicesManagedBean.defineTheNumber(o.alert,o.currentStock)}%</span></td>
+                                                            </c:if>
+                                                            <td> <h:inputText size="3" value="#{requestServicesManagedBean.minibarStockWithoutUpdate[count.index]}"></h:inputText></td>
+
                                                         </tr>
-                                                        <tr>
-                                                            <td>1.</td>
-                                                            <td>Update software</td>
-                                                            <td>
-                                                                <div class="progress progress-xs">
-                                                                    <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                                                                </div>
-                                                            </td>
-                                                            <td><span class="badge bg-danger">55%</span></td>
-                                                        </tr>
+                                                    </c:forEach>
+                                                    <tr>
+                                                        <td><h:commandButton class="btn btn-primary"  value="Update" action="#{requestServicesManagedBean.updateInventory()}">
+                                                                <f:ajax execute="@form" render=":formmodal"></f:ajax>
+                                                            </h:commandButton></td>
 
-                                                    </table>
-                                                </div>
-                                                <!-- /.card-body -->
-                                            </div>
-                                        </div>
+                                                    </tr>
+                                                </table>
+                                            </h:form>
+                                       
+                                        <!-- /.card-body -->
                                     </div>
-
-                                    <div class="tab-pane" id="MiniBar">
-                                        <div class="col-md-12">
-                                            <div class="card">
-
-                                                <!-- /.card-header -->
-                                                <div class="card-body p-0">
-                                                    <h:form>
-                                                        <table class="table">
-                                                            <tr>
-
-                                                                <th>Items</th>
-                                                                <th>Status</th>
-                                                                <th width="0%"></th>
-
-                                                            </tr>
-                                                            <c:forEach items="#{requestServicesManagedBean.getMiniBarItems}" var="o">
-
-                                                                <tr>
-
-                                                                    <td>#{o.minibarItemName}</td>
-                                                                    <c:if test="#{requestServicesManagedBean.defineTheNumber(o.alert,o.currentStock) lt 30}"> 
-                                                                        <td><span class="badge bg-danger">#{requestServicesManagedBean.defineTheNumber(o.alert,o.currentStock)}%</span></td>
-                                                                    </c:if> 
-                                                                    <c:if test="#{requestServicesManagedBean.defineTheNumber(o.alert,o.currentStock) lt 70}">
-                                                                        <td><span class="badge bg-warning">#{requestServicesManagedBean.defineTheNumber(o.alert,o.currentStock)}%</span></td>
-                                                                    </c:if>
-                                                                    <c:if test="#{requestServicesManagedBean.defineTheNumber(o.alert,o.currentStock) gt 70}">
-                                                                        <td><span class="badge bg-success">#{requestServicesManagedBean.defineTheNumber(o.alert,o.currentStock)}%</span></td>
-                                                                    </c:if>
-                                                                    <td><h:commandLink class="fa fa-plus"></h:commandLink></td>
-                                                                </tr>
-                                                            </c:forEach>
-                                                        </table>
-                                                    </h:form>
-                                                </div>
-                                                <!-- /.card-body -->
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                  
-
                                 </div>
 
-                            </div><!-- /.card-body -->
-                        </div>
+
+
+
+
+
+                     
                         <!-- /.nav-tabs-custom -->
                     </div>
                     <!-- /.container-fluid -->
                 </section>
                 <!-- /.content-header -->
                 <!-- Main content -->
+                <h:form id="formmodal">
+                    <div id="modal" class="#{requestServicesManagedBean.styleClass}" role="alert">
+                        <div class="cd-popup-container">
+                            <p class="popup-content">#{requestServicesManagedBean.updateMsg}</p>
 
+                            <ul class="cd-buttons" style="padding-inline-start: unset; padding:0px">
+
+                                <li style="width:100%" ><h:commandLink  action="#{requestServicesManagedBean.inventoryOK()}" class="cd-popup-confirm" value="ok">
+                                        <f:ajax execute="@form" render="@none"></f:ajax>
+                                    </h:commandLink></li>
+
+                                <!--<li style="background-color:lightslategray"><a onclick="changeStyleCheck()" class="cd-popup-closemodal">No</a></li>-->
+
+                            </ul>
+                        </div> <!-- cd-popup-container -->
+                    </div> <!-- cd-popup -->
+                </h:form>
             </ui:define>
 
             <ui:define name="script">

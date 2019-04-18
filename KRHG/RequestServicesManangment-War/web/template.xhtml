@@ -87,24 +87,24 @@
         </script>
 
         <script type="text/javascript">
-             //<![CDATA[
+            //<![CDATA[
             function getFOList(id) {
                 console.log("hi");
                 var orders = document.getElementsByClassName("item");
-                for(i=0;i<orders.length;i++){
+                for (i = 0; i < orders.length; i++) {
                     orders[i].style.backgroundColor = '';
                 }
-                    console.log(id);
-                    console.log(document.getElementById('myForm:selectfID'));
-                    document.getElementById('myForm:selectfID').value = id;
-                    document.getElementById(id).style.backgroundColor="aliceblue"
-                  
-//                        console.log(orders[i].id);
-                        console.log(document.getElementById(id).style.backgroundColor);
+                console.log(id);
+                console.log(document.getElementById('myForm:selectfID'));
+                document.getElementById('myForm:selectfID').value = id;
+                document.getElementById(id).style.backgroundColor = "aliceblue"
 
-                }
-       
- //]]>
+//                        console.log(orders[i].id);
+                console.log(document.getElementById(id).style.backgroundColor);
+
+            }
+
+            //]]>
 
         </script>
 
@@ -178,7 +178,7 @@
                                 <a href="foodMenu.xhtml" class="nav-link" >
                                     <i class="fa fa-credit-card"></i>
                                     <p>
-                                         Food Menu
+                                        Food Menu
                                     </p>
                                 </a>
                             </li>
@@ -187,11 +187,11 @@
                                 <a href="foodOrder.xhtml" class="nav-link" >
                                     <i class="fas fa-swimming-pool"></i>
                                     <p>
-                                         Food Orders
+                                        Food Orders
                                     </p>
                                 </a>
                             </li>
-                            
+
                             <li class="nav-item" >
                                 <a href="foodDelivery.xhtml" class="nav-link" >
                                     <i class="fas fa-swimming-pool"></i>
@@ -283,7 +283,7 @@
 
 
         <script>
-                    $('.collapse').collapse();
+            $('.collapse').collapse();
         </script>
         <!-- page script -->
         <script type="text/javascript">
@@ -310,11 +310,11 @@
             //}
             //]]>
 
-$(function(){
-	$('#scroll').slimScroll({
-		height: 'calc(100vh - 100px);'
-	});
-});
+            $(function () {
+                $('#scroll').slimScroll({
+                    height: 'calc(100vh - 100px);'
+                });
+            });
 
             function test(data) {
                 var status = data.status; // Can be "begin", "complete" or "success".
@@ -335,35 +335,35 @@ $(function(){
                         break;
                 }
             }
-            
-              window.onload = function() {
 
-    document.getElementById("clothingForm").style.display = "none";
-     document.getElementById("deliveryDetails").style.display = "none"
+            window.onload = function () {
 
- document.getElementById("laundryDetails").style.display = "none";
-  };
+                document.getElementById("clothingForm").style.display = "none";
+                document.getElementById("deliveryDetails").style.display = "none"
 
-  function showform(a) {
-  
-    if (a == 0) {
-         console.log(a);
-         document.getElementById("laundryDetails").style.display = "none";
-          document.getElementById("deliveryDetails").style.display = "none"
-      document.getElementById("clothingForm").style.display = "block";
-    } else if (a==1) {
-        console.log(a);
-      document.getElementById("clothingForm").style.display = "none";
-      document.getElementById("deliveryDetails").style.display = "none"
-      document.getElementById("laundryDetails").style.display = "block";
-    } else if (a==2){
-         console.log(a);
-       document.getElementById("deliveryDetails").style.display = "block"
-       document.getElementById("clothingForm").style.display = "none";
-        document.getElementById("laundryDetails").style.display = "none";
-    }
-      
-  }
+                document.getElementById("laundryDetails").style.display = "none";
+            };
+
+            function showform(a) {
+
+                if (a == 0) {
+                    console.log(a);
+                    document.getElementById("laundryDetails").style.display = "none";
+                    document.getElementById("deliveryDetails").style.display = "none"
+                    document.getElementById("clothingForm").style.display = "block";
+                } else if (a == 1) {
+                    console.log(a);
+                    document.getElementById("clothingForm").style.display = "none";
+                    document.getElementById("deliveryDetails").style.display = "none"
+                    document.getElementById("laundryDetails").style.display = "block";
+                } else if (a == 2) {
+                    console.log(a);
+                    document.getElementById("deliveryDetails").style.display = "block"
+                    document.getElementById("clothingForm").style.display = "none";
+                    document.getElementById("laundryDetails").style.display = "none";
+                }
+
+            }
         </script>
 
         <script>
@@ -449,8 +449,13 @@ $(function(){
             function update(o) {
 
 
-           
+
                 document.getElementById("formy:housekeeper").value = o;
+            }
+
+            function changeforInventory(inventoryNumber) {
+                document.getElementById("inventoryFrom:inventoryValue").value = inventoryNumber;
+
             }
             // $('.sidebar-toggle-btn').pushMenu(options)
 
