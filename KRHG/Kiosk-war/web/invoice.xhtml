@@ -49,17 +49,17 @@
 
                     <div class="row" style="overflow-y: scroll; max-height: 450px; width:100%">
                             <col class="col-sm-12 col-xl-12">
-                            <p class="paymentinfo col-lg-12 col-sm-6">Minibar:<span style="position: absolute; right:10px; " class="bookinginfo">$10</span></p>
-                            <p class="paymentinfo col-lg-12 col-sm-6">Room Service - Aglio Olio:<span style="position: absolute; right:10px" class="bookinginfo">$74</span></p>
-                            <p class="paymentinfo col-lg-12 col-sm-6">Laundry Service:<span style="position: absolute; right:10px; " class="bookinginfo">$30</span></p>
+                                <p class="paymentinfo col-lg-12 col-sm-6">Minibar:<span style="position: absolute; right:10px; " class="bookinginfo">#{kioskmanagedBean.minibarPrice()}</span></p>
+                                <p class="paymentinfo col-lg-12 col-sm-6">Room Service<span style="position: absolute; right:10px" class="bookinginfo">#{kioskmanagedBean.roomServicePrice()}</span></p>
+                            <p class="paymentinfo col-lg-12 col-sm-6">Laundry Service:<span style="position: absolute; right:10px; " class="bookinginfo">#{kioskmanagedBean.laundryPrice()}</span></p>
   
   
                         </col>
                     </div>
             
-                    <p class="bookinginfo" style="border-top:2px solid lightgrey;border-bottom:none; margin:0px; width:100%;">Guest Service Charge(10%): <span class="bookinginfo">$11.40</span></p><br/>
-                    <p class="bookinginfo" style="border:none; margin:0px ;width:100%">Taxes(7%): <span class="bookinginfo">$8.80</span></p><br/>
-                    <p class="bookinginfo" style="border:none; margin:0px; font-weight: bold; width:100%">Total: <span class="bookinginfo">$134.20</span></p>
+                    <p class="bookinginfo" style="border-top:2px solid lightgrey;border-bottom:none; margin:0px; width:100%;">Guest Service Charge(10%): <span class="bookinginfo">#{kioskmanagedBean.GSTPrice()}</span></p><br/>
+                    <p class="bookinginfo" style="border:none; margin:0px ;width:100%">Taxes(7%): <span class="bookinginfo">#{kioskmanagedBean.TaxPrice()}</span></p><br/>
+                    <p class="bookinginfo" style="border:none; margin:0px; font-weight: bold; width:100%">Total: <span class="bookinginfo">#{kioskmanagedBean.totaltotaltotalPrice()}</span></p>
 
             </div>
 

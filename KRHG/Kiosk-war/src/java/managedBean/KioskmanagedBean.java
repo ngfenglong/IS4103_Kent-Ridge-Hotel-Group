@@ -5,8 +5,11 @@ package managedBean;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import entity.FoodOrder;
 import entity.Hotel;
 import entity.HouseKeepingOrder;
+import entity.LaundryOrder;
+import entity.MinibarOrder;
 import entity.PaymentTransaction;
 import entity.Room;
 import entity.RoomBooking;
@@ -94,6 +97,11 @@ public class KioskmanagedBean implements Serializable {
     private String checkoutPassport;
     private PaymentTransaction checkoutPaymentTransaction;
     private Room checkoutRoom;
+
+    private String GSTPrice;
+    private double totaltotalPrice = 0;
+    private double GST;
+    private double TAX;
 
     public KioskmanagedBean() {
     }
@@ -206,7 +214,7 @@ public class KioskmanagedBean implements Serializable {
             //Room checkoutRoombooking = roomSessionLocal.getRoom(roomNumber,hotelcode);
             checkoutRoom = getRoom();
             if (checkoutRoom == null) {
-                 checkoutRoomNumber=null;
+                checkoutRoomNumber = null;
                 out.println("<script type=\"text/javascript\">");
                 out.println("alert('No result found');");
                 out.println("</script>");
@@ -215,7 +223,7 @@ public class KioskmanagedBean implements Serializable {
 
             checkoutRoombooking = getRoombooking();
             if (checkoutRoombooking == null) {
-                 checkoutRoomNumber=null;
+                checkoutRoomNumber = null;
                 out.println("<script type=\"text/javascript\">");
                 out.println("alert('No result found');");
                 out.println("</script>");
@@ -232,7 +240,7 @@ public class KioskmanagedBean implements Serializable {
             return "checkouttimer.xhtml?faces-redirect=true";
 
         } catch (NoResultException e) {
-            checkoutRoomNumber=null;
+            checkoutRoomNumber = null;
             out.println("<script type=\"text/javascript\">");
             out.println("alert('No result found');");
             out.println("</script>");
@@ -272,7 +280,7 @@ public class KioskmanagedBean implements Serializable {
 
     public Room getRoom() {
         for (Room rm : roomSessionLocal.getAllRooms()) {
-            if (rm.getRoomNumber().equals(checkoutRoomNumber) && rm.getHotel().getHotelCodeName().equals(hotelCode)&&rm.getStatus().equalsIgnoreCase("occupied")) {
+            if (rm.getRoomNumber().equals(checkoutRoomNumber) && rm.getHotel().getHotelCodeName().equals(hotelCode) && rm.getStatus().equalsIgnoreCase("occupied")) {
                 return rm;
             }
         }
@@ -282,7 +290,7 @@ public class KioskmanagedBean implements Serializable {
     public String allocateRoom() throws NoResultException, IOException {
         HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
         PrintWriter out = response.getWriter();
-
+        System.out.println("AllocateRoom");
         allocatedRoomNumbers = new ArrayList<>();
         for (RoomBooking rm : checkinPayment.getRoomsBooked()) {
             String roomtype = rm.getRoomType();
@@ -598,5 +606,60 @@ public class KioskmanagedBean implements Serializable {
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public String minibarPrice() {
+
+        List<RoomBooking> rb = checkoutPaymentTransaction.getRoomsBooked();
+        int totalPrice = 0;
+
+        for (RoomBooking rbb : rb) {
+            for (MinibarOrder mbO : rbb.getListOfMinibarOrders()) {
+                totalPrice += mbO.getTotalPrice();
+            }
+        }
+        totaltotalPrice += totalPrice;
+        return "$" + totalPrice;
+    }
+
+    public String roomServicePrice() {
+        List<RoomBooking> rb = checkoutPaymentTransaction.getRoomsBooked();
+        int totalPrice = 0;
+        for (RoomBooking rbb : rb) {
+            for (FoodOrder mbO : rbb.getListOfFoodOrders()) {
+                totalPrice += mbO.getTotalPrice();
+            }
+        }
+        totaltotalPrice += totalPrice;
+        return "$" + totalPrice;
+    }
+
+    public String laundryPrice() {
+        List<RoomBooking> rb = checkoutPaymentTransaction.getRoomsBooked();
+        int totalPrice = 0;
+        for (RoomBooking rbb : rb) {
+            for (LaundryOrder mbO : rbb.getListOfLaundryOrders()) {
+                totalPrice += mbO.getTotalPrice();
+            }
+        }
+        totaltotalPrice += totalPrice;
+        return "$" + totalPrice;
+    }
+
+    public String GSTPrice() {
+        double gst = totaltotalPrice * 0.1;
+        GST = gst;
+        return "$" + gst;
+    }
+
+    public String TaxPrice() {
+        double tax = totaltotalPrice * 0.07;
+        TAX = tax;
+        return "$" + tax;
+    }
+    
+    public String totaltotaltotalPrice(){
+       totaltotalPrice = totaltotalPrice + TAX + GST;
+       return "$"+totaltotalPrice;
     }
 }
