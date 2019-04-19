@@ -79,7 +79,7 @@
                                                     #{fo.status}</span>
                                            
                                                 
-                                                <h:commandLink actionListener="#{requestServicesManagedBean.selectFoodOrder(fo.foodOrderID)}" style="font-size:calc((100% + 0.25vw)*0.8);" value="See Details>">
+                                                <h:commandLink actionListener="#{requestServicesManagedBean.selectFoodOrder2(fo.foodOrderID)}" style="font-size:calc((100% + 0.25vw)*0.8);" value="See Details>">
                                                 </h:commandLink>
 
                                             </div>
@@ -122,8 +122,8 @@
                                 "#{requestServicesManagedBean.getSpecialRequest()}"
                             </div>
                         <h:commandButton id="editBtn" value="Complete Order" class="btn btn-primary" style="float:right"
-                                         action="#{requestServicesManagedBean.markFoodOrderComplete()}" >
-                          <f:ajax execute="@form" render=":detailsForm"></f:ajax>
+                                         action="#{requestServicesManagedBean.modalTrigger2()}" >
+                          <f:ajax execute="@form" render="formmodal2"></f:ajax>
                         </h:commandButton>
                         </c:if>
 
@@ -140,10 +140,30 @@
 
                                 <ul class="cd-buttons" style="padding-inline-start: unset; padding:0px">
 
-                                    <li ><h:commandLink id="deleteFoodItemFromMenu" action="#{requestServicesManagedBean.deleteFoodOrder()}" class="cd-popup-confirm" value="Yes">
+                                    <li ><h:commandLink id="deleteFoodOrder" action="#{requestServicesManagedBean.deleteFoodOrder()}" class="cd-popup-confirm" value="Yes">
                                                <f:ajax execute="@form" render=":detailsForm"></f:ajax>
                                         </h:commandLink></li>
-                                    <li style="background-color:lightslategray"><h:commandLink id="cancelFoodItemFromMenu" action="#{requestServicesManagedBean.cancelingDeleteFoodOrder()}" class="cd-popup-closemodal" value="No">
+                                    <li style="background-color:lightslategray"><h:commandLink id="cancelFoodItemFromMenu" action="#{requestServicesManagedBean.cancelingDeleteOrder()}" class="cd-popup-closemodal" value="No">
+                                            <f:ajax execute="@form" render="@none"></f:ajax>
+                                        </h:commandLink></li>
+                                    <!--<li style="background-color:lightslategray"><a onclick="changeStyleCheck()" class="cd-popup-closemodal">No</a></li>-->
+                                    <h:inputHidden id="styleCheckID" value="#{requestServicesManagedBean.styleCheck}" />
+                                </ul>
+                            </div> <!-- cd-popup-container -->
+                        </div> <!-- cd-popup -->
+                    </h:form>
+                
+                   <h:form id="formmodal2">
+                        <div id="modal" class="#{requestServicesManagedBean.styleClass2}" role="alert">
+                            <div class="cd-popup-container">
+                                <p class="popup-content">Update order ##{requestServicesManagedBean.selectedFoodOrderID}?</p>
+
+                                <ul class="cd-buttons" style="padding-inline-start: unset; padding:0px">
+
+                                    <li ><h:commandLink id="completeMenu" action="#{requestServicesManagedBean.markFoodOrderComplete()}" class="cd-popup-confirm" value="Yes">
+                                               <f:ajax execute="@form" render=":detailsForm formmodal2"></f:ajax>
+                                        </h:commandLink></li>
+                                    <li style="background-color:lightslategray"><h:commandLink id="cancelFoodComplete" action="#{requestServicesManagedBean.cancelingDeleteOrder()}" class="cd-popup-closemodal" value="No">
                                             <f:ajax execute="@form" render="@none"></f:ajax>
                                         </h:commandLink></li>
                                     <!--<li style="background-color:lightslategray"><a onclick="changeStyleCheck()" class="cd-popup-closemodal">No</a></li>-->

@@ -54,7 +54,7 @@ jQuery(document).ready(function($){
   });
 
     	//close popup
-	$('.cd-popup').on('click', function(event){
+	$('.cd-popup-confirm').on('click', function(event){
 		if( $(event.target).is('.cd-popup-confirm') || $(event.target).is('.cd-popup') ) {
       console.log($(event.target).attr("id").substring(8));
       console.log("number4");
@@ -64,15 +64,18 @@ jQuery(document).ready(function($){
           var el = document.createElement('p');
           el.classList.add('notification');
           var text = '';
-          if($(event.target).attr("id").substring(8)=="deleteHotel"){
+          if($(event.target).attr("id").substring(8)==="deleteHotel"){
             text = "Hotel has been deleted"
-          } else if ($(event.target).attr("id").substring(8)=="deleteFeedback"){
+          } else if ($(event.target).attr("id").substring(8)==="deleteFeedback"){
             text = "Feedback has been deleted"
-          } else if ($(event.target).attr("id").substring(8)=="deleteStaff"){
+          } else if ($(event.target).attr("id").substring(8)==="deleteStaff"){
             text = "Staff has been deleted"
-          }else if ($(event.target).attr("id").substring(8)=="deleteRoom"){
+          }else if ($(event.target).attr("id").substring(8)==="deleteRoom"){
             text = "Room has been deleted"
-        
+          }else if ($(event.target).attr("id").substring(8)==="deleteFoodMenuItem"){
+            text = "Food Menu Item has been deleted"
+          }else if ($(event.target).attr("id").substring(8)==="deleteFoodOrder"){
+            text = "Food Order has been deleted"
           }
 
           switch (typeValue) {

@@ -40,11 +40,11 @@
         <!-- DataTables -->
         <link rel="stylesheet" href="#{request.contextPath}/plugins/datatables/dataTables.bootstrap4.css" />
         <!-- Theme style (comes with Bootstrap) -->
-        <link rel="stylesheet" href="#{request.contextPath}/dist/css/adminlte.min.css" />
-        <link rel="stylesheet" href="#{request.contextPath}/dist/css/adminlte.css" />
+
+        <link rel="stylesheet" href="./dist/css/adminlte.min.css" />
         <link rel="stylesheet" href="./AdminLTE-2.4.10/AdminLTE-2.4.10/dist/css/AdminLTE.min.css" />
         <link rel="stylesheet" href="./styles/main.css" />
-        <link rel="stylesheet" href="#{request.contextPath}/resources/notifications/dist/Notifications.unmin.css" />
+        <link rel="stylesheet" href="./resources/notifications/dist/Notifications.unmin.css" />
 
 
         <!-- Google Font: Source Sans Pro -->
@@ -132,14 +132,15 @@
             <!-- /.navbar -->
 
             <!-- Main Sidebar Container -->
-            <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <aside class="main-sidebar sidebar-dark-primary elevation-4" style="padding-top:0px !important;">
                 <!-- Brand Logo -->
-                <a href="#{request.contextPath}" class="brand-link">
+                
 
-                    <span class="brand-text font-weight-light">
-                        <b>Request Service System</b>
-                    </span>
+                   
+                <a href="#{request.contextPath}" class="brand-link">
+                    <img src="./img/logo3.png" style="width:200px; margin-left:10px; margin-top:10px"/>
                 </a>
+            
                 <!-- Sidebar -->
                 <div class="sidebar">
                     <!-- Sidebar Menu -->
@@ -272,9 +273,9 @@
         <!-- iCheck 1.0.1 -->
         <script src="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/plugins/iCheck/icheck.min.js"></script>
         <!-- Notifications -->
-        <script src="#{request.contextPath}/resources/notifications/dist/Notifications.js"></script>
+        <script src="./resources/notifications/dist/Notifications.js"></script>
         <script src="#{request.contextPath}/js/numberpicker.js"></script>
-
+        <script src="./js/modal.js"></script>
         <!-- jQuery UI 1.11.4 -->
         <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
         <script src="#{request.contextPath}/dist/js/demo.js"></script>
@@ -289,10 +290,12 @@
         <script type="text/javascript">
             var notifications = new Notifications("p.notification", {
                 closeSelfOnClick: true, animationOutSelf: 'slideout 1s', startTopPosition: 8,
+                
             });
-            notifications.init();
-        </script>
 
+          
+        </script>
+       
         <script>
             //<![CDATA[
 
@@ -336,13 +339,6 @@ $(function(){
                 }
             }
             
-              window.onload = function() {
-
-    document.getElementById("clothingForm").style.display = "none";
-     document.getElementById("deliveryDetails").style.display = "none"
-
- document.getElementById("laundryDetails").style.display = "none";
-  };
 
   function showform(a) {
   
@@ -355,12 +351,32 @@ $(function(){
         console.log(a);
       document.getElementById("clothingForm").style.display = "none";
       document.getElementById("deliveryDetails").style.display = "none"
-      document.getElementById("laundryDetails").style.display = "block";
+       document.getElementById("laundryDetails").style.display = "block";
+
     } else if (a==2){
          console.log(a);
        document.getElementById("deliveryDetails").style.display = "block"
        document.getElementById("clothingForm").style.display = "none";
-        document.getElementById("laundryDetails").style.display = "none";
+         document.getElementById("laundryDetails").style.display = "none";
+        
+    } else if(a==4){
+         document.getElementById("deliveryDetails").style.display = "none"
+       document.getElementById("clothingForm").style.display = "none";
+         document.getElementById("laundryDetails").style.display = "none";
+
+    }
+    else if(a==5){
+         document.getElementById("deliveryDetails").style.display = "none"
+       document.getElementById("clothingForm").style.display = "none";
+         document.getElementById("laundryDetails").style.display = "none";
+
+
+    }
+    else if(a==6){
+         document.getElementById("deliveryDetails").style.display = "none"
+       document.getElementById("clothingForm").style.display = "none";
+         document.getElementById("laundryDetails").style.display = "none";
+
     }
       
   }
@@ -460,5 +476,8 @@ $(function(){
                 getFOList(this.id);
             });
         </script>
+        
+       
+
     </h:body>
 </html>

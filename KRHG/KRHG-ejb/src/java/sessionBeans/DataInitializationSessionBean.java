@@ -37,6 +37,7 @@ import error.NoResultException;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -15586,6 +15587,7 @@ public class DataInitializationSessionBean {
 
     public void intializeRoomBookingsAndCustomer() throws ParseException, NoResultException {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         Customer customer1 = new Customer();
         customer1.setAccountStatus(true);
@@ -15709,7 +15711,7 @@ public class DataInitializationSessionBean {
 //***************Laundry Order***************
         LaundryOrder lo1 = new LaundryOrder();
         lo1.setRoom(roomSessionLocal.getRoomByName("KRG_202"));
-        lo1.setOrderDateTime(format.parse("2019-03-10"));
+        lo1.setOrderDateTime(formatTime.parse("2019-03-10 12:28:29"));
         lo1.setStatus("Delivered");
         lo1.setCompleteDateTime(format.parse("2019-03-12"));
         lo1.setHouseKeeper(staffSessionLocal.getStaffByNric("S1730049J"));
@@ -15736,7 +15738,7 @@ public class DataInitializationSessionBean {
 
         LaundryOrder lo5 = new LaundryOrder();
         lo5.setRoom(roomSessionLocal.getRoomByName("KRG_402"));
-        lo5.setOrderDateTime(format.parse("2019-01-10"));
+        lo5.setOrderDateTime( formatTime.parse("2019-03-10 10:45:00"));
         lo5.setStatus("Delivered");
         lo5.setCompleteDateTime(format.parse("2019-01-12"));
         lo5.setHouseKeeper(staffSessionLocal.getStaffByNric("S1730049J"));
@@ -15756,7 +15758,7 @@ public class DataInitializationSessionBean {
         
         LaundryOrder lo6 = new LaundryOrder();
         lo6.setRoom(roomSessionLocal.getRoomByName("KRG_501"));
-        lo6.setOrderDateTime(format.parse("2019-04-21"));
+        lo6.setOrderDateTime ( formatTime.parse("2019-03-10 14:44:34"));
         lo6.setStatus("Pending");
         lo6.setCompleteDateTime(format.parse("2019-04-25"));
         lo6.setSpecialRequest("");
@@ -15764,7 +15766,7 @@ public class DataInitializationSessionBean {
         
         LaundryOrder lo7 = new LaundryOrder();
         lo7.setRoom(roomSessionLocal.getRoomByName("KRG_801"));
-        lo7.setOrderDateTime(format.parse("2019-04-21"));
+        lo7.setOrderDateTime ( formatTime.parse("2019-03-10 17:24:43"));
         lo7.setStatus("Pending");
         lo7.setCompleteDateTime(format.parse("2019-04-25"));
         lo7.setSpecialRequest("");
@@ -15772,7 +15774,7 @@ public class DataInitializationSessionBean {
         
         LaundryOrder lo8 = new LaundryOrder();
         lo8.setRoom(roomSessionLocal.getRoomByName("KRG_704"));
-        lo8.setOrderDateTime(format.parse("2019-04-20"));
+        lo8.setOrderDateTime (formatTime.parse("2019-03-10 21:00:00"));
         lo8.setStatus("In Progress");
         lo8.setCompleteDateTime(format.parse("2019-04-24"));
         lo8.setHouseKeeper(staffSessionLocal.getStaffByNric("S1730049J"));
@@ -15790,7 +15792,7 @@ public class DataInitializationSessionBean {
         
         LaundryOrder lo9 = new LaundryOrder();
         lo9.setRoom(roomSessionLocal.getRoomByName("KRG_603"));
-        lo9.setOrderDateTime(format.parse("2019-04-20"));
+        lo9.setOrderDateTime(formatTime.parse("2019-03-10 16:28:29"));
         lo9.setStatus("In Progress");
         lo9.setCompleteDateTime(format.parse("2019-04-24"));
         lo9.setHouseKeeper(staffSessionLocal.getStaffByNric("S1730049J"));
@@ -15808,7 +15810,7 @@ public class DataInitializationSessionBean {
         
         LaundryOrder lo10 = new LaundryOrder();
         lo10.setRoom(roomSessionLocal.getRoomByName("KRG_608"));
-        lo10.setOrderDateTime(format.parse("2019-04-19"));
+        lo10.setOrderDateTime( formatTime.parse("2019-03-10 15:28:29"));
         lo10.setStatus("Ready for Delivery");
         lo10.setCompleteDateTime(format.parse("2019-04-22"));
         lo10.setHouseKeeper(staffSessionLocal.getStaffByNric("S1730049J"));
@@ -15826,7 +15828,7 @@ public class DataInitializationSessionBean {
         
         LaundryOrder lo11 = new LaundryOrder();
         lo11.setRoom(roomSessionLocal.getRoomByName("KRG_704"));
-        lo11.setOrderDateTime(format.parse("2019-04-19"));
+        lo11.setOrderDateTime(formatTime.parse("2019-03-10 12:38:29"));
         lo11.setStatus("Ready for Delivery");
         lo11.setCompleteDateTime(format.parse("2019-04-22"));
         lo11.setHouseKeeper(staffSessionLocal.getStaffByNric("S1730049J"));

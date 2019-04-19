@@ -14,6 +14,7 @@ import error.NoResultException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -314,7 +315,6 @@ public class requestAndServiceManagedBean implements Serializable {
 
         LaundryOrder LO = new LaundryOrder();
         LO.setRoom(roomSessionLocal.getRoomByName(laundryRoomNumber));
-        LO.setOrderDateTime(new Date());
         LO.setSpecialRequest(laundrySpecialRequest);
         LO.setStatus("Pending");
 

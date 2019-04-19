@@ -1,17 +1,18 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <body>
 
         <ui:composition template="template.xhtml">
 
-
             <ui:define name="title">
-                KRHG front desk
+                KRHG Request Services Management System
             </ui:define>
 
             <ui:define name="content">
@@ -20,15 +21,13 @@
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-
-
+                                <h1 style="font-size: x-large; margin-bottom:20px">Manage Maintenance Orders</h1>
                             </div>
                             <!-- /.col -->
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item active">
-                                        <!--Add Btn-->
-                                    </li>
+                                    <li><a href="#"> Home</a></li>
+                                    <li class="active">Manage Maintenance Orders</li>
                                 </ol>
                             </div>
                             <!-- /.col -->
@@ -38,71 +37,119 @@
                     <!-- /.container-fluid -->
                 </div> 
                 <section class="content">
-                    <div class="card">
-                        <h:form>
-                            <div class="card-header">
-                                <h:commandLink class="btn btn-primary float-sm-right" action="creatMaintainence.xhtml?faces-redirect=true"> <i class="fa fa-plus" ></i></h:commandLink>
-                                <h3 class="card-title">Maintenance Report</h3>
+                   
+                    <div class="container-fluid">
+                    
+                        <div class=" col-lg-6 box box-primary" style="padding:20px; margin-left:30px;">
+                            <div class="box-header" style="text-align:center; padding:10px">
+                                <h1>Unresolved Maintenance Orders</h1>
                             </div>
-                        </h:form>
-                        <!-- /.card-header -->
-                        <div class="card-body">
-                            <table id="example1" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Location</th>
+                          
+                            <div class="row">
 
-                                        <th>Description</th>
-                                        <th>Date</th>
-                                        <th>Status</th>
-                                        <th></th>
+                                <h:form enctype="multipart/form-data" id="form1" style="width:100%">
+                                   <table id="example1" class="table table-bordered table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Request ID</th>
+                                                        <th>Reported on</th>
+                                                        <th>Description of Issue</th>
+                                                        <th>Location</th>
+                                                        <th style="text-align: center">Complete</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                
 
-                                    </tr>
-                                </thead>
-                                <tbody>
+                                                        <c:forEach items="${requestServicesManagedBean.allIncompleteMaintenanceOrders}" var="mo">
+                                                            <tr>
+                                                                <td>#{mo.requestID}</td>
+                                                                <td>#{requestServicesManagedBean.convertDateFormatDDMMYY(mo.dateReported)}</td>
+                                                                <td>#{mo.description}</td>
+                                                                <td>#{mo.location}</td>
 
-                                    <tr>
-                                        <td>Lvl male toilet</td>
-                                        <td>first cubicle flush not working</td>
-                                        <td>1 April 2018</td>
-                                        <td>Completed</td>
-                                        <td><input type="button" value="update"/></td>
+                                                                <td style="text-align: center"><h:commandLink id="viewBtn" class="far fa-check-square fa-2x" actionListener="#{requestServicesManagedBean.selectMaintenanceOrder(mo.requestID)}" >
+                                                                        <f:ajax execute="@form" render=":formmodal"></f:ajax>
+                                                                    </h:commandLink>
 
+                                                                </td>
+                                                            </tr>
+                                                        </c:forEach>
+                                          
+                                                </tbody>
+                                            </table>
+                                </h:form>
 
-                                    </tr>
-
-
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>Location</th>
-
-                                        <th>Description</th>
-                                        <th>Date</th>
-                                        <th>Status</th>
-                                        <th></th>
-                                    </tr>
-                                </tfoot>
-                            </table>
+                            </div>
+                      
                         </div>
-                        <!-- /.card-body -->
+                        
+                        <div class="col-lg-5 box box-warning" style="padding:10px; margin-left:50px; margin-bottom: 100px"  id="deliveryDetails">
+                        <div class="box-header" style="text-align: center">
+                            <h1>Maintenance Contacts</h1>
+                        </div>
+                             <div class="description-block margin-bottom row"  style="border-bottom:1px solid orange; padding:10px">
+                                            <div class="col-lg-4">
+                                                <span class="description-text" style="font-size:calc((100% + 0.25vw))">Category</span> 
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <span class="description-text" style="font-size:calc((100% + 0.25vw))">Company</span> 
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <span class="description-text" style="font-size:calc((100% + 0.25vw))">Contact Number</span> 
+                                            </div>
+                                        </div>
+                            <div class="row" style="text-align:center; margin-bottom:0px">
+
+                                                        <span class="col-lg-4 description-header" style="font-size:calc((100% + 0.25vw)*0.8)">
+                                                            Aircon </span>
+                                                        <span class="col-lg-4 description-header" style="font-size:calc((100% + 0.25vw)*0.8)">
+                                                            Daikin  </span>
+                                                        <span class="col-lg-4 description-header" style="font-size:calc((100% + 0.25vw)*0.8)">
+                                                            +65 91836824 </span>
+                                                        <br/>
+                                                 
+                                           
+                                        </div>
 
                     </div>
-                    <!-- /.container-fluid -->
+                    </div>
+                    
+                    
+              <h:form id="formmodal">
+                        <div id="modal" class="#{requestServicesManagedBean.styleClass}" role="alert">
+                            <div class="cd-popup-container">
+                                <p class="popup-content">Resolve Maintenance Order ##{requestServicesManagedBean.selectedMaintenanceOrder.requestID}?</p>
+
+                                <ul class="cd-buttons" style="padding-inline-start: unset; padding:0px">
+
+                                    <li ><h:commandLink id="completeMaintenanceOrder" action="#{requestServicesManagedBean.markMaintenanceOrderComplete()}" class="cd-popup-confirm" value="Yes">
+                                            <f:ajax execute="@form" render=":formmodal form1"></f:ajax>
+                                        </h:commandLink></li>
+                                    <li style="background-color:lightslategray"><h:commandLink id="cancelFoodItemFromMenu" action="#{requestServicesManagedBean.cancelMarkMOComplete()}" class="cd-popup-closemodal" value="No">
+                                            <f:ajax execute="@form" render=":formmodal"></f:ajax>
+                                        </h:commandLink></li>
+                                    <!--<li style="background-color:lightslategray"><a onclick="changeStyleCheck()" class="cd-popup-closemodal">No</a></li>-->
+                          
+                                </ul>
+                            </div> <!-- cd-popup-container -->
+                        </div> <!-- cd-popup -->
+                    </h:form>
                 </section>
-                <!-- /.content-header -->
-                <!-- Main content -->
 
-            </ui:define>
 
-            <ui:define name="script">
                 <script>
-                    $('[data-mask]').each(function () {
-                        $(this).mask($(this).attr("data-mask"));
-                    });
-                </script>
-            </ui:define>
+                    function changeStyleCheck() {
+                        console.log("Changing style check");
+                        document.getElementById("styleCheckID").value = false;
+                    }
 
+                </script>
+                <!-- /.content -->
+            </ui:define>
+            <ui:define name="script">
+                script
+            </ui:define>
         </ui:composition>
 
     </body>

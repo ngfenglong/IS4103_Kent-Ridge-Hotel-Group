@@ -53,53 +53,49 @@
                                 <ul class="products-list product-list-in-box">
                                     <c:forEach items="${requestServicesManagedBean.allFoodDelivery}" var="fo">
                                         <h:inputHidden id="selectfID" value="#{requestServicesManagedBean.selectedFoodOrderID}"></h:inputHidden>
-                                            <li class="item" style="border-bottom:1px solid lightblue; padding:8px" id="#{fo.foodOrderID}">
-                                                <div class="product-info" style="margin-left:0px">
-                                                    <div class="row" style="margin-bottom:10px">
-                                                        <span class="label label-info" style="font-size: medium; display:block; width:100%">
-                                                            Room  #{requestServicesManagedBean.getFoodOrderRoom(fo)}</span>
-                                                    
-
-                                                    </div>
-
-                                                    
-    <span class="label label-warning" style="font-size: medium; float:left">
-                                                        #{fo.status}</span>
-                                                    <span class="product-description" style="font-size:calc((100% + 0.25vw)); float: right;" >Order ID: ##{fo.foodOrderID}
-                                                    </span>
-                                                
-                                                    <div class="row" style="width:100%; text-align: right;">
-                                                        <span class="product-description" style="font-size:calc((100% + 0.25vw)); text-align: right; width:100%; margin:0px">
-                                                       Time of Order: 
-                                                       #{fo.orderTime}
-                                                    </span>
-                                                    </div>
-                                                    
-                                                    
-                                                    
-
-
-                                                    <div class="row" style="text-align: center">
-                                                         <c:forEach items ="#{requestServicesManagedBean.getAllFoodMenuItemsOrdered(fo)}" var="fofi">
-                                                       <span class="product-title" style="font-size:calc((100% + 0.25vw)); width:100%; text-align: center">
-                                                        #{fofi.foodMenuItemName}
-                                                    </span>
-                                                    
-                                                   
-                                                    </c:forEach>
-                                                    </div>
-                                                    
-
-                                                    <h:commandButton id="editBtn" value="Delivery Complete" class="btn btn-success" style="float:right; font-size:calc((100% + 0.25vw))!important;"
-                                                                     action="#{requestServicesManagedBean.markFoodOrderDelivered(fo.foodOrderID)}" >
-                                                        <f:ajax execute="@form" render=":myForm"></f:ajax>
-                                                    </h:commandButton>
-
-
+                                        <li class="item" style="border-bottom:1px solid lightblue; padding:8px" id="#{fo.foodOrderID}">
+                                            <div class="product-info" style="margin-left:0px">
+                                                <div class="row" style="margin-bottom:10px">
+                                                    <span class="label label-info" style="font-size: medium; display:block; width:100%">
+                                                        Room  #{requestServicesManagedBean.getFoodOrderRoom(fo)}</span>
                                                 </div>
-                                            </li>
+                                                <span class="label label-warning" style="font-size: medium; float:left">
+                                                    #{fo.status}</span>
+                                                <span class="product-description" style="font-size:calc((100% + 0.25vw)); float: right;" >Order ID: ##{fo.foodOrderID}
+                                                </span>
 
-                                        
+                                                <div class="row" style="width:100%; text-align: right;">
+                                                    <span class="product-description" style="font-size:calc((100% + 0.25vw)); text-align: right; width:100%; margin:0px">
+                                                        Time of Order: 
+                                                        #{fo.orderTime}
+                                                    </span>
+                                                </div>
+
+
+
+
+
+                                                <div class="row" style="text-align: center">
+                                                    <c:forEach items ="#{requestServicesManagedBean.getAllFoodMenuItemsOrdered(fo)}" var="fofi">
+                                                        <span class="product-title" style="font-size:calc((100% + 0.25vw)); width:100%; text-align: center">
+                                                            #{fofi.foodMenuItemName}
+                                                        </span>
+
+
+                                                    </c:forEach>
+                                                </div>
+
+
+                                                <h:commandButton id="editBtn" value="Delivery Complete" class="btn btn-success" style="float:right; font-size:calc((100% + 0.25vw))!important;"
+                                                                 action="#{requestServicesManagedBean.selectFoodOrder(fo.foodOrderID)}" >
+                                                    <f:ajax execute="@form" render="formmodal"></f:ajax>
+                                                </h:commandButton>
+
+
+                                            </div>
+                                        </li>
+
+
 
 
                                     </c:forEach>
@@ -114,12 +110,12 @@
                 <h:form id="formmodal">
                     <div id="modal" class="#{requestServicesManagedBean.styleClass}" role="alert">
                         <div class="cd-popup-container">
-                            <p class="popup-content">Delete order # #{requestServicesManagedBean.selectedFoodOrderID}?</p>
+                            <p class="popup-content">Complete order # #{requestServicesManagedBean.selectedFoodOrderID}?</p>
 
                             <ul class="cd-buttons" style="padding-inline-start: unset; padding:0px">
 
-                                <li ><h:commandLink id="deleteFoodItemFromMenu" action="#{requestServicesManagedBean.deleteFoodOrder}" class="cd-popup-confirm" value="Yes">
-                                        <f:ajax execute="@form" render="@none"></f:ajax>
+                                <li ><h:commandLink id="deleteFoodItemFromMenu" action="#{requestServicesManagedBean.markFoodOrderDelivered()}" class="cd-popup-confirm" value="Yes">
+                                        <f:ajax execute="@form" render="formmodal myForm"></f:ajax>
                                     </h:commandLink></li>
                                 <li style="background-color:lightslategray"><h:commandLink id="cancelFoodItemFromMenu" action="#{requestServicesManagedBean.cancelingDeleteFoodItem()}" class="cd-popup-closemodal" value="No">
                                         <f:ajax execute="@form" render="@none"></f:ajax>

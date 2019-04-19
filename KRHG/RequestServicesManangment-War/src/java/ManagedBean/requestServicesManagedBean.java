@@ -13,7 +13,7 @@ import entity.HouseKeepingOrder;
 import entity.LaundryOrder;
 import entity.LaundryOrderedItem;
 import entity.LaundryType;
-import entity.MinibarItem;
+import entity.MaintainenceOrder;
 
 import entity.RoomBooking;
 
@@ -31,6 +31,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -59,7 +60,7 @@ import sun.misc.IOUtils;
 public class requestServicesManagedBean implements Serializable {
 
     @EJB
-    private MaintainenceOrderSessionLocal maintainenceOrdersessionlocal;
+    private MaintainenceOrderSessionLocal maintenanceOrderSessionLocal;
     @EJB
     private HouseKeepingOrderSessionLocal housekeepingsessionlocal;
     @EJB
@@ -117,11 +118,16 @@ public class requestServicesManagedBean implements Serializable {
 //    private String newFoodOrderedPrice;
 
     //laundry
+    private boolean tabIndex1;
+    private boolean tabIndex2;
+    private boolean tabIndex3;
     private LaundryOrder selectedLaundryOrder;
     private Long selectedLaundryOrderID;
     private List<LaundryOrderedItem> listOfLaundryItems;
+    private List<Staff> allLaundryStaffs = new ArrayList();
     private String specialLaundryRequest;
-    private String selectedLaundryStaff;
+    private Staff selectedLaundryStaff;
+    private String selectedLaundryStaffNRIC = "S2433605J";
     private String OWDWDesc;
     private int OWDWQty;
     private String OWWDesc;
@@ -138,8 +144,24 @@ public class requestServicesManagedBean implements Serializable {
     private int TWQty;
     private String TDWDesc;
     private int TDWQty;
+    
+    //Maintenance Order
+    private MaintainenceOrder selectedMaintenanceOrder;
+    private Long selectedMaintenanceOrderID;
 
     public requestServicesManagedBean() {
+
+    }
+
+    @PostConstruct
+    public void getAllLaundryStaff() {
+        List<Staff> allstaff = staffsession.getAllStaffs();
+        for (Staff s : allstaff) {
+            System.out.println(s.getDepartment());
+            if (s.getDepartment().toUpperCase().equals("LAUNDRY")) {
+                allLaundryStaffs.add(s);
+            }
+        }
 
     }
 
@@ -156,7 +178,35 @@ public class requestServicesManagedBean implements Serializable {
     public String getStyleClass3() {
         return styleCheck3 ? "cd-popup is-visible" : "cd-popup";
     }
+    
+    public boolean getTabIndex1(){
+        return tabIndex1;
+    }
 
+     public boolean getTabIndex2(){
+        return  tabIndex2 ;
+    }
+      public boolean getTabIndex3(){
+        return  tabIndex3;
+    }
+      
+      public void selectTab1(){
+        tabIndex1=true;
+        tabIndex2=false;
+        tabIndex3=false;
+}
+      
+            public void selectTab2(){
+        tabIndex1=false;
+        tabIndex2=true;
+        tabIndex3=false;
+}
+            
+                  public void selectTab3(){
+        tabIndex1=false;
+        tabIndex2=false;
+        tabIndex3=true;
+}
     /**
      *
      */
@@ -164,7 +214,18 @@ public class requestServicesManagedBean implements Serializable {
         selectedFoodOrderID = id;
         styleCheck = true;
     }
+    
+    public void modalTrigger(){
+      styleCheck = true;
+    }
+    
+     public void modalTrigger2(){
+      styleCheck2 = true;
+    }
 
+        public void modalTrigger3(){
+      styleCheck3 = true;
+    }
     public String getFoodOrderRoom(FoodOrder fo) throws NoResultException {
         List<RoomBooking> allRoomBookings = roomBookingSessionLocal.getAllRoomBooking();
         for (RoomBooking r : allRoomBookings) {
@@ -177,44 +238,68 @@ public class requestServicesManagedBean implements Serializable {
         return "";
     }
 
-    public List<Staff> getAllLaundryStaff(){
-       List <Staff> allstaff = staffsession.getAllStaffs();
-       List <Staff> allLaundryStaff = new ArrayList();
-       for(Staff s:allstaff){
-           if(s.getDepartment().toUpperCase().equals("LAUNDRY")){
-               allLaundryStaff.add(s);
-           }
-       }
-       
-       return allLaundryStaff;
-       
+    public List<LaundryOrderedItem> getAllLaundryOrderedItem() {
+        List<LaundryOrderedItem> allLOI = new ArrayList();
+
+        for (LaundryOrderedItem loi : selectedLaundryOrder.getLaundryOrderedItems()) {
+            allLOI.add(loi);
+        }
+
+        return allLOI;
     }
-    
+
     public void updateLaundryOrder() throws NoResultException {
+        System.out.println("TDW");
+        System.out.println(TDWQty);
+        System.out.println(TDWDesc);
+        System.out.println("IWW");
+        System.out.println(IWWQty);
+        System.out.println(IWWDesc);
+        System.out.println("BDW");
+        System.out.println(BDWQty);
+        System.out.println(BDWDesc);
+        System.out.println("OWDW");
+        System.out.println(OWDWQty);
+        System.out.println(OWDWDesc);
+        System.out.println("IWDW");
+        System.out.println(IWDWQty);
+        System.out.println(IWDWDesc);
+        System.out.println("TW");
+        System.out.println(TWQty);
+        System.out.println(TWDesc);
+        System.out.println("OWW");
+        System.out.println(OWWQty);
+        System.out.println(OWWDesc);
+        System.out.println("BW");
+        System.out.println(BWQty);
+        System.out.println(BWDesc);
+
         System.out.println("in updateLaundryOrder");
-        List<LaundryOrderedItem> allItems = new ArrayList();
+        List<LaundryOrderedItem> allItems = new ArrayList<LaundryOrderedItem>();
         double totalPrice = 0;
         if (getTDWQty() != 0) {
 
             LaundryOrderedItem loi = new LaundryOrderedItem();
             loi.setQty(getTDWQty());
             loi.setDescription(getTDWDesc());
+            System.out.println(loi.getDescription());
             loi.setLaundryType(laundrySessionLocal.getLaundryTypeByName("Top (Dry-Wash)"));
             laundrySessionLocal.createLaundryOrderedItem(loi);
-            loi.setLaundryOrderedItemID(laundrySessionLocal.getLastLaundryOrderedItem().getLaundryOrderedItemID());
+            loi = laundrySessionLocal.getLastLaundryOrderedItem();
             allItems.add(loi);
-            totalPrice += (TDWQty*laundrySessionLocal.getLaundryTypeByName("Top (Dry-Wash)").getPrice());
+            totalPrice += (TDWQty * laundrySessionLocal.getLaundryTypeByName("Top (Dry-Wash)").getPrice());
         }
         if (getIWWQty() != 0) {
 
             LaundryOrderedItem loi = new LaundryOrderedItem();
             loi.setQty(getIWWQty());
             loi.setDescription(getIWWDesc());
+            System.out.println(loi.getDescription());
             loi.setLaundryType(laundrySessionLocal.getLaundryTypeByName("Inner Wear (Wash)"));
             laundrySessionLocal.createLaundryOrderedItem(loi);
-            loi.setLaundryOrderedItemID(laundrySessionLocal.getLastLaundryOrderedItem().getLaundryOrderedItemID());
+            loi = laundrySessionLocal.getLastLaundryOrderedItem();
             allItems.add(loi);
-            totalPrice += (IWWQty*laundrySessionLocal.getLaundryTypeByName("Inner Wear (Wash)").getPrice());
+            totalPrice += (IWWQty * laundrySessionLocal.getLaundryTypeByName("Inner Wear (Wash)").getPrice());
         }
 
         if (getBDWQty() != 0) {
@@ -222,22 +307,24 @@ public class requestServicesManagedBean implements Serializable {
             LaundryOrderedItem loi = new LaundryOrderedItem();
             loi.setQty(getBDWQty());
             loi.setDescription(getBDWDesc());
+            System.out.println(loi.getDescription());
             loi.setLaundryType(laundrySessionLocal.getLaundryTypeByName("Bottom (Dry-Wash)"));
             laundrySessionLocal.createLaundryOrderedItem(loi);
-            loi.setLaundryOrderedItemID(laundrySessionLocal.getLastLaundryOrderedItem().getLaundryOrderedItemID());
+            loi = laundrySessionLocal.getLastLaundryOrderedItem();
             allItems.add(loi);
-            totalPrice += (BDWQty*laundrySessionLocal.getLaundryTypeByName("Bottom (Dry-Wash)").getPrice());
+            totalPrice += (BDWQty * laundrySessionLocal.getLaundryTypeByName("Bottom (Dry-Wash)").getPrice());
         }
         if (getOWDWQty() != 0) {
 
             LaundryOrderedItem loi = new LaundryOrderedItem();
             loi.setQty(getOWDWQty());
             loi.setDescription(getOWDWDesc());
+            System.out.println(loi.getDescription());
             loi.setLaundryType(laundrySessionLocal.getLaundryTypeByName("Outer Wear (Dry-Wash)"));
             laundrySessionLocal.createLaundryOrderedItem(loi);
-            loi.setLaundryOrderedItemID(laundrySessionLocal.getLastLaundryOrderedItem().getLaundryOrderedItemID());
+            loi = laundrySessionLocal.getLastLaundryOrderedItem();
             allItems.add(loi);
-             totalPrice += (OWDWQty*laundrySessionLocal.getLaundryTypeByName("Outer Wear (Dry-Wash)").getPrice());
+            totalPrice += (OWDWQty * laundrySessionLocal.getLaundryTypeByName("Outer Wear (Dry-Wash)").getPrice());
         }
 
         if (getIWDWQty() != 0) {
@@ -245,51 +332,55 @@ public class requestServicesManagedBean implements Serializable {
             LaundryOrderedItem loi = new LaundryOrderedItem();
             loi.setQty(getOWWQty());
             loi.setDescription(getIWDWDesc());
+            System.out.println(loi.getDescription());
             loi.setLaundryType(laundrySessionLocal.getLaundryTypeByName("Inner Wear (Dry-Wash)"));
             laundrySessionLocal.createLaundryOrderedItem(loi);
-            loi.setLaundryOrderedItemID(laundrySessionLocal.getLastLaundryOrderedItem().getLaundryOrderedItemID());
+            loi = laundrySessionLocal.getLastLaundryOrderedItem();
             allItems.add(loi);
-             totalPrice += (IWDWQty*laundrySessionLocal.getLaundryTypeByName("Inner Wear (Dry-Wash)").getPrice());
+            totalPrice += (IWDWQty * laundrySessionLocal.getLaundryTypeByName("Inner Wear (Dry-Wash)").getPrice());
         }
         if (getTWQty() != 0) {
 
             LaundryOrderedItem loi = new LaundryOrderedItem();
             loi.setQty(getTWQty());
             loi.setDescription(getTWDesc());
+            System.out.println(loi.getDescription());
             loi.setLaundryType(laundrySessionLocal.getLaundryTypeByName("Top (Wash)"));
             laundrySessionLocal.createLaundryOrderedItem(loi);
-            loi.setLaundryOrderedItemID(laundrySessionLocal.getLastLaundryOrderedItem().getLaundryOrderedItemID());
+            loi = laundrySessionLocal.getLastLaundryOrderedItem();
             allItems.add(loi);
-            totalPrice += (TWQty*laundrySessionLocal.getLaundryTypeByName("Top (Wash)").getPrice());
+            totalPrice += (TWQty * laundrySessionLocal.getLaundryTypeByName("Top (Wash)").getPrice());
         }
         if (getOWWQty() != 0) {
 
             LaundryOrderedItem loi = new LaundryOrderedItem();
             loi.setQty(getOWWQty());
             loi.setDescription(getOWWDesc());
+            System.out.println(loi.getDescription());
             loi.setLaundryType(laundrySessionLocal.getLaundryTypeByName("Outer Wear (Wash)"));
             laundrySessionLocal.createLaundryOrderedItem(loi);
-            loi.setLaundryOrderedItemID(laundrySessionLocal.getLastLaundryOrderedItem().getLaundryOrderedItemID());
+            loi = laundrySessionLocal.getLastLaundryOrderedItem();
             allItems.add(loi);
-            totalPrice += (OWWQty*laundrySessionLocal.getLaundryTypeByName("Outer Wear (Wash)").getPrice());
+            totalPrice += (OWWQty * laundrySessionLocal.getLaundryTypeByName("Outer Wear (Wash)").getPrice());
         }
         if (getBWQty() != 0) {
 
             LaundryOrderedItem loi = new LaundryOrderedItem();
             loi.setQty(getBWQty());
             loi.setDescription(getBWDesc());
+            System.out.println(loi.getDescription());
             loi.setLaundryType(laundrySessionLocal.getLaundryTypeByName("Bottom (Wash)"));
             laundrySessionLocal.createLaundryOrderedItem(loi);
-            loi.setLaundryOrderedItemID(laundrySessionLocal.getLastLaundryOrderedItem().getLaundryOrderedItemID());
+            loi = laundrySessionLocal.getLastLaundryOrderedItem();
             allItems.add(loi);
-             totalPrice += (BWQty*laundrySessionLocal.getLaundryTypeByName("Bottom (Wash)").getPrice());
+            totalPrice += (BWQty * laundrySessionLocal.getLaundryTypeByName("Bottom (Wash)").getPrice());
         }
-        
+
         LaundryOrder currentLaundryOrder = laundrySessionLocal.getLaundryOrderByID(selectedLaundryOrderID);
         currentLaundryOrder.setLaundryOrderedItems(allItems);
         currentLaundryOrder.setTotalPrice(totalPrice);
         currentLaundryOrder.setStatus("IN PROGRESS");
-        
+
         TDWQty = 0;
         IWWQty = 0;
         BDWQty = 0;
@@ -298,7 +389,7 @@ public class requestServicesManagedBean implements Serializable {
         TWQty = 0;
         OWWQty = 0;
         BWQty = 0;
-        
+
         TDWDesc = null;
         IWWDesc = null;
         BDWDesc = null;
@@ -307,23 +398,63 @@ public class requestServicesManagedBean implements Serializable {
         TWDesc = null;
         OWWDesc = null;
         BWDesc = null;
-        
-        
-        System.out.println(currentLaundryOrder.getLaundryOrderID());
-        laundrySessionLocal.updateLaundryOrder(currentLaundryOrder);
-        System.out.println("currentLaundryStaffSelected:" + getSelectedLaundryStaff());
-        currentLaundryOrder.setHouseKeeper(staffsession.getStaffByNric(getSelectedLaundryStaff()));
-                System.out.println("currentLaundryStaffInput:" + currentLaundryOrder.getHouseKeeper().getName());
-        currentLaundryOrder.setSpecialRequest(specialLaundryRequest);
-        System.out.println(laundrySessionLocal.getLaundryOrderByID(currentLaundryOrder.getLaundryOrderID()));
 
+        for (LaundryOrderedItem i : allItems) {
+            System.out.println(i.getDescription());
+        }
+        System.out.println("ALL ITEMS:" + allItems);
+        System.out.println(currentLaundryOrder.getLaundryOrderID());
+        currentLaundryOrder.setSpecialRequest(specialLaundryRequest);
+        currentLaundryOrder.setHouseKeeper(staffsession.getStaffByNric(selectedLaundryStaffNRIC));
+        styleCheck=false;
+        laundrySessionLocal.updateLaundryOrder(currentLaundryOrder);
+
+        
+//        currentLaundryOrder.setHouseKeeper(staffsession.g);
+//                System.out.println("currentLaundryStaffInput:" + currentLaundryOrder.getHouseKeeper().getName());
+
+        System.out.println(laundrySessionLocal.getLaundryOrderByID(currentLaundryOrder.getLaundryOrderID()));
 
     }
 
+    public boolean checkSpecialRequest() {
+        if (selectedLaundryOrder == null || selectedLaundryOrder.getSpecialRequest() == null || selectedLaundryOrder.getSpecialRequest().equals("")) {
+
+            return false;
+        }
+        return true;
+    }
+
+    public void printNRIC() {
+        System.out.println(selectedLaundryStaffNRIC);
+    }
+
+    public List<MaintainenceOrder>getAllMaintenanceOrders() throws NoResultException{
+       return maintenanceOrderSessionLocal.getAllMaintainenceOrder();
+    }
+    
+    public String convertDateFormatDDMMYY(Date date) {
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        return dateFormat.format(date);
+    }
+    
+    public List<MaintainenceOrder> getAllIncompleteMaintenanceOrders()throws NoResultException{
+        List<MaintainenceOrder> allIncomepleteOrders = new ArrayList();
+         List<MaintainenceOrder> allOrders = maintenanceOrderSessionLocal.getAllMaintainenceOrder();
+         for(MaintainenceOrder mo: allOrders){
+             if(mo.getIsResolved() == false){
+                 allIncomepleteOrders.add(mo);
+             }
+         }
+         
+         return allIncomepleteOrders;
+    }
+    
     public List<LaundryType> getAllLaundryTypes() {
         return laundrySessionLocal.getAllLaundryTypes();
     }
 
+   
     public List<LaundryOrder> getAllLaundryOrdersByStatus(String status) {
         List<LaundryOrder> getLaundryOrders = laundrySessionLocal.getAllLaundryOrder();
         List<LaundryOrder> laundryOrdersWithStatus = new ArrayList();
@@ -335,57 +466,95 @@ public class requestServicesManagedBean implements Serializable {
         return laundryOrdersWithStatus;
     }
 
-    public List<LaundryOrderedItem> getAllLaundryOrderedItems() throws NoResultException {
-        List<LaundryOrderedItem> allLOI = laundrySessionLocal.getAllLaundryOrderedItemByLaundryOrderID(selectedLaundryOrderID);
+    public boolean checkDryClean(LaundryOrderedItem loi) {
 
-        return allLOI;
+        if (loi.getLaundryType().getLaundryName().equals("Outer Wear (Dry-Wash)")) {
+
+            return true;
+        }
+        if (loi.getLaundryType().getLaundryName().equals("Inner Wear (Dry-Wash)")) {
+
+            return true;
+        }
+        if (loi.getLaundryType().getLaundryName().equals("Top (Dry-Wash)")) {
+
+            return true;
+        }
+        if (loi.getLaundryType().getLaundryName().equals("Bottom (Dry-Wash)")) {
+
+            return true;
+        }
+
+        return false;
     }
-    
-    public void minusqty(String variable){
-    
-        if(variable.equals("TDWQty") && TDWQty!=0){
-        TDWQty -= 1;
-        }else if (variable.equals("IWWQty") && IWWQty!=0){
+
+    public boolean checkWash(LaundryOrderedItem loi) {
+
+        if (loi.getLaundryType().getLaundryName().equals("Outer Wear (Wash)")) {
+
+            return true;
+        }
+        if (loi.getLaundryType().getLaundryName().equals("Inner Wear (Wash)")) {
+
+            return true;
+        }
+        if (loi.getLaundryType().getLaundryName().equals("Top (Wash)")) {
+
+            return true;
+        }
+        if (loi.getLaundryType().getLaundryName().equals("Bottom (Wash)")) {
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public void minusqty(String variable) {
+
+        if (variable.equals("TDWQty") && TDWQty != 0) {
+            TDWQty -= 1;
+        } else if (variable.equals("IWWQty") && IWWQty != 0) {
             IWWQty -= 1;
-        }else if (variable.equals("BDWQty") && BDWQty!=0){
+        } else if (variable.equals("BDWQty") && BDWQty != 0) {
             BDWQty -= 1;
-        }else if (variable.equals("OWDWQty") && OWDWQty!=0){
+        } else if (variable.equals("OWDWQty") && OWDWQty != 0) {
             OWDWQty -= 1;
-        }else if (variable.equals("IWDWQty") && IWDWQty!=0){
+        } else if (variable.equals("IWDWQty") && IWDWQty != 0) {
             IWDWQty -= 1;
-        }else if (variable.equals("TWQty") && TWQty!=0){
+        } else if (variable.equals("TWQty") && TWQty != 0) {
             TWQty -= 1;
-        }else if (variable.equals("OWWQty") && OWWQty!=0){
+        } else if (variable.equals("OWWQty") && OWWQty != 0) {
             OWWQty -= 1;
-        }else if (variable.equals("BWQty") && BWQty!=0){
+        } else if (variable.equals("BWQty") && BWQty != 0) {
             BWQty -= 1;
         }
     }
-    
-    public void plusqty(String variable){
-    
-        if(variable.equals("TDWQty")){
-        TDWQty += 1;
+
+    public void plusqty(String variable) {
+
+        if (variable.equals("TDWQty")) {
+            TDWQty += 1;
             System.out.println("TDWQty" + TDWQty);
-        }else if (variable.equals("IWWQty")){
+        } else if (variable.equals("IWWQty")) {
             IWWQty += 1;
             System.out.println("IWWQty:" + IWWQty);
-        }else if (variable.equals("BDWQty")){
+        } else if (variable.equals("BDWQty")) {
             BDWQty += 1;
             System.out.println("BDWQty:" + BDWQty);
-        }else if (variable.equals("OWDWQty")){
+        } else if (variable.equals("OWDWQty")) {
             OWDWQty += 1;
             System.out.println("OWDWQty:" + OWDWQty);
-        }else if (variable.equals("IWDWQty")){
+        } else if (variable.equals("IWDWQty")) {
             IWDWQty += 1;
             System.out.println("IWDWQty:" + IWDWQty);
-        }else if (variable.equals("TWQty")){
+        } else if (variable.equals("TWQty")) {
             TWQty += 1;
             System.out.println("TWQty:" + TWQty);
-        }else if (variable.equals("OWWQty")){
+        } else if (variable.equals("OWWQty")) {
             OWWQty += 1;
             System.out.println("OWWQty:" + OWWQty);
-        }else if (variable.equals("BWQty")){
+        } else if (variable.equals("BWQty")) {
             BWQty += 1;
             System.out.println("BWQty" + BWQty);
         }
@@ -421,9 +590,24 @@ public class requestServicesManagedBean implements Serializable {
 
     }
 
+    public String markMaintenanceOrderComplete() throws NoResultException {
+        MaintainenceOrder newMO = new MaintainenceOrder();
+        try{
+            newMO = maintenanceOrderSessionLocal.getMaintainenceOrderByID(selectedMaintenanceOrderID);
+            newMO.setIsResolved(true);
+        } catch (Exception e){
+             e.printStackTrace(System.out);
+        }
+        styleCheck = false;
+        styleCheck2= false;
+        selectedMaintenanceOrder = null;
+        selectedMaintenanceOrderID = null;
+        maintenanceOrderSessionLocal.updateMaintainenceOrder(newMO);
+        
+        return "maintenance.xhtml?faces-redirect=true";
+    }
+    
     public String markFoodOrderComplete() throws NoResultException {
-        System.out.println("in mark food order complete");
-        System.out.println(selectedFoodOrderID);
         FoodOrder newFO = new FoodOrder();
         try {
             newFO = foodOrderSessionLocal.getAllFoodOrderByID(selectedFoodOrderID);
@@ -432,27 +616,62 @@ public class requestServicesManagedBean implements Serializable {
             e.printStackTrace(System.out);
         }
 
+        styleCheck2=false;
         selectedFoodOrderID = null;
         foodOrderSessionLocal.updateFoodOrder(newFO);
 
         return "foodOrder.xhtml?faces-redirect=true";
     }
 
-    public String markFoodOrderDelivered(Long id) throws NoResultException {
-        System.out.println("in mark food order delivered");
-        System.out.println(id);
+    public String markFoodOrderDelivered() throws NoResultException {
         FoodOrder newFO = new FoodOrder();
         try {
-            newFO = foodOrderSessionLocal.getAllFoodOrderByID(id);
+            newFO = foodOrderSessionLocal.getAllFoodOrderByID(selectedFoodOrderID);
             newFO.setStatus("DELIVERED");
         } catch (Exception e) {
             e.printStackTrace(System.out);
         }
 
+        styleCheck=false;
         selectedFoodOrderID = null;
         foodOrderSessionLocal.updateFoodOrder(newFO);
 
         return "foodDelivered.xhtml?faces-redirect=true";
+    }
+
+    public String markLaundryOrderComplete() throws NoResultException {
+
+        LaundryOrder newLaundryOrder = new LaundryOrder();
+        try {
+            newLaundryOrder = laundrySessionLocal.getLaundryOrderByID(selectedLaundryOrderID);
+            newLaundryOrder.setStatus("Ready for Delivery");
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        styleCheck2=false;
+        selectedFoodOrderID = null;
+        selectedFoodOrder = null;
+        laundrySessionLocal.updateLaundryOrder(newLaundryOrder);
+
+        return "laundry.xhtml?face-redirect=true";
+    }
+
+    public String markLaundryOrderDelivered() throws NoResultException {
+
+        LaundryOrder newLaundryOrder = new LaundryOrder();
+        try {
+            newLaundryOrder = laundrySessionLocal.getLaundryOrderByID(selectedLaundryOrderID);
+            newLaundryOrder.setStatus("Delivered");
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+
+        styleCheck3=false;
+        selectedFoodOrderID = null;
+        selectedFoodOrder = null;
+        laundrySessionLocal.updateLaundryOrder(newLaundryOrder);
+
+        return "laundry.xhtml?face-redirect=true";
     }
 
     /**
@@ -618,6 +837,12 @@ public class requestServicesManagedBean implements Serializable {
         return "foodMenu.xhtml?faces-redirect=true";
     }
 
+    public void selectMaintenanceOrder(Long moID)throws NoResultException{
+        styleCheck=true;
+        selectedMaintenanceOrder = maintenanceOrderSessionLocal.getMaintainenceOrderByID(moID);
+        selectedMaintenanceOrderID = moID;
+    }
+    
     public void selectFoodMenuItem(Long fmiID) throws NoResultException {
         styleCheck = true;
         selectedFoodItem = foodMenuItemSessionLocal.getFoodMenuItemByID(fmiID);
@@ -635,15 +860,22 @@ public class requestServicesManagedBean implements Serializable {
     }
 
     public void selectFoodOrder(Long foID) throws NoResultException {
+        styleCheck=true;
         selectedFoodOrderID = foID;
         System.out.println("Current Selection:" + selectedFoodOrderID);
 
+    }
+    
+    public void selectFoodOrder2(Long foID) throws NoResultException{
+         selectedFoodOrderID = foID;
+        System.out.println("Current Selection:" + selectedFoodOrderID);
     }
 
     public void selectLaundryOrder(Long loID) throws NoResultException {
         selectedLaundryOrderID = loID;
         selectedLaundryOrder = laundrySessionLocal.getLaundryOrderByID(loID);
         System.out.println("laundryorderselected: " + selectedLaundryOrderID);
+        System.out.println("HELLO:" + selectedLaundryOrder);
     }
 
     public void addFoodMenuItemToggle1() throws NoResultException {
@@ -682,12 +914,29 @@ public class requestServicesManagedBean implements Serializable {
         styleCheck3 = true;
     }
 
+    public String cancelMarkMOComplete(){
+        styleCheck = false;
+        return "maintenance.xhtml?faces-redirect=true";
+    }
     public String cancelingDeleteFoodItem() {
         styleCheck = false;
         return "foodMenu.xhtml?faces-redirect=true";
     }
+    
+    public String cancemMarkFoodOrderComplete(){
+    styleCheck = false;
+        return "foodOrder.xhtml?faces-redirect=true";
+    }
+    
+    public String cancelUpdateLaundryOrder(){
+        styleCheck2 = false;
+        styleCheck = false;
+        styleCheck3 = false;
+        return "laundry.xhtml?faces-redirect=true";
+    }
 
     public String cancelingDeleteOrder() {
+        styleCheck2 = false;
         styleCheck = false;
         return "foodOrder.xhtml?faces-redirect=true";
     }
@@ -907,6 +1156,22 @@ public class requestServicesManagedBean implements Serializable {
         DateFormat dateFormat = new SimpleDateFormat("hh:mmaa");
         return dateFormat.format(date);
     }
+    
+    public String getLaundryDeliveryDate(){
+        String laundryDeliveryDate = "";
+        if(selectedLaundryOrder != null){
+            laundryDeliveryDate = convertDateFormat(selectedLaundryOrder.getCompleteDateTime());
+        }
+        return laundryDeliveryDate;
+    }
+    
+     public String getLaundryPickupTime(){
+        String laundryPickupTime = "";
+        if(selectedLaundryOrder != null){
+            laundryPickupTime = convertDateFormat(selectedLaundryOrder.getOrderDateTime());
+        }
+        return laundryPickupTime;
+    }
 
     public Staff getAssignedHouseKeeper() {
         return assignedHouseKeeper;
@@ -940,7 +1205,7 @@ public class requestServicesManagedBean implements Serializable {
         for (MinibarStock ms : housekeepingsessionlocal.getAllMinibarStock()) {
             if (ms.getHotelCodeName().equals(hotelCode)) {
                 newlist.add(ms);
-                
+
             }
         }
         return newlist;
@@ -952,7 +1217,6 @@ public class requestServicesManagedBean implements Serializable {
 
         return result;
     }
-
 
     /**
      * @return the logActivityName
@@ -1399,28 +1663,130 @@ public class requestServicesManagedBean implements Serializable {
     }
 
     /**
-     * @return the selectedLaundryStaff
+     * @param selectedLaundryStaff the selectedLaundryStaff to set
      */
-    public String getSelectedLaundryStaff() {
-        return selectedLaundryStaff;
+    public void setSelectedLaundryStaff(String selectedLaundryStaff) {
+        this.setSelectedLaundryStaff(selectedLaundryStaff);
+    }
+
+    public double defineTheNumber(int alert, int stock) {
+        Double alertChange = new Double(alert);
+        Double stockChange = new Double(stock);
+        double stockDiff = stockChange - alertChange;
+
+        return (stockDiff / stockChange * 100);
     }
 
     /**
      * @param selectedLaundryStaff the selectedLaundryStaff to set
      */
-    public void setSelectedLaundryStaff(String selectedLaundryStaff) {
+    public void setSelectedLaundryStaff(Staff selectedLaundryStaff) {
         this.selectedLaundryStaff = selectedLaundryStaff;
     }
 
+    /**
+     * @return the selectedLaundryStaff
+     */
+    public Staff getSelectedLaundryStaff() {
+        return selectedLaundryStaff;
+    }
 
+    /**
+     * @return the allLaundryStaffs
+     */
+    public List<Staff> getAllLaundryStaffs() {
+        return allLaundryStaffs;
+    }
 
-    
-    public double defineTheNumber(int alert , int stock){
-        Double alertChange = new Double(alert);
-        Double stockChange = new Double(stock);
-        double stockDiff =stockChange - alertChange;
-        
-        return (stockDiff/stockChange * 100);
+    /**
+     * @param allLaundryStaffs the allLaundryStaffs to set
+     */
+    public void setAllLaundryStaffs(List<Staff> allLaundryStaffs) {
+        this.allLaundryStaffs = allLaundryStaffs;
+    }
+
+    /**
+     * @return the selectedLaundryStaffNRIC
+     */
+    public String getSelectedLaundryStaffNRIC() {
+        return selectedLaundryStaffNRIC;
+    }
+
+    /**
+     * @param selectedLaundryStaffNRIC the selectedLaundryStaffNRIC to set
+     */
+    public void setSelectedLaundryStaffNRIC(String selectedLaundryStaffNRIC) {
+        this.selectedLaundryStaffNRIC = selectedLaundryStaffNRIC;
+    }
+
+    /**
+     * @return the selectedMaintenanceOrder
+     */
+    public MaintainenceOrder getSelectedMaintenanceOrder() {
+        return selectedMaintenanceOrder;
+    }
+
+    /**
+     * @param selectedMaintenanceOrder the selectedMaintenanceOrder to set
+     */
+    public void setSelectedMaintenanceOrder(MaintainenceOrder selectedMaintenanceOrder) {
+        this.selectedMaintenanceOrder = selectedMaintenanceOrder;
+    }
+
+    /**
+     * @return the selectedMaintenanceOrderID
+     */
+    public Long getSelectedMaintenanceOrderID() {
+        return selectedMaintenanceOrderID;
+    }
+
+    /**
+     * @param selectedMaintenanceOrderID the selectedMaintenanceOrderID to set
+     */
+    public void setSelectedMaintenanceOrderID(Long selectedMaintenanceOrderID) {
+        this.selectedMaintenanceOrderID = selectedMaintenanceOrderID;
+    }
+
+    /**
+     * @return the tabIndex1
+     */
+    public boolean isTabIndex1() {
+        return tabIndex1;
+    }
+
+    /**
+     * @param tabIndex1 the tabIndex1 to set
+     */
+    public void setTabIndex1(boolean tabIndex1) {
+        this.tabIndex1 = tabIndex1;
+    }
+
+    /**
+     * @return the tabIndex2
+     */
+    public boolean isTabIndex2() {
+        return tabIndex2;
+    }
+
+    /**
+     * @param tabIndex2 the tabIndex2 to set
+     */
+    public void setTabIndex2(boolean tabIndex2) {
+        this.tabIndex2 = tabIndex2;
+    }
+
+    /**
+     * @return the tabIndex3
+     */
+    public boolean isTabIndex3() {
+        return tabIndex3;
+    }
+
+    /**
+     * @param tabIndex3 the tabIndex3 to set
+     */
+    public void setTabIndex3(boolean tabIndex3) {
+        this.tabIndex3 = tabIndex3;
     }
 
 }

@@ -134,16 +134,25 @@ public class LaundrySession implements LaundrySessionLocal {
 
     @Override
     public void updateLaundryOrder(LaundryOrder lo) throws NoResultException {
+        System.out.println("in update laundry order");
+        System.out.println(lo.getLaundryOrderID());
         LaundryOrder oldLo = em.find(LaundryOrder.class, lo.getLaundryOrderID());
         if (oldLo != null) {
             oldLo.setRoom(lo.getRoom());
+            System.out.println(lo.getRoom());
             oldLo.setOrderDateTime(lo.getOrderDateTime());
+            System.out.println(lo.getOrderDateTime());
             oldLo.setStatus(lo.getStatus());
             oldLo.setCompleteDateTime(lo.getCompleteDateTime());
             oldLo.setHouseKeeper(lo.getHouseKeeper());
             oldLo.setSpecialRequest(lo.getSpecialRequest());
             oldLo.setTotalPrice(lo.getTotalPrice());
             oldLo.setLaundryOrderedItems(lo.getLaundryOrderedItems());
+            for(LaundryOrderedItem loi: lo.getLaundryOrderedItems()){
+                System.out.println(loi.getLaundryOrderedItemID());
+                System.out.println(loi.getDescription());
+            }
+            em.flush();
         } else {
             throw new NoResultException("Laundry Order Not found");
         }

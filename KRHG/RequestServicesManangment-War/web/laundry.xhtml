@@ -38,26 +38,30 @@
                     <!-- /.container-fluid -->
                 </div> 
                 <section class="content" >
-
-                    <div class="col-lg-5 box box-info" style="padding:0px; margin-left:30px">                     
+ <h:form id="tableForm">
+                    <div class="col-lg-6 box box-info" style="padding:0px; margin-left:30px">                     
                         <div class="nav-tabs-custom ">
                             <!-- Tabs within a box -->
 
+                           
+                                 <ul class="nav nav-tabs pull-right">
 
-
-                            <ul class="nav nav-tabs pull-right">
-
-                                <li class="active pull-right" id="tabs"><a href="#pending" data-toggle="tab">PENDING PICKUP</a></li>
-                                <li class="pull-right" id="tabs"><a href="#inprogress" data-toggle="tab">IN PROGRESS</a></li>
-                                <li class="pull-right" id="tabs"><a href="#delivery" data-toggle="tab">TO DELIVER</a></li>
+                                     <li class="#{requestServicesManagedBean.tabIndex1 ? 'pull-right active' : 'pull-right'}" name="pendingpickup" id="tabs"><h:commandLink value="PENDING PICKUP" a:href="#pending" action="#{requestServicesManagedBean.selectTab1()}" a:data-toggle="tab" onclick="showform(4)">
+                                         <f:ajax execute="@form" render="tableForm"/>
+                                         </h:commandLink></li>
+                                <li class="#{requestServicesManagedBean.tabIndex2  ?'pull-right active' : 'pull-right'}" name="inprogress" id="tabs"><h:commandLink value="IN PROGRESS" a:href="#inprogress" action="#{requestServicesManagedBean.selectTab2()}" a:data-toggle="tab" onclick="showform(5)"></h:commandLink></li>
+                                <li class="#{requestServicesManagedBean.tabIndex3  ?'pull-right active' : 'pull-right'}"  name="todeliver" id="tabs"><h:commandLink value="TO DELIVER" a:href="#delivery"  action="#{requestServicesManagedBean.selectTab3()}" a:data-toggle="tab" onclick="showform(6)"></h:commandLink></li>
 
                             </ul>
+                           
+
+                           
                             <div class="tab-content no-padding">
                                 <div class="tab-pane active" id="pending" style="position: relative; height: fit-content;">
 
 
-                                    <h:form id="pendingForm">
-                                        <div class="box-body" style="padding:0px 10px !important;" id="scroll"  >
+                                   
+                                        <div class="box-body" style="padding:0px 10px !important;  margin-top:20px " id="scroll"  >
 
                                             <table id="example1" class="table table-bordered table-striped">
                                                 <thead>
@@ -76,13 +80,13 @@
                                                             <tr>
                                                                 <td>#{lo.laundryOrderID}</td>
                                                                 <td>#{lo.room.roomNumber}</td>
-                                                                <td>#{lo.orderDateTime}</td>
-                                                                <td>#{lo.completeDateTime}</td>
+                                                                <td>#{requestServicesManagedBean.convertDateFormat(lo.orderDateTime)}</td>
+                                                                <td>#{requestServicesManagedBean.convertDateFormatDDMMYY(lo.completeDateTime)}</td>
 
-                                                                <td><h:commandButton id="viewBtn" value="Collected" actionListener="#{requestServicesManagedBean.selectLaundryOrder(lo.laundryOrderID)}" onclick="showform(0)" class="btn btn-primary" >
-                                                                     <f:ajax execute="@form" render="@none"></f:ajax>
+                                                                <td><h:commandButton id="collectedBtn" value="Collected" actionListener="#{requestServicesManagedBean.selectLaundryOrder(lo.laundryOrderID)}" onclick="showform(0)" class="btn btn-primary" >
+                                                                        <f:ajax execute="@form" render="@none"></f:ajax>
                                                                     </h:commandButton>
-                                                                   
+
                                                                 </td>
                                                             </tr>
                                                         </c:forEach>
@@ -92,14 +96,14 @@
                                             </table>
 
                                         </div> <!-- cd-popup-container -->
-                                    </h:form>
+                                    
                                     <!-- /.content-header -->
                                     <!-- Main content -->
 
                                 </div>
                                 <div class="tab-pane" id="inprogress" style="position: relative; height: fit-content;">
-                                    <h:form id="progressForm">
-                                        <div class="box-body" style="padding:0px !important;" id="scroll"  >
+                               
+                                        <div class="box-body" style="padding:0px !important; margin-top:20px " id="scroll"  >
                                             <table id="example3" class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr>
@@ -116,10 +120,10 @@
                                                             <tr>
                                                                 <td>#{lo.laundryOrderID}</td>
                                                                 <td>#{lo.room.roomNumber}</td>
-                                                                <td>#{lo.completeDateTime}</td>
+                                                                <td>#{requestServicesManagedBean.convertDateFormatDDMMYY(lo.completeDateTime)}</td>
                                                                 <td>#{lo.houseKeeper.name}</td>
-                                                                <td><h:commandButton id="viewBtn" value="Details" actionListener="#{requestServicesManagedBean.selectLaundryOrder(lo.laundryOrderID)}"  onclick="showform(1)" class="btn btn-primary">
-                                                                     <f:ajax execute="@form" render="@none"></f:ajax>
+                                                                <td><h:commandButton id="detailsBtn" value="Details" actionListener="#{requestServicesManagedBean.selectLaundryOrder(lo.laundryOrderID)}"  onclick="showform(1)" class="btn btn-primary">
+                                                                        <f:ajax execute="@form" render=":drycleanForm washForm"></f:ajax>
                                                                     </h:commandButton></td>
                                                             </tr>
                                                         </c:forEach>
@@ -129,11 +133,11 @@
                                             </table>
 
                                         </div> <!-- cd-popup-container -->
-                                    </h:form>
+                                   
                                 </div>
                                 <div class="tab-pane" id="delivery" style="position: relative; height: fit-content;">
-                                    <h:form id="deliveryForm">
-                                        <div class="box-body" style="padding:0px !important;" id="scroll"  >
+                                   
+                                        <div class="box-body" style="padding:0px !important;  margin-top:20px " id="scroll"  >
                                             <table id="example4" class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr>
@@ -149,11 +153,11 @@
                                                             <tr>
                                                                 <td>#{lo.laundryOrderID}</td>
                                                                 <td>#{lo.room.roomNumber}</td>
-                                                                <td>#{lo.completeDateTime}</td>
-                                                                <td><h:commandButton id="viewBtn" value="Details" actionListener="#{requestServicesManagedBean.selectLaundryOrder(lo.laundryOrderID)}"  onclick="showform(2)" class="btn btn-primary">
-                                                                     <f:ajax execute="@form" render="@none"></f:ajax>
+                                                                <td>#{requestServicesManagedBean.convertDateFormatDDMMYY(lo.completeDateTime)}</td>
+                                                                <td><h:commandButton id="deliverDetailsButton" value="Details" actionListener="#{requestServicesManagedBean.selectLaundryOrder(lo.laundryOrderID)}"  onclick="showform(2)" class="btn btn-primary">
+                                                                        <f:ajax execute="@form" render=":todeliverForm"></f:ajax>
                                                                     </h:commandButton>
-                                                            </td>
+                                                                </td>
                                                             </tr>
                                                         </c:forEach>
                                                     </c:if>
@@ -162,16 +166,19 @@
                                             </table>
 
                                         </div> <!-- cd-popup-container -->
-                                    </h:form>
+                                    
                                 </div>
 
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-lg-6 box box-warning" style="padding:10px; margin-left:30px; margin-bottom: 100px"  id="clothingForm">
+ </h:form>
+                    <div class="col-lg-5 box box-warning" style="padding:10px; margin-left:30px; margin-bottom: 100px"  id="clothingForm">
                         <div class="box-header" style="text-align: center">
-                            <h1>Key in Clothing Items</h1>
+                            <h1>Laundry order ##{requestServicesManagedBean.selectedLaundryOrderID}</h1>
+                            <h3 style="font-weight:lighter">Key in clothing details</h3>
+                            <br/>
+                            <p style="color:grey; font-weight: lighter">eg: 2x Black Pants, 1x Grey Coat...</p>
                         </div>
                         <h:form id="pickupForm">
                             <div class="box-body" style="padding:20px !important;" >
@@ -184,41 +191,37 @@
                                         </div>                                            
                                         <div class="col-lg-4 form-group" style="font-size:calc((100% + 0.25vw));">
 
+
                                             <c:if test="#{ltype.laundryName eq 'Outer Wear (Dry-Wash)'}">
-                                                <h:inputText class="form-control"  id="liDescription" value="#{requestServicesManagedBean.OWDWDesc}" a:placeholder="enter description of clothing"></h:inputText>
+                                                <h:inputText class="form-control"  id="OWDWDesc" value="#{requestServicesManagedBean.OWDWDesc}"></h:inputText>
                                             </c:if>
                                             <c:if test="#{ltype.laundryName eq 'Inner Wear (Dry-Wash)'}">
-                                                <h:inputText class="form-control"  id="liDescription" value="#{requestServicesManagedBean.IWDWDesc}" a:placeholder="enter description of clothing"></h:inputText>
+                                                <h:inputText class="form-control"  id="IWDWDesc" value="#{requestServicesManagedBean.IWDWDesc}"></h:inputText>
                                             </c:if>
 
                                             <c:if test="#{ltype.laundryName eq 'Top (Wash)'}">
-                                                <h:inputText class="form-control"  id="liDescription" value="#{requestServicesManagedBean.TWDesc}" a:placeholder="enter description of clothing"></h:inputText>
+                                                <h:inputText class="form-control"  id="TWDesc" value="#{requestServicesManagedBean.TWDesc}"></h:inputText>
                                             </c:if>
 
                                             <c:if test="#{ltype.laundryName eq 'Outer Wear (Wash)'}">
-                                                <h:inputText class="form-control"  id="liDescription" value="#{requestServicesManagedBean.OWWDesc}" a:placeholder="enter description of clothing"></h:inputText>
+                                                <h:inputText class="form-control"  id="OWWDesc" value="#{requestServicesManagedBean.OWWDesc}"></h:inputText>
                                             </c:if>
 
                                             <c:if test="#{ltype.laundryName eq 'Bottom (Wash)'}">
-                                                <h:inputText class="form-control"  id="liDescription" value="#{requestServicesManagedBean.BWDesc}" a:placeholder="enter description of clothing"></h:inputText>
+                                                <h:inputText class="form-control"  id="BWDesc" value="#{requestServicesManagedBean.BWDesc}"></h:inputText>
                                             </c:if>
 
                                             <c:if test="#{ltype.laundryName eq 'Top (Dry-Wash)'}">
-                                                <h:inputText class="form-control"  id="liDescription" value="#{requestServicesManagedBean.TDWDesc}" a:placeholder="enter description of clothing"></h:inputText>
+                                                <h:inputText class="form-control"  id="TDWDesc" value="#{requestServicesManagedBean.TDWDesc}"></h:inputText>
                                             </c:if>
 
                                             <c:if test="#{ltype.laundryName eq 'Inner Wear (Wash)'}">
-                                                <h:inputText class="form-control"  id="liDescription" value="#{requestServicesManagedBean.IWWDesc}" a:placeholder="enter description of clothing"></h:inputText>
+                                                <h:inputText class="form-control"  id="IWWDesc" value="#{requestServicesManagedBean.IWWDesc}"></h:inputText>
                                             </c:if>
 
                                             <c:if test="#{ltype.laundryName eq 'Bottom (Dry-Wash)'}">
-                                                <h:inputText class="form-control"  id="liDescription" value="#{requestServicesManagedBean.BDWDesc}" a:placeholder="enter description of clothing"></h:inputText>
+                                                <h:inputText class="form-control"  id="BDWDesc" value="#{requestServicesManagedBean.BDWDesc}" ></h:inputText>
                                             </c:if>
-
-
-
-
-                                         
                                         </div>
 
                                         <div class="col-lg-4" style="text-align: center">
@@ -303,84 +306,227 @@
                                             </c:if>
 
                                         </div>
-
                                     </div>
 
 
                                 </c:forEach>
                             </div>
-                        </h:form>
-                        <h:form>
+
                             <div class="form-group" style="font-size:calc((100% + 0.25vw));">
                                 <label>Special Requests</label>
                                 <h:inputTextarea value="#{requestServicesManagedBean.specialLaundryRequest}" class="form-control" rows="3" a:placeholder="Enter Special Requests"></h:inputTextarea>
                             </div>
                             <div class="form-group" style="font-size:calc((100% + 0.25vw));">
-                                <label>Select</label>
-                                <h:selectOneMenu class="form-control" value="#{requestServicesManagedBean.selectedLaundryStaff}">
-                                    <c:forEach items="#{requestServicesManagedBean.getAllLaundryStaff()}" var="lstaff">
-                                        <f:selectItem itemValue="#{lstaff.nric}" itemLabel="#{lstaff.name}" />
-                                    </c:forEach>
+
+                                <h:selectOneMenu class="form-control" value="#{requestServicesManagedBean.selectedLaundryStaffNRIC}">
+                                    <f:selectItems value="#{requestServicesManagedBean.allLaundryStaffs}" var="staff" itemValue="#{staff.nric}" itemLabel="#{staff.name}" ></f:selectItems>
                                 </h:selectOneMenu>
+
                             </div>
-                        </h:form>
-                        
-                         <h:form>
-                        <div class="box-footer" style="text-align:center; padding:5px">
-                            <h:commandButton class="btn btn-info" style="font-size:calc((100% + 0.25vw)*1.2)!important;" action="#{requestServicesManagedBean.updateLaundryOrder()}" value="Update Laundry Order"></h:commandButton>
-                        </div>
-  </h:form>
- </div>
-                    
-                    <div class="col-lg-6 box box-warning" style="padding:10px; margin-left:30px; margin-bottom: 100px"  id="laundryDetails">
-                        <div class="box-header" style="text-align: center">
-                            <h1>Laundry Order Details</h1>
-                        </div>
-                        <h:form id="inprogressForm">
-                            <div class="box-body" style="padding:20px !important;" >
-                                <c:forEach items="#{requestServicesManagedBean.selectedLaundryOrder.laundryOrderedItems}" var="loi">
-                                    <h2>
-                                        To Dry Clean
-                                    </h2>
-                                    <br/>
-                                    <c:if test="#{loi.laundryType.laundryName} eq 'Top (Dry-Wash)' or 'Bottom (Dry-Wash)' or 'Inner Wear (Dry-Wash)' or 'Outer Wear (Dry-Wash)'">
-                                    #{loi.qty} - #{loi.description} - #{loi.laundryType.laundryName}
-                                    </c:if>
-                                    <br/>
-                                    <h2>
-                                        To Wash
-                                    </h2>
-                                    <br/>
-                                    <c:if test="#{loi.laundryType.laundryName} eq 'Top (Wash)' or 'Bottom (Wash)' or 'Inner Wear (Wash)' or 'Outer Wear (Wash)'">
-                                    #{loi.qty} - #{loi.description} - #{loi.laundryType.laundryName}
-                                    </c:if>
-                                </c:forEach>
-                                
+
+                            <div class="box-footer" style="text-align:center; padding:5px">
+                                <h:commandButton class="btn btn-info" style="font-size:calc((100% + 0.25vw)*1.2)!important;" action="#{requestServicesManagedBean.modalTrigger()}" value="Update Laundry Order">
+                                    <f:ajax execute="@form" render="formmodal"/>
+                                </h:commandButton>
                             </div>
                         </h:form>
                     </div>
-                    
-                    <div class="col-lg-6 box box-warning" style="padding:10px; margin-left:30px; margin-bottom: 100px"  id="deliveryDetails">
+
+                    <div class="col-lg-5" style="margin-left:30px;" id='laundryDetails'>
+                        <h:form id="drycleanForm">
+                            <div class="box box-warning" style="padding:10px; margin-bottom: 0px"  id="drycleanDetails">
+                                <div class="box-header" style="text-align: center">
+                                    <h1>Dry Clean</h1>
+                                </div>
+
+                                <c:if test="#{requestServicesManagedBean.selectedLaundryOrder ne null}">
+                                    <div class="description-block margin-bottom row" style="border-bottom:1px solid orange; padding:10px">
+
+                                        <div class="col-lg-4">
+                                            <span class="description-text" style="font-size:calc((100% + 0.25vw))">No. of Items</span> 
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <span class="description-text" style="font-size:calc((100% + 0.25vw))">Description of Items</span> 
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <span class="description-text" style="font-size:calc((100% + 0.25vw))">Wash Category</span> 
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="text-align:center; margin-bottom:20px ">
+
+                                        <c:forEach items="#{requestServicesManagedBean.allLaundryOrderedItem}" var="loii">
+
+                                            <c:if test="${requestServicesManagedBean.checkDryClean(loii) eq true}">
+
+                                                <span class="col-lg-4 description-header" style="font-size:calc((100% + 0.25vw)*0.8)">
+                                                    #{loii.qty} </span>
+                                                <span class="col-lg-4 description-header" style="font-size:calc((100% + 0.25vw)*0.8)">
+                                                    #{loii.description}  </span>
+                                                <span class="col-lg-4 description-header" style="font-size:calc((100% + 0.25vw)*0.8)">
+                                                    #{loii.laundryType.laundryName} </span>
+
+                                                <br/>
+                                            </c:if>
+
+                                        </c:forEach>
+                                    </div>                              
+                                </c:if>
+
+
+
+
+
+                            </div>
+
+                            <div class="box box-warning" style="padding:10px;  margin-bottom: 0px"  id="washDetails">
+                                <div class="box-header" style="text-align: center">
+                                    <h1>Wash</h1>
+                                </div>
+
+                                <c:if test="#{requestServicesManagedBean.selectedLaundryOrder ne null}">
+                                    <div class="description-block margin-bottom row"  style="border-bottom:1px solid orange; padding:10px">
+                                        <div class="col-lg-4">
+                                            <span class="description-text" style="font-size:calc((100% + 0.25vw))">No. of Items</span> 
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <span class="description-text" style="font-size:calc((100% + 0.25vw))">Description of Items</span> 
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <span class="description-text" style="font-size:calc((100% + 0.25vw))">Wash Category</span> 
+                                        </div>
+                                    </div>
+                                    <div class="row" style="text-align:center; margin-bottom:0px">
+
+
+                                        <c:forEach items="#{requestServicesManagedBean.allLaundryOrderedItem}" var="loi">
+                                            <c:if test="${requestServicesManagedBean.checkWash(loi) eq true}">
+                                                <span class="col-lg-4 description-header" style="font-size:calc((100% + 0.25vw)*0.8)">
+                                                    #{loi.qty} </span>
+                                                <span class="col-lg-4 description-header" style="font-size:calc((100% + 0.25vw)*0.8)">
+                                                    #{loi.description}  </span>
+                                                <span class="col-lg-4 description-header" style="font-size:calc((100% + 0.25vw)*0.8)">
+                                                    #{loi.laundryType.laundryName} </span>
+                                                <br/>
+                                            </c:if>
+
+                                        </c:forEach>
+
+                                    </div>
+                                </c:if>
+                                <c:if test="#{requestServicesManagedBean.checkSpecialRequest() eq true}">
+                                    <div class="box-header" style="text-align: center; border-top:1px dashed orange">
+                                        <h1>Special requests</h1>
+                                    </div>
+                                    <div class="description-block margin-bottom row"  style=" padding:10px">
+                                        <div class="col-lg-12">
+                                            <span class="description-text" style="font-size:calc((100% + 0.25vw)*0.8);">"#{requestServicesManagedBean.selectedLaundryOrder.specialRequest}"</span> 
+                                        </div>
+                                    </div>
+                                </c:if>
+                            </div>
+                            <h:commandLink value=" Ready To Deliver " class="col-lg-12" style="background-color:orange; color:white; border-radius:2px; margin-bottom: 50px; font-size:calc((100% + 0.25vw)*1.5); padding:10px; font-weight: bold; text-align:center" action="#{requestServicesManagedBean.modalTrigger2()}">
+                                <f:ajax execute="@form" render="formmodal2"/>
+                            </h:commandLink>
+                        </h:form>
+                    </div>
+                    <div class="col-lg-5 box box-warning" style="padding:10px; margin-left:30px; margin-bottom: 100px"  id="deliveryDetails">
                         <div class="box-header" style="text-align: center">
                             <h1>Delivery Details</h1>
                         </div>
                         <h:form id="todeliverForm">
-                            <div class="box-body" style="padding:20px !important;" ></div>
+                            <div class="box-body row" style="padding:20px !important; text-align:center" >
+                                <div style="width:100%">
+                                    <h2 style="font-weight:bold; margin-bottom:10px">Room #{requestServicesManagedBean.selectedLaundryOrder.room.roomNumber}</h2>
+                                    <h3 style="font-weight: lighter">Deliver By: #{requestServicesManagedBean.laundryDeliveryDate}</h3>
+                                    <c:forEach items="#{requestServicesManagedBean.selectedLaundryOrder.laundryOrderedItems}" var='loi'>
+                                        <span style="font-size:calc((100% + 0.25vw))">#{loi.qty}x #{loi.laundryType.laundryName}</span>
+                                        <br/>
+
+                                    </c:forEach>
+                                </div>
+
+                                <h:commandLink value="Delivered" class="col-lg-12" style="margin-top:20px; background-color:orange; color:white; border-radius:2px; font-size:calc((100% + 0.25vw)*1.5); padding:10px; font-weight: bold; text-align:center" action="#{requestServicesManagedBean.modalTrigger3()}">
+                                <f:ajax execute="@form" render="formmodal3"/>
+                                </h:commandLink>
+
+                            </div>
                         </h:form>
                     </div>
-                
-                   
-                        
-                   
-                        
-                  
 
+                    <h:form id="formmodal">
+                        <div id="modal" class="#{requestServicesManagedBean.styleClass}" role="alert">
+                            <div class="cd-popup-container">
+                                <p class="popup-content">Update Laundry Request ##{requestServicesManagedBean.selectedLaundryOrderID}?</p>
 
+                                <ul class="cd-buttons" style="padding-inline-start: unset; padding:0px">
 
+                                    <li ><h:commandLink id="updateLaundryOrder" action="#{requestServicesManagedBean.updateLaundryOrder()}" class="cd-popup-confirm" value="Yes">
+                                            <f:ajax execute="@form" render="tableForm formmodal"></f:ajax>
+                                        </h:commandLink></li>
+                                    <li style="background-color:lightslategray"><h:commandLink id="cancelUpdateLaundryOrder" action="#{requestServicesManagedBean.cancelUpdateLaundryOrder()}" class="cd-popup-closemodal" value="No">
+                                            <f:ajax execute="@form" render="@none"></f:ajax>
+                                        </h:commandLink></li>
+                                    <!--<li style="background-color:lightslategray"><a onclick="changeStyleCheck()" class="cd-popup-closemodal">No</a></li>-->
+                                    <h:inputHidden id="styleCheckID" value="#{requestServicesManagedBean.styleCheck}" />
+                                </ul>
+                            </div> <!-- cd-popup-container -->
+                        </div> <!-- cd-popup -->
+                    </h:form>
+                    
+                    <h:form id="formmodal2">
+                        <div id="modal" class="#{requestServicesManagedBean.styleClass2}" role="alert">
+                            <div class="cd-popup-container">
+                                <p class="popup-content">Update Laundry Request ##{requestServicesManagedBean.selectedLaundryOrderID}?</p>
 
+                                <ul class="cd-buttons" style="padding-inline-start: unset; padding:0px">
+
+                                    <li ><h:commandLink id="markLaundryOrderComplete" action="#{requestServicesManagedBean.markLaundryOrderComplete()}" class="cd-popup-confirm" value="Yes">
+                                            <f:ajax execute="@form" render="formmodal2 tableForm"></f:ajax>
+                                        </h:commandLink></li>
+                                    <li style="background-color:lightslategray"><h:commandLink id="cancelUpdateLaundryOrder" action="#{requestServicesManagedBean.cancelUpdateLaundryOrder()}" class="cd-popup-closemodal" value="No">
+                                            <f:ajax execute="@form" render="@none"></f:ajax>
+                                        </h:commandLink></li>
+                                    <!--<li style="background-color:lightslategray"><a onclick="changeStyleCheck()" class="cd-popup-closemodal">No</a></li>-->
+                                    <h:inputHidden id="styleCheckID" value="#{requestServicesManagedBean.styleCheck}" />
+                                </ul>
+                            </div> <!-- cd-popup-container -->
+                        </div> <!-- cd-popup -->
+                    </h:form>
+                    
+                     <h:form id="formmodal3">
+                        <div id="modal" class="#{requestServicesManagedBean.styleClass3}" role="alert">
+                            <div class="cd-popup-container">
+                                <p class="popup-content">Complete Laundry Request ##{requestServicesManagedBean.selectedLaundryOrderID}?</p>
+
+                                <ul class="cd-buttons" style="padding-inline-start: unset; padding:0px">
+
+                                    <li ><h:commandLink id="deliverLaundryOrderComplete" action="#{requestServicesManagedBean.markLaundryOrderDelivered()}" class="cd-popup-confirm" value="Yes">
+                                            <f:ajax execute="@form" render=" formmodal3 tableForm"></f:ajax>
+                                        </h:commandLink></li>
+                                    <li style="background-color:lightslategray"><h:commandLink id="cancelUpdateLaundryOrder" action="#{requestServicesManagedBean.cancelUpdateLaundryOrder()}" class="cd-popup-closemodal" value="No">
+                                            <f:ajax execute="@form" render="formmodal3"></f:ajax>
+                                        </h:commandLink></li>
+                                    <!--<li style="background-color:lightslategray"><a onclick="changeStyleCheck()" class="cd-popup-closemodal">No</a></li>-->
+                                    <h:inputHidden id="styleCheckID" value="#{requestServicesManagedBean.styleCheck}" />
+                                </ul>
+                            </div> <!-- cd-popup-container -->
+                        </div> <!-- cd-popup -->
+                    </h:form>
                 </section>
 
+                <script>
+                    window.onload = function () {
 
+                        document.getElementById("clothingForm").style.display = "none";
+                        document.getElementById("deliveryDetails").style.display = "none"
+                        document.getElementById("laundryDetails").style.display = "none";
+
+
+
+                    };
+
+                </script>
 
             </ui:define>
 
