@@ -570,8 +570,8 @@
 
                                 <ul class="cd-buttons" style="padding-inline-start: unset; padding:0px">
 
-                                    <li ><h:commandLink id="add-new" action="#{requestServicesManagedBean.deleteFoodItem()}" class="cd-popup-confirm" value="Yes">
-                                            <f:ajax execute="@form" render="@none"></f:ajax>
+                                    <li ><h:commandLink id="add-new" class="cd-popup-confirm" value="Yes">
+                                            <f:ajax execute="@form" oncomplete="triggerNotif()" listener="#{requestServicesManagedBean.deleteFoodItem()}" render="form1 form2 form3 form4 form5 form6 form7 form8 formmodal"></f:ajax>
                                         </h:commandLink></li>
                                     <li style="background-color:lightslategray"><h:commandLink id="cancelFoodItemFromMenu" action="#{requestServicesManagedBean.cancelingDeleteFoodItem()}" class="cd-popup-closemodal" value="No">
                                             <f:ajax execute="@form" render="@none"></f:ajax>
@@ -695,7 +695,7 @@
                                 <ul class="cd-buttons" style="padding-inline-start: unset; padding:0px; font-size: calc((100% + 0.25vw))!important; margin-top:30px">
 
                                     <li ><h:commandLink id="saveFoodMenuItem" action="#{requestServicesManagedBean.addFoodMenuItem()}" class="cd-popup-confirm" value="Add">
-                                            <f:ajax execute="@form" render="@none"></f:ajax>
+                                            <f:ajax execute="@form"  render="@none"></f:ajax>
                                         </h:commandLink></li>
                                     <li style="background-color:lightslategray"><h:commandLink id="cancelAddFoodItem" action="#{requestServicesManagedBean.cancelingAddFoodItem()}" class="cd-popup-closemodal" value="Cancel">
                                             <f:ajax execute="@form" render="@none"></f:ajax>
@@ -722,50 +722,7 @@
                     }
 
 
-                    //<![CDATA[
-
-                   
-                    var ADDNEW = document.getElementById("add-new");
-                    console.log(ADDNEW);
-                    var radiosBehavior = document.getElementsByName('self-closing');
-                    var radiosType = document.getElementsByName('notif-type');
-
-               
-                    ADDNEW.addEventListener('click', function () {
-                        console.log("in function")
-                        var behaviorValue = 'yes';
-                        var typeValue = 'info';
-                     
-                        var el = document.createElement('p');
-                        el.classList.add('notification');
-                        var innerHTML = 'hello';
-                        
-
-                       
-                        switch (typeValue) {
-                            case "success":
-                                el.classList.add('is-success');
-                                break;
-                            case "error":
-                                el.classList.add('is-danger');
-                                break;
-                            case "warning":
-                                el.classList.add('is-warning');
-                                break;
-                            default:
-                                el.classList.add('is-primary');
-                                break;
-                        }
-                        if (behaviorValue === 'yes') {
-                            el.setAttribute('data-close', 'self');
-                        } else {
-                            innerHTML += '<button class="delete" type="button">Close</button>';
-                        }
-                        el.innerHTML = innerHTML;
-                        document.querySelector('body').appendChild(el);
-                    });
-                    
-                    //]]>
+                
                 </script>
                 <!-- init -->
                

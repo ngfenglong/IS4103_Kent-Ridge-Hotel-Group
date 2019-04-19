@@ -292,6 +292,53 @@
                 closeSelfOnClick: true, animationOutSelf: 'slideout 1s', startTopPosition: 8,
                 
             });
+            
+                //<![CDATA[
+
+                   
+                   
+                    var ADDNEW = document.getElementById('formmodal:add-new');
+                    console.log(ADDNEW);
+                    
+                    console.log("above event listener")
+                    ADDNEW.addEventListener('click', triggerNotif);
+                    
+    
+                function triggerNotif() {
+                        console.log("in function")
+                        var behaviorValue = 'yes';
+                        var typeValue = 'info';
+                     
+                        var el = document.createElement('p');
+                        el.classList.add('notification');
+                        var innerHTML = 'hello';
+                        
+
+                       
+                        switch (typeValue) {
+                            case "success":
+                                el.classList.add('is-success');
+                                break;
+                            case "error":
+                                el.classList.add('is-danger');
+                                break;
+                            case "warning":
+                                el.classList.add('is-warning');
+                                break;
+                            default:
+                                el.classList.add('is-primary');
+                                break;
+                        }
+                        if (behaviorValue === 'yes') {
+                            el.setAttribute('data-close', 'self');
+                        } else {
+                            innerHTML += '<button class="delete" type="button">Close</button>';
+                        }
+                        el.innerHTML = innerHTML;
+                        document.querySelector('body').appendChild(el);
+                    }
+                    
+                    //]]>
 
           
         </script>

@@ -38,29 +38,29 @@
                     <!-- /.container-fluid -->
                 </div> 
                 <section class="content" >
- <h:form id="tableForm">
-                    <div class="col-lg-6 box box-info" style="padding:0px; margin-left:30px">                     
-                        <div class="nav-tabs-custom ">
-                            <!-- Tabs within a box -->
-
-                           
-                                 <ul class="nav nav-tabs pull-right">
-
-                                     <li class="#{requestServicesManagedBean.tabIndex1 ? 'pull-right active' : 'pull-right'}" name="pendingpickup" id="tabs"><h:commandLink value="PENDING PICKUP" a:href="#pending" action="#{requestServicesManagedBean.selectTab1()}" a:data-toggle="tab" onclick="showform(4)">
-                                         <f:ajax execute="@form" render="tableForm"/>
-                                         </h:commandLink></li>
-                                <li class="#{requestServicesManagedBean.tabIndex2  ?'pull-right active' : 'pull-right'}" name="inprogress" id="tabs"><h:commandLink value="IN PROGRESS" a:href="#inprogress" action="#{requestServicesManagedBean.selectTab2()}" a:data-toggle="tab" onclick="showform(5)"></h:commandLink></li>
-                                <li class="#{requestServicesManagedBean.tabIndex3  ?'pull-right active' : 'pull-right'}"  name="todeliver" id="tabs"><h:commandLink value="TO DELIVER" a:href="#delivery"  action="#{requestServicesManagedBean.selectTab3()}" a:data-toggle="tab" onclick="showform(6)"></h:commandLink></li>
-
-                            </ul>
-                           
-
-                           
-                            <div class="tab-content no-padding">
-                                <div class="tab-pane active" id="pending" style="position: relative; height: fit-content;">
+                    <h:form id="tableForm">
+                        <div class="col-lg-6 box box-info" style="padding:0px; margin-left:30px">                     
+                            <div class="nav-tabs-custom ">
+                                <!-- Tabs within a box -->
 
 
-                                   
+                                <ul class="nav nav-tabs pull-right">
+                                    <li class="#{requestServicesManagedBean.tabIndex1 ? 'pull-right active' : 'pull-right'}" name="pendingpickup" id="tabs">
+                                        <h:commandLink id="test1" value="PENDING PICKUP" a:href="#pending" actionListener="#{requestServicesManagedBean.selectTab1()}" a:data-toggle="tab" onclick="showform(4)">
+                                            <f:ajax execute="test1" render="@none"/> </h:commandLink></li>
+                                    <li class="#{requestServicesManagedBean.tabIndex2  ?'pull-right active' : 'pull-right'}" name="inprogress" id="tabs"><h:commandLink value="IN PROGRESS" a:href="#inprogress" id="test2" actionListener="#{requestServicesManagedBean.selectTab2()}" a:data-toggle="tab" onclick="showform(5)">
+                                            <f:ajax execute="test2" render="@none"/></h:commandLink></li>
+                                    <li class="#{requestServicesManagedBean.tabIndex3  ?'pull-right active' : 'pull-right'}"  name="todeliver" id="tabs"><h:commandLink id="test3" value="TO DELIVER" a:href="#delivery"  actionListener="#{requestServicesManagedBean.selectTab3()}" a:data-toggle="tab" onclick="showform(6)">
+                                            <f:ajax execute="test3" render="@none"/></h:commandLink></li>
+                                </ul>
+
+
+
+                                <div class="tab-content no-padding">
+                                    <div class="tab-pane active" id="pending" style="position: relative; height: fit-content;">
+
+
+
                                         <div class="box-body" style="padding:0px 10px !important;  margin-top:20px " id="scroll"  >
 
                                             <table id="example1" class="table table-bordered table-striped">
@@ -76,15 +76,15 @@
                                                 <tbody>
                                                     <c:if test="#{requestServicesManagedBean.getAllLaundryOrdersByStatus('PENDING') ne null}" >
 
-                                                        <c:forEach items="${requestServicesManagedBean.getAllLaundryOrdersByStatus('PENDING')}" var="lo">
+                                                        <c:forEach items="${requestServicesManagedBean.getAllLaundryOrdersByStatus('PENDING')}" var="lo" varStatus="count">
                                                             <tr>
                                                                 <td>#{lo.laundryOrderID}</td>
                                                                 <td>#{lo.room.roomNumber}</td>
                                                                 <td>#{requestServicesManagedBean.convertDateFormat(lo.orderDateTime)}</td>
                                                                 <td>#{requestServicesManagedBean.convertDateFormatDDMMYY(lo.completeDateTime)}</td>
 
-                                                                <td><h:commandButton id="collectedBtn" value="Collected" actionListener="#{requestServicesManagedBean.selectLaundryOrder(lo.laundryOrderID)}" onclick="showform(0)" class="btn btn-primary" >
-                                                                        <f:ajax execute="@form" render="@none"></f:ajax>
+                                                                <td><h:commandButton id="collectedBtn#{count.index}" value="Collected" actionListener="#{requestServicesManagedBean.selectLaundryOrder(lo.laundryOrderID)}" onclick="showform(0)" class="btn btn-primary" >
+                                                                        <f:ajax execute="collectedBtn#{count.index}" render=":pickupForm"></f:ajax>
                                                                     </h:commandButton>
 
                                                                 </td>
@@ -96,13 +96,13 @@
                                             </table>
 
                                         </div> <!-- cd-popup-container -->
-                                    
-                                    <!-- /.content-header -->
-                                    <!-- Main content -->
 
-                                </div>
-                                <div class="tab-pane" id="inprogress" style="position: relative; height: fit-content;">
-                               
+                                        <!-- /.content-header -->
+                                        <!-- Main content -->
+
+                                    </div>
+                                    <div class="tab-pane" id="inprogress" style="position: relative; height: fit-content;">
+
                                         <div class="box-body" style="padding:0px !important; margin-top:20px " id="scroll"  >
                                             <table id="example3" class="table table-bordered table-striped">
                                                 <thead>
@@ -133,10 +133,10 @@
                                             </table>
 
                                         </div> <!-- cd-popup-container -->
-                                   
-                                </div>
-                                <div class="tab-pane" id="delivery" style="position: relative; height: fit-content;">
-                                   
+
+                                    </div>
+                                    <div class="tab-pane" id="delivery" style="position: relative; height: fit-content;">
+
                                         <div class="box-body" style="padding:0px !important;  margin-top:20px " id="scroll"  >
                                             <table id="example4" class="table table-bordered table-striped">
                                                 <thead>
@@ -166,21 +166,22 @@
                                             </table>
 
                                         </div> <!-- cd-popup-container -->
-                                    
-                                </div>
 
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
-                    </div>
- </h:form>
-                    <div class="col-lg-5 box box-warning" style="padding:10px; margin-left:30px; margin-bottom: 100px"  id="clothingForm">
-                        <div class="box-header" style="text-align: center">
-                            <h1>Laundry order ##{requestServicesManagedBean.selectedLaundryOrderID}</h1>
-                            <h3 style="font-weight:lighter">Key in clothing details</h3>
-                            <br/>
-                            <p style="color:grey; font-weight: lighter">eg: 2x Black Pants, 1x Grey Coat...</p>
-                        </div>
-                        <h:form id="pickupForm">
+                    </h:form>
+                    <h:form id="pickupForm">
+                        <div class="col-lg-5 box box-warning" style="padding:10px; margin-left:30px; margin-bottom: 100px"  id="clothingForm">
+                            <div class="box-header" style="text-align: center">
+                                <h1>Laundry order ##{requestServicesManagedBean.selectedLaundryOrder.laundryOrderID}</h1>
+                                <h3 style="font-weight:lighter">Key in clothing details</h3>
+                                <br/>
+                                <p style="color:grey; font-weight: lighter">eg: 2x Black Pants, 1x Grey Coat...</p>
+                            </div>
+
                             <div class="box-body" style="padding:20px !important;" >
                                 <c:forEach items="${requestServicesManagedBean.getAllLaundryTypes()}" var="ltype">
 
@@ -329,9 +330,8 @@
                                     <f:ajax execute="@form" render="formmodal"/>
                                 </h:commandButton>
                             </div>
-                        </h:form>
-                    </div>
-
+                        </div>
+                    </h:form>
                     <div class="col-lg-5" style="margin-left:30px;" id='laundryDetails'>
                         <h:form id="drycleanForm">
                             <div class="box box-warning" style="padding:10px; margin-bottom: 0px"  id="drycleanDetails">
@@ -447,7 +447,7 @@
                                 </div>
 
                                 <h:commandLink value="Delivered" class="col-lg-12" style="margin-top:20px; background-color:orange; color:white; border-radius:2px; font-size:calc((100% + 0.25vw)*1.5); padding:10px; font-weight: bold; text-align:center" action="#{requestServicesManagedBean.modalTrigger3()}">
-                                <f:ajax execute="@form" render="formmodal3"/>
+                                    <f:ajax execute="@form" render="formmodal3"/>
                                 </h:commandLink>
 
                             </div>
@@ -473,7 +473,7 @@
                             </div> <!-- cd-popup-container -->
                         </div> <!-- cd-popup -->
                     </h:form>
-                    
+
                     <h:form id="formmodal2">
                         <div id="modal" class="#{requestServicesManagedBean.styleClass2}" role="alert">
                             <div class="cd-popup-container">
@@ -493,8 +493,8 @@
                             </div> <!-- cd-popup-container -->
                         </div> <!-- cd-popup -->
                     </h:form>
-                    
-                     <h:form id="formmodal3">
+
+                    <h:form id="formmodal3">
                         <div id="modal" class="#{requestServicesManagedBean.styleClass3}" role="alert">
                             <div class="cd-popup-container">
                                 <p class="popup-content">Complete Laundry Request ##{requestServicesManagedBean.selectedLaundryOrderID}?</p>

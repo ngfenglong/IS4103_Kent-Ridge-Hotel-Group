@@ -54,6 +54,7 @@ jQuery(document).ready(function($){
   });
 
     	//close popup
+        console.log("in modalJS above method")
 	$('.cd-popup-confirm').on('click', function(event){
 		if( $(event.target).is('.cd-popup-confirm') || $(event.target).is('.cd-popup') ) {
       console.log($(event.target).attr("id").substring(8));
