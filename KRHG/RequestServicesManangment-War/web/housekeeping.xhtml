@@ -22,15 +22,14 @@
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-
-
+                                <h1 style="font-size: x-large; margin-bottom:20px">Manage Housekeeping</h1>
                             </div>
                             <!-- /.col -->
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item active">
-                                        <!--Add Btn-->
-                                    </li>
+                                    <li><a href="index.xhtml">Home</a></li>
+
+                                    <li class="active">Housekeeping</li>
                                 </ol>
                             </div>
                             <!-- /.col -->
@@ -40,7 +39,7 @@
                     <!-- /.container-fluid -->
                 </div> 
                 <section class="content">
-                    <div class="card">
+              <div class="box box-primary" style="padding:20px">
 
                         <h:form>
                             <div class="card-header">
@@ -74,7 +73,9 @@
                                                             <f:selectItem itemValue="#{hk}" itemLabel="#{hk.name}" ></f:selectItem>
                                                         </c:forEach>
                                                     </h:selectOneMenu></td>
-                                                <td><h:commandButton value="update" action="#{requestServicesManagedBean.update(o)}"></h:commandButton></td>
+                                                <td><h:commandButton value="update" class="btn btn-primary" action="#{requestServicesManagedBean.update(o)}">
+                                                        <f:ajax execute="@form" render=":formmodal"></f:ajax>
+                                                    </h:commandButton></td>
                                             </tr>
 
                                         </c:forEach>
@@ -89,6 +90,23 @@
                     </div>
                     <!-- /.container-fluid -->
                 </section>
+                <h:form id="formmodal">
+                    <div id="modal" class="#{requestServicesManagedBean.styleClass}" role="alert">
+                        <div class="cd-popup-container">
+                            <p class="popup-content">#{requestServicesManagedBean.housekeeperName} assigned to housekeeping order.</p>
+
+                            <ul class="cd-buttons" style="padding-inline-start: unset; padding:0px">
+
+                                <li style="width:100%" ><h:commandLink  action="#{requestServicesManagedBean.housekeepingOK()}" class="cd-popup-confirm" value="ok">
+                                        <f:ajax execute="@form" render="@none"></f:ajax>
+                                    </h:commandLink></li>
+
+                                <!--<li style="background-color:lightslategray"><a onclick="changeStyleCheck()" class="cd-popup-closemodal">No</a></li>-->
+
+                            </ul>
+                        </div> <!-- cd-popup-container -->
+                    </div> <!-- cd-popup -->
+                </h:form>
                 <!-- /.content-header -->
                 <!-- Main content -->
 
@@ -99,8 +117,8 @@
                     $('[data-mask]').each(function () {
                         $(this).mask($(this).attr("data-mask"));
                     });
-                    
-                  
+
+
                 </script>
             </ui:define>
 

@@ -13,8 +13,8 @@ import entity.HouseKeepingOrder;
 import entity.LaundryOrder;
 import entity.LaundryOrderedItem;
 import entity.LaundryType;
-import entity.MaintainenceOrder;
 
+import entity.MaintainenceOrder;
 import entity.RoomBooking;
 
 import entity.MinibarStock;
@@ -27,6 +27,7 @@ import java.io.Serializable;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -97,9 +98,12 @@ public class requestServicesManagedBean implements Serializable {
     private List<HouseKeepingOrder> getIncompleteHousekeepingOrders;
     private List<Staff> getHousekeepingStaff;
     private Staff assignedHouseKeeper;
+    private String housekeeperName;
 
     //inventory 
     private List<MinibarStock> getMiniBarItems;
+    private Integer[] minibarStockWithoutUpdate;
+    private String updateMsg;
 
     //foodMenu
     private FoodMenuItem selectedFoodItem;
@@ -238,6 +242,7 @@ public class requestServicesManagedBean implements Serializable {
         return "";
     }
 
+
     public List<LaundryOrderedItem> getAllLaundryOrderedItem() {
         List<LaundryOrderedItem> allLOI = new ArrayList();
 
@@ -246,6 +251,17 @@ public class requestServicesManagedBean implements Serializable {
         }
 
         return allLOI;
+
+    public List<Staff> getAllLaundryStaff() {
+        List<Staff> allstaff = staffsession.getAllStaffs();
+        List<Staff> allLaundryStaff = new ArrayList();
+        for (Staff s : allstaff) {
+            if (s.getDepartment().toUpperCase().equals("LAUNDRY")) {
+                allLaundryStaff.add(s);
+            }
+        }
+
+        return allLaundryStaff;
     }
 
     public void updateLaundryOrder() throws NoResultException {
@@ -399,11 +415,17 @@ public class requestServicesManagedBean implements Serializable {
         OWWDesc = null;
         BWDesc = null;
 
+
         for (LaundryOrderedItem i : allItems) {
             System.out.println(i.getDescription());
         }
-        System.out.println("ALL ITEMS:" + allItems);
+
         System.out.println(currentLaundryOrder.getLaundryOrderID());
+        laundrySessionLocal.updateLaundryOrder(currentLaundryOrder);
+        System.out.println("currentLaundryStaffSelected:" + getSelectedLaundryStaff());
+        currentLaundryOrder.setHouseKeeper(staffsession.getStaffByNric(getSelectedLaundryStaff()));
+        System.out.println("currentLaundryStaffInput:" + currentLaundryOrder.getHouseKeeper().getName());
+
         currentLaundryOrder.setSpecialRequest(specialLaundryRequest);
         currentLaundryOrder.setHouseKeeper(staffsession.getStaffByNric(selectedLaundryStaffNRIC));
         styleCheck=false;
@@ -415,6 +437,7 @@ public class requestServicesManagedBean implements Serializable {
 
         System.out.println(laundrySessionLocal.getLaundryOrderByID(currentLaundryOrder.getLaundryOrderID()));
 
+
     }
 
     public boolean checkSpecialRequest() {
@@ -423,10 +446,6 @@ public class requestServicesManagedBean implements Serializable {
             return false;
         }
         return true;
-    }
-
-    public void printNRIC() {
-        System.out.println(selectedLaundryStaffNRIC);
     }
 
     public List<MaintainenceOrder>getAllMaintenanceOrders() throws NoResultException{
@@ -487,6 +506,7 @@ public class requestServicesManagedBean implements Serializable {
 
         return false;
     }
+
 
     public boolean checkWash(LaundryOrderedItem loi) {
 
@@ -1142,14 +1162,15 @@ public class requestServicesManagedBean implements Serializable {
         System.err.println("house: " + housekeeping);
         System.out.println("weifughweuiguwebguwbegwe");
         if (assignedHouseKeeper != null) {
-            System.err.println("in");
-            System.out.println(assignedHouseKeeper.getName());
+
+            housekeeperName = assignedHouseKeeper.getName();
             //Staff staff = staffsession.getStaffByID(assignedHouseKeeper);
 
             housekeeping.setHouseKeeper(assignedHouseKeeper);
 
             housekeepingsessionlocal.updateHouseKeepingOrder(housekeeping);
         }
+        styleCheck = true;
     }
 
     public String convertDateFormat(Date date) {
@@ -1202,10 +1223,15 @@ public class requestServicesManagedBean implements Serializable {
 
     public List<MinibarStock> getMinibarByHotelCode() {
         List<MinibarStock> newlist = new ArrayList<>();
+
+        minibarStockWithoutUpdate = new Integer[6];
+        int count = 0;
         for (MinibarStock ms : housekeepingsessionlocal.getAllMinibarStock()) {
             if (ms.getHotelCodeName().equals(hotelCode)) {
                 newlist.add(ms);
 
+                minibarStockWithoutUpdate[count] = 0;
+                count++;
             }
         }
         return newlist;
@@ -1274,6 +1300,14 @@ public class requestServicesManagedBean implements Serializable {
      */
     public void setNoImageStr(String noImageStr) {
         this.noImageStr = noImageStr;
+    }
+
+    public String getHousekeeperName() {
+        return housekeeperName;
+    }
+
+    public void setHousekeeperName(String housekeeperName) {
+        this.housekeeperName = housekeeperName;
     }
 
     /**
@@ -1684,6 +1718,7 @@ public class requestServicesManagedBean implements Serializable {
         this.selectedLaundryStaff = selectedLaundryStaff;
     }
 
+
     /**
      * @return the selectedLaundryStaff
      */
@@ -1703,6 +1738,55 @@ public class requestServicesManagedBean implements Serializable {
      */
     public void setAllLaundryStaffs(List<Staff> allLaundryStaffs) {
         this.allLaundryStaffs = allLaundryStaffs;
+}
+    public double defineTheNumber(int alert, int stock) {
+        Double alertChange = new Double(alert);
+        Double stockChange = new Double(stock);
+
+        double stockDiff = (stockChange / alertChange) * 30;
+        DecimalFormat decim = new DecimalFormat("0.00");
+        return Double.parseDouble(decim.format(stockDiff));
+    }
+
+    public Integer[] getMinibarStockWithoutUpdate() {
+        return minibarStockWithoutUpdate;
+    }
+
+    public String updateInventory() throws NoResultException {
+        updateMsg = "There are no updates";
+        for (int i = 0; i < 6; i++) {
+            MinibarStock ms = getMiniBarItems.get(i);
+
+            Integer current = ms.getCurrentStock();
+            ms.setCurrentStock(current + minibarStockWithoutUpdate[i]);
+            if (minibarStockWithoutUpdate[i] != 0) {
+                updateMsg = "Minibar stock updated";
+            }
+            housekeepingsessionlocal.updateMinibarStock(ms);
+            System.out.println(ms.getCurrentStock());
+        }
+        styleCheck = true;
+        return "Inventory.xhtml";
+    }
+
+    public String inventoryOK() {
+        styleCheck = false;
+
+        return "Inventory.xhtml?faces-redirect=true";
+    }
+
+    public String housekeepingOK() {
+        styleCheck = false;
+
+        return "housekeeping.xhtml?faces-redirect=true";
+    }
+
+    public String getUpdateMsg() {
+        return updateMsg;
+    }
+
+    public void setUpdateMsg(String updateMsg) {
+        this.updateMsg = updateMsg;
     }
 
     /**
