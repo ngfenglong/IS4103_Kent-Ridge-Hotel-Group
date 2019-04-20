@@ -11,7 +11,7 @@
 
 
             <ui:define name="title">
-                KRHG front desk
+                KRHG Front Desk
             </ui:define>
 
             <ui:define name="content">
@@ -88,46 +88,31 @@
                                 <table  id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Booked by</th>
-                                            <th>Booking Id</th>
+                                            <th>Room Number</th>
+                                            <th>Booked By</th>
                                             <th>Passport Number</th>
                                             <th>Book out Date</th>
-
-                                            <th></th>
+                                            <th>Price</th>
                                         </tr>
                                     </thead>
                                     <tbody>
 
-                                        <ui:repeat var="o" value="#{frontDeskManagedBean.todayCheckOutRoom}" varStatus="status">
+                                        <ui:repeat var="o" value="#{frontDeskManagedBean.getTodayCheckOutRoom()}" varStatus="status">
 
                                             <tr>
-                                                <td>#{o.bookedBy.name}</td>
                                                 <td>#{o.bookedRoom.roomNumber}</td>
+                                                <td>#{o.bookedBy.firstName} #{o.bookedBy.lastName}</td>
                                                 <td>#{o.passportNum}</td>
                                                 <td>#{o.bookOutDate}</td>
-                                                <td colspan="3"><h:commandLink action="#{frontDeskManagedBean.checkOut(o)}" > <i class="fa fa-arrow-circle-down" style="color:gray" ></i></h:commandLink></td>                                            
+                                                <td>#{o.price}</td>
+                                                <td colspan="3"><h:commandLink action="#{frontDeskManagedBean.displayCheckoutOrders(o)}" > <i class="fa fa-arrow-circle-down" style="color:gray" ></i></h:commandLink></td>                                            
 
                                             </tr>
-
-
-
-
-
 
                                         </ui:repeat>
 
 
                                     </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Booked by</th>
-                                            <th>Booking Id</th>
-                                            <th>Passport Number</th>
-                                            <th>Book out Date</th>
-
-                                            <th></th>
-                                        </tr>
-                                    </tfoot>
                                 </table>
                             </h:form>
                         </div>
