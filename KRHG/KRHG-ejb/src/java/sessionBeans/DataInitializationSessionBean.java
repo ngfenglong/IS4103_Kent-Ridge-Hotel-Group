@@ -16176,6 +16176,7 @@ public class DataInitializationSessionBean {
 		
         RoomBooking rb10 = new RoomBooking();
         rb10.setBookedRoom(roomSessionLocal.getRoomByName("KRG_202"));
+        rb10.setBookInDate(format.parse("2019-02-18"));
         bookingSessionLocal.createRoomBooking(rb10);
         PaymentTransaction PT2 = new PaymentTransaction();
         PT2.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16185,6 +16186,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb11 = new RoomBooking();
         rb11.setBookedRoom(roomSessionLocal.getRoomByName("KRG_203"));
+        rb11.setBookInDate(format.parse("2019-02-10"));
         bookingSessionLocal.createRoomBooking(rb11);
         PaymentTransaction PT3 = new PaymentTransaction();
         PT3.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16194,6 +16196,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb12 = new RoomBooking();
         rb12.setBookedRoom(roomSessionLocal.getRoomByName("KRN_205"));
+        rb12.setBookInDate(format.parse("2019-03-19"));
         bookingSessionLocal.createRoomBooking(rb12);
         PaymentTransaction PT4 = new PaymentTransaction();
         PT4.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16203,6 +16206,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb13 = new RoomBooking();
         rb13.setBookedRoom(roomSessionLocal.getRoomByName("KRN_205"));
+        rb13.setBookInDate(format.parse("2019-04-28"));
         bookingSessionLocal.createRoomBooking(rb13);
         PaymentTransaction PT5 = new PaymentTransaction();
         PT5.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16212,11 +16216,13 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb14 = new RoomBooking();
         rb14.setBookedRoom(roomSessionLocal.getRoomByName("KRS_205"));
+        rb14.setBookInDate(format.parse("2019-03-19"));
         bookingSessionLocal.createRoomBooking(rb14);
         PaymentTransaction PT6 = new PaymentTransaction();
         PT6.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
         RoomBooking rb15 = new RoomBooking();
         rb15.setBookedRoom(roomSessionLocal.getRoomByName("KRS_206"));
+        rb15.setBookInDate(format.parse("2019-03-19"));
         bookingSessionLocal.createRoomBooking(rb15);
         PT6.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
         PT6.setTransactionDateTime(format.parse("2019-03-10"));
@@ -16226,6 +16232,7 @@ public class DataInitializationSessionBean {
 //KRW Payment Transaction        
         RoomBooking rb300 = new RoomBooking();
         rb300.setBookedRoom(roomSessionLocal.getRoomByName("KRW_205"));
+        rb300.setBookInDate(format.parse("2019-01-29"));
         bookingSessionLocal.createRoomBooking(rb300);
         PaymentTransaction PT300 = new PaymentTransaction();
         PT300.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16235,6 +16242,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb301 = new RoomBooking();
         rb301.setBookedRoom(roomSessionLocal.getRoomByName("KRW_305"));
+        rb301.setBookInDate(format.parse("2019-01-29"));
         bookingSessionLocal.createRoomBooking(rb301);
         PaymentTransaction PT301 = new PaymentTransaction();
         PT301.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16244,6 +16252,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb302 = new RoomBooking();
         rb302.setBookedRoom(roomSessionLocal.getRoomByName("KRW_203"));
+        rb302.setBookInDate(format.parse("2019-01-19"));
         bookingSessionLocal.createRoomBooking(rb302);
         PaymentTransaction PT302 = new PaymentTransaction();
         PT302.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16253,6 +16262,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb303 = new RoomBooking();
         rb303.setBookedRoom(roomSessionLocal.getRoomByName("KRW_403"));
+        rb303.setBookInDate(format.parse("2019-01-07"));
         bookingSessionLocal.createRoomBooking(rb303);
         PaymentTransaction PT303 = new PaymentTransaction();
         PT303.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16262,6 +16272,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb304 = new RoomBooking();
         rb304.setBookedRoom(roomSessionLocal.getRoomByName("KRW_203"));
+        rb304.setBookInDate(format.parse("2019-01-19"));
         bookingSessionLocal.createRoomBooking(rb304);
         PaymentTransaction PT304 = new PaymentTransaction();
         PT304.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16271,6 +16282,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb305 = new RoomBooking();
         rb305.setBookedRoom(roomSessionLocal.getRoomByName("KRW_204"));
+        rb305.setBookInDate(format.parse("2019-01-27"));
         bookingSessionLocal.createRoomBooking(rb305);
         PaymentTransaction PT305 = new PaymentTransaction();
         PT305.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16280,6 +16292,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb306 = new RoomBooking();
         rb306.setBookedRoom(roomSessionLocal.getRoomByName("KRW_206"));
+        rb306.setBookInDate(format.parse("2019-01-18"));
         bookingSessionLocal.createRoomBooking(rb306);
         PaymentTransaction PT306 = new PaymentTransaction();
         PT306.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16289,6 +16302,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb307 = new RoomBooking();
         rb307.setBookedRoom(roomSessionLocal.getRoomByName("KRW_207"));
+        rb307.setBookInDate(format.parse("2019-01-30"));
         bookingSessionLocal.createRoomBooking(rb307);
         PaymentTransaction PT307 = new PaymentTransaction();
         PT307.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16298,6 +16312,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb308 = new RoomBooking();
         rb308.setBookedRoom(roomSessionLocal.getRoomByName("KRW_406"));
+        rb308.setBookInDate(format.parse("2019-01-18"));
         bookingSessionLocal.createRoomBooking(rb308);
         PaymentTransaction PT308 = new PaymentTransaction();
         PT308.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16307,6 +16322,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb309 = new RoomBooking();
         rb309.setBookedRoom(roomSessionLocal.getRoomByName("KRW_306"));
+        rb309.setBookInDate(format.parse("2019-01-29"));
         bookingSessionLocal.createRoomBooking(rb309);
         PaymentTransaction PT309 = new PaymentTransaction();
         PT309.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16316,6 +16332,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb310 = new RoomBooking();
         rb310.setBookedRoom(roomSessionLocal.getRoomByName("KRW_203"));
+        rb310.setBookInDate(format.parse("2019-01-17"));
         bookingSessionLocal.createRoomBooking(rb310);
         PaymentTransaction PT310 = new PaymentTransaction();
         PT310.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16325,6 +16342,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb311 = new RoomBooking();
         rb311.setBookedRoom(roomSessionLocal.getRoomByName("KRW_203"));
+        rb311.setBookInDate(format.parse("2019-02-17"));
         bookingSessionLocal.createRoomBooking(rb311);
         PaymentTransaction PT311 = new PaymentTransaction();
         PT311.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16334,6 +16352,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb312 = new RoomBooking();
         rb312.setBookedRoom(roomSessionLocal.getRoomByName("KRW_503"));
+        rb312.setBookInDate(format.parse("2019-02-25"));
         bookingSessionLocal.createRoomBooking(rb312);
         PaymentTransaction PT312 = new PaymentTransaction();
         PT312.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16343,6 +16362,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb313 = new RoomBooking();
         rb313.setBookedRoom(roomSessionLocal.getRoomByName("KRW_504"));
+        rb313.setBookInDate(format.parse("2019-02-27"));
         bookingSessionLocal.createRoomBooking(rb313);
         PaymentTransaction PT313 = new PaymentTransaction();
         PT313.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16352,6 +16372,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb314 = new RoomBooking();
         rb314.setBookedRoom(roomSessionLocal.getRoomByName("KRW_504"));
+        rb314.setBookInDate(format.parse("2019-02-09"));
         bookingSessionLocal.createRoomBooking(rb314);
         PaymentTransaction PT314 = new PaymentTransaction();
         PT314.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16361,6 +16382,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb315 = new RoomBooking();
         rb315.setBookedRoom(roomSessionLocal.getRoomByName("KRW_505"));
+        rb315.setBookInDate(format.parse("2019-02-09"));
         bookingSessionLocal.createRoomBooking(rb315);
         PaymentTransaction PT315 = new PaymentTransaction();
         PT315.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16370,6 +16392,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb316 = new RoomBooking();
         rb316.setBookedRoom(roomSessionLocal.getRoomByName("KRW_506"));
+        rb316.setBookInDate(format.parse("2019-02-09"));
         bookingSessionLocal.createRoomBooking(rb316);
         PaymentTransaction PT316 = new PaymentTransaction();
         PT316.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16379,6 +16402,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb317 = new RoomBooking();
         rb317.setBookedRoom(roomSessionLocal.getRoomByName("KRW_507"));
+        rb317.setBookInDate(format.parse("2019-02-10"));
         bookingSessionLocal.createRoomBooking(rb317);
         PaymentTransaction PT317 = new PaymentTransaction();
         PT317.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16388,6 +16412,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb318 = new RoomBooking();
         rb318.setBookedRoom(roomSessionLocal.getRoomByName("KRW_508"));
+        rb318.setBookInDate(format.parse("2019-02-13"));
         bookingSessionLocal.createRoomBooking(rb318);
         PaymentTransaction PT318 = new PaymentTransaction();
         PT318.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16397,6 +16422,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb319 = new RoomBooking();
         rb319.setBookedRoom(roomSessionLocal.getRoomByName("KRW_601"));
+        rb319.setBookInDate(format.parse("2019-02-15"));
         bookingSessionLocal.createRoomBooking(rb319);
         PaymentTransaction PT319 = new PaymentTransaction();
         PT319.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16406,6 +16432,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb320 = new RoomBooking();
         rb320.setBookedRoom(roomSessionLocal.getRoomByName("KRW_602"));
+        rb320.setBookInDate(format.parse("2019-02-21"));
         bookingSessionLocal.createRoomBooking(rb320);
         PaymentTransaction PT320 = new PaymentTransaction();
         PT320.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16415,6 +16442,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb321 = new RoomBooking();
         rb321.setBookedRoom(roomSessionLocal.getRoomByName("KRW_201"));
+        rb321.setBookInDate(format.parse("2019-03-09"));
         bookingSessionLocal.createRoomBooking(rb321);
         PaymentTransaction PT321 = new PaymentTransaction();
         PT321.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16424,6 +16452,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb322 = new RoomBooking();
         rb322.setBookedRoom(roomSessionLocal.getRoomByName("KRW_202"));
+        rb322.setBookInDate(format.parse("2019-03-09"));
         bookingSessionLocal.createRoomBooking(rb322);
         PaymentTransaction PT322 = new PaymentTransaction();
         PT322.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16433,6 +16462,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb323 = new RoomBooking();
         rb323.setBookedRoom(roomSessionLocal.getRoomByName("KRW_203"));
+        rb323.setBookInDate(format.parse("2019-03-09"));
         bookingSessionLocal.createRoomBooking(rb323);
         PaymentTransaction PT323 = new PaymentTransaction();
         PT323.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16442,6 +16472,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb324 = new RoomBooking();
         rb324.setBookedRoom(roomSessionLocal.getRoomByName("KRW_204"));
+        rb324.setBookInDate(format.parse("2019-03-09"));
         bookingSessionLocal.createRoomBooking(rb324);
         PaymentTransaction PT324 = new PaymentTransaction();
         PT324.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16451,6 +16482,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb325 = new RoomBooking();
         rb325.setBookedRoom(roomSessionLocal.getRoomByName("KRW_205"));
+        rb325.setBookInDate(format.parse("2019-03-10"));
         bookingSessionLocal.createRoomBooking(rb325);
         PaymentTransaction PT325 = new PaymentTransaction();
         PT325.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16460,6 +16492,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb326 = new RoomBooking();
         rb326.setBookedRoom(roomSessionLocal.getRoomByName("KRW_301"));
+        rb326.setBookInDate(format.parse("2019-03-10"));
         bookingSessionLocal.createRoomBooking(rb326);
         PaymentTransaction PT326 = new PaymentTransaction();
         PT326.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16469,6 +16502,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb327 = new RoomBooking();
         rb327.setBookedRoom(roomSessionLocal.getRoomByName("KRW_302"));
+        rb327.setBookInDate(format.parse("2019-03-09"));
         bookingSessionLocal.createRoomBooking(rb327);
         PaymentTransaction PT327 = new PaymentTransaction();
         PT327.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16478,6 +16512,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb328 = new RoomBooking();
         rb328.setBookedRoom(roomSessionLocal.getRoomByName("KRW_303"));
+        rb328.setBookInDate(format.parse("2019-03-19"));
         bookingSessionLocal.createRoomBooking(rb328);
         PaymentTransaction PT328 = new PaymentTransaction();
         PT328.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16487,6 +16522,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb329 = new RoomBooking();
         rb329.setBookedRoom(roomSessionLocal.getRoomByName("KRW_304"));
+        rb329.setBookInDate(format.parse("2019-03-14"));
         bookingSessionLocal.createRoomBooking(rb329);
         PaymentTransaction PT329 = new PaymentTransaction();
         PT329.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16496,6 +16532,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb330 = new RoomBooking();
         rb330.setBookedRoom(roomSessionLocal.getRoomByName("KRW_305"));
+        rb330.setBookInDate(format.parse("2019-03-18"));
         bookingSessionLocal.createRoomBooking(rb330);
         PaymentTransaction PT330 = new PaymentTransaction();
         PT330.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16505,6 +16542,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb331 = new RoomBooking();
         rb331.setBookedRoom(roomSessionLocal.getRoomByName("KRW_201"));
+        rb331.setBookInDate(format.parse("2019-04-18"));
         bookingSessionLocal.createRoomBooking(rb331);
         PaymentTransaction PT331 = new PaymentTransaction();
         PT331.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16514,6 +16552,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb332 = new RoomBooking();
         rb332.setBookedRoom(roomSessionLocal.getRoomByName("KRW_202"));
+        rb332.setBookInDate(format.parse("2019-04-18"));
         bookingSessionLocal.createRoomBooking(rb332);
         PaymentTransaction PT332 = new PaymentTransaction();
         PT332.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16523,6 +16562,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb333 = new RoomBooking();
         rb333.setBookedRoom(roomSessionLocal.getRoomByName("KRW_203"));
+        rb333.setBookInDate(format.parse("2019-04-18"));
         bookingSessionLocal.createRoomBooking(rb333);
         PaymentTransaction PT333 = new PaymentTransaction();
         PT333.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16532,6 +16572,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb334 = new RoomBooking();
         rb334.setBookedRoom(roomSessionLocal.getRoomByName("KRW_204"));
+        rb334.setBookInDate(format.parse("2019-04-19"));
         bookingSessionLocal.createRoomBooking(rb334);
         PaymentTransaction PT334 = new PaymentTransaction();
         PT334.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16541,6 +16582,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb335 = new RoomBooking();
         rb335.setBookedRoom(roomSessionLocal.getRoomByName("KRW_205"));
+        rb335.setBookInDate(format.parse("2019-04-19"));
         bookingSessionLocal.createRoomBooking(rb335);
         PaymentTransaction PT335 = new PaymentTransaction();
         PT335.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16550,6 +16592,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb336 = new RoomBooking();
         rb336.setBookedRoom(roomSessionLocal.getRoomByName("KRW_301"));
+        rb336.setBookInDate(format.parse("2019-04-19"));
         bookingSessionLocal.createRoomBooking(rb336);
         PaymentTransaction PT336 = new PaymentTransaction();
         PT336.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16559,6 +16602,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb337 = new RoomBooking();
         rb337.setBookedRoom(roomSessionLocal.getRoomByName("KRW_302"));
+        rb337.setBookInDate(format.parse("2019-04-19"));
         bookingSessionLocal.createRoomBooking(rb337);
         PaymentTransaction PT337 = new PaymentTransaction();
         PT337.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16568,6 +16612,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb338 = new RoomBooking();
         rb338.setBookedRoom(roomSessionLocal.getRoomByName("KRW_303"));
+        rb338.setBookInDate(format.parse("2019-04-19"));
         bookingSessionLocal.createRoomBooking(rb338);
         PaymentTransaction PT338 = new PaymentTransaction();
         PT338.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16577,6 +16622,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb339 = new RoomBooking();
         rb339.setBookedRoom(roomSessionLocal.getRoomByName("KRG_304"));
+        rb339.setBookInDate(format.parse("2019-04-28"));
         bookingSessionLocal.createRoomBooking(rb339);
         PaymentTransaction PT339 = new PaymentTransaction();
         PT339.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16587,6 +16633,7 @@ public class DataInitializationSessionBean {
 //KRNE PaymentTransaction
         RoomBooking rb340 = new RoomBooking();
         rb340.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_201"));
+        rb340.setBookInDate(format.parse("2019-02-09"));
         bookingSessionLocal.createRoomBooking(rb340);
         PaymentTransaction PT340 = new PaymentTransaction();
         PT340.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16596,6 +16643,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb341 = new RoomBooking();
         rb341.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_202"));
+        rb341.setBookInDate(format.parse("2019-01-09"));
         bookingSessionLocal.createRoomBooking(rb341);
         PaymentTransaction PT341 = new PaymentTransaction();
         PT341.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16605,6 +16653,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb342 = new RoomBooking();
         rb342.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_203"));
+        rb342.setBookInDate(format.parse("2019-02-09"));
         bookingSessionLocal.createRoomBooking(rb342);
         PaymentTransaction PT342 = new PaymentTransaction();
         PT342.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16614,6 +16663,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb343 = new RoomBooking();
         rb343.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_204"));
+        rb343.setBookInDate(format.parse("2019-01-09"));
         bookingSessionLocal.createRoomBooking(rb343);
         PaymentTransaction PT343 = new PaymentTransaction();
         PT343.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16623,6 +16673,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb344 = new RoomBooking();
         rb344.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_205"));
+        rb344.setBookInDate(format.parse("2019-01-09"));
         bookingSessionLocal.createRoomBooking(rb344);
         PaymentTransaction PT344 = new PaymentTransaction();
         PT344.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16632,6 +16683,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb345 = new RoomBooking();
         rb345.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_301"));
+        rb345.setBookInDate(format.parse("2019-01-12"));
         bookingSessionLocal.createRoomBooking(rb345);
         PaymentTransaction PT345 = new PaymentTransaction();
         PT345.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16641,6 +16693,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb346 = new RoomBooking();
         rb346.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_302"));
+        rb346.setBookInDate(format.parse("2019-01-12"));
         bookingSessionLocal.createRoomBooking(rb346);
         PaymentTransaction PT346 = new PaymentTransaction();
         PT346.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16650,6 +16703,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb347 = new RoomBooking();
         rb347.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_303"));
+        rb347.setBookInDate(format.parse("2019-01-13"));
         bookingSessionLocal.createRoomBooking(rb347);
         PaymentTransaction PT347 = new PaymentTransaction();
         PT347.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16659,6 +16713,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb348 = new RoomBooking();
         rb348.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_304"));
+        rb348.setBookInDate(format.parse("2019-01-14"));
         bookingSessionLocal.createRoomBooking(rb348);
         PaymentTransaction PT348 = new PaymentTransaction();
         PT348.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16668,6 +16723,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb349 = new RoomBooking();
         rb349.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_305"));
+        rb349.setBookInDate(format.parse("2019-02-09"));
         bookingSessionLocal.createRoomBooking(rb349);
         PaymentTransaction PT349 = new PaymentTransaction();
         PT349.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16677,6 +16733,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb350 = new RoomBooking();
         rb350.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_201"));
+        rb350.setBookInDate(format.parse("2019-02-09"));
         bookingSessionLocal.createRoomBooking(rb350);
         PaymentTransaction PT350 = new PaymentTransaction();
         PT350.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16686,6 +16743,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb351 = new RoomBooking();
         rb351.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_202"));
+        rb351.setBookInDate(format.parse("2019-02-09"));
         bookingSessionLocal.createRoomBooking(rb351);
         PaymentTransaction PT351 = new PaymentTransaction();
         PT351.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16695,6 +16753,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb352 = new RoomBooking();
         rb352.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_203"));
+        rb352.setBookInDate(format.parse("2019-02-09"));
         bookingSessionLocal.createRoomBooking(rb352);
         PaymentTransaction PT352 = new PaymentTransaction();
         PT352.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16704,6 +16763,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb353 = new RoomBooking();
         rb353.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_204"));
+        rb353.setBookInDate(format.parse("2019-02-08"));
         bookingSessionLocal.createRoomBooking(rb353);
         PaymentTransaction PT353 = new PaymentTransaction();
         PT353.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16713,6 +16773,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb354 = new RoomBooking();
         rb354.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_205"));
+        rb354.setBookInDate(format.parse("2019-02-09"));
         bookingSessionLocal.createRoomBooking(rb354);
         PaymentTransaction PT354 = new PaymentTransaction();
         PT354.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16722,6 +16783,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb355 = new RoomBooking();
         rb355.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_301"));
+        rb355.setBookInDate(format.parse("2019-02-09"));
         bookingSessionLocal.createRoomBooking(rb355);
         PaymentTransaction PT355 = new PaymentTransaction();
         PT355.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16731,6 +16793,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb356 = new RoomBooking();
         rb356.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_302"));
+        rb356.setBookInDate(format.parse("2019-02-14"));
         bookingSessionLocal.createRoomBooking(rb356);
         PaymentTransaction PT356 = new PaymentTransaction();
         PT356.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16740,6 +16803,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb357 = new RoomBooking();
         rb357.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_303"));
+        rb357.setBookInDate(format.parse("2019-02-13"));
         bookingSessionLocal.createRoomBooking(rb357);
         PaymentTransaction PT357 = new PaymentTransaction();
         PT357.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16749,6 +16813,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb358 = new RoomBooking();
         rb358.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_304"));
+        rb358.setBookInDate(format.parse("2019-02-14"));
         bookingSessionLocal.createRoomBooking(rb358);
         PaymentTransaction PT358 = new PaymentTransaction();
         PT358.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16758,6 +16823,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb359 = new RoomBooking();
         rb359.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_305"));
+        rb359.setBookInDate(format.parse("2019-02-17"));
         bookingSessionLocal.createRoomBooking(rb359);
         PaymentTransaction PT359 = new PaymentTransaction();
         PT359.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16767,6 +16833,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb360 = new RoomBooking();
         rb360.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_201"));
+        rb360.setBookInDate(format.parse("2019-03-18"));
         bookingSessionLocal.createRoomBooking(rb360);
         PaymentTransaction PT360 = new PaymentTransaction();
         PT360.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16776,6 +16843,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb361 = new RoomBooking();
         rb361.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_202"));
+        rb361.setBookInDate(format.parse("2019-03-09"));
         bookingSessionLocal.createRoomBooking(rb361);
         PaymentTransaction PT361 = new PaymentTransaction();
         PT361.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16785,6 +16853,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb362 = new RoomBooking();
         rb362.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_203"));
+        rb362.setBookInDate(format.parse("2019-03-09"));
         bookingSessionLocal.createRoomBooking(rb362);
         PaymentTransaction PT362 = new PaymentTransaction();
         PT362.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16794,6 +16863,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb363 = new RoomBooking();
         rb363.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_204"));
+        rb363.setBookInDate(format.parse("2019-03-16"));
         bookingSessionLocal.createRoomBooking(rb363);
         PaymentTransaction PT363 = new PaymentTransaction();
         PT363.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16803,6 +16873,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb364 = new RoomBooking();
         rb364.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_205"));
+        rb364.setBookInDate(format.parse("2019-03-09"));
         bookingSessionLocal.createRoomBooking(rb364);
         PaymentTransaction PT364 = new PaymentTransaction();
         PT364.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16812,6 +16883,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb365 = new RoomBooking();
         rb365.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_301"));
+        rb365.setBookInDate(format.parse("2019-03-17"));
         bookingSessionLocal.createRoomBooking(rb365);
         PaymentTransaction PT365 = new PaymentTransaction();
         PT365.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16821,6 +16893,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb366 = new RoomBooking();
         rb366.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_302"));
+        rb366.setBookInDate(format.parse("2019-03-17"));
         bookingSessionLocal.createRoomBooking(rb366);
         PaymentTransaction PT366 = new PaymentTransaction();
         PT366.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16830,6 +16903,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb367 = new RoomBooking();
         rb367.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_303"));
+        rb367.setBookInDate(format.parse("2019-03-15"));
         bookingSessionLocal.createRoomBooking(rb367);
         PaymentTransaction PT367 = new PaymentTransaction();
         PT367.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16839,6 +16913,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb368 = new RoomBooking();
         rb368.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_304"));
+        rb368.setBookInDate(format.parse("2019-03-13"));
         bookingSessionLocal.createRoomBooking(rb368);
         PaymentTransaction PT368 = new PaymentTransaction();
         PT368.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16848,6 +16923,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb369 = new RoomBooking();
         rb369.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_305"));
+        rb369.setBookInDate(format.parse("2019-03-19"));
         bookingSessionLocal.createRoomBooking(rb369);
         PaymentTransaction PT369 = new PaymentTransaction();
         PT369.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16857,6 +16933,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb370 = new RoomBooking();
         rb370.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_201"));
+        rb370.setBookInDate(format.parse("2019-04-18"));
         bookingSessionLocal.createRoomBooking(rb370);
         PaymentTransaction PT370 = new PaymentTransaction();
         PT370.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16866,6 +16943,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb371 = new RoomBooking();
         rb371.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_202"));
+        rb371.setBookInDate(format.parse("2019-05-09"));
         bookingSessionLocal.createRoomBooking(rb371);
         PaymentTransaction PT371 = new PaymentTransaction();
         PT371.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16875,6 +16953,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb372 = new RoomBooking();
         rb372.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_203"));
+        rb372.setBookInDate(format.parse("2019-04-17"));
         bookingSessionLocal.createRoomBooking(rb372);
         PaymentTransaction PT372 = new PaymentTransaction();
         PT372.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16884,6 +16963,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb373 = new RoomBooking();
         rb373.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_204"));
+        rb373.setBookInDate(format.parse("2019-04-18"));
         bookingSessionLocal.createRoomBooking(rb373);
         PaymentTransaction PT373 = new PaymentTransaction();
         PT373.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16893,6 +16973,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb374 = new RoomBooking();
         rb374.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_205"));
+        rb374.setBookInDate(format.parse("2019-04-19"));
         bookingSessionLocal.createRoomBooking(rb374);
         PaymentTransaction PT374 = new PaymentTransaction();
         PT374.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16902,6 +16983,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb375 = new RoomBooking();
         rb375.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_301"));
+        rb375.setBookInDate(format.parse("2019-04-19"));
         bookingSessionLocal.createRoomBooking(rb375);
         PaymentTransaction PT375 = new PaymentTransaction();
         PT375.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16911,6 +16993,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb376 = new RoomBooking();
         rb376.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_302"));
+        rb376.setBookInDate(format.parse("2019-04-21"));
         bookingSessionLocal.createRoomBooking(rb376);
         PaymentTransaction PT376 = new PaymentTransaction();
         PT376.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16920,6 +17003,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb377 = new RoomBooking();
         rb377.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_303"));
+        rb377.setBookInDate(format.parse("2019-04-21"));
         bookingSessionLocal.createRoomBooking(rb377);
         PaymentTransaction PT377 = new PaymentTransaction();
         PT377.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16929,6 +17013,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb378 = new RoomBooking();
         rb378.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_304"));
+        rb378.setBookInDate(format.parse("2019-04-24"));
         bookingSessionLocal.createRoomBooking(rb378);
         PaymentTransaction PT378 = new PaymentTransaction();
         PT378.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16938,6 +17023,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb379 = new RoomBooking();
         rb379.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_305"));
+        rb379.setBookInDate(format.parse("2019-04-24"));
         bookingSessionLocal.createRoomBooking(rb379);
         PaymentTransaction PT379 = new PaymentTransaction();
         PT379.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16948,6 +17034,7 @@ public class DataInitializationSessionBean {
 //KRNW PaymentTransaction
         RoomBooking rb380 = new RoomBooking();
         rb380.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_201"));
+        rb380.setBookInDate(format.parse("2019-02-09"));
         bookingSessionLocal.createRoomBooking(rb380);
         PaymentTransaction PT380 = new PaymentTransaction();
         PT380.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16957,6 +17044,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb381 = new RoomBooking();
         rb381.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_202"));
+        rb381.setBookInDate(format.parse("2019-01-09"));
         bookingSessionLocal.createRoomBooking(rb381);
         PaymentTransaction PT381 = new PaymentTransaction();
         PT381.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16966,6 +17054,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb382 = new RoomBooking();
         rb382.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_203"));
+        rb382.setBookInDate(format.parse("2019-01-09"));
         bookingSessionLocal.createRoomBooking(rb382);
         PaymentTransaction PT382 = new PaymentTransaction();
         PT382.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16975,6 +17064,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb383 = new RoomBooking();
         rb383.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_204"));
+        rb383.setBookInDate(format.parse("2019-01-12"));
         bookingSessionLocal.createRoomBooking(rb383);
         PaymentTransaction PT383 = new PaymentTransaction();
         PT383.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16984,6 +17074,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb384 = new RoomBooking();
         rb384.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_205"));
+        rb384.setBookInDate(format.parse("2019-02-09"));
         bookingSessionLocal.createRoomBooking(rb384);
         PaymentTransaction PT384 = new PaymentTransaction();
         PT384.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16993,6 +17084,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb385 = new RoomBooking();
         rb385.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_301"));
+        rb385.setBookInDate(format.parse("2019-01-27"));
         bookingSessionLocal.createRoomBooking(rb385);
         PaymentTransaction PT385 = new PaymentTransaction();
         PT385.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17002,6 +17094,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb386 = new RoomBooking();
         rb386.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_302"));
+        rb386.setBookInDate(format.parse("2019-01-28"));
         bookingSessionLocal.createRoomBooking(rb386);
         PaymentTransaction PT386 = new PaymentTransaction();
         PT386.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17011,6 +17104,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb387 = new RoomBooking();
         rb387.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_303"));
+        rb387.setBookInDate(format.parse("2019-01-18"));
         bookingSessionLocal.createRoomBooking(rb387);
         PaymentTransaction PT387 = new PaymentTransaction();
         PT387.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17020,6 +17114,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb388 = new RoomBooking();
         rb388.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_304"));
+        rb388.setBookInDate(format.parse("2019-01-29"));
         bookingSessionLocal.createRoomBooking(rb388);
         PaymentTransaction PT388 = new PaymentTransaction();
         PT388.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17029,6 +17124,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb389 = new RoomBooking();
         rb389.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_305"));
+        rb389.setBookInDate(format.parse("2019-01-28"));
         bookingSessionLocal.createRoomBooking(rb389);
         PaymentTransaction PT389 = new PaymentTransaction();
         PT389.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17038,6 +17134,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb390 = new RoomBooking();
         rb390.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_201"));
+        rb390.setBookInDate(format.parse("2019-02-09"));
         bookingSessionLocal.createRoomBooking(rb390);
         PaymentTransaction PT390 = new PaymentTransaction();
         PT390.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17047,6 +17144,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb391 = new RoomBooking();
         rb391.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_202"));
+        rb391.setBookInDate(format.parse("2019-02-19"));
         bookingSessionLocal.createRoomBooking(rb391);
         PaymentTransaction PT391 = new PaymentTransaction();
         PT391.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17056,6 +17154,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb392 = new RoomBooking();
         rb392.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_203"));
+        rb392.setBookInDate(format.parse("2019-02-19"));
         bookingSessionLocal.createRoomBooking(rb392);
         PaymentTransaction PT392 = new PaymentTransaction();
         PT392.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17065,6 +17164,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb393 = new RoomBooking();
         rb393.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_204"));
+        rb393.setBookInDate(format.parse("2019-02-18"));
         bookingSessionLocal.createRoomBooking(rb393);
         PaymentTransaction PT393 = new PaymentTransaction();
         PT393.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17074,6 +17174,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb394 = new RoomBooking();
         rb394.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_205"));
+        rb394.setBookInDate(format.parse("2019-02-17"));
         bookingSessionLocal.createRoomBooking(rb394);
         PaymentTransaction PT394 = new PaymentTransaction();
         PT394.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17083,6 +17184,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb395 = new RoomBooking();
         rb395.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_301"));
+        rb395.setBookInDate(format.parse("2019-02-09"));
         bookingSessionLocal.createRoomBooking(rb395);
         PaymentTransaction PT395 = new PaymentTransaction();
         PT395.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17092,6 +17194,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb396 = new RoomBooking();
         rb396.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_302"));
+        rb396.setBookInDate(format.parse("2019-02-18"));
         bookingSessionLocal.createRoomBooking(rb396);
         PaymentTransaction PT396 = new PaymentTransaction();
         PT396.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17101,6 +17204,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb397 = new RoomBooking();
         rb397.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_303"));
+        rb397.setBookInDate(format.parse("2019-02-19"));
         bookingSessionLocal.createRoomBooking(rb397);
         PaymentTransaction PT397 = new PaymentTransaction();
         PT397.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17110,6 +17214,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb398 = new RoomBooking();
         rb398.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_304"));
+        rb398.setBookInDate(format.parse("2019-02-18"));
         bookingSessionLocal.createRoomBooking(rb398);
         PaymentTransaction PT398 = new PaymentTransaction();
         PT398.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17119,6 +17224,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb399 = new RoomBooking();
         rb399.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_305"));
+        rb399.setBookInDate(format.parse("2019-02-14"));
         bookingSessionLocal.createRoomBooking(rb399);
         PaymentTransaction PT399 = new PaymentTransaction();
         PT399.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17128,6 +17234,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb400 = new RoomBooking();
         rb400.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_201"));
+        rb400.setBookInDate(format.parse("2019-03-09"));
         bookingSessionLocal.createRoomBooking(rb400);
         PaymentTransaction PT400 = new PaymentTransaction();
         PT400.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17137,6 +17244,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb401 = new RoomBooking();
         rb401.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_202"));
+        rb401.setBookInDate(format.parse("2019-03-09"));
         bookingSessionLocal.createRoomBooking(rb401);
         PaymentTransaction PT401 = new PaymentTransaction();
         PT401.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17146,6 +17254,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb402 = new RoomBooking();
         rb402.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_203"));
+        rb402.setBookInDate(format.parse("2019-03-09"));
         bookingSessionLocal.createRoomBooking(rb402);
         PaymentTransaction PT402 = new PaymentTransaction();
         PT402.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17155,6 +17264,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb403 = new RoomBooking();
         rb403.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_204"));
+        rb403.setBookInDate(format.parse("2019-03-12"));
         bookingSessionLocal.createRoomBooking(rb403);
         PaymentTransaction PT403 = new PaymentTransaction();
         PT403.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17164,6 +17274,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb404 = new RoomBooking();
         rb404.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_205"));
+        rb404.setBookInDate(format.parse("2019-03-09"));
         bookingSessionLocal.createRoomBooking(rb404);
         PaymentTransaction PT404 = new PaymentTransaction();
         PT404.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17173,6 +17284,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb405 = new RoomBooking();
         rb405.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_301"));
+        rb405.setBookInDate(format.parse("2019-03-13"));
         bookingSessionLocal.createRoomBooking(rb405);
         PaymentTransaction PT405 = new PaymentTransaction();
         PT405.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17182,6 +17294,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb406 = new RoomBooking();
         rb406.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_302"));
+        rb406.setBookInDate(format.parse("2019-03-13"));
         bookingSessionLocal.createRoomBooking(rb406);
         PaymentTransaction PT406 = new PaymentTransaction();
         PT406.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17191,6 +17304,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb407 = new RoomBooking();
         rb407.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_303"));
+        rb407.setBookInDate(format.parse("2019-03-18"));
         bookingSessionLocal.createRoomBooking(rb407);
         PaymentTransaction PT407 = new PaymentTransaction();
         PT407.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17200,6 +17314,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb408 = new RoomBooking();
         rb408.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_304"));
+        rb408.setBookInDate(format.parse("2019-03-17"));
         bookingSessionLocal.createRoomBooking(rb408);
         PaymentTransaction PT408 = new PaymentTransaction();
         PT408.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17209,6 +17324,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb409 = new RoomBooking();
         rb409.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_305"));
+        rb409.setBookInDate(format.parse("2019-03-18"));
         bookingSessionLocal.createRoomBooking(rb409);
         PaymentTransaction PT409 = new PaymentTransaction();
         PT409.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17218,6 +17334,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb410 = new RoomBooking();
         rb410.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_201"));
+        rb410.setBookInDate(format.parse("2019-04-09"));
         bookingSessionLocal.createRoomBooking(rb410);
         PaymentTransaction PT410 = new PaymentTransaction();
         PT410.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17227,6 +17344,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb411 = new RoomBooking();
         rb411.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_202"));
+        rb411.setBookInDate(format.parse("2019-04-09"));
         bookingSessionLocal.createRoomBooking(rb411);
         PaymentTransaction PT411 = new PaymentTransaction();
         PT411.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17236,6 +17354,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb412 = new RoomBooking();
         rb412.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_201"));
+        rb412.setBookInDate(format.parse("2019-04-09"));
         bookingSessionLocal.createRoomBooking(rb412);
         PaymentTransaction PT412 = new PaymentTransaction();
         PT412.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17245,6 +17364,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb413 = new RoomBooking();
         rb413.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_204"));
+        rb413.setBookInDate(format.parse("2019-04-18"));
         bookingSessionLocal.createRoomBooking(rb413);
         PaymentTransaction PT413 = new PaymentTransaction();
         PT413.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17254,6 +17374,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb414 = new RoomBooking();
         rb414.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_205"));
+        rb414.setBookInDate(format.parse("2019-04-12"));
         bookingSessionLocal.createRoomBooking(rb414);
         PaymentTransaction PT414 = new PaymentTransaction();
         PT414.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17263,6 +17384,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb415 = new RoomBooking();
         rb415.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_301"));
+        rb415.setBookInDate(format.parse("2019-04-15"));
         bookingSessionLocal.createRoomBooking(rb415);
         PaymentTransaction PT415 = new PaymentTransaction();
         PT415.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17272,6 +17394,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb416 = new RoomBooking();
         rb416.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_302"));
+        rb416.setBookInDate(format.parse("2019-04-17"));
         bookingSessionLocal.createRoomBooking(rb416);
         PaymentTransaction PT416 = new PaymentTransaction();
         PT416.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17281,6 +17404,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb417 = new RoomBooking();
         rb417.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_303"));
+        rb417.setBookInDate(format.parse("2019-04-19"));
         bookingSessionLocal.createRoomBooking(rb417);
         PaymentTransaction PT417 = new PaymentTransaction();
         PT417.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17290,6 +17414,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb418 = new RoomBooking();
         rb418.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_304"));
+        rb418.setBookInDate(format.parse("2019-04-18"));
         bookingSessionLocal.createRoomBooking(rb418);
         PaymentTransaction PT418 = new PaymentTransaction();
         PT418.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17299,6 +17424,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb419 = new RoomBooking();
         rb419.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_305"));
+        rb419.setBookInDate(format.parse("2019-04-17"));
         bookingSessionLocal.createRoomBooking(rb419);
         PaymentTransaction PT419 = new PaymentTransaction();
         PT419.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17309,6 +17435,7 @@ public class DataInitializationSessionBean {
 //KRSE PaymentTransaction
         RoomBooking rb420 = new RoomBooking();
         rb420.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_201"));
+        rb420.setBookInDate(format.parse("2019-02-09"));
         bookingSessionLocal.createRoomBooking(rb420);
         PaymentTransaction PT420 = new PaymentTransaction();
         PT420.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17318,6 +17445,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb421 = new RoomBooking();
         rb421.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_202"));
+        rb421.setBookInDate(format.parse("2019-02-19"));
         bookingSessionLocal.createRoomBooking(rb421);
         PaymentTransaction PT421 = new PaymentTransaction();
         PT421.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17327,6 +17455,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb422 = new RoomBooking();
         rb422.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_203"));
+        rb422.setBookInDate(format.parse("2019-01-09"));
         bookingSessionLocal.createRoomBooking(rb422);
         PaymentTransaction PT422 = new PaymentTransaction();
         PT422.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17336,6 +17465,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb423 = new RoomBooking();
         rb423.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_204"));
+        rb423.setBookInDate(format.parse("2019-01-09"));
         bookingSessionLocal.createRoomBooking(rb423);
         PaymentTransaction PT423 = new PaymentTransaction();
         PT423.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17345,6 +17475,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb424 = new RoomBooking();
         rb424.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_205"));
+        rb424.setBookInDate(format.parse("2019-01-17"));
         bookingSessionLocal.createRoomBooking(rb424);
         PaymentTransaction PT424 = new PaymentTransaction();
         PT424.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17354,6 +17485,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb425 = new RoomBooking();
         rb425.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_301"));
+        rb425.setBookInDate(format.parse("2019-01-13"));
         bookingSessionLocal.createRoomBooking(rb425);
         PaymentTransaction PT425 = new PaymentTransaction();
         PT425.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17363,6 +17495,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb426 = new RoomBooking();
         rb426.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_302"));
+        rb426.setBookInDate(format.parse("2019-01-15"));
         bookingSessionLocal.createRoomBooking(rb426);
         PaymentTransaction PT426 = new PaymentTransaction();
         PT426.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17372,6 +17505,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb427 = new RoomBooking();
         rb427.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_303"));
+        rb427.setBookInDate(format.parse("2019-01-17"));
         bookingSessionLocal.createRoomBooking(rb427);
         PaymentTransaction PT427 = new PaymentTransaction();
         PT427.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17381,6 +17515,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb428 = new RoomBooking();
         rb428.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_304"));
+        rb428.setBookInDate(format.parse("2019-01-16"));
         bookingSessionLocal.createRoomBooking(rb428);
         PaymentTransaction PT428 = new PaymentTransaction();
         PT428.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17390,6 +17525,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb429 = new RoomBooking();
         rb429.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_305"));
+        rb429.setBookInDate(format.parse("2019-01-17"));
         bookingSessionLocal.createRoomBooking(rb429);
         PaymentTransaction PT429 = new PaymentTransaction();
         PT429.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17399,6 +17535,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb430 = new RoomBooking();
         rb430.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_306"));
+        rb430.setBookInDate(format.parse("2019-02-09"));
         bookingSessionLocal.createRoomBooking(rb430);
         PaymentTransaction PT430 = new PaymentTransaction();
         PT430.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17408,6 +17545,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb431 = new RoomBooking();
         rb431.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_202"));
+        rb431.setBookInDate(format.parse("2019-02-12"));
         bookingSessionLocal.createRoomBooking(rb431);
         PaymentTransaction PT431 = new PaymentTransaction();
         PT431.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17417,6 +17555,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb432 = new RoomBooking();
         rb432.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_203"));
+        rb432.setBookInDate(format.parse("2019-02-17"));
         bookingSessionLocal.createRoomBooking(rb432);
         PaymentTransaction PT432 = new PaymentTransaction();
         PT432.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17426,6 +17565,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb433 = new RoomBooking();
         rb433.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_204"));
+        rb433.setBookInDate(format.parse("2019-02-12"));
         bookingSessionLocal.createRoomBooking(rb433);
         PaymentTransaction PT433 = new PaymentTransaction();
         PT433.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17435,6 +17575,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb434 = new RoomBooking();
         rb434.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_205"));
+        rb434.setBookInDate(format.parse("2019-02-17"));
         bookingSessionLocal.createRoomBooking(rb434);
         PaymentTransaction PT434 = new PaymentTransaction();
         PT434.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17444,6 +17585,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb435 = new RoomBooking();
         rb435.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_301"));
+        rb435.setBookInDate(format.parse("2019-02-12"));
         bookingSessionLocal.createRoomBooking(rb435);
         PaymentTransaction PT435 = new PaymentTransaction();
         PT435.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17453,6 +17595,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb436 = new RoomBooking();
         rb436.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_302"));
+        rb436.setBookInDate(format.parse("2019-02-12"));
         bookingSessionLocal.createRoomBooking(rb436);
         PaymentTransaction PT436 = new PaymentTransaction();
         PT436.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17462,6 +17605,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb437 = new RoomBooking();
         rb437.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_303"));
+        rb437.setBookInDate(format.parse("2019-02-14"));
         bookingSessionLocal.createRoomBooking(rb437);
         PaymentTransaction PT437 = new PaymentTransaction();
         PT437.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17471,6 +17615,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb438 = new RoomBooking();
         rb438.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_304"));
+        rb438.setBookInDate(format.parse("2019-02-17"));
         bookingSessionLocal.createRoomBooking(rb438);
         PaymentTransaction PT438 = new PaymentTransaction();
         PT438.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17480,6 +17625,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb439 = new RoomBooking();
         rb439.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_305"));
+        rb439.setBookInDate(format.parse("2019-02-17"));
         bookingSessionLocal.createRoomBooking(rb439);
         PaymentTransaction PT439 = new PaymentTransaction();
         PT439.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17489,6 +17635,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb440 = new RoomBooking();
         rb440.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_201"));
+        rb440.setBookInDate(format.parse("2019-03-18"));
         bookingSessionLocal.createRoomBooking(rb440);
         PaymentTransaction PT440 = new PaymentTransaction();
         PT440.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17498,6 +17645,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb441 = new RoomBooking();
         rb441.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_202"));
+        rb441.setBookInDate(format.parse("2019-03-13"));
         bookingSessionLocal.createRoomBooking(rb441);
         PaymentTransaction PT441 = new PaymentTransaction();
         PT441.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17507,6 +17655,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb442 = new RoomBooking();
         rb442.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_203"));
+        rb442.setBookInDate(format.parse("2019-03-09"));
         bookingSessionLocal.createRoomBooking(rb442);
         PaymentTransaction PT442 = new PaymentTransaction();
         PT442.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17516,6 +17665,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb443 = new RoomBooking();
         rb443.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_204"));
+        rb443.setBookInDate(format.parse("2019-03-17"));
         bookingSessionLocal.createRoomBooking(rb443);
         PaymentTransaction PT443 = new PaymentTransaction();
         PT443.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17525,6 +17675,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb444 = new RoomBooking();
         rb444.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_205"));
+        rb444.setBookInDate(format.parse("2019-03-09"));
         bookingSessionLocal.createRoomBooking(rb444);
         PaymentTransaction PT444 = new PaymentTransaction();
         PT444.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17534,6 +17685,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb445 = new RoomBooking();
         rb445.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_301"));
+        rb445.setBookInDate(format.parse("2019-04-09"));
         bookingSessionLocal.createRoomBooking(rb445);
         PaymentTransaction PT445 = new PaymentTransaction();
         PT445.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17543,6 +17695,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb446 = new RoomBooking();
         rb446.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_302"));
+        rb446.setBookInDate(format.parse("2019-03-19"));
         bookingSessionLocal.createRoomBooking(rb446);
         PaymentTransaction PT446 = new PaymentTransaction();
         PT446.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17552,6 +17705,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb447 = new RoomBooking();
         rb447.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_303"));
+        rb447.setBookInDate(format.parse("2019-03-12"));
         bookingSessionLocal.createRoomBooking(rb447);
         PaymentTransaction PT447 = new PaymentTransaction();
         PT447.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17561,6 +17715,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb448 = new RoomBooking();
         rb448.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_304"));
+        rb448.setBookInDate(format.parse("2019-03-17"));
         bookingSessionLocal.createRoomBooking(rb448);
         PaymentTransaction PT448 = new PaymentTransaction();
         PT448.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17570,6 +17725,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb449 = new RoomBooking();
         rb449.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_305"));
+        rb449.setBookInDate(format.parse("2019-03-19"));
         bookingSessionLocal.createRoomBooking(rb449);
         PaymentTransaction PT449 = new PaymentTransaction();
         PT449.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17579,6 +17735,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb450 = new RoomBooking();
         rb450.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_201"));
+        rb450.setBookInDate(format.parse("2019-04-09"));
         bookingSessionLocal.createRoomBooking(rb450);
         PaymentTransaction PT450 = new PaymentTransaction();
         PT450.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17588,6 +17745,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb451 = new RoomBooking();
         rb451.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_202"));
+        rb451.setBookInDate(format.parse("2019-04-12"));
         bookingSessionLocal.createRoomBooking(rb451);
         PaymentTransaction PT451 = new PaymentTransaction();
         PT451.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17597,6 +17755,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb452 = new RoomBooking();
         rb452.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_203"));
+        rb452.setBookInDate(format.parse("2019-04-12"));
         bookingSessionLocal.createRoomBooking(rb452);
         PaymentTransaction PT452 = new PaymentTransaction();
         PT452.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17606,6 +17765,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb453 = new RoomBooking();
         rb453.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_204"));
+        rb453.setBookInDate(format.parse("2019-04-17"));
         bookingSessionLocal.createRoomBooking(rb453);
         PaymentTransaction PT453 = new PaymentTransaction();
         PT453.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17615,6 +17775,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb454 = new RoomBooking();
         rb454.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_205"));
+        rb454.setBookInDate(format.parse("2019-04-18"));
         bookingSessionLocal.createRoomBooking(rb454);
         PaymentTransaction PT454 = new PaymentTransaction();
         PT454.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17624,6 +17785,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb455 = new RoomBooking();
         rb455.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_301"));
+        rb455.setBookInDate(format.parse("2019-04-17"));
         bookingSessionLocal.createRoomBooking(rb455);
         PaymentTransaction PT455 = new PaymentTransaction();
         PT455.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17633,6 +17795,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb456 = new RoomBooking();
         rb456.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_302"));
+        rb456.setBookInDate(format.parse("2019-04-18"));
         bookingSessionLocal.createRoomBooking(rb456);
         PaymentTransaction PT456 = new PaymentTransaction();
         PT456.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17642,6 +17805,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb457 = new RoomBooking();
         rb457.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_303"));
+        rb457.setBookInDate(format.parse("2019-04-18"));
         bookingSessionLocal.createRoomBooking(rb457);
         PaymentTransaction PT457 = new PaymentTransaction();
         PT457.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17651,6 +17815,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb458 = new RoomBooking();
         rb458.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_304"));
+        rb458.setBookInDate(format.parse("2019-04-18"));
         bookingSessionLocal.createRoomBooking(rb458);
         PaymentTransaction PT458 = new PaymentTransaction();
         PT458.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17660,6 +17825,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb459 = new RoomBooking();
         rb459.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_305"));
+        rb459.setBookInDate(format.parse("2019-04-18"));
         bookingSessionLocal.createRoomBooking(rb459);
         PaymentTransaction PT459 = new PaymentTransaction();
         PT459.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17670,6 +17836,7 @@ public class DataInitializationSessionBean {
 //KRSW PaymentTransaction 
         RoomBooking rb460 = new RoomBooking();
         rb460.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_201"));
+        rb460.setBookInDate(format.parse("2019-01-09"));
         bookingSessionLocal.createRoomBooking(rb460);
         PaymentTransaction PT460 = new PaymentTransaction();
         PT460.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17679,6 +17846,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb461 = new RoomBooking();
         rb461.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_202"));
+        rb461.setBookInDate(format.parse("2019-01-19"));
         bookingSessionLocal.createRoomBooking(rb461);
         PaymentTransaction PT461 = new PaymentTransaction();
         PT461.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17688,6 +17856,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb462 = new RoomBooking();
         rb462.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_203"));
+        rb462.setBookInDate(format.parse("2019-01-09"));
         bookingSessionLocal.createRoomBooking(rb462);
         PaymentTransaction PT462 = new PaymentTransaction();
         PT462.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17697,6 +17866,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb463 = new RoomBooking();
         rb463.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_204"));
+        rb463.setBookInDate(format.parse("2019-02-09"));
         bookingSessionLocal.createRoomBooking(rb463);
         PaymentTransaction PT463 = new PaymentTransaction();
         PT463.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17706,6 +17876,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb464 = new RoomBooking();
         rb464.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_205"));
+        rb464.setBookInDate(format.parse("2019-01-09"));
         bookingSessionLocal.createRoomBooking(rb464);
         PaymentTransaction PT464 = new PaymentTransaction();
         PT464.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17715,6 +17886,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb465 = new RoomBooking();
         rb465.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_301"));
+        rb465.setBookInDate(format.parse("2019-01-13"));
         bookingSessionLocal.createRoomBooking(rb465);
         PaymentTransaction PT465 = new PaymentTransaction();
         PT465.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17724,6 +17896,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb466 = new RoomBooking();
         rb466.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_302"));
+        rb466.setBookInDate(format.parse("2019-01-17"));
         bookingSessionLocal.createRoomBooking(rb466);
         PaymentTransaction PT466 = new PaymentTransaction();
         PT466.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17733,6 +17906,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb467 = new RoomBooking();
         rb467.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_303"));
+        rb467.setBookInDate(format.parse("2019-01-14"));
         bookingSessionLocal.createRoomBooking(rb467);
         PaymentTransaction PT467 = new PaymentTransaction();
         PT467.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17742,6 +17916,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb468 = new RoomBooking();
         rb468.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_304"));
+        rb468.setBookInDate(format.parse("2019-01-18"));
         bookingSessionLocal.createRoomBooking(rb468);
         PaymentTransaction PT468 = new PaymentTransaction();
         PT468.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17751,6 +17926,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb469 = new RoomBooking();
         rb469.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_305"));
+        rb469.setBookInDate(format.parse("2019-01-12"));
         bookingSessionLocal.createRoomBooking(rb469);
         PaymentTransaction PT469 = new PaymentTransaction();
         PT469.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17760,6 +17936,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb470 = new RoomBooking();
         rb470.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_201"));
+        rb470.setBookInDate(format.parse("2019-02-09"));
         bookingSessionLocal.createRoomBooking(rb470);
         PaymentTransaction PT470 = new PaymentTransaction();
         PT470.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17769,6 +17946,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb471 = new RoomBooking();
         rb471.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_202"));
+        rb471.setBookInDate(format.parse("2019-02-12"));
         bookingSessionLocal.createRoomBooking(rb471);
         PaymentTransaction PT471 = new PaymentTransaction();
         PT471.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17778,6 +17956,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb472 = new RoomBooking();
         rb472.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_203"));
+        rb472.setBookInDate(format.parse("2019-02-14"));
         bookingSessionLocal.createRoomBooking(rb472);
         PaymentTransaction PT472 = new PaymentTransaction();
         PT472.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17787,6 +17966,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb473 = new RoomBooking();
         rb473.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_204"));
+        rb473.setBookInDate(format.parse("2019-02-13"));
         bookingSessionLocal.createRoomBooking(rb473);
         PaymentTransaction PT473 = new PaymentTransaction();
         PT473.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17796,6 +17976,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb474 = new RoomBooking();
         rb474.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_205"));
+        rb474.setBookInDate(format.parse("2019-02-18"));
         bookingSessionLocal.createRoomBooking(rb474);
         PaymentTransaction PT474 = new PaymentTransaction();
         PT474.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17805,6 +17986,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb475 = new RoomBooking();
         rb475.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_301"));
+        rb475.setBookInDate(format.parse("2019-02-12"));
         bookingSessionLocal.createRoomBooking(rb475);
         PaymentTransaction PT475 = new PaymentTransaction();
         PT475.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17814,6 +17996,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb476 = new RoomBooking();
         rb476.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_302"));
+        rb476.setBookInDate(format.parse("2019-02-13"));
         bookingSessionLocal.createRoomBooking(rb476);
         PaymentTransaction PT476 = new PaymentTransaction();
         PT476.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17823,6 +18006,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb477 = new RoomBooking();
         rb477.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_303"));
+        rb477.setBookInDate(format.parse("2019-02-18"));
         bookingSessionLocal.createRoomBooking(rb477);
         PaymentTransaction PT477 = new PaymentTransaction();
         PT477.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17832,6 +18016,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb478 = new RoomBooking();
         rb478.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_304"));
+        rb478.setBookInDate(format.parse("2019-02-13"));
         bookingSessionLocal.createRoomBooking(rb478);
         PaymentTransaction PT478 = new PaymentTransaction();
         PT478.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17841,6 +18026,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb479 = new RoomBooking();
         rb479.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_305"));
+        rb479.setBookInDate(format.parse("2019-02-19"));
         bookingSessionLocal.createRoomBooking(rb479);
         PaymentTransaction PT479 = new PaymentTransaction();
         PT479.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17850,6 +18036,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb480 = new RoomBooking();
         rb480.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_201"));
+        rb480.setBookInDate(format.parse("2019-03-09"));
         bookingSessionLocal.createRoomBooking(rb480);
         PaymentTransaction PT480 = new PaymentTransaction();
         PT480.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17859,6 +18046,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb481 = new RoomBooking();
         rb481.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_202"));
+        rb481.setBookInDate(format.parse("2019-03-13"));
         bookingSessionLocal.createRoomBooking(rb481);
         PaymentTransaction PT481 = new PaymentTransaction();
         PT481.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17868,6 +18056,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb482 = new RoomBooking();
         rb482.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_203"));
+        rb482.setBookInDate(format.parse("2019-03-18"));
         bookingSessionLocal.createRoomBooking(rb482);
         PaymentTransaction PT482 = new PaymentTransaction();
         PT482.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17877,6 +18066,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb483 = new RoomBooking();
         rb483.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_204"));
+        rb483.setBookInDate(format.parse("2019-03-18"));
         bookingSessionLocal.createRoomBooking(rb483);
         PaymentTransaction PT483 = new PaymentTransaction();
         PT483.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17886,6 +18076,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb484 = new RoomBooking();
         rb484.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_205"));
+        rb484.setBookInDate(format.parse("2019-03-18"));
         bookingSessionLocal.createRoomBooking(rb484);
         PaymentTransaction PT484 = new PaymentTransaction();
         PT484.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17895,6 +18086,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb485 = new RoomBooking();
         rb485.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_301"));
+        rb485.setBookInDate(format.parse("2019-03-12"));
         bookingSessionLocal.createRoomBooking(rb485);
         PaymentTransaction PT485 = new PaymentTransaction();
         PT485.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17904,6 +18096,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb486 = new RoomBooking();
         rb486.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_302"));
+        rb486.setBookInDate(format.parse("2019-03-09"));
         bookingSessionLocal.createRoomBooking(rb486);
         PaymentTransaction PT486 = new PaymentTransaction();
         PT486.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17913,6 +18106,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb487 = new RoomBooking();
         rb487.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_303"));
+        rb487.setBookInDate(format.parse("2019-03-18"));
         bookingSessionLocal.createRoomBooking(rb487);
         PaymentTransaction PT487 = new PaymentTransaction();
         PT487.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17922,6 +18116,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb488 = new RoomBooking();
         rb488.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_304"));
+        rb488.setBookInDate(format.parse("2019-03-18"));
         bookingSessionLocal.createRoomBooking(rb488);
         PaymentTransaction PT488 = new PaymentTransaction();
         PT488.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17931,6 +18126,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb489 = new RoomBooking();
         rb489.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_305"));
+        rb489.setBookInDate(format.parse("2019-03-19"));
         bookingSessionLocal.createRoomBooking(rb489);
         PaymentTransaction PT489 = new PaymentTransaction();
         PT489.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17940,6 +18136,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb490 = new RoomBooking();
         rb490.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_201"));
+        rb490.setBookInDate(format.parse("2019-04-09"));
         bookingSessionLocal.createRoomBooking(rb490);
         PaymentTransaction PT490 = new PaymentTransaction();
         PT490.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17949,6 +18146,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb491 = new RoomBooking();
         rb491.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_202"));
+        rb491.setBookInDate(format.parse("2019-04-12"));
         bookingSessionLocal.createRoomBooking(rb491);
         PaymentTransaction PT491 = new PaymentTransaction();
         PT491.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17958,6 +18156,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb492 = new RoomBooking();
         rb492.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_203"));
+        rb492.setBookInDate(format.parse("2019-04-18"));
         bookingSessionLocal.createRoomBooking(rb492);
         PaymentTransaction PT492 = new PaymentTransaction();
         PT492.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17967,6 +18166,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb493 = new RoomBooking();
         rb493.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_204"));
+        rb493.setBookInDate(format.parse("2019-04-18"));
         bookingSessionLocal.createRoomBooking(rb493);
         PaymentTransaction PT493 = new PaymentTransaction();
         PT493.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17976,6 +18176,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb494 = new RoomBooking();
         rb494.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_205"));
+        rb494.setBookInDate(format.parse("2019-04-12"));
         bookingSessionLocal.createRoomBooking(rb494);
         PaymentTransaction PT494 = new PaymentTransaction();
         PT494.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17985,6 +18186,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb495 = new RoomBooking();
         rb495.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_301"));
+        rb495.setBookInDate(format.parse("2019-04-12"));
         bookingSessionLocal.createRoomBooking(rb495);
         PaymentTransaction PT495 = new PaymentTransaction();
         PT495.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17994,6 +18196,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb496 = new RoomBooking();
         rb496.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_302"));
+        rb496.setBookInDate(format.parse("2019-04-17"));
         bookingSessionLocal.createRoomBooking(rb496);
         PaymentTransaction PT496 = new PaymentTransaction();
         PT496.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18003,6 +18206,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb497 = new RoomBooking();
         rb497.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_303"));
+        rb497.setBookInDate(format.parse("2019-04-13"));
         bookingSessionLocal.createRoomBooking(rb497);
         PaymentTransaction PT497 = new PaymentTransaction();
         PT497.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18012,6 +18216,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb498 = new RoomBooking();
         rb498.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_304"));
+        rb498.setBookInDate(format.parse("2019-04-13"));
         bookingSessionLocal.createRoomBooking(rb498);
         PaymentTransaction PT498 = new PaymentTransaction();
         PT498.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18021,6 +18226,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb499 = new RoomBooking();
         rb499.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_305"));
+        rb499.setBookInDate(format.parse("2019-04-18"));
         bookingSessionLocal.createRoomBooking(rb499);
         PaymentTransaction PT499 = new PaymentTransaction();
         PT499.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18036,6 +18242,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb20 = new RoomBooking();
         rb20.setBookedRoom(roomSessionLocal.getRoomByName("KRG_201"));
+        rb20.setBookInDate(format.parse("2019-01-09"));
         bookingSessionLocal.createRoomBooking(rb20);
         PaymentTransaction PT10 = new PaymentTransaction();
         PT10.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18045,6 +18252,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb21 = new RoomBooking();
         rb21.setBookedRoom(roomSessionLocal.getRoomByName("KRG_202"));
+        rb21.setBookInDate(format.parse("2019-01-10"));
         bookingSessionLocal.createRoomBooking(rb21);
         PaymentTransaction PT11 = new PaymentTransaction();
         PT11.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18054,6 +18262,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb22 = new RoomBooking();
         rb22.setBookedRoom(roomSessionLocal.getRoomByName("KRG_303"));
+        rb22.setBookInDate(format.parse("2019-01-13"));
         bookingSessionLocal.createRoomBooking(rb22);
         PaymentTransaction PT12 = new PaymentTransaction();
         PT12.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18063,6 +18272,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb23 = new RoomBooking();
         rb23.setBookedRoom(roomSessionLocal.getRoomByName("KRG_206"));
+        rb23.setBookInDate(format.parse("2019-01-18"));
         bookingSessionLocal.createRoomBooking(rb23);
         PaymentTransaction PT13 = new PaymentTransaction();
         PT13.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18072,6 +18282,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb24 = new RoomBooking();
         rb24.setBookedRoom(roomSessionLocal.getRoomByName("KRG_405"));
+        rb24.setBookInDate(format.parse("2019-01-19"));
         bookingSessionLocal.createRoomBooking(rb24);
         PaymentTransaction PT14 = new PaymentTransaction();
         PT14.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18081,6 +18292,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb25 = new RoomBooking();
         rb25.setBookedRoom(roomSessionLocal.getRoomByName("KRG_506"));
+        rb25.setBookInDate(format.parse("2019-01-22"));
         bookingSessionLocal.createRoomBooking(rb25);
         PaymentTransaction PT15 = new PaymentTransaction();
         PT15.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18090,6 +18302,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb26 = new RoomBooking();
         rb26.setBookedRoom(roomSessionLocal.getRoomByName("KRG_207"));
+        rb26.setBookInDate(format.parse("2019-01-22"));
         bookingSessionLocal.createRoomBooking(rb26);
         PaymentTransaction PT16 = new PaymentTransaction();
         PT16.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18099,6 +18312,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb27 = new RoomBooking();
         rb27.setBookedRoom(roomSessionLocal.getRoomByName("KRG_408"));
+        rb27.setBookInDate(format.parse("2019-01-26"));
         bookingSessionLocal.createRoomBooking(rb27);
         PaymentTransaction PT17 = new PaymentTransaction();
         PT17.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18108,6 +18322,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb28 = new RoomBooking();
         rb28.setBookedRoom(roomSessionLocal.getRoomByName("KRG_209"));
+        rb28.setBookInDate(format.parse("2019-02-03"));
         bookingSessionLocal.createRoomBooking(rb28);
         PaymentTransaction PT18 = new PaymentTransaction();
         PT18.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18117,6 +18332,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb29 = new RoomBooking();
         rb29.setBookedRoom(roomSessionLocal.getRoomByName("KRG_510"));
+        rb29.setBookInDate(format.parse("2019-02-04"));
         bookingSessionLocal.createRoomBooking(rb29);
         PaymentTransaction PT19 = new PaymentTransaction();
         PT19.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18126,6 +18342,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb30 = new RoomBooking();
         rb30.setBookedRoom(roomSessionLocal.getRoomByName("KRG_505"));
+        rb30.setBookInDate(format.parse("2019-02-09"));
         bookingSessionLocal.createRoomBooking(rb30);
         PaymentTransaction PT20 = new PaymentTransaction();
         PT20.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18135,6 +18352,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb31 = new RoomBooking();
         rb31.setBookedRoom(roomSessionLocal.getRoomByName("KRG_209"));
+        rb31.setBookInDate(format.parse("2019-02-09"));
         bookingSessionLocal.createRoomBooking(rb31);
         PaymentTransaction PT21 = new PaymentTransaction();
         PT21.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18144,6 +18362,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb32 = new RoomBooking();
         rb32.setBookedRoom(roomSessionLocal.getRoomByName("KRG_802"));
+        rb32.setBookInDate(format.parse("2019-02-11"));
         bookingSessionLocal.createRoomBooking(rb32);
         PaymentTransaction PT22 = new PaymentTransaction();
         PT22.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18153,6 +18372,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb33 = new RoomBooking();
         rb33.setBookedRoom(roomSessionLocal.getRoomByName("KRG_908"));
+        rb33.setBookInDate(format.parse("2019-02-11"));
         bookingSessionLocal.createRoomBooking(rb33);
         PaymentTransaction PT23 = new PaymentTransaction();
         PT23.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18162,6 +18382,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb35 = new RoomBooking();
         rb35.setBookedRoom(roomSessionLocal.getRoomByName("KRG_1204"));
+        rb35.setBookInDate(format.parse("2019-02-14"));
         bookingSessionLocal.createRoomBooking(rb35);
         PaymentTransaction PT24 = new PaymentTransaction();
         PT24.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18171,6 +18392,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb36 = new RoomBooking();
         rb36.setBookedRoom(roomSessionLocal.getRoomByName("KRG_606"));
+        rb36.setBookInDate(format.parse("2019-02-15"));
         bookingSessionLocal.createRoomBooking(rb36);
         PaymentTransaction PT25 = new PaymentTransaction();
         PT25.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18180,6 +18402,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb37 = new RoomBooking();
         rb37.setBookedRoom(roomSessionLocal.getRoomByName("KRG_708"));
+        rb37.setBookInDate(format.parse("2019-02-19"));
         bookingSessionLocal.createRoomBooking(rb37);
         PaymentTransaction PT26 = new PaymentTransaction();
         PT26.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18189,6 +18412,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb38 = new RoomBooking();
         rb38.setBookedRoom(roomSessionLocal.getRoomByName("KRG_904"));
+        rb38.setBookInDate(format.parse("2019-02-19"));
         bookingSessionLocal.createRoomBooking(rb38);
         PaymentTransaction PT27 = new PaymentTransaction();
         PT27.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18198,6 +18422,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb39 = new RoomBooking();
         rb39.setBookedRoom(roomSessionLocal.getRoomByName("KRG_902"));
+        rb39.setBookInDate(format.parse("2019-02-23"));
         bookingSessionLocal.createRoomBooking(rb39);
         PaymentTransaction PT28 = new PaymentTransaction();
         PT28.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18207,6 +18432,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb40 = new RoomBooking();
         rb40.setBookedRoom(roomSessionLocal.getRoomByName("KRG_904"));
+        rb40.setBookInDate(format.parse("2019-02-25"));
         bookingSessionLocal.createRoomBooking(rb40);
         PaymentTransaction PT29 = new PaymentTransaction();
         PT29.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18216,6 +18442,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb41 = new RoomBooking();
         rb41.setBookedRoom(roomSessionLocal.getRoomByName("KRG_402"));
+        rb41.setBookInDate(format.parse("2019-03-05"));
         bookingSessionLocal.createRoomBooking(rb41);
         PaymentTransaction PT30 = new PaymentTransaction();
         PT30.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18225,6 +18452,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb42 = new RoomBooking();
         rb42.setBookedRoom(roomSessionLocal.getRoomByName("KRG_602"));
+        rb42.setBookInDate(format.parse("2019-03-07"));
         bookingSessionLocal.createRoomBooking(rb42);
         PaymentTransaction PT31 = new PaymentTransaction();
         PT31.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18234,6 +18462,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb43 = new RoomBooking();
         rb43.setBookedRoom(roomSessionLocal.getRoomByName("KRG_703"));
+        rb43.setBookInDate(format.parse("2019-03-14"));
         bookingSessionLocal.createRoomBooking(rb43);
         PaymentTransaction PT32 = new PaymentTransaction();
         PT32.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18243,6 +18472,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb44 = new RoomBooking();
         rb44.setBookedRoom(roomSessionLocal.getRoomByName("KRG_1103"));
+        rb44.setBookInDate(format.parse("2019-03-13"));
         bookingSessionLocal.createRoomBooking(rb44);
         PaymentTransaction PT33 = new PaymentTransaction();
         PT33.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18252,6 +18482,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb45 = new RoomBooking();
         rb45.setBookedRoom(roomSessionLocal.getRoomByName("KRG_1402"));
+        rb45.setBookInDate(format.parse("2019-03-18"));
         bookingSessionLocal.createRoomBooking(rb45);
         PaymentTransaction PT34 = new PaymentTransaction();
         PT34.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18261,6 +18492,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb46 = new RoomBooking();
         rb46.setBookedRoom(roomSessionLocal.getRoomByName("KRG_1203"));
+        rb46.setBookInDate(format.parse("2019-03-22"));
         bookingSessionLocal.createRoomBooking(rb46);
         PaymentTransaction PT35 = new PaymentTransaction();
         PT35.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18270,6 +18502,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb47 = new RoomBooking();
         rb47.setBookedRoom(roomSessionLocal.getRoomByName("KRG_203"));
+        rb47.setBookInDate(format.parse("2019-03-26"));
         bookingSessionLocal.createRoomBooking(rb47);
         PaymentTransaction PT36 = new PaymentTransaction();
         PT36.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18279,6 +18512,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb48 = new RoomBooking();
         rb48.setBookedRoom(roomSessionLocal.getRoomByName("KRG_703"));
+        rb48.setBookInDate(format.parse("2019-03-25"));
         bookingSessionLocal.createRoomBooking(rb48);
         PaymentTransaction PT37 = new PaymentTransaction();
         PT37.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18288,6 +18522,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb49 = new RoomBooking();
         rb49.setBookedRoom(roomSessionLocal.getRoomByName("KRG_707"));
+        rb49.setBookInDate(format.parse("2019-03-29"));
         bookingSessionLocal.createRoomBooking(rb49);
         PaymentTransaction PT38 = new PaymentTransaction();
         PT38.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18297,6 +18532,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb50 = new RoomBooking();
         rb50.setBookedRoom(roomSessionLocal.getRoomByName("KRG_808"));
+        rb50.setBookInDate(format.parse("2019-04-01"));
         bookingSessionLocal.createRoomBooking(rb50);
         PaymentTransaction PT39 = new PaymentTransaction();
         PT39.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18306,6 +18542,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb51 = new RoomBooking();
         rb51.setBookedRoom(roomSessionLocal.getRoomByName("KRG_407"));
+        rb51.setBookInDate(format.parse("2019-04-07"));
         bookingSessionLocal.createRoomBooking(rb51);
         PaymentTransaction PT40 = new PaymentTransaction();
         PT40.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18315,6 +18552,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb52 = new RoomBooking();
         rb52.setBookedRoom(roomSessionLocal.getRoomByName("KRG_905"));
+        rb52.setBookInDate(format.parse("2019-04-15"));
         bookingSessionLocal.createRoomBooking(rb52);
         PaymentTransaction PT41 = new PaymentTransaction();
         PT41.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18324,6 +18562,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb53 = new RoomBooking();
         rb53.setBookedRoom(roomSessionLocal.getRoomByName("KRG_403"));
+        rb53.setBookInDate(format.parse("2019-04-15"));
         bookingSessionLocal.createRoomBooking(rb53);
         PaymentTransaction PT42 = new PaymentTransaction();
         PT42.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18333,6 +18572,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb54 = new RoomBooking();
         rb54.setBookedRoom(roomSessionLocal.getRoomByName("KRG_608"));
+        rb54.setBookInDate(format.parse("2019-04-16"));
         bookingSessionLocal.createRoomBooking(rb54);
         PaymentTransaction PT43 = new PaymentTransaction();
         PT43.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18342,6 +18582,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb55 = new RoomBooking();
         rb55.setBookedRoom(roomSessionLocal.getRoomByName("KRG_702"));
+        rb55.setBookInDate(format.parse("2019-04-16"));
         bookingSessionLocal.createRoomBooking(rb55);
         PaymentTransaction PT44 = new PaymentTransaction();
         PT44.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18351,6 +18592,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb56 = new RoomBooking();
         rb56.setBookedRoom(roomSessionLocal.getRoomByName("KRG_303"));
+        rb56.setBookInDate(format.parse("2019-04-17"));
         bookingSessionLocal.createRoomBooking(rb56);
         PaymentTransaction PT45 = new PaymentTransaction();
         PT45.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18360,6 +18602,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb57 = new RoomBooking();
         rb57.setBookedRoom(roomSessionLocal.getRoomByName("KRG_904"));
+        rb57.setBookInDate(format.parse("2019-04-18"));
         bookingSessionLocal.createRoomBooking(rb57);
         PaymentTransaction PT46 = new PaymentTransaction();
         PT46.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18369,6 +18612,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb58 = new RoomBooking();
         rb58.setBookedRoom(roomSessionLocal.getRoomByName("KRG_1201"));
+        rb58.setBookInDate(format.parse("2019-04-19"));
         bookingSessionLocal.createRoomBooking(rb58);
         PaymentTransaction PT47 = new PaymentTransaction();
         PT47.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18378,6 +18622,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb59 = new RoomBooking();
         rb59.setBookedRoom(roomSessionLocal.getRoomByName("KRG_1202"));
+        rb59.setBookInDate(format.parse("2019-04-22"));
         bookingSessionLocal.createRoomBooking(rb59);
         PaymentTransaction PT48 = new PaymentTransaction();
         PT48.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18387,6 +18632,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb60 = new RoomBooking();
         rb60.setBookedRoom(roomSessionLocal.getRoomByName("KRG_1203"));
+        rb60.setBookInDate(format.parse("2019-04-25"));
         bookingSessionLocal.createRoomBooking(rb60);
         PaymentTransaction PT49 = new PaymentTransaction();
         PT49.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18396,6 +18642,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb61 = new RoomBooking();
         rb61.setBookedRoom(roomSessionLocal.getRoomByName("KRC_602"));
+        rb61.setBookInDate(format.parse("2019-01-05"));
         bookingSessionLocal.createRoomBooking(rb61);
         PaymentTransaction PT50 = new PaymentTransaction();
         PT50.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18405,6 +18652,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb62 = new RoomBooking();
         rb62.setBookedRoom(roomSessionLocal.getRoomByName("KRC_1201"));
+        rb62.setBookInDate(format.parse("2019-01-06"));
         bookingSessionLocal.createRoomBooking(rb62);
         PaymentTransaction PT51 = new PaymentTransaction();
         PT51.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18414,6 +18662,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb63 = new RoomBooking();
         rb63.setBookedRoom(roomSessionLocal.getRoomByName("KRC_303"));
+        rb63.setBookInDate(format.parse("2019-01-06"));
         bookingSessionLocal.createRoomBooking(rb63);
         PaymentTransaction PT52 = new PaymentTransaction();
         PT52.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18423,6 +18672,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb64 = new RoomBooking();
         rb64.setBookedRoom(roomSessionLocal.getRoomByName("KRC_502"));
+        rb64.setBookInDate(format.parse("2019-01-08"));
         bookingSessionLocal.createRoomBooking(rb64);
         PaymentTransaction PT53 = new PaymentTransaction();
         PT53.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18432,6 +18682,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb65 = new RoomBooking();
         rb65.setBookedRoom(roomSessionLocal.getRoomByName("KRC_1202"));
+        rb65.setBookInDate(format.parse("2019-01-13"));
         bookingSessionLocal.createRoomBooking(rb65);
         PaymentTransaction PT54 = new PaymentTransaction();
         PT54.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18441,6 +18692,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb66 = new RoomBooking();
         rb66.setBookedRoom(roomSessionLocal.getRoomByName("KRC_508"));
+        rb66.setBookInDate(format.parse("2019-01-16"));
         bookingSessionLocal.createRoomBooking(rb66);
         PaymentTransaction PT55 = new PaymentTransaction();
         PT55.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18450,6 +18702,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb67 = new RoomBooking();
         rb67.setBookedRoom(roomSessionLocal.getRoomByName("KRC_904"));
+        rb67.setBookInDate(format.parse("2019-01-19"));
         bookingSessionLocal.createRoomBooking(rb67);
         PaymentTransaction PT56 = new PaymentTransaction();
         PT56.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18459,6 +18712,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb68 = new RoomBooking();
         rb68.setBookedRoom(roomSessionLocal.getRoomByName("KRC_1203"));
+        rb68.setBookInDate(format.parse("2019-01-28"));
         bookingSessionLocal.createRoomBooking(rb68);
         PaymentTransaction PT57 = new PaymentTransaction();
         PT57.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18468,6 +18722,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb69 = new RoomBooking();
         rb69.setBookedRoom(roomSessionLocal.getRoomByName("KRC_1202"));
+        rb69.setBookInDate(format.parse("2019-01-29"));
         bookingSessionLocal.createRoomBooking(rb69);
         PaymentTransaction PT58 = new PaymentTransaction();
         PT58.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18477,6 +18732,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb70 = new RoomBooking();
         rb70.setBookedRoom(roomSessionLocal.getRoomByName("KRC_702"));
+        rb70.setBookInDate(format.parse("2019-02-01"));
         bookingSessionLocal.createRoomBooking(rb70);
         PaymentTransaction PT59 = new PaymentTransaction();
         PT59.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18486,6 +18742,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb71 = new RoomBooking();
         rb71.setBookedRoom(roomSessionLocal.getRoomByName("KRC_302"));
+        rb71.setBookInDate(format.parse("2019-02-09"));
         bookingSessionLocal.createRoomBooking(rb71);
         PaymentTransaction PT60 = new PaymentTransaction();
         PT60.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18495,6 +18752,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb72 = new RoomBooking();
         rb72.setBookedRoom(roomSessionLocal.getRoomByName("KRC_303"));
+        rb72.setBookInDate(format.parse("2019-02-09"));
         bookingSessionLocal.createRoomBooking(rb72);
         PaymentTransaction PT61 = new PaymentTransaction();
         PT61.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18504,6 +18762,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb73 = new RoomBooking();
         rb73.setBookedRoom(roomSessionLocal.getRoomByName("KRC_305"));
+        rb73.setBookInDate(format.parse("2019-02-10"));
         bookingSessionLocal.createRoomBooking(rb73);
         PaymentTransaction PT62 = new PaymentTransaction();
         PT62.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18513,6 +18772,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb74 = new RoomBooking();
         rb74.setBookedRoom(roomSessionLocal.getRoomByName("KRC_403"));
+        rb74.setBookInDate(format.parse("2019-02-15"));
         bookingSessionLocal.createRoomBooking(rb74);
         PaymentTransaction PT63 = new PaymentTransaction();
         PT63.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18522,6 +18782,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb75 = new RoomBooking();
         rb75.setBookedRoom(roomSessionLocal.getRoomByName("KRC_404"));
+        rb75.setBookInDate(format.parse("2019-02-19"));
         bookingSessionLocal.createRoomBooking(rb75);
         PaymentTransaction PT64 = new PaymentTransaction();
         PT64.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18531,6 +18792,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb76 = new RoomBooking();
         rb76.setBookedRoom(roomSessionLocal.getRoomByName("KRC_405"));
+        rb76.setBookInDate(format.parse("2019-02-22"));
         bookingSessionLocal.createRoomBooking(rb76);
         PaymentTransaction PT65 = new PaymentTransaction();
         PT65.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18540,6 +18802,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb77 = new RoomBooking();
         rb77.setBookedRoom(roomSessionLocal.getRoomByName("KRC_506"));
+        rb77.setBookInDate(format.parse("2019-02-22"));
         bookingSessionLocal.createRoomBooking(rb77);
         PaymentTransaction PT66 = new PaymentTransaction();
         PT66.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18549,6 +18812,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb78 = new RoomBooking();
         rb78.setBookedRoom(roomSessionLocal.getRoomByName("KRC_603"));
+        rb78.setBookInDate(format.parse("2019-02-27"));
         bookingSessionLocal.createRoomBooking(rb78);
         PaymentTransaction PT67 = new PaymentTransaction();
         PT67.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18558,6 +18822,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb79 = new RoomBooking();
         rb79.setBookedRoom(roomSessionLocal.getRoomByName("KRC_605"));
+        rb79.setBookInDate(format.parse("2019-02-26"));
         bookingSessionLocal.createRoomBooking(rb79);
         PaymentTransaction PT68 = new PaymentTransaction();
         PT68.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18567,6 +18832,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb80 = new RoomBooking();
         rb80.setBookedRoom(roomSessionLocal.getRoomByName("KRC_703"));
+        rb80.setBookInDate(format.parse("2019-03-02"));
         bookingSessionLocal.createRoomBooking(rb80);
         PaymentTransaction PT69 = new PaymentTransaction();
         PT69.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18576,6 +18842,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb81 = new RoomBooking();
         rb81.setBookedRoom(roomSessionLocal.getRoomByName("KRC_707"));
+        rb81.setBookInDate(format.parse("2019-03-09"));
         bookingSessionLocal.createRoomBooking(rb81);
         PaymentTransaction PT70 = new PaymentTransaction();
         PT70.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18585,6 +18852,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb82 = new RoomBooking();
         rb82.setBookedRoom(roomSessionLocal.getRoomByName("KRC_802"));
+        rb82.setBookInDate(format.parse("2019-03-08"));
         bookingSessionLocal.createRoomBooking(rb82);
         PaymentTransaction PT71 = new PaymentTransaction();
         PT71.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18594,6 +18862,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb83 = new RoomBooking();
         rb83.setBookedRoom(roomSessionLocal.getRoomByName("KRC_903"));
+        rb83.setBookInDate(format.parse("2019-03-11"));
         bookingSessionLocal.createRoomBooking(rb83);
         PaymentTransaction PT72 = new PaymentTransaction();
         PT72.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18603,6 +18872,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb84 = new RoomBooking();
         rb84.setBookedRoom(roomSessionLocal.getRoomByName("KRC_904"));
+        rb84.setBookInDate(format.parse("2019-03-14"));
         bookingSessionLocal.createRoomBooking(rb84);
         PaymentTransaction PT73 = new PaymentTransaction();
         PT73.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18612,6 +18882,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb85 = new RoomBooking();
         rb85.setBookedRoom(roomSessionLocal.getRoomByName("KRC_302"));
+        rb85.setBookInDate(format.parse("2019-03-17"));
         bookingSessionLocal.createRoomBooking(rb85);
         PaymentTransaction PT74 = new PaymentTransaction();
         PT74.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18621,6 +18892,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb86 = new RoomBooking();
         rb86.setBookedRoom(roomSessionLocal.getRoomByName("KRC_304"));
+        rb86.setBookInDate(format.parse("2019-03-22"));
         bookingSessionLocal.createRoomBooking(rb86);
         PaymentTransaction PT75 = new PaymentTransaction();
         PT75.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18630,6 +18902,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb87 = new RoomBooking();
         rb87.setBookedRoom(roomSessionLocal.getRoomByName("KRC_306"));
+        rb87.setBookInDate(format.parse("2019-03-22"));
         bookingSessionLocal.createRoomBooking(rb87);
         PaymentTransaction PT76 = new PaymentTransaction();
         PT76.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18639,6 +18912,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb88 = new RoomBooking();
         rb88.setBookedRoom(roomSessionLocal.getRoomByName("KRC_403"));
+        rb88.setBookInDate(format.parse("2019-03-28"));
         bookingSessionLocal.createRoomBooking(rb88);
         PaymentTransaction PT77 = new PaymentTransaction();
         PT77.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18648,6 +18922,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb89 = new RoomBooking();
         rb89.setBookedRoom(roomSessionLocal.getRoomByName("KRC_405"));
+        rb89.setBookInDate(format.parse("2019-03-28"));
         bookingSessionLocal.createRoomBooking(rb89);
         PaymentTransaction PT78 = new PaymentTransaction();
         PT78.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18657,6 +18932,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb90 = new RoomBooking();
         rb90.setBookedRoom(roomSessionLocal.getRoomByName("KRC_503"));
+        rb90.setBookInDate(format.parse("2019-03-29"));
         bookingSessionLocal.createRoomBooking(rb90);
         PaymentTransaction PT79 = new PaymentTransaction();
         PT79.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18666,6 +18942,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb91 = new RoomBooking();
         rb91.setBookedRoom(roomSessionLocal.getRoomByName("KRC_608"));
+        rb91.setBookInDate(format.parse("2019-03-29"));
         bookingSessionLocal.createRoomBooking(rb91);
         PaymentTransaction PT80 = new PaymentTransaction();
         PT80.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18675,6 +18952,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb92 = new RoomBooking();
         rb92.setBookedRoom(roomSessionLocal.getRoomByName("KRC_703"));
+        rb92.setBookInDate(format.parse("2019-03-30"));
         bookingSessionLocal.createRoomBooking(rb92);
         PaymentTransaction PT81 = new PaymentTransaction();
         PT81.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18684,6 +18962,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb93 = new RoomBooking();
         rb93.setBookedRoom(roomSessionLocal.getRoomByName("KRC_1201"));
+        rb93.setBookInDate(format.parse("2019-04-08"));
         bookingSessionLocal.createRoomBooking(rb93);
         PaymentTransaction PT82 = new PaymentTransaction();
         PT82.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18693,6 +18972,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb94 = new RoomBooking();
         rb94.setBookedRoom(roomSessionLocal.getRoomByName("KRC_1202"));
+        rb94.setBookInDate(format.parse("2019-04-06"));
         bookingSessionLocal.createRoomBooking(rb94);
         PaymentTransaction PT83 = new PaymentTransaction();
         PT83.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18702,6 +18982,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb95 = new RoomBooking();
         rb95.setBookedRoom(roomSessionLocal.getRoomByName("KRC_1204"));
+        rb95.setBookInDate(format.parse("2019-04-07"));
         bookingSessionLocal.createRoomBooking(rb95);
         PaymentTransaction PT84 = new PaymentTransaction();
         PT84.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18711,6 +18992,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb96 = new RoomBooking();
         rb96.setBookedRoom(roomSessionLocal.getRoomByName("KRC_602"));
+        rb96.setBookInDate(format.parse("2019-04-09"));
         bookingSessionLocal.createRoomBooking(rb96);
         PaymentTransaction PT85 = new PaymentTransaction();
         PT85.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18720,6 +19002,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb97 = new RoomBooking();
         rb97.setBookedRoom(roomSessionLocal.getRoomByName("KRC_603"));
+        rb97.setBookInDate(format.parse("2019-04-11"));
         bookingSessionLocal.createRoomBooking(rb97);
         PaymentTransaction PT86 = new PaymentTransaction();
         PT86.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18729,6 +19012,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb98 = new RoomBooking();
         rb98.setBookedRoom(roomSessionLocal.getRoomByName("KRC_702"));
+        rb98.setBookInDate(format.parse("2019-04-13"));
         bookingSessionLocal.createRoomBooking(rb98);
         PaymentTransaction PT87 = new PaymentTransaction();
         PT87.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18738,6 +19022,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb99 = new RoomBooking();
         rb99.setBookedRoom(roomSessionLocal.getRoomByName("KRC_703"));
+        rb99.setBookInDate(format.parse("2019-04-15"));
         bookingSessionLocal.createRoomBooking(rb99);
         PaymentTransaction PT88 = new PaymentTransaction();
         PT88.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18747,6 +19032,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb100 = new RoomBooking();
         rb100.setBookedRoom(roomSessionLocal.getRoomByName("KRC_704"));
+        rb100.setBookInDate(format.parse("2019-04-15"));
         bookingSessionLocal.createRoomBooking(rb100);
         PaymentTransaction PT89 = new PaymentTransaction();
         PT89.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18756,6 +19042,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb101 = new RoomBooking();
         rb101.setBookedRoom(roomSessionLocal.getRoomByName("KRC_802"));
+        rb101.setBookInDate(format.parse("2019-04-16"));
         bookingSessionLocal.createRoomBooking(rb101);
         PaymentTransaction PT90 = new PaymentTransaction();
         PT90.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18765,6 +19052,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb102 = new RoomBooking();
         rb102.setBookedRoom(roomSessionLocal.getRoomByName("KRC_706"));
+        rb102.setBookInDate(format.parse("2019-04-19"));
         bookingSessionLocal.createRoomBooking(rb102);
         PaymentTransaction PT91 = new PaymentTransaction();
         PT91.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18774,6 +19062,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb103 = new RoomBooking();
         rb103.setBookedRoom(roomSessionLocal.getRoomByName("KRN_602"));
+        rb103.setBookInDate(format.parse("2019-01-15"));
         bookingSessionLocal.createRoomBooking(rb103);
         PaymentTransaction PT92 = new PaymentTransaction();
         PT92.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18783,6 +19072,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb104 = new RoomBooking();
         rb104.setBookedRoom(roomSessionLocal.getRoomByName("KRN_802"));
+        rb104.setBookInDate(format.parse("2019-01-14"));
         bookingSessionLocal.createRoomBooking(rb104);
         PaymentTransaction PT93 = new PaymentTransaction();
         PT93.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18792,6 +19082,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb105 = new RoomBooking();
         rb105.setBookedRoom(roomSessionLocal.getRoomByName("KRN_703"));
+        rb105.setBookInDate(format.parse("2019-01-15"));
         bookingSessionLocal.createRoomBooking(rb105);
         PaymentTransaction PT94 = new PaymentTransaction();
         PT94.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18801,6 +19092,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb106 = new RoomBooking();
         rb106.setBookedRoom(roomSessionLocal.getRoomByName("KRN_804"));
+        rb106.setBookInDate(format.parse("2019-01-14"));
         bookingSessionLocal.createRoomBooking(rb106);
         PaymentTransaction PT95 = new PaymentTransaction();
         PT95.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18810,6 +19102,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb107 = new RoomBooking();
         rb107.setBookedRoom(roomSessionLocal.getRoomByName("KRN_205"));
+        rb107.setBookInDate(format.parse("2019-01-15"));
         bookingSessionLocal.createRoomBooking(rb107);
         PaymentTransaction PT96 = new PaymentTransaction();
         PT96.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18819,6 +19112,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb108 = new RoomBooking();
         rb108.setBookedRoom(roomSessionLocal.getRoomByName("KRN_206"));
+        rb108.setBookInDate(format.parse("2019-01-18"));
         bookingSessionLocal.createRoomBooking(rb108);
         PaymentTransaction PT97 = new PaymentTransaction();
         PT97.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18828,6 +19122,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb109 = new RoomBooking();
         rb109.setBookedRoom(roomSessionLocal.getRoomByName("KRN_207"));
+        rb109.setBookInDate(format.parse("2019-01-20"));
         bookingSessionLocal.createRoomBooking(rb109);
         PaymentTransaction PT98 = new PaymentTransaction();
         PT98.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18837,6 +19132,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb110 = new RoomBooking();
         rb110.setBookedRoom(roomSessionLocal.getRoomByName("KRN_208"));
+        rb110.setBookInDate(format.parse("2019-01-22"));
         bookingSessionLocal.createRoomBooking(rb110);
         PaymentTransaction PT99 = new PaymentTransaction();
         PT99.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18846,6 +19142,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb111 = new RoomBooking();
         rb111.setBookedRoom(roomSessionLocal.getRoomByName("KRN_302"));
+        rb111.setBookInDate(format.parse("2019-01-24"));
         bookingSessionLocal.createRoomBooking(rb111);
         PaymentTransaction PT100 = new PaymentTransaction();
         PT100.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18855,6 +19152,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb112 = new RoomBooking();
         rb112.setBookedRoom(roomSessionLocal.getRoomByName("KRN_303"));
+        rb112.setBookInDate(format.parse("2019-01-29"));
         bookingSessionLocal.createRoomBooking(rb112);
         PaymentTransaction PT101 = new PaymentTransaction();
         PT101.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18864,6 +19162,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb113 = new RoomBooking();
         rb113.setBookedRoom(roomSessionLocal.getRoomByName("KRN_304"));
+        rb113.setBookInDate(format.parse("2019-02-05"));
         bookingSessionLocal.createRoomBooking(rb113);
         PaymentTransaction PT102 = new PaymentTransaction();
         PT102.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18873,6 +19172,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb114 = new RoomBooking();
         rb114.setBookedRoom(roomSessionLocal.getRoomByName("KRN_305"));
+        rb114.setBookInDate(format.parse("2019-02-08"));
         bookingSessionLocal.createRoomBooking(rb114);
         PaymentTransaction PT103 = new PaymentTransaction();
         PT103.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18882,6 +19182,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb115 = new RoomBooking();
         rb115.setBookedRoom(roomSessionLocal.getRoomByName("KRN_306"));
+        rb115.setBookInDate(format.parse("2019-02-09"));
         bookingSessionLocal.createRoomBooking(rb115);
         PaymentTransaction PT104 = new PaymentTransaction();
         PT104.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18891,6 +19192,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb116 = new RoomBooking();
         rb116.setBookedRoom(roomSessionLocal.getRoomByName("KRN_402"));
+        rb116.setBookInDate(format.parse("2019-02-11"));
         bookingSessionLocal.createRoomBooking(rb116);
         PaymentTransaction PT105 = new PaymentTransaction();
         PT105.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18900,6 +19202,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb117 = new RoomBooking();
         rb117.setBookedRoom(roomSessionLocal.getRoomByName("KRN_403"));
+        rb117.setBookInDate(format.parse("2019-02-11"));
         bookingSessionLocal.createRoomBooking(rb117);
         PaymentTransaction PT106 = new PaymentTransaction();
         PT106.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18909,6 +19212,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb118 = new RoomBooking();
         rb118.setBookedRoom(roomSessionLocal.getRoomByName("KRN_404"));
+        rb118.setBookInDate(format.parse("2019-02-13"));
         bookingSessionLocal.createRoomBooking(rb118);
         PaymentTransaction PT107 = new PaymentTransaction();
         PT107.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18918,6 +19222,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb119 = new RoomBooking();
         rb119.setBookedRoom(roomSessionLocal.getRoomByName("KRN_405"));
+        rb119.setBookInDate(format.parse("2019-02-18"));
         bookingSessionLocal.createRoomBooking(rb119);
         PaymentTransaction PT108 = new PaymentTransaction();
         PT108.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18927,6 +19232,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb120 = new RoomBooking();
         rb120.setBookedRoom(roomSessionLocal.getRoomByName("KRN_502"));
+        rb120.setBookInDate(format.parse("2019-02-18"));
         bookingSessionLocal.createRoomBooking(rb120);
         PaymentTransaction PT109 = new PaymentTransaction();
         PT109.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18936,6 +19242,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb121 = new RoomBooking();
         rb121.setBookedRoom(roomSessionLocal.getRoomByName("KRN_503"));
+        rb121.setBookInDate(format.parse("2019-02-20"));
         bookingSessionLocal.createRoomBooking(rb121);
         PaymentTransaction PT110 = new PaymentTransaction();
         PT110.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18945,6 +19252,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb122 = new RoomBooking();
         rb122.setBookedRoom(roomSessionLocal.getRoomByName("KRN_504"));
+        rb122.setBookInDate(format.parse("2019-02-24"));
         bookingSessionLocal.createRoomBooking(rb122);
         PaymentTransaction PT111 = new PaymentTransaction();
         PT111.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18954,6 +19262,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb123 = new RoomBooking();
         rb123.setBookedRoom(roomSessionLocal.getRoomByName("KRN_505"));
+        rb123.setBookInDate(format.parse("2019-03-08"));
         bookingSessionLocal.createRoomBooking(rb123);
         PaymentTransaction PT112 = new PaymentTransaction();
         PT112.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18963,6 +19272,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb124 = new RoomBooking();
         rb124.setBookedRoom(roomSessionLocal.getRoomByName("KRN_506"));
+        rb124.setBookInDate(format.parse("2019-03-10"));
         bookingSessionLocal.createRoomBooking(rb124);
         PaymentTransaction PT113 = new PaymentTransaction();
         PT113.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18972,6 +19282,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb125 = new RoomBooking();
         rb125.setBookedRoom(roomSessionLocal.getRoomByName("KRN_507"));
+        rb125.setBookInDate(format.parse("2019-03-14"));
         bookingSessionLocal.createRoomBooking(rb125);
         PaymentTransaction PT114 = new PaymentTransaction();
         PT114.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18981,6 +19292,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb126 = new RoomBooking();
         rb126.setBookedRoom(roomSessionLocal.getRoomByName("KRN_508"));
+        rb126.setBookInDate(format.parse("2019-03-15"));
         bookingSessionLocal.createRoomBooking(rb126);
         PaymentTransaction PT115 = new PaymentTransaction();
         PT115.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18990,6 +19302,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb127 = new RoomBooking();
         rb127.setBookedRoom(roomSessionLocal.getRoomByName("KRN_602"));
+        rb127.setBookInDate(format.parse("2019-03-20"));
         bookingSessionLocal.createRoomBooking(rb127);
         PaymentTransaction PT116 = new PaymentTransaction();
         PT116.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18999,6 +19312,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb128 = new RoomBooking();
         rb128.setBookedRoom(roomSessionLocal.getRoomByName("KRN_603"));
+        rb128.setBookInDate(format.parse("2019-03-24"));
         bookingSessionLocal.createRoomBooking(rb128);
         PaymentTransaction PT117 = new PaymentTransaction();
         PT117.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19008,6 +19322,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb129 = new RoomBooking();
         rb129.setBookedRoom(roomSessionLocal.getRoomByName("KRN_604"));
+        rb129.setBookInDate(format.parse("2019-03-29"));
         bookingSessionLocal.createRoomBooking(rb129);
         PaymentTransaction PT118 = new PaymentTransaction();
         PT118.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19017,6 +19332,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb130 = new RoomBooking();
         rb130.setBookedRoom(roomSessionLocal.getRoomByName("KRN_605"));
+        rb130.setBookInDate(format.parse("2019-04-03"));
         bookingSessionLocal.createRoomBooking(rb130);
         PaymentTransaction PT119 = new PaymentTransaction();
         PT119.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19026,6 +19342,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb131 = new RoomBooking();
         rb131.setBookedRoom(roomSessionLocal.getRoomByName("KRN_703"));
+        rb131.setBookInDate(format.parse("2019-04-03"));
         bookingSessionLocal.createRoomBooking(rb131);
         PaymentTransaction PT120 = new PaymentTransaction();
         PT120.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19035,6 +19352,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb132 = new RoomBooking();
         rb132.setBookedRoom(roomSessionLocal.getRoomByName("KRN_704"));
+        rb132.setBookInDate(format.parse("2019-04-05"));
         bookingSessionLocal.createRoomBooking(rb132);
         PaymentTransaction PT121 = new PaymentTransaction();
         PT121.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19044,6 +19362,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb133 = new RoomBooking();
         rb133.setBookedRoom(roomSessionLocal.getRoomByName("KRN_705"));
+        rb133.setBookInDate(format.parse("2019-04-08"));
         bookingSessionLocal.createRoomBooking(rb133);
         PaymentTransaction PT122 = new PaymentTransaction();
         PT122.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19053,6 +19372,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb134 = new RoomBooking();
         rb134.setBookedRoom(roomSessionLocal.getRoomByName("KRN_706"));
+        rb134.setBookInDate(format.parse("2019-04-09"));
         bookingSessionLocal.createRoomBooking(rb134);
         PaymentTransaction PT123 = new PaymentTransaction();
         PT123.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19062,6 +19382,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb135 = new RoomBooking();
         rb135.setBookedRoom(roomSessionLocal.getRoomByName("KRN_707"));
+        rb135.setBookInDate(format.parse("2019-04-10"));
         bookingSessionLocal.createRoomBooking(rb135);
         PaymentTransaction PT124 = new PaymentTransaction();
         PT124.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19071,6 +19392,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb136 = new RoomBooking();
         rb136.setBookedRoom(roomSessionLocal.getRoomByName("KRN_801"));
+        rb136.setBookInDate(format.parse("2019-04-13"));
         bookingSessionLocal.createRoomBooking(rb136);
         PaymentTransaction PT125 = new PaymentTransaction();
         PT125.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19080,6 +19402,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb137 = new RoomBooking();
         rb137.setBookedRoom(roomSessionLocal.getRoomByName("KRN_1202"));
+        rb137.setBookInDate(format.parse("2019-04-18"));
         bookingSessionLocal.createRoomBooking(rb137);
         PaymentTransaction PT126 = new PaymentTransaction();
         PT126.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19089,6 +19412,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb138 = new RoomBooking();
         rb138.setBookedRoom(roomSessionLocal.getRoomByName("KRN_1203"));
+        rb138.setBookInDate(format.parse("2019-04-16"));
         bookingSessionLocal.createRoomBooking(rb138);
         PaymentTransaction PT127 = new PaymentTransaction();
         PT127.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19098,6 +19422,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb139 = new RoomBooking();
         rb139.setBookedRoom(roomSessionLocal.getRoomByName("KRN_1204"));
+        rb139.setBookInDate(format.parse("2019-04-19"));
         bookingSessionLocal.createRoomBooking(rb139);
         PaymentTransaction PT128 = new PaymentTransaction();
         PT128.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19107,6 +19432,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb140 = new RoomBooking();
         rb140.setBookedRoom(roomSessionLocal.getRoomByName("KRN_901"));
+        rb140.setBookInDate(format.parse("2019-04-20"));
         bookingSessionLocal.createRoomBooking(rb140);
         PaymentTransaction PT129 = new PaymentTransaction();
         PT129.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19116,6 +19442,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb141 = new RoomBooking();
         rb141.setBookedRoom(roomSessionLocal.getRoomByName("KRN_902"));
+        rb141.setBookInDate(format.parse("2019-04-20"));
         bookingSessionLocal.createRoomBooking(rb141);
         PaymentTransaction PT130 = new PaymentTransaction();
         PT130.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19125,6 +19452,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb142 = new RoomBooking();
         rb142.setBookedRoom(roomSessionLocal.getRoomByName("KRN_903"));
+        rb142.setBookInDate(format.parse("2019-01-05"));
         bookingSessionLocal.createRoomBooking(rb142);
         PaymentTransaction PT131 = new PaymentTransaction();
         PT131.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19134,6 +19462,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb143 = new RoomBooking();
         rb143.setBookedRoom(roomSessionLocal.getRoomByName("KRE_602"));
+        rb143.setBookInDate(format.parse("2019-01-06"));
         bookingSessionLocal.createRoomBooking(rb143);
         PaymentTransaction PT132 = new PaymentTransaction();
         PT132.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19143,6 +19472,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb144 = new RoomBooking();
         rb144.setBookedRoom(roomSessionLocal.getRoomByName("KRE_605"));
+        rb144.setBookInDate(format.parse("2019-01-10"));
         bookingSessionLocal.createRoomBooking(rb144);
         PaymentTransaction PT133 = new PaymentTransaction();
         PT133.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19152,6 +19482,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb145 = new RoomBooking();
         rb145.setBookedRoom(roomSessionLocal.getRoomByName("KRE_301"));
+        rb145.setBookInDate(format.parse("2019-01-18"));
         bookingSessionLocal.createRoomBooking(rb145);
         PaymentTransaction PT134 = new PaymentTransaction();
         PT134.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19161,6 +19492,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb146 = new RoomBooking();
         rb146.setBookedRoom(roomSessionLocal.getRoomByName("KRE_401"));
+        rb146.setBookInDate(format.parse("2019-01-20"));
         bookingSessionLocal.createRoomBooking(rb146);
         PaymentTransaction PT135 = new PaymentTransaction();
         PT135.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19170,6 +19502,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb147 = new RoomBooking();
         rb147.setBookedRoom(roomSessionLocal.getRoomByName("KRE_507"));
+        rb147.setBookInDate(format.parse("2019-01-22"));
         bookingSessionLocal.createRoomBooking(rb147);
         PaymentTransaction PT136 = new PaymentTransaction();
         PT136.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19179,6 +19512,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb148 = new RoomBooking();
         rb148.setBookedRoom(roomSessionLocal.getRoomByName("KRE_503"));
+        rb148.setBookInDate(format.parse("2019-01-24"));
         bookingSessionLocal.createRoomBooking(rb148);
         PaymentTransaction PT137 = new PaymentTransaction();
         PT137.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19188,6 +19522,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb149 = new RoomBooking();
         rb149.setBookedRoom(roomSessionLocal.getRoomByName("KRE_504"));
+        rb149.setBookInDate(format.parse("2019-01-28"));
         bookingSessionLocal.createRoomBooking(rb149);
         PaymentTransaction PT138 = new PaymentTransaction();
         PT138.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19197,6 +19532,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb150 = new RoomBooking();
         rb150.setBookedRoom(roomSessionLocal.getRoomByName("KRE_505"));
+        rb150.setBookInDate(format.parse("2019-01-29"));
         bookingSessionLocal.createRoomBooking(rb150);
         PaymentTransaction PT139 = new PaymentTransaction();
         PT139.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19206,6 +19542,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb151 = new RoomBooking();
         rb151.setBookedRoom(roomSessionLocal.getRoomByName("KRE_601"));
+        rb151.setBookInDate(format.parse("2019-01-29"));
         bookingSessionLocal.createRoomBooking(rb151);
         PaymentTransaction PT140 = new PaymentTransaction();
         PT140.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19215,6 +19552,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb152 = new RoomBooking();
         rb152.setBookedRoom(roomSessionLocal.getRoomByName("KRE_606"));
+        rb152.setBookInDate(format.parse("2019-02-07"));
         bookingSessionLocal.createRoomBooking(rb152);
         PaymentTransaction PT141 = new PaymentTransaction();
         PT141.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19224,6 +19562,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb153 = new RoomBooking();
         rb153.setBookedRoom(roomSessionLocal.getRoomByName("KRE_607"));
+        rb153.setBookInDate(format.parse("2019-02-08"));
         bookingSessionLocal.createRoomBooking(rb153);
         PaymentTransaction PT142 = new PaymentTransaction();
         PT142.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19233,6 +19572,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb154 = new RoomBooking();
         rb154.setBookedRoom(roomSessionLocal.getRoomByName("KRE_604"));
+        rb154.setBookInDate(format.parse("2019-02-09"));
         bookingSessionLocal.createRoomBooking(rb154);
         PaymentTransaction PT143 = new PaymentTransaction();
         PT143.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19242,6 +19582,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb155 = new RoomBooking();
         rb155.setBookedRoom(roomSessionLocal.getRoomByName("KRE_602"));
+        rb155.setBookInDate(format.parse("2019-02-11"));
         bookingSessionLocal.createRoomBooking(rb155);
         PaymentTransaction PT144 = new PaymentTransaction();
         PT144.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19251,6 +19592,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb156 = new RoomBooking();
         rb156.setBookedRoom(roomSessionLocal.getRoomByName("KRE_603"));
+        rb156.setBookInDate(format.parse("2019-02-18"));
         bookingSessionLocal.createRoomBooking(rb156);
         PaymentTransaction PT145 = new PaymentTransaction();
         PT145.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19260,6 +19602,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb157 = new RoomBooking();
         rb157.setBookedRoom(roomSessionLocal.getRoomByName("KRE_504"));
+        rb157.setBookInDate(format.parse("2019-02-23"));
         bookingSessionLocal.createRoomBooking(rb157);
         PaymentTransaction PT146 = new PaymentTransaction();
         PT146.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19269,6 +19612,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb158 = new RoomBooking();
         rb158.setBookedRoom(roomSessionLocal.getRoomByName("KRE_405"));
+        rb158.setBookInDate(format.parse("2019-02-23"));
         bookingSessionLocal.createRoomBooking(rb158);
         PaymentTransaction PT147 = new PaymentTransaction();
         PT147.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19278,6 +19622,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb159 = new RoomBooking();
         rb159.setBookedRoom(roomSessionLocal.getRoomByName("KRE_306"));
+        rb159.setBookInDate(format.parse("2019-02-27"));
         bookingSessionLocal.createRoomBooking(rb159);
         PaymentTransaction PT148 = new PaymentTransaction();
         PT148.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19287,6 +19632,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb160 = new RoomBooking();
         rb160.setBookedRoom(roomSessionLocal.getRoomByName("KRE_407"));
+        rb160.setBookInDate(format.parse("2019-03-02"));
         bookingSessionLocal.createRoomBooking(rb160);
         PaymentTransaction PT149 = new PaymentTransaction();
         PT149.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19296,6 +19642,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb161 = new RoomBooking();
         rb161.setBookedRoom(roomSessionLocal.getRoomByName("KRE_206"));
+        rb161.setBookInDate(format.parse("2019-03-01"));
         bookingSessionLocal.createRoomBooking(rb161);
         PaymentTransaction PT150 = new PaymentTransaction();
         PT150.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19305,6 +19652,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb162 = new RoomBooking();
         rb162.setBookedRoom(roomSessionLocal.getRoomByName("KRE_305"));
+        rb162.setBookInDate(format.parse("2019-03-07"));
         bookingSessionLocal.createRoomBooking(rb162);
         PaymentTransaction PT151 = new PaymentTransaction();
         PT151.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19314,6 +19662,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb163 = new RoomBooking();
         rb163.setBookedRoom(roomSessionLocal.getRoomByName("KRE_403"));
+        rb163.setBookInDate(format.parse("2019-03-12"));
         bookingSessionLocal.createRoomBooking(rb163);
         PaymentTransaction PT152 = new PaymentTransaction();
         PT152.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19323,6 +19672,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb164 = new RoomBooking();
         rb164.setBookedRoom(roomSessionLocal.getRoomByName("KRE_402"));
+        rb164.setBookInDate(format.parse("2019-03-15"));
         bookingSessionLocal.createRoomBooking(rb164);
         PaymentTransaction PT153 = new PaymentTransaction();
         PT153.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19332,6 +19682,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb165 = new RoomBooking();
         rb165.setBookedRoom(roomSessionLocal.getRoomByName("KRE_401"));
+        rb165.setBookInDate(format.parse("2019-03-18"));
         bookingSessionLocal.createRoomBooking(rb165);
         PaymentTransaction PT154 = new PaymentTransaction();
         PT154.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19341,6 +19692,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb166 = new RoomBooking();
         rb166.setBookedRoom(roomSessionLocal.getRoomByName("KRE_308"));
+        rb166.setBookInDate(format.parse("2019-03-22"));
         bookingSessionLocal.createRoomBooking(rb166);
         PaymentTransaction PT155 = new PaymentTransaction();
         PT155.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19350,6 +19702,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb167 = new RoomBooking();
         rb167.setBookedRoom(roomSessionLocal.getRoomByName("KRE_307"));
+        rb167.setBookInDate(format.parse("2019-03-23"));
         bookingSessionLocal.createRoomBooking(rb167);
         PaymentTransaction PT156 = new PaymentTransaction();
         PT156.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19359,6 +19712,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb168 = new RoomBooking();
         rb168.setBookedRoom(roomSessionLocal.getRoomByName("KRE_306"));
+        rb168.setBookInDate(format.parse("2019-03-24"));
         bookingSessionLocal.createRoomBooking(rb168);
         PaymentTransaction PT157 = new PaymentTransaction();
         PT157.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19368,6 +19722,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb169 = new RoomBooking();
         rb169.setBookedRoom(roomSessionLocal.getRoomByName("KRE_305"));
+        rb169.setBookInDate(format.parse("2019-03-29"));
         bookingSessionLocal.createRoomBooking(rb169);
         PaymentTransaction PT158 = new PaymentTransaction();
         PT158.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19377,6 +19732,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb170 = new RoomBooking();
         rb170.setBookedRoom(roomSessionLocal.getRoomByName("KRE_304"));
+        rb170.setBookInDate(format.parse("2019-04-01"));
         bookingSessionLocal.createRoomBooking(rb170);
         PaymentTransaction PT159 = new PaymentTransaction();
         PT159.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19386,6 +19742,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb171 = new RoomBooking();
         rb171.setBookedRoom(roomSessionLocal.getRoomByName("KRE_303"));
+        rb171.setBookInDate(format.parse("2019-04-02"));
         bookingSessionLocal.createRoomBooking(rb171);
         PaymentTransaction PT160 = new PaymentTransaction();
         PT160.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19395,6 +19752,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb172 = new RoomBooking();
         rb172.setBookedRoom(roomSessionLocal.getRoomByName("KRE_302"));
+        rb172.setBookInDate(format.parse("2019-04-07"));
         bookingSessionLocal.createRoomBooking(rb172);
         PaymentTransaction PT161 = new PaymentTransaction();
         PT161.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19404,6 +19762,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb173 = new RoomBooking();
         rb173.setBookedRoom(roomSessionLocal.getRoomByName("KRE_208"));
+        rb173.setBookInDate(format.parse("2019-04-09"));
         bookingSessionLocal.createRoomBooking(rb173);
         PaymentTransaction PT162 = new PaymentTransaction();
         PT162.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19413,6 +19772,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb174 = new RoomBooking();
         rb174.setBookedRoom(roomSessionLocal.getRoomByName("KRE_207"));
+        rb174.setBookInDate(format.parse("2019-04-10"));
         bookingSessionLocal.createRoomBooking(rb174);
         PaymentTransaction PT163 = new PaymentTransaction();
         PT163.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19422,6 +19782,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb175 = new RoomBooking();
         rb175.setBookedRoom(roomSessionLocal.getRoomByName("KRE_206"));
+        rb175.setBookInDate(format.parse("2019-04-12"));
         bookingSessionLocal.createRoomBooking(rb175);
         PaymentTransaction PT164 = new PaymentTransaction();
         PT164.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19431,6 +19792,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb176 = new RoomBooking();
         rb176.setBookedRoom(roomSessionLocal.getRoomByName("KRE_204"));
+        rb176.setBookInDate(format.parse("2019-04-18"));
         bookingSessionLocal.createRoomBooking(rb176);
         PaymentTransaction PT165 = new PaymentTransaction();
         PT165.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19440,6 +19802,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb177 = new RoomBooking();
         rb177.setBookedRoom(roomSessionLocal.getRoomByName("KRE_203"));
+        rb177.setBookInDate(format.parse("2019-04-19"));
         bookingSessionLocal.createRoomBooking(rb177);
         PaymentTransaction PT166 = new PaymentTransaction();
         PT166.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19449,6 +19812,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb178 = new RoomBooking();
         rb178.setBookedRoom(roomSessionLocal.getRoomByName("KRE_202"));
+        rb178.setBookInDate(format.parse("2019-04-19"));
         bookingSessionLocal.createRoomBooking(rb178);
         PaymentTransaction PT167 = new PaymentTransaction();
         PT167.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19458,6 +19822,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb179 = new RoomBooking();
         rb179.setBookedRoom(roomSessionLocal.getRoomByName("KRE_201"));
+        rb179.setBookInDate(format.parse("2019-04-19"));
         bookingSessionLocal.createRoomBooking(rb179);
         PaymentTransaction PT168 = new PaymentTransaction();
         PT168.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19467,6 +19832,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb180 = new RoomBooking();
         rb180.setBookedRoom(roomSessionLocal.getRoomByName("KRE_602"));
+        rb180.setBookInDate(format.parse("2019-04-22"));
         bookingSessionLocal.createRoomBooking(rb180);
         PaymentTransaction PT169 = new PaymentTransaction();
         PT169.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19476,6 +19842,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb181 = new RoomBooking();
         rb181.setBookedRoom(roomSessionLocal.getRoomByName("KRE_603"));
+        rb181.setBookInDate(format.parse("2019-04-22"));
         bookingSessionLocal.createRoomBooking(rb181);
         PaymentTransaction PT170 = new PaymentTransaction();
         PT170.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19485,6 +19852,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb182 = new RoomBooking();
         rb182.setBookedRoom(roomSessionLocal.getRoomByName("KRE_1204"));
+        rb182.setBookInDate(format.parse("2019-04-23"));
         bookingSessionLocal.createRoomBooking(rb182);
         PaymentTransaction PT171 = new PaymentTransaction();
         PT171.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19495,6 +19863,7 @@ public class DataInitializationSessionBean {
 //KRS Payment Transaction
         RoomBooking rb500 = new RoomBooking();
         rb500.setBookedRoom(roomSessionLocal.getRoomByName("KRS_201"));
+        rb500.setBookInDate(format.parse("2019-01-09"));
         bookingSessionLocal.createRoomBooking(rb500);
         PaymentTransaction PT500 = new PaymentTransaction();
         PT500.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19504,6 +19873,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb501 = new RoomBooking();
         rb501.setBookedRoom(roomSessionLocal.getRoomByName("KRS_202"));
+        rb501.setBookInDate(format.parse("2019-01-09"));
         bookingSessionLocal.createRoomBooking(rb501);
         PaymentTransaction PT501 = new PaymentTransaction();
         PT501.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19513,6 +19883,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb502 = new RoomBooking();
         rb502.setBookedRoom(roomSessionLocal.getRoomByName("KRS_203"));
+        rb502.setBookInDate(format.parse("2019-01-13"));
         bookingSessionLocal.createRoomBooking(rb502);
         PaymentTransaction PT502 = new PaymentTransaction();
         PT502.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19522,6 +19893,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb503 = new RoomBooking();
         rb503.setBookedRoom(roomSessionLocal.getRoomByName("KRS_204"));
+        rb503.setBookInDate(format.parse("2019-01-12"));
         bookingSessionLocal.createRoomBooking(rb503);
         PaymentTransaction PT503 = new PaymentTransaction();
         PT503.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19531,6 +19903,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb504 = new RoomBooking();
         rb504.setBookedRoom(roomSessionLocal.getRoomByName("KRS_205"));
+        rb504.setBookInDate(format.parse("2019-01-09"));
         bookingSessionLocal.createRoomBooking(rb504);
         PaymentTransaction PT504 = new PaymentTransaction();
         PT504.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19540,6 +19913,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb505 = new RoomBooking();
         rb505.setBookedRoom(roomSessionLocal.getRoomByName("KRS_301"));
+        rb505.setBookInDate(format.parse("2019-01-09"));
         bookingSessionLocal.createRoomBooking(rb505);
         PaymentTransaction PT505 = new PaymentTransaction();
         PT505.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19549,6 +19923,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb506 = new RoomBooking();
         rb506.setBookedRoom(roomSessionLocal.getRoomByName("KRS_302"));
+        rb506.setBookInDate(format.parse("2019-01-13"));
         bookingSessionLocal.createRoomBooking(rb506);
         PaymentTransaction PT506 = new PaymentTransaction();
         PT506.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19558,6 +19933,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb507 = new RoomBooking();
         rb507.setBookedRoom(roomSessionLocal.getRoomByName("KRS_303"));
+        rb507.setBookInDate(format.parse("2019-01-12"));
         bookingSessionLocal.createRoomBooking(rb507);
         PaymentTransaction PT507 = new PaymentTransaction();
         PT507.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19567,6 +19943,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb508 = new RoomBooking();
         rb508.setBookedRoom(roomSessionLocal.getRoomByName("KRS_304"));
+        rb508.setBookInDate(format.parse("2019-01-14"));
         bookingSessionLocal.createRoomBooking(rb508);
         PaymentTransaction PT508 = new PaymentTransaction();
         PT508.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19576,6 +19953,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb509 = new RoomBooking();
         rb509.setBookedRoom(roomSessionLocal.getRoomByName("KRS_305"));
+        rb509.setBookInDate(format.parse("2019-01-18"));
         bookingSessionLocal.createRoomBooking(rb509);
         PaymentTransaction PT509 = new PaymentTransaction();
         PT509.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19585,6 +19963,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb510 = new RoomBooking();
         rb510.setBookedRoom(roomSessionLocal.getRoomByName("KRS_401"));
+        rb510.setBookInDate(format.parse("2019-02-13"));
         bookingSessionLocal.createRoomBooking(rb510);
         PaymentTransaction PT510 = new PaymentTransaction();
         PT510.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19594,6 +19973,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb511 = new RoomBooking();
         rb511.setBookedRoom(roomSessionLocal.getRoomByName("KRS_402"));
+        rb511.setBookInDate(format.parse("2019-02-09"));
         bookingSessionLocal.createRoomBooking(rb511);
         PaymentTransaction PT511 = new PaymentTransaction();
         PT511.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19603,6 +19983,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb512 = new RoomBooking();
         rb512.setBookedRoom(roomSessionLocal.getRoomByName("KRS_403"));
+        rb512.setBookInDate(format.parse("2019-02-19"));
         bookingSessionLocal.createRoomBooking(rb512);
         PaymentTransaction PT512 = new PaymentTransaction();
         PT512.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19612,6 +19993,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb513 = new RoomBooking();
         rb513.setBookedRoom(roomSessionLocal.getRoomByName("KRS_404"));
+        rb513.setBookInDate(format.parse("2019-02-14"));
         bookingSessionLocal.createRoomBooking(rb513);
         PaymentTransaction PT513 = new PaymentTransaction();
         PT513.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19621,6 +20003,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb514 = new RoomBooking();
         rb514.setBookedRoom(roomSessionLocal.getRoomByName("KRS_405"));
+        rb514.setBookInDate(format.parse("2019-02-18"));
         bookingSessionLocal.createRoomBooking(rb514);
         PaymentTransaction PT514 = new PaymentTransaction();
         PT514.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19630,6 +20013,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb515 = new RoomBooking();
         rb515.setBookedRoom(roomSessionLocal.getRoomByName("KRS_501"));
+        rb515.setBookInDate(format.parse("2019-02-13"));
         bookingSessionLocal.createRoomBooking(rb515);
         PaymentTransaction PT515 = new PaymentTransaction();
         PT515.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19639,6 +20023,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb516 = new RoomBooking();
         rb516.setBookedRoom(roomSessionLocal.getRoomByName("KRS_502"));
+        rb516.setBookInDate(format.parse("2019-02-13"));
         bookingSessionLocal.createRoomBooking(rb516);
         PaymentTransaction PT516 = new PaymentTransaction();
         PT516.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19648,6 +20033,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb517 = new RoomBooking();
         rb517.setBookedRoom(roomSessionLocal.getRoomByName("KRS_503"));
+        rb517.setBookInDate(format.parse("2019-02-13"));
         bookingSessionLocal.createRoomBooking(rb517);
         PaymentTransaction PT517 = new PaymentTransaction();
         PT517.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19657,6 +20043,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb518 = new RoomBooking();
         rb518.setBookedRoom(roomSessionLocal.getRoomByName("KRS_504"));
+        rb518.setBookInDate(format.parse("2019-02-18"));
         bookingSessionLocal.createRoomBooking(rb518);
         PaymentTransaction PT518 = new PaymentTransaction();
         PT518.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19666,6 +20053,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb519 = new RoomBooking();
         rb519.setBookedRoom(roomSessionLocal.getRoomByName("KRS_505"));
+        rb519.setBookInDate(format.parse("2019-02-18"));
         bookingSessionLocal.createRoomBooking(rb519);
         PaymentTransaction PT519 = new PaymentTransaction();
         PT519.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19675,6 +20063,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb520 = new RoomBooking();
         rb520.setBookedRoom(roomSessionLocal.getRoomByName("KRS_201"));
+        rb520.setBookInDate(format.parse("2019-03-09"));
         bookingSessionLocal.createRoomBooking(rb520);
         PaymentTransaction PT520 = new PaymentTransaction();
         PT520.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19684,6 +20073,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb521 = new RoomBooking();
         rb521.setBookedRoom(roomSessionLocal.getRoomByName("KRS_202"));
+        rb521.setBookInDate(format.parse("2019-03-12"));
         bookingSessionLocal.createRoomBooking(rb521);
         PaymentTransaction PT521 = new PaymentTransaction();
         PT521.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19693,6 +20083,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb522 = new RoomBooking();
         rb522.setBookedRoom(roomSessionLocal.getRoomByName("KRS_203"));
+        rb522.setBookInDate(format.parse("2019-03-12"));
         bookingSessionLocal.createRoomBooking(rb522);
         PaymentTransaction PT522 = new PaymentTransaction();
         PT522.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19702,6 +20093,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb523 = new RoomBooking();
         rb523.setBookedRoom(roomSessionLocal.getRoomByName("KRS_204"));
+        rb523.setBookInDate(format.parse("2019-03-09"));
         bookingSessionLocal.createRoomBooking(rb523);
         PaymentTransaction PT523 = new PaymentTransaction();
         PT523.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19711,6 +20103,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb524 = new RoomBooking();
         rb524.setBookedRoom(roomSessionLocal.getRoomByName("KRS_205"));
+        rb524.setBookInDate(format.parse("2019-03-19"));
         bookingSessionLocal.createRoomBooking(rb524);
         PaymentTransaction PT524 = new PaymentTransaction();
         PT524.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19720,6 +20113,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb525 = new RoomBooking();
         rb525.setBookedRoom(roomSessionLocal.getRoomByName("KRS_301"));
+        rb525.setBookInDate(format.parse("2019-03-12"));
         bookingSessionLocal.createRoomBooking(rb525);
         PaymentTransaction PT525 = new PaymentTransaction();
         PT525.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19729,6 +20123,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb526 = new RoomBooking();
         rb526.setBookedRoom(roomSessionLocal.getRoomByName("KRS_302"));
+        rb526.setBookInDate(format.parse("2019-03-17"));
         bookingSessionLocal.createRoomBooking(rb526);
         PaymentTransaction PT526 = new PaymentTransaction();
         PT526.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19738,6 +20133,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb527 = new RoomBooking();
         rb527.setBookedRoom(roomSessionLocal.getRoomByName("KRS_303"));
+        rb527.setBookInDate(format.parse("2019-03-13"));
         bookingSessionLocal.createRoomBooking(rb527);
         PaymentTransaction PT527 = new PaymentTransaction();
         PT527.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19747,6 +20143,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb528 = new RoomBooking();
         rb528.setBookedRoom(roomSessionLocal.getRoomByName("KRS_304"));
+        rb528.setBookInDate(format.parse("2019-03-12"));
         bookingSessionLocal.createRoomBooking(rb528);
         PaymentTransaction PT528 = new PaymentTransaction();
         PT528.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19756,6 +20153,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb529 = new RoomBooking();
         rb529.setBookedRoom(roomSessionLocal.getRoomByName("KRS_305"));
+        rb529.setBookInDate(format.parse("2019-03-14"));
         bookingSessionLocal.createRoomBooking(rb529);
         PaymentTransaction PT529 = new PaymentTransaction();
         PT529.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19765,6 +20163,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb530 = new RoomBooking();
         rb530.setBookedRoom(roomSessionLocal.getRoomByName("KRS_401"));
+        rb530.setBookInDate(format.parse("2019-04-19"));
         bookingSessionLocal.createRoomBooking(rb530);
         PaymentTransaction PT530 = new PaymentTransaction();
         PT530.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19774,6 +20173,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb531 = new RoomBooking();
         rb531.setBookedRoom(roomSessionLocal.getRoomByName("KRS_402"));
+        rb531.setBookInDate(format.parse("2019-04-18"));
         bookingSessionLocal.createRoomBooking(rb531);
         PaymentTransaction PT531 = new PaymentTransaction();
         PT531.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19783,6 +20183,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb532 = new RoomBooking();
         rb532.setBookedRoom(roomSessionLocal.getRoomByName("KRS_403"));
+        rb532.setBookInDate(format.parse("2019-04-17"));
         bookingSessionLocal.createRoomBooking(rb532);
         PaymentTransaction PT532 = new PaymentTransaction();
         PT532.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19792,6 +20193,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb533 = new RoomBooking();
         rb533.setBookedRoom(roomSessionLocal.getRoomByName("KRS_404"));
+        rb533.setBookInDate(format.parse("2019-04-18"));
         bookingSessionLocal.createRoomBooking(rb533);
         PaymentTransaction PT533 = new PaymentTransaction();
         PT533.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19801,6 +20203,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb534 = new RoomBooking();
         rb534.setBookedRoom(roomSessionLocal.getRoomByName("KRS_405"));
+        rb534.setBookInDate(format.parse("2019-04-18"));
         bookingSessionLocal.createRoomBooking(rb534);
         PaymentTransaction PT534 = new PaymentTransaction();
         PT534.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19810,6 +20213,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb535 = new RoomBooking();
         rb535.setBookedRoom(roomSessionLocal.getRoomByName("KRS_501"));
+        rb535.setBookInDate(format.parse("2019-04-13"));
         bookingSessionLocal.createRoomBooking(rb535);
         PaymentTransaction PT535 = new PaymentTransaction();
         PT535.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19819,6 +20223,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb536 = new RoomBooking();
         rb536.setBookedRoom(roomSessionLocal.getRoomByName("KRS_502"));
+        rb536.setBookInDate(format.parse("2019-04-17"));
         bookingSessionLocal.createRoomBooking(rb536);
         PaymentTransaction PT536 = new PaymentTransaction();
         PT536.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19828,6 +20233,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb537 = new RoomBooking();
         rb537.setBookedRoom(roomSessionLocal.getRoomByName("KRS_503"));
+        rb537.setBookInDate(format.parse("2019-04-18"));
         bookingSessionLocal.createRoomBooking(rb537);
         PaymentTransaction PT537 = new PaymentTransaction();
         PT537.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19837,6 +20243,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb538 = new RoomBooking();
         rb538.setBookedRoom(roomSessionLocal.getRoomByName("KRS_504"));
+        rb538.setBookInDate(format.parse("2019-04-14"));
         bookingSessionLocal.createRoomBooking(rb538);
         PaymentTransaction PT538 = new PaymentTransaction();
         PT538.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19846,6 +20253,7 @@ public class DataInitializationSessionBean {
 
         RoomBooking rb539 = new RoomBooking();
         rb539.setBookedRoom(roomSessionLocal.getRoomByName("KRS_505"));
+        rb539.setBookInDate(format.parse("2019-04-17"));
         bookingSessionLocal.createRoomBooking(rb539);
         PaymentTransaction PT539 = new PaymentTransaction();
         PT539.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
