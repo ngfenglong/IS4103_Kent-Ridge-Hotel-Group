@@ -24,8 +24,8 @@
                         <!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li><a href="#"> Home</a></li>
-                                <li><a href="#"> Profile</a></li>
+                                <li><a href="adminIndex.xhtml?faces-redirect=true"> Home</a></li>
+                                <li><a href="profile.xhtml?faces-redirect=true"> Profile</a></li>
                                 <li class="active">Edit Profile</li>
                             </ol>
                         </div>
@@ -38,7 +38,7 @@
             <section class="content-header">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="box box-primary">
+                        <div class="box box-primary" style="padding:0px 10px">
                             <div class="box-header with-border" style="text-align: center">
                                 <h3 class="box-title" style="text-align: center; font-size:xx-large">
                                     Edit Profile </h3>
@@ -154,7 +154,7 @@
                                                 <label for="nokPhoneNumber">Next-of-Kin Phone Number</label>
                                                 <h:inputText class="form-control"
                                                              value="#{authenticationManagedBean.loggedInStaff.nokPhoneNumber}"
-                                                               id="nokContact" a:placeholder="Enter NOK Phone Number" required="true" />>
+                                                               id="nokContact" a:placeholder="Enter NOK Phone Number" required="true" >
                                                         <h:message for="nokContact" style="color:red" />
                                                 </h:inputText>
                                                     
@@ -166,8 +166,11 @@
                                     </div>
                                 </div>
                                 <div class="card-footer" style="text-align: center">
+                                     <h:commandLink class="btn btn-danger" value="Cancel" action="profile.xhtml?faces-redirect=true"></h:commandLink>
                                     <h:commandButton class="btn btn-primary" value="Submit"
                                         action="#{authenticationManagedBean.updateProfile()}"></h:commandButton>
+                                   
+                                    
                                 </div>
                             </h:form>
 
