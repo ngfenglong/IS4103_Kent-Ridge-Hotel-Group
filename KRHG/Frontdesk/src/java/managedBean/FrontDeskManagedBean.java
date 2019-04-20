@@ -252,9 +252,45 @@ public class FrontDeskManagedBean implements Serializable {
             numOfPentHouseRooms--;
         }
     }
-
+    
     public boolean checkForLineBreak(Room r) {
         if (Integer.parseInt(r.getRoomNumber()) % 100 == 1) {
+            return true;
+        }
+        return false;
+    }
+    
+    public int getRoomLevel(Room r) {
+        return (Integer.parseInt(r.getRoomNumber()) / 100);
+    }
+    
+    public boolean checkForLineBreakForStandard(Room r) {
+        if (Integer.parseInt(r.getRoomNumber()) % 10 == 6 && r.getRoomType().equals("Standard")) {
+            return true;
+        }
+        return false;
+    }
+    public boolean checkForLineBreakForDeluxe(Room r) {
+        if (Integer.parseInt(r.getRoomNumber()) % 10 == 4 && r.getRoomType().equals("Deluxe")) {
+            return true;
+        }
+        return false;
+    }
+    public boolean checkForLineBreakForPremium(Room r) {
+        if (Integer.parseInt(r.getRoomNumber()) % 10 == 5 && r.getRoomType().equals("Premium")) {
+            return true;
+        }
+        return false;
+    }
+    public boolean checkForLineBreakForSuite(Room r) {
+        if (Integer.parseInt(r.getRoomNumber()) % 100 == 3 && r.getRoomType().equals("Suite")) {
+            return true;
+        }
+        return false;
+    }
+    
+      public boolean checkIsOdd(Room r) {
+        if (Integer.parseInt(r.getRoomNumber()) % 2 == 1) {
             return true;
         }
         return false;
