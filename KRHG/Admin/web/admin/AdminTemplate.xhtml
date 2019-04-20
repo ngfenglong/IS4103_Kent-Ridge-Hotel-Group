@@ -385,14 +385,6 @@
                                 </li>
                             </c:if>
                             <li class="nav-item" >
-                                <a href="#{request.contextPath}/admin/profile.xhtml" class="nav-link" >
-                                    <i class="fas fa-user"></i>
-                                    <p>
-                                        Profile
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="nav-item" >
                                 <h:form class="nav-link">
                                     <h:commandButton class="btn btn-danger" action="#{authenticationManagedBean.logout()}" value="Logout" />
                                 </h:form>
@@ -492,12 +484,17 @@
                 closeOnSelect: 'false'
             });
 
-
+$(document).ready(function(){
+    $('#myTable').dataTable();
+});
 
             $(function () {
                 $("#example1").DataTable();
 
-                $('#example2').DataTable({
+             
+            });
+            
+               $('#example2').DataTable({
                     "paging": true,
                     "lengthChange": false,
                     "searching": true,
@@ -509,7 +506,6 @@
                     "info": true,
                     "autoWidth": false
                 });
-            });
 
             $('#example3').DataTable({
                 "paging": false,
@@ -648,8 +644,8 @@
                     "info": true,
                     "autoWidth": false
             });
-            }
-            );
+            
+       
 
             // $('.sidebar-toggle-btn').pushMenu(options)
         </script> 

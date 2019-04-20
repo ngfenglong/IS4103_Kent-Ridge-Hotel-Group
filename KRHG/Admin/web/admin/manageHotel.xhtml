@@ -106,7 +106,6 @@
                                 <th>Hotel Code</th>
                                 <th>Contact</th>
                                 <th>Address</th>
-                                <th>View Rooms</th>
                                 <th>View Details</th>
                             </tr>
                         </thead>
@@ -117,11 +116,6 @@
                                     <td>#{hotel.hotelCodeName}</td>
                                     <td>+65 #{hotel.hotelContact}</td>
                                     <td>#{hotel.hotelAddress}</td>
-                                    <td style="text-align: center">
-                                        <h:commandLink id="viewRoomBtn"
-                                            action="#{hotelManagedBean.viewHotelRooms(hotel.hotelName)}"
-                                           ><i class="fas fa-door-open"></i></h:commandLink>
-                                    </td>
                                     <td style="text-align: center">
                                         <h:commandLink id="viewDetailBtn"
                                             action="#{hotelManagedBean.viewHotel(hotel.hotelID)}" 
