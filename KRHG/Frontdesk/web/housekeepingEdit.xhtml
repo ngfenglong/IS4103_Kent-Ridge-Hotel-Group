@@ -12,7 +12,7 @@
 
 
             <ui:define name="title">
-                KRHG front desk
+                KRHG Front Desk
             </ui:define>
 
             <ui:define name="content">
@@ -50,7 +50,7 @@
 
                                 <div class="card card-primary">
                                     <div class="card-header">
-                                        <h3 class="card-title">Update Lost and Found Report</h3>
+                                        <h3 class="card-title">Update Housekeeping Request</h3>
                                     </div>
                                     <!-- /.card-header -->
                                     <!-- form start -->
@@ -93,8 +93,8 @@
                                                     <td>
                                                         <div class="form-group">
                                                             <h:selectOneMenu value="#{requestAndServiceManagedBean.hkRequestStatus}">
-                                                                <f:selectItem itemValue="complete" itemLabel="Complete" />
-                                                                <f:selectItem itemValue="incomplete" itemLabel="Incomplete" />
+                                                                <f:selectItem itemValue="Complete" itemLabel="Complete" />
+                                                                <f:selectItem itemValue="Incomplete" itemLabel="Incomplete" />
 
                                                             </h:selectOneMenu>                                                         </div>
                                                     </td>
@@ -108,7 +108,7 @@
                                         <!-- /.card-body -->
 
                                         <div class="card-footer">
-                                            <h:commandButton class="custom-button" value="Update HouseKeeping request" action="#{requestAndServiceManagedBean.updateEditHKRequest()}"></h:commandButton>
+                                            <h:commandButton class="btn btn-primary" value="Update Request" action="#{requestAndServiceManagedBean.updateEditHKRequest()}"></h:commandButton>
                                         </div>
                                     </h:form>
                                 </div>

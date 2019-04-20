@@ -12,7 +12,7 @@
 
 
             <ui:define name="title">
-                KRHG front desk
+                KRHG Front Desk
             </ui:define>
 
             <ui:define name="content">
@@ -60,7 +60,7 @@
 
                                                 <h:selectOneMenu value="#{requestAndServiceManagedBean.hkroom}">
                                                     <f:selectItems value="#{requestAndServiceManagedBean.allOccupiedRooms}" var="c"
-                                                                   itemLabel="#{c.roomNumber}" itemValue="#{c.roomName}" />
+                                                                   itemLabel="#{c.roomNumber}" itemValue="#{c.roomNumber}" />
                                                 </h:selectOneMenu>
                                             </td>
                                         </div>
@@ -69,12 +69,12 @@
                                     <tr>
                                         <td>
                                             <label>
-                                                Special Request:
+                                                Details:
                                             </label>
                                         </td>
                                         <td>
                                             <div class="form-group">
-                                                <h:inputTextarea cols="50" rows="10" class="form-control" value="#{requestAndServiceManagedBean.hkSpecialRequest}"  a:placeholder="Special Request" ></h:inputTextarea>
+                                                <h:inputTextarea cols="50" rows="10" class="form-control" value="#{requestAndServiceManagedBean.hkSpecialRequest}"  a:placeholder="E.g Request for more toothbrush" ></h:inputTextarea>
                                             </div>
                                         </td>
                                     </tr>
@@ -90,9 +90,8 @@
                                             <td>
 
                                                 <h:selectOneMenu value="#{requestAndServiceManagedBean.hkRequestType}">
-
-                                                    <f:selectItem itemValue="Toiletries" itemLabel="toiletries" />
-                                                    <f:selectItem itemValue="Housekeeping" itemLabel="housekeeping" />
+                                                    <f:selectItem itemValue="housekeeping" itemLabel="Housekeeping" />
+                                                    <f:selectItem itemValue="toiletries" itemLabel="Toiletries" />
                                                 </h:selectOneMenu>
                                             </td>
                                         </div>
