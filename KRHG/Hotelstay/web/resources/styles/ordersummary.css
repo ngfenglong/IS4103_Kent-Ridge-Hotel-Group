@@ -255,7 +255,7 @@ a:hover {
 }
 
 .qt-minus {
-	line-height: 47px;
+	line-height: 50px;
 }
 
 #site-footer {
@@ -301,17 +301,17 @@ a:hover {
 	background: #C5B358	 !important; 
 	border: 1px solid #999 !important;
 	border-style: none none solid none!important ;
-    cursor: pointer !important;
-    font-family: 'Open Sans', sans-serif !important;
+        cursor: pointer !important;
+        font-family: 'Open Sans', sans-serif !important;
 	display: block !important;
 	color: #fff !important;
 	font-size: 20px !important;
 	font-weight: 300 !important;
 	padding: 16px 0 !important;
 	width: 290px !important;
-    text-align: center!important;
-    line-height: inherit;
-    border-radius: 0 !important;
+        text-align: center!important;
+        line-height: inherit;
+        border-radius: 0 !important;
 
 	-webkit-transition: all .2s linear !important;
 	-moz-transition: all .2s linear !important;
