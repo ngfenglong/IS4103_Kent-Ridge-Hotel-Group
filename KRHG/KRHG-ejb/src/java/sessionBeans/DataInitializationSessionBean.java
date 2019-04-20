@@ -120,7 +120,7 @@ public class DataInitializationSessionBean {
                 initializeKRSERoom();
                 initializeKRSWRoom();
                 intializeRoomBookingsAndCustomer();
-				initializeRoomBooking2();
+                initializeRoomBooking2();
                 intializeRequests();
             } catch (NoResultException ex) {
                 ex.printStackTrace();
@@ -1461,7 +1461,7 @@ public class DataInitializationSessionBean {
         fb3.setFeedBackMsg("rooms were recently renovated and very comfortable, modern and nice.");
         fb3.setHotel(h1);
         feedbackSessionLocal.createFeedback(fb3);
-		
+
         Feedback fb4 = new Feedback();
         fb4.setFeedBackDate(format.parse("2019-04-01"));
         fb4.setFeedBackTitle("Hotel place is good");
@@ -1703,7 +1703,7 @@ public class DataInitializationSessionBean {
         fb30.setFeedBackMsg("Clean hotel. Nice beds for a good sleep.");
         fb30.setHotel(h10);
         fb30.setFeedbackRating(4);
-        feedbackSessionLocal.createFeedback(fb30);		
+        feedbackSessionLocal.createFeedback(fb30);
 
 //*********************************************LAUNDRY TYPE************************************************        
         LaundryType lt1 = new LaundryType();
@@ -15894,7 +15894,7 @@ public class DataInitializationSessionBean {
         rm1.setRoomType("Standard");
         rm1.setStatus("Incomplete");
         bookingSessionLocal.createRoomBooking(rm1);
-		
+
         PaymentTransaction PT1 = new PaymentTransaction();
         PT1.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
         PT1.setCreditCard(null);
@@ -15902,9 +15902,9 @@ public class DataInitializationSessionBean {
         PT1.setTransactionDateTime(new Date());
         PT1.setInitialPayment(2000);
         PT1.setFinalPayment(2000);
-        paymentTransactionSessionLocal.createPaymentTransaction(PT1);		
+        paymentTransactionSessionLocal.createPaymentTransaction(PT1);
 
-         RoomBooking rb1 = new RoomBooking();
+        RoomBooking rb1 = new RoomBooking();
         rb1.setBookInDate(format.parse("2019-03-10"));
         rb1.setBookOutDate(format.parse("2019-03-13"));
         rb1.setStatus("checkedOut");
@@ -15921,7 +15921,7 @@ public class DataInitializationSessionBean {
         rb1.setHasExtraBed(false);
         bookingSessionLocal.createRoomBooking(rb1);
         RoomBooking newrb1 = bookingSessionLocal.getLastRoomBooking();
-        
+
         RoomBooking rb2 = new RoomBooking();
         rb2.setBookInDate(format.parse("2019-01-10"));
         rb2.setBookOutDate(format.parse("2019-01-13"));
@@ -15938,7 +15938,7 @@ public class DataInitializationSessionBean {
         rb2.setHasExtraBed(true);
         bookingSessionLocal.createRoomBooking(rb2);
         RoomBooking newrb2 = bookingSessionLocal.getLastRoomBooking();
-        
+
         RoomBooking rb3 = new RoomBooking();
         rb3.setBookInDate(format.parse("2019-05-10"));
         rb3.setBookOutDate(format.parse("2019-05-13"));
@@ -15954,7 +15954,7 @@ public class DataInitializationSessionBean {
         rb3.setLastName("Neo Guohui");
         rb3.setHasExtraBed(true);
         bookingSessionLocal.createRoomBooking(rb3);
-        RoomBooking newrb3 = bookingSessionLocal.getLastRoomBooking();        
+        RoomBooking newrb3 = bookingSessionLocal.getLastRoomBooking();
 
 //***************Laundry Order***************
         LaundryOrder lo1 = new LaundryOrder();
@@ -15966,7 +15966,6 @@ public class DataInitializationSessionBean {
         lo1.setSpecialRequest("you may come in and collect the coat if I'm not in the room");
         laundrySessionLocal.createLaundryOrder(lo1);
         LaundryOrder newlo1 = laundrySessionLocal.getLastLaundryOrder();
-       
 
         LaundryOrderedItem loi1 = new LaundryOrderedItem();
         loi1.setQty(2);
@@ -15986,7 +15985,7 @@ public class DataInitializationSessionBean {
 
         LaundryOrder lo5 = new LaundryOrder();
         lo5.setRoom(roomSessionLocal.getRoomByName("KRG_402"));
-        lo5.setOrderDateTime( formatTime.parse("2019-03-10 10:45:00"));
+        lo5.setOrderDateTime(formatTime.parse("2019-03-10 10:45:00"));
         lo5.setStatus("Delivered");
         lo5.setCompleteDateTime(format.parse("2019-01-12"));
         lo5.setHouseKeeper(staffSessionLocal.getStaffByNric("S1730049J"));
@@ -16003,33 +16002,33 @@ public class DataInitializationSessionBean {
 
         newlo2.setTotalPrice(15.0);
         newrb1.addLaundryOrder(newlo2);
-        
+
         LaundryOrder lo6 = new LaundryOrder();
         lo6.setRoom(roomSessionLocal.getRoomByName("KRG_501"));
-        lo6.setOrderDateTime ( formatTime.parse("2019-03-10 14:44:34"));
+        lo6.setOrderDateTime(formatTime.parse("2019-03-10 14:44:34"));
         lo6.setStatus("Pending");
         lo6.setCompleteDateTime(format.parse("2019-04-25"));
         lo6.setSpecialRequest("");
         laundrySessionLocal.createLaundryOrder(lo6);
-        
+
         LaundryOrder lo7 = new LaundryOrder();
         lo7.setRoom(roomSessionLocal.getRoomByName("KRG_801"));
-        lo7.setOrderDateTime ( formatTime.parse("2019-03-10 17:24:43"));
+        lo7.setOrderDateTime(formatTime.parse("2019-03-10 17:24:43"));
         lo7.setStatus("Pending");
         lo7.setCompleteDateTime(format.parse("2019-04-25"));
         lo7.setSpecialRequest("");
-        laundrySessionLocal.createLaundryOrder(lo7);        
-        
+        laundrySessionLocal.createLaundryOrder(lo7);
+
         LaundryOrder lo8 = new LaundryOrder();
         lo8.setRoom(roomSessionLocal.getRoomByName("KRG_704"));
-        lo8.setOrderDateTime (formatTime.parse("2019-03-10 21:00:00"));
+        lo8.setOrderDateTime(formatTime.parse("2019-03-10 21:00:00"));
         lo8.setStatus("In Progress");
         lo8.setCompleteDateTime(format.parse("2019-04-24"));
         lo8.setHouseKeeper(staffSessionLocal.getStaffByNric("S1730049J"));
         lo8.setSpecialRequest("");
         laundrySessionLocal.createLaundryOrder(lo8);
         LaundryOrder newlo3 = laundrySessionLocal.getLastLaundryOrder();
-        
+
         LaundryOrderedItem loi6 = new LaundryOrderedItem();
         loi6.setQty(1);
         loi6.setLaundryType(laundrySessionLocal.getLaundryTypeByName("Bottom (Dry-Wash)"));
@@ -16037,7 +16036,7 @@ public class DataInitializationSessionBean {
         laundrySessionLocal.createLaundryOrderedItem(loi6);
         newlo3.addLaundryOrderedItem(laundrySessionLocal.getLastLaundryOrderedItem());
         newlo3.setTotalPrice(15.0);
-        
+
         LaundryOrder lo9 = new LaundryOrder();
         lo9.setRoom(roomSessionLocal.getRoomByName("KRG_603"));
         lo9.setOrderDateTime(formatTime.parse("2019-03-10 16:28:29"));
@@ -16047,25 +16046,25 @@ public class DataInitializationSessionBean {
         lo9.setSpecialRequest("");
         laundrySessionLocal.createLaundryOrder(lo9);
         LaundryOrder newlo4 = laundrySessionLocal.getLastLaundryOrder();
-        
+
         LaundryOrderedItem loi7 = new LaundryOrderedItem();
         loi7.setQty(1);
         loi7.setLaundryType(laundrySessionLocal.getLaundryTypeByName("Top (Dry-Wash)"));
         loi7.setDescription("1x Coat");
         laundrySessionLocal.createLaundryOrderedItem(loi7);
         newlo4.addLaundryOrderedItem(laundrySessionLocal.getLastLaundryOrderedItem());
-        newlo4.setTotalPrice(15.0); 
-        
+        newlo4.setTotalPrice(15.0);
+
         LaundryOrder lo10 = new LaundryOrder();
         lo10.setRoom(roomSessionLocal.getRoomByName("KRG_608"));
-        lo10.setOrderDateTime( formatTime.parse("2019-03-10 15:28:29"));
+        lo10.setOrderDateTime(formatTime.parse("2019-03-10 15:28:29"));
         lo10.setStatus("Ready for Delivery");
         lo10.setCompleteDateTime(format.parse("2019-04-22"));
         lo10.setHouseKeeper(staffSessionLocal.getStaffByNric("S1730049J"));
         lo10.setSpecialRequest("");
         laundrySessionLocal.createLaundryOrder(lo10);
         LaundryOrder newlo5 = laundrySessionLocal.getLastLaundryOrder();
-        
+
         LaundryOrderedItem loi8 = new LaundryOrderedItem();
         loi8.setQty(1);
         loi8.setLaundryType(laundrySessionLocal.getLaundryTypeByName("Top (Dry-Wash)"));
@@ -16073,7 +16072,7 @@ public class DataInitializationSessionBean {
         laundrySessionLocal.createLaundryOrderedItem(loi8);
         newlo5.addLaundryOrderedItem(laundrySessionLocal.getLastLaundryOrderedItem());
         newlo5.setTotalPrice(15.0);
-        
+
         LaundryOrder lo11 = new LaundryOrder();
         lo11.setRoom(roomSessionLocal.getRoomByName("KRG_704"));
         lo11.setOrderDateTime(formatTime.parse("2019-03-10 12:38:29"));
@@ -16083,16 +16082,14 @@ public class DataInitializationSessionBean {
         lo11.setSpecialRequest("");
         laundrySessionLocal.createLaundryOrder(lo11);
         LaundryOrder newlo6 = laundrySessionLocal.getLastLaundryOrder();
-        
+
         LaundryOrderedItem loi9 = new LaundryOrderedItem();
         loi9.setQty(1);
         loi9.setLaundryType(laundrySessionLocal.getLaundryTypeByName("Top (Dry-Wash)"));
         loi9.setDescription("1x Suit");
         laundrySessionLocal.createLaundryOrderedItem(loi9);
         newlo6.addLaundryOrderedItem(laundrySessionLocal.getLastLaundryOrderedItem());
-        newlo6.setTotalPrice(15.0);            
-        
-        
+        newlo6.setTotalPrice(15.0);
 
 //***************Food Order***************        
         FoodOrder fo1 = new FoodOrder();
@@ -16173,35 +16170,53 @@ public class DataInitializationSessionBean {
         newrb2.addMinibarOrder(newmo2);
 
         em.flush();
-		
+
         RoomBooking rb10 = new RoomBooking();
         rb10.setBookedRoom(roomSessionLocal.getRoomByName("KRG_202"));
         rb10.setBookInDate(format.parse("2019-02-18"));
+        rb10.setBookedBy(customerSessionLocal.getCustomerByEmail("zel1502@hotmail.com"));
+        rb10.setStatus("checkedOut");
         bookingSessionLocal.createRoomBooking(rb10);
         PaymentTransaction PT2 = new PaymentTransaction();
         PT2.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
         PT2.setTransactionDateTime(format.parse("2019-01-30"));
         PT2.setFinalPayment(753.0);
+        PT2.setEmail("zell1502@hotmail.com");
+        PT2.setFirstName("Zack");
+        PT2.setLastName("Neo Guohui");
+        PT2.setPayer(customerSessionLocal.getCustomerByEmail("zel1502@hotmail.com"));
         paymentTransactionSessionLocal.createPaymentTransaction(PT2);
 
         RoomBooking rb11 = new RoomBooking();
         rb11.setBookedRoom(roomSessionLocal.getRoomByName("KRG_203"));
         rb11.setBookInDate(format.parse("2019-02-10"));
+        rb11.setBookedBy(customerSessionLocal.getCustomerByEmail("zel1502@hotmail.com"));
+        rb11.setStatus("checkedOut");
         bookingSessionLocal.createRoomBooking(rb11);
         PaymentTransaction PT3 = new PaymentTransaction();
         PT3.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
         PT3.setTransactionDateTime(format.parse("2019-02-03"));
         PT3.setFinalPayment(826.0);
+        PT3.setEmail("zell1502@hotmail.com");
+        PT3.setFirstName("Zack");
+        PT3.setLastName("Neo Guohui");
+        PT3.setPayer(customerSessionLocal.getCustomerByEmail("zel1502@hotmail.com"));
         paymentTransactionSessionLocal.createPaymentTransaction(PT3);
 
         RoomBooking rb12 = new RoomBooking();
         rb12.setBookedRoom(roomSessionLocal.getRoomByName("KRN_205"));
         rb12.setBookInDate(format.parse("2019-03-19"));
+        rb12.setBookedBy(customerSessionLocal.getCustomerByEmail("zel1502@hotmail.com"));
+        rb12.setStatus("checkedOut");
         bookingSessionLocal.createRoomBooking(rb12);
         PaymentTransaction PT4 = new PaymentTransaction();
         PT4.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
         PT4.setTransactionDateTime(format.parse("2019-03-10"));
         PT4.setFinalPayment(241.0);
+        PT4.setEmail("zell1502@hotmail.com");
+        PT4.setFirstName("Zack");
+        PT4.setLastName("Neo Guohui");
+        PT4.setPayer(customerSessionLocal.getCustomerByEmail("zel1502@hotmail.com"));
         paymentTransactionSessionLocal.createPaymentTransaction(PT4);
 
         RoomBooking rb13 = new RoomBooking();
@@ -16628,7 +16643,7 @@ public class DataInitializationSessionBean {
         rb339.setBookInDate(format.parse("2019-04-28"));
         rb339.setFirstName("John");
         rb339.setLastName("Paul");
-        rb339.setPassportNum("A1826163X");        
+        rb339.setPassportNum("A1826163X");
         bookingSessionLocal.createRoomBooking(rb339);
         PaymentTransaction PT339 = new PaymentTransaction();
         PT339.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -16952,7 +16967,7 @@ public class DataInitializationSessionBean {
         rb371.setBookInDate(format.parse("2019-05-09"));
         rb371.setFirstName("Dan");
         rb371.setLastName("Brown");
-        rb371.setPassportNum("A1271682W");        
+        rb371.setPassportNum("A1271682W");
         bookingSessionLocal.createRoomBooking(rb371);
         PaymentTransaction PT371 = new PaymentTransaction();
         PT371.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17025,7 +17040,7 @@ public class DataInitializationSessionBean {
         rb378.setBookInDate(format.parse("2019-04-24"));
         rb378.setFirstName("Zilin");
         rb378.setLastName("Yeo");
-        rb378.setPassportNum("A7316153C");        
+        rb378.setPassportNum("A7316153C");
         bookingSessionLocal.createRoomBooking(rb378);
         PaymentTransaction PT378 = new PaymentTransaction();
         PT378.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -17038,7 +17053,7 @@ public class DataInitializationSessionBean {
         rb379.setBookInDate(format.parse("2019-04-24"));
         rb379.setFirstName("Matthew");
         rb379.setLastName("Tan");
-        rb379.setPassportNum("A3917273T");        
+        rb379.setPassportNum("A3917273T");
         bookingSessionLocal.createRoomBooking(rb379);
         PaymentTransaction PT379 = new PaymentTransaction();
         PT379.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18247,11 +18262,10 @@ public class DataInitializationSessionBean {
         PT499.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
         PT499.setTransactionDateTime(format.parse("2019-04-10"));
         PT499.setFinalPayment(281.0);
-        paymentTransactionSessionLocal.createPaymentTransaction(PT499);		
-
+        paymentTransactionSessionLocal.createPaymentTransaction(PT499);
 
     }
-	
+
     public void initializeRoomBooking2() throws ParseException, NoResultException {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -18640,7 +18654,7 @@ public class DataInitializationSessionBean {
         rb59.setBookInDate(format.parse("2019-04-22"));
         rb59.setFirstName("Menteo");
         rb59.setLastName("Lucas");
-        rb59.setPassportNum("A4726126D");        
+        rb59.setPassportNum("A4726126D");
         bookingSessionLocal.createRoomBooking(rb59);
         PaymentTransaction PT48 = new PaymentTransaction();
         PT48.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -18653,7 +18667,7 @@ public class DataInitializationSessionBean {
         rb60.setBookInDate(format.parse("2019-04-25"));
         rb60.setFirstName("Steve");
         rb60.setLastName("Wayne");
-        rb60.setPassportNum("A8217632K");        
+        rb60.setPassportNum("A8217632K");
         bookingSessionLocal.createRoomBooking(rb60);
         PaymentTransaction PT49 = new PaymentTransaction();
         PT49.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19856,7 +19870,7 @@ public class DataInitializationSessionBean {
         rb180.setBookInDate(format.parse("2019-04-22"));
         rb180.setFirstName("Aaron");
         rb180.setLastName("Johnson");
-        rb180.setPassportNum("A382713Y");        
+        rb180.setPassportNum("A382713Y");
         bookingSessionLocal.createRoomBooking(rb180);
         PaymentTransaction PT169 = new PaymentTransaction();
         PT169.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19869,7 +19883,7 @@ public class DataInitializationSessionBean {
         rb181.setBookInDate(format.parse("2019-04-22"));
         rb181.setFirstName("Kimberly");
         rb181.setLastName("Johansson");
-        rb181.setPassportNum("A482716Y");        
+        rb181.setPassportNum("A482716Y");
         bookingSessionLocal.createRoomBooking(rb181);
         PaymentTransaction PT170 = new PaymentTransaction();
         PT170.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -19882,7 +19896,7 @@ public class DataInitializationSessionBean {
         rb182.setBookInDate(format.parse("2019-04-23"));
         rb182.setFirstName("Felix");
         rb182.setLastName("John");
-        rb182.setPassportNum("A1264827I");        
+        rb182.setPassportNum("A1264827I");
         bookingSessionLocal.createRoomBooking(rb182);
         PaymentTransaction PT171 = new PaymentTransaction();
         PT171.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
@@ -20292,7 +20306,6 @@ public class DataInitializationSessionBean {
         paymentTransactionSessionLocal.createPaymentTransaction(PT539);
 
     }
-	
 
     public void intializeRequests() throws ParseException {
 
