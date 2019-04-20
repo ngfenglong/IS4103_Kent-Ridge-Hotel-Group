@@ -48,7 +48,7 @@ public class HousekeepingordersResource {
     @Produces(MediaType.APPLICATION_JSON)
     public List<HouseKeepingOrder> getAllHouseKeepingOrders() {
 
-        System.out.println("Running 55");
+//        System.out.println("Running 55");
 
         try {
             List<HouseKeepingOrder> getList = houseKeepingOrderSession.getAllHouseKeepingOrder();
@@ -92,7 +92,7 @@ public class HousekeepingordersResource {
     @Path("/query")
     @Produces(MediaType.APPLICATION_JSON)
     public Response searchHouseKeepingOrder(@QueryParam("level") String level, @QueryParam("hotelCodeName") String hotelCodeName, @QueryParam("isSpecialRequest") boolean isSpecialRequest) throws NoResultException {
-        System.out.println("444Searching based on level: " + level + " Hotel Codename: " + hotelCodeName + " Special request: " + isSpecialRequest);
+//        System.out.println("444Searching based on level: " + level + " Hotel Codename: " + hotelCodeName + " Special request: " + isSpecialRequest);
         if (level != null) {
 //            List<HouseKeepingOrder> getList = houseKeepingOrderSession.getHouseKeepingOrderByLevel(Integer.parseInt(level));
 //              List<HouseKeepingOrder> getList = houseKeepingOrderSession.getHouseKeepingOrderByLevelAndHotelCodeName(Integer.parseInt(level), hotelCodeName);
@@ -120,7 +120,8 @@ public class HousekeepingordersResource {
             return Response.status(200).entity(entity).build();
 //            return returnList;
         } else {
-            return null;
+             return Response.status(404).entity(Json.createObjectBuilder().add("", "").build())
+                    .type(MediaType.APPLICATION_JSON).build();
         }
     }
 
@@ -131,14 +132,22 @@ public class HousekeepingordersResource {
         try {
 
             HouseKeepingOrder ho = houseKeepingOrderSession.getHouseKeepingOrderID(Long.parseLong(hoID));
-            ho.setStatus("complete");
+            if(ho.getStatus().equals("Incomplete")) {
+                ho.setStatus("In Progress");
+            } else {
+                ho.setStatus("Complete");
+            }
             houseKeepingOrderSession.updateHouseKeepingOrder(ho);
-            return Response.status(204).build();
-        } catch (NoResultException e) {
-            JsonObject exception = Json.createObjectBuilder()
-                    .add("error", "Not found")
-                    .build();
-            return Response.status(404).entity(exception)
+            return Response.status(200).entity(Json.createObjectBuilder().add("hoid", hoID).build()).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+//            return new ArrayList<>();
+//            List<HouseKeepingOrder> returnList = new ArrayList<>();
+//            JsonObject exception = Json.createObjectBuilder()
+//                    .add("error", "Not found")
+//                    .build();
+            System.out.println("Entered exception");
+            return Response.status(404).entity(Json.createObjectBuilder().add("", "").build())
                     .type(MediaType.APPLICATION_JSON).build();
         }
     } 
