@@ -46,7 +46,7 @@ Primary style
 } */
 
 a {
-  color: #35a785;
+  color: #2b2b2b;
   text-decoration: none;
 }
 
@@ -233,7 +233,7 @@ xpopup
 .cd-popup-container .cd-popup-confirm:after
  {
   content: '';
-  position: absolute;
+  position: relative;
   top: 12px;
   width: 14px;
   height: 3px;

@@ -24,6 +24,11 @@
         <!-- Morris chart -->
         <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/morris.js/morris.css"></link>
 
+        <!-- iCheck for checkboxes and radio inputs -->
+        <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/plugins/iCheck/all.css"></link>
+
+        <!-- table scroll diancong burden -->
+        <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/select2/dist/css/diancong.css"/>
 
         <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -36,11 +41,11 @@
         <!-- DataTables -->
         <link rel="stylesheet" href="#{request.contextPath}/plugins/datatables/dataTables.bootstrap4.css" />
         <!-- Theme style (comes with Bootstrap) -->
-        <link rel="stylesheet" href="#{request.contextPath}/dist/css/adminlte.min.css" />
-        <link rel="stylesheet" href="#{request.contextPath}/dist/css/adminlte.css" />
+
+        <link rel="stylesheet" href="./dist/css/adminlte.min.css" />
         <link rel="stylesheet" href="./AdminLTE-2.4.10/AdminLTE-2.4.10/dist/css/AdminLTE.min.css" />
-        <link rel="stylesheet" href="./dist/css/main.css" />
-        <link rel="stylesheet" href="#{request.contextPath}/resources/notifications/dist/Notifications.unmin.css" />
+        <link rel="stylesheet" href="./styles/main.css" />
+        <link rel="stylesheet" href="./resources/notifications/dist/Notifications.unmin.css" />
 
 
         <!-- Google Font: Source Sans Pro -->
@@ -76,12 +81,40 @@
 
         </style>
 
+        <script>
+            function selectFood(foID) {
+                console.log(foID);
+            }
+        </script>
+
+        <script type="text/javascript">
+            //<![CDATA[
+            function getFOList(id) {
+                console.log("hi");
+                var orders = document.getElementsByClassName("item");
+                for (i = 0; i < orders.length; i++) {
+                    orders[i].style.backgroundColor = '';
+                }
+                console.log(id);
+                console.log(document.getElementById('myForm:selectfID'));
+                document.getElementById('myForm:selectfID').value = id;
+                document.getElementById(id).style.backgroundColor = "aliceblue"
+
+//                        console.log(orders[i].id);
+                console.log(document.getElementById(id).style.backgroundColor);
+
+            }
+
+            //]]>
+
+        </script>
+
 
     </h:head>
     <h:body class="hold-transition sidebar-mini">
         <div class="wrapper">
             <!-- Navbar -->
-            <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
+            <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom" >
                 <!-- Left navbar links -->
                 <ul class="navbar-nav">
                     <li class="nav-item">
@@ -91,23 +124,24 @@
 
                     </li>
                     <li class="nav-item float-sm-right">
-                        <h:form>
-                            Welcome #{authenticationManagedBean.name}
-                        </h:form>
+                        <h:outputText value="Welcome #{requestServicesManagedBean.loggedInAccount.name}" style="text-align: right;">
+                        </h:outputText>
                     </li>
                 </ul>
             </nav>
+
             <!-- /.navbar -->
 
             <!-- Main Sidebar Container -->
-            <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <aside class="main-sidebar sidebar-dark-primary elevation-4" style="padding-top:0px !important;">
                 <!-- Brand Logo -->
-                <a href="#{request.contextPath}" class="brand-link">
+                
 
-                    <span class="brand-text font-weight-light">
-                        <b>Request Service System</b>
-                    </span>
+                   
+                <a href="#{request.contextPath}" class="brand-link">
+                    <img src="./img/logo3.png" style="width:200px; margin-left:10px; margin-top:10px"/>
                 </a>
+            
                 <!-- Sidebar -->
                 <div class="sidebar">
                     <!-- Sidebar Menu -->
@@ -115,6 +149,7 @@
                         <ul class="nav nav-pills nav-sidebar flex-column" datawidget="treeview" role="menu" data-accordion="false">
                             <!-- Add icons to the links using the .nav-icon class
                             with font-awesome or any other icon font library -->
+                            <c:if test="#{requestServicesManagedBean.housekeepingStaff eq true}">
                             <li class="nav-header">Housekeeping</li>
                             <li class="nav-item" >
                                 <a href="housekeeping.xhtml" class="nav-link" >
@@ -140,7 +175,8 @@
                                     </p>
                                 </a>
                             </li>
-
+                            </c:if>
+                            <c:if test="#{requestServicesManagedBean.kitchenStaff eq true}">
                             <li class="nav-header">Food</li>
                             <li class="nav-item" >
                                 <a href="foodMenu.xhtml" class="nav-link" >
@@ -160,6 +196,16 @@
                                 </a>
                             </li>
 
+                            <li class="nav-item" >
+                                <a href="foodDelivery.xhtml" class="nav-link" >
+                                    <i class="fas fa-swimming-pool"></i>
+                                    <p>
+                                        Food Delivery
+                                    </p>
+                                </a>
+                            </li>
+                            </c:if>
+                            <c:if test="#{requestServicesManagedBean.laundryStaff eq true}">
                             <li class="nav-header">Laundry</li>
                             <li class="nav-item" >
                                 <a href="laundry.xhtml" class="nav-link" >
@@ -169,7 +215,9 @@
                                     </p>
                                 </a>
                             </li>
-
+                            </c:if>
+                            
+                            <c:if test="#{requestServicesManagedBean.maintenanceStaff eq true}">
                             <li class="nav-header">Maintenance Order</li>
                             <li class="nav-item" >
                                 <a href="Maintenance.xhtml" class="nav-link" >
@@ -179,11 +227,12 @@
                                     </p>
                                 </a>
                             </li>
+                            </c:if>
 
 
                             <li class="nav-item" >
                                 <h:form class="nav-link">
-                                    <h:commandButton class="btn btn-danger" action="#{authenticationManagedBean.logout()}" value="Logout" />
+                                    <h:commandButton class="btn btn-danger" action="#{requestServicesManagedBean.logout()}" value="Logout" />
                                 </h:form>
                             </li>
                         </ul>
@@ -228,10 +277,12 @@
         <script src="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/select2/dist/js/select2.full.js"></script>
         <!-- ChartJS -->
         <script src="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/chart.js/Chart.js"></script>
-
+        <!-- iCheck 1.0.1 -->
+        <script src="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/plugins/iCheck/icheck.min.js"></script>
         <!-- Notifications -->
-        <script src="#{request.contextPath}/resources/notifications/dist/Notifications.js"></script>
-
+        <script src="./resources/notifications/dist/Notifications.js"></script>
+        <script src="#{request.contextPath}/js/numberpicker.js"></script>
+        <script src="./js/modal.js"></script>
         <!-- jQuery UI 1.11.4 -->
         <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
         <script src="#{request.contextPath}/dist/js/demo.js"></script>
@@ -246,13 +297,173 @@
         <script type="text/javascript">
             var notifications = new Notifications("p.notification", {
                 closeSelfOnClick: true, animationOutSelf: 'slideout 1s', startTopPosition: 8,
-
+                
             });
-            notifications.init();
+            
+                //<![CDATA[
+
+                   
+                   
+                    var ADDNEW = document.getElementById('formmodal:add-new');
+                    console.log(ADDNEW);
+                    
+                    console.log("above event listener")
+                    ADDNEW.addEventListener('click', triggerNotif);
+                    
+    
+                function triggerNotif() {
+                        console.log("in function")
+                        var behaviorValue = 'yes';
+                        var typeValue = 'info';
+                     
+                        var el = document.createElement('p');
+                        el.classList.add('notification');
+                        var innerHTML = 'hello';
+                        
+
+                       
+                        switch (typeValue) {
+                            case "success":
+                                el.classList.add('is-success');
+                                break;
+                            case "error":
+                                el.classList.add('is-danger');
+                                break;
+                            case "warning":
+                                el.classList.add('is-warning');
+                                break;
+                            default:
+                                el.classList.add('is-primary');
+                                break;
+                        }
+                        if (behaviorValue === 'yes') {
+                            el.setAttribute('data-close', 'self');
+                        } else {
+                            innerHTML += '<button class="delete" type="button">Close</button>';
+                        }
+                        el.innerHTML = innerHTML;
+                        document.querySelector('body').appendChild(el);
+                    }
+                    
+                    //]]>
+
+          
+        </script>
+       
+        <script>
+            //<![CDATA[
+
+//            function popMenu(e) {
+//                console.log(e);
+//                document.querySelector(e).onclick = function (e) {
+//                    e.preventDefault();
+//                    console.log(e);
+//                    document.querySelector('.circle').classList.toggle('open');
+//                }
+//
+//
+
+
+            //}
+            //]]>
+
+            $(function () {
+                $('#scroll').slimScroll({
+                    height: 'calc(100vh - 100px);'
+                });
+            });
+
+            function test(data) {
+                var status = data.status; // Can be "begin", "complete" or "success".
+                var source = data.source; // The parent HTML DOM element.
+
+                switch (status) {
+                    case "begin": // Before the ajax request is sent.
+                        console.log("abc")
+                        break;
+
+                    case "complete": // After the ajax response is arrived.
+                        console.log("def")
+                        break;
+
+                    case "success": // After update of HTML DOM based on ajax response.
+                        // ...
+                        console.log("ghi")
+                        break;
+                }
+            }
+
+            
+
+  function showform(a) {
+  
+    if (a == 0) {
+         console.log(a);
+         document.getElementById("laundryDetails").style.display = "none";
+          document.getElementById("deliveryDetails").style.display = "none"
+      document.getElementById("clothingForm").style.display = "block";
+    } else if (a==1) {
+        console.log(a);
+      document.getElementById("clothingForm").style.display = "none";
+      document.getElementById("deliveryDetails").style.display = "none"
+       document.getElementById("laundryDetails").style.display = "block";
+
+    } else if (a==2){
+         console.log(a);
+       document.getElementById("deliveryDetails").style.display = "block"
+       document.getElementById("clothingForm").style.display = "none";
+         document.getElementById("laundryDetails").style.display = "none";
+        
+    } else if(a==4){
+         document.getElementById("deliveryDetails").style.display = "none"
+       document.getElementById("clothingForm").style.display = "none";
+         document.getElementById("laundryDetails").style.display = "none";
+
+    }
+    else if(a==5){
+         document.getElementById("deliveryDetails").style.display = "none"
+       document.getElementById("clothingForm").style.display = "none";
+         document.getElementById("laundryDetails").style.display = "none";
+
+
+    }
+    else if(a==6){
+         document.getElementById("deliveryDetails").style.display = "none"
+       document.getElementById("clothingForm").style.display = "none";
+         document.getElementById("laundryDetails").style.display = "none";
+
+    }
+      
+  }
         </script>
 
         <script>
+
+
             //<![CDATA[
+            var coll = document.getElementsByClassName("collapsible");
+            var i;
+
+            for (i = 0; i < coll.length; i++) {
+                coll[i].addEventListener("click", function () {
+                    console.log("collapsible clicked")
+                    this.classList.toggle("active");
+                    var content = this.nextElementSibling;
+                    if (content.style.maxHeight) {
+                        content.style.maxHeight = null;
+                        this.id = "plus";
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + "px";
+
+                        console.log("hiya");
+                        this.id = "minus";
+                        console.log(this);
+                    }
+                });
+            }
+
+
+
             $('option').mousedown(function (e) {
 
                 console.log("test");
@@ -281,8 +492,16 @@
 
 
 
+            //Flat red color scheme for iCheck
+            $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+                checkboxClass: 'icheckbox_flat-green',
+                radioClass: 'iradio_flat-green'
+            })
+
             $(function () {
                 $("#example1").DataTable();
+                $("#example3").DataTable();
+                $("#example4").DataTable();
 
                 $('#example2').DataTable({
                     "paging": true,
@@ -297,135 +516,48 @@
                     "autoWidth": false
                 });
 
-                $('#rp1').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": true,
-                    "columns": [
-                        {"orderData": [0, 1], "targets": 0},
-                        {"orderData": 0, "targets": 1},
-                        {"orderData": [2, 3, 4], "targets": 2}
-                    ],
-                    "info": true,
-                    "autoWidth": false
-                });
-                $('#rp2').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": true,
-                    "columns": [
-                        {"orderData": [0, 1], "targets": 0},
-                        {"orderData": 0, "targets": 1},
-                        {"orderData": [2, 3, 4], "targets": 2}
-                    ],
-                    "info": true,
-                    "autoWidth": false
-                });
-                $('#rp3').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": true,
-                    "columns": [
-                        {"orderData": [0, 1], "targets": 0},
-                        {"orderData": 0, "targets": 1},
-                        {"orderData": [2, 3, 4], "targets": 2}
-                    ],
-                    "info": true,
-                    "autoWidth": false
-                });
-                $('#rp4').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": true,
-                    "columns": [
-                        {"orderData": [0, 1], "targets": 0},
-                        {"orderData": 0, "targets": 1},
-                        {"orderData": [2, 3, 4], "targets": 2}
-                    ],
-                    "info": true,
-                    "autoWidth": false
-                });
-                $('#rp5').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": true,
-                    "columns": [
-                        {"orderData": [0, 1], "targets": 0},
-                        {"orderData": 0, "targets": 1},
-                        {"orderData": [2, 3, 4], "targets": 2}
-                    ],
-                    "info": true,
-                    "autoWidth": false
-                });
-                $('#rp6').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": true,
-                    "columns": [
-                        {"orderData": [0, 1], "targets": 0},
-                        {"orderData": 0, "targets": 1},
-                        {"orderData": [2, 3, 4], "targets": 2}
-                    ],
-                    "info": true,
-                    "autoWidth": false
-                });
-                $('#rp7').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": true,
-                    "columns": [
-                        {"orderData": [0, 1], "targets": 0},
-                        {"orderData": 0, "targets": 1},
-                        {"orderData": [2, 3, 4], "targets": 2}
-                    ],
-                    "info": true,
-                    "autoWidth": false
-                });
-                $('#rp8').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": true,
-                    "columns": [
-                        {"orderData": [0, 1], "targets": 0},
-                        {"orderData": 0, "targets": 1},
-                        {"orderData": [2, 3, 4], "targets": 2}
-                    ],
-                    "info": true,
-                    "autoWidth": false
-                });
-                $('#rp9').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": true,
-                    "columns": [
-                        {"orderData": [0, 1], "targets": 0},
-                        {"orderData": 0, "targets": 1},
-                        {"orderData": [2, 3, 4], "targets": 2}
-                    ],
-                    "info": true,
-                    "autoWidth": false
-                });
-
-                $('#rp10').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": true,
-                    "columns": [
-                        {"orderData": [0, 1], "targets": 0},
-                        {"orderData": 0, "targets": 1},
-                        {"orderData": [2, 3, 4], "targets": 2}
-                    ],
-                    "info": true,
-                    "autoWidth": false
-                });
             });
             function update(o) {
 
-           
+
+
                 document.getElementById("formy:housekeeper").value = o;
             }
+
+            function changeforInventory(inventoryNumber) {
+                document.getElementById("inventoryFrom:inventoryValue").value = inventoryNumber;
+
+            }
             // $('.sidebar-toggle-btn').pushMenu(options)
+
         </script> 
+        <script>
+            $('.item').click(function () {
+                getFOList(this.id);
+            });
+              function handleDrop(event, ui) {
+
+                console.log(event.target.id);
+                var droppedCar = ui.draggable;
+
+                var str = event.target.id;
+                var res = str.split(":");
+
+                //var test1 = document.getElementById("hidden" + res[1]).value = res[1];
+                //document.getElementById(ViewState).value = res[1];
+                //console.log(test1.values());
+
+                //droppedCar.fadeOut('fast');
+
+
+                let inputs = document.getElementsByTagName('inputHidden');
+                for (let input of inputs) {
+                    console.log(input.value);
+                }
+            }
+        </script>
+        
+       
 
     </h:body>
 </html>

@@ -20,6 +20,7 @@ import entity.LaundryOrderedItem;
 import entity.LaundryType;
 import entity.LostAndFoundReport;
 import entity.MaintainenceOrder;
+import entity.MemberTier;
 import entity.MinibarItem;
 import entity.MinibarOrder;
 import entity.MinibarOrderedItem;
@@ -36,6 +37,7 @@ import error.NoResultException;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -96,6 +98,8 @@ public class DataInitializationSessionBean {
     LaundrySessionLocal laundrySessionLocal;
     @EJB
     FoodOrderSessionLocal foodOrderSessionLocal;
+    @EJB
+    MemberTierSessionLocal memberTierSessionLocal;
 
     public DataInitializationSessionBean() {
     }
@@ -116,6 +120,7 @@ public class DataInitializationSessionBean {
                 initializeKRSERoom();
                 initializeKRSWRoom();
                 intializeRoomBookingsAndCustomer();
+                initializeRoomBooking2();
                 intializeRequests();
             } catch (NoResultException ex) {
                 ex.printStackTrace();
@@ -127,6 +132,14 @@ public class DataInitializationSessionBean {
     }
 
     public void initializeData() throws NoResultException, ParseException {
+        //********************************************* Member Tier ************************************************
+        MemberTier mt1 = new MemberTier("Silver Member", 5000);
+        memberTierSessionLocal.createMemberTier(mt1);
+        MemberTier mt2 = new MemberTier("Gold Member", 20000);
+        memberTierSessionLocal.createMemberTier(mt2);
+        MemberTier mt3 = new MemberTier("Platinum Member", 50000);
+        memberTierSessionLocal.createMemberTier(mt3);
+
 //*********************************************Staff Type************************************************
         StaffType st1 = new StaffType("Housekeeping Staff");
         staffSessionLocal.createStaffType(st1);
@@ -1087,13 +1100,16 @@ public class DataInitializationSessionBean {
 //*********************************************CUSTOMER************************************************
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
-        Customer c1 = new Customer("Zack", "Neo Guohui", "Male", encryptPassword("test"), 187, "neoguoh202@hotmail.com", "+6591321876", format.parse("2019-02-04"), true);
+        Customer c1 = new Customer("Zack", "Neo Guohui", "Male", encryptPassword("test"), 187, "zell1502@hotmail.com", "+6591321876", format.parse("2019-02-04"), true);
         customerSessionLocal.createCustomer(c1);
-        c1 = customerSessionLocal.getCustomerByEmail("neoguoh202@hotmail.com");
+        //        c1 = customerSessionLocal.getCustomerByEmail("neoguoh202@hotmail.com");
+        c1 = customerSessionLocal.getCustomerByEmail("zell1502@hotmail.com");
 
-        Customer c2 = new Customer("Pillay", "Maureen", "Male", encryptPassword("test"), 31877, "maureenpi1@yahoo.com.sg", "+6582375237", format.parse("2019-01-28"), false);
+        Customer c2 = new Customer("Pillay", "Maureen", "Male", encryptPassword("test"), 31877, "anselm.dm@gmail.com", "+6582375237", format.parse("2019-01-28"), false);
+        c2.setPoints(6000);
         customerSessionLocal.createCustomer(c2);
-        c2 = customerSessionLocal.getCustomerByEmail("maureenpi1@yahoo.com.sg");
+        c2 = customerSessionLocal.getCustomerByEmail("anselm.dm@gmail.com");
+        //        c2 = customerSessionLocal.getCustomerByEmail("maureenpi1@yahoo.com.sg");
 
         Customer c3 = new Customer("Mei Fang", "Chia", "Female", encryptPassword("test"), 1023823, "chiame317@gmail.com", "+6591312719", format.parse("2019-03-01"), true);
         customerSessionLocal.createCustomer(c3);
@@ -1445,6 +1461,249 @@ public class DataInitializationSessionBean {
         fb3.setFeedBackMsg("rooms were recently renovated and very comfortable, modern and nice.");
         fb3.setHotel(h1);
         feedbackSessionLocal.createFeedback(fb3);
+
+        Feedback fb4 = new Feedback();
+        fb4.setFeedBackDate(format.parse("2019-04-01"));
+        fb4.setFeedBackTitle("Hotel place is good");
+        fb4.setFeedBackFrom("Chaminda");
+        fb4.setFeedBackMsg("Room is clean Superb and clean every where. More shopping around ");
+        fb4.setHotel(h2);
+        fb4.setFeedbackRating(5);
+        feedbackSessionLocal.createFeedback(fb4);
+
+        Feedback fb5 = new Feedback();
+        fb5.setFeedBackDate(format.parse("2019-04-01"));
+        fb5.setFeedBackTitle("Service");
+        fb5.setFeedBackFrom("Chaminda");
+        fb5.setFeedBackMsg("Rooms are clean and comfortable.Service is good from the hotel. The hotel is very near from mrt. The hotel is very Near from restaurant");
+        fb5.setHotel(h2);
+        fb5.setFeedbackRating(5);
+        feedbackSessionLocal.createFeedback(fb5);
+
+        Feedback fb6 = new Feedback();
+        fb6.setFeedBackDate(format.parse("2019-04-04"));
+        fb6.setFeedBackTitle("Bang for the buck");
+        fb6.setFeedBackFrom("Abhishek N");
+        fb6.setFeedBackMsg("Great hotel with air conditioned and clean rooms.Hotel has great wifi connection.Hotel staff was very disciplined and helpful, especially Mr Gill the manager.");
+        fb6.setHotel(h2);
+        fb6.setFeedbackRating(5);
+        feedbackSessionLocal.createFeedback(fb6);
+
+        Feedback fb7 = new Feedback();
+        fb7.setFeedBackDate(format.parse("2019-04-01"));
+        fb7.setFeedBackTitle("Friendly and helpfull staffs");
+        fb7.setFeedBackFrom("Ng Swee Thai");
+        fb7.setFeedBackMsg("Staff were amazing and very helpful. Very convenience location. Close to subway and many famous shopping mall ");
+        fb7.setHotel(h3);
+        fb7.setFeedbackRating(5);
+        feedbackSessionLocal.createFeedback(fb7);
+
+        Feedback fb8 = new Feedback();
+        fb8.setFeedBackDate(format.parse("2019-03-01"));
+        fb8.setFeedBackTitle("A little gem");
+        fb8.setFeedBackFrom("Angel Peck");
+        fb8.setFeedBackMsg("I found this hotel to be clean & comfortable with fresh toiletries supplied daily.");
+        fb8.setHotel(h3);
+        fb8.setFeedbackRating(4);
+        feedbackSessionLocal.createFeedback(fb8);
+
+        Feedback fb9 = new Feedback();
+        fb9.setFeedBackDate(format.parse("2019-03-01"));
+        fb9.setFeedBackTitle("Strategic location");
+        fb9.setFeedBackFrom("Dibyne");
+        fb9.setFeedBackMsg("the hotel is well-maintained and clean.");
+        fb9.setHotel(h3);
+        fb9.setFeedbackRating(4);
+        feedbackSessionLocal.createFeedback(fb9);
+
+        Feedback fb10 = new Feedback();
+        fb10.setFeedBackDate(format.parse("2019-02-23"));
+        fb10.setFeedBackTitle("Value for money");
+        fb10.setFeedBackFrom("Gujarati C");
+        fb10.setFeedBackMsg("Very near to metro .. cleanliness was good.. centralised ac and separate ac in room");
+        fb10.setHotel(h4);
+        fb10.setFeedbackRating(4);
+        feedbackSessionLocal.createFeedback(fb10);
+
+        Feedback fb11 = new Feedback();
+        fb11.setFeedBackDate(format.parse("2019-02-23"));
+        fb11.setFeedBackTitle("great location");
+        fb11.setFeedBackFrom("Barry A");
+        fb11.setFeedBackMsg("rooms are small but good wifi and new aircons.");
+        fb11.setHotel(h4);
+        fb11.setFeedbackRating(4);
+        feedbackSessionLocal.createFeedback(fb11);
+
+        Feedback fb12 = new Feedback();
+        fb12.setFeedBackDate(format.parse("2019-02-14"));
+        fb12.setFeedBackTitle("Reasonable hotel in a great location");
+        fb12.setFeedBackFrom("James H");
+        fb12.setFeedBackMsg("Clean tidy on suit room. Not cheap a night. But the staff are friendly and helpful. ");
+        fb12.setHotel(h4);
+        fb12.setFeedbackRating(4);
+        feedbackSessionLocal.createFeedback(fb12);
+
+        Feedback fb13 = new Feedback();
+        fb13.setFeedBackDate(format.parse("2019-01-21"));
+        fb13.setFeedBackTitle("Convenient to access");
+        fb13.setFeedBackFrom("Eriko");
+        fb13.setFeedBackMsg("The room is clean, however, refrigerator and bath tab havent.");
+        fb13.setHotel(h5);
+        fb13.setFeedbackRating(4);
+        feedbackSessionLocal.createFeedback(fb13);
+
+        Feedback fb14 = new Feedback();
+        fb14.setFeedBackDate(format.parse("2019-01-23"));
+        fb14.setFeedBackTitle("Good value, good service, no thrills hotel");
+        fb14.setFeedBackFrom("James Rattigan");
+        fb14.setFeedBackMsg("Even though our room was kinda small for a couple we still enjoyed our stay. For 3 days the room was ok, but for longer stay I wouldn't recommend it, because there was no place for our things");
+        fb14.setHotel(h5);
+        fb14.setFeedbackRating(4);
+        feedbackSessionLocal.createFeedback(fb14);
+
+        Feedback fb15 = new Feedback();
+        fb15.setFeedBackDate(format.parse("2019-01-02"));
+        fb15.setFeedBackTitle("Very friendly staff");
+        fb15.setFeedBackFrom("Jan S");
+        fb15.setFeedBackMsg("The hotel was clean and quiet.");
+        fb15.setHotel(h5);
+        fb15.setFeedbackRating(4);
+        feedbackSessionLocal.createFeedback(fb15);
+
+        Feedback fb16 = new Feedback();
+        fb16.setFeedBackDate(format.parse("2019-01-21"));
+        fb16.setFeedBackTitle("Feedback");
+        fb16.setFeedBackFrom("Peter B");
+        fb16.setFeedBackMsg("Neat and Tidy and its so close to the hotels and all near shopping malls");
+        fb16.setHotel(h6);
+        fb16.setFeedbackRating(4);
+        feedbackSessionLocal.createFeedback(fb16);
+
+        Feedback fb17 = new Feedback();
+        fb17.setFeedBackDate(format.parse("2019-01-07"));
+        fb17.setFeedBackTitle("Good Hotel for short stays");
+        fb17.setFeedBackFrom("Peter B");
+        fb17.setFeedBackMsg("Excellent location, good hotel at reasonable rates, very tidy, all amenities provided, very quiet even if facing the stree.");
+        fb17.setHotel(h6);
+        fb17.setFeedbackRating(4);
+        feedbackSessionLocal.createFeedback(fb17);
+
+        Feedback fb18 = new Feedback();
+        fb18.setFeedBackDate(format.parse("2019-03-07"));
+        fb18.setFeedBackTitle("Worth It");
+        fb18.setFeedBackFrom("Rahul");
+        fb18.setFeedBackMsg("Decent hotel at an affordable rate.Rooms are extremely small in size without any wardrobe or windows. However hotel staff is somewhat co-operative and friendly.");
+        fb18.setHotel(h6);
+        fb18.setFeedbackRating(3);
+        feedbackSessionLocal.createFeedback(fb18);
+
+        Feedback fb19 = new Feedback();
+        fb19.setFeedBackDate(format.parse("2019-03-04"));
+        fb19.setFeedBackTitle("Service");
+        fb19.setFeedBackFrom("Wesley");
+        fb19.setFeedBackMsg("Rooom is clean and very worth the value. 8athroom has hot water always.AIrcon is cool and very cold. Staff are very friendly");
+        fb19.setHotel(h7);
+        fb19.setFeedbackRating(5);
+        feedbackSessionLocal.createFeedback(fb19);
+
+        Feedback fb20 = new Feedback();
+        fb20.setFeedBackDate(format.parse("2019-03-04"));
+        fb20.setFeedBackTitle("Value for money and great location");
+        fb20.setFeedBackFrom("Keshini H");
+        fb20.setFeedBackMsg("We booked a standard room online and when we checked in to the hotel we wanted to see the room we booked");
+        fb20.setHotel(h7);
+        fb20.setFeedbackRating(4);
+        feedbackSessionLocal.createFeedback(fb20);
+
+        Feedback fb21 = new Feedback();
+        fb21.setFeedBackDate(format.parse("2019-03-05"));
+        fb21.setFeedBackTitle("Good location");
+        fb21.setFeedBackFrom("Mahendra R");
+        fb21.setFeedBackMsg("Easy to travel to many different places.All the rooms is clean.Too small but comfortable");
+        fb21.setHotel(h7);
+        fb21.setFeedbackRating(4);
+        feedbackSessionLocal.createFeedback(fb21);
+
+        Feedback fb22 = new Feedback();
+        fb22.setFeedBackDate(format.parse("2019-03-03"));
+        fb22.setFeedBackTitle("A visit to Singapore");
+        fb22.setFeedBackFrom("Fazel F");
+        fb22.setFeedBackMsg("It is a calm and clean place with reasonable price and good service");
+        fb22.setHotel(h8);
+        fb22.setFeedbackRating(4);
+        feedbackSessionLocal.createFeedback(fb22);
+
+        Feedback fb23 = new Feedback();
+        fb23.setFeedBackDate(format.parse("2019-03-03"));
+        fb23.setFeedBackTitle("Good person");
+        fb23.setFeedBackFrom("aashi jain ");
+        fb23.setFeedBackMsg("John is very nice guy, he helped us lot in finding out the places how to travel everywhere.");
+        fb23.setHotel(h8);
+        fb23.setFeedbackRating(5);
+        feedbackSessionLocal.createFeedback(fb23);
+
+        Feedback fb24 = new Feedback();
+        fb24.setFeedBackDate(format.parse("2019-03-03"));
+        fb24.setFeedBackTitle("Between average and very good");
+        fb24.setFeedBackFrom("John D");
+        fb24.setFeedBackMsg("It's good but not VERY good. For the price it's ok. I was travelling alone but the room was still small with a tiny hanging space.");
+        fb24.setHotel(h8);
+        fb24.setFeedbackRating(3);
+        feedbackSessionLocal.createFeedback(fb24);
+
+        Feedback fb25 = new Feedback();
+        fb25.setFeedBackDate(format.parse("2019-02-07"));
+        fb25.setFeedBackTitle("Between average and very good");
+        fb25.setFeedBackFrom("Caro L");
+        fb25.setFeedBackMsg("Ok hotel. Simple room with good beds and shower");
+        fb25.setHotel(h9);
+        fb25.setFeedbackRating(3);
+        feedbackSessionLocal.createFeedback(fb25);
+
+        Feedback fb26 = new Feedback();
+        fb26.setFeedBackDate(format.parse("2019-02-07"));
+        fb26.setFeedBackTitle("Nice!");
+        fb26.setFeedBackFrom("Stephan K");
+        fb26.setFeedBackMsg("We enjoyed going out and meeting friends who stayed close to us in another hotel.");
+        fb26.setHotel(h9);
+        fb26.setFeedbackRating(4);
+        feedbackSessionLocal.createFeedback(fb26);
+
+        Feedback fb27 = new Feedback();
+        fb27.setFeedBackDate(format.parse("2019-02-07"));
+        fb27.setFeedBackTitle("Review");
+        fb27.setFeedBackFrom("Felix K");
+        fb27.setFeedBackMsg("Rooms are very small and no tables or chairs provided. Door lock not working. Every time someone has to come and open the room door. No dust bin in toilet");
+        fb27.setHotel(h9);
+        fb27.setFeedbackRating(2);
+        feedbackSessionLocal.createFeedback(fb27);
+
+        Feedback fb28 = new Feedback();
+        fb28.setFeedBackDate(format.parse("2019-02-10"));
+        fb28.setFeedBackTitle("poor service");
+        fb28.setFeedBackFrom("Jane N");
+        fb28.setFeedBackMsg("The rooms are ok and the location is strategic. But the service is so poor. I had to go up and down 3 times to get assistance from the front desk because the power in our room went off");
+        fb28.setHotel(h10);
+        fb28.setFeedbackRating(2);
+        feedbackSessionLocal.createFeedback(fb28);
+
+        Feedback fb29 = new Feedback();
+        fb29.setFeedBackDate(format.parse("2019-02-13"));
+        fb29.setFeedBackTitle("Nice and comfortable");
+        fb29.setFeedBackFrom("Monica May");
+        fb29.setFeedBackMsg("It was my first stay at the hotel .My family and I were greeted with very friendly receptionist");
+        fb29.setHotel(h10);
+        fb29.setFeedbackRating(4);
+        feedbackSessionLocal.createFeedback(fb29);
+
+        Feedback fb30 = new Feedback();
+        fb30.setFeedBackDate(format.parse("2019-02-01"));
+        fb30.setFeedBackTitle("Good hotel non noncense");
+        fb30.setFeedBackFrom("Monica May");
+        fb30.setFeedBackMsg("Clean hotel. Nice beds for a good sleep.");
+        fb30.setHotel(h10);
+        fb30.setFeedbackRating(4);
+        feedbackSessionLocal.createFeedback(fb30);
 
 //*********************************************LAUNDRY TYPE************************************************        
         LaundryType lt1 = new LaundryType();
@@ -15548,23 +15807,19 @@ public class DataInitializationSessionBean {
 
         em.flush();
 
-        HouseKeepingOrder ho1 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_401"), "incomplete", 4, new Date(), new Date(), null, "Toothpaste and hairnet", "toiletries", true);
-        HouseKeepingOrder ho2 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_402"), "incomplete", 4, new Date(), new Date(), null, "Spoilt TV", "maintenance", false);
-        HouseKeepingOrder ho3 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_405"), "incomplete", 4, new Date(), new Date(), null, "Spilled drinks", "housekeeping", true);
-        HouseKeepingOrder ho4 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_406"), "incomplete", 4, new Date(), new Date(), null, "Dusty table", "housekeeping", true);
-        HouseKeepingOrder ho5 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_402"), "incomplete", 4, new Date(), new Date(), null, "Tv not working", "maintenance", true);
-        HouseKeepingOrder ho6 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_403"), "incomplete", 4, new Date(), new Date(), null, "1 pants & 1 shirt", "laundry", true);
-        HouseKeepingOrder ho7 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_409"), "incomplete", 4, new Date(), new Date(), null, "5 pants & 5 shirts", "laundry", true);
-        HouseKeepingOrder ho8 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_408"), "incomplete", 4, new Date(), new Date(), null, "Mineral water refill", "housekeeping", true);
-        HouseKeepingOrder ho9 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_407"), "incomplete", 4, new Date(), new Date(), null, "Clogged Sink", "maintenance", true);
+        HouseKeepingOrder ho1 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_401"), "Incomplete", 4, new Date(), new Date(), null, "Toothpaste and hairnet", "toiletries", true);
+        HouseKeepingOrder ho2 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_402"), "Incomplete", 4, new Date(), new Date(), null, "Spoilt TV", "maintenance", false);
+        HouseKeepingOrder ho3 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_405"), "Incomplete", 4, new Date(), new Date(), null, "Spilled drinks", "housekeeping", true);
+        HouseKeepingOrder ho4 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_406"), "Incomplete", 4, new Date(), new Date(), null, "Dusty table", "housekeeping", true);
+        HouseKeepingOrder ho5 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_402"), "Incomplete", 4, new Date(), new Date(), null, "Tv not working", "maintenance", true);
+        HouseKeepingOrder ho8 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_408"), "Incomplete", 4, new Date(), new Date(), null, "Mineral water refill", "housekeeping", true);
+        HouseKeepingOrder ho9 = new HouseKeepingOrder(roomSessionLocal.getRoomByName("KRG_407"), "Incomplete", 4, new Date(), new Date(), null, "Clogged Sink", "maintenance", true);
 
         houseKeepingOrderSessionLocal.createHouseKeepingOrder(ho1);
         houseKeepingOrderSessionLocal.createHouseKeepingOrder(ho2);
         houseKeepingOrderSessionLocal.createHouseKeepingOrder(ho3);
         houseKeepingOrderSessionLocal.createHouseKeepingOrder(ho4);
         houseKeepingOrderSessionLocal.createHouseKeepingOrder(ho5);
-        houseKeepingOrderSessionLocal.createHouseKeepingOrder(ho6);
-        houseKeepingOrderSessionLocal.createHouseKeepingOrder(ho7);
         houseKeepingOrderSessionLocal.createHouseKeepingOrder(ho8);
         houseKeepingOrderSessionLocal.createHouseKeepingOrder(ho9);
         em.flush();
@@ -15572,6 +15827,7 @@ public class DataInitializationSessionBean {
 
     public void intializeRoomBookingsAndCustomer() throws ParseException, NoResultException {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         Customer customer1 = new Customer();
         customer1.setAccountStatus(true);
@@ -15621,7 +15877,7 @@ public class DataInitializationSessionBean {
         CreditCard creditCard1 = new CreditCard();
         creditCard1.setCardNum(encryptPassword("1234123412341234"));
         creditCard1.setCvv(encryptPassword("123"));
-        creditCard1.setExpiryDate(format.parse("2021-04-01"));
+        creditCard1.setExpiryDate("2021-04-01");
 
         Date date = format.parse("2019-04-01");
 
@@ -15629,7 +15885,7 @@ public class DataInitializationSessionBean {
         rm1.setBookInDate(new Date());
         rm1.setBookOutDate(date);
         rm1.setBookedBy(customer1);
-
+        rm1.setBookedRoom(roomSessionLocal.getRoomByName("KRG_302"));
         rm1.setEmailAddress(customer1.getEmail());
         rm1.setHasTransport(false);
         rm1.setLastName(customer1.getLastName());
@@ -15637,8 +15893,16 @@ public class DataInitializationSessionBean {
         rm1.setPrice(2000.0);
         rm1.setRoomType("Standard");
         rm1.setStatus("Incomplete");
-
         bookingSessionLocal.createRoomBooking(rm1);
+
+        PaymentTransaction PT1 = new PaymentTransaction();
+        PT1.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT1.setCreditCard(null);
+        PT1.setPayer(customer1);
+        PT1.setTransactionDateTime(new Date());
+        PT1.setInitialPayment(2000);
+        PT1.setFinalPayment(2000);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT1);
 
         RoomBooking rb1 = new RoomBooking();
         rb1.setBookInDate(format.parse("2019-03-10"));
@@ -15647,8 +15911,9 @@ public class DataInitializationSessionBean {
         rb1.setPrice(450.0);
         rb1.setBookedRoom(roomSessionLocal.getRoomByName("KRG_202"));
         rb1.setHasTransport(false);
-        rb1.setBookedBy(customerSessionLocal.getCustomerByEmail("neoguoh202@hotmail.com"));
-        rb1.setEmailAddress("neoguoh202@hotmail.com");
+//        rb1.setBookedBy(customerSessionLocal.getCustomerByEmail("neoguoh202@hotmail.com"));
+        rb1.setBookedBy(customerSessionLocal.getCustomerByEmail("zell1502@hotmail.com"));
+        rb1.setEmailAddress("zell1502@hotmail.com");
         rb1.setPassportNum("E2342213B");
         rb1.setRoomType("Standard");
         rb1.setFirstName("Zack");
@@ -15664,8 +15929,8 @@ public class DataInitializationSessionBean {
         rb2.setPrice(450.0);
         rb2.setBookedRoom(roomSessionLocal.getRoomByName("KRG_402"));
         rb2.setHasTransport(false);
-        rb2.setBookedBy(customerSessionLocal.getCustomerByEmail("neoguoh202@hotmail.com"));
-        rb2.setEmailAddress("neoguoh202@hotmail.com");
+        rb2.setBookedBy(customerSessionLocal.getCustomerByEmail("zell1502@hotmail.com"));
+        rb2.setEmailAddress("zell1502@hotmail.com");
         rb2.setPassportNum("E2342213B");
         rb2.setRoomType("Standard");
         rb2.setFirstName("Zack");
@@ -15681,8 +15946,8 @@ public class DataInitializationSessionBean {
         rb3.setPrice(450.0);
         rb3.setBookedRoom(roomSessionLocal.getRoomByName("KRG_302"));
         rb3.setHasTransport(false);
-        rb3.setBookedBy(customerSessionLocal.getCustomerByEmail("neoguoh202@hotmail.com"));
-        rb3.setEmailAddress("neoguoh202@hotmail.com");
+        rb3.setBookedBy(customerSessionLocal.getCustomerByEmail("zell1502@hotmail.com"));
+        rb3.setEmailAddress("zell1502@hotmail.com");
         rb3.setPassportNum("E2342213B");
         rb3.setRoomType("Standard");
         rb3.setFirstName("Zack");
@@ -15690,10 +15955,11 @@ public class DataInitializationSessionBean {
         rb3.setHasExtraBed(true);
         bookingSessionLocal.createRoomBooking(rb3);
         RoomBooking newrb3 = bookingSessionLocal.getLastRoomBooking();
+
 //***************Laundry Order***************
         LaundryOrder lo1 = new LaundryOrder();
         lo1.setRoom(roomSessionLocal.getRoomByName("KRG_202"));
-        lo1.setOrderDateTime(format.parse("2019-03-10"));
+        lo1.setOrderDateTime(formatTime.parse("2019-03-10 12:28:29"));
         lo1.setStatus("Delivered");
         lo1.setCompleteDateTime(format.parse("2019-03-12"));
         lo1.setHouseKeeper(staffSessionLocal.getStaffByNric("S1730049J"));
@@ -15719,7 +15985,7 @@ public class DataInitializationSessionBean {
 
         LaundryOrder lo5 = new LaundryOrder();
         lo5.setRoom(roomSessionLocal.getRoomByName("KRG_402"));
-        lo5.setOrderDateTime(format.parse("2019-01-10"));
+        lo5.setOrderDateTime(formatTime.parse("2019-03-10 10:45:00"));
         lo5.setStatus("Delivered");
         lo5.setCompleteDateTime(format.parse("2019-01-12"));
         lo5.setHouseKeeper(staffSessionLocal.getStaffByNric("S1730049J"));
@@ -15736,6 +16002,94 @@ public class DataInitializationSessionBean {
 
         newlo2.setTotalPrice(15.0);
         newrb1.addLaundryOrder(newlo2);
+
+        LaundryOrder lo6 = new LaundryOrder();
+        lo6.setRoom(roomSessionLocal.getRoomByName("KRG_501"));
+        lo6.setOrderDateTime(formatTime.parse("2019-03-10 14:44:34"));
+        lo6.setStatus("Pending");
+        lo6.setCompleteDateTime(format.parse("2019-04-25"));
+        lo6.setSpecialRequest("");
+        laundrySessionLocal.createLaundryOrder(lo6);
+
+        LaundryOrder lo7 = new LaundryOrder();
+        lo7.setRoom(roomSessionLocal.getRoomByName("KRG_801"));
+        lo7.setOrderDateTime(formatTime.parse("2019-03-10 17:24:43"));
+        lo7.setStatus("Pending");
+        lo7.setCompleteDateTime(format.parse("2019-04-25"));
+        lo7.setSpecialRequest("");
+        laundrySessionLocal.createLaundryOrder(lo7);
+
+        LaundryOrder lo8 = new LaundryOrder();
+        lo8.setRoom(roomSessionLocal.getRoomByName("KRG_704"));
+        lo8.setOrderDateTime(formatTime.parse("2019-03-10 21:00:00"));
+        lo8.setStatus("In Progress");
+        lo8.setCompleteDateTime(format.parse("2019-04-24"));
+        lo8.setHouseKeeper(staffSessionLocal.getStaffByNric("S1730049J"));
+        lo8.setSpecialRequest("");
+        laundrySessionLocal.createLaundryOrder(lo8);
+        LaundryOrder newlo3 = laundrySessionLocal.getLastLaundryOrder();
+
+        LaundryOrderedItem loi6 = new LaundryOrderedItem();
+        loi6.setQty(1);
+        loi6.setLaundryType(laundrySessionLocal.getLaundryTypeByName("Bottom (Dry-Wash)"));
+        loi6.setDescription("1x Yoga Pants");
+        laundrySessionLocal.createLaundryOrderedItem(loi6);
+        newlo3.addLaundryOrderedItem(laundrySessionLocal.getLastLaundryOrderedItem());
+        newlo3.setTotalPrice(15.0);
+
+        LaundryOrder lo9 = new LaundryOrder();
+        lo9.setRoom(roomSessionLocal.getRoomByName("KRG_603"));
+        lo9.setOrderDateTime(formatTime.parse("2019-03-10 16:28:29"));
+        lo9.setStatus("In Progress");
+        lo9.setCompleteDateTime(format.parse("2019-04-24"));
+        lo9.setHouseKeeper(staffSessionLocal.getStaffByNric("S1730049J"));
+        lo9.setSpecialRequest("");
+        laundrySessionLocal.createLaundryOrder(lo9);
+        LaundryOrder newlo4 = laundrySessionLocal.getLastLaundryOrder();
+
+        LaundryOrderedItem loi7 = new LaundryOrderedItem();
+        loi7.setQty(1);
+        loi7.setLaundryType(laundrySessionLocal.getLaundryTypeByName("Top (Dry-Wash)"));
+        loi7.setDescription("1x Coat");
+        laundrySessionLocal.createLaundryOrderedItem(loi7);
+        newlo4.addLaundryOrderedItem(laundrySessionLocal.getLastLaundryOrderedItem());
+        newlo4.setTotalPrice(15.0);
+
+        LaundryOrder lo10 = new LaundryOrder();
+        lo10.setRoom(roomSessionLocal.getRoomByName("KRG_608"));
+        lo10.setOrderDateTime(formatTime.parse("2019-03-10 15:28:29"));
+        lo10.setStatus("Ready for Delivery");
+        lo10.setCompleteDateTime(format.parse("2019-04-22"));
+        lo10.setHouseKeeper(staffSessionLocal.getStaffByNric("S1730049J"));
+        lo10.setSpecialRequest("");
+        laundrySessionLocal.createLaundryOrder(lo10);
+        LaundryOrder newlo5 = laundrySessionLocal.getLastLaundryOrder();
+
+        LaundryOrderedItem loi8 = new LaundryOrderedItem();
+        loi8.setQty(1);
+        loi8.setLaundryType(laundrySessionLocal.getLaundryTypeByName("Top (Dry-Wash)"));
+        loi8.setDescription("1x Jacket");
+        laundrySessionLocal.createLaundryOrderedItem(loi8);
+        newlo5.addLaundryOrderedItem(laundrySessionLocal.getLastLaundryOrderedItem());
+        newlo5.setTotalPrice(15.0);
+
+        LaundryOrder lo11 = new LaundryOrder();
+        lo11.setRoom(roomSessionLocal.getRoomByName("KRG_704"));
+        lo11.setOrderDateTime(formatTime.parse("2019-03-10 12:38:29"));
+        lo11.setStatus("Ready for Delivery");
+        lo11.setCompleteDateTime(format.parse("2019-04-22"));
+        lo11.setHouseKeeper(staffSessionLocal.getStaffByNric("S1730049J"));
+        lo11.setSpecialRequest("");
+        laundrySessionLocal.createLaundryOrder(lo11);
+        LaundryOrder newlo6 = laundrySessionLocal.getLastLaundryOrder();
+
+        LaundryOrderedItem loi9 = new LaundryOrderedItem();
+        loi9.setQty(1);
+        loi9.setLaundryType(laundrySessionLocal.getLaundryTypeByName("Top (Dry-Wash)"));
+        loi9.setDescription("1x Suit");
+        laundrySessionLocal.createLaundryOrderedItem(loi9);
+        newlo6.addLaundryOrderedItem(laundrySessionLocal.getLastLaundryOrderedItem());
+        newlo6.setTotalPrice(15.0);
 
 //***************Food Order***************        
         FoodOrder fo1 = new FoodOrder();
@@ -15817,14 +16171,4140 @@ public class DataInitializationSessionBean {
 
         em.flush();
 
-        PaymentTransaction PT1 = new PaymentTransaction();
-        PT1.addRoomBooking(rm1);
-        PT1.setCreditCard(null);
-        PT1.setPayer(customer1);
-        PT1.setTransactionDateTime(new Date());
-        PT1.setInitialPayment(2000);
+        RoomBooking rb10 = new RoomBooking();
+        rb10.setBookedRoom(roomSessionLocal.getRoomByName("KRG_202"));
+        rb10.setBookInDate(format.parse("2019-02-18"));
+        rb10.setBookedBy(customerSessionLocal.getCustomerByEmail("zel1502@hotmail.com"));
+        rb10.setStatus("checkedOut");
+        bookingSessionLocal.createRoomBooking(rb10);
+        PaymentTransaction PT2 = new PaymentTransaction();
+        PT2.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT2.setTransactionDateTime(format.parse("2019-01-30"));
+        PT2.setFinalPayment(753.0);
+        PT2.setEmail("zell1502@hotmail.com");
+        PT2.setFirstName("Zack");
+        PT2.setLastName("Neo Guohui");
+        PT2.setPayer(customerSessionLocal.getCustomerByEmail("zel1502@hotmail.com"));
+        paymentTransactionSessionLocal.createPaymentTransaction(PT2);
 
-        paymentTransactionSessionLocal.createPaymentTransaction(PT1);
+        RoomBooking rb11 = new RoomBooking();
+        rb11.setBookedRoom(roomSessionLocal.getRoomByName("KRG_203"));
+        rb11.setBookInDate(format.parse("2019-02-10"));
+        rb11.setBookedBy(customerSessionLocal.getCustomerByEmail("zel1502@hotmail.com"));
+        rb11.setStatus("checkedOut");
+        bookingSessionLocal.createRoomBooking(rb11);
+        PaymentTransaction PT3 = new PaymentTransaction();
+        PT3.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT3.setTransactionDateTime(format.parse("2019-02-03"));
+        PT3.setFinalPayment(826.0);
+        PT3.setEmail("zell1502@hotmail.com");
+        PT3.setFirstName("Zack");
+        PT3.setLastName("Neo Guohui");
+        PT3.setPayer(customerSessionLocal.getCustomerByEmail("zel1502@hotmail.com"));
+        paymentTransactionSessionLocal.createPaymentTransaction(PT3);
+
+        RoomBooking rb12 = new RoomBooking();
+        rb12.setBookedRoom(roomSessionLocal.getRoomByName("KRN_205"));
+        rb12.setBookInDate(format.parse("2019-03-19"));
+        rb12.setBookedBy(customerSessionLocal.getCustomerByEmail("zel1502@hotmail.com"));
+        rb12.setStatus("checkedOut");
+        bookingSessionLocal.createRoomBooking(rb12);
+        PaymentTransaction PT4 = new PaymentTransaction();
+        PT4.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT4.setTransactionDateTime(format.parse("2019-03-10"));
+        PT4.setFinalPayment(241.0);
+        PT4.setEmail("zell1502@hotmail.com");
+        PT4.setFirstName("Zack");
+        PT4.setLastName("Neo Guohui");
+        PT4.setPayer(customerSessionLocal.getCustomerByEmail("zel1502@hotmail.com"));
+        paymentTransactionSessionLocal.createPaymentTransaction(PT4);
+
+        RoomBooking rb13 = new RoomBooking();
+        rb13.setBookedRoom(roomSessionLocal.getRoomByName("KRN_205"));
+        rb13.setBookInDate(format.parse("2019-04-28"));
+        rb13.setFirstName("Andy");
+        rb13.setLastName("Lau");
+        rb13.setPassportNum("A1826351Y");
+        bookingSessionLocal.createRoomBooking(rb13);
+        PaymentTransaction PT5 = new PaymentTransaction();
+        PT5.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT5.setTransactionDateTime(format.parse("2019-04-19"));
+        PT5.setFinalPayment(612.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT5);
+
+        RoomBooking rb14 = new RoomBooking();
+        rb14.setBookedRoom(roomSessionLocal.getRoomByName("KRS_205"));
+        rb14.setBookInDate(format.parse("2019-03-19"));
+        bookingSessionLocal.createRoomBooking(rb14);
+        PaymentTransaction PT6 = new PaymentTransaction();
+        PT6.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        RoomBooking rb15 = new RoomBooking();
+        rb15.setBookedRoom(roomSessionLocal.getRoomByName("KRS_206"));
+        rb15.setBookInDate(format.parse("2019-03-19"));
+        bookingSessionLocal.createRoomBooking(rb15);
+        PT6.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT6.setTransactionDateTime(format.parse("2019-03-10"));
+        PT6.setFinalPayment(816.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT6);
+
+//KRW Payment Transaction        
+        RoomBooking rb300 = new RoomBooking();
+        rb300.setBookedRoom(roomSessionLocal.getRoomByName("KRW_205"));
+        rb300.setBookInDate(format.parse("2019-01-29"));
+        bookingSessionLocal.createRoomBooking(rb300);
+        PaymentTransaction PT300 = new PaymentTransaction();
+        PT300.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT300.setTransactionDateTime(format.parse("2019-01-10"));
+        PT300.setFinalPayment(716.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT300);
+
+        RoomBooking rb301 = new RoomBooking();
+        rb301.setBookedRoom(roomSessionLocal.getRoomByName("KRW_305"));
+        rb301.setBookInDate(format.parse("2019-01-29"));
+        bookingSessionLocal.createRoomBooking(rb301);
+        PaymentTransaction PT301 = new PaymentTransaction();
+        PT301.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT301.setTransactionDateTime(format.parse("2019-01-12"));
+        PT301.setFinalPayment(434.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT301);
+
+        RoomBooking rb302 = new RoomBooking();
+        rb302.setBookedRoom(roomSessionLocal.getRoomByName("KRW_203"));
+        rb302.setBookInDate(format.parse("2019-01-19"));
+        bookingSessionLocal.createRoomBooking(rb302);
+        PaymentTransaction PT302 = new PaymentTransaction();
+        PT302.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT302.setTransactionDateTime(format.parse("2019-01-02"));
+        PT302.setFinalPayment(697.39);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT302);
+
+        RoomBooking rb303 = new RoomBooking();
+        rb303.setBookedRoom(roomSessionLocal.getRoomByName("KRW_403"));
+        rb303.setBookInDate(format.parse("2019-01-07"));
+        bookingSessionLocal.createRoomBooking(rb303);
+        PaymentTransaction PT303 = new PaymentTransaction();
+        PT303.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT303.setTransactionDateTime(format.parse("2019-01-03"));
+        PT303.setFinalPayment(652.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT303);
+
+        RoomBooking rb304 = new RoomBooking();
+        rb304.setBookedRoom(roomSessionLocal.getRoomByName("KRW_203"));
+        rb304.setBookInDate(format.parse("2019-01-19"));
+        bookingSessionLocal.createRoomBooking(rb304);
+        PaymentTransaction PT304 = new PaymentTransaction();
+        PT304.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT304.setTransactionDateTime(format.parse("2019-01-13"));
+        PT304.setFinalPayment(417.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT304);
+
+        RoomBooking rb305 = new RoomBooking();
+        rb305.setBookedRoom(roomSessionLocal.getRoomByName("KRW_204"));
+        rb305.setBookInDate(format.parse("2019-01-27"));
+        bookingSessionLocal.createRoomBooking(rb305);
+        PaymentTransaction PT305 = new PaymentTransaction();
+        PT305.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT305.setTransactionDateTime(format.parse("2019-01-23"));
+        PT305.setFinalPayment(817.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT305);
+
+        RoomBooking rb306 = new RoomBooking();
+        rb306.setBookedRoom(roomSessionLocal.getRoomByName("KRW_206"));
+        rb306.setBookInDate(format.parse("2019-01-18"));
+        bookingSessionLocal.createRoomBooking(rb306);
+        PaymentTransaction PT306 = new PaymentTransaction();
+        PT306.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT306.setTransactionDateTime(format.parse("2019-01-12"));
+        PT306.setFinalPayment(471.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT306);
+
+        RoomBooking rb307 = new RoomBooking();
+        rb307.setBookedRoom(roomSessionLocal.getRoomByName("KRW_207"));
+        rb307.setBookInDate(format.parse("2019-01-30"));
+        bookingSessionLocal.createRoomBooking(rb307);
+        PaymentTransaction PT307 = new PaymentTransaction();
+        PT307.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT307.setTransactionDateTime(format.parse("2019-01-27"));
+        PT307.setFinalPayment(512.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT307);
+
+        RoomBooking rb308 = new RoomBooking();
+        rb308.setBookedRoom(roomSessionLocal.getRoomByName("KRW_406"));
+        rb308.setBookInDate(format.parse("2019-01-18"));
+        bookingSessionLocal.createRoomBooking(rb308);
+        PaymentTransaction PT308 = new PaymentTransaction();
+        PT308.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT308.setTransactionDateTime(format.parse("2019-01-15"));
+        PT308.setFinalPayment(671.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT308);
+
+        RoomBooking rb309 = new RoomBooking();
+        rb309.setBookedRoom(roomSessionLocal.getRoomByName("KRW_306"));
+        rb309.setBookInDate(format.parse("2019-01-29"));
+        bookingSessionLocal.createRoomBooking(rb309);
+        PaymentTransaction PT309 = new PaymentTransaction();
+        PT309.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT309.setTransactionDateTime(format.parse("2019-01-25"));
+        PT309.setFinalPayment(273.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT309);
+
+        RoomBooking rb310 = new RoomBooking();
+        rb310.setBookedRoom(roomSessionLocal.getRoomByName("KRW_203"));
+        rb310.setBookInDate(format.parse("2019-01-17"));
+        bookingSessionLocal.createRoomBooking(rb310);
+        PaymentTransaction PT310 = new PaymentTransaction();
+        PT310.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT310.setTransactionDateTime(format.parse("2019-01-09"));
+        PT310.setFinalPayment(134.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT310);
+
+        RoomBooking rb311 = new RoomBooking();
+        rb311.setBookedRoom(roomSessionLocal.getRoomByName("KRW_203"));
+        rb311.setBookInDate(format.parse("2019-02-17"));
+        bookingSessionLocal.createRoomBooking(rb311);
+        PaymentTransaction PT311 = new PaymentTransaction();
+        PT311.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT311.setTransactionDateTime(format.parse("2019-02-09"));
+        PT311.setFinalPayment(512.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT311);
+
+        RoomBooking rb312 = new RoomBooking();
+        rb312.setBookedRoom(roomSessionLocal.getRoomByName("KRW_503"));
+        rb312.setBookInDate(format.parse("2019-02-25"));
+        bookingSessionLocal.createRoomBooking(rb312);
+        PaymentTransaction PT312 = new PaymentTransaction();
+        PT312.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT312.setTransactionDateTime(format.parse("2019-02-19"));
+        PT312.setFinalPayment(521.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT312);
+
+        RoomBooking rb313 = new RoomBooking();
+        rb313.setBookedRoom(roomSessionLocal.getRoomByName("KRW_504"));
+        rb313.setBookInDate(format.parse("2019-02-27"));
+        bookingSessionLocal.createRoomBooking(rb313);
+        PaymentTransaction PT313 = new PaymentTransaction();
+        PT313.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT313.setTransactionDateTime(format.parse("2019-02-21"));
+        PT313.setFinalPayment(512.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT313);
+
+        RoomBooking rb314 = new RoomBooking();
+        rb314.setBookedRoom(roomSessionLocal.getRoomByName("KRW_504"));
+        rb314.setBookInDate(format.parse("2019-02-09"));
+        bookingSessionLocal.createRoomBooking(rb314);
+        PaymentTransaction PT314 = new PaymentTransaction();
+        PT314.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT314.setTransactionDateTime(format.parse("2019-02-04"));
+        PT314.setFinalPayment(471.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT314);
+
+        RoomBooking rb315 = new RoomBooking();
+        rb315.setBookedRoom(roomSessionLocal.getRoomByName("KRW_505"));
+        rb315.setBookInDate(format.parse("2019-02-09"));
+        bookingSessionLocal.createRoomBooking(rb315);
+        PaymentTransaction PT315 = new PaymentTransaction();
+        PT315.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT315.setTransactionDateTime(format.parse("2019-02-05"));
+        PT315.setFinalPayment(531.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT315);
+
+        RoomBooking rb316 = new RoomBooking();
+        rb316.setBookedRoom(roomSessionLocal.getRoomByName("KRW_506"));
+        rb316.setBookInDate(format.parse("2019-02-09"));
+        bookingSessionLocal.createRoomBooking(rb316);
+        PaymentTransaction PT316 = new PaymentTransaction();
+        PT316.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT316.setTransactionDateTime(format.parse("2019-02-06"));
+        PT316.setFinalPayment(531.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT316);
+
+        RoomBooking rb317 = new RoomBooking();
+        rb317.setBookedRoom(roomSessionLocal.getRoomByName("KRW_507"));
+        rb317.setBookInDate(format.parse("2019-02-10"));
+        bookingSessionLocal.createRoomBooking(rb317);
+        PaymentTransaction PT317 = new PaymentTransaction();
+        PT317.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT317.setTransactionDateTime(format.parse("2019-02-07"));
+        PT317.setFinalPayment(531.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT317);
+
+        RoomBooking rb318 = new RoomBooking();
+        rb318.setBookedRoom(roomSessionLocal.getRoomByName("KRW_508"));
+        rb318.setBookInDate(format.parse("2019-02-13"));
+        bookingSessionLocal.createRoomBooking(rb318);
+        PaymentTransaction PT318 = new PaymentTransaction();
+        PT318.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT318.setTransactionDateTime(format.parse("2019-02-08"));
+        PT318.setFinalPayment(271.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT318);
+
+        RoomBooking rb319 = new RoomBooking();
+        rb319.setBookedRoom(roomSessionLocal.getRoomByName("KRW_601"));
+        rb319.setBookInDate(format.parse("2019-02-15"));
+        bookingSessionLocal.createRoomBooking(rb319);
+        PaymentTransaction PT319 = new PaymentTransaction();
+        PT319.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT319.setTransactionDateTime(format.parse("2019-02-09"));
+        PT319.setFinalPayment(416.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT319);
+
+        RoomBooking rb320 = new RoomBooking();
+        rb320.setBookedRoom(roomSessionLocal.getRoomByName("KRW_602"));
+        rb320.setBookInDate(format.parse("2019-02-21"));
+        bookingSessionLocal.createRoomBooking(rb320);
+        PaymentTransaction PT320 = new PaymentTransaction();
+        PT320.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT320.setTransactionDateTime(format.parse("2019-02-10"));
+        PT320.setFinalPayment(321.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT320);
+
+        RoomBooking rb321 = new RoomBooking();
+        rb321.setBookedRoom(roomSessionLocal.getRoomByName("KRW_201"));
+        rb321.setBookInDate(format.parse("2019-03-09"));
+        bookingSessionLocal.createRoomBooking(rb321);
+        PaymentTransaction PT321 = new PaymentTransaction();
+        PT321.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT321.setTransactionDateTime(format.parse("2019-03-01"));
+        PT321.setFinalPayment(271.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT321);
+
+        RoomBooking rb322 = new RoomBooking();
+        rb322.setBookedRoom(roomSessionLocal.getRoomByName("KRW_202"));
+        rb322.setBookInDate(format.parse("2019-03-09"));
+        bookingSessionLocal.createRoomBooking(rb322);
+        PaymentTransaction PT322 = new PaymentTransaction();
+        PT322.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT322.setTransactionDateTime(format.parse("2019-03-02"));
+        PT322.setFinalPayment(513.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT322);
+
+        RoomBooking rb323 = new RoomBooking();
+        rb323.setBookedRoom(roomSessionLocal.getRoomByName("KRW_203"));
+        rb323.setBookInDate(format.parse("2019-03-09"));
+        bookingSessionLocal.createRoomBooking(rb323);
+        PaymentTransaction PT323 = new PaymentTransaction();
+        PT323.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT323.setTransactionDateTime(format.parse("2019-03-03"));
+        PT323.setFinalPayment(812.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT323);
+
+        RoomBooking rb324 = new RoomBooking();
+        rb324.setBookedRoom(roomSessionLocal.getRoomByName("KRW_204"));
+        rb324.setBookInDate(format.parse("2019-03-09"));
+        bookingSessionLocal.createRoomBooking(rb324);
+        PaymentTransaction PT324 = new PaymentTransaction();
+        PT324.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT324.setTransactionDateTime(format.parse("2019-03-04"));
+        PT324.setFinalPayment(231.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT324);
+
+        RoomBooking rb325 = new RoomBooking();
+        rb325.setBookedRoom(roomSessionLocal.getRoomByName("KRW_205"));
+        rb325.setBookInDate(format.parse("2019-03-10"));
+        bookingSessionLocal.createRoomBooking(rb325);
+        PaymentTransaction PT325 = new PaymentTransaction();
+        PT325.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT325.setTransactionDateTime(format.parse("2019-03-05"));
+        PT325.setFinalPayment(432.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT325);
+
+        RoomBooking rb326 = new RoomBooking();
+        rb326.setBookedRoom(roomSessionLocal.getRoomByName("KRW_301"));
+        rb326.setBookInDate(format.parse("2019-03-10"));
+        bookingSessionLocal.createRoomBooking(rb326);
+        PaymentTransaction PT326 = new PaymentTransaction();
+        PT326.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT326.setTransactionDateTime(format.parse("2019-03-06"));
+        PT326.setFinalPayment(531.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT326);
+
+        RoomBooking rb327 = new RoomBooking();
+        rb327.setBookedRoom(roomSessionLocal.getRoomByName("KRW_302"));
+        rb327.setBookInDate(format.parse("2019-03-09"));
+        bookingSessionLocal.createRoomBooking(rb327);
+        PaymentTransaction PT327 = new PaymentTransaction();
+        PT327.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT327.setTransactionDateTime(format.parse("2019-03-07"));
+        PT327.setFinalPayment(412.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT327);
+
+        RoomBooking rb328 = new RoomBooking();
+        rb328.setBookedRoom(roomSessionLocal.getRoomByName("KRW_303"));
+        rb328.setBookInDate(format.parse("2019-03-19"));
+        bookingSessionLocal.createRoomBooking(rb328);
+        PaymentTransaction PT328 = new PaymentTransaction();
+        PT328.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT328.setTransactionDateTime(format.parse("2019-03-08"));
+        PT328.setFinalPayment(573.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT328);
+
+        RoomBooking rb329 = new RoomBooking();
+        rb329.setBookedRoom(roomSessionLocal.getRoomByName("KRW_304"));
+        rb329.setBookInDate(format.parse("2019-03-14"));
+        bookingSessionLocal.createRoomBooking(rb329);
+        PaymentTransaction PT329 = new PaymentTransaction();
+        PT329.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT329.setTransactionDateTime(format.parse("2019-03-09"));
+        PT329.setFinalPayment(463.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT329);
+
+        RoomBooking rb330 = new RoomBooking();
+        rb330.setBookedRoom(roomSessionLocal.getRoomByName("KRW_305"));
+        rb330.setBookInDate(format.parse("2019-03-18"));
+        bookingSessionLocal.createRoomBooking(rb330);
+        PaymentTransaction PT330 = new PaymentTransaction();
+        PT330.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT330.setTransactionDateTime(format.parse("2019-03-10"));
+        PT330.setFinalPayment(431.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT330);
+
+        RoomBooking rb331 = new RoomBooking();
+        rb331.setBookedRoom(roomSessionLocal.getRoomByName("KRW_201"));
+        rb331.setBookInDate(format.parse("2019-04-18"));
+        bookingSessionLocal.createRoomBooking(rb331);
+        PaymentTransaction PT331 = new PaymentTransaction();
+        PT331.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT331.setTransactionDateTime(format.parse("2019-04-10"));
+        PT331.setFinalPayment(431.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT331);
+
+        RoomBooking rb332 = new RoomBooking();
+        rb332.setBookedRoom(roomSessionLocal.getRoomByName("KRW_202"));
+        rb332.setBookInDate(format.parse("2019-04-18"));
+        bookingSessionLocal.createRoomBooking(rb332);
+        PaymentTransaction PT332 = new PaymentTransaction();
+        PT332.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT332.setTransactionDateTime(format.parse("2019-04-11"));
+        PT332.setFinalPayment(213.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT332);
+
+        RoomBooking rb333 = new RoomBooking();
+        rb333.setBookedRoom(roomSessionLocal.getRoomByName("KRW_203"));
+        rb333.setBookInDate(format.parse("2019-04-18"));
+        bookingSessionLocal.createRoomBooking(rb333);
+        PaymentTransaction PT333 = new PaymentTransaction();
+        PT333.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT333.setTransactionDateTime(format.parse("2019-04-12"));
+        PT333.setFinalPayment(531.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT333);
+
+        RoomBooking rb334 = new RoomBooking();
+        rb334.setBookedRoom(roomSessionLocal.getRoomByName("KRW_204"));
+        rb334.setBookInDate(format.parse("2019-04-19"));
+        bookingSessionLocal.createRoomBooking(rb334);
+        PaymentTransaction PT334 = new PaymentTransaction();
+        PT334.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT334.setTransactionDateTime(format.parse("2019-04-13"));
+        PT334.setFinalPayment(321.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT334);
+
+        RoomBooking rb335 = new RoomBooking();
+        rb335.setBookedRoom(roomSessionLocal.getRoomByName("KRW_205"));
+        rb335.setBookInDate(format.parse("2019-04-19"));
+        bookingSessionLocal.createRoomBooking(rb335);
+        PaymentTransaction PT335 = new PaymentTransaction();
+        PT335.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT335.setTransactionDateTime(format.parse("2019-04-14"));
+        PT335.setFinalPayment(612.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT335);
+
+        RoomBooking rb336 = new RoomBooking();
+        rb336.setBookedRoom(roomSessionLocal.getRoomByName("KRW_301"));
+        rb336.setBookInDate(format.parse("2019-04-19"));
+        bookingSessionLocal.createRoomBooking(rb336);
+        PaymentTransaction PT336 = new PaymentTransaction();
+        PT336.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT336.setTransactionDateTime(format.parse("2019-04-15"));
+        PT336.setFinalPayment(421.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT336);
+
+        RoomBooking rb337 = new RoomBooking();
+        rb337.setBookedRoom(roomSessionLocal.getRoomByName("KRW_302"));
+        rb337.setBookInDate(format.parse("2019-04-19"));
+        bookingSessionLocal.createRoomBooking(rb337);
+        PaymentTransaction PT337 = new PaymentTransaction();
+        PT337.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT337.setTransactionDateTime(format.parse("2019-04-16"));
+        PT337.setFinalPayment(414.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT337);
+
+        RoomBooking rb338 = new RoomBooking();
+        rb338.setBookedRoom(roomSessionLocal.getRoomByName("KRW_303"));
+        rb338.setBookInDate(format.parse("2019-04-19"));
+        bookingSessionLocal.createRoomBooking(rb338);
+        PaymentTransaction PT338 = new PaymentTransaction();
+        PT338.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT338.setTransactionDateTime(format.parse("2019-04-17"));
+        PT338.setFinalPayment(461.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT338);
+
+        RoomBooking rb339 = new RoomBooking();
+        rb339.setBookedRoom(roomSessionLocal.getRoomByName("KRG_304"));
+        rb339.setBookInDate(format.parse("2019-04-28"));
+        rb339.setFirstName("John");
+        rb339.setLastName("Paul");
+        rb339.setPassportNum("A1826163X");
+        bookingSessionLocal.createRoomBooking(rb339);
+        PaymentTransaction PT339 = new PaymentTransaction();
+        PT339.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT339.setTransactionDateTime(format.parse("2019-04-18"));
+        PT339.setFinalPayment(231.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT339);
+
+//KRNE PaymentTransaction
+        RoomBooking rb340 = new RoomBooking();
+        rb340.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_201"));
+        rb340.setBookInDate(format.parse("2019-02-09"));
+        bookingSessionLocal.createRoomBooking(rb340);
+        PaymentTransaction PT340 = new PaymentTransaction();
+        PT340.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT340.setTransactionDateTime(format.parse("2019-01-01"));
+        PT340.setFinalPayment(231.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT340);
+
+        RoomBooking rb341 = new RoomBooking();
+        rb341.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_202"));
+        rb341.setBookInDate(format.parse("2019-01-09"));
+        bookingSessionLocal.createRoomBooking(rb341);
+        PaymentTransaction PT341 = new PaymentTransaction();
+        PT341.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT341.setTransactionDateTime(format.parse("2019-01-02"));
+        PT341.setFinalPayment(414.27);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT341);
+
+        RoomBooking rb342 = new RoomBooking();
+        rb342.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_203"));
+        rb342.setBookInDate(format.parse("2019-02-09"));
+        bookingSessionLocal.createRoomBooking(rb342);
+        PaymentTransaction PT342 = new PaymentTransaction();
+        PT342.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT342.setTransactionDateTime(format.parse("2019-01-03"));
+        PT342.setFinalPayment(513.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT342);
+
+        RoomBooking rb343 = new RoomBooking();
+        rb343.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_204"));
+        rb343.setBookInDate(format.parse("2019-01-09"));
+        bookingSessionLocal.createRoomBooking(rb343);
+        PaymentTransaction PT343 = new PaymentTransaction();
+        PT343.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT343.setTransactionDateTime(format.parse("2019-01-04"));
+        PT343.setFinalPayment(216.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT343);
+
+        RoomBooking rb344 = new RoomBooking();
+        rb344.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_205"));
+        rb344.setBookInDate(format.parse("2019-01-09"));
+        bookingSessionLocal.createRoomBooking(rb344);
+        PaymentTransaction PT344 = new PaymentTransaction();
+        PT344.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT344.setTransactionDateTime(format.parse("2019-01-05"));
+        PT344.setFinalPayment(216.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT344);
+
+        RoomBooking rb345 = new RoomBooking();
+        rb345.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_301"));
+        rb345.setBookInDate(format.parse("2019-01-12"));
+        bookingSessionLocal.createRoomBooking(rb345);
+        PaymentTransaction PT345 = new PaymentTransaction();
+        PT345.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT345.setTransactionDateTime(format.parse("2019-01-06"));
+        PT345.setFinalPayment(431.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT345);
+
+        RoomBooking rb346 = new RoomBooking();
+        rb346.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_302"));
+        rb346.setBookInDate(format.parse("2019-01-12"));
+        bookingSessionLocal.createRoomBooking(rb346);
+        PaymentTransaction PT346 = new PaymentTransaction();
+        PT346.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT346.setTransactionDateTime(format.parse("2019-01-07"));
+        PT346.setFinalPayment(713.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT346);
+
+        RoomBooking rb347 = new RoomBooking();
+        rb347.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_303"));
+        rb347.setBookInDate(format.parse("2019-01-13"));
+        bookingSessionLocal.createRoomBooking(rb347);
+        PaymentTransaction PT347 = new PaymentTransaction();
+        PT347.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT347.setTransactionDateTime(format.parse("2019-01-08"));
+        PT347.setFinalPayment(241.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT347);
+
+        RoomBooking rb348 = new RoomBooking();
+        rb348.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_304"));
+        rb348.setBookInDate(format.parse("2019-01-14"));
+        bookingSessionLocal.createRoomBooking(rb348);
+        PaymentTransaction PT348 = new PaymentTransaction();
+        PT348.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT348.setTransactionDateTime(format.parse("2019-01-09"));
+        PT348.setFinalPayment(231.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT348);
+
+        RoomBooking rb349 = new RoomBooking();
+        rb349.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_305"));
+        rb349.setBookInDate(format.parse("2019-02-09"));
+        bookingSessionLocal.createRoomBooking(rb349);
+        PaymentTransaction PT349 = new PaymentTransaction();
+        PT349.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT349.setTransactionDateTime(format.parse("2019-01-10"));
+        PT349.setFinalPayment(419.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT349);
+
+        RoomBooking rb350 = new RoomBooking();
+        rb350.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_201"));
+        rb350.setBookInDate(format.parse("2019-02-09"));
+        bookingSessionLocal.createRoomBooking(rb350);
+        PaymentTransaction PT350 = new PaymentTransaction();
+        PT350.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT350.setTransactionDateTime(format.parse("2019-02-01"));
+        PT350.setFinalPayment(431.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT350);
+
+        RoomBooking rb351 = new RoomBooking();
+        rb351.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_202"));
+        rb351.setBookInDate(format.parse("2019-02-09"));
+        bookingSessionLocal.createRoomBooking(rb351);
+        PaymentTransaction PT351 = new PaymentTransaction();
+        PT351.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT351.setTransactionDateTime(format.parse("2019-02-02"));
+        PT351.setFinalPayment(172.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT351);
+
+        RoomBooking rb352 = new RoomBooking();
+        rb352.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_203"));
+        rb352.setBookInDate(format.parse("2019-02-09"));
+        bookingSessionLocal.createRoomBooking(rb352);
+        PaymentTransaction PT352 = new PaymentTransaction();
+        PT352.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT352.setTransactionDateTime(format.parse("2019-02-03"));
+        PT352.setFinalPayment(328.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT352);
+
+        RoomBooking rb353 = new RoomBooking();
+        rb353.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_204"));
+        rb353.setBookInDate(format.parse("2019-02-08"));
+        bookingSessionLocal.createRoomBooking(rb353);
+        PaymentTransaction PT353 = new PaymentTransaction();
+        PT353.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT353.setTransactionDateTime(format.parse("2019-02-04"));
+        PT353.setFinalPayment(123.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT353);
+
+        RoomBooking rb354 = new RoomBooking();
+        rb354.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_205"));
+        rb354.setBookInDate(format.parse("2019-02-09"));
+        bookingSessionLocal.createRoomBooking(rb354);
+        PaymentTransaction PT354 = new PaymentTransaction();
+        PT354.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT354.setTransactionDateTime(format.parse("2019-02-05"));
+        PT354.setFinalPayment(281.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT354);
+
+        RoomBooking rb355 = new RoomBooking();
+        rb355.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_301"));
+        rb355.setBookInDate(format.parse("2019-02-09"));
+        bookingSessionLocal.createRoomBooking(rb355);
+        PaymentTransaction PT355 = new PaymentTransaction();
+        PT355.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT355.setTransactionDateTime(format.parse("2019-02-06"));
+        PT355.setFinalPayment(231.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT355);
+
+        RoomBooking rb356 = new RoomBooking();
+        rb356.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_302"));
+        rb356.setBookInDate(format.parse("2019-02-14"));
+        bookingSessionLocal.createRoomBooking(rb356);
+        PaymentTransaction PT356 = new PaymentTransaction();
+        PT356.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT356.setTransactionDateTime(format.parse("2019-02-07"));
+        PT356.setFinalPayment(128.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT356);
+
+        RoomBooking rb357 = new RoomBooking();
+        rb357.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_303"));
+        rb357.setBookInDate(format.parse("2019-02-13"));
+        bookingSessionLocal.createRoomBooking(rb357);
+        PaymentTransaction PT357 = new PaymentTransaction();
+        PT357.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT357.setTransactionDateTime(format.parse("2019-02-08"));
+        PT357.setFinalPayment(361.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT357);
+
+        RoomBooking rb358 = new RoomBooking();
+        rb358.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_304"));
+        rb358.setBookInDate(format.parse("2019-02-14"));
+        bookingSessionLocal.createRoomBooking(rb358);
+        PaymentTransaction PT358 = new PaymentTransaction();
+        PT358.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT358.setTransactionDateTime(format.parse("2019-02-09"));
+        PT358.setFinalPayment(162.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT358);
+
+        RoomBooking rb359 = new RoomBooking();
+        rb359.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_305"));
+        rb359.setBookInDate(format.parse("2019-02-17"));
+        bookingSessionLocal.createRoomBooking(rb359);
+        PaymentTransaction PT359 = new PaymentTransaction();
+        PT359.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT359.setTransactionDateTime(format.parse("2019-02-10"));
+        PT359.setFinalPayment(281.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT359);
+
+        RoomBooking rb360 = new RoomBooking();
+        rb360.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_201"));
+        rb360.setBookInDate(format.parse("2019-03-18"));
+        bookingSessionLocal.createRoomBooking(rb360);
+        PaymentTransaction PT360 = new PaymentTransaction();
+        PT360.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT360.setTransactionDateTime(format.parse("2019-03-01"));
+        PT360.setFinalPayment(291.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT360);
+
+        RoomBooking rb361 = new RoomBooking();
+        rb361.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_202"));
+        rb361.setBookInDate(format.parse("2019-03-09"));
+        bookingSessionLocal.createRoomBooking(rb361);
+        PaymentTransaction PT361 = new PaymentTransaction();
+        PT361.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT361.setTransactionDateTime(format.parse("2019-03-02"));
+        PT361.setFinalPayment(321.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT361);
+
+        RoomBooking rb362 = new RoomBooking();
+        rb362.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_203"));
+        rb362.setBookInDate(format.parse("2019-03-09"));
+        bookingSessionLocal.createRoomBooking(rb362);
+        PaymentTransaction PT362 = new PaymentTransaction();
+        PT362.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT362.setTransactionDateTime(format.parse("2019-03-03"));
+        PT362.setFinalPayment(427.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT362);
+
+        RoomBooking rb363 = new RoomBooking();
+        rb363.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_204"));
+        rb363.setBookInDate(format.parse("2019-03-16"));
+        bookingSessionLocal.createRoomBooking(rb363);
+        PaymentTransaction PT363 = new PaymentTransaction();
+        PT363.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT363.setTransactionDateTime(format.parse("2019-03-04"));
+        PT363.setFinalPayment(321.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT363);
+
+        RoomBooking rb364 = new RoomBooking();
+        rb364.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_205"));
+        rb364.setBookInDate(format.parse("2019-03-09"));
+        bookingSessionLocal.createRoomBooking(rb364);
+        PaymentTransaction PT364 = new PaymentTransaction();
+        PT364.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT364.setTransactionDateTime(format.parse("2019-03-05"));
+        PT364.setFinalPayment(328.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT364);
+
+        RoomBooking rb365 = new RoomBooking();
+        rb365.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_301"));
+        rb365.setBookInDate(format.parse("2019-03-17"));
+        bookingSessionLocal.createRoomBooking(rb365);
+        PaymentTransaction PT365 = new PaymentTransaction();
+        PT365.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT365.setTransactionDateTime(format.parse("2019-03-06"));
+        PT365.setFinalPayment(216.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT365);
+
+        RoomBooking rb366 = new RoomBooking();
+        rb366.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_302"));
+        rb366.setBookInDate(format.parse("2019-03-17"));
+        bookingSessionLocal.createRoomBooking(rb366);
+        PaymentTransaction PT366 = new PaymentTransaction();
+        PT366.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT366.setTransactionDateTime(format.parse("2019-03-07"));
+        PT366.setFinalPayment(419.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT366);
+
+        RoomBooking rb367 = new RoomBooking();
+        rb367.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_303"));
+        rb367.setBookInDate(format.parse("2019-03-15"));
+        bookingSessionLocal.createRoomBooking(rb367);
+        PaymentTransaction PT367 = new PaymentTransaction();
+        PT367.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT367.setTransactionDateTime(format.parse("2019-03-08"));
+        PT367.setFinalPayment(271.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT367);
+
+        RoomBooking rb368 = new RoomBooking();
+        rb368.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_304"));
+        rb368.setBookInDate(format.parse("2019-03-13"));
+        bookingSessionLocal.createRoomBooking(rb368);
+        PaymentTransaction PT368 = new PaymentTransaction();
+        PT368.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT368.setTransactionDateTime(format.parse("2019-03-09"));
+        PT368.setFinalPayment(127.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT368);
+
+        RoomBooking rb369 = new RoomBooking();
+        rb369.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_305"));
+        rb369.setBookInDate(format.parse("2019-03-19"));
+        bookingSessionLocal.createRoomBooking(rb369);
+        PaymentTransaction PT369 = new PaymentTransaction();
+        PT369.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT369.setTransactionDateTime(format.parse("2019-03-10"));
+        PT369.setFinalPayment(417.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT369);
+
+        RoomBooking rb370 = new RoomBooking();
+        rb370.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_201"));
+        rb370.setBookInDate(format.parse("2019-04-18"));
+        bookingSessionLocal.createRoomBooking(rb370);
+        PaymentTransaction PT370 = new PaymentTransaction();
+        PT370.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT370.setTransactionDateTime(format.parse("2019-04-11"));
+        PT370.setFinalPayment(321.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT370);
+
+        RoomBooking rb371 = new RoomBooking();
+        rb371.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_202"));
+        rb371.setBookInDate(format.parse("2019-05-09"));
+        rb371.setFirstName("Dan");
+        rb371.setLastName("Brown");
+        rb371.setPassportNum("A1271682W");
+        bookingSessionLocal.createRoomBooking(rb371);
+        PaymentTransaction PT371 = new PaymentTransaction();
+        PT371.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT371.setTransactionDateTime(format.parse("2019-04-12"));
+        PT371.setFinalPayment(417.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT371);
+
+        RoomBooking rb372 = new RoomBooking();
+        rb372.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_203"));
+        rb372.setBookInDate(format.parse("2019-04-17"));
+        bookingSessionLocal.createRoomBooking(rb372);
+        PaymentTransaction PT372 = new PaymentTransaction();
+        PT372.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT372.setTransactionDateTime(format.parse("2019-04-13"));
+        PT372.setFinalPayment(261.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT372);
+
+        RoomBooking rb373 = new RoomBooking();
+        rb373.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_204"));
+        rb373.setBookInDate(format.parse("2019-04-18"));
+        bookingSessionLocal.createRoomBooking(rb373);
+        PaymentTransaction PT373 = new PaymentTransaction();
+        PT373.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT373.setTransactionDateTime(format.parse("2019-04-14"));
+        PT373.setFinalPayment(172.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT373);
+
+        RoomBooking rb374 = new RoomBooking();
+        rb374.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_205"));
+        rb374.setBookInDate(format.parse("2019-04-19"));
+        bookingSessionLocal.createRoomBooking(rb374);
+        PaymentTransaction PT374 = new PaymentTransaction();
+        PT374.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT374.setTransactionDateTime(format.parse("2019-04-15"));
+        PT374.setFinalPayment(218.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT374);
+
+        RoomBooking rb375 = new RoomBooking();
+        rb375.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_301"));
+        rb375.setBookInDate(format.parse("2019-04-19"));
+        bookingSessionLocal.createRoomBooking(rb375);
+        PaymentTransaction PT375 = new PaymentTransaction();
+        PT375.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT375.setTransactionDateTime(format.parse("2019-04-16"));
+        PT375.setFinalPayment(271.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT375);
+
+        RoomBooking rb376 = new RoomBooking();
+        rb376.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_302"));
+        rb376.setBookInDate(format.parse("2019-04-21"));
+        bookingSessionLocal.createRoomBooking(rb376);
+        PaymentTransaction PT376 = new PaymentTransaction();
+        PT376.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT376.setTransactionDateTime(format.parse("2019-04-17"));
+        PT376.setFinalPayment(162.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT376);
+
+        RoomBooking rb377 = new RoomBooking();
+        rb377.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_303"));
+        rb377.setBookInDate(format.parse("2019-04-21"));
+        bookingSessionLocal.createRoomBooking(rb377);
+        PaymentTransaction PT377 = new PaymentTransaction();
+        PT377.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT377.setTransactionDateTime(format.parse("2019-04-17"));
+        PT377.setFinalPayment(281.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT377);
+
+        RoomBooking rb378 = new RoomBooking();
+        rb378.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_304"));
+        rb378.setBookInDate(format.parse("2019-04-24"));
+        rb378.setFirstName("Zilin");
+        rb378.setLastName("Yeo");
+        rb378.setPassportNum("A7316153C");
+        bookingSessionLocal.createRoomBooking(rb378);
+        PaymentTransaction PT378 = new PaymentTransaction();
+        PT378.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT378.setTransactionDateTime(format.parse("2019-04-18"));
+        PT378.setFinalPayment(172.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT378);
+
+        RoomBooking rb379 = new RoomBooking();
+        rb379.setBookedRoom(roomSessionLocal.getRoomByName("KRNE_305"));
+        rb379.setBookInDate(format.parse("2019-04-24"));
+        rb379.setFirstName("Matthew");
+        rb379.setLastName("Tan");
+        rb379.setPassportNum("A3917273T");
+        bookingSessionLocal.createRoomBooking(rb379);
+        PaymentTransaction PT379 = new PaymentTransaction();
+        PT379.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT379.setTransactionDateTime(format.parse("2019-04-19"));
+        PT379.setFinalPayment(321.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT379);
+
+//KRNW PaymentTransaction
+        RoomBooking rb380 = new RoomBooking();
+        rb380.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_201"));
+        rb380.setBookInDate(format.parse("2019-02-09"));
+        bookingSessionLocal.createRoomBooking(rb380);
+        PaymentTransaction PT380 = new PaymentTransaction();
+        PT380.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT380.setTransactionDateTime(format.parse("2019-01-01"));
+        PT380.setFinalPayment(321.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT380);
+
+        RoomBooking rb381 = new RoomBooking();
+        rb381.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_202"));
+        rb381.setBookInDate(format.parse("2019-01-09"));
+        bookingSessionLocal.createRoomBooking(rb381);
+        PaymentTransaction PT381 = new PaymentTransaction();
+        PT381.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT381.setTransactionDateTime(format.parse("2019-01-02"));
+        PT381.setFinalPayment(218.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT381);
+
+        RoomBooking rb382 = new RoomBooking();
+        rb382.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_203"));
+        rb382.setBookInDate(format.parse("2019-01-09"));
+        bookingSessionLocal.createRoomBooking(rb382);
+        PaymentTransaction PT382 = new PaymentTransaction();
+        PT382.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT382.setTransactionDateTime(format.parse("2019-01-03"));
+        PT382.setFinalPayment(123.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT382);
+
+        RoomBooking rb383 = new RoomBooking();
+        rb383.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_204"));
+        rb383.setBookInDate(format.parse("2019-01-12"));
+        bookingSessionLocal.createRoomBooking(rb383);
+        PaymentTransaction PT383 = new PaymentTransaction();
+        PT383.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT383.setTransactionDateTime(format.parse("2019-01-04"));
+        PT383.setFinalPayment(127.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT383);
+
+        RoomBooking rb384 = new RoomBooking();
+        rb384.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_205"));
+        rb384.setBookInDate(format.parse("2019-02-09"));
+        bookingSessionLocal.createRoomBooking(rb384);
+        PaymentTransaction PT384 = new PaymentTransaction();
+        PT384.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT384.setTransactionDateTime(format.parse("2019-01-05"));
+        PT384.setFinalPayment(127.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT384);
+
+        RoomBooking rb385 = new RoomBooking();
+        rb385.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_301"));
+        rb385.setBookInDate(format.parse("2019-01-27"));
+        bookingSessionLocal.createRoomBooking(rb385);
+        PaymentTransaction PT385 = new PaymentTransaction();
+        PT385.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT385.setTransactionDateTime(format.parse("2019-01-06"));
+        PT385.setFinalPayment(126.48);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT385);
+
+        RoomBooking rb386 = new RoomBooking();
+        rb386.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_302"));
+        rb386.setBookInDate(format.parse("2019-01-28"));
+        bookingSessionLocal.createRoomBooking(rb386);
+        PaymentTransaction PT386 = new PaymentTransaction();
+        PT386.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT386.setTransactionDateTime(format.parse("2019-01-07"));
+        PT386.setFinalPayment(126.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT386);
+
+        RoomBooking rb387 = new RoomBooking();
+        rb387.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_303"));
+        rb387.setBookInDate(format.parse("2019-01-18"));
+        bookingSessionLocal.createRoomBooking(rb387);
+        PaymentTransaction PT387 = new PaymentTransaction();
+        PT387.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT387.setTransactionDateTime(format.parse("2019-01-08"));
+        PT387.setFinalPayment(216.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT387);
+
+        RoomBooking rb388 = new RoomBooking();
+        rb388.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_304"));
+        rb388.setBookInDate(format.parse("2019-01-29"));
+        bookingSessionLocal.createRoomBooking(rb388);
+        PaymentTransaction PT388 = new PaymentTransaction();
+        PT388.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT388.setTransactionDateTime(format.parse("2019-01-09"));
+        PT388.setFinalPayment(182.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT388);
+
+        RoomBooking rb389 = new RoomBooking();
+        rb389.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_305"));
+        rb389.setBookInDate(format.parse("2019-01-28"));
+        bookingSessionLocal.createRoomBooking(rb389);
+        PaymentTransaction PT389 = new PaymentTransaction();
+        PT389.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT389.setTransactionDateTime(format.parse("2019-01-10"));
+        PT389.setFinalPayment(238.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT389);
+
+        RoomBooking rb390 = new RoomBooking();
+        rb390.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_201"));
+        rb390.setBookInDate(format.parse("2019-02-09"));
+        bookingSessionLocal.createRoomBooking(rb390);
+        PaymentTransaction PT390 = new PaymentTransaction();
+        PT390.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT390.setTransactionDateTime(format.parse("2019-02-01"));
+        PT390.setFinalPayment(127.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT390);
+
+        RoomBooking rb391 = new RoomBooking();
+        rb391.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_202"));
+        rb391.setBookInDate(format.parse("2019-02-19"));
+        bookingSessionLocal.createRoomBooking(rb391);
+        PaymentTransaction PT391 = new PaymentTransaction();
+        PT391.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT391.setTransactionDateTime(format.parse("2019-02-02"));
+        PT391.setFinalPayment(381.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT391);
+
+        RoomBooking rb392 = new RoomBooking();
+        rb392.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_203"));
+        rb392.setBookInDate(format.parse("2019-02-19"));
+        bookingSessionLocal.createRoomBooking(rb392);
+        PaymentTransaction PT392 = new PaymentTransaction();
+        PT392.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT392.setTransactionDateTime(format.parse("2019-02-03"));
+        PT392.setFinalPayment(162.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT392);
+
+        RoomBooking rb393 = new RoomBooking();
+        rb393.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_204"));
+        rb393.setBookInDate(format.parse("2019-02-18"));
+        bookingSessionLocal.createRoomBooking(rb393);
+        PaymentTransaction PT393 = new PaymentTransaction();
+        PT393.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT393.setTransactionDateTime(format.parse("2019-02-04"));
+        PT393.setFinalPayment(217.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT393);
+
+        RoomBooking rb394 = new RoomBooking();
+        rb394.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_205"));
+        rb394.setBookInDate(format.parse("2019-02-17"));
+        bookingSessionLocal.createRoomBooking(rb394);
+        PaymentTransaction PT394 = new PaymentTransaction();
+        PT394.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT394.setTransactionDateTime(format.parse("2019-02-05"));
+        PT394.setFinalPayment(183.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT394);
+
+        RoomBooking rb395 = new RoomBooking();
+        rb395.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_301"));
+        rb395.setBookInDate(format.parse("2019-02-09"));
+        bookingSessionLocal.createRoomBooking(rb395);
+        PaymentTransaction PT395 = new PaymentTransaction();
+        PT395.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT395.setTransactionDateTime(format.parse("2019-02-06"));
+        PT395.setFinalPayment(172.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT395);
+
+        RoomBooking rb396 = new RoomBooking();
+        rb396.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_302"));
+        rb396.setBookInDate(format.parse("2019-02-18"));
+        bookingSessionLocal.createRoomBooking(rb396);
+        PaymentTransaction PT396 = new PaymentTransaction();
+        PT396.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT396.setTransactionDateTime(format.parse("2019-02-07"));
+        PT396.setFinalPayment(127.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT396);
+
+        RoomBooking rb397 = new RoomBooking();
+        rb397.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_303"));
+        rb397.setBookInDate(format.parse("2019-02-19"));
+        bookingSessionLocal.createRoomBooking(rb397);
+        PaymentTransaction PT397 = new PaymentTransaction();
+        PT397.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT397.setTransactionDateTime(format.parse("2019-02-08"));
+        PT397.setFinalPayment(291.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT397);
+
+        RoomBooking rb398 = new RoomBooking();
+        rb398.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_304"));
+        rb398.setBookInDate(format.parse("2019-02-18"));
+        bookingSessionLocal.createRoomBooking(rb398);
+        PaymentTransaction PT398 = new PaymentTransaction();
+        PT398.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT398.setTransactionDateTime(format.parse("2019-02-09"));
+        PT398.setFinalPayment(172.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT398);
+
+        RoomBooking rb399 = new RoomBooking();
+        rb399.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_305"));
+        rb399.setBookInDate(format.parse("2019-02-14"));
+        bookingSessionLocal.createRoomBooking(rb399);
+        PaymentTransaction PT399 = new PaymentTransaction();
+        PT399.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT399.setTransactionDateTime(format.parse("2019-02-10"));
+        PT399.setFinalPayment(417.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT399);
+
+        RoomBooking rb400 = new RoomBooking();
+        rb400.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_201"));
+        rb400.setBookInDate(format.parse("2019-03-09"));
+        bookingSessionLocal.createRoomBooking(rb400);
+        PaymentTransaction PT400 = new PaymentTransaction();
+        PT400.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT400.setTransactionDateTime(format.parse("2019-03-01"));
+        PT400.setFinalPayment(128.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT400);
+
+        RoomBooking rb401 = new RoomBooking();
+        rb401.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_202"));
+        rb401.setBookInDate(format.parse("2019-03-09"));
+        bookingSessionLocal.createRoomBooking(rb401);
+        PaymentTransaction PT401 = new PaymentTransaction();
+        PT401.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT401.setTransactionDateTime(format.parse("2019-03-02"));
+        PT401.setFinalPayment(312.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT401);
+
+        RoomBooking rb402 = new RoomBooking();
+        rb402.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_203"));
+        rb402.setBookInDate(format.parse("2019-03-09"));
+        bookingSessionLocal.createRoomBooking(rb402);
+        PaymentTransaction PT402 = new PaymentTransaction();
+        PT402.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT402.setTransactionDateTime(format.parse("2019-03-03"));
+        PT402.setFinalPayment(192.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT402);
+
+        RoomBooking rb403 = new RoomBooking();
+        rb403.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_204"));
+        rb403.setBookInDate(format.parse("2019-03-12"));
+        bookingSessionLocal.createRoomBooking(rb403);
+        PaymentTransaction PT403 = new PaymentTransaction();
+        PT403.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT403.setTransactionDateTime(format.parse("2019-03-04"));
+        PT403.setFinalPayment(172.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT403);
+
+        RoomBooking rb404 = new RoomBooking();
+        rb404.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_205"));
+        rb404.setBookInDate(format.parse("2019-03-09"));
+        bookingSessionLocal.createRoomBooking(rb404);
+        PaymentTransaction PT404 = new PaymentTransaction();
+        PT404.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT404.setTransactionDateTime(format.parse("2019-03-05"));
+        PT404.setFinalPayment(192.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT404);
+
+        RoomBooking rb405 = new RoomBooking();
+        rb405.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_301"));
+        rb405.setBookInDate(format.parse("2019-03-13"));
+        bookingSessionLocal.createRoomBooking(rb405);
+        PaymentTransaction PT405 = new PaymentTransaction();
+        PT405.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT405.setTransactionDateTime(format.parse("2019-03-06"));
+        PT405.setFinalPayment(271.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT405);
+
+        RoomBooking rb406 = new RoomBooking();
+        rb406.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_302"));
+        rb406.setBookInDate(format.parse("2019-03-13"));
+        bookingSessionLocal.createRoomBooking(rb406);
+        PaymentTransaction PT406 = new PaymentTransaction();
+        PT406.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT406.setTransactionDateTime(format.parse("2019-03-07"));
+        PT406.setFinalPayment(192.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT406);
+
+        RoomBooking rb407 = new RoomBooking();
+        rb407.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_303"));
+        rb407.setBookInDate(format.parse("2019-03-18"));
+        bookingSessionLocal.createRoomBooking(rb407);
+        PaymentTransaction PT407 = new PaymentTransaction();
+        PT407.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT407.setTransactionDateTime(format.parse("2019-03-08"));
+        PT407.setFinalPayment(182.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT407);
+
+        RoomBooking rb408 = new RoomBooking();
+        rb408.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_304"));
+        rb408.setBookInDate(format.parse("2019-03-17"));
+        bookingSessionLocal.createRoomBooking(rb408);
+        PaymentTransaction PT408 = new PaymentTransaction();
+        PT408.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT408.setTransactionDateTime(format.parse("2019-03-09"));
+        PT408.setFinalPayment(384.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT408);
+
+        RoomBooking rb409 = new RoomBooking();
+        rb409.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_305"));
+        rb409.setBookInDate(format.parse("2019-03-18"));
+        bookingSessionLocal.createRoomBooking(rb409);
+        PaymentTransaction PT409 = new PaymentTransaction();
+        PT409.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT409.setTransactionDateTime(format.parse("2019-03-10"));
+        PT409.setFinalPayment(173.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT409);
+
+        RoomBooking rb410 = new RoomBooking();
+        rb410.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_201"));
+        rb410.setBookInDate(format.parse("2019-04-09"));
+        bookingSessionLocal.createRoomBooking(rb410);
+        PaymentTransaction PT410 = new PaymentTransaction();
+        PT410.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT410.setTransactionDateTime(format.parse("2019-04-01"));
+        PT410.setFinalPayment(173.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT410);
+
+        RoomBooking rb411 = new RoomBooking();
+        rb411.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_202"));
+        rb411.setBookInDate(format.parse("2019-04-09"));
+        bookingSessionLocal.createRoomBooking(rb411);
+        PaymentTransaction PT411 = new PaymentTransaction();
+        PT411.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT411.setTransactionDateTime(format.parse("2019-04-02"));
+        PT411.setFinalPayment(172.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT411);
+
+        RoomBooking rb412 = new RoomBooking();
+        rb412.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_201"));
+        rb412.setBookInDate(format.parse("2019-04-09"));
+        bookingSessionLocal.createRoomBooking(rb412);
+        PaymentTransaction PT412 = new PaymentTransaction();
+        PT412.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT412.setTransactionDateTime(format.parse("2019-04-03"));
+        PT412.setFinalPayment(281.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT412);
+
+        RoomBooking rb413 = new RoomBooking();
+        rb413.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_204"));
+        rb413.setBookInDate(format.parse("2019-04-18"));
+        bookingSessionLocal.createRoomBooking(rb413);
+        PaymentTransaction PT413 = new PaymentTransaction();
+        PT413.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT413.setTransactionDateTime(format.parse("2019-04-04"));
+        PT413.setFinalPayment(372.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT413);
+
+        RoomBooking rb414 = new RoomBooking();
+        rb414.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_205"));
+        rb414.setBookInDate(format.parse("2019-04-12"));
+        bookingSessionLocal.createRoomBooking(rb414);
+        PaymentTransaction PT414 = new PaymentTransaction();
+        PT414.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT414.setTransactionDateTime(format.parse("2019-04-05"));
+        PT414.setFinalPayment(292.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT414);
+
+        RoomBooking rb415 = new RoomBooking();
+        rb415.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_301"));
+        rb415.setBookInDate(format.parse("2019-04-15"));
+        bookingSessionLocal.createRoomBooking(rb415);
+        PaymentTransaction PT415 = new PaymentTransaction();
+        PT415.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT415.setTransactionDateTime(format.parse("2019-04-06"));
+        PT415.setFinalPayment(271.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT415);
+
+        RoomBooking rb416 = new RoomBooking();
+        rb416.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_302"));
+        rb416.setBookInDate(format.parse("2019-04-17"));
+        bookingSessionLocal.createRoomBooking(rb416);
+        PaymentTransaction PT416 = new PaymentTransaction();
+        PT416.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT416.setTransactionDateTime(format.parse("2019-04-07"));
+        PT416.setFinalPayment(471.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT416);
+
+        RoomBooking rb417 = new RoomBooking();
+        rb417.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_303"));
+        rb417.setBookInDate(format.parse("2019-04-19"));
+        bookingSessionLocal.createRoomBooking(rb417);
+        PaymentTransaction PT417 = new PaymentTransaction();
+        PT417.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT417.setTransactionDateTime(format.parse("2019-04-08"));
+        PT417.setFinalPayment(172.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT417);
+
+        RoomBooking rb418 = new RoomBooking();
+        rb418.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_304"));
+        rb418.setBookInDate(format.parse("2019-04-18"));
+        bookingSessionLocal.createRoomBooking(rb418);
+        PaymentTransaction PT418 = new PaymentTransaction();
+        PT418.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT418.setTransactionDateTime(format.parse("2019-04-09"));
+        PT418.setFinalPayment(182.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT418);
+
+        RoomBooking rb419 = new RoomBooking();
+        rb419.setBookedRoom(roomSessionLocal.getRoomByName("KRNW_305"));
+        rb419.setBookInDate(format.parse("2019-04-17"));
+        bookingSessionLocal.createRoomBooking(rb419);
+        PaymentTransaction PT419 = new PaymentTransaction();
+        PT419.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT419.setTransactionDateTime(format.parse("2019-04-10"));
+        PT419.setFinalPayment(283.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT419);
+
+//KRSE PaymentTransaction
+        RoomBooking rb420 = new RoomBooking();
+        rb420.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_201"));
+        rb420.setBookInDate(format.parse("2019-02-09"));
+        bookingSessionLocal.createRoomBooking(rb420);
+        PaymentTransaction PT420 = new PaymentTransaction();
+        PT420.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT420.setTransactionDateTime(format.parse("2019-01-01"));
+        PT420.setFinalPayment(231.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT420);
+
+        RoomBooking rb421 = new RoomBooking();
+        rb421.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_202"));
+        rb421.setBookInDate(format.parse("2019-02-19"));
+        bookingSessionLocal.createRoomBooking(rb421);
+        PaymentTransaction PT421 = new PaymentTransaction();
+        PT421.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT421.setTransactionDateTime(format.parse("2019-01-02"));
+        PT421.setFinalPayment(231.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT421);
+
+        RoomBooking rb422 = new RoomBooking();
+        rb422.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_203"));
+        rb422.setBookInDate(format.parse("2019-01-09"));
+        bookingSessionLocal.createRoomBooking(rb422);
+        PaymentTransaction PT422 = new PaymentTransaction();
+        PT422.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT422.setTransactionDateTime(format.parse("2019-01-03"));
+        PT422.setFinalPayment(123.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT422);
+
+        RoomBooking rb423 = new RoomBooking();
+        rb423.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_204"));
+        rb423.setBookInDate(format.parse("2019-01-09"));
+        bookingSessionLocal.createRoomBooking(rb423);
+        PaymentTransaction PT423 = new PaymentTransaction();
+        PT423.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT423.setTransactionDateTime(format.parse("2019-01-04"));
+        PT423.setFinalPayment(123.84);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT423);
+
+        RoomBooking rb424 = new RoomBooking();
+        rb424.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_205"));
+        rb424.setBookInDate(format.parse("2019-01-17"));
+        bookingSessionLocal.createRoomBooking(rb424);
+        PaymentTransaction PT424 = new PaymentTransaction();
+        PT424.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT424.setTransactionDateTime(format.parse("2019-01-05"));
+        PT424.setFinalPayment(213.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT424);
+
+        RoomBooking rb425 = new RoomBooking();
+        rb425.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_301"));
+        rb425.setBookInDate(format.parse("2019-01-13"));
+        bookingSessionLocal.createRoomBooking(rb425);
+        PaymentTransaction PT425 = new PaymentTransaction();
+        PT425.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT425.setTransactionDateTime(format.parse("2019-01-06"));
+        PT425.setFinalPayment(241.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT425);
+
+        RoomBooking rb426 = new RoomBooking();
+        rb426.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_302"));
+        rb426.setBookInDate(format.parse("2019-01-15"));
+        bookingSessionLocal.createRoomBooking(rb426);
+        PaymentTransaction PT426 = new PaymentTransaction();
+        PT426.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT426.setTransactionDateTime(format.parse("2019-01-07"));
+        PT426.setFinalPayment(142.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT426);
+
+        RoomBooking rb427 = new RoomBooking();
+        rb427.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_303"));
+        rb427.setBookInDate(format.parse("2019-01-17"));
+        bookingSessionLocal.createRoomBooking(rb427);
+        PaymentTransaction PT427 = new PaymentTransaction();
+        PT427.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT427.setTransactionDateTime(format.parse("2019-01-08"));
+        PT427.setFinalPayment(421.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT427);
+
+        RoomBooking rb428 = new RoomBooking();
+        rb428.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_304"));
+        rb428.setBookInDate(format.parse("2019-01-16"));
+        bookingSessionLocal.createRoomBooking(rb428);
+        PaymentTransaction PT428 = new PaymentTransaction();
+        PT428.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT428.setTransactionDateTime(format.parse("2019-01-09"));
+        PT428.setFinalPayment(123.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT428);
+
+        RoomBooking rb429 = new RoomBooking();
+        rb429.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_305"));
+        rb429.setBookInDate(format.parse("2019-01-17"));
+        bookingSessionLocal.createRoomBooking(rb429);
+        PaymentTransaction PT429 = new PaymentTransaction();
+        PT429.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT429.setTransactionDateTime(format.parse("2019-01-10"));
+        PT429.setFinalPayment(281.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT429);
+
+        RoomBooking rb430 = new RoomBooking();
+        rb430.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_306"));
+        rb430.setBookInDate(format.parse("2019-02-09"));
+        bookingSessionLocal.createRoomBooking(rb430);
+        PaymentTransaction PT430 = new PaymentTransaction();
+        PT430.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT430.setTransactionDateTime(format.parse("2019-02-01"));
+        PT430.setFinalPayment(281.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT430);
+
+        RoomBooking rb431 = new RoomBooking();
+        rb431.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_202"));
+        rb431.setBookInDate(format.parse("2019-02-12"));
+        bookingSessionLocal.createRoomBooking(rb431);
+        PaymentTransaction PT431 = new PaymentTransaction();
+        PT431.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT431.setTransactionDateTime(format.parse("2019-02-02"));
+        PT431.setFinalPayment(237.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT431);
+
+        RoomBooking rb432 = new RoomBooking();
+        rb432.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_203"));
+        rb432.setBookInDate(format.parse("2019-02-17"));
+        bookingSessionLocal.createRoomBooking(rb432);
+        PaymentTransaction PT432 = new PaymentTransaction();
+        PT432.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT432.setTransactionDateTime(format.parse("2019-02-03"));
+        PT432.setFinalPayment(182.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT432);
+
+        RoomBooking rb433 = new RoomBooking();
+        rb433.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_204"));
+        rb433.setBookInDate(format.parse("2019-02-12"));
+        bookingSessionLocal.createRoomBooking(rb433);
+        PaymentTransaction PT433 = new PaymentTransaction();
+        PT433.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT433.setTransactionDateTime(format.parse("2019-02-04"));
+        PT433.setFinalPayment(192.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT433);
+
+        RoomBooking rb434 = new RoomBooking();
+        rb434.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_205"));
+        rb434.setBookInDate(format.parse("2019-02-17"));
+        bookingSessionLocal.createRoomBooking(rb434);
+        PaymentTransaction PT434 = new PaymentTransaction();
+        PT434.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT434.setTransactionDateTime(format.parse("2019-02-05"));
+        PT434.setFinalPayment(247.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT434);
+
+        RoomBooking rb435 = new RoomBooking();
+        rb435.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_301"));
+        rb435.setBookInDate(format.parse("2019-02-12"));
+        bookingSessionLocal.createRoomBooking(rb435);
+        PaymentTransaction PT435 = new PaymentTransaction();
+        PT435.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT435.setTransactionDateTime(format.parse("2019-02-06"));
+        PT435.setFinalPayment(128.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT435);
+
+        RoomBooking rb436 = new RoomBooking();
+        rb436.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_302"));
+        rb436.setBookInDate(format.parse("2019-02-12"));
+        bookingSessionLocal.createRoomBooking(rb436);
+        PaymentTransaction PT436 = new PaymentTransaction();
+        PT436.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT436.setTransactionDateTime(format.parse("2019-02-07"));
+        PT436.setFinalPayment(182.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT436);
+
+        RoomBooking rb437 = new RoomBooking();
+        rb437.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_303"));
+        rb437.setBookInDate(format.parse("2019-02-14"));
+        bookingSessionLocal.createRoomBooking(rb437);
+        PaymentTransaction PT437 = new PaymentTransaction();
+        PT437.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT437.setTransactionDateTime(format.parse("2019-02-08"));
+        PT437.setFinalPayment(472.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT437);
+
+        RoomBooking rb438 = new RoomBooking();
+        rb438.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_304"));
+        rb438.setBookInDate(format.parse("2019-02-17"));
+        bookingSessionLocal.createRoomBooking(rb438);
+        PaymentTransaction PT438 = new PaymentTransaction();
+        PT438.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT438.setTransactionDateTime(format.parse("2019-02-09"));
+        PT438.setFinalPayment(281.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT438);
+
+        RoomBooking rb439 = new RoomBooking();
+        rb439.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_305"));
+        rb439.setBookInDate(format.parse("2019-02-17"));
+        bookingSessionLocal.createRoomBooking(rb439);
+        PaymentTransaction PT439 = new PaymentTransaction();
+        PT439.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT439.setTransactionDateTime(format.parse("2019-02-10"));
+        PT439.setFinalPayment(217.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT439);
+
+        RoomBooking rb440 = new RoomBooking();
+        rb440.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_201"));
+        rb440.setBookInDate(format.parse("2019-03-18"));
+        bookingSessionLocal.createRoomBooking(rb440);
+        PaymentTransaction PT440 = new PaymentTransaction();
+        PT440.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT440.setTransactionDateTime(format.parse("2019-03-01"));
+        PT440.setFinalPayment(271.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT440);
+
+        RoomBooking rb441 = new RoomBooking();
+        rb441.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_202"));
+        rb441.setBookInDate(format.parse("2019-03-13"));
+        bookingSessionLocal.createRoomBooking(rb441);
+        PaymentTransaction PT441 = new PaymentTransaction();
+        PT441.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT441.setTransactionDateTime(format.parse("2019-03-02"));
+        PT441.setFinalPayment(281.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT441);
+
+        RoomBooking rb442 = new RoomBooking();
+        rb442.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_203"));
+        rb442.setBookInDate(format.parse("2019-03-09"));
+        bookingSessionLocal.createRoomBooking(rb442);
+        PaymentTransaction PT442 = new PaymentTransaction();
+        PT442.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT442.setTransactionDateTime(format.parse("2019-03-03"));
+        PT442.setFinalPayment(293.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT442);
+
+        RoomBooking rb443 = new RoomBooking();
+        rb443.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_204"));
+        rb443.setBookInDate(format.parse("2019-03-17"));
+        bookingSessionLocal.createRoomBooking(rb443);
+        PaymentTransaction PT443 = new PaymentTransaction();
+        PT443.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT443.setTransactionDateTime(format.parse("2019-03-04"));
+        PT443.setFinalPayment(172.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT443);
+
+        RoomBooking rb444 = new RoomBooking();
+        rb444.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_205"));
+        rb444.setBookInDate(format.parse("2019-03-09"));
+        bookingSessionLocal.createRoomBooking(rb444);
+        PaymentTransaction PT444 = new PaymentTransaction();
+        PT444.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT444.setTransactionDateTime(format.parse("2019-03-05"));
+        PT444.setFinalPayment(313.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT444);
+
+        RoomBooking rb445 = new RoomBooking();
+        rb445.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_301"));
+        rb445.setBookInDate(format.parse("2019-04-09"));
+        bookingSessionLocal.createRoomBooking(rb445);
+        PaymentTransaction PT445 = new PaymentTransaction();
+        PT445.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT445.setTransactionDateTime(format.parse("2019-03-06"));
+        PT445.setFinalPayment(387.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT445);
+
+        RoomBooking rb446 = new RoomBooking();
+        rb446.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_302"));
+        rb446.setBookInDate(format.parse("2019-03-19"));
+        bookingSessionLocal.createRoomBooking(rb446);
+        PaymentTransaction PT446 = new PaymentTransaction();
+        PT446.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT446.setTransactionDateTime(format.parse("2019-03-07"));
+        PT446.setFinalPayment(271.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT446);
+
+        RoomBooking rb447 = new RoomBooking();
+        rb447.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_303"));
+        rb447.setBookInDate(format.parse("2019-03-12"));
+        bookingSessionLocal.createRoomBooking(rb447);
+        PaymentTransaction PT447 = new PaymentTransaction();
+        PT447.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT447.setTransactionDateTime(format.parse("2019-03-08"));
+        PT447.setFinalPayment(273.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT447);
+
+        RoomBooking rb448 = new RoomBooking();
+        rb448.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_304"));
+        rb448.setBookInDate(format.parse("2019-03-17"));
+        bookingSessionLocal.createRoomBooking(rb448);
+        PaymentTransaction PT448 = new PaymentTransaction();
+        PT448.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT448.setTransactionDateTime(format.parse("2019-03-09"));
+        PT448.setFinalPayment(148.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT448);
+
+        RoomBooking rb449 = new RoomBooking();
+        rb449.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_305"));
+        rb449.setBookInDate(format.parse("2019-03-19"));
+        bookingSessionLocal.createRoomBooking(rb449);
+        PaymentTransaction PT449 = new PaymentTransaction();
+        PT449.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT449.setTransactionDateTime(format.parse("2019-03-10"));
+        PT449.setFinalPayment(175.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT449);
+
+        RoomBooking rb450 = new RoomBooking();
+        rb450.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_201"));
+        rb450.setBookInDate(format.parse("2019-04-09"));
+        bookingSessionLocal.createRoomBooking(rb450);
+        PaymentTransaction PT450 = new PaymentTransaction();
+        PT450.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT450.setTransactionDateTime(format.parse("2019-04-01"));
+        PT450.setFinalPayment(182.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT450);
+
+        RoomBooking rb451 = new RoomBooking();
+        rb451.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_202"));
+        rb451.setBookInDate(format.parse("2019-04-12"));
+        bookingSessionLocal.createRoomBooking(rb451);
+        PaymentTransaction PT451 = new PaymentTransaction();
+        PT451.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT451.setTransactionDateTime(format.parse("2019-04-02"));
+        PT451.setFinalPayment(281.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT451);
+
+        RoomBooking rb452 = new RoomBooking();
+        rb452.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_203"));
+        rb452.setBookInDate(format.parse("2019-04-12"));
+        bookingSessionLocal.createRoomBooking(rb452);
+        PaymentTransaction PT452 = new PaymentTransaction();
+        PT452.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT452.setTransactionDateTime(format.parse("2019-04-03"));
+        PT452.setFinalPayment(281.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT452);
+
+        RoomBooking rb453 = new RoomBooking();
+        rb453.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_204"));
+        rb453.setBookInDate(format.parse("2019-04-17"));
+        bookingSessionLocal.createRoomBooking(rb453);
+        PaymentTransaction PT453 = new PaymentTransaction();
+        PT453.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT453.setTransactionDateTime(format.parse("2019-04-04"));
+        PT453.setFinalPayment(192.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT453);
+
+        RoomBooking rb454 = new RoomBooking();
+        rb454.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_205"));
+        rb454.setBookInDate(format.parse("2019-04-18"));
+        bookingSessionLocal.createRoomBooking(rb454);
+        PaymentTransaction PT454 = new PaymentTransaction();
+        PT454.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT454.setTransactionDateTime(format.parse("2019-04-05"));
+        PT454.setFinalPayment(102.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT454);
+
+        RoomBooking rb455 = new RoomBooking();
+        rb455.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_301"));
+        rb455.setBookInDate(format.parse("2019-04-17"));
+        bookingSessionLocal.createRoomBooking(rb455);
+        PaymentTransaction PT455 = new PaymentTransaction();
+        PT455.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT455.setTransactionDateTime(format.parse("2019-04-06"));
+        PT455.setFinalPayment(182.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT455);
+
+        RoomBooking rb456 = new RoomBooking();
+        rb456.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_302"));
+        rb456.setBookInDate(format.parse("2019-04-18"));
+        bookingSessionLocal.createRoomBooking(rb456);
+        PaymentTransaction PT456 = new PaymentTransaction();
+        PT456.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT456.setTransactionDateTime(format.parse("2019-04-07"));
+        PT456.setFinalPayment(213.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT456);
+
+        RoomBooking rb457 = new RoomBooking();
+        rb457.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_303"));
+        rb457.setBookInDate(format.parse("2019-04-18"));
+        bookingSessionLocal.createRoomBooking(rb457);
+        PaymentTransaction PT457 = new PaymentTransaction();
+        PT457.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT457.setTransactionDateTime(format.parse("2019-04-08"));
+        PT457.setFinalPayment(281.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT457);
+
+        RoomBooking rb458 = new RoomBooking();
+        rb458.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_304"));
+        rb458.setBookInDate(format.parse("2019-04-18"));
+        bookingSessionLocal.createRoomBooking(rb458);
+        PaymentTransaction PT458 = new PaymentTransaction();
+        PT458.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT458.setTransactionDateTime(format.parse("2019-04-09"));
+        PT458.setFinalPayment(182.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT458);
+
+        RoomBooking rb459 = new RoomBooking();
+        rb459.setBookedRoom(roomSessionLocal.getRoomByName("KRSE_305"));
+        rb459.setBookInDate(format.parse("2019-04-18"));
+        bookingSessionLocal.createRoomBooking(rb459);
+        PaymentTransaction PT459 = new PaymentTransaction();
+        PT459.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT459.setTransactionDateTime(format.parse("2019-04-10"));
+        PT459.setFinalPayment(283.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT459);
+
+//KRSW PaymentTransaction 
+        RoomBooking rb460 = new RoomBooking();
+        rb460.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_201"));
+        rb460.setBookInDate(format.parse("2019-01-09"));
+        bookingSessionLocal.createRoomBooking(rb460);
+        PaymentTransaction PT460 = new PaymentTransaction();
+        PT460.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT460.setTransactionDateTime(format.parse("2019-01-01"));
+        PT460.setFinalPayment(281.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT460);
+
+        RoomBooking rb461 = new RoomBooking();
+        rb461.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_202"));
+        rb461.setBookInDate(format.parse("2019-01-19"));
+        bookingSessionLocal.createRoomBooking(rb461);
+        PaymentTransaction PT461 = new PaymentTransaction();
+        PT461.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT461.setTransactionDateTime(format.parse("2019-01-02"));
+        PT461.setFinalPayment(172.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT461);
+
+        RoomBooking rb462 = new RoomBooking();
+        rb462.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_203"));
+        rb462.setBookInDate(format.parse("2019-01-09"));
+        bookingSessionLocal.createRoomBooking(rb462);
+        PaymentTransaction PT462 = new PaymentTransaction();
+        PT462.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT462.setTransactionDateTime(format.parse("2019-01-03"));
+        PT462.setFinalPayment(231.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT462);
+
+        RoomBooking rb463 = new RoomBooking();
+        rb463.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_204"));
+        rb463.setBookInDate(format.parse("2019-02-09"));
+        bookingSessionLocal.createRoomBooking(rb463);
+        PaymentTransaction PT463 = new PaymentTransaction();
+        PT463.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT463.setTransactionDateTime(format.parse("2019-01-04"));
+        PT463.setFinalPayment(231.42);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT463);
+
+        RoomBooking rb464 = new RoomBooking();
+        rb464.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_205"));
+        rb464.setBookInDate(format.parse("2019-01-09"));
+        bookingSessionLocal.createRoomBooking(rb464);
+        PaymentTransaction PT464 = new PaymentTransaction();
+        PT464.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT464.setTransactionDateTime(format.parse("2019-01-05"));
+        PT464.setFinalPayment(421.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT464);
+
+        RoomBooking rb465 = new RoomBooking();
+        rb465.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_301"));
+        rb465.setBookInDate(format.parse("2019-01-13"));
+        bookingSessionLocal.createRoomBooking(rb465);
+        PaymentTransaction PT465 = new PaymentTransaction();
+        PT465.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT465.setTransactionDateTime(format.parse("2019-01-06"));
+        PT465.setFinalPayment(123.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT465);
+
+        RoomBooking rb466 = new RoomBooking();
+        rb466.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_302"));
+        rb466.setBookInDate(format.parse("2019-01-17"));
+        bookingSessionLocal.createRoomBooking(rb466);
+        PaymentTransaction PT466 = new PaymentTransaction();
+        PT466.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT466.setTransactionDateTime(format.parse("2019-01-07"));
+        PT466.setFinalPayment(231.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT466);
+
+        RoomBooking rb467 = new RoomBooking();
+        rb467.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_303"));
+        rb467.setBookInDate(format.parse("2019-01-14"));
+        bookingSessionLocal.createRoomBooking(rb467);
+        PaymentTransaction PT467 = new PaymentTransaction();
+        PT467.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT467.setTransactionDateTime(format.parse("2019-01-08"));
+        PT467.setFinalPayment(321.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT467);
+
+        RoomBooking rb468 = new RoomBooking();
+        rb468.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_304"));
+        rb468.setBookInDate(format.parse("2019-01-18"));
+        bookingSessionLocal.createRoomBooking(rb468);
+        PaymentTransaction PT468 = new PaymentTransaction();
+        PT468.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT468.setTransactionDateTime(format.parse("2019-01-09"));
+        PT468.setFinalPayment(142.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT468);
+
+        RoomBooking rb469 = new RoomBooking();
+        rb469.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_305"));
+        rb469.setBookInDate(format.parse("2019-01-12"));
+        bookingSessionLocal.createRoomBooking(rb469);
+        PaymentTransaction PT469 = new PaymentTransaction();
+        PT469.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT469.setTransactionDateTime(format.parse("2019-01-10"));
+        PT469.setFinalPayment(231.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT469);
+
+        RoomBooking rb470 = new RoomBooking();
+        rb470.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_201"));
+        rb470.setBookInDate(format.parse("2019-02-09"));
+        bookingSessionLocal.createRoomBooking(rb470);
+        PaymentTransaction PT470 = new PaymentTransaction();
+        PT470.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT470.setTransactionDateTime(format.parse("2019-02-01"));
+        PT470.setFinalPayment(421.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT470);
+
+        RoomBooking rb471 = new RoomBooking();
+        rb471.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_202"));
+        rb471.setBookInDate(format.parse("2019-02-12"));
+        bookingSessionLocal.createRoomBooking(rb471);
+        PaymentTransaction PT471 = new PaymentTransaction();
+        PT471.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT471.setTransactionDateTime(format.parse("2019-02-02"));
+        PT471.setFinalPayment(231.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT471);
+
+        RoomBooking rb472 = new RoomBooking();
+        rb472.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_203"));
+        rb472.setBookInDate(format.parse("2019-02-14"));
+        bookingSessionLocal.createRoomBooking(rb472);
+        PaymentTransaction PT472 = new PaymentTransaction();
+        PT472.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT472.setTransactionDateTime(format.parse("2019-02-03"));
+        PT472.setFinalPayment(123.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT472);
+
+        RoomBooking rb473 = new RoomBooking();
+        rb473.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_204"));
+        rb473.setBookInDate(format.parse("2019-02-13"));
+        bookingSessionLocal.createRoomBooking(rb473);
+        PaymentTransaction PT473 = new PaymentTransaction();
+        PT473.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT473.setTransactionDateTime(format.parse("2019-02-04"));
+        PT473.setFinalPayment(232.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT473);
+
+        RoomBooking rb474 = new RoomBooking();
+        rb474.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_205"));
+        rb474.setBookInDate(format.parse("2019-02-18"));
+        bookingSessionLocal.createRoomBooking(rb474);
+        PaymentTransaction PT474 = new PaymentTransaction();
+        PT474.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT474.setTransactionDateTime(format.parse("2019-02-05"));
+        PT474.setFinalPayment(231.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT474);
+
+        RoomBooking rb475 = new RoomBooking();
+        rb475.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_301"));
+        rb475.setBookInDate(format.parse("2019-02-12"));
+        bookingSessionLocal.createRoomBooking(rb475);
+        PaymentTransaction PT475 = new PaymentTransaction();
+        PT475.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT475.setTransactionDateTime(format.parse("2019-02-06"));
+        PT475.setFinalPayment(123.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT475);
+
+        RoomBooking rb476 = new RoomBooking();
+        rb476.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_302"));
+        rb476.setBookInDate(format.parse("2019-02-13"));
+        bookingSessionLocal.createRoomBooking(rb476);
+        PaymentTransaction PT476 = new PaymentTransaction();
+        PT476.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT476.setTransactionDateTime(format.parse("2019-02-07"));
+        PT476.setFinalPayment(182.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT476);
+
+        RoomBooking rb477 = new RoomBooking();
+        rb477.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_303"));
+        rb477.setBookInDate(format.parse("2019-02-18"));
+        bookingSessionLocal.createRoomBooking(rb477);
+        PaymentTransaction PT477 = new PaymentTransaction();
+        PT477.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT477.setTransactionDateTime(format.parse("2019-02-08"));
+        PT477.setFinalPayment(217.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT477);
+
+        RoomBooking rb478 = new RoomBooking();
+        rb478.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_304"));
+        rb478.setBookInDate(format.parse("2019-02-13"));
+        bookingSessionLocal.createRoomBooking(rb478);
+        PaymentTransaction PT478 = new PaymentTransaction();
+        PT478.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT478.setTransactionDateTime(format.parse("2019-02-09"));
+        PT478.setFinalPayment(182.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT478);
+
+        RoomBooking rb479 = new RoomBooking();
+        rb479.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_305"));
+        rb479.setBookInDate(format.parse("2019-02-19"));
+        bookingSessionLocal.createRoomBooking(rb479);
+        PaymentTransaction PT479 = new PaymentTransaction();
+        PT479.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT479.setTransactionDateTime(format.parse("2019-02-10"));
+        PT479.setFinalPayment(123.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT479);
+
+        RoomBooking rb480 = new RoomBooking();
+        rb480.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_201"));
+        rb480.setBookInDate(format.parse("2019-03-09"));
+        bookingSessionLocal.createRoomBooking(rb480);
+        PaymentTransaction PT480 = new PaymentTransaction();
+        PT480.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT480.setTransactionDateTime(format.parse("2019-03-01"));
+        PT480.setFinalPayment(321.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT480);
+
+        RoomBooking rb481 = new RoomBooking();
+        rb481.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_202"));
+        rb481.setBookInDate(format.parse("2019-03-13"));
+        bookingSessionLocal.createRoomBooking(rb481);
+        PaymentTransaction PT481 = new PaymentTransaction();
+        PT481.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT481.setTransactionDateTime(format.parse("2019-03-02"));
+        PT481.setFinalPayment(327.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT481);
+
+        RoomBooking rb482 = new RoomBooking();
+        rb482.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_203"));
+        rb482.setBookInDate(format.parse("2019-03-18"));
+        bookingSessionLocal.createRoomBooking(rb482);
+        PaymentTransaction PT482 = new PaymentTransaction();
+        PT482.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT482.setTransactionDateTime(format.parse("2019-03-03"));
+        PT482.setFinalPayment(142.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT482);
+
+        RoomBooking rb483 = new RoomBooking();
+        rb483.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_204"));
+        rb483.setBookInDate(format.parse("2019-03-18"));
+        bookingSessionLocal.createRoomBooking(rb483);
+        PaymentTransaction PT483 = new PaymentTransaction();
+        PT483.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT483.setTransactionDateTime(format.parse("2019-03-04"));
+        PT483.setFinalPayment(218.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT483);
+
+        RoomBooking rb484 = new RoomBooking();
+        rb484.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_205"));
+        rb484.setBookInDate(format.parse("2019-03-18"));
+        bookingSessionLocal.createRoomBooking(rb484);
+        PaymentTransaction PT484 = new PaymentTransaction();
+        PT484.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT484.setTransactionDateTime(format.parse("2019-03-05"));
+        PT484.setFinalPayment(271.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT484);
+
+        RoomBooking rb485 = new RoomBooking();
+        rb485.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_301"));
+        rb485.setBookInDate(format.parse("2019-03-12"));
+        bookingSessionLocal.createRoomBooking(rb485);
+        PaymentTransaction PT485 = new PaymentTransaction();
+        PT485.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT485.setTransactionDateTime(format.parse("2019-03-06"));
+        PT485.setFinalPayment(217.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT485);
+
+        RoomBooking rb486 = new RoomBooking();
+        rb486.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_302"));
+        rb486.setBookInDate(format.parse("2019-03-09"));
+        bookingSessionLocal.createRoomBooking(rb486);
+        PaymentTransaction PT486 = new PaymentTransaction();
+        PT486.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT486.setTransactionDateTime(format.parse("2019-03-06"));
+        PT486.setFinalPayment(231.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT486);
+
+        RoomBooking rb487 = new RoomBooking();
+        rb487.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_303"));
+        rb487.setBookInDate(format.parse("2019-03-18"));
+        bookingSessionLocal.createRoomBooking(rb487);
+        PaymentTransaction PT487 = new PaymentTransaction();
+        PT487.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT487.setTransactionDateTime(format.parse("2019-03-08"));
+        PT487.setFinalPayment(219.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT487);
+
+        RoomBooking rb488 = new RoomBooking();
+        rb488.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_304"));
+        rb488.setBookInDate(format.parse("2019-03-18"));
+        bookingSessionLocal.createRoomBooking(rb488);
+        PaymentTransaction PT488 = new PaymentTransaction();
+        PT488.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT488.setTransactionDateTime(format.parse("2019-03-09"));
+        PT488.setFinalPayment(327.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT488);
+
+        RoomBooking rb489 = new RoomBooking();
+        rb489.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_305"));
+        rb489.setBookInDate(format.parse("2019-03-19"));
+        bookingSessionLocal.createRoomBooking(rb489);
+        PaymentTransaction PT489 = new PaymentTransaction();
+        PT489.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT489.setTransactionDateTime(format.parse("2019-03-10"));
+        PT489.setFinalPayment(318.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT489);
+
+        RoomBooking rb490 = new RoomBooking();
+        rb490.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_201"));
+        rb490.setBookInDate(format.parse("2019-04-09"));
+        bookingSessionLocal.createRoomBooking(rb490);
+        PaymentTransaction PT490 = new PaymentTransaction();
+        PT490.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT490.setTransactionDateTime(format.parse("2019-04-01"));
+        PT490.setFinalPayment(218.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT490);
+
+        RoomBooking rb491 = new RoomBooking();
+        rb491.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_202"));
+        rb491.setBookInDate(format.parse("2019-04-12"));
+        bookingSessionLocal.createRoomBooking(rb491);
+        PaymentTransaction PT491 = new PaymentTransaction();
+        PT491.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT491.setTransactionDateTime(format.parse("2019-04-02"));
+        PT491.setFinalPayment(271.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT491);
+
+        RoomBooking rb492 = new RoomBooking();
+        rb492.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_203"));
+        rb492.setBookInDate(format.parse("2019-04-18"));
+        bookingSessionLocal.createRoomBooking(rb492);
+        PaymentTransaction PT492 = new PaymentTransaction();
+        PT492.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT492.setTransactionDateTime(format.parse("2019-04-03"));
+        PT492.setFinalPayment(318.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT492);
+
+        RoomBooking rb493 = new RoomBooking();
+        rb493.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_204"));
+        rb493.setBookInDate(format.parse("2019-04-18"));
+        bookingSessionLocal.createRoomBooking(rb493);
+        PaymentTransaction PT493 = new PaymentTransaction();
+        PT493.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT493.setTransactionDateTime(format.parse("2019-04-04"));
+        PT493.setFinalPayment(182.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT493);
+
+        RoomBooking rb494 = new RoomBooking();
+        rb494.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_205"));
+        rb494.setBookInDate(format.parse("2019-04-12"));
+        bookingSessionLocal.createRoomBooking(rb494);
+        PaymentTransaction PT494 = new PaymentTransaction();
+        PT494.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT494.setTransactionDateTime(format.parse("2019-04-05"));
+        PT494.setFinalPayment(284.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT494);
+
+        RoomBooking rb495 = new RoomBooking();
+        rb495.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_301"));
+        rb495.setBookInDate(format.parse("2019-04-12"));
+        bookingSessionLocal.createRoomBooking(rb495);
+        PaymentTransaction PT495 = new PaymentTransaction();
+        PT495.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT495.setTransactionDateTime(format.parse("2019-04-06"));
+        PT495.setFinalPayment(128.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT495);
+
+        RoomBooking rb496 = new RoomBooking();
+        rb496.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_302"));
+        rb496.setBookInDate(format.parse("2019-04-17"));
+        bookingSessionLocal.createRoomBooking(rb496);
+        PaymentTransaction PT496 = new PaymentTransaction();
+        PT496.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT496.setTransactionDateTime(format.parse("2019-04-07"));
+        PT496.setFinalPayment(482.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT496);
+
+        RoomBooking rb497 = new RoomBooking();
+        rb497.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_303"));
+        rb497.setBookInDate(format.parse("2019-04-13"));
+        bookingSessionLocal.createRoomBooking(rb497);
+        PaymentTransaction PT497 = new PaymentTransaction();
+        PT497.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT497.setTransactionDateTime(format.parse("2019-04-08"));
+        PT497.setFinalPayment(271.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT497);
+
+        RoomBooking rb498 = new RoomBooking();
+        rb498.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_304"));
+        rb498.setBookInDate(format.parse("2019-04-13"));
+        bookingSessionLocal.createRoomBooking(rb498);
+        PaymentTransaction PT498 = new PaymentTransaction();
+        PT498.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT498.setTransactionDateTime(format.parse("2019-04-09"));
+        PT498.setFinalPayment(318.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT498);
+
+        RoomBooking rb499 = new RoomBooking();
+        rb499.setBookedRoom(roomSessionLocal.getRoomByName("KRSW_305"));
+        rb499.setBookInDate(format.parse("2019-04-18"));
+        bookingSessionLocal.createRoomBooking(rb499);
+        PaymentTransaction PT499 = new PaymentTransaction();
+        PT499.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT499.setTransactionDateTime(format.parse("2019-04-10"));
+        PT499.setFinalPayment(281.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT499);
+
+    }
+
+    public void initializeRoomBooking2() throws ParseException, NoResultException {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+        RoomBooking rb20 = new RoomBooking();
+        rb20.setBookedRoom(roomSessionLocal.getRoomByName("KRG_201"));
+        rb20.setBookInDate(format.parse("2019-01-09"));
+        bookingSessionLocal.createRoomBooking(rb20);
+        PaymentTransaction PT10 = new PaymentTransaction();
+        PT10.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT10.setTransactionDateTime(format.parse("2019-01-05"));
+        PT10.setFinalPayment(392.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT10);
+
+        RoomBooking rb21 = new RoomBooking();
+        rb21.setBookedRoom(roomSessionLocal.getRoomByName("KRG_202"));
+        rb21.setBookInDate(format.parse("2019-01-10"));
+        bookingSessionLocal.createRoomBooking(rb21);
+        PaymentTransaction PT11 = new PaymentTransaction();
+        PT11.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT11.setTransactionDateTime(format.parse("2019-01-06"));
+        PT11.setFinalPayment(1129.72);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT11);
+
+        RoomBooking rb22 = new RoomBooking();
+        rb22.setBookedRoom(roomSessionLocal.getRoomByName("KRG_303"));
+        rb22.setBookInDate(format.parse("2019-01-13"));
+        bookingSessionLocal.createRoomBooking(rb22);
+        PaymentTransaction PT12 = new PaymentTransaction();
+        PT12.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT12.setTransactionDateTime(format.parse("2019-01-09"));
+        PT12.setFinalPayment(695.50);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT12);
+
+        RoomBooking rb23 = new RoomBooking();
+        rb23.setBookedRoom(roomSessionLocal.getRoomByName("KRG_206"));
+        rb23.setBookInDate(format.parse("2019-01-18"));
+        bookingSessionLocal.createRoomBooking(rb23);
+        PaymentTransaction PT13 = new PaymentTransaction();
+        PT13.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT13.setTransactionDateTime(format.parse("2019-01-14"));
+        PT13.setFinalPayment(554.45);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT13);
+
+        RoomBooking rb24 = new RoomBooking();
+        rb24.setBookedRoom(roomSessionLocal.getRoomByName("KRG_405"));
+        rb24.setBookInDate(format.parse("2019-01-19"));
+        bookingSessionLocal.createRoomBooking(rb24);
+        PaymentTransaction PT14 = new PaymentTransaction();
+        PT14.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT14.setTransactionDateTime(format.parse("2019-01-14"));
+        PT14.setFinalPayment(386.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT14);
+
+        RoomBooking rb25 = new RoomBooking();
+        rb25.setBookedRoom(roomSessionLocal.getRoomByName("KRG_506"));
+        rb25.setBookInDate(format.parse("2019-01-22"));
+        bookingSessionLocal.createRoomBooking(rb25);
+        PaymentTransaction PT15 = new PaymentTransaction();
+        PT15.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT15.setTransactionDateTime(format.parse("2019-01-17"));
+        PT15.setFinalPayment(256.10);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT15);
+
+        RoomBooking rb26 = new RoomBooking();
+        rb26.setBookedRoom(roomSessionLocal.getRoomByName("KRG_207"));
+        rb26.setBookInDate(format.parse("2019-01-22"));
+        bookingSessionLocal.createRoomBooking(rb26);
+        PaymentTransaction PT16 = new PaymentTransaction();
+        PT16.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT16.setTransactionDateTime(format.parse("2019-01-18"));
+        PT16.setFinalPayment(768.20);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT16);
+
+        RoomBooking rb27 = new RoomBooking();
+        rb27.setBookedRoom(roomSessionLocal.getRoomByName("KRG_408"));
+        rb27.setBookInDate(format.parse("2019-01-26"));
+        bookingSessionLocal.createRoomBooking(rb27);
+        PaymentTransaction PT17 = new PaymentTransaction();
+        PT17.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT17.setTransactionDateTime(format.parse("2019-01-21"));
+        PT17.setFinalPayment(1024.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT17);
+
+        RoomBooking rb28 = new RoomBooking();
+        rb28.setBookedRoom(roomSessionLocal.getRoomByName("KRG_209"));
+        rb28.setBookInDate(format.parse("2019-02-03"));
+        bookingSessionLocal.createRoomBooking(rb28);
+        PaymentTransaction PT18 = new PaymentTransaction();
+        PT18.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT18.setTransactionDateTime(format.parse("2019-01-26"));
+        PT18.setFinalPayment(512.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT18);
+
+        RoomBooking rb29 = new RoomBooking();
+        rb29.setBookedRoom(roomSessionLocal.getRoomByName("KRG_510"));
+        rb29.setBookInDate(format.parse("2019-02-04"));
+        bookingSessionLocal.createRoomBooking(rb29);
+        PaymentTransaction PT19 = new PaymentTransaction();
+        PT19.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT19.setTransactionDateTime(format.parse("2019-01-27"));
+        PT19.setFinalPayment(461.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT19);
+
+        RoomBooking rb30 = new RoomBooking();
+        rb30.setBookedRoom(roomSessionLocal.getRoomByName("KRG_505"));
+        rb30.setBookInDate(format.parse("2019-02-09"));
+        bookingSessionLocal.createRoomBooking(rb30);
+        PaymentTransaction PT20 = new PaymentTransaction();
+        PT20.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT20.setTransactionDateTime(format.parse("2019-02-02"));
+        PT20.setFinalPayment(652.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT20);
+
+        RoomBooking rb31 = new RoomBooking();
+        rb31.setBookedRoom(roomSessionLocal.getRoomByName("KRG_209"));
+        rb31.setBookInDate(format.parse("2019-02-09"));
+        bookingSessionLocal.createRoomBooking(rb31);
+        PaymentTransaction PT21 = new PaymentTransaction();
+        PT21.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT21.setTransactionDateTime(format.parse("2019-02-04"));
+        PT21.setFinalPayment(763.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT21);
+
+        RoomBooking rb32 = new RoomBooking();
+        rb32.setBookedRoom(roomSessionLocal.getRoomByName("KRG_802"));
+        rb32.setBookInDate(format.parse("2019-02-11"));
+        bookingSessionLocal.createRoomBooking(rb32);
+        PaymentTransaction PT22 = new PaymentTransaction();
+        PT22.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT22.setTransactionDateTime(format.parse("2019-02-06"));
+        PT22.setFinalPayment(1024.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT22);
+
+        RoomBooking rb33 = new RoomBooking();
+        rb33.setBookedRoom(roomSessionLocal.getRoomByName("KRG_908"));
+        rb33.setBookInDate(format.parse("2019-02-11"));
+        bookingSessionLocal.createRoomBooking(rb33);
+        PaymentTransaction PT23 = new PaymentTransaction();
+        PT23.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT23.setTransactionDateTime(format.parse("2019-02-07"));
+        PT23.setFinalPayment(2261.70);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT23);
+
+        RoomBooking rb35 = new RoomBooking();
+        rb35.setBookedRoom(roomSessionLocal.getRoomByName("KRG_1204"));
+        rb35.setBookInDate(format.parse("2019-02-14"));
+        bookingSessionLocal.createRoomBooking(rb35);
+        PaymentTransaction PT24 = new PaymentTransaction();
+        PT24.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT24.setTransactionDateTime(format.parse("2019-02-09"));
+        PT24.setFinalPayment(3213.50);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT24);
+
+        RoomBooking rb36 = new RoomBooking();
+        rb36.setBookedRoom(roomSessionLocal.getRoomByName("KRG_606"));
+        rb36.setBookInDate(format.parse("2019-02-15"));
+        bookingSessionLocal.createRoomBooking(rb36);
+        PaymentTransaction PT25 = new PaymentTransaction();
+        PT25.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT25.setTransactionDateTime(format.parse("2019-02-10"));
+        PT25.setFinalPayment(1532.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT25);
+
+        RoomBooking rb37 = new RoomBooking();
+        rb37.setBookedRoom(roomSessionLocal.getRoomByName("KRG_708"));
+        rb37.setBookInDate(format.parse("2019-02-19"));
+        bookingSessionLocal.createRoomBooking(rb37);
+        PaymentTransaction PT26 = new PaymentTransaction();
+        PT26.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT26.setTransactionDateTime(format.parse("2019-02-13"));
+        PT26.setFinalPayment(791.60);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT26);
+
+        RoomBooking rb38 = new RoomBooking();
+        rb38.setBookedRoom(roomSessionLocal.getRoomByName("KRG_904"));
+        rb38.setBookInDate(format.parse("2019-02-19"));
+        bookingSessionLocal.createRoomBooking(rb38);
+        PaymentTransaction PT27 = new PaymentTransaction();
+        PT27.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT27.setTransactionDateTime(format.parse("2019-02-14"));
+        PT27.setFinalPayment(1822.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT27);
+
+        RoomBooking rb39 = new RoomBooking();
+        rb39.setBookedRoom(roomSessionLocal.getRoomByName("KRG_902"));
+        rb39.setBookInDate(format.parse("2019-02-23"));
+        bookingSessionLocal.createRoomBooking(rb39);
+        PaymentTransaction PT28 = new PaymentTransaction();
+        PT28.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT28.setTransactionDateTime(format.parse("2019-02-19"));
+        PT28.setFinalPayment(962.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT28);
+
+        RoomBooking rb40 = new RoomBooking();
+        rb40.setBookedRoom(roomSessionLocal.getRoomByName("KRG_904"));
+        rb40.setBookInDate(format.parse("2019-02-25"));
+        bookingSessionLocal.createRoomBooking(rb40);
+        PaymentTransaction PT29 = new PaymentTransaction();
+        PT29.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT29.setTransactionDateTime(format.parse("2019-02-22"));
+        PT29.setFinalPayment(452.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT29);
+
+        RoomBooking rb41 = new RoomBooking();
+        rb41.setBookedRoom(roomSessionLocal.getRoomByName("KRG_402"));
+        rb41.setBookInDate(format.parse("2019-03-05"));
+        bookingSessionLocal.createRoomBooking(rb41);
+        PaymentTransaction PT30 = new PaymentTransaction();
+        PT30.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT30.setTransactionDateTime(format.parse("2019-03-02"));
+        PT30.setFinalPayment(587.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT30);
+
+        RoomBooking rb42 = new RoomBooking();
+        rb42.setBookedRoom(roomSessionLocal.getRoomByName("KRG_602"));
+        rb42.setBookInDate(format.parse("2019-03-07"));
+        bookingSessionLocal.createRoomBooking(rb42);
+        PaymentTransaction PT31 = new PaymentTransaction();
+        PT31.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT31.setTransactionDateTime(format.parse("2019-03-03"));
+        PT31.setFinalPayment(599.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT31);
+
+        RoomBooking rb43 = new RoomBooking();
+        rb43.setBookedRoom(roomSessionLocal.getRoomByName("KRG_703"));
+        rb43.setBookInDate(format.parse("2019-03-14"));
+        bookingSessionLocal.createRoomBooking(rb43);
+        PaymentTransaction PT32 = new PaymentTransaction();
+        PT32.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT32.setTransactionDateTime(format.parse("2019-03-07"));
+        PT32.setFinalPayment(768.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT32);
+
+        RoomBooking rb44 = new RoomBooking();
+        rb44.setBookedRoom(roomSessionLocal.getRoomByName("KRG_1103"));
+        rb44.setBookInDate(format.parse("2019-03-13"));
+        bookingSessionLocal.createRoomBooking(rb44);
+        PaymentTransaction PT33 = new PaymentTransaction();
+        PT33.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT33.setTransactionDateTime(format.parse("2019-03-09"));
+        PT33.setFinalPayment(1238.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT33);
+
+        RoomBooking rb45 = new RoomBooking();
+        rb45.setBookedRoom(roomSessionLocal.getRoomByName("KRG_1402"));
+        rb45.setBookInDate(format.parse("2019-03-18"));
+        bookingSessionLocal.createRoomBooking(rb45);
+        PaymentTransaction PT34 = new PaymentTransaction();
+        PT34.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT34.setTransactionDateTime(format.parse("2019-03-13"));
+        PT34.setFinalPayment(4388.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT34);
+
+        RoomBooking rb46 = new RoomBooking();
+        rb46.setBookedRoom(roomSessionLocal.getRoomByName("KRG_1203"));
+        rb46.setBookInDate(format.parse("2019-03-22"));
+        bookingSessionLocal.createRoomBooking(rb46);
+        PaymentTransaction PT35 = new PaymentTransaction();
+        PT35.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT35.setTransactionDateTime(format.parse("2019-03-17"));
+        PT35.setFinalPayment(1462.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT35);
+
+        RoomBooking rb47 = new RoomBooking();
+        rb47.setBookedRoom(roomSessionLocal.getRoomByName("KRG_203"));
+        rb47.setBookInDate(format.parse("2019-03-26"));
+        bookingSessionLocal.createRoomBooking(rb47);
+        PaymentTransaction PT36 = new PaymentTransaction();
+        PT36.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT36.setTransactionDateTime(format.parse("2019-03-19"));
+        PT36.setFinalPayment(732.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT36);
+
+        RoomBooking rb48 = new RoomBooking();
+        rb48.setBookedRoom(roomSessionLocal.getRoomByName("KRG_703"));
+        rb48.setBookInDate(format.parse("2019-03-25"));
+        bookingSessionLocal.createRoomBooking(rb48);
+        PaymentTransaction PT37 = new PaymentTransaction();
+        PT37.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT37.setTransactionDateTime(format.parse("2019-03-21"));
+        PT37.setFinalPayment(741.40);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT37);
+
+        RoomBooking rb49 = new RoomBooking();
+        rb49.setBookedRoom(roomSessionLocal.getRoomByName("KRG_707"));
+        rb49.setBookInDate(format.parse("2019-03-29"));
+        bookingSessionLocal.createRoomBooking(rb49);
+        PaymentTransaction PT38 = new PaymentTransaction();
+        PT38.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT38.setTransactionDateTime(format.parse("2019-03-25"));
+        PT38.setFinalPayment(552.99);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT38);
+
+        RoomBooking rb50 = new RoomBooking();
+        rb50.setBookedRoom(roomSessionLocal.getRoomByName("KRG_808"));
+        rb50.setBookInDate(format.parse("2019-04-01"));
+        bookingSessionLocal.createRoomBooking(rb50);
+        PaymentTransaction PT39 = new PaymentTransaction();
+        PT39.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT39.setTransactionDateTime(format.parse("2019-03-28"));
+        PT39.setFinalPayment(746.10);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT39);
+
+        RoomBooking rb51 = new RoomBooking();
+        rb51.setBookedRoom(roomSessionLocal.getRoomByName("KRG_407"));
+        rb51.setBookInDate(format.parse("2019-04-07"));
+        bookingSessionLocal.createRoomBooking(rb51);
+        PaymentTransaction PT40 = new PaymentTransaction();
+        PT40.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT40.setTransactionDateTime(format.parse("2019-04-04"));
+        PT40.setFinalPayment(1372.30);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT40);
+
+        RoomBooking rb52 = new RoomBooking();
+        rb52.setBookedRoom(roomSessionLocal.getRoomByName("KRG_905"));
+        rb52.setBookInDate(format.parse("2019-04-15"));
+        bookingSessionLocal.createRoomBooking(rb52);
+        PaymentTransaction PT41 = new PaymentTransaction();
+        PT41.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT41.setTransactionDateTime(format.parse("2019-04-09"));
+        PT41.setFinalPayment(2166.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT41);
+
+        RoomBooking rb53 = new RoomBooking();
+        rb53.setBookedRoom(roomSessionLocal.getRoomByName("KRG_403"));
+        rb53.setBookInDate(format.parse("2019-04-15"));
+        bookingSessionLocal.createRoomBooking(rb53);
+        PaymentTransaction PT42 = new PaymentTransaction();
+        PT42.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT42.setTransactionDateTime(format.parse("2019-04-10"));
+        PT42.setFinalPayment(1114.70);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT42);
+
+        RoomBooking rb54 = new RoomBooking();
+        rb54.setBookedRoom(roomSessionLocal.getRoomByName("KRG_608"));
+        rb54.setBookInDate(format.parse("2019-04-16"));
+        bookingSessionLocal.createRoomBooking(rb54);
+        PaymentTransaction PT43 = new PaymentTransaction();
+        PT43.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT43.setTransactionDateTime(format.parse("2019-04-10"));
+        PT43.setFinalPayment(832.10);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT43);
+
+        RoomBooking rb55 = new RoomBooking();
+        rb55.setBookedRoom(roomSessionLocal.getRoomByName("KRG_702"));
+        rb55.setBookInDate(format.parse("2019-04-16"));
+        bookingSessionLocal.createRoomBooking(rb55);
+        PaymentTransaction PT44 = new PaymentTransaction();
+        PT44.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT44.setTransactionDateTime(format.parse("2019-04-11"));
+        PT44.setFinalPayment(874.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT44);
+
+        RoomBooking rb56 = new RoomBooking();
+        rb56.setBookedRoom(roomSessionLocal.getRoomByName("KRG_303"));
+        rb56.setBookInDate(format.parse("2019-04-17"));
+        bookingSessionLocal.createRoomBooking(rb56);
+        PaymentTransaction PT45 = new PaymentTransaction();
+        PT45.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT45.setTransactionDateTime(format.parse("2019-04-12"));
+        PT45.setFinalPayment(522.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT45);
+
+        RoomBooking rb57 = new RoomBooking();
+        rb57.setBookedRoom(roomSessionLocal.getRoomByName("KRG_904"));
+        rb57.setBookInDate(format.parse("2019-04-18"));
+        bookingSessionLocal.createRoomBooking(rb57);
+        PaymentTransaction PT46 = new PaymentTransaction();
+        PT46.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT46.setTransactionDateTime(format.parse("2019-04-13"));
+        PT46.setFinalPayment(8483.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT46);
+
+        RoomBooking rb58 = new RoomBooking();
+        rb58.setBookedRoom(roomSessionLocal.getRoomByName("KRG_1201"));
+        rb58.setBookInDate(format.parse("2019-04-19"));
+        bookingSessionLocal.createRoomBooking(rb58);
+        PaymentTransaction PT47 = new PaymentTransaction();
+        PT47.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT47.setTransactionDateTime(format.parse("2019-04-14"));
+        PT47.setFinalPayment(10512.70);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT47);
+
+        RoomBooking rb59 = new RoomBooking();
+        rb59.setBookedRoom(roomSessionLocal.getRoomByName("KRG_1202"));
+        rb59.setBookInDate(format.parse("2019-04-22"));
+        rb59.setFirstName("Menteo");
+        rb59.setLastName("Lucas");
+        rb59.setPassportNum("A4726126D");
+        bookingSessionLocal.createRoomBooking(rb59);
+        PaymentTransaction PT48 = new PaymentTransaction();
+        PT48.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT48.setTransactionDateTime(format.parse("2019-04-17"));
+        PT48.setFinalPayment(5622.60);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT48);
+
+        RoomBooking rb60 = new RoomBooking();
+        rb60.setBookedRoom(roomSessionLocal.getRoomByName("KRG_1203"));
+        rb60.setBookInDate(format.parse("2019-04-25"));
+        rb60.setFirstName("Steve");
+        rb60.setLastName("Wayne");
+        rb60.setPassportNum("A8217632K");
+        bookingSessionLocal.createRoomBooking(rb60);
+        PaymentTransaction PT49 = new PaymentTransaction();
+        PT49.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT49.setTransactionDateTime(format.parse("2019-04-19"));
+        PT49.setFinalPayment(6782.60);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT49);
+
+        RoomBooking rb61 = new RoomBooking();
+        rb61.setBookedRoom(roomSessionLocal.getRoomByName("KRC_602"));
+        rb61.setBookInDate(format.parse("2019-01-05"));
+        bookingSessionLocal.createRoomBooking(rb61);
+        PaymentTransaction PT50 = new PaymentTransaction();
+        PT50.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT50.setTransactionDateTime(format.parse("2019-01-01"));
+        PT50.setFinalPayment(602.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT50);
+
+        RoomBooking rb62 = new RoomBooking();
+        rb62.setBookedRoom(roomSessionLocal.getRoomByName("KRC_1201"));
+        rb62.setBookInDate(format.parse("2019-01-06"));
+        bookingSessionLocal.createRoomBooking(rb62);
+        PaymentTransaction PT51 = new PaymentTransaction();
+        PT51.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT51.setTransactionDateTime(format.parse("2019-01-02"));
+        PT51.setFinalPayment(2932.40);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT51);
+
+        RoomBooking rb63 = new RoomBooking();
+        rb63.setBookedRoom(roomSessionLocal.getRoomByName("KRC_303"));
+        rb63.setBookInDate(format.parse("2019-01-06"));
+        bookingSessionLocal.createRoomBooking(rb63);
+        PaymentTransaction PT52 = new PaymentTransaction();
+        PT52.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT52.setTransactionDateTime(format.parse("2019-01-03"));
+        PT52.setFinalPayment(456.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT52);
+
+        RoomBooking rb64 = new RoomBooking();
+        rb64.setBookedRoom(roomSessionLocal.getRoomByName("KRC_502"));
+        rb64.setBookInDate(format.parse("2019-01-08"));
+        bookingSessionLocal.createRoomBooking(rb64);
+        PaymentTransaction PT53 = new PaymentTransaction();
+        PT53.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT53.setTransactionDateTime(format.parse("2019-01-04"));
+        PT53.setFinalPayment(923.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT53);
+
+        RoomBooking rb65 = new RoomBooking();
+        rb65.setBookedRoom(roomSessionLocal.getRoomByName("KRC_1202"));
+        rb65.setBookInDate(format.parse("2019-01-13"));
+        bookingSessionLocal.createRoomBooking(rb65);
+        PaymentTransaction PT54 = new PaymentTransaction();
+        PT54.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT54.setTransactionDateTime(format.parse("2019-01-10"));
+        PT54.setFinalPayment(2296.78);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT54);
+
+        RoomBooking rb66 = new RoomBooking();
+        rb66.setBookedRoom(roomSessionLocal.getRoomByName("KRC_508"));
+        rb66.setBookInDate(format.parse("2019-01-16"));
+        bookingSessionLocal.createRoomBooking(rb66);
+        PaymentTransaction PT55 = new PaymentTransaction();
+        PT55.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT55.setTransactionDateTime(format.parse("2019-01-11"));
+        PT55.setFinalPayment(587.32);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT55);
+
+        RoomBooking rb67 = new RoomBooking();
+        rb67.setBookedRoom(roomSessionLocal.getRoomByName("KRC_904"));
+        rb67.setBookInDate(format.parse("2019-01-19"));
+        bookingSessionLocal.createRoomBooking(rb67);
+        PaymentTransaction PT56 = new PaymentTransaction();
+        PT56.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT56.setTransactionDateTime(format.parse("2019-01-12"));
+        PT56.setFinalPayment(1621.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT56);
+
+        RoomBooking rb68 = new RoomBooking();
+        rb68.setBookedRoom(roomSessionLocal.getRoomByName("KRC_1203"));
+        rb68.setBookInDate(format.parse("2019-01-28"));
+        bookingSessionLocal.createRoomBooking(rb68);
+        PaymentTransaction PT57 = new PaymentTransaction();
+        PT57.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT57.setTransactionDateTime(format.parse("2019-01-23"));
+        PT57.setFinalPayment(4981.50);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT57);
+
+        RoomBooking rb69 = new RoomBooking();
+        rb69.setBookedRoom(roomSessionLocal.getRoomByName("KRC_1202"));
+        rb69.setBookInDate(format.parse("2019-01-29"));
+        bookingSessionLocal.createRoomBooking(rb69);
+        PaymentTransaction PT58 = new PaymentTransaction();
+        PT58.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT58.setTransactionDateTime(format.parse("2019-01-24"));
+        PT58.setFinalPayment(1100.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT58);
+
+        RoomBooking rb70 = new RoomBooking();
+        rb70.setBookedRoom(roomSessionLocal.getRoomByName("KRC_702"));
+        rb70.setBookInDate(format.parse("2019-02-01"));
+        bookingSessionLocal.createRoomBooking(rb70);
+        PaymentTransaction PT59 = new PaymentTransaction();
+        PT59.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT59.setTransactionDateTime(format.parse("2019-01-25"));
+        PT59.setFinalPayment(692.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT59);
+
+        RoomBooking rb71 = new RoomBooking();
+        rb71.setBookedRoom(roomSessionLocal.getRoomByName("KRC_302"));
+        rb71.setBookInDate(format.parse("2019-02-09"));
+        bookingSessionLocal.createRoomBooking(rb71);
+        PaymentTransaction PT60 = new PaymentTransaction();
+        PT60.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT60.setTransactionDateTime(format.parse("2019-02-04"));
+        PT60.setFinalPayment(762.50);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT60);
+
+        RoomBooking rb72 = new RoomBooking();
+        rb72.setBookedRoom(roomSessionLocal.getRoomByName("KRC_303"));
+        rb72.setBookInDate(format.parse("2019-02-09"));
+        bookingSessionLocal.createRoomBooking(rb72);
+        PaymentTransaction PT61 = new PaymentTransaction();
+        PT61.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT61.setTransactionDateTime(format.parse("2019-02-05"));
+        PT61.setFinalPayment(742.30);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT61);
+
+        RoomBooking rb73 = new RoomBooking();
+        rb73.setBookedRoom(roomSessionLocal.getRoomByName("KRC_305"));
+        rb73.setBookInDate(format.parse("2019-02-10"));
+        bookingSessionLocal.createRoomBooking(rb73);
+        PaymentTransaction PT62 = new PaymentTransaction();
+        PT62.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT62.setTransactionDateTime(format.parse("2019-02-05"));
+        PT62.setFinalPayment(815.40);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT62);
+
+        RoomBooking rb74 = new RoomBooking();
+        rb74.setBookedRoom(roomSessionLocal.getRoomByName("KRC_403"));
+        rb74.setBookInDate(format.parse("2019-02-15"));
+        bookingSessionLocal.createRoomBooking(rb74);
+        PaymentTransaction PT63 = new PaymentTransaction();
+        PT63.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT63.setTransactionDateTime(format.parse("2019-02-09"));
+        PT63.setFinalPayment(814.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT63);
+
+        RoomBooking rb75 = new RoomBooking();
+        rb75.setBookedRoom(roomSessionLocal.getRoomByName("KRC_404"));
+        rb75.setBookInDate(format.parse("2019-02-19"));
+        bookingSessionLocal.createRoomBooking(rb75);
+        PaymentTransaction PT64 = new PaymentTransaction();
+        PT64.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT64.setTransactionDateTime(format.parse("2019-02-14"));
+        PT64.setFinalPayment(862.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT64);
+
+        RoomBooking rb76 = new RoomBooking();
+        rb76.setBookedRoom(roomSessionLocal.getRoomByName("KRC_405"));
+        rb76.setBookInDate(format.parse("2019-02-22"));
+        bookingSessionLocal.createRoomBooking(rb76);
+        PaymentTransaction PT65 = new PaymentTransaction();
+        PT65.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT65.setTransactionDateTime(format.parse("2019-02-16"));
+        PT65.setFinalPayment(987.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT65);
+
+        RoomBooking rb77 = new RoomBooking();
+        rb77.setBookedRoom(roomSessionLocal.getRoomByName("KRC_506"));
+        rb77.setBookInDate(format.parse("2019-02-22"));
+        bookingSessionLocal.createRoomBooking(rb77);
+        PaymentTransaction PT66 = new PaymentTransaction();
+        PT66.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT66.setTransactionDateTime(format.parse("2019-02-17"));
+        PT66.setFinalPayment(916.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT66);
+
+        RoomBooking rb78 = new RoomBooking();
+        rb78.setBookedRoom(roomSessionLocal.getRoomByName("KRC_603"));
+        rb78.setBookInDate(format.parse("2019-02-27"));
+        bookingSessionLocal.createRoomBooking(rb78);
+        PaymentTransaction PT67 = new PaymentTransaction();
+        PT67.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT67.setTransactionDateTime(format.parse("2019-02-21"));
+        PT67.setFinalPayment(1227.60);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT67);
+
+        RoomBooking rb79 = new RoomBooking();
+        rb79.setBookedRoom(roomSessionLocal.getRoomByName("KRC_605"));
+        rb79.setBookInDate(format.parse("2019-02-26"));
+        bookingSessionLocal.createRoomBooking(rb79);
+        PaymentTransaction PT68 = new PaymentTransaction();
+        PT68.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT68.setTransactionDateTime(format.parse("2019-02-22"));
+        PT68.setFinalPayment(681.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT68);
+
+        RoomBooking rb80 = new RoomBooking();
+        rb80.setBookedRoom(roomSessionLocal.getRoomByName("KRC_703"));
+        rb80.setBookInDate(format.parse("2019-03-02"));
+        bookingSessionLocal.createRoomBooking(rb80);
+        PaymentTransaction PT69 = new PaymentTransaction();
+        PT69.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT69.setTransactionDateTime(format.parse("2019-02-25"));
+        PT69.setFinalPayment(975.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT69);
+
+        RoomBooking rb81 = new RoomBooking();
+        rb81.setBookedRoom(roomSessionLocal.getRoomByName("KRC_707"));
+        rb81.setBookInDate(format.parse("2019-03-09"));
+        bookingSessionLocal.createRoomBooking(rb81);
+        PaymentTransaction PT70 = new PaymentTransaction();
+        PT70.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT70.setTransactionDateTime(format.parse("2019-03-02"));
+        PT70.setFinalPayment(1843.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT70);
+
+        RoomBooking rb82 = new RoomBooking();
+        rb82.setBookedRoom(roomSessionLocal.getRoomByName("KRC_802"));
+        rb82.setBookInDate(format.parse("2019-03-08"));
+        bookingSessionLocal.createRoomBooking(rb82);
+        PaymentTransaction PT71 = new PaymentTransaction();
+        PT71.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT71.setTransactionDateTime(format.parse("2019-03-03"));
+        PT71.setFinalPayment(694.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT71);
+
+        RoomBooking rb83 = new RoomBooking();
+        rb83.setBookedRoom(roomSessionLocal.getRoomByName("KRC_903"));
+        rb83.setBookInDate(format.parse("2019-03-11"));
+        bookingSessionLocal.createRoomBooking(rb83);
+        PaymentTransaction PT72 = new PaymentTransaction();
+        PT72.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT72.setTransactionDateTime(format.parse("2019-03-06"));
+        PT72.setFinalPayment(9752.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT72);
+
+        RoomBooking rb84 = new RoomBooking();
+        rb84.setBookedRoom(roomSessionLocal.getRoomByName("KRC_904"));
+        rb84.setBookInDate(format.parse("2019-03-14"));
+        bookingSessionLocal.createRoomBooking(rb84);
+        PaymentTransaction PT73 = new PaymentTransaction();
+        PT73.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT73.setTransactionDateTime(format.parse("2019-03-10"));
+        PT73.setFinalPayment(1452.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT73);
+
+        RoomBooking rb85 = new RoomBooking();
+        rb85.setBookedRoom(roomSessionLocal.getRoomByName("KRC_302"));
+        rb85.setBookInDate(format.parse("2019-03-17"));
+        bookingSessionLocal.createRoomBooking(rb85);
+        PaymentTransaction PT74 = new PaymentTransaction();
+        PT74.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT74.setTransactionDateTime(format.parse("2019-03-13"));
+        PT74.setFinalPayment(841.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT74);
+
+        RoomBooking rb86 = new RoomBooking();
+        rb86.setBookedRoom(roomSessionLocal.getRoomByName("KRC_304"));
+        rb86.setBookInDate(format.parse("2019-03-22"));
+        bookingSessionLocal.createRoomBooking(rb86);
+        PaymentTransaction PT75 = new PaymentTransaction();
+        PT75.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT75.setTransactionDateTime(format.parse("2019-03-16"));
+        PT75.setFinalPayment(952.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT75);
+
+        RoomBooking rb87 = new RoomBooking();
+        rb87.setBookedRoom(roomSessionLocal.getRoomByName("KRC_306"));
+        rb87.setBookInDate(format.parse("2019-03-22"));
+        bookingSessionLocal.createRoomBooking(rb87);
+        PaymentTransaction PT76 = new PaymentTransaction();
+        PT76.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT76.setTransactionDateTime(format.parse("2019-03-19"));
+        PT76.setFinalPayment(651.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT76);
+
+        RoomBooking rb88 = new RoomBooking();
+        rb88.setBookedRoom(roomSessionLocal.getRoomByName("KRC_403"));
+        rb88.setBookInDate(format.parse("2019-03-28"));
+        bookingSessionLocal.createRoomBooking(rb88);
+        PaymentTransaction PT77 = new PaymentTransaction();
+        PT77.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT77.setTransactionDateTime(format.parse("2019-03-21"));
+        PT77.setFinalPayment(694.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT77);
+
+        RoomBooking rb89 = new RoomBooking();
+        rb89.setBookedRoom(roomSessionLocal.getRoomByName("KRC_405"));
+        rb89.setBookInDate(format.parse("2019-03-28"));
+        bookingSessionLocal.createRoomBooking(rb89);
+        PaymentTransaction PT78 = new PaymentTransaction();
+        PT78.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT78.setTransactionDateTime(format.parse("2019-03-24"));
+        PT78.setFinalPayment(6152.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT78);
+
+        RoomBooking rb90 = new RoomBooking();
+        rb90.setBookedRoom(roomSessionLocal.getRoomByName("KRC_503"));
+        rb90.setBookInDate(format.parse("2019-03-29"));
+        bookingSessionLocal.createRoomBooking(rb90);
+        PaymentTransaction PT79 = new PaymentTransaction();
+        PT79.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT79.setTransactionDateTime(format.parse("2019-03-25"));
+        PT79.setFinalPayment(916.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT79);
+
+        RoomBooking rb91 = new RoomBooking();
+        rb91.setBookedRoom(roomSessionLocal.getRoomByName("KRC_608"));
+        rb91.setBookInDate(format.parse("2019-03-29"));
+        bookingSessionLocal.createRoomBooking(rb91);
+        PaymentTransaction PT80 = new PaymentTransaction();
+        PT80.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT80.setTransactionDateTime(format.parse("2019-03-25"));
+        PT80.setFinalPayment(969.30);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT80);
+
+        RoomBooking rb92 = new RoomBooking();
+        rb92.setBookedRoom(roomSessionLocal.getRoomByName("KRC_703"));
+        rb92.setBookInDate(format.parse("2019-03-30"));
+        bookingSessionLocal.createRoomBooking(rb92);
+        PaymentTransaction PT81 = new PaymentTransaction();
+        PT81.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT81.setTransactionDateTime(format.parse("2019-03-26"));
+        PT81.setFinalPayment(2123.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT81);
+
+        RoomBooking rb93 = new RoomBooking();
+        rb93.setBookedRoom(roomSessionLocal.getRoomByName("KRC_1201"));
+        rb93.setBookInDate(format.parse("2019-04-08"));
+        bookingSessionLocal.createRoomBooking(rb93);
+        PaymentTransaction PT82 = new PaymentTransaction();
+        PT82.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT82.setTransactionDateTime(format.parse("2019-04-01"));
+        PT82.setFinalPayment(2181.80);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT82);
+
+        RoomBooking rb94 = new RoomBooking();
+        rb94.setBookedRoom(roomSessionLocal.getRoomByName("KRC_1202"));
+        rb94.setBookInDate(format.parse("2019-04-06"));
+        bookingSessionLocal.createRoomBooking(rb94);
+        PaymentTransaction PT83 = new PaymentTransaction();
+        PT83.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT83.setTransactionDateTime(format.parse("2019-04-01"));
+        PT83.setFinalPayment(2561.90);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT83);
+
+        RoomBooking rb95 = new RoomBooking();
+        rb95.setBookedRoom(roomSessionLocal.getRoomByName("KRC_1204"));
+        rb95.setBookInDate(format.parse("2019-04-07"));
+        bookingSessionLocal.createRoomBooking(rb95);
+        PaymentTransaction PT84 = new PaymentTransaction();
+        PT84.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT84.setTransactionDateTime(format.parse("2019-04-03"));
+        PT84.setFinalPayment(990.90);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT84);
+
+        RoomBooking rb96 = new RoomBooking();
+        rb96.setBookedRoom(roomSessionLocal.getRoomByName("KRC_602"));
+        rb96.setBookInDate(format.parse("2019-04-09"));
+        bookingSessionLocal.createRoomBooking(rb96);
+        PaymentTransaction PT85 = new PaymentTransaction();
+        PT85.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT85.setTransactionDateTime(format.parse("2019-04-05"));
+        PT85.setFinalPayment(842.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT85);
+
+        RoomBooking rb97 = new RoomBooking();
+        rb97.setBookedRoom(roomSessionLocal.getRoomByName("KRC_603"));
+        rb97.setBookInDate(format.parse("2019-04-11"));
+        bookingSessionLocal.createRoomBooking(rb97);
+        PaymentTransaction PT86 = new PaymentTransaction();
+        PT86.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT86.setTransactionDateTime(format.parse("2019-04-06"));
+        PT86.setFinalPayment(815.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT86);
+
+        RoomBooking rb98 = new RoomBooking();
+        rb98.setBookedRoom(roomSessionLocal.getRoomByName("KRC_702"));
+        rb98.setBookInDate(format.parse("2019-04-13"));
+        bookingSessionLocal.createRoomBooking(rb98);
+        PaymentTransaction PT87 = new PaymentTransaction();
+        PT87.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT87.setTransactionDateTime(format.parse("2019-04-08"));
+        PT87.setFinalPayment(877.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT87);
+
+        RoomBooking rb99 = new RoomBooking();
+        rb99.setBookedRoom(roomSessionLocal.getRoomByName("KRC_703"));
+        rb99.setBookInDate(format.parse("2019-04-15"));
+        bookingSessionLocal.createRoomBooking(rb99);
+        PaymentTransaction PT88 = new PaymentTransaction();
+        PT88.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT88.setTransactionDateTime(format.parse("2019-04-09"));
+        PT88.setFinalPayment(988.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT88);
+
+        RoomBooking rb100 = new RoomBooking();
+        rb100.setBookedRoom(roomSessionLocal.getRoomByName("KRC_704"));
+        rb100.setBookInDate(format.parse("2019-04-15"));
+        bookingSessionLocal.createRoomBooking(rb100);
+        PaymentTransaction PT89 = new PaymentTransaction();
+        PT89.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT89.setTransactionDateTime(format.parse("2019-04-10"));
+        PT89.setFinalPayment(1044.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT89);
+
+        RoomBooking rb101 = new RoomBooking();
+        rb101.setBookedRoom(roomSessionLocal.getRoomByName("KRC_802"));
+        rb101.setBookInDate(format.parse("2019-04-16"));
+        bookingSessionLocal.createRoomBooking(rb101);
+        PaymentTransaction PT90 = new PaymentTransaction();
+        PT90.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT90.setTransactionDateTime(format.parse("2019-04-11"));
+        PT90.setFinalPayment(1122.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT90);
+
+        RoomBooking rb102 = new RoomBooking();
+        rb102.setBookedRoom(roomSessionLocal.getRoomByName("KRC_706"));
+        rb102.setBookInDate(format.parse("2019-04-19"));
+        bookingSessionLocal.createRoomBooking(rb102);
+        PaymentTransaction PT91 = new PaymentTransaction();
+        PT91.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT91.setTransactionDateTime(format.parse("2019-04-14"));
+        PT91.setFinalPayment(677.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT91);
+
+        RoomBooking rb103 = new RoomBooking();
+        rb103.setBookedRoom(roomSessionLocal.getRoomByName("KRN_602"));
+        rb103.setBookInDate(format.parse("2019-01-15"));
+        bookingSessionLocal.createRoomBooking(rb103);
+        PaymentTransaction PT92 = new PaymentTransaction();
+        PT92.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT92.setTransactionDateTime(format.parse("2019-01-07"));
+        PT92.setFinalPayment(774.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT92);
+
+        RoomBooking rb104 = new RoomBooking();
+        rb104.setBookedRoom(roomSessionLocal.getRoomByName("KRN_802"));
+        rb104.setBookInDate(format.parse("2019-01-14"));
+        bookingSessionLocal.createRoomBooking(rb104);
+        PaymentTransaction PT93 = new PaymentTransaction();
+        PT93.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT93.setTransactionDateTime(format.parse("2019-01-08"));
+        PT93.setFinalPayment(683.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT93);
+
+        RoomBooking rb105 = new RoomBooking();
+        rb105.setBookedRoom(roomSessionLocal.getRoomByName("KRN_703"));
+        rb105.setBookInDate(format.parse("2019-01-15"));
+        bookingSessionLocal.createRoomBooking(rb105);
+        PaymentTransaction PT94 = new PaymentTransaction();
+        PT94.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT94.setTransactionDateTime(format.parse("2019-01-09"));
+        PT94.setFinalPayment(1636.50);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT94);
+
+        RoomBooking rb106 = new RoomBooking();
+        rb106.setBookedRoom(roomSessionLocal.getRoomByName("KRN_804"));
+        rb106.setBookInDate(format.parse("2019-01-14"));
+        bookingSessionLocal.createRoomBooking(rb106);
+        PaymentTransaction PT95 = new PaymentTransaction();
+        PT95.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT95.setTransactionDateTime(format.parse("2019-01-10"));
+        PT95.setFinalPayment(2522.30);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT95);
+
+        RoomBooking rb107 = new RoomBooking();
+        rb107.setBookedRoom(roomSessionLocal.getRoomByName("KRN_205"));
+        rb107.setBookInDate(format.parse("2019-01-15"));
+        bookingSessionLocal.createRoomBooking(rb107);
+        PaymentTransaction PT96 = new PaymentTransaction();
+        PT96.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT96.setTransactionDateTime(format.parse("2019-01-11"));
+        PT96.setFinalPayment(831.70);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT96);
+
+        RoomBooking rb108 = new RoomBooking();
+        rb108.setBookedRoom(roomSessionLocal.getRoomByName("KRN_206"));
+        rb108.setBookInDate(format.parse("2019-01-18"));
+        bookingSessionLocal.createRoomBooking(rb108);
+        PaymentTransaction PT97 = new PaymentTransaction();
+        PT97.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT97.setTransactionDateTime(format.parse("2019-01-13"));
+        PT97.setFinalPayment(984.40);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT97);
+
+        RoomBooking rb109 = new RoomBooking();
+        rb109.setBookedRoom(roomSessionLocal.getRoomByName("KRN_207"));
+        rb109.setBookInDate(format.parse("2019-01-20"));
+        bookingSessionLocal.createRoomBooking(rb109);
+        PaymentTransaction PT98 = new PaymentTransaction();
+        PT98.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT98.setTransactionDateTime(format.parse("2019-01-15"));
+        PT98.setFinalPayment(907.60);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT98);
+
+        RoomBooking rb110 = new RoomBooking();
+        rb110.setBookedRoom(roomSessionLocal.getRoomByName("KRN_208"));
+        rb110.setBookInDate(format.parse("2019-01-22"));
+        bookingSessionLocal.createRoomBooking(rb110);
+        PaymentTransaction PT99 = new PaymentTransaction();
+        PT99.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT99.setTransactionDateTime(format.parse("2019-01-18"));
+        PT99.setFinalPayment(784.30);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT99);
+
+        RoomBooking rb111 = new RoomBooking();
+        rb111.setBookedRoom(roomSessionLocal.getRoomByName("KRN_302"));
+        rb111.setBookInDate(format.parse("2019-01-24"));
+        bookingSessionLocal.createRoomBooking(rb111);
+        PaymentTransaction PT100 = new PaymentTransaction();
+        PT100.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT100.setTransactionDateTime(format.parse("2019-01-19"));
+        PT100.setFinalPayment(875.40);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT100);
+
+        RoomBooking rb112 = new RoomBooking();
+        rb112.setBookedRoom(roomSessionLocal.getRoomByName("KRN_303"));
+        rb112.setBookInDate(format.parse("2019-01-29"));
+        bookingSessionLocal.createRoomBooking(rb112);
+        PaymentTransaction PT101 = new PaymentTransaction();
+        PT101.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT101.setTransactionDateTime(format.parse("2019-01-23"));
+        PT101.setFinalPayment(923.50);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT101);
+
+        RoomBooking rb113 = new RoomBooking();
+        rb113.setBookedRoom(roomSessionLocal.getRoomByName("KRN_304"));
+        rb113.setBookInDate(format.parse("2019-02-05"));
+        bookingSessionLocal.createRoomBooking(rb113);
+        PaymentTransaction PT102 = new PaymentTransaction();
+        PT102.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT102.setTransactionDateTime(format.parse("2019-02-01"));
+        PT102.setFinalPayment(1098.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT102);
+
+        RoomBooking rb114 = new RoomBooking();
+        rb114.setBookedRoom(roomSessionLocal.getRoomByName("KRN_305"));
+        rb114.setBookInDate(format.parse("2019-02-08"));
+        bookingSessionLocal.createRoomBooking(rb114);
+        PaymentTransaction PT103 = new PaymentTransaction();
+        PT103.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT103.setTransactionDateTime(format.parse("2019-02-03"));
+        PT103.setFinalPayment(3983.80);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT103);
+
+        RoomBooking rb115 = new RoomBooking();
+        rb115.setBookedRoom(roomSessionLocal.getRoomByName("KRN_306"));
+        rb115.setBookInDate(format.parse("2019-02-09"));
+        bookingSessionLocal.createRoomBooking(rb115);
+        PaymentTransaction PT104 = new PaymentTransaction();
+        PT104.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT104.setTransactionDateTime(format.parse("2019-02-04"));
+        PT104.setFinalPayment(976.60);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT104);
+
+        RoomBooking rb116 = new RoomBooking();
+        rb116.setBookedRoom(roomSessionLocal.getRoomByName("KRN_402"));
+        rb116.setBookInDate(format.parse("2019-02-11"));
+        bookingSessionLocal.createRoomBooking(rb116);
+        PaymentTransaction PT105 = new PaymentTransaction();
+        PT105.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT105.setTransactionDateTime(format.parse("2019-02-06"));
+        PT105.setFinalPayment(1512.06);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT105);
+
+        RoomBooking rb117 = new RoomBooking();
+        rb117.setBookedRoom(roomSessionLocal.getRoomByName("KRN_403"));
+        rb117.setBookInDate(format.parse("2019-02-11"));
+        bookingSessionLocal.createRoomBooking(rb117);
+        PaymentTransaction PT106 = new PaymentTransaction();
+        PT106.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT106.setTransactionDateTime(format.parse("2019-02-08"));
+        PT106.setFinalPayment(1024.70);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT106);
+
+        RoomBooking rb118 = new RoomBooking();
+        rb118.setBookedRoom(roomSessionLocal.getRoomByName("KRN_404"));
+        rb118.setBookInDate(format.parse("2019-02-13"));
+        bookingSessionLocal.createRoomBooking(rb118);
+        PaymentTransaction PT107 = new PaymentTransaction();
+        PT107.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT107.setTransactionDateTime(format.parse("2019-02-10"));
+        PT107.setFinalPayment(809.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT107);
+
+        RoomBooking rb119 = new RoomBooking();
+        rb119.setBookedRoom(roomSessionLocal.getRoomByName("KRN_405"));
+        rb119.setBookInDate(format.parse("2019-02-18"));
+        bookingSessionLocal.createRoomBooking(rb119);
+        PaymentTransaction PT108 = new PaymentTransaction();
+        PT108.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT108.setTransactionDateTime(format.parse("2019-02-11"));
+        PT108.setFinalPayment(690.70);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT108);
+
+        RoomBooking rb120 = new RoomBooking();
+        rb120.setBookedRoom(roomSessionLocal.getRoomByName("KRN_502"));
+        rb120.setBookInDate(format.parse("2019-02-18"));
+        bookingSessionLocal.createRoomBooking(rb120);
+        PaymentTransaction PT109 = new PaymentTransaction();
+        PT109.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT109.setTransactionDateTime(format.parse("2019-02-14"));
+        PT109.setFinalPayment(612.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT109);
+
+        RoomBooking rb121 = new RoomBooking();
+        rb121.setBookedRoom(roomSessionLocal.getRoomByName("KRN_503"));
+        rb121.setBookInDate(format.parse("2019-02-20"));
+        bookingSessionLocal.createRoomBooking(rb121);
+        PaymentTransaction PT110 = new PaymentTransaction();
+        PT110.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT110.setTransactionDateTime(format.parse("2019-02-17"));
+        PT110.setFinalPayment(457.60);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT110);
+
+        RoomBooking rb122 = new RoomBooking();
+        rb122.setBookedRoom(roomSessionLocal.getRoomByName("KRN_504"));
+        rb122.setBookInDate(format.parse("2019-02-24"));
+        bookingSessionLocal.createRoomBooking(rb122);
+        PaymentTransaction PT111 = new PaymentTransaction();
+        PT111.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT111.setTransactionDateTime(format.parse("2019-02-18"));
+        PT111.setFinalPayment(602.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT111);
+
+        RoomBooking rb123 = new RoomBooking();
+        rb123.setBookedRoom(roomSessionLocal.getRoomByName("KRN_505"));
+        rb123.setBookInDate(format.parse("2019-03-08"));
+        bookingSessionLocal.createRoomBooking(rb123);
+        PaymentTransaction PT112 = new PaymentTransaction();
+        PT112.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT112.setTransactionDateTime(format.parse("2019-03-03"));
+        PT112.setFinalPayment(982.30);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT112);
+
+        RoomBooking rb124 = new RoomBooking();
+        rb124.setBookedRoom(roomSessionLocal.getRoomByName("KRN_506"));
+        rb124.setBookInDate(format.parse("2019-03-10"));
+        bookingSessionLocal.createRoomBooking(rb124);
+        PaymentTransaction PT113 = new PaymentTransaction();
+        PT113.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT113.setTransactionDateTime(format.parse("2019-03-06"));
+        PT113.setFinalPayment(868.70);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT113);
+
+        RoomBooking rb125 = new RoomBooking();
+        rb125.setBookedRoom(roomSessionLocal.getRoomByName("KRN_507"));
+        rb125.setBookInDate(format.parse("2019-03-14"));
+        bookingSessionLocal.createRoomBooking(rb125);
+        PaymentTransaction PT114 = new PaymentTransaction();
+        PT114.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT114.setTransactionDateTime(format.parse("2019-03-09"));
+        PT114.setFinalPayment(2081.80);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT114);
+
+        RoomBooking rb126 = new RoomBooking();
+        rb126.setBookedRoom(roomSessionLocal.getRoomByName("KRN_508"));
+        rb126.setBookInDate(format.parse("2019-03-15"));
+        bookingSessionLocal.createRoomBooking(rb126);
+        PaymentTransaction PT115 = new PaymentTransaction();
+        PT115.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT115.setTransactionDateTime(format.parse("2019-03-11"));
+        PT115.setFinalPayment(1272.90);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT115);
+
+        RoomBooking rb127 = new RoomBooking();
+        rb127.setBookedRoom(roomSessionLocal.getRoomByName("KRN_602"));
+        rb127.setBookInDate(format.parse("2019-03-20"));
+        bookingSessionLocal.createRoomBooking(rb127);
+        PaymentTransaction PT116 = new PaymentTransaction();
+        PT116.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT116.setTransactionDateTime(format.parse("2019-03-15"));
+        PT116.setFinalPayment(612.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT116);
+
+        RoomBooking rb128 = new RoomBooking();
+        rb128.setBookedRoom(roomSessionLocal.getRoomByName("KRN_603"));
+        rb128.setBookInDate(format.parse("2019-03-24"));
+        bookingSessionLocal.createRoomBooking(rb128);
+        PaymentTransaction PT117 = new PaymentTransaction();
+        PT117.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT117.setTransactionDateTime(format.parse("2019-03-18"));
+        PT117.setFinalPayment(889.20);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT117);
+
+        RoomBooking rb129 = new RoomBooking();
+        rb129.setBookedRoom(roomSessionLocal.getRoomByName("KRN_604"));
+        rb129.setBookInDate(format.parse("2019-03-29"));
+        bookingSessionLocal.createRoomBooking(rb129);
+        PaymentTransaction PT118 = new PaymentTransaction();
+        PT118.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT118.setTransactionDateTime(format.parse("2019-03-25"));
+        PT118.setFinalPayment(542.80);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT118);
+
+        RoomBooking rb130 = new RoomBooking();
+        rb130.setBookedRoom(roomSessionLocal.getRoomByName("KRN_605"));
+        rb130.setBookInDate(format.parse("2019-04-03"));
+        bookingSessionLocal.createRoomBooking(rb130);
+        PaymentTransaction PT119 = new PaymentTransaction();
+        PT119.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT119.setTransactionDateTime(format.parse("2019-03-26"));
+        PT119.setFinalPayment(982.80);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT119);
+
+        RoomBooking rb131 = new RoomBooking();
+        rb131.setBookedRoom(roomSessionLocal.getRoomByName("KRN_703"));
+        rb131.setBookInDate(format.parse("2019-04-03"));
+        bookingSessionLocal.createRoomBooking(rb131);
+        PaymentTransaction PT120 = new PaymentTransaction();
+        PT120.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT120.setTransactionDateTime(format.parse("2019-03-27"));
+        PT120.setFinalPayment(632.90);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT120);
+
+        RoomBooking rb132 = new RoomBooking();
+        rb132.setBookedRoom(roomSessionLocal.getRoomByName("KRN_704"));
+        rb132.setBookInDate(format.parse("2019-04-05"));
+        bookingSessionLocal.createRoomBooking(rb132);
+        PaymentTransaction PT121 = new PaymentTransaction();
+        PT121.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT121.setTransactionDateTime(format.parse("2019-03-28"));
+        PT121.setFinalPayment(843.90);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT121);
+
+        RoomBooking rb133 = new RoomBooking();
+        rb133.setBookedRoom(roomSessionLocal.getRoomByName("KRN_705"));
+        rb133.setBookInDate(format.parse("2019-04-08"));
+        bookingSessionLocal.createRoomBooking(rb133);
+        PaymentTransaction PT122 = new PaymentTransaction();
+        PT122.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT122.setTransactionDateTime(format.parse("2019-04-02"));
+        PT122.setFinalPayment(629.90);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT122);
+
+        RoomBooking rb134 = new RoomBooking();
+        rb134.setBookedRoom(roomSessionLocal.getRoomByName("KRN_706"));
+        rb134.setBookInDate(format.parse("2019-04-09"));
+        bookingSessionLocal.createRoomBooking(rb134);
+        PaymentTransaction PT123 = new PaymentTransaction();
+        PT123.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT123.setTransactionDateTime(format.parse("2019-04-04"));
+        PT123.setFinalPayment(2008.80);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT123);
+
+        RoomBooking rb135 = new RoomBooking();
+        rb135.setBookedRoom(roomSessionLocal.getRoomByName("KRN_707"));
+        rb135.setBookInDate(format.parse("2019-04-10"));
+        bookingSessionLocal.createRoomBooking(rb135);
+        PaymentTransaction PT124 = new PaymentTransaction();
+        PT124.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT124.setTransactionDateTime(format.parse("2019-04-06"));
+        PT124.setFinalPayment(1937.20);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT124);
+
+        RoomBooking rb136 = new RoomBooking();
+        rb136.setBookedRoom(roomSessionLocal.getRoomByName("KRN_801"));
+        rb136.setBookInDate(format.parse("2019-04-13"));
+        bookingSessionLocal.createRoomBooking(rb136);
+        PaymentTransaction PT125 = new PaymentTransaction();
+        PT125.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT125.setTransactionDateTime(format.parse("2019-04-08"));
+        PT125.setFinalPayment(999.90);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT125);
+
+        RoomBooking rb137 = new RoomBooking();
+        rb137.setBookedRoom(roomSessionLocal.getRoomByName("KRN_1202"));
+        rb137.setBookInDate(format.parse("2019-04-18"));
+        bookingSessionLocal.createRoomBooking(rb137);
+        PaymentTransaction PT126 = new PaymentTransaction();
+        PT126.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT126.setTransactionDateTime(format.parse("2019-04-09"));
+        PT126.setFinalPayment(2517.70);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT126);
+
+        RoomBooking rb138 = new RoomBooking();
+        rb138.setBookedRoom(roomSessionLocal.getRoomByName("KRN_1203"));
+        rb138.setBookInDate(format.parse("2019-04-16"));
+        bookingSessionLocal.createRoomBooking(rb138);
+        PaymentTransaction PT127 = new PaymentTransaction();
+        PT127.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT127.setTransactionDateTime(format.parse("2019-04-11"));
+        PT127.setFinalPayment(1439.80);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT127);
+
+        RoomBooking rb139 = new RoomBooking();
+        rb139.setBookedRoom(roomSessionLocal.getRoomByName("KRN_1204"));
+        rb139.setBookInDate(format.parse("2019-04-19"));
+        bookingSessionLocal.createRoomBooking(rb139);
+        PaymentTransaction PT128 = new PaymentTransaction();
+        PT128.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT128.setTransactionDateTime(format.parse("2019-04-13"));
+        PT128.setFinalPayment(590.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT128);
+
+        RoomBooking rb140 = new RoomBooking();
+        rb140.setBookedRoom(roomSessionLocal.getRoomByName("KRN_901"));
+        rb140.setBookInDate(format.parse("2019-04-20"));
+        bookingSessionLocal.createRoomBooking(rb140);
+        PaymentTransaction PT129 = new PaymentTransaction();
+        PT129.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT129.setTransactionDateTime(format.parse("2019-04-15"));
+        PT129.setFinalPayment(899.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT129);
+
+        RoomBooking rb141 = new RoomBooking();
+        rb141.setBookedRoom(roomSessionLocal.getRoomByName("KRN_902"));
+        rb141.setBookInDate(format.parse("2019-04-20"));
+        bookingSessionLocal.createRoomBooking(rb141);
+        PaymentTransaction PT130 = new PaymentTransaction();
+        PT130.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT130.setTransactionDateTime(format.parse("2019-04-17"));
+        PT130.setFinalPayment(777.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT130);
+
+        RoomBooking rb142 = new RoomBooking();
+        rb142.setBookedRoom(roomSessionLocal.getRoomByName("KRN_903"));
+        rb142.setBookInDate(format.parse("2019-01-05"));
+        bookingSessionLocal.createRoomBooking(rb142);
+        PaymentTransaction PT131 = new PaymentTransaction();
+        PT131.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT131.setTransactionDateTime(format.parse("2019-01-01"));
+        PT131.setFinalPayment(678.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT131);
+
+        RoomBooking rb143 = new RoomBooking();
+        rb143.setBookedRoom(roomSessionLocal.getRoomByName("KRE_602"));
+        rb143.setBookInDate(format.parse("2019-01-06"));
+        bookingSessionLocal.createRoomBooking(rb143);
+        PaymentTransaction PT132 = new PaymentTransaction();
+        PT132.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT132.setTransactionDateTime(format.parse("2019-01-02"));
+        PT132.setFinalPayment(969.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT132);
+
+        RoomBooking rb144 = new RoomBooking();
+        rb144.setBookedRoom(roomSessionLocal.getRoomByName("KRE_605"));
+        rb144.setBookInDate(format.parse("2019-01-10"));
+        bookingSessionLocal.createRoomBooking(rb144);
+        PaymentTransaction PT133 = new PaymentTransaction();
+        PT133.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT133.setTransactionDateTime(format.parse("2019-01-06"));
+        PT133.setFinalPayment(599.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT133);
+
+        RoomBooking rb145 = new RoomBooking();
+        rb145.setBookedRoom(roomSessionLocal.getRoomByName("KRE_301"));
+        rb145.setBookInDate(format.parse("2019-01-18"));
+        bookingSessionLocal.createRoomBooking(rb145);
+        PaymentTransaction PT134 = new PaymentTransaction();
+        PT134.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT134.setTransactionDateTime(format.parse("2019-01-13"));
+        PT134.setFinalPayment(958.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT134);
+
+        RoomBooking rb146 = new RoomBooking();
+        rb146.setBookedRoom(roomSessionLocal.getRoomByName("KRE_401"));
+        rb146.setBookInDate(format.parse("2019-01-20"));
+        bookingSessionLocal.createRoomBooking(rb146);
+        PaymentTransaction PT135 = new PaymentTransaction();
+        PT135.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT135.setTransactionDateTime(format.parse("2019-01-15"));
+        PT135.setFinalPayment(1921.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT135);
+
+        RoomBooking rb147 = new RoomBooking();
+        rb147.setBookedRoom(roomSessionLocal.getRoomByName("KRE_507"));
+        rb147.setBookInDate(format.parse("2019-01-22"));
+        bookingSessionLocal.createRoomBooking(rb147);
+        PaymentTransaction PT136 = new PaymentTransaction();
+        PT136.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT136.setTransactionDateTime(format.parse("2019-01-18"));
+        PT136.setFinalPayment(1024.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT136);
+
+        RoomBooking rb148 = new RoomBooking();
+        rb148.setBookedRoom(roomSessionLocal.getRoomByName("KRE_503"));
+        rb148.setBookInDate(format.parse("2019-01-24"));
+        bookingSessionLocal.createRoomBooking(rb148);
+        PaymentTransaction PT137 = new PaymentTransaction();
+        PT137.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT137.setTransactionDateTime(format.parse("2019-01-19"));
+        PT137.setFinalPayment(2109.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT137);
+
+        RoomBooking rb149 = new RoomBooking();
+        rb149.setBookedRoom(roomSessionLocal.getRoomByName("KRE_504"));
+        rb149.setBookInDate(format.parse("2019-01-28"));
+        bookingSessionLocal.createRoomBooking(rb149);
+        PaymentTransaction PT138 = new PaymentTransaction();
+        PT138.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT138.setTransactionDateTime(format.parse("2019-01-21"));
+        PT138.setFinalPayment(986.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT138);
+
+        RoomBooking rb150 = new RoomBooking();
+        rb150.setBookedRoom(roomSessionLocal.getRoomByName("KRE_505"));
+        rb150.setBookInDate(format.parse("2019-01-29"));
+        bookingSessionLocal.createRoomBooking(rb150);
+        PaymentTransaction PT139 = new PaymentTransaction();
+        PT139.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT139.setTransactionDateTime(format.parse("2019-01-23"));
+        PT139.setFinalPayment(875.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT139);
+
+        RoomBooking rb151 = new RoomBooking();
+        rb151.setBookedRoom(roomSessionLocal.getRoomByName("KRE_601"));
+        rb151.setBookInDate(format.parse("2019-01-29"));
+        bookingSessionLocal.createRoomBooking(rb151);
+        PaymentTransaction PT140 = new PaymentTransaction();
+        PT140.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT140.setTransactionDateTime(format.parse("2019-01-25"));
+        PT140.setFinalPayment(1212.50);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT140);
+
+        RoomBooking rb152 = new RoomBooking();
+        rb152.setBookedRoom(roomSessionLocal.getRoomByName("KRE_606"));
+        rb152.setBookInDate(format.parse("2019-02-07"));
+        bookingSessionLocal.createRoomBooking(rb152);
+        PaymentTransaction PT141 = new PaymentTransaction();
+        PT141.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT141.setTransactionDateTime(format.parse("2019-02-01"));
+        PT141.setFinalPayment(879.40);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT141);
+
+        RoomBooking rb153 = new RoomBooking();
+        rb153.setBookedRoom(roomSessionLocal.getRoomByName("KRE_607"));
+        rb153.setBookInDate(format.parse("2019-02-08"));
+        bookingSessionLocal.createRoomBooking(rb153);
+        PaymentTransaction PT142 = new PaymentTransaction();
+        PT142.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT142.setTransactionDateTime(format.parse("2019-02-03"));
+        PT142.setFinalPayment(878.50);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT142);
+
+        RoomBooking rb154 = new RoomBooking();
+        rb154.setBookedRoom(roomSessionLocal.getRoomByName("KRE_604"));
+        rb154.setBookInDate(format.parse("2019-02-09"));
+        bookingSessionLocal.createRoomBooking(rb154);
+        PaymentTransaction PT143 = new PaymentTransaction();
+        PT143.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT143.setTransactionDateTime(format.parse("2019-02-04"));
+        PT143.setFinalPayment(875.30);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT143);
+
+        RoomBooking rb155 = new RoomBooking();
+        rb155.setBookedRoom(roomSessionLocal.getRoomByName("KRE_602"));
+        rb155.setBookInDate(format.parse("2019-02-11"));
+        bookingSessionLocal.createRoomBooking(rb155);
+        PaymentTransaction PT144 = new PaymentTransaction();
+        PT144.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT144.setTransactionDateTime(format.parse("2019-02-08"));
+        PT144.setFinalPayment(767.40);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT144);
+
+        RoomBooking rb156 = new RoomBooking();
+        rb156.setBookedRoom(roomSessionLocal.getRoomByName("KRE_603"));
+        rb156.setBookInDate(format.parse("2019-02-18"));
+        bookingSessionLocal.createRoomBooking(rb156);
+        PaymentTransaction PT145 = new PaymentTransaction();
+        PT145.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT145.setTransactionDateTime(format.parse("2019-02-14"));
+        PT145.setFinalPayment(768.90);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT145);
+
+        RoomBooking rb157 = new RoomBooking();
+        rb157.setBookedRoom(roomSessionLocal.getRoomByName("KRE_504"));
+        rb157.setBookInDate(format.parse("2019-02-23"));
+        bookingSessionLocal.createRoomBooking(rb157);
+        PaymentTransaction PT146 = new PaymentTransaction();
+        PT146.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT146.setTransactionDateTime(format.parse("2019-02-17"));
+        PT146.setFinalPayment(986.50);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT146);
+
+        RoomBooking rb158 = new RoomBooking();
+        rb158.setBookedRoom(roomSessionLocal.getRoomByName("KRE_405"));
+        rb158.setBookInDate(format.parse("2019-02-23"));
+        bookingSessionLocal.createRoomBooking(rb158);
+        PaymentTransaction PT147 = new PaymentTransaction();
+        PT147.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT147.setTransactionDateTime(format.parse("2019-02-18"));
+        PT147.setFinalPayment(872.05);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT147);
+
+        RoomBooking rb159 = new RoomBooking();
+        rb159.setBookedRoom(roomSessionLocal.getRoomByName("KRE_306"));
+        rb159.setBookInDate(format.parse("2019-02-27"));
+        bookingSessionLocal.createRoomBooking(rb159);
+        PaymentTransaction PT148 = new PaymentTransaction();
+        PT148.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT148.setTransactionDateTime(format.parse("2019-02-21"));
+        PT148.setFinalPayment(687.50);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT148);
+
+        RoomBooking rb160 = new RoomBooking();
+        rb160.setBookedRoom(roomSessionLocal.getRoomByName("KRE_407"));
+        rb160.setBookInDate(format.parse("2019-03-02"));
+        bookingSessionLocal.createRoomBooking(rb160);
+        PaymentTransaction PT149 = new PaymentTransaction();
+        PT149.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT149.setTransactionDateTime(format.parse("2019-02-24"));
+        PT149.setFinalPayment(1234.50);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT149);
+
+        RoomBooking rb161 = new RoomBooking();
+        rb161.setBookedRoom(roomSessionLocal.getRoomByName("KRE_206"));
+        rb161.setBookInDate(format.parse("2019-03-01"));
+        bookingSessionLocal.createRoomBooking(rb161);
+        PaymentTransaction PT150 = new PaymentTransaction();
+        PT150.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT150.setTransactionDateTime(format.parse("2019-02-24"));
+        PT150.setFinalPayment(1266.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT150);
+
+        RoomBooking rb162 = new RoomBooking();
+        rb162.setBookedRoom(roomSessionLocal.getRoomByName("KRE_305"));
+        rb162.setBookInDate(format.parse("2019-03-07"));
+        bookingSessionLocal.createRoomBooking(rb162);
+        PaymentTransaction PT151 = new PaymentTransaction();
+        PT151.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT151.setTransactionDateTime(format.parse("2019-03-04"));
+        PT151.setFinalPayment(652.50);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT151);
+
+        RoomBooking rb163 = new RoomBooking();
+        rb163.setBookedRoom(roomSessionLocal.getRoomByName("KRE_403"));
+        rb163.setBookInDate(format.parse("2019-03-12"));
+        bookingSessionLocal.createRoomBooking(rb163);
+        PaymentTransaction PT152 = new PaymentTransaction();
+        PT152.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT152.setTransactionDateTime(format.parse("2019-03-09"));
+        PT152.setFinalPayment(886.70);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT152);
+
+        RoomBooking rb164 = new RoomBooking();
+        rb164.setBookedRoom(roomSessionLocal.getRoomByName("KRE_402"));
+        rb164.setBookInDate(format.parse("2019-03-15"));
+        bookingSessionLocal.createRoomBooking(rb164);
+        PaymentTransaction PT153 = new PaymentTransaction();
+        PT153.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT153.setTransactionDateTime(format.parse("2019-03-10"));
+        PT153.setFinalPayment(762.40);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT153);
+
+        RoomBooking rb165 = new RoomBooking();
+        rb165.setBookedRoom(roomSessionLocal.getRoomByName("KRE_401"));
+        rb165.setBookInDate(format.parse("2019-03-18"));
+        bookingSessionLocal.createRoomBooking(rb165);
+        PaymentTransaction PT154 = new PaymentTransaction();
+        PT154.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT154.setTransactionDateTime(format.parse("2019-03-12"));
+        PT154.setFinalPayment(1563.20);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT154);
+
+        RoomBooking rb166 = new RoomBooking();
+        rb166.setBookedRoom(roomSessionLocal.getRoomByName("KRE_308"));
+        rb166.setBookInDate(format.parse("2019-03-22"));
+        bookingSessionLocal.createRoomBooking(rb166);
+        PaymentTransaction PT155 = new PaymentTransaction();
+        PT155.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT155.setTransactionDateTime(format.parse("2019-03-14"));
+        PT155.setFinalPayment(902.60);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT155);
+
+        RoomBooking rb167 = new RoomBooking();
+        rb167.setBookedRoom(roomSessionLocal.getRoomByName("KRE_307"));
+        rb167.setBookInDate(format.parse("2019-03-23"));
+        bookingSessionLocal.createRoomBooking(rb167);
+        PaymentTransaction PT156 = new PaymentTransaction();
+        PT156.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT156.setTransactionDateTime(format.parse("2019-03-17"));
+        PT156.setFinalPayment(852.50);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT156);
+
+        RoomBooking rb168 = new RoomBooking();
+        rb168.setBookedRoom(roomSessionLocal.getRoomByName("KRE_306"));
+        rb168.setBookInDate(format.parse("2019-03-24"));
+        bookingSessionLocal.createRoomBooking(rb168);
+        PaymentTransaction PT157 = new PaymentTransaction();
+        PT157.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT157.setTransactionDateTime(format.parse("2019-03-20"));
+        PT157.setFinalPayment(653.60);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT157);
+
+        RoomBooking rb169 = new RoomBooking();
+        rb169.setBookedRoom(roomSessionLocal.getRoomByName("KRE_305"));
+        rb169.setBookInDate(format.parse("2019-03-29"));
+        bookingSessionLocal.createRoomBooking(rb169);
+        PaymentTransaction PT158 = new PaymentTransaction();
+        PT158.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT158.setTransactionDateTime(format.parse("2019-03-23"));
+        PT158.setFinalPayment(987.60);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT158);
+
+        RoomBooking rb170 = new RoomBooking();
+        rb170.setBookedRoom(roomSessionLocal.getRoomByName("KRE_304"));
+        rb170.setBookInDate(format.parse("2019-04-01"));
+        bookingSessionLocal.createRoomBooking(rb170);
+        PaymentTransaction PT159 = new PaymentTransaction();
+        PT159.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT159.setTransactionDateTime(format.parse("2019-03-25"));
+        PT159.setFinalPayment(778.40);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT159);
+
+        RoomBooking rb171 = new RoomBooking();
+        rb171.setBookedRoom(roomSessionLocal.getRoomByName("KRE_303"));
+        rb171.setBookInDate(format.parse("2019-04-02"));
+        bookingSessionLocal.createRoomBooking(rb171);
+        PaymentTransaction PT160 = new PaymentTransaction();
+        PT160.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT160.setTransactionDateTime(format.parse("2019-03-27"));
+        PT160.setFinalPayment(864.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT160);
+
+        RoomBooking rb172 = new RoomBooking();
+        rb172.setBookedRoom(roomSessionLocal.getRoomByName("KRE_302"));
+        rb172.setBookInDate(format.parse("2019-04-07"));
+        bookingSessionLocal.createRoomBooking(rb172);
+        PaymentTransaction PT161 = new PaymentTransaction();
+        PT161.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT161.setTransactionDateTime(format.parse("2019-04-02"));
+        PT161.setFinalPayment(764.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT161);
+
+        RoomBooking rb173 = new RoomBooking();
+        rb173.setBookedRoom(roomSessionLocal.getRoomByName("KRE_208"));
+        rb173.setBookInDate(format.parse("2019-04-09"));
+        bookingSessionLocal.createRoomBooking(rb173);
+        PaymentTransaction PT162 = new PaymentTransaction();
+        PT162.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT162.setTransactionDateTime(format.parse("2019-04-03"));
+        PT162.setFinalPayment(616.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT162);
+
+        RoomBooking rb174 = new RoomBooking();
+        rb174.setBookedRoom(roomSessionLocal.getRoomByName("KRE_207"));
+        rb174.setBookInDate(format.parse("2019-04-10"));
+        bookingSessionLocal.createRoomBooking(rb174);
+        PaymentTransaction PT163 = new PaymentTransaction();
+        PT163.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT163.setTransactionDateTime(format.parse("2019-04-04"));
+        PT163.setFinalPayment(612.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT163);
+
+        RoomBooking rb175 = new RoomBooking();
+        rb175.setBookedRoom(roomSessionLocal.getRoomByName("KRE_206"));
+        rb175.setBookInDate(format.parse("2019-04-12"));
+        bookingSessionLocal.createRoomBooking(rb175);
+        PaymentTransaction PT164 = new PaymentTransaction();
+        PT164.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT164.setTransactionDateTime(format.parse("2019-04-07"));
+        PT164.setFinalPayment(887.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT164);
+
+        RoomBooking rb176 = new RoomBooking();
+        rb176.setBookedRoom(roomSessionLocal.getRoomByName("KRE_204"));
+        rb176.setBookInDate(format.parse("2019-04-18"));
+        bookingSessionLocal.createRoomBooking(rb176);
+        PaymentTransaction PT165 = new PaymentTransaction();
+        PT165.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT165.setTransactionDateTime(format.parse("2019-04-10"));
+        PT165.setFinalPayment(776.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT165);
+
+        RoomBooking rb177 = new RoomBooking();
+        rb177.setBookedRoom(roomSessionLocal.getRoomByName("KRE_203"));
+        rb177.setBookInDate(format.parse("2019-04-19"));
+        bookingSessionLocal.createRoomBooking(rb177);
+        PaymentTransaction PT166 = new PaymentTransaction();
+        PT166.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT166.setTransactionDateTime(format.parse("2019-04-11"));
+        PT166.setFinalPayment(665.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT166);
+
+        RoomBooking rb178 = new RoomBooking();
+        rb178.setBookedRoom(roomSessionLocal.getRoomByName("KRE_202"));
+        rb178.setBookInDate(format.parse("2019-04-19"));
+        bookingSessionLocal.createRoomBooking(rb178);
+        PaymentTransaction PT167 = new PaymentTransaction();
+        PT167.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT167.setTransactionDateTime(format.parse("2019-04-12"));
+        PT167.setFinalPayment(870.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT167);
+
+        RoomBooking rb179 = new RoomBooking();
+        rb179.setBookedRoom(roomSessionLocal.getRoomByName("KRE_201"));
+        rb179.setBookInDate(format.parse("2019-04-19"));
+        bookingSessionLocal.createRoomBooking(rb179);
+        PaymentTransaction PT168 = new PaymentTransaction();
+        PT168.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT168.setTransactionDateTime(format.parse("2019-04-14"));
+        PT168.setFinalPayment(975.70);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT168);
+
+        RoomBooking rb180 = new RoomBooking();
+        rb180.setBookedRoom(roomSessionLocal.getRoomByName("KRE_602"));
+        rb180.setBookInDate(format.parse("2019-04-22"));
+        rb180.setFirstName("Aaron");
+        rb180.setLastName("Johnson");
+        rb180.setPassportNum("A382713Y");
+        bookingSessionLocal.createRoomBooking(rb180);
+        PaymentTransaction PT169 = new PaymentTransaction();
+        PT169.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT169.setTransactionDateTime(format.parse("2019-04-16"));
+        PT169.setFinalPayment(987.50);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT169);
+
+        RoomBooking rb181 = new RoomBooking();
+        rb181.setBookedRoom(roomSessionLocal.getRoomByName("KRE_603"));
+        rb181.setBookInDate(format.parse("2019-04-22"));
+        rb181.setFirstName("Kimberly");
+        rb181.setLastName("Johansson");
+        rb181.setPassportNum("A482716Y");
+        bookingSessionLocal.createRoomBooking(rb181);
+        PaymentTransaction PT170 = new PaymentTransaction();
+        PT170.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT170.setTransactionDateTime(format.parse("2019-04-17"));
+        PT170.setFinalPayment(785.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT170);
+
+        RoomBooking rb182 = new RoomBooking();
+        rb182.setBookedRoom(roomSessionLocal.getRoomByName("KRE_1204"));
+        rb182.setBookInDate(format.parse("2019-04-23"));
+        rb182.setFirstName("Felix");
+        rb182.setLastName("John");
+        rb182.setPassportNum("A1264827I");
+        bookingSessionLocal.createRoomBooking(rb182);
+        PaymentTransaction PT171 = new PaymentTransaction();
+        PT171.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT171.setTransactionDateTime(format.parse("2019-04-19"));
+        PT171.setFinalPayment(1412.50);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT171);
+
+//KRS Payment Transaction
+        RoomBooking rb500 = new RoomBooking();
+        rb500.setBookedRoom(roomSessionLocal.getRoomByName("KRS_201"));
+        rb500.setBookInDate(format.parse("2019-01-09"));
+        bookingSessionLocal.createRoomBooking(rb500);
+        PaymentTransaction PT500 = new PaymentTransaction();
+        PT500.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT500.setTransactionDateTime(format.parse("2019-01-01"));
+        PT500.setFinalPayment(481.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT500);
+
+        RoomBooking rb501 = new RoomBooking();
+        rb501.setBookedRoom(roomSessionLocal.getRoomByName("KRS_202"));
+        rb501.setBookInDate(format.parse("2019-01-09"));
+        bookingSessionLocal.createRoomBooking(rb501);
+        PaymentTransaction PT501 = new PaymentTransaction();
+        PT501.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT501.setTransactionDateTime(format.parse("2019-01-02"));
+        PT501.setFinalPayment(381.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT501);
+
+        RoomBooking rb502 = new RoomBooking();
+        rb502.setBookedRoom(roomSessionLocal.getRoomByName("KRS_203"));
+        rb502.setBookInDate(format.parse("2019-01-13"));
+        bookingSessionLocal.createRoomBooking(rb502);
+        PaymentTransaction PT502 = new PaymentTransaction();
+        PT502.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT502.setTransactionDateTime(format.parse("2019-01-03"));
+        PT502.setFinalPayment(838.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT502);
+
+        RoomBooking rb503 = new RoomBooking();
+        rb503.setBookedRoom(roomSessionLocal.getRoomByName("KRS_204"));
+        rb503.setBookInDate(format.parse("2019-01-12"));
+        bookingSessionLocal.createRoomBooking(rb503);
+        PaymentTransaction PT503 = new PaymentTransaction();
+        PT503.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT503.setTransactionDateTime(format.parse("2019-01-04"));
+        PT503.setFinalPayment(248.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT503);
+
+        RoomBooking rb504 = new RoomBooking();
+        rb504.setBookedRoom(roomSessionLocal.getRoomByName("KRS_205"));
+        rb504.setBookInDate(format.parse("2019-01-09"));
+        bookingSessionLocal.createRoomBooking(rb504);
+        PaymentTransaction PT504 = new PaymentTransaction();
+        PT504.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT504.setTransactionDateTime(format.parse("2019-01-05"));
+        PT504.setFinalPayment(471.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT504);
+
+        RoomBooking rb505 = new RoomBooking();
+        rb505.setBookedRoom(roomSessionLocal.getRoomByName("KRS_301"));
+        rb505.setBookInDate(format.parse("2019-01-09"));
+        bookingSessionLocal.createRoomBooking(rb505);
+        PaymentTransaction PT505 = new PaymentTransaction();
+        PT505.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT505.setTransactionDateTime(format.parse("2019-01-06"));
+        PT505.setFinalPayment(481.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT505);
+
+        RoomBooking rb506 = new RoomBooking();
+        rb506.setBookedRoom(roomSessionLocal.getRoomByName("KRS_302"));
+        rb506.setBookInDate(format.parse("2019-01-13"));
+        bookingSessionLocal.createRoomBooking(rb506);
+        PaymentTransaction PT506 = new PaymentTransaction();
+        PT506.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT506.setTransactionDateTime(format.parse("2019-01-07"));
+        PT506.setFinalPayment(518.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT506);
+
+        RoomBooking rb507 = new RoomBooking();
+        rb507.setBookedRoom(roomSessionLocal.getRoomByName("KRS_303"));
+        rb507.setBookInDate(format.parse("2019-01-12"));
+        bookingSessionLocal.createRoomBooking(rb507);
+        PaymentTransaction PT507 = new PaymentTransaction();
+        PT507.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT507.setTransactionDateTime(format.parse("2019-01-08"));
+        PT507.setFinalPayment(371.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT507);
+
+        RoomBooking rb508 = new RoomBooking();
+        rb508.setBookedRoom(roomSessionLocal.getRoomByName("KRS_304"));
+        rb508.setBookInDate(format.parse("2019-01-14"));
+        bookingSessionLocal.createRoomBooking(rb508);
+        PaymentTransaction PT508 = new PaymentTransaction();
+        PT508.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT508.setTransactionDateTime(format.parse("2019-01-09"));
+        PT508.setFinalPayment(371.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT508);
+
+        RoomBooking rb509 = new RoomBooking();
+        rb509.setBookedRoom(roomSessionLocal.getRoomByName("KRS_305"));
+        rb509.setBookInDate(format.parse("2019-01-18"));
+        bookingSessionLocal.createRoomBooking(rb509);
+        PaymentTransaction PT509 = new PaymentTransaction();
+        PT509.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT509.setTransactionDateTime(format.parse("2019-01-10"));
+        PT509.setFinalPayment(487.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT509);
+
+        RoomBooking rb510 = new RoomBooking();
+        rb510.setBookedRoom(roomSessionLocal.getRoomByName("KRS_401"));
+        rb510.setBookInDate(format.parse("2019-02-13"));
+        bookingSessionLocal.createRoomBooking(rb510);
+        PaymentTransaction PT510 = new PaymentTransaction();
+        PT510.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT510.setTransactionDateTime(format.parse("2019-02-01"));
+        PT510.setFinalPayment(162.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT510);
+
+        RoomBooking rb511 = new RoomBooking();
+        rb511.setBookedRoom(roomSessionLocal.getRoomByName("KRS_402"));
+        rb511.setBookInDate(format.parse("2019-02-09"));
+        bookingSessionLocal.createRoomBooking(rb511);
+        PaymentTransaction PT511 = new PaymentTransaction();
+        PT511.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT511.setTransactionDateTime(format.parse("2019-02-02"));
+        PT511.setFinalPayment(481.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT511);
+
+        RoomBooking rb512 = new RoomBooking();
+        rb512.setBookedRoom(roomSessionLocal.getRoomByName("KRS_403"));
+        rb512.setBookInDate(format.parse("2019-02-19"));
+        bookingSessionLocal.createRoomBooking(rb512);
+        PaymentTransaction PT512 = new PaymentTransaction();
+        PT512.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT512.setTransactionDateTime(format.parse("2019-02-03"));
+        PT512.setFinalPayment(471.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT512);
+
+        RoomBooking rb513 = new RoomBooking();
+        rb513.setBookedRoom(roomSessionLocal.getRoomByName("KRS_404"));
+        rb513.setBookInDate(format.parse("2019-02-14"));
+        bookingSessionLocal.createRoomBooking(rb513);
+        PaymentTransaction PT513 = new PaymentTransaction();
+        PT513.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT513.setTransactionDateTime(format.parse("2019-02-04"));
+        PT513.setFinalPayment(827.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT513);
+
+        RoomBooking rb514 = new RoomBooking();
+        rb514.setBookedRoom(roomSessionLocal.getRoomByName("KRS_405"));
+        rb514.setBookInDate(format.parse("2019-02-18"));
+        bookingSessionLocal.createRoomBooking(rb514);
+        PaymentTransaction PT514 = new PaymentTransaction();
+        PT514.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT514.setTransactionDateTime(format.parse("2019-02-05"));
+        PT514.setFinalPayment(184.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT514);
+
+        RoomBooking rb515 = new RoomBooking();
+        rb515.setBookedRoom(roomSessionLocal.getRoomByName("KRS_501"));
+        rb515.setBookInDate(format.parse("2019-02-13"));
+        bookingSessionLocal.createRoomBooking(rb515);
+        PaymentTransaction PT515 = new PaymentTransaction();
+        PT515.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT515.setTransactionDateTime(format.parse("2019-02-06"));
+        PT515.setFinalPayment(287.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT515);
+
+        RoomBooking rb516 = new RoomBooking();
+        rb516.setBookedRoom(roomSessionLocal.getRoomByName("KRS_502"));
+        rb516.setBookInDate(format.parse("2019-02-13"));
+        bookingSessionLocal.createRoomBooking(rb516);
+        PaymentTransaction PT516 = new PaymentTransaction();
+        PT516.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT516.setTransactionDateTime(format.parse("2019-02-07"));
+        PT516.setFinalPayment(746.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT516);
+
+        RoomBooking rb517 = new RoomBooking();
+        rb517.setBookedRoom(roomSessionLocal.getRoomByName("KRS_503"));
+        rb517.setBookInDate(format.parse("2019-02-13"));
+        bookingSessionLocal.createRoomBooking(rb517);
+        PaymentTransaction PT517 = new PaymentTransaction();
+        PT517.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT517.setTransactionDateTime(format.parse("2019-02-08"));
+        PT517.setFinalPayment(678.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT517);
+
+        RoomBooking rb518 = new RoomBooking();
+        rb518.setBookedRoom(roomSessionLocal.getRoomByName("KRS_504"));
+        rb518.setBookInDate(format.parse("2019-02-18"));
+        bookingSessionLocal.createRoomBooking(rb518);
+        PaymentTransaction PT518 = new PaymentTransaction();
+        PT518.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT518.setTransactionDateTime(format.parse("2019-02-09"));
+        PT518.setFinalPayment(256.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT518);
+
+        RoomBooking rb519 = new RoomBooking();
+        rb519.setBookedRoom(roomSessionLocal.getRoomByName("KRS_505"));
+        rb519.setBookInDate(format.parse("2019-02-18"));
+        bookingSessionLocal.createRoomBooking(rb519);
+        PaymentTransaction PT519 = new PaymentTransaction();
+        PT519.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT519.setTransactionDateTime(format.parse("2019-02-10"));
+        PT519.setFinalPayment(568.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT519);
+
+        RoomBooking rb520 = new RoomBooking();
+        rb520.setBookedRoom(roomSessionLocal.getRoomByName("KRS_201"));
+        rb520.setBookInDate(format.parse("2019-03-09"));
+        bookingSessionLocal.createRoomBooking(rb520);
+        PaymentTransaction PT520 = new PaymentTransaction();
+        PT520.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT520.setTransactionDateTime(format.parse("2019-03-01"));
+        PT520.setFinalPayment(256.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT520);
+
+        RoomBooking rb521 = new RoomBooking();
+        rb521.setBookedRoom(roomSessionLocal.getRoomByName("KRS_202"));
+        rb521.setBookInDate(format.parse("2019-03-12"));
+        bookingSessionLocal.createRoomBooking(rb521);
+        PaymentTransaction PT521 = new PaymentTransaction();
+        PT521.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT521.setTransactionDateTime(format.parse("2019-03-02"));
+        PT521.setFinalPayment(673.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT521);
+
+        RoomBooking rb522 = new RoomBooking();
+        rb522.setBookedRoom(roomSessionLocal.getRoomByName("KRS_203"));
+        rb522.setBookInDate(format.parse("2019-03-12"));
+        bookingSessionLocal.createRoomBooking(rb522);
+        PaymentTransaction PT522 = new PaymentTransaction();
+        PT522.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT522.setTransactionDateTime(format.parse("2019-03-03"));
+        PT522.setFinalPayment(725.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT522);
+
+        RoomBooking rb523 = new RoomBooking();
+        rb523.setBookedRoom(roomSessionLocal.getRoomByName("KRS_204"));
+        rb523.setBookInDate(format.parse("2019-03-09"));
+        bookingSessionLocal.createRoomBooking(rb523);
+        PaymentTransaction PT523 = new PaymentTransaction();
+        PT523.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT523.setTransactionDateTime(format.parse("2019-03-04"));
+        PT523.setFinalPayment(273.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT523);
+
+        RoomBooking rb524 = new RoomBooking();
+        rb524.setBookedRoom(roomSessionLocal.getRoomByName("KRS_205"));
+        rb524.setBookInDate(format.parse("2019-03-19"));
+        bookingSessionLocal.createRoomBooking(rb524);
+        PaymentTransaction PT524 = new PaymentTransaction();
+        PT524.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT524.setTransactionDateTime(format.parse("2019-03-05"));
+        PT524.setFinalPayment(723.69);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT524);
+
+        RoomBooking rb525 = new RoomBooking();
+        rb525.setBookedRoom(roomSessionLocal.getRoomByName("KRS_301"));
+        rb525.setBookInDate(format.parse("2019-03-12"));
+        bookingSessionLocal.createRoomBooking(rb525);
+        PaymentTransaction PT525 = new PaymentTransaction();
+        PT525.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT525.setTransactionDateTime(format.parse("2019-03-06"));
+        PT525.setFinalPayment(743.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT525);
+
+        RoomBooking rb526 = new RoomBooking();
+        rb526.setBookedRoom(roomSessionLocal.getRoomByName("KRS_302"));
+        rb526.setBookInDate(format.parse("2019-03-17"));
+        bookingSessionLocal.createRoomBooking(rb526);
+        PaymentTransaction PT526 = new PaymentTransaction();
+        PT526.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT526.setTransactionDateTime(format.parse("2019-03-07"));
+        PT526.setFinalPayment(264.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT526);
+
+        RoomBooking rb527 = new RoomBooking();
+        rb527.setBookedRoom(roomSessionLocal.getRoomByName("KRS_303"));
+        rb527.setBookInDate(format.parse("2019-03-13"));
+        bookingSessionLocal.createRoomBooking(rb527);
+        PaymentTransaction PT527 = new PaymentTransaction();
+        PT527.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT527.setTransactionDateTime(format.parse("2019-03-08"));
+        PT527.setFinalPayment(726.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT527);
+
+        RoomBooking rb528 = new RoomBooking();
+        rb528.setBookedRoom(roomSessionLocal.getRoomByName("KRS_304"));
+        rb528.setBookInDate(format.parse("2019-03-12"));
+        bookingSessionLocal.createRoomBooking(rb528);
+        PaymentTransaction PT528 = new PaymentTransaction();
+        PT528.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT528.setTransactionDateTime(format.parse("2019-03-09"));
+        PT528.setFinalPayment(724.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT528);
+
+        RoomBooking rb529 = new RoomBooking();
+        rb529.setBookedRoom(roomSessionLocal.getRoomByName("KRS_305"));
+        rb529.setBookInDate(format.parse("2019-03-14"));
+        bookingSessionLocal.createRoomBooking(rb529);
+        PaymentTransaction PT529 = new PaymentTransaction();
+        PT529.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT529.setTransactionDateTime(format.parse("2019-03-10"));
+        PT529.setFinalPayment(264.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT529);
+
+        RoomBooking rb530 = new RoomBooking();
+        rb530.setBookedRoom(roomSessionLocal.getRoomByName("KRS_401"));
+        rb530.setBookInDate(format.parse("2019-04-19"));
+        bookingSessionLocal.createRoomBooking(rb530);
+        PaymentTransaction PT530 = new PaymentTransaction();
+        PT530.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT530.setTransactionDateTime(format.parse("2019-04-01"));
+        PT530.setFinalPayment(648.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT530);
+
+        RoomBooking rb531 = new RoomBooking();
+        rb531.setBookedRoom(roomSessionLocal.getRoomByName("KRS_402"));
+        rb531.setBookInDate(format.parse("2019-04-18"));
+        bookingSessionLocal.createRoomBooking(rb531);
+        PaymentTransaction PT531 = new PaymentTransaction();
+        PT531.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT531.setTransactionDateTime(format.parse("2019-04-02"));
+        PT531.setFinalPayment(263.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT531);
+
+        RoomBooking rb532 = new RoomBooking();
+        rb532.setBookedRoom(roomSessionLocal.getRoomByName("KRS_403"));
+        rb532.setBookInDate(format.parse("2019-04-17"));
+        bookingSessionLocal.createRoomBooking(rb532);
+        PaymentTransaction PT532 = new PaymentTransaction();
+        PT532.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT532.setTransactionDateTime(format.parse("2019-04-03"));
+        PT532.setFinalPayment(643.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT532);
+
+        RoomBooking rb533 = new RoomBooking();
+        rb533.setBookedRoom(roomSessionLocal.getRoomByName("KRS_404"));
+        rb533.setBookInDate(format.parse("2019-04-18"));
+        bookingSessionLocal.createRoomBooking(rb533);
+        PaymentTransaction PT533 = new PaymentTransaction();
+        PT533.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT533.setTransactionDateTime(format.parse("2019-04-04"));
+        PT533.setFinalPayment(723.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT533);
+
+        RoomBooking rb534 = new RoomBooking();
+        rb534.setBookedRoom(roomSessionLocal.getRoomByName("KRS_405"));
+        rb534.setBookInDate(format.parse("2019-04-18"));
+        bookingSessionLocal.createRoomBooking(rb534);
+        PaymentTransaction PT534 = new PaymentTransaction();
+        PT534.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT534.setTransactionDateTime(format.parse("2019-04-05"));
+        PT534.setFinalPayment(724.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT534);
+
+        RoomBooking rb535 = new RoomBooking();
+        rb535.setBookedRoom(roomSessionLocal.getRoomByName("KRS_501"));
+        rb535.setBookInDate(format.parse("2019-04-13"));
+        bookingSessionLocal.createRoomBooking(rb535);
+        PaymentTransaction PT535 = new PaymentTransaction();
+        PT535.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT535.setTransactionDateTime(format.parse("2019-04-06"));
+        PT535.setFinalPayment(326.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT535);
+
+        RoomBooking rb536 = new RoomBooking();
+        rb536.setBookedRoom(roomSessionLocal.getRoomByName("KRS_502"));
+        rb536.setBookInDate(format.parse("2019-04-17"));
+        bookingSessionLocal.createRoomBooking(rb536);
+        PaymentTransaction PT536 = new PaymentTransaction();
+        PT536.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT536.setTransactionDateTime(format.parse("2019-04-07"));
+        PT536.setFinalPayment(274.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT536);
+
+        RoomBooking rb537 = new RoomBooking();
+        rb537.setBookedRoom(roomSessionLocal.getRoomByName("KRS_503"));
+        rb537.setBookInDate(format.parse("2019-04-18"));
+        bookingSessionLocal.createRoomBooking(rb537);
+        PaymentTransaction PT537 = new PaymentTransaction();
+        PT537.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT537.setTransactionDateTime(format.parse("2019-04-08"));
+        PT537.setFinalPayment(743.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT537);
+
+        RoomBooking rb538 = new RoomBooking();
+        rb538.setBookedRoom(roomSessionLocal.getRoomByName("KRS_504"));
+        rb538.setBookInDate(format.parse("2019-04-14"));
+        bookingSessionLocal.createRoomBooking(rb538);
+        PaymentTransaction PT538 = new PaymentTransaction();
+        PT538.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT538.setTransactionDateTime(format.parse("2019-04-09"));
+        PT538.setFinalPayment(284.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT538);
+
+        RoomBooking rb539 = new RoomBooking();
+        rb539.setBookedRoom(roomSessionLocal.getRoomByName("KRS_505"));
+        rb539.setBookInDate(format.parse("2019-04-17"));
+        bookingSessionLocal.createRoomBooking(rb539);
+        PaymentTransaction PT539 = new PaymentTransaction();
+        PT539.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+        PT539.setTransactionDateTime(format.parse("2019-04-10"));
+        PT539.setFinalPayment(472.0);
+        paymentTransactionSessionLocal.createPaymentTransaction(PT539);
+
     }
 
     public void intializeRequests() throws ParseException {

@@ -1,12 +1,14 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
-    <body>
-
+    <body onload="getFOList()">
+ 
         <ui:composition template="template.xhtml">
 
 
@@ -20,15 +22,13 @@
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-
-
+                                <h1 style="font-size: x-large; margin-bottom:20px">Manage Food Orders</h1>
                             </div>
                             <!-- /.col -->
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item active">
-                                        <!--Add Btn-->
-                                    </li>
+                                    <li><a href="index.xhtml"> Home</a></li>
+                                    <li class="active">Food Orders</li>
                                 </ol>
                             </div>
                             <!-- /.col -->
@@ -37,70 +37,151 @@
                     </div>
                     <!-- /.container-fluid -->
                 </div> 
-                <section class="content">
+                <section class="content" >
 
-                    <div class="card">
-                         <h:form>
-                                <div class="card-header">
-                                    <h:commandButton class="btn btn-primary float-sm-right" action="createFoodOrder.xhtml?faces-redirect=true" value="Add New request" />
-                                    <h3 class="card-title">Food Order</h3>
-                                </div>
-                            </h:form>
-                        <!-- /.card-header -->
-                        <div class="card-body">
-                            <table id="example1" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Room</th>
-                                        <th>Price</th>
-                                        <th>Quantity</th>
-                                        <th>Status</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>502</td>
-                                        <td>$2100.00</td>
-                                        <td>20</td>
-                                        <td>Completed</td>
-
-                                        <td><input type="button" value="View"/></td>
-                                    </tr>
-                                    <tr>
-                                        <td>202</td>
-                                        <td>$20.00</td>
-                                        <td>1</td>
-                                        <td>processing</td>
-                                        <td><input type="button" value="View"/></td>
-                                    </tr>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>Room</th>
-                                        <th>Price</th>
-                                        <th>Quantity</th>
-                                        <th>Status</th>
-                                        <th></th>
-                                    </tr>
-                                </tfoot>
-                            </table>
+                    <div class="col-lg-4 box box-info" style="padding:0px; margin-left:30px;">
+                        <div class="row" style="text-align:center">
+                            <span class="box-title" style="margin-bottom:10px; width:100%; padding:10px 20px; font-size:calc((100% + 0.25vw)*1.3); font-weight:bold;">
+                                All Orders
+                            </span>
+                            <div class="box-tools pull-right col-md-6">
+                            </div>
                         </div>
-                        <!-- /.card-body -->
+
+                        <h:form id="myForm">
+                            <div class="box-body" style="padding:0px !important;" id="scroll">
+                                <ul class="products-list product-list-in-box">
+                                    <c:forEach items="${requestServicesManagedBean.allFoodOrders}" var="fo">
+                                        <h:inputHidden id="selectfID" value="#{requestServicesManagedBean.selectedFoodOrderID}"></h:inputHidden>
+                                        <a href="#" onclick="selectFood(fo.foodOrderID);">
+                                            <li class="item" style="border-bottom:1px solid lightblue; padding:15px" id="#{fo.foodOrderID}">
+                                            <div class="product-info" style="margin-left:0px">
+                                                <div class="row" style="margin-bottom:10px">
+                                                    <span class="label label-primary pull-left" style="font-size: medium; display:block">
+                                                    Room  #{requestServicesManagedBean.getFoodOrderRoom(fo)}</span>
+                                                    <h:commandLink style="position:absolute; right:10px"  actionListener="#{requestServicesManagedBean.modalToggle(fo.foodOrderID)}" id="deleteBtn"
+                                                               class="fas fa-times fa-2x">
+                                                            <f:ajax execute="@form" render=":formmodal"></f:ajax>
+                                                </h:commandLink>
+                                                    
+                                                </div>
+                                                
+
+                                                <span class="product-title" style="font-size:calc((100% + 0.25vw)); width:100%" >Order ID: #{fo.foodOrderID}
+                                                </span>
+                                              
+                                                     
+                                                    <br/>
+                                                <span class="product-description" style="font-size:calc((100% + 0.25vw)*0.8);">
+                                                    Time of Order: #{fo.orderTime}
+                                                </span>
+                                                    
+                                                <span class="label label-warning pull-right" style="font-size: medium">
+                                                    #{fo.status}</span>
+                                           
+                                                
+                                                <h:commandLink actionListener="#{requestServicesManagedBean.selectFoodOrder2(fo.foodOrderID)}" style="color:paleblue; border-radius:2px; padding:5px " class="fas fa-search fa-2x">
+                                                </h:commandLink>
+
+                                            </div>
+                                        </li>
+
+                                        </a>
+                                      
+
+                                    </c:forEach>
+                                </ul>
+                            </div>
+                            <!-- /.box-body -->
+
+                        </h:form>
                     </div>
-                    <!-- /.container-fluid -->
+
+                    <h:form id="detailsForm">
+                         <div class="col-lg-7 box box-warning" style="padding:20px 20px; margin-left:30px;">
+                             
+                        <c:if test="#{requestServicesManagedBean.selectedFoodOrderID ne null}">
+                            <div class="box-header" style="text-align: center">
+                                   <h1 style="font-weight:bold">Food order # #{requestServicesManagedBean.selectedFoodOrderID}</h1>
+                            </div>
+                         
+                        <c:forEach items="${requestServicesManagedBean.getFoodItemsFromFoodOrderID()}" var="fofi">
+                                       <div class="form-group" >
+                                                <label>
+                                                    <input type="checkbox" class="flat-red"></input>
+                                                    <span style="font-size:calc((100% + 0.25vw)); font-weight: normal!important;margin-left: 10px">#{fofi.foodMenuItemName}</span>
+                                                    
+                                                </label>
+                                       </div>
+                        </c:forEach>
+                              <div class="box-header" style="text-align: center; font-weight: 300">
+                                   <h2>Special Requests</h2>
+                            </div>
+                            
+                            <div class="row" style="font-size:calc((100% + 0.25vw));">
+                              
+                                "#{requestServicesManagedBean.getSpecialRequest()}"
+                            </div>
+                        <h:commandButton id="editBtn" value="Complete Order" class="btn btn-primary" style="float:right"
+                                         action="#{requestServicesManagedBean.modalTrigger2()}" >
+                          <f:ajax execute="@form" render="formmodal2"></f:ajax>
+                        </h:commandButton>
+                        </c:if>
+
+
+                    </div>
+                    </h:form>
+                   
                 </section>
+                
+                   <h:form id="formmodal">
+                        <div id="modal" class="#{requestServicesManagedBean.styleClass}" role="alert">
+                            <div class="cd-popup-container">
+                                <p class="popup-content">Delete order # #{requestServicesManagedBean.selectedFoodOrderID}?</p>
+
+                                <ul class="cd-buttons" style="padding-inline-start: unset; padding:0px">
+
+                                    <li ><h:commandLink id="deleteFoodOrder" action="#{requestServicesManagedBean.deleteFoodOrder()}" class="cd-popup-confirm" value="Yes">
+                                               <f:ajax execute="@form" render=":detailsForm"></f:ajax>
+                                        </h:commandLink></li>
+                                    <li style="background-color:lightslategray"><h:commandLink id="cancelFoodItemFromMenu" action="#{requestServicesManagedBean.cancelingDeleteOrder()}" class="cd-popup-closemodal" value="No">
+                                            <f:ajax execute="@form" render="@none"></f:ajax>
+                                        </h:commandLink></li>
+                                    <!--<li style="background-color:lightslategray"><a onclick="changeStyleCheck()" class="cd-popup-closemodal">No</a></li>-->
+                                    <h:inputHidden id="styleCheckID" value="#{requestServicesManagedBean.styleCheck}" />
+                                </ul>
+                            </div> <!-- cd-popup-container -->
+                        </div> <!-- cd-popup -->
+                    </h:form>
+                
+                   <h:form id="formmodal2">
+                        <div id="modal" class="#{requestServicesManagedBean.styleClass2}" role="alert">
+                            <div class="cd-popup-container">
+                                <p class="popup-content">Update order ##{requestServicesManagedBean.selectedFoodOrderID}?</p>
+
+                                <ul class="cd-buttons" style="padding-inline-start: unset; padding:0px">
+
+                                    <li ><h:commandLink id="completeMenu" action="#{requestServicesManagedBean.markFoodOrderComplete()}" class="cd-popup-confirm" value="Yes">
+                                               <f:ajax execute="@form" render=":detailsForm formmodal2"></f:ajax>
+                                        </h:commandLink></li>
+                                    <li style="background-color:lightslategray"><h:commandLink id="cancelFoodComplete" action="#{requestServicesManagedBean.cancelingDeleteOrder()}" class="cd-popup-closemodal" value="No">
+                                            <f:ajax execute="@form" render="@none"></f:ajax>
+                                        </h:commandLink></li>
+                                    <!--<li style="background-color:lightslategray"><a onclick="changeStyleCheck()" class="cd-popup-closemodal">No</a></li>-->
+                                    <h:inputHidden id="styleCheckID" value="#{requestServicesManagedBean.styleCheck}" />
+                                </ul>
+                            </div> <!-- cd-popup-container -->
+                        </div> <!-- cd-popup -->
+                    </h:form>
                 <!-- /.content-header -->
                 <!-- Main content -->
+ 
 
+  
             </ui:define>
 
             <ui:define name="script">
-                <script>
-                    $('[data-mask]').each(function () {
-                        $(this).mask($(this).attr("data-mask"));
-                    });
-                </script>
+
             </ui:define>
 
         </ui:composition>

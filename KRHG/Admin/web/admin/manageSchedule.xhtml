@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./AdminTemplate.xhtml">
+            <ui:define name="title">
+                KRHG Admin Console System
+            </ui:define>
+
+            <ui:define name="content">
+                <!-- Content Header (Page header) -->
+                <div class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <h1 style="font-size: x-large; margin-bottom:20px">Manage Hotels</h1>
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li><a href="#"> Home</a></li>
+                                    <li class="active">Manage Hotels</li>
+                                </ol>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </div>
+                <!-- /.content-header -->
+                <!-- Main content -->
+                <section class="content">
+
+                    <div class="box box-primary" style="padding:20px 50px; margin:14px; width:98% ">
+
+                        <h3 class="box-title" style="margin-bottom:10px; text-align: center; font-size:x-large">KRHG Hotels</h3>
+                        <div class="box-tools pull-right">
+                            <!--Add Btn-->
+                            <h:form>
+                                <h:commandButton class="btn btn-primary"
+                                                 action="#{hotelManagedBean.directCreateHQSchedule()}" value="+" />
+                            </h:form>
+                        </div>
+                        <h:form>
+
+                            <h:selectOneMenu value="#{hotelManagedBean.selectedDateDropDown}" id="selectDate" class="form-control select2">
+                                <c:forEach items="${hotelManagedBean.distinctDate}" var="d">
+                                    <f:selectItem itemValue="#{d}" itemLabel="#{d}" />
+                                </c:forEach>
+                                <f:ajax execute="selectDate" rendered="form" />
+                            </h:selectOneMenu><br/>
+
+                            <table id="example3"  class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Staff</th>
+                                        <th>Staff Type</th>
+                                        <th>Sunday</th>
+                                        <th>Monday</th>
+                                        <th>Tuesday</th>
+                                        <th>Wednesday</th>
+                                        <th>Thursday</th>
+                                        <th>Friday</th>
+                                        <th>Saturday</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <c:forEach items="${hotelManagedBean.HQStaff}" var="s">
+                                        <tr>
+                                            <td>#{s.name}</td>
+                                            <td>#{s.staffTypeString}</td>
+                                            <td>#{s.getScheduleByDate(selectedDateDropDown).sun}</td>
+                                            <td>#{s.getScheduleByDate(selectedDateDropDown).mon}</td>
+                                            <td>#{s.getScheduleByDate(selectedDateDropDown).tue}</td>
+                                            <td>#{s.getScheduleByDate(selectedDateDropDown).wed}</td>
+                                            <td>#{s.getScheduleByDate(selectedDateDropDown).thurs}</td>
+                                            <td>#{s.getScheduleByDate(selectedDateDropDown).fri}</td>
+                                            <td>#{s.getScheduleByDate(selectedDateDropDown).sat}</td>
+                                        </tr>
+                                    </c:forEach>
+                                </tbody>
+                            </table>
+                            <h:commandLink id="editBtn" rendered="#{hotelManagedBean.selectedDateDropDown}"
+                                           action="#{hotelManagedBean.editSchedule()}"><i class="fas fa-search"></i>
+                            </h:commandLink>
+                            <h3> Legend: 
+                                <br /> 1: 8:00  - 17:00
+                                <br /> 2: 16:00 - 01:00 
+                                <br /> 3: 00:00 - 09:00
+                            </h3>
+                        </h:form>
+                    </div>
+
+
+
+
+                </section>
+                <!-- /.content -->
+
+
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+
+</html>

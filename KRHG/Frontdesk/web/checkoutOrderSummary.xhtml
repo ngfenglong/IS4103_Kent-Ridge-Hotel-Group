@@ -1,0 +1,154 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+    <body>
+
+        <ui:composition template="template.xhtml">
+
+
+            <ui:define name="title">
+                KRHG front desk
+            </ui:define>
+
+            <ui:define name="content">
+                <!-- Content Header (Page header) -->
+                <div class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+
+
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li class="breadcrumb-item active">
+                                        <!--Add Btn-->
+                                    </li>
+                                </ol>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </div> 
+                <section class="content">
+
+
+                    <div class="container-fluid">
+                        <div class="row">
+                            <!-- left column -->
+                            <div class="col-md-10">
+
+
+
+
+                                <div class="card card-primary">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Checkout</h3>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <!-- form start -->
+                                    <h:form role="form">
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <h:inputText value="#{frontDeskManagedBean.checkoutRoom}" a:placeholder="Enter Room number"  > </h:inputText>
+
+                                            </div>
+
+
+
+                                            <!-- /.input group -->
+
+                                        </div>
+                                        <!-- /.card-body -->
+
+                                        <div class="card-footer">
+                                            <h:commandButton class="btn btn-primary" value="Search" action="#{frontDeskManagedBean.searchCheckout()}" ></h:commandButton>
+                                        </div>
+                                    </h:form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.container-fluid -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Rooms checking out today</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <h:form>
+                                <table  id="example1" class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Booked by</th>
+                                            <th>Booking Id</th>
+                                            <th>Passport Number</th>
+                                            <th>Book out Date</th>
+
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <ui:repeat var="o" value="#{frontDeskManagedBean.todayCheckOutRoom}" varStatus="status">
+
+                                            <tr>
+                                                <td>#{o.bookedBy.firstName} #{o.bookedBy.lastName}</td>
+                                                <td>#{o.bookedRoom.roomNumber}</td>
+                                                <td>#{o.passportNum}</td>
+                                                <td>#{o.bookOutDate}</td>
+                                                <td colspan="3"><h:commandLink action="#{frontDeskManagedBean.checkOut()}" > <i class="fa fa-arrow-circle-down" style="color:gray" ></i></h:commandLink></td>                                            
+
+                                            </tr>
+
+
+
+
+
+
+                                        </ui:repeat>
+
+
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Booked by</th>
+                                            <th>Booking Id</th>
+                                            <th>Passport Number</th>
+                                            <th>Book out Date</th>
+
+                                            <th></th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </h:form>
+                        </div>
+                        <!-- /.card-body -->
+
+                    </div>
+                </section>
+                <!-- /.content-header -->
+                <!-- Main content -->
+
+            </ui:define>
+
+            <ui:define name="script">
+                <script>
+                    $('[data-mask]').each(function () {
+                        $(this).mask($(this).attr("data-mask"));
+                    });
+                </script>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

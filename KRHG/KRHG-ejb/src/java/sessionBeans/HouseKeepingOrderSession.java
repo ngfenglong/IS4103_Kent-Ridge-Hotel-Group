@@ -240,10 +240,10 @@ public class HouseKeepingOrderSession implements HouseKeepingOrderSessionLocal {
     public void updateMinibarStock(MinibarStock ms) throws NoResultException{
         MinibarStock oldMinibarStock = em.find(MinibarStock.class, ms.getMinibarStockID());
         if (oldMinibarStock != null) {
-            oldMinibarStock.setMinibarItemName(oldMinibarStock.getMinibarItemName());
-            oldMinibarStock.setCurrentStock(oldMinibarStock.getCurrentStock());
-            oldMinibarStock.setHotelCodeName(oldMinibarStock.getHotelCodeName());
-            oldMinibarStock.setAlert(oldMinibarStock.getAlert());
+            oldMinibarStock.setMinibarItemName(ms.getMinibarItemName());
+            oldMinibarStock.setCurrentStock(ms.getCurrentStock());
+            oldMinibarStock.setHotelCodeName(ms.getHotelCodeName());
+            oldMinibarStock.setAlert(ms.getAlert());
             em.flush();
         } else {
             throw new NoResultException("MinibarStock not found");

@@ -24,7 +24,7 @@
                                         <!-- /.col -->
                                         <div class="col-sm-6">
                                             <ol class="breadcrumb float-sm-right">
-                                                    <li><a href="#"> Home</a></li>
+                                                    <li><a href="adminIndex.xhtml"> Home</a></li>
                                                     <li class="active">Manage Staff</li>
                                             </ol>
                                         </div>
@@ -44,7 +44,12 @@
                                 <div class="box-tools pull-right">
                                     
                              <!--Add Btn-->
-                                    <h:commandButton class="btn btn-primary" action="addStaff.xhtml?faces-redirect=true" value="Add Staff" />
+                            <h:form>
+                            
+                                <h:commandButton class="btn btn-primary"
+                                                 action="addStaff.xhtml?faces-redirect=true" value="+" />
+                                
+                            </h:form>
                         </div>
                         
                             <table id="example1" class="table table-bordered table-striped">

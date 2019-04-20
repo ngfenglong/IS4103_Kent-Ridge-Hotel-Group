@@ -18,6 +18,7 @@ public interface PaymentTransactionSessionLocal {
     public void updatePaymentTransaction (PaymentTransaction pt) throws NoResultException;
     public void deletePaymentTransaction (Long ptID) throws NoResultException;
     public void createPaymentTransaction (PaymentTransaction pt);
+    public PaymentTransaction getLastPaymentTransaction() throws NoResultException;
     
     public void createCreditCard(CreditCard cc);
     public CreditCard getLastCreditCard() throws NoResultException;

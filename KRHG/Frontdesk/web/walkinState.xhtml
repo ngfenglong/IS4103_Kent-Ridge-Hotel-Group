@@ -1,0 +1,170 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <body>
+
+        <ui:composition template="template.xhtml">
+
+
+            <ui:define name="title">
+                KRHG front desk
+            </ui:define>
+
+            <ui:define name="content">
+                <!-- Content Header (Page header) -->
+                <div class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <h1 style="font-size: x-large; margin-bottom:20px">Room Type Selection</h1>
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li><a href="index.xhtml"> Home</a></li>
+                                    <li><a href="walkinRate.xhtml"> Walk-In Bookings</a></li>
+                                    <li class="active">Choose Room Type</li>
+                                </ol>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </div>
+                <section class="content">
+                    <h:form>
+                        <div class="form-group" style="font-size:calc((100% + 0.25vw)*1.2); text-align: center">
+                            <label>Number of Nights:</label>
+                            <br/>
+                            <h:outputText value="#{frontDeskManagedBean.nightStay}" />
+                        </div>
+                        <div class="row" style="text-align:center">
+                            <div class="col-lg-1"></div>
+                            <div class="col-lg-10">
+                                <div class="row" >
+
+                                    <div class="col-lg-4" >
+                                        <img style="width:100%; height:300px" src="./img/booking_1.jpg"></img>
+                                        <div class="small-box bg-info">
+                                            <div class="inner">
+                                                <h3>#{frontDeskManagedBean.getNumberOfAvailByRoomType("Standard")}</h3>
+
+                                                <p>Standard</p>
+                                            </div>
+                                            <div class="icon">
+
+                                            </div>
+                                            <h:commandLink action="#{frontDeskManagedBean.checkRooms('Standard')}" class="small-box-footer">
+                                                Choose Room  <i class="fa fa-arrow-circle-right"/></h:commandLink>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <img style="width:100%; height:300px" src="./img/booking_2.jpg"></img>
+                                        <div class="small-box bg-info">
+                                            <div class="inner">
+                                                <h3>#{frontDeskManagedBean.getNumberOfAvailByRoomType("Deluxe")}</h3>
+
+                                                <p>Deluxe</p>
+                                            </div>
+                                            <div class="icon">
+
+                                            </div>
+                                            <h:commandLink action="#{frontDeskManagedBean.checkRooms('Deluxe')}" class="small-box-footer">
+                                                Choose Room  <i class="fa fa-arrow-circle-right"/></h:commandLink>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4" >
+                                        <img style="width:100%; height:300px" src="./img/booking_3.jpg"></img>
+                                        <div class="small-box bg-info">
+                                            <div class="inner">
+                                                <h3>#{frontDeskManagedBean.getNumberOfAvailByRoomType('Premium')}</h3>
+
+                                                <p>Premium</p>
+                                            </div>
+                                            <div class="icon">
+
+                                            </div>
+                                            <h:commandLink action="#{frontDeskManagedBean.checkRooms('Premium')}" class="small-box-footer">
+                                                Choose Room  <i class="fa fa-arrow-circle-right"/></h:commandLink>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-lg-6" >
+                                        <img style="width:100% ;height:290px" src="./img/booking_4.jpg"></img>
+                                        <div class="small-box bg-blue">
+                                            <div class="inner">
+                                                <h3>#{frontDeskManagedBean.getNumberOfAvailByRoomType("Suite")}</h3>
+
+                                                <p>Suite</p>
+                                            </div>
+                                            <div class="icon">
+
+                                            </div>
+                                            <h:commandLink action="#{frontDeskManagedBean.checkRooms('suite')}" class="small-box-footer">
+                                                Choose Room  <i class="fa fa-arrow-circle-right"/></h:commandLink>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6" >
+                                        <img style="width:100% ;height:290px" src="./img/booking_5.jpg"></img>
+                                        <div class="small-box bg-blue">
+                                            <div class="inner">
+                                                <h3>#{frontDeskManagedBean.getNumberOfAvailByRoomType("Penthouse")}</h3>
+
+                                                <p>Penthouse</p>
+                                            </div>
+                                            <div class="icon">
+
+                                            </div>
+                                            <h:commandLink action="#{frontDeskManagedBean.checkRooms('Penthouse')}" class="small-box-footer">
+                                                Choose Room  <i class="fa fa-arrow-circle-right"/></h:commandLink>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="container-fluid">
+
+                            <div class="row">
+                                <!-- left column -->
+                                <div class="col-md-10">
+
+
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </h:form>
+                    <!-- /.container-fluid -->
+                </section>
+                <!-- /.content-header -->
+                <!-- Main content -->
+
+            </ui:define>
+
+            <ui:define name="script">
+                <script>
+                    $('[data-mask]').each(function () {
+                        $(this).mask($(this).attr("data-mask"));
+                    });
+                </script>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

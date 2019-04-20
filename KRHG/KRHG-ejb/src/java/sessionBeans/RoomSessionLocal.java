@@ -5,7 +5,6 @@
  */
 package sessionBeans;
 
-import entity.CleaningSchedule;
 import entity.ExtraSurcharge;
 import entity.HolidaySurcharge;
 import entity.MinibarItem;
@@ -27,13 +26,14 @@ public interface RoomSessionLocal {
     public List<Room> getSingleRoomByType(String roomType, String hotelCodeName, String status) throws NoResultException;
     public List<Room> getRoomByPax(String roomPax, String roomHotel) throws NoResultException;
     public List<Room> getRoomByHotel(String roomHotel) throws NoResultException;
+    public List<Room> getRoomByHotelCodeName(String hotelCodeName) throws NoResultException;
+    public List<Room> getRoomByHotelName(String hotelName) throws NoResultException;
     public void deleteRoom(Long rID) throws NoResultException;
     public void createRoom(Room r); 
     public void updateRoom(Room r) throws NoResultException;
     public void addRoomFacility(Long rID, RoomFacility rf);
     public void removeRoomFacility(Long rID, RoomFacility rf);
-    public void addCleaningSchedule(Long rID, CleaningSchedule cs);
-    public void removeCleaningSchedule(Long rID, CleaningSchedule cs);
+  
     public void addMinibarItem(Long rID, MinibarItem mi);
     public void removeMinibarItem(Long rID, MinibarItem mi);
      public List<Room> getRoomByHotelNameAndRoomType(String roomType, String hotelCodeName) throws NoResultException;

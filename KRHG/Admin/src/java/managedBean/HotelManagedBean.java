@@ -15,12 +15,15 @@ import entity.Logging;
 import entity.MailingList;
 import entity.MemberTier;
 import entity.MinibarItem;
-import entity.MinibarOrderedItem;
+import entity.PaymentTransaction;
+import entity.PromoCode;
 import entity.Room;
 import entity.RoomFacility;
 import entity.RoomPricing;
+import entity.Shift;
 import entity.Staff;
 import entity.StaffType;
+import entity.WeeklySchedule;
 import error.NoResultException;
 import etc.RandomPassword;
 import java.io.InputStream;
@@ -36,11 +39,19 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
+import java.util.Properties;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.Part;
 import sessionBeans.CustomerSessionLocal;
 import sessionBeans.FeedbackSessionLocal;
@@ -51,10 +62,14 @@ import sessionBeans.HouseKeepingOrderSessionLocal;
 import sessionBeans.LogSessionLocal;
 import sessionBeans.MailingListSessionLocal;
 import sessionBeans.MemberTierSessionLocal;
+import sessionBeans.PaymentTransactionSessionLocal;
+import sessionBeans.PromoCodeSessionLocal;
 import sessionBeans.RoomFacilitySessionLocal;
 import sessionBeans.RoomPricingSessionLocal;
 import sessionBeans.RoomSessionLocal;
+import sessionBeans.ShiftSessionLocal;
 import sessionBeans.StaffSessionLocal;
+import sessionBeans.WeeklyScheduleSessionLocal;
 import sun.misc.IOUtils;
 
 /**
@@ -89,7 +104,14 @@ public class HotelManagedBean implements Serializable {
     MailingListSessionLocal mailingListSessionLocal;
     @EJB
     CustomerSessionLocal customerSessionLocal;
-
+    @EJB
+    WeeklyScheduleSessionLocal weeklyScheduleSessionLocal;
+    @EJB
+    ShiftSessionLocal shiftSessionLocal;
+    @EJB
+    PaymentTransactionSessionLocal paymentTransactionSessionLocal;
+    @EJB
+    PromoCodeSessionLocal promocodesessionlocal;
 
     private String loggedInUser;
 
@@ -188,6 +210,30 @@ public class HotelManagedBean implements Serializable {
     public String stNokPhoneNumber;
     public String[] stStaffType;
 
+    public String emailText;
+
+    public String subjectTB;
+    public String emailMsg;
+    public String[] mailingListToSend;
+
+    public String[][] hqSchedule;
+
+    public String scheduleDate;
+
+    public String selectedDateDropDown;
+
+    public String topGrossingHotel;
+
+    public double topGrossingAmount = 0;
+    //promocode
+    public List<PromoCode> allPromoCode;
+    private String promocodeName;
+    private String promoStartDate;
+    private String promoEndDate;
+    private double promodiscount;
+    private String promoStatus;
+    private PromoCode editPromo;
+
     @ManagedProperty(value = "#{authenticationManagedBean}")
     private AuthenticationManagedBean authBean;
 
@@ -280,6 +326,112 @@ public class HotelManagedBean implements Serializable {
         return customerSessionLocal.getAllCustomers();
     }
 
+    public String getTopGrossingHotel() throws Exception {
+        double roundOff = getKrgTotalRevenue();
+        if (roundOff > topGrossingAmount) {
+            topGrossingAmount = roundOff;
+            topGrossingHotel = "Kent Ridge Grand";
+        }
+
+        double roundOff2 = getKrcTotalRevenue();
+        if (roundOff2 > topGrossingAmount) {
+            topGrossingAmount = roundOff;
+            topGrossingHotel = "Kent Ridge Central";
+        }
+        double roundOff3 = getKrnTotalRevenue();
+        if (roundOff3 > topGrossingAmount) {
+            topGrossingAmount = roundOff;
+            topGrossingHotel = "Kent Ridge North";
+        }
+        double roundOff4 = getKrsTotalRevenue();
+        if (roundOff4 > topGrossingAmount) {
+            topGrossingAmount = roundOff;
+            topGrossingHotel = "Kent Ridge South";
+        }
+        double roundOff5 = getKreTotalRevenue();
+        if (roundOff5 > topGrossingAmount) {
+            topGrossingAmount = roundOff;
+            topGrossingHotel = "Kent Ridge East";
+        }
+
+        double roundOff6 = getKrwTotalRevenue();
+        if (roundOff6 > topGrossingAmount) {
+            topGrossingAmount = roundOff;
+            topGrossingHotel = "Kent Ridge West";
+        }
+        double roundOff7 = getKrneTotalRevenue();
+        if (roundOff7 > topGrossingAmount) {
+            topGrossingAmount = roundOff;
+            topGrossingHotel = "Kent Ridge North East";
+        }
+
+        double roundOff8 = getKrnwTotalRevenue();
+        if (roundOff8 > topGrossingAmount) {
+            topGrossingAmount = roundOff;
+            topGrossingHotel = "Kent Ridge North West";
+        }
+
+        double roundOff9 = getKrseTotalRevenue();
+        if (roundOff9 > topGrossingAmount) {
+            topGrossingAmount = roundOff;
+            topGrossingHotel = "Kent Ridge South East";
+        }
+
+        double roundOff10 = getKrswTotalRevenue();
+        if (roundOff10 > topGrossingAmount) {
+            topGrossingAmount = roundOff;
+            topGrossingHotel = "Kent Ridge South West";
+        }
+        return topGrossingHotel;
+    }
+
+    public String getTopMonth() throws NoResultException, ParseException {
+        double highest = 0;
+        String topMonth = "";
+        double roundOff1 = getJanTotalRevenue();
+        if (roundOff1 > highest) {
+            highest = roundOff1;
+            topMonth = "January";
+        }
+
+        double roundOff2 = getFebTotalRevenue();
+        if (roundOff2 > highest) {
+            highest = roundOff2;
+            topMonth = "February";
+        }
+
+        double roundOff3 = getMarTotalRevenue();
+        if (roundOff3 > highest) {
+            highest = roundOff3;
+            topMonth = "March";
+        }
+
+        double roundOff4 = getAprTotalRevenue();
+        if (roundOff4 > highest) {
+            highest = roundOff4;
+            topMonth = "April";
+        }
+
+        return topMonth;
+    }
+
+    public String getTotalRevenue() throws NoResultException, ParseException {
+        double totalRevenue = 0;
+        totalRevenue = totalRevenue + getJanTotalRevenue();
+        totalRevenue = totalRevenue + getFebTotalRevenue();
+        totalRevenue = totalRevenue + getMarTotalRevenue();
+        totalRevenue = totalRevenue + getAprTotalRevenue();
+
+        double roundOff = (double) Math.round(totalRevenue * 100) / 100;
+        String roundOffString = "$" + String.format("%,.2f", roundOff);
+        return roundOffString;
+
+    }
+
+    public void setTopGrossingHotel(String topGrossingHotel) {
+        this.topGrossingHotel = topGrossingHotel;
+    }
+
     public String convertDateFormat(Date date) {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         return dateFormat.format(date);
@@ -289,13 +441,411 @@ public class HotelManagedBean implements Serializable {
         List<Room> rooms = roomSessionLocal.getAllRooms();
         List<Room> occupiedRooms = new ArrayList<Room>();
         for (Room r : rooms) {
-            if (r.getStatus().equals("occupied")) {
+            if (r.getStatus().equals("Occupied")) {
+                Room tempRoom = r;
+                occupiedRooms.add(tempRoom);
+            }
+        }
+        double ocr = occupiedRooms.size() * 1.0;
+        double rs = rooms.size() * 1.0;
+
+        double rate = ocr / rs;
+        double ratePercent = rate * 100;
+        double roundOff = (double) Math.round(ratePercent * 100) / 100;
+        String str1 = Double.toString(roundOff);
+        return str1;
+    }
+
+    public String getFeedbackRate() {
+        List<Feedback> feedbacks = feedbackSessionLocal.getAllFeedbacks();
+        int ratingTotal = 0;
+        for (Feedback f : feedbacks) {
+            ratingTotal = ratingTotal + f.getFeedbackRating();
+        }
+        double feedbackTotal = ratingTotal * 1.0;
+        double feedbackBase = feedbacks.size() * 1.0;
+        double feedbackRate = feedbackTotal / feedbackBase;
+        double roundOff = (double) Math.round(feedbackRate * 10) / 10.0;
+        String str1 = Double.toString(roundOff);
+        return str1;
+    }
+
+    public String getFeedbackRatePct() {
+        List<Feedback> feedbacks = feedbackSessionLocal.getAllFeedbacks();
+        int ratingTotal = 0;
+        for (Feedback f : feedbacks) {
+            ratingTotal = ratingTotal + f.getFeedbackRating();
+        }
+        double feedbackTotal = ratingTotal * 1.0;
+        double feedbackBase = feedbacks.size() * 1.0;
+        double feedbackRate = feedbackTotal / feedbackBase;
+        double feedbackPct = feedbackRate * 20.0;
+        double roundOff = (double) Math.round(feedbackPct * 10) / 10.0;
+        String str1 = Double.toString(roundOff);
+        return str1;
+    }
+
+    public String getTopPerformingHotel() throws NoResultException {
+        List<Hotel> hotels = hotelSessionLocal.getAllHotels();
+
+        int index = 0;
+        double highestOccRate = 0.0;
+        String highestHotelName = "";
+        List<Room> occupiedRooms = new ArrayList<Room>();
+        while (index < hotels.size()) {
+            List<Room> tempRoom = roomSessionLocal.getRoomByHotelCodeName(hotels.get(index).getHotelCodeName());
+            for (Room r : tempRoom) {
+                if (r.getStatus().equals("Occupied")) {
+                    Room temp = r;
+                    occupiedRooms.add(temp);
+                }
+            }
+
+            double ocr = occupiedRooms.size() * 1.0;
+            double rs = tempRoom.size() * 1.0;
+            double rate = ocr / rs;
+
+            if (rate > highestOccRate) {
+                highestOccRate = rate;
+                highestHotelName = hotels.get(index).getHotelName();
+            }
+            occupiedRooms.clear();
+
+            index++;
+        }//end of while-loop
+
+        return highestHotelName;
+    }
+
+    public String getTopOccupiedRate() throws NoResultException {
+        List<Hotel> hotels = hotelSessionLocal.getAllHotels();
+
+        int index = 0;
+        double highestOccRate = 0.0;
+        String highestHotelName = "";
+        List<Room> occupiedRooms = new ArrayList<Room>();
+        while (index < hotels.size()) {
+            List<Room> tempRoom = roomSessionLocal.getRoomByHotelCodeName(hotels.get(index).getHotelCodeName());
+            for (Room r : tempRoom) {
+                if (r.getStatus().equals("Occupied")) {
+                    Room temp = r;
+                    occupiedRooms.add(temp);
+                }
+            }
+
+            double ocr = occupiedRooms.size() * 1.0;
+            double rs = tempRoom.size() * 1.0;
+            double rate = ocr / rs;
+
+            if (rate > highestOccRate) {
+                highestOccRate = rate;
+                highestHotelName = hotels.get(index).getHotelName();
+            }
+            occupiedRooms.clear();
+            index++;
+        }//end of while-loop
+
+        double ratePercent = highestOccRate * 100;
+        double roundOff = (double) Math.round(ratePercent * 100) / 100;
+        String str1 = Double.toString(roundOff);
+        return str1;
+    }
+
+    public String getHotelOccupancyRate() throws NoResultException {
+        List<Room> rooms = roomSessionLocal.getRoomByHotelName(selectedHotel);
+        List<Room> occupiedRooms = new ArrayList<Room>();
+        for (Room r : rooms) {
+            if (r.getStatus().equals("Occupied")) {
+                Room tempRoom = r;
+                occupiedRooms.add(tempRoom);
+            }
+        }
+        double ocr = occupiedRooms.size() * 1.0;
+        double rs = rooms.size() * 1.0;
+
+        double rate = ocr / rs;
+        double ratePercent = rate * 100;
+        double roundOff = (double) Math.round(ratePercent * 100) / 100;
+        String str1 = Double.toString(roundOff);
+        return str1;
+    }
+
+    public String getHotelAvailableRoom() throws NoResultException {
+        List<Room> rooms = roomSessionLocal.getRoomByHotelName(selectedHotel);
+        List<Room> occupiedRooms = new ArrayList<Room>();
+        for (Room r : rooms) {
+            if (r.getStatus().equals("Available")) {
                 Room tempRoom = r;
                 occupiedRooms.add(tempRoom);
             }
         }
 
-        return ((occupiedRooms.size() / rooms.size()) * 100) + "";
+        String str1 = Integer.toString(occupiedRooms.size());
+        return str1;
+    }
+
+    public String getHotelUnavailableRoom() throws NoResultException {
+        List<Room> rooms = roomSessionLocal.getRoomByHotelName(selectedHotel);
+        List<Room> occupiedRooms = new ArrayList<Room>();
+        for (Room r : rooms) {
+            if (r.getStatus().equals("Unavailable")) {
+                Room tempRoom = r;
+                occupiedRooms.add(tempRoom);
+            }
+        }
+
+        String str1 = Integer.toString(occupiedRooms.size());
+        return str1;
+    }
+
+    public String getHotelFeedbackRate() throws NoResultException {
+        List<Feedback> feedbacks = feedbackSessionLocal.getAllFeedbacks();
+        int ratingTotal = 0;
+        int feedbackBase = 0;
+        for (Feedback f : feedbacks) {
+            if (f.getHotel().getHotelName().equals(selectedHotel)) {
+                ratingTotal = ratingTotal + f.getFeedbackRating();
+                feedbackBase = feedbackBase + 1;
+            }
+        }
+        double feedbackTotal = ratingTotal * 1.0;
+        double feedbackRate = feedbackTotal / feedbackBase;
+        double roundOff = (double) Math.round(feedbackRate * 10) / 10.0;
+        String str1 = Double.toString(roundOff);
+        return str1;
+    }
+
+    public String getHotelFeedbackRatePct() throws NoResultException {
+        List<Feedback> feedbacks = feedbackSessionLocal.getAllFeedbacks();
+        int ratingTotal = 0;
+        int feedbackBase = 0;
+        for (Feedback f : feedbacks) {
+            if (f.getHotel().getHotelName().equals(selectedHotel)) {
+                ratingTotal = ratingTotal + f.getFeedbackRating();
+                feedbackBase = feedbackBase + 1;
+            }
+        }
+        double feedbackTotal = ratingTotal * 1.0;
+        double feedbackRate = feedbackTotal / feedbackBase;
+        double feedbackPct = feedbackRate * 20.0;
+        double roundOff = (double) Math.round(feedbackPct * 10) / 10.0;
+        String str1 = Double.toString(roundOff);
+        return str1;
+    }
+
+    public double getJanTotalRevenue() throws NoResultException, ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        List<PaymentTransaction> pts = paymentTransactionSessionLocal.getAllPaymentTransaction();
+        double totalJan = 0;
+        for (PaymentTransaction pt : pts) {
+            if (pt.getTransactionDateTime().compareTo(format.parse("2018-12-31")) == 1 && pt.getTransactionDateTime().compareTo(format.parse("2019-02-01")) == -1) {
+                totalJan = totalJan + pt.getFinalPayment();
+            }
+        }
+
+        double roundOff = (double) Math.round(totalJan * 100) / 100;
+        return roundOff;
+    }
+
+    public double getFebTotalRevenue() throws NoResultException, ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        List<PaymentTransaction> pts = paymentTransactionSessionLocal.getAllPaymentTransaction();
+        double totalJan = 0;
+        for (PaymentTransaction pt : pts) {
+            if (pt.getTransactionDateTime().compareTo(format.parse("2019-01-31")) == 1 && pt.getTransactionDateTime().compareTo(format.parse("2019-03-01")) == -1) {
+                totalJan = totalJan + pt.getFinalPayment();
+            }
+        }
+        double roundOff = (double) Math.round(totalJan * 100) / 100;
+        return roundOff;
+    }
+
+    public double getMarTotalRevenue() throws NoResultException, ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        List<PaymentTransaction> pts = paymentTransactionSessionLocal.getAllPaymentTransaction();
+        double totalJan = 0;
+        for (PaymentTransaction pt : pts) {
+            if (pt.getTransactionDateTime().compareTo(format.parse("2019-02-28")) == 1 && pt.getTransactionDateTime().compareTo(format.parse("2019-04-01")) == -1) {
+                totalJan = totalJan + pt.getFinalPayment();
+            }
+        }
+        double roundOff = (double) Math.round(totalJan * 100) / 100;
+        return roundOff;
+    }
+
+    public double getAprTotalRevenue() throws NoResultException, ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        List<PaymentTransaction> pts = paymentTransactionSessionLocal.getAllPaymentTransaction();
+        double totalJan = 0;
+        for (PaymentTransaction pt : pts) {
+            if (pt.getTransactionDateTime().compareTo(format.parse("2019-03-31")) == 1 && pt.getTransactionDateTime().compareTo(format.parse("2019-05-01")) == -1) {
+                totalJan = totalJan + pt.getFinalPayment();
+            }
+        }
+        double roundOff = (double) Math.round(totalJan * 100) / 100;
+        return roundOff;
+    }
+
+    public double getKrgTotalRevenue() throws NoResultException {
+        List<PaymentTransaction> pts = paymentTransactionSessionLocal.getAllPaymentTransaction();
+        double totalKRG = 0;
+        for (PaymentTransaction pt : pts) {
+            if (pt.getRoomsBooked().get(0).getBookedRoom().getHotel().getHotelCodeName().equals("KRG")) {
+                totalKRG = totalKRG + pt.getFinalPayment();
+            }
+        }
+
+        double roundOff = (double) Math.round(totalKRG * 100) / 100;
+        if (roundOff > topGrossingAmount) {
+            topGrossingAmount = roundOff;
+            topGrossingHotel = "Kent Ridge Grand";
+        }
+        return roundOff;
+    }
+
+    public double getKrcTotalRevenue() throws NoResultException {
+        List<PaymentTransaction> pts = paymentTransactionSessionLocal.getAllPaymentTransaction();
+        double totalKRG = 0;
+        for (PaymentTransaction pt : pts) {
+            if (pt.getRoomsBooked().get(0).getBookedRoom().getHotel().getHotelCodeName().equals("KRC")) {
+                totalKRG = totalKRG + pt.getFinalPayment();
+            }
+        }
+        double roundOff = (double) Math.round(totalKRG * 100) / 100;
+        if (roundOff > topGrossingAmount) {
+            topGrossingAmount = roundOff;
+            topGrossingHotel = "Kent Ridge Central";
+        }
+        return roundOff;
+    }
+
+    public double getKrnTotalRevenue() throws NoResultException {
+        List<PaymentTransaction> pts = paymentTransactionSessionLocal.getAllPaymentTransaction();
+        double totalKRG = 0;
+        for (PaymentTransaction pt : pts) {
+            if (pt.getRoomsBooked().get(0).getBookedRoom().getHotel().getHotelCodeName().equals("KRN")) {
+                totalKRG = totalKRG + pt.getFinalPayment();
+            }
+        }
+        double roundOff = (double) Math.round(totalKRG * 100) / 100;
+        if (roundOff > topGrossingAmount) {
+            topGrossingAmount = roundOff;
+            topGrossingHotel = "Kent Ridge North";
+        }
+        return roundOff;
+    }
+
+    public double getKrsTotalRevenue() throws NoResultException {
+        List<PaymentTransaction> pts = paymentTransactionSessionLocal.getAllPaymentTransaction();
+        double totalKRG = 0;
+        for (PaymentTransaction pt : pts) {
+            if (pt.getRoomsBooked().get(0).getBookedRoom().getHotel().getHotelCodeName().equals("KRS")) {
+                totalKRG = totalKRG + pt.getFinalPayment();
+            }
+        }
+        double roundOff = (double) Math.round(totalKRG * 100) / 100;
+        if (roundOff > topGrossingAmount) {
+            topGrossingAmount = roundOff;
+            topGrossingHotel = "Kent Ridge South";
+        }
+        return roundOff;
+    }
+
+    public double getKreTotalRevenue() throws NoResultException {
+        List<PaymentTransaction> pts = paymentTransactionSessionLocal.getAllPaymentTransaction();
+        double totalKRG = 0;
+        for (PaymentTransaction pt : pts) {
+            if (pt.getRoomsBooked().get(0).getBookedRoom().getHotel().getHotelCodeName().equals("KRE")) {
+                totalKRG = totalKRG + pt.getFinalPayment();
+
+            }
+        }
+        double roundOff = (double) Math.round(totalKRG * 100) / 100;
+        if (roundOff > topGrossingAmount) {
+            topGrossingAmount = roundOff;
+            topGrossingHotel = "Kent Ridge East";
+        }
+        return roundOff;
+    }
+
+    public double getKrwTotalRevenue() throws NoResultException {
+        List<PaymentTransaction> pts = paymentTransactionSessionLocal.getAllPaymentTransaction();
+        double totalKRG = 0;
+        for (PaymentTransaction pt : pts) {
+            if (pt.getRoomsBooked().get(0).getBookedRoom().getHotel().getHotelCodeName().equals("KRW")) {
+                totalKRG = totalKRG + pt.getFinalPayment();
+            }
+        }
+        double roundOff = (double) Math.round(totalKRG * 100) / 100;
+        if (roundOff > topGrossingAmount) {
+            topGrossingAmount = roundOff;
+            topGrossingHotel = "Kent Ridge West";
+        }
+        return roundOff;
+    }
+
+    public double getKrneTotalRevenue() throws NoResultException {
+        List<PaymentTransaction> pts = paymentTransactionSessionLocal.getAllPaymentTransaction();
+        double totalKRG = 0;
+        for (PaymentTransaction pt : pts) {
+            if (pt.getRoomsBooked().get(0).getBookedRoom().getHotel().getHotelCodeName().equals("KRNE")) {
+                totalKRG = totalKRG + pt.getFinalPayment();
+            }
+        }
+        double roundOff = (double) Math.round(totalKRG * 100) / 100;
+        if (roundOff > topGrossingAmount) {
+            topGrossingAmount = roundOff;
+            topGrossingHotel = "Kent Ridge North East";
+        }
+        return roundOff;
+    }
+
+    public double getKrnwTotalRevenue() throws NoResultException {
+        List<PaymentTransaction> pts = paymentTransactionSessionLocal.getAllPaymentTransaction();
+        double totalKRG = 0;
+        for (PaymentTransaction pt : pts) {
+            if (pt.getRoomsBooked().get(0).getBookedRoom().getHotel().getHotelCodeName().equals("KRNW")) {
+                totalKRG = totalKRG + pt.getFinalPayment();
+            }
+        }
+        double roundOff = (double) Math.round(totalKRG * 100) / 100;
+        if (roundOff > topGrossingAmount) {
+            topGrossingAmount = roundOff;
+            topGrossingHotel = "Kent Ridge North West";
+        }
+        return roundOff;
+    }
+
+    public double getKrseTotalRevenue() throws NoResultException {
+        List<PaymentTransaction> pts = paymentTransactionSessionLocal.getAllPaymentTransaction();
+        double totalKRG = 0;
+        for (PaymentTransaction pt : pts) {
+            if (pt.getRoomsBooked().get(0).getBookedRoom().getHotel().getHotelCodeName().equals("KRSE")) {
+                totalKRG = totalKRG + pt.getFinalPayment();
+            }
+        }
+        double roundOff = (double) Math.round(totalKRG * 100) / 100;
+        if (roundOff > topGrossingAmount) {
+            topGrossingAmount = roundOff;
+            topGrossingHotel = "Kent Ridge South East";
+        }
+        return roundOff;
+    }
+
+    public double getKrswTotalRevenue() throws NoResultException {
+        List<PaymentTransaction> pts = paymentTransactionSessionLocal.getAllPaymentTransaction();
+        double totalKRG = 0;
+        for (PaymentTransaction pt : pts) {
+            if (pt.getRoomsBooked().get(0).getBookedRoom().getHotel().getHotelCodeName().equals("KRSW")) {
+                totalKRG = totalKRG + pt.getFinalPayment();
+            }
+        }
+        double roundOff = (double) Math.round(totalKRG * 100) / 100;
+        if (roundOff > topGrossingAmount) {
+            topGrossingAmount = roundOff;
+            topGrossingHotel = "Kent Ridge South West";
+        }
+        return roundOff;
     }
 
     public String selectMailingList(MailingList m) {
@@ -730,6 +1280,7 @@ public class HotelManagedBean implements Serializable {
 
         return "editMinibarItem.xhtml?faces-redirect=true";
     }
+
     public void selectMinibarItem(Long miID) throws NoResultException {
         selectedMinibarItem = roomSessionLocal.getMinibarItemByID(miID);
     }
@@ -786,18 +1337,18 @@ public class HotelManagedBean implements Serializable {
     public String viewHotel(Long hID) throws NoResultException {
         System.out.println("in view hotel");
         System.out.println("ID: " + hID);
-        
-              selectedHotelObj = hotelSessionLocal.getHotelByID(hID);
-              selectedHotelID = hID;
+
+        selectedHotelObj = hotelSessionLocal.getHotelByID(hID);
+        selectedHotelID = hID;
         List<HotelFacility> tempHotelFacilities = selectedHotelObj.getHotelFacilities();
         if (!tempHotelFacilities.isEmpty()) {
             setSelectedHotelFacilities(new String[tempHotelFacilities.size()]);
             for (int i = 0; i < tempHotelFacilities.size(); i++) {
-            selectedHotelFacilities[i] = tempHotelFacilities.get(i).getHotelFacilityName();
+                selectedHotelFacilities[i] = tempHotelFacilities.get(i).getHotelFacilityName();
 //                System.out.println(hotelFacilities[i] = tempHotelFacilities.get(i).getHotelFacilityName());
             }
-            
-            for(int r=0; r< getSelectedHotelFacilities().length; r++){
+
+            for (int r = 0; r < getSelectedHotelFacilities().length; r++) {
                 System.out.println(getSelectedHotelFacilities()[r]);
             }
         }
@@ -891,9 +1442,10 @@ public class HotelManagedBean implements Serializable {
 
         return "manageFacility.xhtml?faces-redirect=true";
     }
-        public void selectedDeleteHotelFacility(Long tempHFID){
+
+    public void selectedDeleteHotelFacility(Long tempHFID) {
         selectedHFID = tempHFID;
-        }
+    }
 
     public String deleteLog(Long lID) throws NoResultException {
         logSessionLocal.deleteLogging(lID);
@@ -929,12 +1481,10 @@ public class HotelManagedBean implements Serializable {
         return "manageHotel.xhtml?faces-redirect=true";
     }
 
-        
-    public void selectedDeleteRoomFacility(Long tempID){
+    public void selectedDeleteRoomFacility(Long tempID) {
         selectedRFID = tempID;
     }
-    
-    
+
     public String deleteRoomFacility() throws NoResultException {
 
         List<Room> rooms = roomSessionLocal.getAllRooms();
@@ -983,7 +1533,7 @@ public class HotelManagedBean implements Serializable {
         MinibarItem mi = selectedMinibarItem;
         mi.setStatus(false);
         roomSessionLocal.updateMinibarItem(mi);
- 
+
         logActivityName = mi.getItemName();
         FacesContext context = FacesContext.getCurrentInstance();
         String loggedInName = context.getApplication().createValueBinding("#{authenticationManagedBean.name}").getValue(context).toString();
@@ -1473,6 +2023,343 @@ public class HotelManagedBean implements Serializable {
         logSessionLocal.createLogging(l);
 
         return "manageStaff.xhtml?faces-redirect=true";
+    }
+
+    public List<WeeklySchedule> getAllWeeklySchedule() {
+        return weeklyScheduleSessionLocal.getAllWeeklySchedule();
+    }
+
+    public List<Shift> getAllShift() {
+        return shiftSessionLocal.getAllShift();
+    }
+
+    public List<RoomPricing> getHotelRoomPricings(String hotelCode) {
+        List<RoomPricing> returnList = roomPricingSessionLocal.getAllRoomPricingsByHotel(hotelCode);
+
+        return returnList;
+    }
+
+    public List<Staff> getHQStaff() {
+        List<Staff> checkList = getAllStaff();
+        List<Staff> returnList = new ArrayList<Staff>();
+        for (Staff s : checkList) {
+            if (s.getHotelGroup().equals("HQ")) {
+                Staff tempStaff = s;
+                returnList.add(s);
+            }
+        }
+        return returnList;
+    }
+
+    public List<WeeklySchedule> getAllWeeklyScheduleByWeek(String WeeklySchedule) throws ParseException {
+        Date tempDate = (new SimpleDateFormat("dd-MM-yyyy").parse(WeeklySchedule));
+
+        List<WeeklySchedule> returnList = new ArrayList<WeeklySchedule>();
+        List<WeeklySchedule> checkList = weeklyScheduleSessionLocal.getAllWeeklySchedule();
+        for (WeeklySchedule w : checkList) {
+            if (w.getStartDate().compareTo(tempDate) == 0) {
+                WeeklySchedule tempWeekSchdule = w;
+                returnList.add(tempWeekSchdule);
+            }
+        }
+
+        return returnList;
+    }
+
+    public String directCreateHQSchedule() {
+
+        hqSchedule = new String[getHQStaff().size()][7];
+        for (int i = 0; i < getHQStaff().size(); i++) {
+            for (int j = 0; j < 7; j++) {
+                hqSchedule[i][j] = "";
+            }
+        }
+
+        return "createSchedule.xhtml?faces-redirect=true";
+    }
+
+    public static void sendEmail(String recipient, String subject, String msg) {
+
+        final String username = "automessage.kentridgehotelgroup@gmail.com";
+        final String password = "krhg1234";
+
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+
+        Session session = Session.getInstance(props,
+                new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
+
+        try {
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("Do-not-reply@KentRidgeHotelGroup.com"));
+            message.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse(recipient));
+            message.setSubject(subject);
+            message.setText(msg);
+            Transport.send(message);
+
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void sendMailingListEmail(String recipient, String subject, String content) {
+
+        final String username = "automessage.kentridgehotelgroup@gmail.com";
+        final String password = "krhg1234";
+
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+
+        Session session = Session.getInstance(props,
+                new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
+
+        try {
+
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("Do-not-reply@KentRidgeHotelGroup.com"));
+            message.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse(recipient));
+            message.setSubject(subject);
+            message.setContent(content, "text/html");
+            Transport.send(message);
+
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public String sendMailingList() throws NoResultException {
+        List<String> listToSend = new ArrayList<String>();
+        if (mailingListToSend != null) {
+            for (int i = 0; i < mailingListToSend.length; i++) {
+                listToSend.add(mailingListToSend[i]);
+            }
+        }
+
+        if (listToSend.contains("Silver Member")) {
+            for (Customer c : getAllCustomer()) {
+                if (c.getPoints() >= 5000 && c.getPoints() < 20000) {
+                    listToSend.add(c.getEmail());
+                }
+            }
+        }
+        if (listToSend.contains("Gold Member")) {
+            for (Customer c : getAllCustomer()) {
+                if (c.getPoints() >= 20000 && c.getPoints() < 50000) {
+                    listToSend.add(c.getEmail());
+                }
+            }
+        }
+        if (listToSend.contains("Platinum Member")) {
+            for (Customer c : getAllCustomer()) {
+                if (c.getPoints() >= 50000) {
+                    listToSend.add(c.getEmail());
+                }
+            }
+        }
+
+        for (int i = 0; i < listToSend.size(); i++) {
+            if (!listToSend.get(i).equals("Silver Member") && !listToSend.get(i).equals("Gold Member") && !listToSend.get(i).equals("Platinum Member")) {
+                String content = "<!DOCTYPE html>\n"
+                        + "<html lang=\"en\">\n"
+                        + "<head>\n"
+                        + "  <title>Mailing List </title>\n"
+                        + "  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n"
+                        + "  <meta name=\"viewport\" content=\"width=device-width\">\n"
+                        + "</head>\n"
+                        + "<body style=\"margin: 0\">\n"
+                        + "  <style type=\"text/css\">\n"
+                        + "    body {\n"
+                        + "      margin: 0;\n"
+                        + "      }\n"
+                        + "      h1 a:hover {\n"
+                        + "      font-size: 30px; color: #333;\n"
+                        + "      }\n"
+                        + "      h1 a:active {\n"
+                        + "      font-size: 30px; color: #333;\n"
+                        + "      }\n"
+                        + "      h1 a:visited {\n"
+                        + "      font-size: 30px; color: #333;\n"
+                        + "      }\n"
+                        + "      a:hover {\n"
+                        + "      text-decoration: none;\n"
+                        + "      }\n"
+                        + "      a:active {\n"
+                        + "      text-decoration: none;\n"
+                        + "      }\n"
+                        + "      a:visited {\n"
+                        + "      text-decoration: none;\n"
+                        + "      }\n"
+                        + "      .button__text:hover {\n"
+                        + "      color: #fff; text-decoration: none;\n"
+                        + "      }\n"
+                        + "      .button__text:active {\n"
+                        + "      color: #fff; text-decoration: none;\n"
+                        + "      }\n"
+                        + "      .button__text:visited {\n"
+                        + "      color: #fff; text-decoration: none;\n"
+                        + "      }\n"
+                        + "      a:hover {\n"
+                        + "      color: #080e66;\n"
+                        + "      }\n"
+                        + "      a:active {\n"
+                        + "      color: #080e66;\n"
+                        + "      }\n"
+                        + "      a:visited {\n"
+                        + "      color: #080e66;\n"
+                        + "      }\n"
+                        + "      @media (max-width: 600px) {\n"
+                        + "        .container {\n"
+                        + "          width: 94% !important;\n"
+                        + "        }\n"
+                        + "        .main-action-cell {\n"
+                        + "          float: none !important; margin-right: 0 !important;\n"
+                        + "        }\n"
+                        + "        .secondary-action-cell {\n"
+                        + "          text-align: center; width: 100%;\n"
+                        + "        }\n"
+                        + "        .header {\n"
+                        + "          margin-top: 20px !important; margin-bottom: 2px !important;\n"
+                        + "        }\n"
+                        + "        .shop-name__cell {\n"
+                        + "          display: block;\n"
+                        + "        }\n"
+                        + "        .order-number__cell {\n"
+                        + "          display: block; text-align: left !important; margin-top: 20px;\n"
+                        + "        }\n"
+                        + "        .button {\n"
+                        + "          width: 100%;\n"
+                        + "        }\n"
+                        + "        .or {\n"
+                        + "          margin-right: 0 !important;\n"
+                        + "        }\n"
+                        + "        .apple-wallet-button {\n"
+                        + "          text-align: center;\n"
+                        + "        }\n"
+                        + "        .customer-info__item {\n"
+                        + "          display: block; width: 100% !important;\n"
+                        + "        }\n"
+                        + "        .spacer {\n"
+                        + "          display: none;\n"
+                        + "        }\n"
+                        + "        .subtotal-spacer {\n"
+                        + "          display: none;\n"
+                        + "        }\n"
+                        + "      }\n"
+                        + "  </style>\n"
+                        + "  <table class=\"body\" style=\"border-collapse: collapse; border-spacing: 0; height: 100% !important; width: 100% !important\">\n"
+                        + "    <tr>\n"
+                        + "      <td style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif\">\n"
+                        + "        <table class=\"row content\" style=\"border-collapse: collapse; border-spacing: 0; width: 100%\">\n"
+                        + "          <tr>\n"
+                        + "            <td class=\"content__cell\" style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; padding-bottom: 40px\">\n"
+                        + "              <center>\n"
+                        + "                <table class=\"container\" style=\"border-collapse: collapse; border-spacing: 0; margin: 0 auto; text-align: left; width: 560px\">\n"
+                        + "                  <tr>\n"
+                        + "                    <td style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif\">\n"
+                        + "\n"
+                        + "                      <p style=\"color: #777; font-size: 16px; line-height: 150%; margin: 0\">Dear " + customerSessionLocal.getCustomerByEmail(listToSend.get(i)).getFirstName() + ",<br><br>\n"
+                        + "                       " + emailMsg + "</p>\n"
+                        + "                     </tr>\n"
+                        + "                </table>\n"
+                        + "              </center>\n"
+                        + "            </td>\n"
+                        + "          </tr>\n"
+                        + "        </table>\n"
+                        + "       <table class=\"row section\" style=\"border-collapse: collapse; border-spacing: 0; border-top-color: #e5e5e5; border-top-style: solid; border-top-width: 1px; width: 100%\">\n"
+                        + "          <tr>\n"
+                        + "            <td class=\"section__cell\" style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; padding: 40px 0\">\n"
+                        + "              <center>\n"
+                        + "\n"
+                        + "                <table class=\"container\" style=\"border-collapse: collapse; border-spacing: 0; margin: 0 auto; text-align: left; width: 560px\">\n"
+                        + "                  <tr>\n"
+                        + "                    <td style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif\">\n"
+                        + "                      <table class=\"row\" style=\"border-collapse: collapse; border-spacing: 0; width: 100%\">\n"
+                        + "                        <tr class=\"order-list__item order-list__item--single\" style=\"border-bottom-color: #e5e5e5; border-bottom-style: none !important; border-bottom-width: 1px; width: 100%\">\n"
+                        + "                          <td class=\"order-list__item__cell\" style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; padding: 0\">\n"
+                        + "                            <table style=\"border-collapse: collapse; border-spacing: 0\">\n"
+                        + "                            \n"
+                        + "                              <td style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif\">\n"
+                        + "                                <img src=\"http://zetegral.website/krhgImages/KRHGblack.png\" align=\"left\" width=\"130\" height=\"100\" class=\"order-list__product-image\">\n"
+                        + "                              </td>\n"
+                        + "                              <td class=\"order-list__product-description-cell\" style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; width: 100%\"> \n"
+                        + "                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n"
+                        + "                                <span class=\"order-list__item-title\" style=\"color: rgb(0, 0, 0); font-size: 12px; font-weight: 600; line-height: 1.4\"><b>" + authBean.getLoggedInStaff().getName() + "(" + authBean.getLoggedInStaff().genderTitle() + ")</b></span>\n"
+                        + "                                <br />\n"
+                        + "                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n"
+                        + "                                <span class=\"order-list__item-title\" style=\"color: rgb(0, 0, 0); font-size: 10px; font-weight: 600; line-height: 1.4\">" + authBean.getLoggedInStaff().getJobTitle() + "</span>\n"
+                        + "                                <br />\n"
+                        + "                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n"
+                        + "                                <span class=\"order-list__item-title\" style=\"color: rgb(0, 0, 0); font-size: 10px; font-weight: 600; line-height: 1.4\">+65 6123 2000</span>\n"
+                        + "                                <span class=\"order-list__item-title\" style=\"color: rgb(250, 0, 0); font-size: 10px; font-weight: 600; line-height: 1.4\">|</span>\n"
+                        + "                                <span class=\"order-list__item-title\" style=\"color: rgb(0, 0, 0); font-size: 10px; font-weight: 600; line-height: 1.4\">" + authBean.getLoggedInStaff().getEmail() + "</span>\n"
+                        + "                                <br />\n"
+                        + "                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n"
+                        + "                                <span class=\"order-list__item-title\" style=\"color: rgb(0, 0, 0); font-size: 10px; font-weight: 600; line-height: 1.4\">Kent Ridge Grand</span>\n"
+                        + "                                <span class=\"order-list__item-title\" style=\"color: rgb(250, 0, 0); font-size: 10px; font-weight: 600; line-height: 1.4\">|</span>\n"
+                        + "                                <span class=\"order-list__item-title\" style=\"color: rgb(0, 0, 0); font-size: 10px; font-weight: 600; line-height: 1.4\">63 Somerset Road, Singapore 238163</span>\n"
+                        + "                                <br />\n"
+                        + "                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n"
+                        + "                                <span class=\"order-list__item-title\" style=\"color: rgb(0, 0, 0); font-size: 10px; font-weight: 600; line-height: 1.4\">If you have any questions, contact us at <a href=\"#\" style=\"color: #080e66; font-size: 12px; text-decoration: none\">reservations@KRHG.com</a></span>\n"
+                        + "                                <br />\n"
+                        + "                              </td>\n"
+                        + "                                           \n"
+                        + "                            </table>\n"
+                        + "                          </td>\n"
+                        + "                        </tr>\n"
+                        + "                      </table>\n"
+                        + "                    </td>\n"
+                        + "                    </tr>\n"
+                        + "                </table>    \n"
+                        + "            </center>\n"
+                        + "        </td>\n"
+                        + "    </tr>\n"
+                        + "  </table>\n"
+                        + "  <table class=\"row footer\" style=\"border-collapse: collapse; border-spacing: 0; border-top-color: #e5e5e5; border-top-style: solid; border-top-width: 1px; width: 100%\">\n"
+                        + "          <tr>\n"
+                        + "            <td class=\"footer__cell\" style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; padding: 35px 0\">\n"
+                        + "              <center>\n"
+                        + "                <table class=\"container\" style=\"border-collapse: collapse; border-spacing: 0; margin: 0 auto; text-align: left; width: 560px\">\n"
+                        + "                  \n"
+                        + "                </table>\n"
+                        + "              </center>\n"
+                        + "            </td>\n"
+                        + "          </tr>\n"
+                        + "        </table>\n"
+                        + "      </td>\n"
+                        + "    </tr>\n"
+                        + "  </table>\n"
+                        + "</body>\n"
+                        + "</html>";
+                sendMailingListEmail(listToSend.get(i), subjectTB, content);
+                System.out.println(listToSend.get(i));
+            }
+        }
+
+        subjectTB = null;
+        emailMsg = null;
+        mailingListToSend = null;
+
+        return "sendMail.xhtml?faces-redirect=true";
+    }
+
+    public List<String> getDistinctDate() {
+        return weeklyScheduleSessionLocal.getDistinctDate();
     }
 
     public String viewStaffDetail(Long sID) throws NoResultException {
@@ -2214,14 +3101,14 @@ public class HotelManagedBean implements Serializable {
         this.selectedHotelFacilities = selectedHotelFacilities;
     }
 
-        public Long getSelectedHFID() {
+    public Long getSelectedHFID() {
         return selectedHFID;
     }
 
     public void setSelectedHFID(Long selectedHFID) {
         this.selectedHFID = selectedHFID;
     }
-        
+
     public Long getSelectedRFID() {
         return selectedRFID;
     }
@@ -2246,4 +3133,83 @@ public class HotelManagedBean implements Serializable {
         this.selectedHotelID = selectedHotelID;
     }
 
+    public List<PromoCode> getAllPromoCode() {
+        return allPromoCode = promocodesessionlocal.getAllPromoCodes();
+    }
+
+    public void setAllPromoCode(List<PromoCode> allPromoCode) {
+        this.allPromoCode = allPromoCode;
+    }
+
+    public String getPromocodeName() {
+        return promocodeName;
+    }
+
+    public void setPromocodeName(String promocodeName) {
+        this.promocodeName = promocodeName;
+    }
+
+    public String getPromoStartDate() {
+        return promoStartDate;
+    }
+
+    public void setPromoStartDate(String promoStartDate) {
+        this.promoStartDate = promoStartDate;
+    }
+
+    public String getPromoEndDate() {
+        return promoEndDate;
+    }
+
+    public void setPromoEndDate(String promoEndDate) {
+        this.promoEndDate = promoEndDate;
+    }
+
+    public double getPromodiscount() {
+        return promodiscount;
+    }
+
+    public void setPromodiscount(double promodiscount) {
+        this.promodiscount = promodiscount;
+    }
+
+    public String createPromoCode() throws ParseException {
+        PromoCode pc = new PromoCode();
+        pc.setPromoCode(promocodeName);
+        pc.setDiscount(promodiscount);
+        pc.setStartDate(new SimpleDateFormat("yyyy-MM-dd").parse(promoStartDate));
+        pc.setEndDate(new SimpleDateFormat("yyyy-MM-dd").parse(promoEndDate));
+        pc.setStatus("Active");
+
+        promocodesessionlocal.createPromoCode(pc);
+        promocodeName = null;
+        promodiscount = 0.0;
+        promoStartDate = null;
+        promoEndDate = null;
+
+        return "promocode.xhtml?faces-redirect=true";
+    }
+
+    public String editPromo(PromoCode o) {
+        editPromo = o;
+        promocodeName = o.getPromoCode();
+        promodiscount = o.getDiscount() * 100;
+        promoStatus = o.getStatus();
+        promoStartDate = convertDateFormat(o.getStartDate());
+        promoEndDate = convertDateFormat(o.getEndDate());;
+
+        return "editPromoCode.xhtml?faces-redirect=true";
+    }
+
+    public String doupdatePromocode()throws ParseException,NoResultException {
+        editPromo.setPromoCode(promocodeName);
+        editPromo.setDiscount(promodiscount);
+        editPromo.setStartDate(new SimpleDateFormat("yyyy-MM-dd").parse(promoStartDate));
+        editPromo.setEndDate(new SimpleDateFormat("yyyy-MM-dd").parse(promoEndDate));
+        editPromo.setStatus(promoStatus);
+        
+        promocodesessionlocal.updatePromoCode(editPromo);
+        
+        return "promocode.xhtml?faces-redirect=true";
+    }
 }

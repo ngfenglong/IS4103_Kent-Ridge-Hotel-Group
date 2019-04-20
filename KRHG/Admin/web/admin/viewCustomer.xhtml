@@ -22,9 +22,9 @@
                             <!-- /.col -->
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item active">
-                                        <!--Add Btn-->
-                                    </li>
+                                    <li><a href="adminIndex.xhtml"> Home</a></li>
+                                    <li><a href="manageCustomer.xhtml"> Manage Customers</a></li>
+                                    <li><a class="active">View Customer</a> </li>
                                 </ol>
                             </div>
                             <!-- /.col -->
@@ -60,6 +60,8 @@
                                             <dd style="padding-left:1rem;">#{hotelManagedBean.selectedCustomer.mobileNum}</dd>
                                             <dt style="padding-left: 1rem;">Points: </dt>
                                             <dd style="padding-left:1rem;">#{hotelManagedBean.selectedCustomer.points}</dd>
+                                            <dt style="padding-left: 1rem;">Date Joined:</dt>
+                                            <dd style="padding-left:1rem;">#{hotelManagedBean.selectedCustomer.displayDateJoined()}</dd>
                                         </dl>
                                     </div>
                                     <!-- /.card-body -->

@@ -65,7 +65,7 @@
                                         <ui:repeat var="o" value="#{frontDeskManagedBean.checkOutRoomResult}" varStatus="status">
 
                                             <tr>
-                                                <td>#{o.bookedBy.name}</td>
+                                                <td>#{o.bookedBy.firstName} #{o.bookedBy.lastName}</td>
                                                 <td>#{o.bookedRoom.roomNumber}</td>
                                                 <td>#{o.passportNum}</td>
                                                 <td>#{o.bookOutDate}</td>

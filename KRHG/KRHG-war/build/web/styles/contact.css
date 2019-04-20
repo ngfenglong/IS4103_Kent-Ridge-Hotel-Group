@@ -154,7 +154,7 @@ button:active
 }
 .form-control
 {
-	color: #db5246;
+	color: #000;
 }
 section
 {
@@ -410,7 +410,7 @@ section
 }
 .book_button:hover
 {
-	background: rgba(255,255,255,0.2);
+	background: #f88379  !important;
 }
 .book_button:hover a
 {

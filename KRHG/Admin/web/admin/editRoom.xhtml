@@ -19,14 +19,14 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 style="font-size: x-large; margin-bottom:20px">Edit Hotel</h1>
+                            <h1 style="font-size: x-large; margin-bottom:20px">Edit Room</h1>
                         </div>
                         <!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li><a href="#"> Home</a></li>
-                                <li><a href="#"> Manage Hotels</a></li>
-                                <li><a href="#"> View Room - #{hotelManagedBean.selectedRoom.roomName}</a></li>
+                                <li><a href="adminIndex.xhtml"> Home</a></li>
+                                <li><a href="manageHotel.xhtml"> Manage Hotels</a></li>
+                                <li><a href="viewRoom.xhtml"> View Room - #{hotelManagedBean.selectedRoom.roomName}</a></li>
                                 <li class="active">Edit Room Details</li>
                             </ol>
                         </div>
@@ -123,8 +123,7 @@
                                 </div>
                             </div>
                             <div class="box-footer" style="text-align: right">
-                                    <h:commandButton class="btn btn-danger" value="Cancel" style="margin-right:10px"
-                                    action="manageRoom.xhtml?faces-redirect=true"></h:commandButton>
+                                <a class="btn btn-danger" href="manageRoom.xhtml" style="margin-right:10px">Cancel</a>
                                 <h:commandButton class="btn btn-primary" value="Save"
                                     action="#{hotelManagedBean.saveRoom()}"></h:commandButton>
                             </div>

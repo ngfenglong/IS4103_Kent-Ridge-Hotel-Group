@@ -24,7 +24,7 @@ public class PaymentTransactionSession implements PaymentTransactionSessionLocal
     @Override
     public List<PaymentTransaction> getAllPaymentTransaction() throws NoResultException {
         Query q;
-        q = em.createQuery("SELECT pt FROM PaymentTransaction pt ");
+        q = em.createQuery("SELECT pt FROM PaymentTransaction pt");
         return q.getResultList();
     }
 
@@ -52,6 +52,7 @@ public class PaymentTransactionSession implements PaymentTransactionSessionLocal
             oldPT.setFunctionRoomBooked(pt.getFunctionRoomBooked());
             oldPT.setTransportBooked(pt.getTransportBooked());
             oldPT.setRoomsBooked(pt.getRoomsBooked());
+            em.flush();
         } else {
             throw new NoResultException("Payment Transaction not found.");
         }
@@ -81,6 +82,12 @@ public class PaymentTransactionSession implements PaymentTransactionSessionLocal
     public CreditCard getLastCreditCard() throws NoResultException {
         Query q = em.createQuery("SELECT c FROM CreditCard c ORDER BY c.creditCardID DESC");
         return (CreditCard) q.getResultList().get(0);
+    }
+
+    @Override
+    public PaymentTransaction getLastPaymentTransaction() throws NoResultException {
+        Query q = em.createQuery("SELECT p FROM PaymentTransaction p ORDER BY p.transactionID DESC");
+        return (PaymentTransaction) q.getResultList().get(0);
     }
 
 }

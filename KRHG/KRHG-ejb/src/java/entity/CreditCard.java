@@ -23,10 +23,20 @@ public class CreditCard implements Serializable {
     private Long creditCardID;
     private String cardNum;
     private String cvv;
-    
-    @Temporal(TemporalType.DATE)
-    private Date expiryDate;
+    private String name;
+    private String expiryDate;
 
+    public CreditCard(){
+        
+    }
+
+    public CreditCard(String cardNum, String cvv, String name, String expiryDate) {
+        this.cardNum = cardNum;
+        this.cvv = cvv;
+        this.name = name;
+        this.expiryDate = expiryDate;
+    }
+    
     public Long getCreditCardID() {
         return creditCardID;
     }
@@ -89,17 +99,21 @@ public class CreditCard implements Serializable {
         this.cvv = cvv;
     }
 
-    /**
-     * @return the expiryDate
-     */
-    public Date getExpiryDate() {
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getExpiryDate() {
         return expiryDate;
     }
 
-    /**
-     * @param expiryDate the expiryDate to set
-     */
-    public void setExpiryDate(Date expiryDate) {
+    public void setExpiryDate(String expiryDate) {
         this.expiryDate = expiryDate;
     }
+
 }

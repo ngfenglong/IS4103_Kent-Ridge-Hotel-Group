@@ -14,12 +14,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 @Entity
 public class FoodOrder implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long foodOrderID;
@@ -27,9 +31,18 @@ public class FoodOrder implements Serializable {
     private List<FoodOrderedItem> foodOrdered;
     private Double totalPrice;
     private String specialRequest;
+    private String status;
+    private String orderTime;
 
+
+    
+    
+    
     public FoodOrder() {
         foodOrdered = new ArrayList<FoodOrderedItem>();
+        status = "ORDERED";
+        orderTime =  sdf.format(new Timestamp(System.currentTimeMillis()));
+        specialRequest = "No Onions!";      
     }
 
     public Long getFoodOrderID() {
@@ -114,4 +127,32 @@ public class FoodOrder implements Serializable {
         this.specialRequest = specialRequest;
     }
 
+    /**
+     * @return the status
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    /**
+     * @return the orderTime
+     */
+    public String getOrderTime() {
+        return orderTime;
+    }
+
+    /**
+     * @param orderTime the orderTime to set
+     */
+    public void setOrderTime(String orderTime) {
+        this.orderTime = orderTime;
+    }
 }
+

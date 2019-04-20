@@ -3,8 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
-
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+        <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css"/>
+        <link rel="stylesheet" href="/vendors/formvalidation/dist/css/formValidation.min.css"/>
+    </head>    
     <body>
 
         <ui:composition template="template.xhtml">
@@ -46,16 +51,14 @@
                                     <div class="form-group">
                                         <td>
                                             <label>
-                                                Price:
+                                                Total Price:
                                             </label>
                                         </td>
                                         <td>
-                                            <h:outputText value="$100"></h:outputText>
+                                            <h:outputText value="#{frontDeskManagedBean.selectedPaymentTransaction.totalPrice}"></h:outputText>
                                         </td>
                                     </div>
                                 </tr>
-
-
 
                                 <tr>
                                     <td>
@@ -64,31 +67,11 @@
                                         </label>
                                     </td>
                                     <td>
-                                        <div class="form-group">
-                                            <h:inputText value="#{frontDeskManagedBean.paymentNameOnCard}">
-
-                                            </h:inputText>
+                                        <div class="form-group owner">
+                                            <h:inputText value="#{frontDeskManagedBean.ccName}" class="form-control" id="owner"> </h:inputText>
                                         </div>
                                     </td>
                                 </tr>
-
-
-
-                                <tr>
-                                    <td>
-                                        <label>
-                                            Expiry date:
-                                        </label>
-                                    </td>
-                                    <td>
-                                        <div class="form-group">
-                                            <h:inputText value="#{frontDeskManagedBean.paymentExpiryDate}" >
-
-                                            </h:inputText>
-                                        </div>
-                                    </td>
-                                </tr>
-
                                 <tr>
                                     <td>
                                         <label>
@@ -96,13 +79,47 @@
                                         </label>
                                     </td>
                                     <td>
-                                        <div class="form-group">
-                                            <h:inputText value="#{frontDeskManagedBean.paymentDigits}" >
-
+                                        <div class="form-group" id="card-number-field">
+                                            <h:inputText value="#{frontDeskManagedBean.ccCardNumber}" class="form-control" id="cardNumber">
                                             </h:inputText>
                                         </div>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td>
+                                        <label>
+                                            Expiry date:
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <h:selectOneMenu value="#{frontDeskManagedBean.ccMonth}" class="form-control select2" id="ccMonth">
+                                            <f:selectItem itemValue="1" itemLabel="January" />
+                                            <f:selectItem itemValue="2" itemLabel="February" />
+                                            <f:selectItem itemValue="3" itemLabel="March" />
+                                            <f:selectItem itemValue="4" itemLabel="April" />
+                                            <f:selectItem itemValue="5" itemLabel="May" />
+                                            <f:selectItem itemValue="6" itemLabel="June" />
+                                            <f:selectItem itemValue="7" itemLabel="July" />
+                                            <f:selectItem itemValue="8" itemLabel="August" />
+                                            <f:selectItem itemValue="9" itemLabel="September" />
+                                            <f:selectItem itemValue="10" itemLabel="October" />
+                                            <f:selectItem itemValue="11" itemLabel="November" />
+                                            <f:selectItem itemValue="12" itemLabel="December" />
+                                        </h:selectOneMenu>
+                                        <h:selectOneMenu value="#{frontDeskManagedBean.ccYear}" class="form-control select2" id="ccYear">
+                                            <f:selectItem itemValue="19" itemLabel="2019" />
+                                            <f:selectItem itemValue="20" itemLabel="2020" />
+                                            <f:selectItem itemValue="21" itemLabel="2021" />
+                                            <f:selectItem itemValue="22" itemLabel="2022" />
+                                            <f:selectItem itemValue="23" itemLabel="2023" />
+                                            <f:selectItem itemValue="24" itemLabel="2024" />
+                                            <f:selectItem itemValue="25" itemLabel="2025" />
+                                            <f:selectItem itemValue="26" itemLabel="2026" />
+                                        </h:selectOneMenu>
+
+                                    </td>
+                                </tr>
+
 
                                 <tr>
                                     <td>
@@ -112,12 +129,26 @@
                                     </td>
                                     <td>
                                         <div class="form-group">
-                                            <h:inputText value="#{frontDeskManagedBean.paymentCVV}" >
-
-                                            </h:inputText>
+                                            <h:inputText value="#{frontDeskManagedBean.ccCVV}" maxlength="3" ></h:inputText>
                                         </div>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td>
+                                        <label>
+
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <div class="form-group" id="credit_cards">
+                                            <img src="http://zetegral.website/krhgImages/visa.jpg" id="visa"></img>
+                                            <img src="http://zetegral.website/krhgImages/mastercard.jpg" id="mastercard"></img>
+                                            <img src="http://zetegral.website/krhgImages/amex.jpg" id="amex"></img>
+                                        </div>
+                                    </td>
+                                </tr>                                
+
+
 
                                 <!-- /.input group -->
                             </table>
@@ -125,9 +156,13 @@
                         <!-- /.card-body -->
 
                         <div class="card-footer">
-                            <h:commandButton class="btn btn-primary" value="Make Payment" action="#{frontDeskManagedBean.makePayment}" ></h:commandButton>
+                            <h:commandButton class="btn btn-primary" value="Make Payment" action="#{frontDeskManagedBean.makePayment()}" ></h:commandButton>
                         </div>
-                    </h:form>
+                    </h:form> 
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+                    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+                    <script src="#{request.contextPath}/js/jquery.payform.min.js" charset="utf-8"></script>
+                    <script src="#{request.contextPath}/js/script.js"></script>                    
                     <!-- /.container-fluid -->
                 </section>
                 <!-- /.content-header -->
@@ -141,6 +176,7 @@
                         $(this).mask($(this).attr("data-mask"));
                     });
                 </script>
+
             </ui:define>
 
         </ui:composition>

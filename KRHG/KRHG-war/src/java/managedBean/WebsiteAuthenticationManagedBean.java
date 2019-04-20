@@ -7,11 +7,12 @@ package managedBean;
 
 import entity.Logging;
 import entity.Customer;
+import entity.PaymentTransaction;
+import entity.RoomBooking;
 import error.NoResultException;
 import etc.RandomPassword;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.inject.Named;
 import javax.faces.bean.SessionScoped;
 import javax.ejb.EJB;
 import java.io.Serializable;
@@ -20,7 +21,9 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Formatter;
+import java.util.List;
 import java.util.Properties;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
@@ -32,8 +35,10 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletResponse;
+import sessionBeans.BookingSessionLocal;
 import sessionBeans.CustomerSessionLocal;
 import sessionBeans.LogSessionLocal;
+import sessionBeans.PaymentTransactionSessionLocal;
 
 /**
  *
@@ -62,6 +67,12 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
 
     private String rpEmail;
 
+    //BookingHistory
+    private List <RoomBooking> pastBookings;
+    private List <PaymentTransaction> pastTransactions;
+    private Long selectedTransactionID;
+    private PaymentTransaction selectedTransaction;
+    
     private Long id = -1L;
 
     private Customer loggedInCustomer;
@@ -70,7 +81,11 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
     private CustomerSessionLocal customerSessionLocal;
 
     @EJB
+    private PaymentTransactionSessionLocal paymentTransactionSessionLocal;
+    @EJB
     private LogSessionLocal logSessionLocal;
+    @EJB
+    private BookingSessionLocal bookingSessionLocal;
 
     /**
      * Creates a new instance of AuthenticationManagedBean
@@ -98,7 +113,7 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
 
                 Logging l = new Logging("Customer", "Login Successfuly as " + name, name);
                 logSessionLocal.createLogging(l);
-
+                getAllPastBookings();
                 out.println("<script type=\"text/javascript\">");
                 out.println("alert('Login Succesful!');");
                 out.println("</script>");
@@ -279,7 +294,59 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
     public String updateProfile() throws NoResultException {
         customerSessionLocal.updateCustomer(loggedInCustomer);
 
+        
+        
         return "Profile.xhtml?faces-redirect=true";
+    }
+    
+    public void getAllPastBookings() throws NoResultException{
+        List<PaymentTransaction> allPaymentTransactions = paymentTransactionSessionLocal.getAllPaymentTransaction();
+        List<PaymentTransaction> allCustomerTransactions = new ArrayList();
+        
+        for(PaymentTransaction p:allPaymentTransactions){
+            if(p.getEmail()!=null){
+             if(p.getEmail().equals(loggedInCustomer.getEmail())&& p.getRoomsBooked()!=null){
+                allCustomerTransactions.add(p);
+            }
+            }
+           
+        }
+        
+        pastTransactions = allCustomerTransactions;
+    }
+    
+    public String getTypeOfFacilityBooked(PaymentTransaction t){
+        String facilitiesBooked = "";
+        if(t.getRoomsBooked() != null){
+            if(facilitiesBooked !=null){
+                facilitiesBooked = facilitiesBooked+", room";
+            } else {
+                facilitiesBooked = "room";
+            }
+        }
+        if(t.getFunctionRoomBooked() !=null){
+            if(facilitiesBooked !=null){
+                facilitiesBooked = facilitiesBooked+", Function Room";
+            } else {
+                facilitiesBooked = "Function Room";
+            }
+        }      
+        return facilitiesBooked;
+    }
+    
+    public void selectTransaction(Long transactionId)throws NoResultException{
+        selectedTransactionID = transactionId;
+        paymentTransactionSessionLocal.getPaymentTransactionByID(transactionId);
+    }
+    
+    public List<RoomBooking> getAllRoomBookingFromTransaction(PaymentTransaction t)throws NoResultException{
+        List <RoomBooking> allBooking = t.getRoomsBooked();
+        List <RoomBooking> roomBookingsByTransaction = new ArrayList();
+        for(RoomBooking r: allBooking){
+            roomBookingsByTransaction.add(bookingSessionLocal.getRoomBookingByID(r.getRoomBookingID()));
+        }
+         
+        return roomBookingsByTransaction;
     }
 
     public static void sendEmail(String recipient, String subject, String msg) {
@@ -576,15 +643,15 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
         this.logSessionLocal = logSessionLocal;
     }
 
-    public String getFName() {
+    public String getRegFName() {
         return regFName;
     }
 
     public void setRegFName(String regFName) {
         this.regFName = regFName;
     }
-    
-    public String getLName() {
+
+    public String getRegLName() {
         return regLName;
     }
 
@@ -592,6 +659,7 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
         this.regLName = regLName;
     }
 
+ 
     public String getRegNric() {
         return regNric;
     }
@@ -646,6 +714,62 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
 
     public void setRpEmail(String rpEmail) {
         this.rpEmail = rpEmail;
+    }
+
+    /**
+     * @return the pastBookings
+     */
+    public List <RoomBooking> getPastBookings() {
+        return pastBookings;
+    }
+
+    /**
+     * @param pastBookings the pastBookings to set
+     */
+    public void setPastBookings(List <RoomBooking> pastBookings) {
+        this.pastBookings = pastBookings;
+    }
+
+    /**
+     * @return the pastTransactions
+     */
+    public List <PaymentTransaction> getPastTransactions() {
+        return pastTransactions;
+    }
+
+    /**
+     * @param pastTransactions the pastTransactions to set
+     */
+    public void setPastTransactions(List <PaymentTransaction> pastTransactions) {
+        this.pastTransactions = pastTransactions;
+    }
+
+    /**
+     * @return the selectedTransactionID
+     */
+    public Long getSelectedTransactionID() {
+        return selectedTransactionID;
+    }
+
+    /**
+     * @param selectedTransactionID the selectedTransactionID to set
+     */
+    public void setSelectedTransactionID(Long selectedTransactionID) {
+        this.selectedTransactionID = selectedTransactionID;
+    }
+
+    /**
+     * @return the selectedTransaction
+     */
+    public PaymentTransaction getSelectedTransaction() {
+        return selectedTransaction;
+    }
+
+    /**
+     * @param selectedTransaction the selectedTransaction to set
+     */
+    public void setSelectedTransaction(PaymentTransaction selectedTransaction) {
+        this.selectedTransaction = selectedTransaction;
     }
 
 }

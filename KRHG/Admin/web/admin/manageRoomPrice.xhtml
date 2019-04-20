@@ -40,7 +40,7 @@
                              style="padding:20px 40px; margin-right:10px; ">
                             <div class="box-header">
                                 <i class="fa fa-th"></i>
-                                <h3 class="box-title">Price History</h3>
+                                <h3 class="box-title">Revenue for 2019</h3>
                             </div>
                             <div class="box-body border-radius-none">
                                 <canvas id="canvas" height="450" width="600"></canvas>
@@ -62,20 +62,20 @@
                                     </div>
                                     <div class="col-md-6">
                                         <ul class="chart-legend clearfix">
-                                            <li><i class="far fa-circle text-green"></i> IE</li>
-                                            <li><i class="far fa-circle text-yellow"></i> FireFox</li>
-                                            <li><i class="far fa-circle text-aqua"></i> Safari</li>
-                                            <li><i class="far fa-circle text-light-blue"></i> Opera</li>
-                                            <li><i class="far fa-circle text-gray"></i> Navigator</li>
+                                            <li><i class="far fa-circle text-lime"></i>KRG</li>
+                                            <li><i class="far fa-circle text-red"></i>KRC</li>
+                                            <li><i class="far fa-circle text-aqua"></i>KRN</li>
+                                            <li><i class="far fa-circle text-black"></i>KRS</li>
+                                            <li><i class="far fa-circle text-fuchsia"></i>KRE</li>
                                         </ul>
                                     </div>
                                     <div class="col-md-6">
                                         <ul class="chart-legend clearfix">
-                                            <li><i class="far fa-circle text-red"></i> Chrome</li>
-                                            <li><i class="far fa-circle text-green"></i> IE</li>
-                                            <li><i class="far fa-circle text-yellow"></i> FireFox</li>
-                                            <li><i class="far fa-circle text-aqua"></i> Safari</li>
-                                            <li><i class="far fa-circle text-light-blue"></i> Opera</li>
+                                            <li><i class="far fa-circle text-maroon"></i>KRW</li>
+                                            <li><i class="far fa-circle text-blue"></i>KRNE</li>
+                                            <li><i class="far fa-circle text-gray"></i>KRNW</li>
+                                            <li><i class="far fa-circle text-orange"></i>KRSE</li>
+                                            <li><i class="far fa-circle text-purple"></i>KRSW</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -89,38 +89,35 @@
                         <div class="col-md-3 col-sm-11" style="padding-bottom:10px;">
                             <div class="small-box bg-aqua" style="width:120%; margin-bottom: 25px !important;">
                                 <div class="inner">
-                                    <h3>150</h3>
+                                    <h3>#{hotelManagedBean.topMonth}</h3>
 
-                                    <p>New Orders</p>
+                                    <p>Top Revenue Month</p>
                                 </div>
                                 <div class="icon">
-                                    <i class="ion ion-bag"></i>
+                                    <i class="ion ion-calendar"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                             </div>
 
                             <div class="small-box bg-red" style="width:120%; margin-bottom: 25px !important;">
                                 <div class="inner">
-                                    <h3>150</h3>
+                                    <h3>#{hotelManagedBean.topGrossingHotel}</h3>
 
-                                    <p>New Orders</p>
+                                    <p>Top Grossing Hotel</p>
                                 </div>
                                 <div class="icon">
-                                    <i class="ion ion-bag"></i>
+                                    <i class="ion ion-trophy"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                             </div>
 
                             <div class="small-box bg-yellow" style="width:120%">
                                 <div class="inner">
-                                    <h3>150</h3>
+                                    <h3>#{hotelManagedBean.totalRevenue}</h3>
 
-                                    <p>New Orders</p>
+                                    <p>Revenue of 2019</p>
                                 </div>
                                 <div class="icon">
-                                    <i class="ion ion-bag"></i>
+                                    <i class="ion ion-cash"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -167,7 +164,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <c:forEach items="${hotelManagedBean.allRoomPricing}" var="pricing">
+                                                        <c:forEach items="${hotelManagedBean.getHotelRoomPricings('KRG')}" var="pricing" >
                                                             <tr>
                                                                 <td>#{pricing.pricingName}</td>
                                                                 <td>$#{pricing.price}0</td>
@@ -209,7 +206,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <c:forEach items="${hotelManagedBean.allRoomPricing}" var="pricing">
+                                                    <c:forEach items="${hotelManagedBean.getHotelRoomPricings('KRC')}" var="pricing">
                                                         <tr>
                                                             <td>#{pricing.pricingName}</td>
                                                             <td>$#{pricing.price}0</td>
@@ -246,7 +243,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <c:forEach items="${hotelManagedBean.allRoomPricing}" var="pricing">
+                                                    <c:forEach items="${hotelManagedBean.getHotelRoomPricings('KRN')}" var="pricing">
                                                         <tr>
                                                             <td>#{pricing.pricingName}</td>
                                                             <td>$#{pricing.price}0</td>
@@ -284,7 +281,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <c:forEach items="${hotelManagedBean.allRoomPricing}" var="pricing">
+                                                    <c:forEach items="${hotelManagedBean.getHotelRoomPricings('KRS')}" var="pricing">
                                                         <tr>
                                                             <td>#{pricing.pricingName}</td>
                                                             <td>$#{pricing.price}0</td>
@@ -322,7 +319,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <c:forEach items="${hotelManagedBean.allRoomPricing}" var="pricing">
+                                                    <c:forEach items="${hotelManagedBean.getHotelRoomPricings('KRE')}" var="pricing">
                                                         <tr>
                                                             <td>#{pricing.pricingName}</td>
                                                             <td>$#{pricing.price}0</td>
@@ -360,7 +357,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <c:forEach items="${hotelManagedBean.allRoomPricing}" var="pricing">
+                                                    <c:forEach items="${hotelManagedBean.getHotelRoomPricings('KRW')}" var="pricing">
                                                         <tr>
                                                             <td>#{pricing.pricingName}</td>
                                                             <td>$#{pricing.price}0</td>
@@ -398,7 +395,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <c:forEach items="${hotelManagedBean.allRoomPricing}" var="pricing">
+                                                    <c:forEach items="${hotelManagedBean.getHotelRoomPricings('KRNE')}" var="pricing">
                                                         <tr>
                                                             <td>#{pricing.pricingName}</td>
                                                             <td>$#{pricing.price}0</td>
@@ -436,7 +433,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <c:forEach items="${hotelManagedBean.allRoomPricing}" var="pricing">
+                                                    <c:forEach items="${hotelManagedBean.getHotelRoomPricings('KRNW')}" var="pricing">
                                                         <tr>
                                                             <td>#{pricing.pricingName}</td>
                                                             <td>$#{pricing.price}0</td>
@@ -474,7 +471,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <c:forEach items="${hotelManagedBean.allRoomPricing}" var="pricing">
+                                                    <c:forEach items="${hotelManagedBean.getHotelRoomPricings('KRSE')}" var="pricing">
                                                         <tr>
                                                             <td>#{pricing.pricingName}</td>
                                                             <td>$#{pricing.price}0</td>
@@ -512,7 +509,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <c:forEach items="${hotelManagedBean.allRoomPricing}" var="pricing">
+                                                    <c:forEach items="${hotelManagedBean.getHotelRoomPricings('KRSW')}" var="pricing">
                                                         <tr>
                                                             <td>#{pricing.pricingName}</td>
                                                             <td>$#{pricing.price}0</td>
@@ -667,7 +664,7 @@
                         return Math.round(Math.random() * 100)
                     };
                     var lineChartData = {
-                        labels: ["January", "February", "March", "April", "May", "June", "July"],
+                        labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
                         datasets: [
                             {
                                 label: "My First dataset",
@@ -678,7 +675,7 @@
                                 pointHighlightFill: "#fff",
                                 pointHighlightStroke: "#fff",
                                 borderColor: "rgba(255,0,255,0)",
-                                data: [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor()]
+                                data: [#{hotelManagedBean.janTotalRevenue}, #{hotelManagedBean.febTotalRevenue}, #{hotelManagedBean.marTotalRevenue}, #{hotelManagedBean.aprTotalRevenue}, 0, 0, 0, 0, 0, 0, 0, 0]
                             }
                         ],
                         options: {
@@ -702,39 +699,68 @@
                     }
 
                     var doughnutData = [
-                        {
-                            value: 300,
-                            color: "#F7464A",
-                            highlight: "#FF5A5E",
-                            label: "Red"
+                         {
+                            value: #{hotelManagedBean.krgTotalRevenue},
+                            color: "#32CD32",
+                            highlight: "#3AE146",
+                            label: "KRG"
                         },
                         {
-                            value: 50,
-                            color: "#46BFBD",
-                            highlight: "#5AD3D1",
-                            label: "Green"
+                            value: #{hotelManagedBean.krcTotalRevenue},
+                            color: "#FF0000",
+                            highlight: "#FF3232",
+                            label: "KRC"
                         },
                         {
-                            value: 100,
-                            color: "#FDB45C",
-                            highlight: "#FFC870",
-                            label: "Yellow"
+                            value: #{hotelManagedBean.krnTotalRevenue},
+                            color: "#00FFFF",
+                            highlight: "#7EFCFC",
+                            label: "KRN"
                         },
                         {
-                            value: 40,
-                            color: "#949FB1",
-                            highlight: "#A8B3C5",
-                            label: "Grey"
+                            value: #{hotelManagedBean.krsTotalRevenue},
+                            color: "#000000",
+                            highlight: "#303030",
+                            label: "KRS"
                         },
                         {
-                            value: 120,
-                            color: "#4D5360",
-                            highlight: "#616774",
-                            label: "Dark Grey"
+                            value: #{hotelManagedBean.kreTotalRevenue},
+                            color: "#FF00FF",
+                            highlight: "#FF4FFF",
+                            label: "KRE"
+                        },
+                        {
+                            value: #{hotelManagedBean.krwTotalRevenue},
+                            color: "#DA1B60",
+                            highlight: "#E24A81",
+                            label: "KRW"
+                        },
+                        {
+                            value: #{hotelManagedBean.krneTotalRevenue},
+                            color: "#0000FF",
+                            highlight: "#3D3DFF",
+                            label: "KRNE"
+                        },
+                        {
+                            value: #{hotelManagedBean.krnwTotalRevenue},
+                            color: "#808080",
+                            highlight: "#A5A4A4",
+                            label: "KRNW"
+                        },
+                        {
+                            value: #{hotelManagedBean.krseTotalRevenue},
+                            color: "#FF7F00",
+                            highlight: "#FF9226",
+                            label: "KRSE"
+                        },                                
+                        {
+                            value: #{hotelManagedBean.krswTotalRevenue},
+                            color: "#800080",
+                            highlight: "#B517B5",
+                            label: "KRSW"
                         }
 
                     ];
-
                     window.onload = function () {
                         var ctx = document.getElementById("canvas").getContext("2d");
                         window.myLine = new Chart(ctx).Line(lineChartData, {

@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <body>
 
@@ -48,7 +49,7 @@
 
                                 <div class="card card-primary">
                                     <div class="card-header">
-                                        <h3 class="card-title">Assign room number</h3>
+                                        <h3 class="card-title">Confirmation Page</h3>
                                     </div>
                                     <!-- /.card-header -->
                                     <!-- form start -->
@@ -60,33 +61,43 @@
                                                     <div class="form-group">
                                                         <td>
                                                             <label>
-                                                                Name:
+                                                                First Name:
                                                             </label>
                                                         </td>
                                                         <td>
-                                                            <h:outputText value="Lim Dian Cong"></h:outputText>
+                                                            <h:outputText value="#{frontDeskManagedBean.customerFirstName}"></h:outputText>
                                                         </td>
                                                     </div>
                                                 </tr>
-
-
-
                                                 <tr>
                                                     <td>
                                                         <label>
-                                                            Check in date:
+                                                            Last Name:
                                                         </label>
                                                     </td>
                                                     <td>
                                                         <div class="form-group">
-                                                            <h:outputText value="26 March 2019">
+                                                            <h:outputText value="#{frontDeskManagedBean.customerLastName}">
 
                                                             </h:outputText>
                                                         </div>
                                                     </td>
                                                 </tr>
 
+                                                <tr>
+                                                    <td>
+                                                        <label>
+                                                            Checkin date:
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <h:outputText value="#{frontDeskManagedBean.checkinDateString}">
 
+                                                            </h:outputText>
+                                                        </div>
+                                                    </td>
+                                                </tr>
 
                                                 <tr>
                                                     <td>
@@ -96,7 +107,7 @@
                                                     </td>
                                                     <td>
                                                         <div class="form-group">
-                                                            <h:outputText value="01 April 2019">
+                                                            <h:outputText value="#{frontDeskManagedBean.checkoutDateString}">
 
                                                             </h:outputText>
                                                         </div>
@@ -113,20 +124,35 @@
                                                     </td>
                                                     <td>
                                                         <div class="form-group">
-                                                            <h:outputText value="1023">
-
-                                                            </h:outputText>
+                                                            <c:forEach items="#{frontDeskManagedBean.roomBookedOnWalkin}" var="room">
+                                                                <h:outputText value="#{room.roomType} Room - #{room.roomNumber} : $#{frontDeskManagedBean.getRoomPriceFromTransaction(room)}0">
+                                                                </h:outputText>
+                                                                <br />
+                                                            </c:forEach>
                                                         </div>
                                                     </td>
                                                 </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label>
 
+                                                            Total Price:#{frontDeskManagedBean.selectedPaymentTransaction.totalPrice}
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <h:outputText value="#{frontDeskManagedBean.selectedPaymentTransaction.totalPrice}">
+                                                            </h:outputText>
+                                                        </div>
+                                                    </td>
+                                                </tr>                                                
                                                 <!-- /.input group -->
                                             </table>
                                         </div>
                                         <!-- /.card-body -->
 
                                         <div class="card-footer">
-                                            <h:commandButton class="btn btn-primary" value="Confirm Check in" action="#{frontDeskManagedBean.UpdateAccount()}" ></h:commandButton>
+                                            <h:commandButton class="btn btn-primary" value="Make Payment" action="#{frontDeskManagedBean.walkinpayment()}" ></h:commandButton>
                                         </div>
                                     </h:form>
                                 </div>

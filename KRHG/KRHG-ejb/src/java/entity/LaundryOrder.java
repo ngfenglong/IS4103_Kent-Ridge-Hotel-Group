@@ -7,6 +7,7 @@ package entity;
 
 import error.NoResultException;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -90,13 +91,6 @@ public class LaundryOrder implements Serializable {
         this.room = room;
     }
 
-    public Date getOrderDateTime() {
-        return orderDateTime;
-    }
-
-    public void setOrderDateTime(Date orderDateTime) {
-        this.orderDateTime = orderDateTime;
-    }
 
     public String getStatus() {
         return status;
@@ -161,5 +155,20 @@ public class LaundryOrder implements Serializable {
             throw new NoResultException("Laundry Item not inside Laundry Order");
         }
     } 
+
+    /**
+     * @return the orderDateTime
+     */
+    public Date getOrderDateTime() {
+        return orderDateTime;
+    }
+
+    /**
+     * @param orderDateTime the orderDateTime to set
+     */
+    public void setOrderDateTime(Date orderDateTime) {
+        this.orderDateTime = orderDateTime;
+    }
+
 
 }
