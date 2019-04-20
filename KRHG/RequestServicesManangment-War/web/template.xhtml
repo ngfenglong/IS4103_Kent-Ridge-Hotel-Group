@@ -113,7 +113,7 @@
     <h:body class="hold-transition sidebar-mini">
         <div class="wrapper">
             <!-- Navbar -->
-            <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
+            <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom" >
                 <!-- Left navbar links -->
                 <ul class="navbar-nav">
                     <li class="nav-item">
@@ -123,12 +123,12 @@
 
                     </li>
                     <li class="nav-item float-sm-right">
-                        <h:form>
-                            Welcome #{authenticationManagedBean.name}
-                        </h:form>
+                        <h:outputText value="Welcome #{requestServicesManagedBean.loggedInAccount.name}" style="text-align: right;">
+                        </h:outputText>
                     </li>
                 </ul>
             </nav>
+
             <!-- /.navbar -->
 
             <!-- Main Sidebar Container -->
@@ -148,6 +148,7 @@
                         <ul class="nav nav-pills nav-sidebar flex-column" datawidget="treeview" role="menu" data-accordion="false">
                             <!-- Add icons to the links using the .nav-icon class
                             with font-awesome or any other icon font library -->
+                            <c:if test="#{requestServicesManagedBean.housekeepingStaff eq true}">
                             <li class="nav-header">Housekeeping</li>
                             <li class="nav-item" >
                                 <a href="housekeeping.xhtml" class="nav-link" >
@@ -173,7 +174,8 @@
                                     </p>
                                 </a>
                             </li>
-
+                            </c:if>
+                            <c:if test="#{requestServicesManagedBean.kitchenStaff eq true}">
                             <li class="nav-header">Food</li>
                             <li class="nav-item" >
                                 <a href="foodMenu.xhtml" class="nav-link" >
@@ -201,7 +203,8 @@
                                     </p>
                                 </a>
                             </li>
-
+                            </c:if>
+                            <c:if test="#{requestServicesManagedBean.laundryStaff eq true}">
                             <li class="nav-header">Laundry</li>
                             <li class="nav-item" >
                                 <a href="laundry.xhtml" class="nav-link" >
@@ -211,7 +214,9 @@
                                     </p>
                                 </a>
                             </li>
-
+                            </c:if>
+                            
+                            <c:if test="#{requestServicesManagedBean.maintenanceStaff eq true}">
                             <li class="nav-header">Maintenance Order</li>
                             <li class="nav-item" >
                                 <a href="Maintenance.xhtml" class="nav-link" >
@@ -221,11 +226,12 @@
                                     </p>
                                 </a>
                             </li>
+                            </c:if>
 
 
                             <li class="nav-item" >
                                 <h:form class="nav-link">
-                                    <h:commandButton class="btn btn-danger" action="#{authenticationManagedBean.logout()}" value="Logout" />
+                                    <h:commandButton class="btn btn-danger" action="#{requestServicesManagedBean.logout()}" value="Logout" />
                                 </h:form>
                             </li>
                         </ul>
