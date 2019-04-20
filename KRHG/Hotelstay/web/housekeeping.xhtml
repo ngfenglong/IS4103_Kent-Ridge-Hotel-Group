@@ -7,7 +7,6 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <h:head>
-
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
         <meta name="description" content=""/>
@@ -20,7 +19,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 
         <!--Component Stylesheets: Growl, Modal, Date/Time Picker-->
-        <link rel="stylesheet" href="./resources/notifications/dist/Notifications.unmin.css"/>
+        <link rel="stylesheet" href="./resources/notifications/demo/Notifications.css"/>
         <link href="./resources/styles/modal.css" rel="stylesheet"/>
         <link rel="stylesheet" href="./resources/css/materialize.min.css"/>
 
@@ -32,87 +31,74 @@
         <link href="./resources/styles/main.css" rel="stylesheet"/>
 
         <script type="text/javascript">
-
             function startTime2() {
-            var today = new Date();
-            var h = today.getHours();
-            var m = today.getMinutes();
-            var s = today.getSeconds();
-            var ampm = h >= 12 ? ' PM' : ' AM';
-            h = h % 12;
-            h = h ? h : 12;
-            m = checkTime(m);
-            s = checkTime(s);
-            document.getElementById("txt").innerHTML = h + ":" + m + ampm;
+                var today = new Date();
+                var h = today.getHours();
+                var m = today.getMinutes();
+                var s = today.getSeconds();
+                var ampm = h >= 12 ? ' PM' : ' AM';
+                h = h % 12;
+                h = h ? h : 12;
+                m = checkTime(m);
+                s = checkTime(s);
+                document.getElementById("txt").innerHTML = h + ":" + m + ampm;
             }
 
-
             function startTime() {
-            var today = new Date();
-            var h = today.getHours();
-            var m = today.getMinutes();
-            var s = today.getSeconds();
-            var ampm = h >= 12 ? ' PM' : ' AM';
-            h = h % 12;
-            h = h ? h : 12;
-            m = checkTime(m);
-            s = checkTime(s);
-            //set 12pm if user does not pick a time, can change to whatever housekeeping manager assigns.
-            document.getElementById("printtime").innerHTML = "12:00 PM";
-            // document.getElementById('timeinput').
-            //     t = setTimeout('startTime()', 500);
+                var today = new Date();
+                var h = today.getHours();
+                var m = today.getMinutes();
+                var s = today.getSeconds();
+                var ampm = h >= 12 ? ' PM' : ' AM';
+                h = h % 12;
+                h = h ? h : 12;
+                m = checkTime(m);
+                s = checkTime(s);
+                //set 12pm if user does not pick a time, can change to whatever housekeeping manager assigns.
+                document.getElementById("printtime").innerHTML = "12:00 PM";
+                // document.getElementById('timeinput').
+                //     t = setTimeout('startTime()', 500);
             }
 
             function checkTime(i) {
-            if (i &lt; 10) {
-            i = "0" + i;
-            }
-            return i;
+                if (i &lt; 10) {
+                i = "0" + i;
+                }
+                return i;
             }
 
             window.onload = function () {
-            determinePage();
+                determinePage();
             };
         </script>
     </h:head>
 
     <h:body>
-
-
         <div class="content">
             <div class="row" style="position:absolute; top:50px; left:50px; margin-bottom:50px; text-align: center; width:100%">
-
                 <a href="index.xhtml"><img height="50px" width="50px" src="resources/images/krhglogo5.svg"/>
-                    <h1 style="color: #fff; font-family: 'Lora',serif; font-size:40px">
-                        Housekeeping <br/> Request</h1>
-
+                    <h1 style="color: #fff; font-family: 'Lora',serif; font-size:40px">Housekeeping <br/> Request</h1>
                 </a>
                 <div class="theSubtitle active" style="width:400px; top:50px; height:100px;">
-
                     <span class="separator" style="height:100%; "></span>
                     <div class="titleright" style="width:40%">
                         <p style=" margin-top:12%; color:#C5B358"><div id="txt" style="text-align:left;color: #C5B358; font-size: 150%; font-weight: 500;"></div></p>
                         <p style=" color:#C5B358; font-size:150%">#{hotelStayManagedBean.roomNumber}</p>
                     </div>
-
                 </div>
-
             </div>
 
             <section id="section1">
                 <div class="rowcontent row">
                     <div class="col-lg-12">
-                        <p style="color: #fff; text-align: center; font-size: 200%; margin-bottom: 2%">What time would you
-                            like us to drop by?</p>
+                        <p style="color: #fff; text-align: center; font-size: 200%; margin-bottom: 2%">What time would you like us to drop by?</p>
                         <h:form id="housekeepingtimeform">
-                        <input type="text" id="time" class="timepicker"
-                               style="color:#C5B358;font-family: 'Lora',serif; width: 40%; height: 50%; font-size:500%; text-align: center; border-radius:2px;  margin-left: 30%;"/>
-                        <p style="color: #fff; text-align: center; font-size: 150%; margin-top: 1%">Please note that housekeeping services are only available from 10am to 10pm. </p>
-                        <p style="color: #fff; text-align: center; font-size: 110%; margin-top: 1%">If time is not picked, your housekeeping request will be scheduled at anytime from 12PM to 5PM. </p>
-
-                        <h:commandButton id="nextBtn" class="bigBtn" onclick="onClickNext(1)" value="Next" >
-                            <f:ajax execute="@form" render="@none" />
-                        </h:commandButton>
+                            <input type="text" id="time" class="timepicker" style="color:#C5B358;font-family: 'Lora',serif; width: 40%; height: 50%; font-size:500%; text-align: center; border-radius:2px;  margin-left: 30%;"/>
+                            <p style="color: #fff; text-align: center; font-size: 150%; margin-top: 1%">Please note that housekeeping services are only available from 10am to 10pm. </p>
+                            <p style="color: #fff; text-align: center; font-size: 110%; margin-top: 1%">If time is not picked, your housekeeping request will be scheduled at anytime from 12PM to 5PM. </p>
+                            <h:commandButton id="nextBtn" class="bigBtn" onclick="onClickNext(1)" value="Next" >
+                                <f:ajax execute="@form" render="@none" />
+                            </h:commandButton>
                         </h:form>
                     </div>
                 </div>
@@ -121,46 +107,40 @@
             <section style="display: none;" id="section2">
                 <div class="row rowcontent" >
                     <div class="col-lg-12">
-                        <p style="color: #fff; text-align: center; font-size: 200%; margin-bottom: 2%">Any special requests?
-                        </p>
+                        <p style="color: #fff; text-align: center; font-size: 200%; margin-bottom: 2%">Any special requests?</p>
                         <h:form id="housekeepingitemform">
-                        <p>
-                            <label style="margin-right: 30px; ">
-                                <input class="check" type="checkbox" value="Extra Towels" />
-                                <span style="font-size: 200%; color: white;">Extra Towels</span>
-                            </label>
-                            <label style="margin-right: 30px">
-                                <input class="check" type="checkbox" value="More Shower Amenities" />
-                                <span style="font-size: 200%; color: white;">More Shower Amenities</span>
-                            </label>
-                            <label style="margin-right: 30px">
-                                <input class="check" type="checkbox" value="Restock Minibar"/>
-                                <span style="font-size: 200%; color: white;">Restock Minibar</span>
-                            </label>
-                        </p>
+                            <p>
+                                <label style="margin-right: 30px; ">
+                                    <input class="check" type="checkbox" value="Extra Towels" />
+                                    <span style="font-size: 200%; color: white;">Extra Towels</span>
+                                </label>
+                                <label style="margin-right: 30px">
+                                    <input class="check" type="checkbox" value="More Shower Amenities" />
+                                    <span style="font-size: 200%; color: white;">More Shower Amenities</span>
+                                </label>
+                                <label style="margin-right: 30px">
+                                    <input class="check" type="checkbox" value="Restock Minibar"/>
+                                    <span style="font-size: 200%; color: white;">Restock Minibar</span>
+                                </label>
+                            </p>
 
-                        <div class="input-field col-xs-12" style="padding-top:50px">
-                            <textarea id="otherrequests" style="color:white; font-size:150%"
-                                      class="materialize-textarea" data-length="120"></textarea>
-                            <label for="otherrequests" style="font-size: 140%; font-weight:300;">Other Requests</label>
-                        </div>
+                            <div class="input-field col-xs-12" style="padding-top:50px">
+                                <textarea id="otherrequests" style="color:white; font-size:150%" class="materialize-textarea" data-length="120"></textarea>
+                                <label for="otherrequests" style="font-size: 140%; font-weight:300;">Other Requests</label>
+                            </div>
 
-                        <button class="cd-popup-trigger bigBtn" id="modal-1" data-target="#modal-1"
-                                style="display:block;">Submit</button>
-                        <button class="bigBtn" onclick="onClickNext(0)">Back</button>
+                            <button class="cd-popup-trigger bigBtn" id="modal-1" data-target="#modal-1" style="display:block;">Submit</button>
+                            <button class="bigBtn" onclick="onClickNext(0)">Back</button>
                         </h:form>
                     </div>
                 </div>
             </section>
 
             <section style="display: none;" id="section3">
-
                 <div class="row rowcontent">
                     <div class="col-lg-12">
-                        <p style="color: #fff; text-align: center; font-size: 200%; margin-bottom: 2%">Your housekeeping
-                            request has been confirmed.</p>
-                        <p style="color: #fff; text-align: center; font-size: 180%; margin-bottom: 2%">The details are as
-                            follows:</p>
+                        <p style="color: #fff; text-align: center; font-size: 200%; margin-bottom: 2%">Your housekeeping request has been confirmed.</p>
+                        <p style="color: #fff; text-align: center; font-size: 180%; margin-bottom: 2%">The details are as follows:</p>
                         <p id="printtime" style="font-size: 200%; color:#C5B358; font-family: 'lora',serif; text-align: center">hi</p>
                         <p id="checkrequests1" style="font-size: 150%; color:grey; text-align: center"></p>
                         <p id="checkrequests2" style="font-size: 150%; color:grey; text-align: center"></p>
@@ -168,31 +148,33 @@
                         <button class="cd-popup-trigger bigBtn" id="modal-2" data-target="#modal-1">Cancel/Edit Request</button>
                     </div>
                 </div>
-
             </section>
         </div>
         <!-- Page Content -->
 
-
         <!--modal-->
         <div id="modal" class="cd-popup" role="alert">
             <div class="cd-popup-container">
-                <p class="popup-content">Submit Laundry Request?</p>       
-                <ul class="cd-buttons">            
-                    <h:form id="housekeepingform">
-                        <h:outputText value="#{hotelStayManagedBean.roomNumber}" />
-                        <h:inputHidden  id="houseKeepingTime" value="#{hotelStayManagedBean.houseKeepingCollectionTime}" />
-
-                        <h:commandLink class="cd-popup-confirm" id="yesbutton" value="Commandbutton"  action="#{hotelStayManagedBean.bookHouseKeeping()}" >
-                            <f:ajax execute="@form" render="@none" />
-                        </h:commandLink>
-                    </h:form>
-                    <li><a href="#0"  class=" cd-popup-closemodal">No</a></li>
+                <p class="popup-content">Submit Laundry Request?</p>
+                <h:outputText value="#{hotelStayManagedBean.roomNumber}" />
+                <ul class="cd-buttons">
+                    <li>
+                        <h:form id="housekeepingform">
+                            <h:inputHidden id="houseKeepingTime" value="#{hotelStayManagedBean.houseKeepingCollectionTime}" />
+                            <h:inputHidden id="houseKeepingRequests" value="#{hotelStayManagedBean.houseKeepingRequestDetails}" />
+                            <h:commandButton id="hidden-btn" action="#{hotelStayManagedBean.bookHouseKeeping()}" style="display: none" >
+                                <f:ajax/>
+                            </h:commandButton>
+                            <h:commandLink class="cd-popup-confirm" id="yesbutton" value="Yes">
+                                <f:ajax execute="@form" render="@none" />
+                            </h:commandLink>
+                        </h:form>
+                    </li>
+                    <li><a href="#0" class=" cd-popup-closemodal">No</a></li>
                 </ul>
                 <a href="#0" class="cd-popup-close img-replace">Close</a>
             </div> <!-- cd-popup-container -->
         </div> <!-- cd-popup -->
-
 
         <div id="modal2" class="cd-popup" role="alert">
             <div class="cd-popup-container">
@@ -205,153 +187,151 @@
             </div> <!-- cd-popup-container -->
         </div> <!-- cd-popup -->
 
-
         <!-- Bootstrap core JavaScript -->
         <script src="./resources/jquery/jquery.min.js"></script>
         <script src="./resources/bootstrap/js/bootstrap.bundle.js"></script>
         <!--Component Javascript-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
         <script src="./resources/js/modal.js"></script>
-        <script src="./resources/notifications/dist/Notifications.js"></script>
+        <script src="./resources/notifications/demo/Notifications.js"></script>
 
-
-
-        <script type="text/javascript">
-            
+        <script type="text/javascript">     
             function test(){
                 console.log("Yes button is clicked.");
             }
             
+            var timepicked;
+            document.addEventListener('DOMContentLoaded', function () {
+                var time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+                //print out current time on display
+                console.log("test1:" + time);
+                console.log(document.getElementById('time'));
+                
+                document.getElementById('time').value = time;
+                var elems = document.querySelectorAll('.timepicker');
+                var instances = M.Timepicker.init(elems, {
+                    defaultTime: 'now',
+                    autoClose: true,
+                    onCloseEnd: function () {
+
+                    timepicked = instances[0].time + instances[0].amOrPm;
+                    console.log("test2:" + timepicked);
+                    if ((timepicked.substring(timepicked.length - 2, timepicked.length) == "AM") &amp;&amp; ((new Number(timepicked.substring(0, 2))) &lt; 10)){
+                        console.log(timepicked.substring(timepicked.length - 2, timepicked.length));
+                        console.log(new Number(timepicked.substring(0, 2)).valueOf());
+                        callModal();
+                    //if user picks time after 10pm
+                    } else if ((timepicked.substring(timepicked.length - 2, timepicked.length) == "PM") &amp;&amp; ((new Number(timepicked.substring(0, 2))) &gt; 10)){
+                        console.log("hiii2");
+                        callModal();
+                    }
+                        document.getElementById("time").blur();
+                        console.log("time2", instances[0], timepicked);
+                    }
+                });
+
+                var a = M.Timepicker.getInstance(elems);
+                console.log(elems);
+                console.log(a);
+            });
             
-                            var timepicked;
-                            document.addEventListener('DOMContentLoaded', function () {
-                            var time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-                            //print out current time on display
-                            console.log("test1:" + time);
-                            console.log(document.getElementById('time'));
-                            document.getElementById('time').value = time;
-                            var elems = document.querySelectorAll('.timepicker');
-                            var instances = M.Timepicker.init(elems, {
-                            defaultTime: 'now',
-                                    autoClose: true,
-                                    onCloseEnd: function () {
+            function callModal(){
+                $('#modal2').addClass('is-visible');
+            }
 
-                                    timepicked = instances[0].time + instances[0].amOrPm;
-                                    console.log("test2:" + timepicked);
-                                    if ((timepicked.substring(timepicked.length - 2, timepicked.length) == "AM") &amp;&amp; ((new Number(timepicked.substring(0, 2))) &lt; 10)){
-                                    console.log(timepicked.substring(timepicked.length - 2, timepicked.length));
-                                    console.log(new Number(timepicked.substring(0, 2)).valueOf());
-                                    callModal();
-                                    //if user picks time after 10pm
-                                    } else if ((timepicked.substring(timepicked.length - 2, timepicked.length) == "PM") &amp;&amp; ((new Number(timepicked.substring(0, 2))) &gt; 10)){
-                                    console.log("hiii2");
-                                    callModal();
-                                    }
-                                    document.getElementById("time").blur();
-                                    console.log("time2", instances[0], timepicked);
-                                    }
-                            });
-                            var a = M.Timepicker.getInstance(elems);
-                            console.log(a);
-                            });
-                            function callModal(){
-                            $('#modal2').addClass('is-visible');
-                            }
+            function loadtime() {
+                console.log(timepicked);
+                if (timepicked != undefined){
+                    console.log("inloadtime");
+                    console.log(timepicked);
+                    document.getElementById("printtime").innerHTML = timepicked;
+                    //document.getElementById('laundryForm:houseKeepingTime').value = document.getElementById("printtime");
+                } else {
+                    console.log("timestart");
+                    startTime();
+                }
 
-                            function loadtime() {
-                            console.log(timepicked);
-                            if (timepicked != undefined){
-                            console.log("inloadtime");
-                            console.log(timepicked);
-                            document.getElementById("printtime").innerHTML = timepicked;
-//                            document.getElementById('laundryForm:houseKeepingTime').value = document.getElementById("printtime");
-                            } else {
-                            console.log("timestart");
-                            startTime();
-                            }
+                console.log("hello", timepicked);
+                console.log(document.getElementById("printtime"));
+            }
 
-                            console.log("hello", timepicked);
-                            console.log(document.getElementById("printtime"));
-                            }
-
-                            function loadrequests() {
-                            var checkedValue = null;
-                            var inputElements = document.getElementsByClassName('check');
-                            console.log(document.getElementsByClassName('check'));
-                            for (var i = 0; inputElements[i]; ++i) {
-                            console.log("inhere");
-                            if (inputElements[i].checked) {
-
-                            if (i == 0){
+            function loadrequests() {
+                var checkedValue = null;
+                var inputElements = document.getElementsByClassName('check');
+                console.log(document.getElementsByClassName('check'));
+                for (var i = 0; inputElements[i]; ++i) {
+                    console.log("inhere");
+                    if (inputElements[i].checked) {
+                        if (i == 0){
                             document.getElementById("checkrequests1").innerHTML = inputElements[i].value;
-                            } else if (i == 1){
+                        } else if (i == 1){
                             document.getElementById("checkrequests2").innerHTML = inputElements[i].value;
-                            } else {
+                        } else {
                             document.getElementById("checkrequests3").innerHTML = inputElements[i].value;
-                            }
+                        }
+                    }
+                }
 
-                            }
-                            }
+                if (checkedValue == null){
+                    document.getElementById("checkrequests1").innerHTML = "No Special Requests";
+                }
+            }
 
-                            if (checkedValue == null){
-                            document.getElementById("checkrequests1").innerHTML = "No Special Requests";
-                            }
-                            }
-
-                            function determinePage(){
-                            startTime2();
-                            }
-
-
-
-
-
-
+            function determinePage(){
+                startTime2();
+            }
         </script>
 
         <!--Modal Function-->
         <script>
             $('.cd-popup-trigger').on('click', function (event) {
-            console.log("Testing Trigger");
-            var message = '';
-            var modalfunction = '';
-            if ($(event)[0].target.id == "modal-1") {
-            message = "Submit Housekeeping Request?"
+                console.log("Testing Trigger");
+                var message = '';
+                var modalfunction = '';
+                if ($(event)[0].target.id == "modal-1") {
+                    message = "Submit Housekeeping Request?"
                     console.log("in modal 1");
-            modalfunction = "onClickNext(2)"
-            }
-            if ($(event)[0].target.id == "modal-2") {
-            message = "Cancel Housekeeping Request?"
+                    modalfunction = "onClickNext(2)"
+                }
+                
+                if ($(event)[0].target.id == "modal-2") {
+                    message = "Cancel Housekeeping Request?"
                     modalfunction = "onClickNext(0)"
-            }
-            var modal = $('.cd-popup')
-                    modal.find('.cd-popup-confirm').attr("onclick", modalfunction);
-            modal.find('.popup-content').text(message);
+                }
+                
+                var modal = $('.cd-popup')
+                modal.find('.cd-popup-confirm').attr("onclick", modalfunction);
+                modal.find('.popup-content').text(message);
             })
         </script>
+        
         <script>
-                    function onClickNext(page) {
-                    console.log("in onClickNext")
-                            if (page == 0) {
+            function onClickNext(page) {
+                console.log("in onClickNext")
+                if (page == 0) {
                     console.log("Page 0");
                     document.getElementById("section2").style.display = "none";
                     document.getElementById("section3").style.display = "none";
                     document.getElementById("section1").style.display = "initial";
-                    }
-                    if (page == 1) {
+                }
+                
+                if (page == 1) {
                     console.log("Page 1");
                     document.getElementById("section1").style.display = "none";
                     document.getElementById("section2").style.display = "initial";
-                    } else if (page == 2) {
+                } else if (page == 2) {
                     console.log("Page 2");
                     document.getElementById("section2").style.display = "none";
                     document.getElementById("section3").style.display = "initial";
                     console.log("Trying to simulate yes button click");
+                    var jsfCommandButton = document.getElementById("housekeepingform:hidden-btn");
+                    jsfCommandButton.click();
                     loadtime();
                     loadrequests();
                     console.log("pg2", page);
-                    }
-                    }
+                }
+            }
         </script>
     </h:body>
 </html>
