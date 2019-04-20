@@ -55,6 +55,10 @@ import sessionBeans.LogSessionLocal;
 import sessionBeans.MaintainenceOrderSessionLocal;
 import sessionBeans.RoomSessionLocal;
 import sessionBeans.StaffSessionLocal;
+import org.primefaces.event.DragDropEvent;
+import entity.Room;
+import entity.CleaningSchedule;
+import sessionBeans.CleaningScheduleSessionLocal;
 import sun.misc.IOUtils;
 
 /**
@@ -87,6 +91,8 @@ public class requestServicesManagedBean implements Serializable {
     private FoodOrderSessionLocal foodOrderSessionLocal;
     @EJB
     private LaundrySessionLocal laundrySessionLocal;
+    @EJB
+    private CleaningScheduleSessionLocal cleaningScheduleSessionLocal;
     /**
      * Creates a new instance of requestServicesManagedBean
      */
@@ -103,7 +109,7 @@ public class requestServicesManagedBean implements Serializable {
     private List<Staff> getHousekeepingStaff;
     private Staff assignedHouseKeeper;
     private String housekeeperName;
-    
+
     //For login
     private String username;
     private String password;
@@ -161,6 +167,13 @@ public class requestServicesManagedBean implements Serializable {
     private MaintainenceOrder selectedMaintenanceOrder;
     private Long selectedMaintenanceOrderID;
 
+    
+     //cleaning
+    private List<List<Staff>> assginingStaffLevel;
+    private int numberOfFloor;
+    private List<Staff> staffAvail;
+    private Integer staffLevel;
+    private CleaningSchedule cs;
     public requestServicesManagedBean() {
 
     }
@@ -176,7 +189,7 @@ public class requestServicesManagedBean implements Serializable {
         }
 
     }
-    
+
     public boolean isHousekeepingStaff() {
         boolean status = false;
         if (loggedInAccount != null) {
@@ -190,7 +203,7 @@ public class requestServicesManagedBean implements Serializable {
         }
         return status;
     }
-    
+
     public boolean isLaundryStaff() {
         boolean status = false;
         if (loggedInAccount != null) {
@@ -204,7 +217,7 @@ public class requestServicesManagedBean implements Serializable {
         }
         return status;
     }
-    
+
     public boolean isKitchenStaff() {
         boolean status = false;
         if (loggedInAccount != null) {
@@ -219,8 +232,8 @@ public class requestServicesManagedBean implements Serializable {
         }
         return status;
     }
-    
-     public boolean isMaintenanceStaff() {
+
+    public boolean isMaintenanceStaff() {
         boolean status = false;
         if (loggedInAccount != null) {
             List<StaffType> checkList = loggedInAccount.getAccountRights();
@@ -234,14 +247,14 @@ public class requestServicesManagedBean implements Serializable {
         }
         return status;
     }
-    
+
     public String login() throws NoResultException {
-        if(username != null && password != null) {
+        if (username != null && password != null) {
             try {
                 setLoggedInAccount(staffsession.getStaffByUsename(username));
                 System.out.println("Username: " + username);
                 System.out.println("Password: " + password);
-                if(getLoggedInAccount().getUserName().equals(username) && getLoggedInAccount().getPassword().equals(encryptPassword(password))) {
+                if (getLoggedInAccount().getUserName().equals(username) && getLoggedInAccount().getPassword().equals(encryptPassword(password))) {
                     System.out.println("Logged in successfully");
                     setPassword("");
                     return "index.xhtml?faces-redirect=true";
@@ -262,7 +275,7 @@ public class requestServicesManagedBean implements Serializable {
         }
         return "return login.xhtml?faces-redirect=true";
     }
-    
+
     public String logout() {
         setUsername("");
         setPassword("");
@@ -511,7 +524,6 @@ public class requestServicesManagedBean implements Serializable {
         currentLaundryOrder.setHouseKeeper(staffsession.getStaffByNric(selectedLaundryStaffNRIC));
         styleCheck = false;
         laundrySessionLocal.updateLaundryOrder(currentLaundryOrder);
-
 
     }
 
@@ -1995,7 +2007,7 @@ public class requestServicesManagedBean implements Serializable {
         }
         return sha1;
     }
-    
+
     private static String byteToHex(final byte[] hash) {
         Formatter formatter = new Formatter();
         for (byte b : hash) {
@@ -2005,5 +2017,182 @@ public class requestServicesManagedBean implements Serializable {
         formatter.close();
         return result;
     }
+       
 
+	  
+
+
+	
+	
+
+
+
+
+	
+	
+
+	
+	
+	
+	public void createDailyHousekeeping() {
+
+        for (Room rm : roomsessionlocal.getAllRooms()) {
+            HouseKeepingOrder hk = new HouseKeepingOrder();
+            hk.setSpecialRequest(null);
+            hk.setIsSpecialRequest(false);
+            hk.setRequestType("housekeeping");
+            hk.setOrderDateTime(new Date());
+            hk.setStatus("incomplete");
+            hk.setRoom(rm);
+            hk.setLevel(getLevel(rm.getRoomNumber()));
+
+            housekeepingsessionlocal.createHouseKeepingOrder(hk);
+
+        }
+
+    }
+
+    public int getLevel(String roomnumber) {
+        if (roomnumber.length() == 3) {
+            return Integer.parseInt(roomnumber.substring(0, 1));
+        } else {
+            return Integer.parseInt(roomnumber.substring(0, 2));
+        }
+    }
+
+    public List<List<Staff>> getAssginingStaff() {
+        try {
+
+            if (cleaningScheduleSessionLocal.getCleaningScheduleByHotelCodeName(hotelCode).isEmpty()) {
+                numberOfFloor = getNumberOfFloor();
+                assginingStaffLevel = new ArrayList<>();
+                for (int i = 0; i < numberOfFloor; i++) {
+                    assginingStaffLevel.add(new ArrayList<>());
+
+                }
+                return assginingStaffLevel;
+            }
+            assginingStaffLevel = new ArrayList<>();
+            for (CleaningSchedule cs : cleaningScheduleSessionLocal.getCleaningScheduleByHotelCodeName(hotelCode)) {
+                assginingStaffLevel.add(cs.getListOfStaff());
+            }
+        } catch (NoResultException e) {
+            if (assginingStaffLevel == null) {
+                numberOfFloor = getNumberOfFloor();
+                assginingStaffLevel = new ArrayList<>();
+                for (int i = 0; i < numberOfFloor; i++) {
+                    assginingStaffLevel.add(new ArrayList<>());
+
+                }
+                return assginingStaffLevel;
+            }
+        }
+
+        return assginingStaffLevel;
+    }
+
+    public void preparetherd() throws NoResultException {
+
+        numberOfFloor = getNumberOfFloor();
+        assginingStaffLevel = new ArrayList<>();
+        for (int i = 0; i < numberOfFloor; i++) {
+            assginingStaffLevel.add(new ArrayList<>());
+
+        }
+    }
+
+    public int getNumberOfFloor() {
+        int highestFloor = 0;
+        try {
+            for (Room i : roomsessionlocal.getRoomByHotel(hotelCode)) {
+                if (highestFloor < getLevel(i.getRoomNumber())) {
+                    highestFloor = getLevel(i.getRoomNumber());
+                }
+            }
+        } catch (NoResultException e) {
+            System.out.println("No room found");
+        }
+
+        return highestFloor;
+    }
+
+    public void setAssginingStaff(List<List<Staff>> assginingStaff) {
+        this.assginingStaffLevel = assginingStaff;
+    }
+
+    public List<Staff> getStaffAvail() {
+        if (staffAvail == null) {
+            return staffAvail = getGetHousekeepingStaff();
+        } else {
+            return staffAvail;
+        }
+    }
+
+    public void setStaffAvail(List<Staff> staffAvail) {
+        this.staffAvail = staffAvail;
+    }
+
+    public void onStaffDrop(DragDropEvent ddEvent) {
+        staffLevel = (Integer) ddEvent.getComponent().getAttributes().get("test");
+        System.out.println(staffLevel);
+        System.out.println("1");
+        Staff car = ((Staff) ddEvent.getData());
+        System.out.println("2");
+        System.out.println(staffLevel);
+        System.out.println("3");
+        System.out.println(assginingStaffLevel.size());
+        List<Staff> level = assginingStaffLevel.get(staffLevel);
+        System.out.println("7");
+        level.add(car);
+        staffAvail.remove(car);
+        printprint();
+    }
+
+    public int convertStaffLevel(String staffLevel) {
+        System.out.println("5");
+
+        String[] staffString = staffLevel.split("_");
+        System.out.println("6");
+        return Integer.parseInt(staffString[1]);
+    }
+
+    public void printprint() {
+        for (List<Staff> test : assginingStaffLevel) {
+            System.out.println(test.size());
+            for (Staff s : test) {
+                System.out.println(s.getName());
+            }
+        }
+
+    }
+
+    public void removefromlevel(Staff s, int level) {
+
+        assginingStaffLevel.get(level).remove(s);
+        staffAvail.add(s);
+
+    }
+
+    public void printthis(int hellpo) {
+        System.out.println(hellpo);
+    }
+
+    public void updateCleaning() {
+
+        int counter = 0;
+        for (List<Staff> s : assginingStaffLevel) {
+            CleaningSchedule css = new CleaningSchedule();
+            css.setHotelCodeName(hotelCode);
+            css.setLevel(counter + "");
+            css.setListOfStaff(s);
+            cleaningScheduleSessionLocal.createCleaningSchedule(css);
+        }
+    }
+
+	
+	
+	
+	
+	
+	
 }

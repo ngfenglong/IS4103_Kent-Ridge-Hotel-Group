@@ -3,7 +3,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
@@ -27,7 +30,7 @@
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li><a href="index.xhtml">Home</a></li>
-                                    
+
                                     <li class="active">Housekeeping Schedule</li>
                                 </ol>
                             </div>
@@ -38,7 +41,66 @@
                     <!-- /.container-fluid -->
                 </div> 
                 <section class="content">
-              
+                    <h:form id="cleaningForm">
+                        <div class="row">
+                            <div class="col-lg-3" >
+                                <p:dataTable class="box box-primary" style="width: 100%" id="availableStaff" var="staff" value="#{requestServicesManagedBean.staffAvail}">
+
+                                    <p:column  style="width:20px">
+                                        <h:outputText id="dragIcon" styleClass="fa fa-plus" ></h:outputText>
+                                        <p:draggable for="dragIcon" revert="true" helper="clone"></p:draggable>
+                                    </p:column>
+                                    <p:column style="width:50%" headerText="Name">
+                                        <h:outputText value="#{staff.name}" />
+                                    </p:column>
+
+                                </p:dataTable>
+                            </div>
+                            <div class="col-lg-7">
+                                <c:forEach  items="#{requestServicesManagedBean.assginingStaff}" var="level" varStatus="count">
+
+                                    <p:fieldset id="level_#{count.index}" legend="Level #{count.count}" style="margin-top:20px">
+                                        <p:outputPanel id="dropArea#{count.count}">
+                                            <p:dataTable id="selectedlevel#{count.count}" var="Staff" value="#{level}" rendered="#{not empty requestServicesManagedBean.assginingStaff.get(count.index)}" >
+
+                                                <p:column style="width:50%" headerText="Name">
+                                                    <h:outputText value="#{Staff.name}" ></h:outputText>
+                                                </p:column>
+                                                <p:column style="width:30%">
+                                                    <h:commandLink class="fa fa-times" action="#{requestServicesManagedBean.removefromlevel(Staff,count.index)}">
+                                                  
+                                                    </h:commandLink>
+                                                </p:column>
+
+                                            </p:dataTable>
+
+                                        </p:outputPanel>
+
+                                    </p:fieldset>
+
+
+
+                                    <p:droppable for="level_#{count.index}" tolerance="touch" activeStyleClass="ui-state-highlight" datasource="availableStaff" onDrop="handleDrop">
+                                    
+                                        <f:attribute name="test" value="#{count.index}" />
+                                        <p:ajax listener="#{requestServicesManagedBean.onStaffDrop}" update="dropArea#{count.count}, availableStaff">
+
+                                        </p:ajax>
+
+                                    </p:droppable>
+
+                                </c:forEach>
+
+
+                            </div>
+                        </div>
+                        
+                        <h:commandButton value="update" class="btn btn-primary"  action="#{requestServicesManagedBean.updateCleaning()}">
+                            
+                        </h:commandButton>
+                    </h:form>
+
+
                     <!-- /.container-fluid -->
                 </section>
                 <!-- /.content-header -->

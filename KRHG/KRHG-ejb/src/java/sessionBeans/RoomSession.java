@@ -214,7 +214,7 @@ public class RoomSession implements RoomSessionLocal {
     public List<Room> getRoomByHotel(String roomHotel) throws NoResultException {
         Query q;
         q = em.createQuery("SELECT r FROM Room r WHERE "
-                + "LOWER(r.roomHote) = :roomHotel");
+                + "LOWER(r.hotel.hotelCodeName) = :roomHotel");
         q.setParameter("roomHotel", roomHotel.toLowerCase());
 
         if (!q.getResultList().isEmpty()) {
@@ -276,27 +276,7 @@ public class RoomSession implements RoomSessionLocal {
         }
     }
 
-    @Override
-    public void addCleaningSchedule(Long rID, CleaningSchedule cs) {
-        Room r = em.find(Room.class, rID);
-        try {
-            r.addCleaningSchedule(cs);
-            em.flush();
-        } catch (NoResultException ex) {
-            Logger.getLogger(RoomSession.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 
-    @Override
-    public void removeCleaningSchedule(Long rID, CleaningSchedule cs) {
-        Room r = em.find(Room.class, rID);
-        try {
-            r.removeCleaningSchedule(cs);
-            em.flush();
-        } catch (NoResultException ex) {
-            Logger.getLogger(RoomSession.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 
     @Override
     public void addMinibarItem(Long rID, MinibarItem mi) {

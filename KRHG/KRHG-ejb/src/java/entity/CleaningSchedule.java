@@ -6,14 +6,13 @@
 package entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.OneToMany;
 
 @Entity
 public class CleaningSchedule implements Serializable {
@@ -22,14 +21,67 @@ public class CleaningSchedule implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long cleaningScheduleID;
-    
-    @Temporal(TemporalType.DATE)
-    private Date dateOfCleaning;
-    @OneToOne
-    private Room room;
+
+    private String hotelCodeName;
+
+    private String roomlevel;
+    @OneToMany
+    private List<Staff> listOfStaff;
+
+    public CleaningSchedule() {
+        listOfStaff = new ArrayList<>();
+    }
+
+    public CleaningSchedule(String hotelCodeName, String level) {
+        this();
+        this.hotelCodeName = hotelCodeName;
+        this.roomlevel = level;
+    }
+
+    /**
+     * @return the hotelCodeName
+     */
+    public String getHotelCodeName() {
+        return hotelCodeName;
+    }
+
+    /**
+     * @param hotelCodeName the hotelCodeName to set
+     */
+    public void setHotelCodeName(String hotelCodeName) {
+        this.hotelCodeName = hotelCodeName;
+    }
+
+    /**
+     * @return the level
+     */
+    public String getLevel() {
+        return roomlevel;
+    }
+
+    /**
+     * @param level the level to set
+     */
+    public void setLevel(String level) {
+        this.roomlevel = level;
+    }
 
     public Long getCleaningScheduleID() {
         return cleaningScheduleID;
+    }
+
+    /**
+     * @return the listOfStaff
+     */
+    public List<Staff> getListOfStaff() {
+        return listOfStaff;
+    }
+
+    /**
+     * @param listOfStaff the listOfStaff to set
+     */
+    public void setListOfStaff(List<Staff> listOfStaff) {
+        this.listOfStaff = listOfStaff;
     }
 
     public void setCleaningScheduleID(Long cleaningScheduleID) {
@@ -60,32 +112,5 @@ public class CleaningSchedule implements Serializable {
     public String toString() {
         return "entity.CleaningSchedule[ cleaningScheduleID=" + cleaningScheduleID + " ]";
     }
-    
-    /**
-     * @return the dateOfCleaning
-     */
-    public Date getDateOfCleaning() {
-        return dateOfCleaning;
-    }
 
-    /**
-     * @param dateOfCleaning the dateOfCleaning to set
-     */
-    public void setDateOfCleaning(Date dateOfCleaning) {
-        this.dateOfCleaning = dateOfCleaning;
-    }
-
-    /**
-     * @return the room
-     */
-    public Room getRoom() {
-        return room;
-    }
-
-    /**
-     * @param room the room to set
-     */
-    public void setRoom(Room room) {
-        this.room = room;
-    }
 }
