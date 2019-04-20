@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="template.xhtml">
+
+
+            <ui:define name="title">
+                KRHG Front Desk
+            </ui:define>
+
+            <ui:define name="content">
+                <!-- Content Header (Page header) -->
+                <div class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+
+
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li class="breadcrumb-item active">
+                                        <!--Add Btn-->
+                                    </li>
+                                </ol>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </div> 
+                <section class="content">
+
+                    <div class="container-fluid">
+                        <div class="row">
+                            <!-- left column -->
+                            <div class="col-md-10">
+
+
+
+
+                                <div class="card card-primary">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Update Maintenance Order</h3>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <!-- form start -->
+                                    <h:form role="form">
+                                        <div class="card-body">
+                                            <table>
+                                                <tr>
+
+                                                    <div class="form-group">
+                                                        <td>
+                                                            <label>
+                                                                Location:
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <h:inputText class="form-control" value="#{requestAndServiceManagedBean.mlocation}" a:placeholder="E.g Room 203" required="true"></h:inputText>
+                                                        </td>
+                                                    </div>
+                                                </tr>
+
+                                                <tr>
+                                                    <div class="form-group">
+                                                        <td>
+                                                            <label>Description:</label>
+                                                        </td>
+                                                        <td>  
+                                                            <h:inputText class="form-control" value="#{requestAndServiceManagedBean.maintainDescription}" a:placeholder="E.g Clogged basin" required="true"></h:inputText>
+
+                                                        </td>
+                                                    </div>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label>
+                                                            Status:
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <h:selectOneMenu value="#{requestAndServiceManagedBean.status}">
+                                                                <f:selectItem itemValue="incomplete" itemLabel="Incomplete" />
+                                                                <f:selectItem itemValue="complete" itemLabel="Complete" />
+                                                            </h:selectOneMenu>                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label>
+                                                            Is Resolved:
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <h:selectOneMenu value="#{requestAndServiceManagedBean.isResolved}">
+                                                                <f:selectItem itemValue="#{false}" itemLabel="Unresolved" />
+                                                                <f:selectItem itemValue="#{true}" itemLabel="Solved" />
+                                                            </h:selectOneMenu>                                                        </div>
+                                                    </td>
+                                                </tr>
+
+
+                                                <!-- /.input group -->
+                                            </table>
+                                        </div>
+                                        <!-- /.card-body -->
+
+                                        <div class="card-footer">
+                                            <h:commandButton class="btn btn-primary" value="Update Report" action="#{requestAndServiceManagedBean.updateMaintainenceOrder()}"></h:commandButton>
+                                        </div>
+                                    </h:form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.container-fluid -->
+                </section>
+                <!-- /.content-header -->
+                <!-- Main content -->
+
+            </ui:define>
+
+            <ui:define name="script">
+                <script>
+                    $('[data-mask]').each(function () {
+                        $(this).mask($(this).attr("data-mask"));
+                    });
+                </script>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
