@@ -8,9 +8,12 @@ package managedBean;
 import entity.CreditCard;
 import entity.Customer;
 import entity.ExtraSurcharge;
+import entity.FoodOrder;
 import entity.FunctionRoom;
 import entity.HolidaySurcharge;
 import entity.Hotel;
+import entity.LaundryOrder;
+import entity.MinibarOrder;
 import entity.PaymentTransaction;
 import entity.Room;
 import entity.RoomBooking;
@@ -53,6 +56,62 @@ import sessionBeans.RoomSessionLocal;
 @SessionScoped
 public class FrontDeskManagedBean implements Serializable {
 
+    public RoomBooking getCheckoutRoomBooking() {
+        return checkoutRoomBooking;
+    }
+
+    public void setCheckoutRoomBooking(RoomBooking checkoutRoomBooking) {
+        this.checkoutRoomBooking = checkoutRoomBooking;
+    }
+
+    public List<LaundryOrder> getListOfLaundryOrders() {
+        return listOfLaundryOrders;
+    }
+
+    public void setListOfLaundryOrders(List<LaundryOrder> listOfLaundryOrders) {
+        this.listOfLaundryOrders = listOfLaundryOrders;
+    }
+
+    public List<FoodOrder> getListOfFoodOrders() {
+        return listOfFoodOrders;
+    }
+
+    public void setListOfFoodOrders(List<FoodOrder> listOfFoodOrders) {
+        this.listOfFoodOrders = listOfFoodOrders;
+    }
+
+    public List<MinibarOrder> getListOfMinibarOrders() {
+        return listOfMinibarOrders;
+    }
+
+    public void setListOfMinibarOrders(List<MinibarOrder> listOfMinibarOrders) {
+        this.listOfMinibarOrders = listOfMinibarOrders;
+    }
+
+    public String getCheckoutRoomNumber() {
+        return checkoutRoomNumber;
+    }
+
+    public void setCheckoutRoomNumber(String checkoutRoomNumber) {
+        this.checkoutRoomNumber = checkoutRoomNumber;
+    }
+
+    public String getTransactionID() {
+        return transactionID;
+    }
+
+    public void setTransactionID(String transactionID) {
+        this.transactionID = transactionID;
+    }
+
+    public RoomBooking getRoomBookingToDisplay() {
+        return roomBookingToDisplay;
+    }
+
+    public void setRoomBookingToDisplay(RoomBooking roomBookingToDisplay) {
+        this.roomBookingToDisplay = roomBookingToDisplay;
+    }
+
     /**
      * Creates a new instance of FrontDeskManagedBean
      */
@@ -89,11 +148,18 @@ public class FrontDeskManagedBean implements Serializable {
     private Date checkoutDate;
     private String checkinDateString;
     private String checkoutDateString;
-
+    
+    private String transactionID;
+    private RoomBooking roomBookingToDisplay;
+    private String checkoutRoomNumber;
+    private RoomBooking checkoutRoomBooking;
     //customer check out
     private List<RoomBooking> todayCheckOutRoom;
     private String checkoutRoom;
     private List<RoomBooking> checkOutRoomResult;
+    private List<LaundryOrder> listOfLaundryOrders;
+    private List<FoodOrder> listOfFoodOrders;
+    private List<MinibarOrder> listOfMinibarOrders;
 
     //Customer walk in
     private int walkinPax;
@@ -876,10 +942,33 @@ public class FrontDeskManagedBean implements Serializable {
         return "checkoutResult.xhtml?faces-redirect=true";
     }
 
-    public String checkOut(RoomBooking rm) {
+    public String displayCheckoutOrders(RoomBooking rb) {
         //do check out 
         //update check out room and change roombooking status
-        return "";
+        try {
+            setListOfFoodOrders(null);
+            setListOfLaundryOrders(null);
+            setListOfMinibarOrders(null);
+            setCheckoutRoomBooking(rb);
+            setListOfFoodOrders(rb.getListOfFoodOrders());
+            setListOfLaundryOrders(rb.getListOfLaundryOrders());
+            setListOfMinibarOrders(rb.getListOfMinibarOrders());   
+            return "checkoutOrderSummary.xhtml?faces-redirect=true";
+        } catch (Exception e) {
+            return "checkout.xhtml?faces-redirect=true";
+        }
+    }
+    
+    public String checkOut() {
+        try {
+        checkoutRoomBooking.setStatus("checkedOut");
+        checkoutRoomBooking.getBookedRoom().setStatus("Unavailable");
+        roomSessionLocal.updateRoom(checkoutRoomBooking.getBookedRoom());
+        bookSessionLocal.updateRoomBooking(checkoutRoomBooking);
+        } catch (Exception e) {
+            return "checkout.xhtml?faces-redirect=true";
+        }
+        return "checkout.xhtml?faces-redirect=true";
     }
 
     public List<PaymentTransaction> getTodaysbookings() throws NoResultException {
@@ -1092,8 +1181,10 @@ public class FrontDeskManagedBean implements Serializable {
 
     public List<RoomBooking> getTodayCheckOutRoom() throws NoResultException {
 
-        return bookSessionLocal.getAllRoomBookingByStatus("Occupied", null);
+        return bookSessionLocal.getAllRoomBookingByStatus("checkedIn", null);
     }
+    
+    
 
     public void setTodayCheckOutRoom(List<RoomBooking> todayCheckOutRoom) {
         this.todayCheckOutRoom = todayCheckOutRoom;
