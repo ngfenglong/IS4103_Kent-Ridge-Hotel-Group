@@ -36,18 +36,7 @@ public class RoomSession implements RoomSessionLocal {
         return q.getResultList();
     }
     
-    @Override
-    public List<Room> getRoomByHotelCodeName(String hotelCodeName) throws NoResultException {
-        Query q;
-        q = em.createQuery("SELECT r FROM Room r"
-                + " WHERE LOWER(r.hotel.hotelCodeName) = :hotelCodeName");
-        q.setParameter("hotelCodeName", hotelCodeName.toLowerCase());
-        if (!q.getResultList().isEmpty()) {
-            return q.getResultList();
-        } else {
-            throw new NoResultException("Room not found.");
-        }
-    }
+
 
     @Override
     public Room getRoomByID(Long rID) throws NoResultException {
@@ -249,6 +238,7 @@ public class RoomSession implements RoomSessionLocal {
             throw new NoResultException("Room not found.");
         }
     }
+    
 
     @Override
     public List<Room> getRoomByHotelName(String hotelName) throws NoResultException {

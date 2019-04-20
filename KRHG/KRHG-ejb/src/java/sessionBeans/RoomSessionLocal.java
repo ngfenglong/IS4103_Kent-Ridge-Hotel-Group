@@ -27,7 +27,6 @@ public interface RoomSessionLocal {
     public List<Room> getSingleRoomByType(String roomType, String hotelCodeName, String status) throws NoResultException;
     public List<Room> getRoomByPax(String roomPax, String roomHotel) throws NoResultException;
     public List<Room> getRoomByHotel(String roomHotel) throws NoResultException;
-    public List<Room> getRoomByHotelCodeName(String hotelCodeName) throws NoResultException;
     public List<Room> getRoomByHotelName(String hotelName) throws NoResultException;
     public void deleteRoom(Long rID) throws NoResultException;
     public void createRoom(Room r); 
