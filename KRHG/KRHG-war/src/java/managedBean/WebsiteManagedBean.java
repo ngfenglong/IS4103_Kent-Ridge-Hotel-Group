@@ -245,7 +245,7 @@ public class WebsiteManagedBean implements Serializable {
         CreditCard cc = new CreditCard();
         cc.setCardNum(creditCardTB);
         cc.setCvv(cvsTB);
-        cc.setExpiryDate(new SimpleDateFormat("yy/MM").parse(expiryDateTB));
+//        cc.setExpiryDate(new SimpleDateFormat("yy/MM").parse(expiryDateTB));
         paymentTransactionSessionLocal.createCreditCard(cc);
         cc = paymentTransactionSessionLocal.getLastCreditCard();
         p.setCreditCard(cc);

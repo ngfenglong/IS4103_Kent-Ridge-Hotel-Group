@@ -70,6 +70,7 @@ public class RoomPricing implements Serializable {
         if (!(object instanceof RoomPricing)) {
             return false;
         }
+        
         RoomPricing other = (RoomPricing) object;
         if ((this.roomPricingID == null && other.roomPricingID != null) || (this.roomPricingID != null && !this.roomPricingID.equals(other.roomPricingID))) {
             return false;

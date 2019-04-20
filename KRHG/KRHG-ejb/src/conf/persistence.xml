@@ -18,12 +18,17 @@
     <class>entity.HotelFacilityBooking</class>
     <class>entity.HouseKeepingOrder</class>
     <class>entity.LaundryOrder</class>
+    <class>entity.LaundryOrderedItem</class>
+    <class>entity.LaundryType</class>
     <class>entity.Logging</class>
     <class>entity.LostAndFoundReport</class>
     <class>entity.MailingList</class>
     <class>entity.MaintainenceOrder</class>
     <class>entity.MemberTier</class>
     <class>entity.MinibarItem</class>
+    <class>entity.MinibarOrder</class>
+    <class>entity.MinibarOrderedItem</class>
+    <class>entity.MinibarStock</class>
     <class>entity.Newsletter</class>
     <class>entity.PaymentTransaction</class>
     <class>entity.PromoCode</class>
@@ -32,9 +37,11 @@
     <class>entity.RoomFacility</class>
     <class>entity.RoomInventory</class>
     <class>entity.RoomPricing</class>
+    <class>entity.Shift</class>
     <class>entity.Staff</class>
     <class>entity.StaffType</class>
     <class>entity.TransportBooking</class>
+    <class>entity.WeeklySchedule</class>
     <class>entity.WorkSchedule</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
