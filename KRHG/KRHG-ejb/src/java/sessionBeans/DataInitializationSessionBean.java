@@ -15885,7 +15885,7 @@ public class DataInitializationSessionBean {
         rm1.setBookInDate(new Date());
         rm1.setBookOutDate(date);
         rm1.setBookedBy(customer1);
-
+        rm1.setBookedRoom(roomSessionLocal.getRoomByName("KRG_302"));
         rm1.setEmailAddress(customer1.getEmail());
         rm1.setHasTransport(false);
         rm1.setLastName(customer1.getLastName());
@@ -15893,7 +15893,6 @@ public class DataInitializationSessionBean {
         rm1.setPrice(2000.0);
         rm1.setRoomType("Standard");
         rm1.setStatus("Incomplete");
-
         bookingSessionLocal.createRoomBooking(rm1);
 		
         PaymentTransaction PT1 = new PaymentTransaction();
