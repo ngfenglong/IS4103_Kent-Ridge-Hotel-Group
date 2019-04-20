@@ -4,7 +4,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <body>
 
@@ -21,15 +21,14 @@
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-
-
+                                <h1 style="font-size: x-large; margin-bottom:20px">Walk-In Booking</h1>
                             </div>
                             <!-- /.col -->
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item active">
-                                        <!--Add Btn-->
-                                    </li>
+                                    <li><a href="index.xhtml"> Home</a></li>
+                                    <li><a href="walkinRate.xhtml"> Walk-In Bookings</a></li>
+                                    <li class="active">Room Rates</li>
                                 </ol>
                             </div>
                             <!-- /.col -->
@@ -37,59 +36,70 @@
                         <!-- /.row -->
                     </div>
                     <!-- /.container-fluid -->
-                </div> 
+                </div>
                 <section class="content">
-
-
-                    <div class="container-fluid">
-                        <div class="row">
-                            <!-- left column -->
-                            <div class="col-md-10">
-
-
-
-
-                                <div class="card card-primary">
-                                    <div class="card-header">
-                                        <h3 class="card-title">Walk in Customer</h3>
-                                    </div>
-                                    <!-- /.card-header -->
-                                    <!-- form start -->
-                                    <h:form role="form">
-                                        <div class="card-body">
-                                            <div class="form-group">
-                                                <label for="roomtype">Select room type:</label>
-
-                                                <h:selectOneMenu value="#{frontDeskManagedBean.walkinRoomtype}">
-                                                    <f:selectItem itemValue="Standard" itemLabel="Standard" />
-                                                    <f:selectItem itemValue="Deluxe" itemLabel="Deluxe" />
-                                                    <f:selectItem itemValue="Premium" itemLabel="Premium" />
-                                                    <f:selectItem itemValue="Suite" itemLabel="Suite" />
-                                                    <f:selectItem itemValue="Penthouse" itemLabel="Penthouse" />
-                                                </h:selectOneMenu>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Number of pax:</label>
-
-                                                <h:inputText value="#{frontDeskManagedBean.walkinPax}" a:placeholder="Number of pax" required="true" ></h:inputText>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Number of Night:</label>
-                                                <h:inputText value="#{frontDeskManagedBean.numOfNights}" required="true" id="time" class="datepicker">
-                                                </h:inputText>                                    
-                                            </div>
-                                        </div>
-                                        <!-- /.card-body -->
-
-                                        <div class="card-footer">
-                                            <h:commandButton class="btn btn-primary" value="Search" action="#{frontDeskManagedBean.searchRoomAvailable()}" ></h:commandButton>
-                                        </div>
-                                    </h:form>
-                                </div>
-
-                            </div>
+                    <div class="row">
+                      
+                             <div class="box box-primary col-lg-10" style=" margin-left:100px; padding:20px">
+                                         <div class="box-header" style="text-align: center">
+                                 <h2>
+                                     Room Rates
+                                 </h2>
+                             </div>
+                      <table id="example3" class="table table-bordered table-striped">
+                        <tr>
+                            <td><b>Room type</b></td>
+                            <td><b>Price</b></td>
+                        </tr>
+                        <c:forEach items="#{frontDeskManagedBean.listofPricing}" var="o">
+                            <tr>
+                                <td>
+                                    #{frontDeskManagedBean.editNameAway(o.pricingName)}
+                                </td>
+                                <td>
+                                    $ #{o.price} 
+                                </td>
+                            </tr> 
+                        </c:forEach>
+                    </table>
+                 
                         </div>
+                        
+                         <div class="box box-info col-lg-10" style="margin-left:100px; padding:20px">
+                     <div class="box-header" style="text-align: center">
+                                 <h2>
+                                     Period of Stay
+                                 </h2>
+                             </div>
+                        <div class="section-center" style="margin: 10px">
+                                        <h:form>
+                                            <div class="row" style="margin-top:20px; margin-bottom:30px">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <span class="form-label">Check In</span>
+                                                        <h:inputText class="form-control" style="font-size:calc((100% + 0.25vw)); padding:20px" id="todays-date" a:type="date" value = "#{frontDeskManagedBean.todayDate}" readonly="true"></h:inputText>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <span class="form-label">Check out</span>
+                                                        <h:inputText class="form-control"  style="font-size:calc((100% + 0.25vw)); padding:20px" value="#{frontDeskManagedBean.checkoutDateString}" a:type="date" a:min="#{frontDeskManagedBean.tomorrowDate}" required = "true" ></h:inputText>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-btn">
+                                                <h:commandButton class="btn btn-primary" style="font-size:calc((100% + 0.25vw)); padding:10px; width:100%" value = "Check Availability" action='#{frontDeskManagedBean.checkAvailability()}'></h:commandButton>
+                                            </div>
+                                        </h:form>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+
                     </div>
+                    </div>
+                   
+
+                   
                     <!-- /.container-fluid -->
                 </section>
                 <!-- /.content-header -->
@@ -102,6 +112,13 @@
                     $('[data-mask]').each(function () {
                         $(this).mask($(this).attr("data-mask"));
                     });
+
+                    var today = new Date();
+                    var dd = ("0" + (today.getDate())).slice(-2);
+                    var mm = ("0" + (today.getMonth() + 　1)).slice(-2);
+                    var yyyy = today.getFullYear();
+                    today = yyyy + '-' + mm + '-' + dd;
+                    $("#todays-date").attr("value", today);
                 </script>
             </ui:define>
 

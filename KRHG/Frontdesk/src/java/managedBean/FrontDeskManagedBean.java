@@ -95,7 +95,7 @@ public class FrontDeskManagedBean implements Serializable {
     private String checkoutRoom;
     private List<RoomBooking> checkOutRoomResult;
 
-    //Cusrtomer walk in
+    //Customer walk in
     private int walkinPax;
     private int walkinNumberOfday;
     private List<Room> walkinAvailableRoom;
@@ -109,6 +109,7 @@ public class FrontDeskManagedBean implements Serializable {
     //reuse checkinPassportNumber for walk in too
     private String checkinName;
     private String checkinEmail;
+
 
     //manage account
     private List<Customer> allCustomer;
@@ -170,7 +171,79 @@ public class FrontDeskManagedBean implements Serializable {
 
     private PaymentTransaction selectedPaymentTransaction;
 
-    public String checkRooms() throws NoResultException {
+
+    public boolean checkDeluxe(Room room){
+     if(checkForLineBreak(room) && room.getRoomType().equals("Deluxe")){
+        return true;
+    } 
+             return false;
+    }
+    
+    public boolean checkSuite(Room room){
+     if(checkForLineBreak(room) && room.getRoomType().equals("Suite")){
+        return true;
+    } 
+             return false;
+    }
+    
+     public boolean checkStandard(Room room){
+     if(checkForLineBreak(room) && room.getRoomType().equals("Standard")){
+        return true;
+    } 
+             return false;
+    }
+     
+        public boolean checkPremium(Room room){
+     if(checkForLineBreak(room) && room.getRoomType().equals("Premium")){
+        return true;
+    } 
+             return false;
+    }
+        
+           public boolean checkPenthouse(Room room){
+     if(checkForLineBreak(room) && room.getRoomType().equals("Penthouse")){
+        return true;
+    } 
+             return false;
+    }
+           
+    public boolean checkIsDeluxe(Room room){
+     if(room.getRoomType().equals("Deluxe")){
+        return true;
+    } 
+             return false;
+    }
+    
+    public boolean checkIsSuite(Room room){
+     if(room.getRoomType().equals("Suite")){
+        return true;
+    } 
+             return false;
+    }
+    
+     public boolean checkIsStandard(Room room){
+     if(room.getRoomType().equals("Standard")){
+        return true;
+    } 
+             return false;
+    }
+     
+        public boolean checkIsPremium(Room room){
+     if(room.getRoomType().equals("Premium")){
+        return true;
+    } 
+             return false;
+    }
+        
+           public boolean checkIsPenthouse(Room room){
+     if(room.getRoomType().equals("Penthouse")){
+        return true;
+    } 
+             return false;
+    }
+    
+    public String checkRooms(String roomType) throws NoResultException {
+        walkinRoomtype = roomType;
         walkInRoomsChecking = getRoomsByHotelAndType();
         if (roomBookedOnWalkin.size() > 0) {
             for (Room r : roomBookedOnWalkin) {
@@ -283,7 +356,14 @@ public class FrontDeskManagedBean implements Serializable {
         return false;
     }
     public boolean checkForLineBreakForSuite(Room r) {
-        if (Integer.parseInt(r.getRoomNumber()) % 100 == 3 && r.getRoomType().equals("Suite")) {
+        if (Integer.parseInt(r.getRoomNumber()) % 10 == 3 && r.getRoomType().equals("Suite")) {
+            return true;
+        }
+        return false;
+    }
+    
+        public boolean checkForLineBreakForPenthouse(Room r) {
+        if (Integer.parseInt(r.getRoomNumber()) % 10 == 3 && r.getRoomType().equals("Penthouse")) {
             return true;
         }
         return false;
@@ -298,11 +378,11 @@ public class FrontDeskManagedBean implements Serializable {
 
     public String checkClassColor(int i) {
         if (walkInRoomsChecking.get(i).getStatus().equals("Available")) {
-            return "green";
+            return "turquoise";
         } else if (walkInRoomsChecking.get(i).getStatus().equals("Selected")) {
             return "orange";
         } else {
-            return "red";
+            return "lightgrey";
         }
     }
 
