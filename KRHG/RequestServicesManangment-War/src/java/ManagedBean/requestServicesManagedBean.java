@@ -20,17 +20,22 @@ import entity.RoomBooking;
 import entity.MinibarStock;
 
 import entity.Staff;
+import entity.StaffType;
 import error.NoResultException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Formatter;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -92,14 +97,17 @@ public class requestServicesManagedBean implements Serializable {
     private boolean styleCheck3 = false;
     private String logActivityName;
     private String noImageStr = "Noimage.jpg";
-
     //housekeeping
     private List<HouseKeepingOrder> allHousekeepingOrders;
     private List<HouseKeepingOrder> getIncompleteHousekeepingOrders;
     private List<Staff> getHousekeepingStaff;
     private Staff assignedHouseKeeper;
     private String housekeeperName;
-
+    
+    //For login
+    private String username;
+    private String password;
+    private Staff loggedInAccount;
     //inventory 
     private List<MinibarStock> getMiniBarItems;
     private Integer[] minibarStockWithoutUpdate;
@@ -167,6 +175,99 @@ public class requestServicesManagedBean implements Serializable {
             }
         }
 
+    }
+    
+    public boolean isHousekeepingStaff() {
+        boolean status = false;
+        if (loggedInAccount != null) {
+            List<StaffType> checkList = loggedInAccount.getAccountRights();
+            for (StaffType st : checkList) {
+                System.out.println("Staff type: " + st.getStaffTypeName());
+                if (st.getStaffTypeName().equals("Housekeeping Staff") || st.getStaffTypeName().equals("Housekeeping Manager")) {
+                    status = true;
+                }
+            }
+        }
+        return status;
+    }
+    
+    public boolean isLaundryStaff() {
+        boolean status = false;
+        if (loggedInAccount != null) {
+            List<StaffType> checkList = loggedInAccount.getAccountRights();
+            for (StaffType st : checkList) {
+                System.out.println("Staff type: " + st.getStaffTypeName());
+                if (st.getStaffTypeName().equals("Laundry Staff") || st.getStaffTypeName().equals("Laundry Manager")) {
+                    status = true;
+                }
+            }
+        }
+        return status;
+    }
+    
+    public boolean isKitchenStaff() {
+        boolean status = false;
+        if (loggedInAccount != null) {
+            List<StaffType> checkList = loggedInAccount.getAccountRights();
+            for (StaffType st : checkList) {
+                System.out.println("Staff type: " + st.getStaffTypeName());
+                if (st.getStaffTypeName().equals("Kitchen Staff") || st.getStaffTypeName().equals("Kitchen Manager")) {
+                    System.out.println("Hit!");
+                    status = true;
+                }
+            }
+        }
+        return status;
+    }
+    
+     public boolean isMaintenanceStaff() {
+        boolean status = false;
+        if (loggedInAccount != null) {
+            List<StaffType> checkList = loggedInAccount.getAccountRights();
+            for (StaffType st : checkList) {
+                System.out.println("Staff type: " + st.getStaffTypeName());
+                if (st.getStaffTypeName().equals("General Manager")) {
+                    System.out.println("Hit!");
+                    status = true;
+                }
+            }
+        }
+        return status;
+    }
+    
+    public String login() throws NoResultException {
+        if(username != null && password != null) {
+            try {
+                setLoggedInAccount(staffsession.getStaffByUsename(username));
+                System.out.println("Username: " + username);
+                System.out.println("Password: " + password);
+                if(getLoggedInAccount().getUserName().equals(username) && getLoggedInAccount().getPassword().equals(encryptPassword(password))) {
+                    System.out.println("Logged in successfully");
+                    setPassword("");
+                    return "index.xhtml?faces-redirect=true";
+                } else {
+                    System.out.println("Invalid Password/Username failed");
+                    setUsername("");
+                    setPassword("");
+                    setLoggedInAccount(null);
+                    return "login.xhtml?faces-redirect=true";
+                }
+            } catch (Exception e) {
+                System.out.println("Account does not exist. Login failed.");
+                setUsername("");
+                setPassword("");
+                setLoggedInAccount(null);
+                return "login.xhtml?faces-redirect=true";
+            }
+        }
+        return "return login.xhtml?faces-redirect=true";
+    }
+    
+    public String logout() {
+        setUsername("");
+        setPassword("");
+        setLoggedInAccount(null);
+        return "login.xhtml?faces-redirect=true";
     }
 
     public String getStyleClass() {
@@ -1836,6 +1937,73 @@ public class requestServicesManagedBean implements Serializable {
      */
     public void setTabIndex3(boolean tabIndex3) {
         this.tabIndex3 = tabIndex3;
+    }
+
+    /**
+     * @return the username
+     */
+    public String getUsername() {
+        return username;
+    }
+
+    /**
+     * @param username the username to set
+     */
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    /**
+     * @return the password
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * @param password the password to set
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    /**
+     * @return the loggedInAccount
+     */
+    public Staff getLoggedInAccount() {
+        return loggedInAccount;
+    }
+
+    /**
+     * @param loggedInAccount the loggedInAccount to set
+     */
+    public void setLoggedInAccount(Staff loggedInAccount) {
+        this.loggedInAccount = loggedInAccount;
+    }
+
+    private static String encryptPassword(String password) {
+        String sha1 = "";
+        try {
+            MessageDigest crypt = MessageDigest.getInstance("SHA-1");
+            crypt.reset();
+            crypt.update(password.getBytes("UTF-8"));
+            sha1 = byteToHex(crypt.digest());
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return sha1;
+    }
+    
+    private static String byteToHex(final byte[] hash) {
+        Formatter formatter = new Formatter();
+        for (byte b : hash) {
+            formatter.format("%02x", b);
+        }
+        String result = formatter.toString();
+        formatter.close();
+        return result;
     }
 
 }
