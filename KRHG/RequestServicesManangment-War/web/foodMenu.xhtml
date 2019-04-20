@@ -194,7 +194,7 @@
                                                 <div class="row" style="height:100%">
                                                     <div class="col-lg-12" style="text-align:right; font-size: calc((100% + 0.25vw))"> 
                                                         <h:commandLink style="margin:10px 2px 0px 10px;" actionListener="#{requestServicesManagedBean.setUnavailable(i.foodMenuItemID)}" class="fas fa-minus" >
-                                                            <f:ajax execute="@form" render=":form2 form8"></f:ajax>
+                                                            <f:ajax execute="@form" render=":form3 form8"></f:ajax>
                                                         </h:commandLink>
 
                                                     </div>
@@ -259,7 +259,7 @@
                                                 <div class="row" style="height:100%">
                                                     <div class="col-lg-12" style="text-align:right; font-size: calc((100% + 0.25vw))"> 
                                                         <h:commandLink style="margin:10px 2px 0px 10px;" actionListener="#{requestServicesManagedBean.setUnavailable(i.foodMenuItemID)}" class="fas fa-minus" >
-                                                            <f:ajax execute="@form" render="form2 form8"></f:ajax>
+                                                            <f:ajax execute="@form" render="form4 form8"></f:ajax>
                                                         </h:commandLink>
 
                                                     </div>
@@ -325,7 +325,7 @@
                                                 <div class="row" style="height:100%">
                                                     <div class="col-lg-12" style="text-align:right; font-size: calc((100% + 0.25vw))"> 
                                                         <h:commandLink style="margin:10px 2px 0px 10px;" actionListener="#{requestServicesManagedBean.setUnavailable(i.foodMenuItemID)}" class="fas fa-minus" >
-                                                            <f:ajax execute="@form" render="form2 form8"></f:ajax>
+                                                            <f:ajax execute="@form" render="form5 form8"></f:ajax>
                                                         </h:commandLink>
 
                                                     </div>
@@ -391,7 +391,7 @@
                                                 <div class="row" style="height:100%">
                                                     <div class="col-lg-12" style="text-align:right; font-size: calc((100% + 0.25vw))"> 
                                                         <h:commandLink style="margin:10px 2px 0px 10px;" actionListener="#{requestServicesManagedBean.setUnavailable(i.foodMenuItemID)}" class="fas fa-minus" >
-                                                            <f:ajax execute="@form" render="form2 form8"></f:ajax>
+                                                            <f:ajax execute="@form" render="form6 form8"></f:ajax>
                                                         </h:commandLink>
 
                                                     </div>
@@ -416,10 +416,10 @@
 
 
                                                     <div class="col-lg-12" style="text-align:right; font-size: calc((100% + 0.25vw)) " >
-                                                        <h:commandLink style="margin:10px 2px 0px 10px" actionListener="#{requestServicesManagedBean.selectFoodMenuItem2(i.foodMenuItemID)}" class="fas fa-edit" >
+                                                        <h:commandLink style="margin:10px 2px 0px 10px; position:absolute; right:25px; bottom:10px" actionListener="#{requestServicesManagedBean.selectFoodMenuItem2(i.foodMenuItemID)}" class="fas fa-edit" >
                                                             <f:ajax execute="@form" render=":formmodal2"></f:ajax>
                                                         </h:commandLink>
-                                                        <h:commandLink style="margin:10px 2px 0px 10px" actionListener="#{requestServicesManagedBean.selectFoodMenuItem(i.foodMenuItemID)}" class="fas fa-trash-alt" >
+                                                        <h:commandLink style="margin:10px 2px 0px 10px; position:absolute; right:5px; bottom:10px" actionListener="#{requestServicesManagedBean.selectFoodMenuItem(i.foodMenuItemID)}" class="fas fa-trash-alt" >
                                                             <f:ajax execute="@form" render=":formmodal"></f:ajax>
                                                         </h:commandLink>
 
@@ -459,7 +459,7 @@
                                                 <div class="row" style="height:100%">
                                                     <div class="col-lg-12" style="text-align:right; font-size: calc((100% + 0.25vw))"> 
                                                         <h:commandLink style="margin:10px 2px 0px 10px;" actionListener="#{requestServicesManagedBean.setUnavailable(i.foodMenuItemID)}" class="fas fa-minus" >
-                                                            <f:ajax execute="@form" render="form2 form8"></f:ajax>
+                                                            <f:ajax execute="@form" render="form7 form8"></f:ajax>
                                                         </h:commandLink>
 
                                                     </div>
@@ -516,7 +516,7 @@
                                                 <div class="row" style="height:100%">
                                                     <div class="col-lg-12" style="text-align:right; font-size: calc((100% + 0.25vw))"> 
                                                         <h:commandLink style="margin:10px 2px 0px 10px;" actionListener="#{requestServicesManagedBean.setAvailable(i.foodMenuItemID)}" class="fas fa-plus" >
-                                                            <f:ajax execute="@form" render="form1 form2 form3 form4 form5 form6 form 7 form8"></f:ajax>
+                                                            <f:ajax execute="@form" render="form1 form2 form3 form4 form5 form6 form7 form8"></f:ajax>
                                                         </h:commandLink>
 
                                                     </div>
@@ -571,7 +571,7 @@
                                 <ul class="cd-buttons" style="padding-inline-start: unset; padding:0px">
 
                                     <li ><h:commandLink id="add-new" class="cd-popup-confirm" value="Yes">
-                                            <f:ajax execute="@form" oncomplete="triggerNotif()" listener="#{requestServicesManagedBean.deleteFoodItem()}" render="form1 form2 form3 form4 form5 form6 form7 form8 formmodal"></f:ajax>
+                                            <f:ajax execute="@form"  listener="#{requestServicesManagedBean.deleteFoodItem()}" render="form1 form2 form3 form4 form5 form6 form7 form8 formmodal"></f:ajax>
                                         </h:commandLink></li>
                                     <li style="background-color:lightslategray"><h:commandLink id="cancelFoodItemFromMenu" action="#{requestServicesManagedBean.cancelingDeleteFoodItem()}" class="cd-popup-closemodal" value="No">
                                             <f:ajax execute="@form" render="@none"></f:ajax>
@@ -653,7 +653,7 @@
 
                     <h:form id="formmodal3" enctype="multipart/form-data">
                         <div id="modal3" class="#{requestServicesManagedBean.styleClass3}" role="alert">
-                            <div class="cd-popup-container" style="max-width:700px; height:50%;">
+                            <div class="cd-popup-container" style="max-width:700px; height:52%;">
                                 <div class="popup-content" style="padding:20px">
                                     <h1 style="text-align: center; margin-bottom: 30px">Add Food Item</h1>
                                     <div class="form-group" style="font-size: calc((100% + 0.25vw))!important; text-align: left">

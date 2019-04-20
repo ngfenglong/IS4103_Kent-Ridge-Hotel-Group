@@ -35,7 +35,6 @@
         <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.3.4/animate.css"/>
         <link href="plugins/jquery-datepicker/jquery-ui.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" type="text/css" href="styles/contact.css"/>
-        <link rel="stylesheet" type="text/css" href="styles/contact_responsive.css"/>
         <!--===============================================================================================-->
         <link rel="stylesheet" type="text/css" href="css/util.css"/>
         <link rel="stylesheet" type="text/css" href="css/main.css"/>
@@ -124,15 +123,15 @@
                                 Last Name   
                             </span>
                             <div class="wrap-input100 validate-input m-b-36" data-validate = "Last name is required" >
-                                <h:inputText class="input100" value="#{websiteAuthenticationManagedBean.regLName}" id="lName" a:placeholder="Last NAme" required="true" />
+                                <h:inputText class="input100" value="#{websiteAuthenticationManagedBean.regLName}" id="lName" a:placeholder="Last Name" required="true" />
                                 <span class="focus-input100"></span>
                             </div>
 
                             <span class="txt1 p-b-11">
                                 gender
                             </span>
-                            <div class="wrap-input100 validate-input m-b-36" data-validate = " Gender is required" >
-                                <h:selectOneMenu>
+                            <div class="wrap-input100 validate-input m-b-36 form-group" style="border:none" data-validate = " Gender is required" >
+                                <h:selectOneMenu class="form-control" style="color:black">  
                                     <f:selectItem itemValue="Male" itemLabel="Male" />
                                     <f:selectItem itemValue="Female" itemLabel="Female" />
                                 </h:selectOneMenu>
@@ -145,7 +144,7 @@
                                 Email
                             </span>
                             <div class="wrap-input100 validate-input m-b-36" data-validate = "Email is required" >
-                                <h:inputText class="input100" value="#{websiteAuthenticationManagedBean.regEmail}" id="email" a:placeholder="EMAIL" required="true" />
+                                <h:inputText class="input100" value="#{websiteAuthenticationManagedBean.regEmail}" id="email" a:placeholder="Email" required="true" />
                                 <span class="focus-input100"></span>
                             </div>
 
@@ -154,7 +153,7 @@
                                 Contact Number
                             </span>
                             <div class="wrap-input100 validate-input m-b-36" data-validate = "Contact Number is required" >
-                                <h:inputText class="input100" value="#{websiteAuthenticationManagedBean.regMobileNum}" id="contactNumber" a:placeholder="CONTACT NUMBER" required="true" />
+                                <h:inputText class="input100" value="#{websiteAuthenticationManagedBean.regMobileNum}" id="contactNumber" a:placeholder="Contact Number" required="true" />
                                 <span class="focus-input100"></span>
                             </div>
 
@@ -167,7 +166,7 @@
                                 <span class="btn-show-pass">
                                     <i class="fa fa-eye"></i>
                                 </span>
-                                <h:inputSecret class="form-control"  value="#{websiteAuthenticationManagedBean.regPassword}"  id="password" a:placeholder="PASSWORD" required="true">
+                                <h:inputSecret class="form-control"  value="#{websiteAuthenticationManagedBean.regPassword}"  id="password" a:placeholder="Password" required="true">
                                 </h:inputSecret>
                             </div>
 
@@ -175,18 +174,18 @@
                             <span class="txt1 p-b-11">
                                 Confirm Password
                             </span>
-                            <div class="wrap-input100 validate-input m-b-12" data-validate = "Confirm Password is required">
+                            <div class="wrap-input100 validate-input m-b-12" style="border:none" data-validate = "Confirm Password is required">
                                 <span class="btn-show-pass">
                                     <i class="fa fa-eye"></i>
                                 </span>
-                                <h:inputSecret class="form-control"  value="#{websiteAuthenticationManagedBean.regConfirmPassword}"  id="confirmPassword" a:placeholder="CONFIRM PASSWORD" required="true">
+                                <h:inputSecret class="form-control"  value="#{websiteAuthenticationManagedBean.regConfirmPassword}"  id="confirmPassword" a:placeholder="Confirm Password" required="true">
                                 </h:inputSecret>
                                 <span class="focus-input100"></span>
                             </div>
 
 
                             <div class="container-login100-form-btn">
-                                <h:commandButton class="book_button" value="Create" action="#{websiteAuthenticationManagedBean.register()}"></h:commandButton>
+                                <h:commandButton class="book_button" value="Create" style="width:100%; margin:0px; color:white; font-weight:bold; font-size:large" action="#{websiteAuthenticationManagedBean.register()}"></h:commandButton>
                             </div>
                         </h:form>
                     </div>
