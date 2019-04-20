@@ -43,7 +43,7 @@
 
                 <div class="row invoicecontent" style=" padding-bottom:900px; padding-top:30px; top:0px">
 
-                    <div class="theTitle active" style="width:800px; top:200px; left:520px ">
+                    <div class="theTitle active" style="width:900px;top:200px;left:700px;">
 
                         <div class="titleleft" style="margin-right:30px">
                             <div class="row">
@@ -76,7 +76,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-2" style="padding:0px;  text-align:center">
-                                    <p style="position:absolute; top:0px;">Hotel Group</p>
+                                    <p style="position:absolute; top:0px;font-size: 25px;">Hotel Group</p>
                                 </div>
                                 <div class="col-sm-5">
                                     <div style="padding-top:10px;" class="line">
@@ -90,14 +90,14 @@
                         </div>
                         <span class="separator"></span>
                         <div class="titleright" style="height:100%">
-                            <p style="margin-top:30%; color:#C5B358">Room</p><br/>
+                            <p style="margin-top:12%;color:#C5B358;">Room</p><br/>
                             <p style=" color:#C5B358">Login</p>
 
                         </div>
 
                     </div>
 
-                    <h:form class="mainWrap" style="position: absolute; top:400px; padding-left:20px; width:85%">
+                    <h:form class="mainWrap" style="position: absolute; top:400px; padding-left:180px; width:85%">
                         <h:inputText value="#{hotelStayManagedBean.username}" style="text-align: center" a:placeholder="Hotel Code" class="loginleft" required="required" />
                         <h:inputSecret value="#{hotelStayManagedBean.password}" style="text-align: center" a:placeholder="Password" class="loginleft" required="required" />
                         <h:commandButton value="LOGIN" class="bigBtn" action="#{hotelStayManagedBean.login()}"></h:commandButton>

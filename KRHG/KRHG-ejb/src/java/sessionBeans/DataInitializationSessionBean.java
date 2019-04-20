@@ -1100,7 +1100,7 @@ public class DataInitializationSessionBean {
 //*********************************************CUSTOMER************************************************
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
-        Customer c1 = new Customer("Zack", "Neo Guohui", "Male", encryptPassword("test"), 187, "zell1502@hotmail.com", "+6591321876", format.parse("2019-02-04"), true);
+        Customer c1 = new Customer("Zell", "Tan", "Male", encryptPassword("test"), 187, "zell1502@hotmail.com", "+6591321876", format.parse("2019-02-04"), true);
         customerSessionLocal.createCustomer(c1);
         //        c1 = customerSessionLocal.getCustomerByEmail("neoguoh202@hotmail.com");
         c1 = customerSessionLocal.getCustomerByEmail("zell1502@hotmail.com");
@@ -15916,8 +15916,8 @@ public class DataInitializationSessionBean {
         rb1.setEmailAddress("zell1502@hotmail.com");
         rb1.setPassportNum("E2342213B");
         rb1.setRoomType("Standard");
-        rb1.setFirstName("Zack");
-        rb1.setLastName("Neo Guohui");
+        rb1.setFirstName("Zell");
+        rb1.setLastName("Tan");
         rb1.setHasExtraBed(false);
         bookingSessionLocal.createRoomBooking(rb1);
         RoomBooking newrb1 = bookingSessionLocal.getLastRoomBooking();
@@ -15933,8 +15933,8 @@ public class DataInitializationSessionBean {
         rb2.setEmailAddress("zell1502@hotmail.com");
         rb2.setPassportNum("E2342213B");
         rb2.setRoomType("Standard");
-        rb2.setFirstName("Zack");
-        rb2.setLastName("Neo Guohui");
+        rb2.setFirstName("Zell");
+        rb2.setLastName("Tan");
         rb2.setHasExtraBed(true);
         bookingSessionLocal.createRoomBooking(rb2);
         RoomBooking newrb2 = bookingSessionLocal.getLastRoomBooking();
@@ -15950,8 +15950,8 @@ public class DataInitializationSessionBean {
         rb3.setEmailAddress("zell1502@hotmail.com");
         rb3.setPassportNum("E2342213B");
         rb3.setRoomType("Standard");
-        rb3.setFirstName("Zack");
-        rb3.setLastName("Neo Guohui");
+        rb3.setFirstName("Zell");
+        rb3.setLastName("Tan");
         rb3.setHasExtraBed(true);
         bookingSessionLocal.createRoomBooking(rb3);
         RoomBooking newrb3 = bookingSessionLocal.getLastRoomBooking();
@@ -16174,7 +16174,7 @@ public class DataInitializationSessionBean {
         RoomBooking rb10 = new RoomBooking();
         rb10.setBookedRoom(roomSessionLocal.getRoomByName("KRG_202"));
         rb10.setBookInDate(format.parse("2019-02-18"));
-        rb10.setBookedBy(customerSessionLocal.getCustomerByEmail("zel1502@hotmail.com"));
+        rb10.setBookedBy(customerSessionLocal.getCustomerByEmail("zell1502@hotmail.com"));
         rb10.setStatus("checkedOut");
         bookingSessionLocal.createRoomBooking(rb10);
         PaymentTransaction PT2 = new PaymentTransaction();
@@ -16182,15 +16182,15 @@ public class DataInitializationSessionBean {
         PT2.setTransactionDateTime(format.parse("2019-01-30"));
         PT2.setFinalPayment(753.0);
         PT2.setEmail("zell1502@hotmail.com");
-        PT2.setFirstName("Zack");
-        PT2.setLastName("Neo Guohui");
-        PT2.setPayer(customerSessionLocal.getCustomerByEmail("zel1502@hotmail.com"));
+        PT2.setFirstName("Zell");
+        PT2.setLastName("Tan");
+        PT2.setPayer(customerSessionLocal.getCustomerByEmail("zell1502@hotmail.com"));
         paymentTransactionSessionLocal.createPaymentTransaction(PT2);
 
         RoomBooking rb11 = new RoomBooking();
         rb11.setBookedRoom(roomSessionLocal.getRoomByName("KRG_203"));
         rb11.setBookInDate(format.parse("2019-02-10"));
-        rb11.setBookedBy(customerSessionLocal.getCustomerByEmail("zel1502@hotmail.com"));
+        rb11.setBookedBy(customerSessionLocal.getCustomerByEmail("zell1502@hotmail.com"));
         rb11.setStatus("checkedOut");
         bookingSessionLocal.createRoomBooking(rb11);
         PaymentTransaction PT3 = new PaymentTransaction();
@@ -16198,15 +16198,15 @@ public class DataInitializationSessionBean {
         PT3.setTransactionDateTime(format.parse("2019-02-03"));
         PT3.setFinalPayment(826.0);
         PT3.setEmail("zell1502@hotmail.com");
-        PT3.setFirstName("Zack");
-        PT3.setLastName("Neo Guohui");
-        PT3.setPayer(customerSessionLocal.getCustomerByEmail("zel1502@hotmail.com"));
+        PT3.setFirstName("Zell");
+        PT3.setLastName("Tan");
+        PT3.setPayer(customerSessionLocal.getCustomerByEmail("zell1502@hotmail.com"));
         paymentTransactionSessionLocal.createPaymentTransaction(PT3);
 
         RoomBooking rb12 = new RoomBooking();
         rb12.setBookedRoom(roomSessionLocal.getRoomByName("KRN_205"));
         rb12.setBookInDate(format.parse("2019-03-19"));
-        rb12.setBookedBy(customerSessionLocal.getCustomerByEmail("zel1502@hotmail.com"));
+        rb12.setBookedBy(customerSessionLocal.getCustomerByEmail("zell1502@hotmail.com"));
         rb12.setStatus("checkedOut");
         bookingSessionLocal.createRoomBooking(rb12);
         PaymentTransaction PT4 = new PaymentTransaction();
@@ -16214,9 +16214,9 @@ public class DataInitializationSessionBean {
         PT4.setTransactionDateTime(format.parse("2019-03-10"));
         PT4.setFinalPayment(241.0);
         PT4.setEmail("zell1502@hotmail.com");
-        PT4.setFirstName("Zack");
-        PT4.setLastName("Neo Guohui");
-        PT4.setPayer(customerSessionLocal.getCustomerByEmail("zel1502@hotmail.com"));
+        PT4.setFirstName("Zell");
+        PT4.setLastName("Tan");
+        PT4.setPayer(customerSessionLocal.getCustomerByEmail("zell1502@hotmail.com"));
         paymentTransactionSessionLocal.createPaymentTransaction(PT4);
 
         RoomBooking rb13 = new RoomBooking();

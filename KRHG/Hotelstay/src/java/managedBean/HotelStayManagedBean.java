@@ -11,16 +11,24 @@ import entity.Room;
 import error.NoResultException;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.TimeZone;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.component.UINamingContainer;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import sessionBeans.FoodMenuItemSessionLocal;
 import sessionBeans.HouseKeepingOrderSessionLocal;
@@ -66,15 +74,18 @@ public class HotelStayManagedBean implements Serializable {
     private Room currentRoom = null;
     private String username = null;
     private String password = null;
-    private HashMap<Long, Integer> foodMenuOrder = new HashMap<>();
+    private int quantity;
+    private int totalQty;
     private double totalPrice;
+    private double taxes;
+    private double totalPriceWithTax;
     private boolean extraTowels = false;
     private boolean extraShowerAmenities = false;
     private boolean restockMinibar = false;
     private String houseKeepingRequestDetails = "";
-    private SimpleDateFormat laundryCollectionDate;
-    private SimpleDateFormat laundryCollectionTime;
-    private SimpleDateFormat houseKeepingCollectionTime;
+    private Date laundryCollectionDate = new Date();
+    private Date laundryCollectionTime = new Date();
+    private Date houseKeepingCollectionTime = new Date();
     private List<FoodMenuItem> foodMenuItemList;
     private List<FoodMenuItem> breakfastItemList = new ArrayList();
     private List<FoodMenuItem> startersItemList = new ArrayList();
@@ -86,9 +97,11 @@ public class HotelStayManagedBean implements Serializable {
     private List<FoodMenuItem> softDrinksItemList = new ArrayList();
     private List<FoodMenuItem> coffeeItemList = new ArrayList();
     private List<FoodMenuItem> teaItemList = new ArrayList();
+    private List<FoodMenuItem> foodMenuOrderList = new ArrayList();
+    private HashMap<Long, Integer> foodMenuOrder = new HashMap<>();
     private HouseKeepingOrder bookedHouseKeepingOrder;
     private HouseKeepingOrder bookedLaundryOrder;
-    private String roomNumber;
+    private String roomNumber;  
 
     public HotelStayManagedBean() {
     }
@@ -97,9 +110,10 @@ public class HotelStayManagedBean implements Serializable {
     public void init() {
         try {
             setFoodMenuItemList(foodMenuItemSessionLocal.getAllFoodMenuItems());
-//            System.out.println("Food Menu Item: " + foodMenuItemList);
+            //breakfastItemList.add(foodMenuItemList.get(0));
+            //System.out.println("Food Menu Item: " + foodMenuItemList);
             for (FoodMenuItem food : foodMenuItemList) {
-//                System.out.println("Food Menu Item: " + food.getFoodMenuItemName());
+                //System.out.println("Food Menu Item: " + food.getFoodMenuItemName());
                 switch (food.getCategory()) {
                     case "All Day Breakfast":
                         breakfastItemList.add(food);
@@ -135,16 +149,16 @@ public class HotelStayManagedBean implements Serializable {
                         break;
                 }
             }
-//            System.out.println("Breakfast: " + breakfastItemList);
-//            System.out.println("Starters: " + startersItemList);
-//            System.out.println("Sandwich: " + sandwichesAndBurgersItemList);
-//            System.out.println("Asia: " + asiaItemList);
-//            System.out.println("Mains: " + mainsItemList);
-//            System.out.println("Alcohol: " + alcoholItemList);
-//            System.out.println("Juices: " + juicesItemList);
-//            System.out.println("Soft Drinks: " + softDrinksItemList);
-//            System.out.println("Coffee: " + coffeeItemList);
-//            System.out.println("Tea: " + teaItemList);
+            System.out.println("Breakfast: " + breakfastItemList);
+            System.out.println("Starters: " + startersItemList);
+            System.out.println("Sandwich: " + sandwichesAndBurgersItemList);
+            System.out.println("Asia: " + asiaItemList);
+            System.out.println("Mains: " + mainsItemList);
+            System.out.println("Alcohol: " + alcoholItemList);
+            System.out.println("Juices: " + juicesItemList);
+            System.out.println("Soft Drinks: " + softDrinksItemList);
+            System.out.println("Coffee: " + coffeeItemList);
+            System.out.println("Tea: " + teaItemList);
         } catch (Exception e) {
             System.out.println("No Result found");
             System.out.println(e);
@@ -169,9 +183,9 @@ public class HotelStayManagedBean implements Serializable {
                     System.out.println("Setting Room to: " + roomNumber);
                     return "index.xhtml?faces-redirect=true";
                 }
-            } catch (Exception e) {
+            } catch (NoResultException | NumberFormatException e) {
                 System.out.println("Invalid credentials!");
-//                setCurrentRoom(null);
+                //setCurrentRoom(null);
                 setUsername("");
                 setPassword("");
                 return "login.xhtml";
@@ -183,31 +197,58 @@ public class HotelStayManagedBean implements Serializable {
         return "login.xhtml";
     }
 
-    public void addToCart(FoodMenuItem foodMenuItem, int qty) {
+    public void addToCart(FoodMenuItem foodMenuItem) {      
         System.out.println("-------------------------------------");
         System.out.println("ADD TO CART");
-        if (foodMenuOrder.containsKey(foodMenuItem.getFoodMenuItemID())) {
-            System.out.println("Existing Item");
-            int currentQty = foodMenuOrder.get(foodMenuItem.getFoodMenuItemID());
-            System.out.println("Current Quantity: " + currentQty);
-            foodMenuOrder.replace(foodMenuItem.getFoodMenuItemID(), currentQty + qty);
-        } else {
-            System.out.println("New Item");
-            foodMenuOrder.put(foodMenuItem.getFoodMenuItemID(), qty);
+        
+        FacesContext ctx = FacesContext.getCurrentInstance();
+        Map<String,String> request = ctx.getExternalContext().getRequestParameterMap();
+        System.out.println("Request: " + request.toString());
+        String data = request.toString();
+        //String data = request.get("foodMenuForm" + UINamingContainer.getSeparatorChar(ctx) + "qty"); //the id for the form : id of the text
+        System.out.println("Data: " + data);
+        String fields[] = data.split(",");
+        String qtyKeyValue[] = fields[1].split("=");
+        setQuantity(Integer.parseInt(qtyKeyValue[1]));
+        System.out.println("Quantity: " + getQuantity());
+        
+        if (getQuantity() != 0) {
+            if (foodMenuOrder.containsKey(foodMenuItem.getFoodMenuItemID())) {
+                System.out.println("Existing Item");
+                int currentQty = foodMenuOrder.get(foodMenuItem.getFoodMenuItemID());
+                System.out.println("Current Quantity: " + currentQty);
+                foodMenuOrder.replace(foodMenuItem.getFoodMenuItemID(), currentQty + getQuantity());
+            } else {
+                System.out.println("New Item");
+                foodMenuOrder.put(foodMenuItem.getFoodMenuItemID(), getQuantity());
+                getFoodMenuOrderList().add(foodMenuItem);
+            }
         }
 
         System.out.println("Total Price: " + totalPrice);
         System.out.println("Unit Price: " + foodMenuItem.getUnitPrice());
-        System.out.println("Quantity: " + qty);
-        totalPrice = totalPrice + (foodMenuItem.getUnitPrice() * qty);
+        System.out.println("Quantity: " + getQuantity());
+        totalQty = totalQty + getQuantity();
+        totalPrice = totalPrice + (foodMenuItem.getUnitPrice() * getQuantity());
+        taxes = 0.07 * totalPrice;
+        totalPriceWithTax = 1.07 * totalPrice;
+        setQuantity(0);
         System.out.println("Total Price: " + totalPrice);
         System.out.println("-------------------------------------");
     }
 
     public void updateQty(FoodMenuItem foodMenuItem, int quantity) {
-        totalPrice = totalPrice - foodMenuOrder.get(foodMenuItem.getFoodMenuItemID() * foodMenuItem.getUnitPrice());
+        System.out.println("-------------------------------------");
+        System.out.println("UPDATE QUANTITY");
+        System.out.println("Quantity: " + quantity);
+        totalQty = totalQty - quantity;
+        totalPrice = totalPrice - foodMenuOrder.get(foodMenuItem.getFoodMenuItemID()) * foodMenuItem.getUnitPrice();
+        System.out.println("Before Total Price: " + totalPrice);
         foodMenuOrder.replace(foodMenuItem.getFoodMenuItemID(), quantity);
-        totalPrice = totalPrice + foodMenuOrder.get(foodMenuItem.getFoodMenuItemID() * foodMenuItem.getUnitPrice());
+        totalQty = totalQty + quantity;
+        totalPrice = totalPrice + foodMenuOrder.get(foodMenuItem.getFoodMenuItemID()) * foodMenuItem.getUnitPrice();
+        System.out.println("After Total Price: " + totalPrice);
+        System.out.println("-------------------------------------");
     }
 
     public void checkOutOrder() {
@@ -215,11 +256,18 @@ public class HotelStayManagedBean implements Serializable {
         System.out.println("-------------------------------------");
         System.out.println("CHECKOUT ORDER");
         foodMenuOrder.clear();
+        foodMenuOrderList.clear();
+        quantity = 0;
+        totalQty = 0;
         totalPrice = 0;
+        taxes = 0;
+        totalPriceWithTax = 0;
         System.out.println("-------------------------------------");
     }
 
     public int getLevel(String roomnumber) {
+        System.out.println("-------------------------------------");
+        System.out.println("GET LEVEL");
         if (roomnumber.length() == 3) {
             return Integer.parseInt(roomnumber.substring(0, 1));
         } else {
@@ -231,21 +279,63 @@ public class HotelStayManagedBean implements Serializable {
         System.out.println("Testing purposes");
     }
 
-    public String bookHouseKeeping() {
-//        System.out.println("Food Menu Item: " + foodMenuItemList);
+    public void bookHouseKeeping() {
         System.out.println("Trying to book house keeping ");
         System.out.println("Book housekeeping: Setting Room to: " + currentRoom.getRoomNumber());
-        System.out.println("Timing to book: " + houseKeepingCollectionTime);
+        System.out.println("Timing to book: " + houseKeepingCollectionTime.toString());
+        System.out.println("Requests to book: " + houseKeepingRequestDetails);
+        
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+        SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        dateFormat.setTimeZone(TimeZone.getTimeZone("Asia/Singapore"));
+        timeFormat.setTimeZone(TimeZone.getTimeZone("Asia/Singapore"));
+        dateTimeFormat.setTimeZone(TimeZone.getTimeZone("Asia/Singapore"));  
+        String currentDate = dateFormat.format(new Date());
+        String inputTime = timeFormat.format(houseKeepingCollectionTime);
+        Date selectedDate = new Date();
+        
+        try {
+            cal.setTime(dateFormat.parse(currentDate));
+            cal.add(Calendar.DAY_OF_MONTH, 4);
+            String deadline = dateFormat.format(cal.getTime());
+            selectedDate = dateTimeFormat.parse(deadline + " " + inputTime);
+            System.out.println("Current Date: " + currentDate);
+            System.out.println("Deadline: " + deadline);
+            System.out.println("Selected Date: " + selectedDate);
+        } catch (ParseException ex) {
+            Logger.getLogger(HotelStayManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+              
         HouseKeepingOrder hkOrder = new HouseKeepingOrder();
         hkOrder.setOrderDateTime(new Date());
+        hkOrder.setCompleteDateTime(selectedDate);
         hkOrder.setSpecialRequest(houseKeepingRequestDetails);
         hkOrder.setRoom(currentRoom);
         hkOrder.setLevel(getLevel(currentRoom.getRoomNumber())); //Need to set properly
         hkOrder.setStatus("incomplete");
-        hkOrder.setRequestType("housekeeping");
+              
+        if (houseKeepingRequestDetails.isEmpty()) {
+            System.out.println("No Special Request!");
+            hkOrder.setIsSpecialRequest(false);          
+        } else {
+            System.out.println("Special Requests: " + houseKeepingRequestDetails);
+            hkOrder.setIsSpecialRequest(true);
+            
+            //Set boolean to extraTowels, extraShowerAmenities and restockMinibar
+            
+            if (extraTowels == true || extraShowerAmenities == true) {
+                System.out.println("Toiletries Request");
+                hkOrder.setRequestType("toiletries");
+            }
+            
+            System.out.println("Housekeeping Request");
+            hkOrder.setRequestType("housekeeping");
+        }
+        
         houseKeepingSessionLocal.createHouseKeepingOrder(hkOrder);
-        setBookedHouseKeepingOrder(hkOrder);
-        return "";
+        setBookedHouseKeepingOrder(hkOrder);      
     }
 
     public void editHouseKeepingOrder(SimpleDateFormat HousekeepingTime) {
@@ -413,28 +503,28 @@ public class HotelStayManagedBean implements Serializable {
     /**
      * @return the laundryCollectionDate
      */
-    public SimpleDateFormat getLaundryCollectionDate() {
+    public Date getLaundryCollectionDate() {
         return laundryCollectionDate;
     }
 
     /**
      * @param laundryCollectionDate the laundryCollectionDate to set
      */
-    public void setLaundryCollectionDate(SimpleDateFormat laundryCollectionDate) {
+    public void setLaundryCollectionDate(Date laundryCollectionDate) {
         this.laundryCollectionDate = laundryCollectionDate;
     }
 
     /**
      * @return the laundryCollectionTime
      */
-    public SimpleDateFormat getLaundryCollectionTime() {
+    public Date getLaundryCollectionTime() {
         return laundryCollectionTime;
     }
 
     /**
      * @param laundryCollectionTime the laundryCollectionTime to set
      */
-    public void setLaundryCollectionTime(SimpleDateFormat laundryCollectionTime) {
+    public void setLaundryCollectionTime(Date laundryCollectionTime) {
         this.laundryCollectionTime = laundryCollectionTime;
     }
 
@@ -638,14 +728,84 @@ public class HotelStayManagedBean implements Serializable {
      /**
      * @return the houseKeepingCollectionTime
      */
-    public SimpleDateFormat getHouseKeepingCollectionTime() {
+    public Date getHouseKeepingCollectionTime() {
         return houseKeepingCollectionTime;
     }
 
     /**
      * @param houseKeepingCollectionTime the houseKeepingCollectionTime to set
      */
-    public void setHouseKeepingCollectionTime(SimpleDateFormat houseKeepingCollectionTime) {
+    public void setHouseKeepingCollectionTime(Date houseKeepingCollectionTime) {
         this.houseKeepingCollectionTime = houseKeepingCollectionTime;
+    }
+
+    /**
+     * @return the quantity
+     */
+    public int getQuantity() {
+        return quantity;
+    }
+
+    /**
+     * @param quantity the quantity to set
+     */
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    /**
+     * @return the foodMenuOrderList
+     */
+    public List<FoodMenuItem> getFoodMenuOrderList() {
+        return foodMenuOrderList;
+    }
+
+    /**
+     * @param foodMenuOrderList the foodMenuOrderList to set
+     */
+    public void setFoodMenuOrderList(List<FoodMenuItem> foodMenuOrderList) {
+        this.foodMenuOrderList = foodMenuOrderList;
+    }
+
+    /**
+     * @return the taxes
+     */
+    public double getTaxes() {
+        return taxes;
+    }
+
+    /**
+     * @param taxes the taxes to set
+     */
+    public void setTaxes(double taxes) {
+        this.taxes = taxes;
+    }
+
+    /**
+     * @return the totalPriceWithTax
+     */
+    public double getTotalPriceWithTax() {
+        return totalPriceWithTax;
+    }
+
+    /**
+     * @param totalPriceWithTax the totalPriceWithTax to set
+     */
+    public void setTotalPriceWithTax(double totalPriceWithTax) {
+        this.totalPriceWithTax = totalPriceWithTax;
+    }
+
+    /**
+     * @return the totalQty
+     */
+    public int getTotalQty() {
+        return totalQty;
+    }
+
+    /**
+     * @param totalQty the totalQty to set
+     */
+    public void setTotalQty(int totalQty) {
+        this.totalQty = totalQty;
     }
 }

@@ -70,7 +70,7 @@ public class LostAndFoundReportResource {
     @POST
     @Path("/create")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createLostAndFoundReport(@QueryParam("itemName") String itemName, @QueryParam("itemDescription") String itemDescription) {
+    public Response createLostAndFoundReport(@QueryParam("itemName") String itemName, @QueryParam("itemDescription") String itemDescription, @QueryParam("itemImage") String itemImage) {
 
         System.out.println("Running 55");
         LostAndFoundReport newReport = new LostAndFoundReport();
@@ -79,17 +79,19 @@ public class LostAndFoundReportResource {
         newReport.setItemName(itemName);
         newReport.setReportType("Found");
         newReport.setReportedDate(new Date());
+        newReport.setItemImage(itemImage);
        
 
         try {
             lostAndFoundSession.createLostAndFoundReport(newReport);
-            return Response.status(204).entity(Json.createObjectBuilder().build()).build();
+            return Response.status(200).entity(Json.createObjectBuilder().add("itemName", itemName).build()).build();
         } catch (Exception e) {
-            JsonObject exception = Json.createObjectBuilder()
-                    .add("error", "Failed to create Lost and Found Report")
-                    .build();
-            return Response.status(404).entity(exception)
+//            JsonObject exception = Json.createObjectBuilder()
+//                    .add("error", "Failed to create Lost and Found Report")
+//                    .build();
+            return Response.status(404).entity(Json.createObjectBuilder().add("", "").build())
                     .type(MediaType.APPLICATION_JSON).build();
+            
         }
     }
     

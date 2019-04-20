@@ -4,7 +4,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
     <head>
 
@@ -22,7 +23,7 @@
 
         <!--Order Summary, Component Stylesheets: Growl, Modal, Date/Time Picker-->
         <link rel="stylesheet" href="./resources/styles/ordersummary.css" />
-        <link rel="stylesheet" href="./resources/notifications/dist/Notifications.unmin.css" />
+        <link rel="stylesheet" href="./resources/notifications/demo/Notifications.css" />
         <link href="./resources/styles/modal.css" rel="stylesheet" />
 
 
@@ -60,15 +61,11 @@
                 startTime();
             };
         </script>
-
-
     </head>
 
     <body>
-
         <!-- Page Content -->
         <section>
-
             <div class="content">
                 <div class="row" style="position:absolute; top:50px; left:50px; margin-bottom:50px; text-align: center; width:100%">
 
@@ -87,40 +84,41 @@
             </div>
             <div class="rowcontent" style="height:580px;overflow-y: scroll;">
                 <div class="container">
-                    <section id="cart"> 
-                        <article class="product">
-                            <header>
-                                <a class="remove">
-                                    <img src="./resources/images/ClassicToastedWesternSandwhiches.jpg" alt="" />
-                                    <h3>Remove</h3>
-                                </a>
-                            </header>
+                    <section id="cart">
+                        <ui:repeat var="foodMenuItem" value="#{hotelStayManagedBean.foodMenuOrderList}" varStatus="status">
+                            <article class="product">
+                                <header>
+                                    <a class="remove">
+                                        <img src="http://zetegral.website/krhgImages/#{foodMenuItem.foodImage}" alt="" />
+                                        <h3>Remove</h3>
+                                    </a>
+                                </header>
 
-                            <div class="summarycontent">
+                                <div class="summarycontent">
+                                    <h1>#{foodMenuItem.foodMenuItemName}</h1>
+                                    #{foodMenuItem.foodMenuItemDescription}
+                                </div>
+                                
+<!--                                <div class="summarycontent">
+                                    
+                                    <h1>Classic Toasted Western Sandwhiches</h1>
 
-                                <h1>Classic Toasted Western Sanwhiches</h1>
+                                    Served With turkey bacon ham and melted cheddar cheese.
 
-                                Served With turkey bacon ham and melted cheddar cheese.
+                                </div>-->
 
-                            </div>
+                                <footer class="summarycontent">
+                                    <span class="qt-minus">-</span>
+                                    <span class="qt">#{hotelStayManagedBean.foodMenuOrder.get(foodMenuItem.foodMenuItemID)}</span>
+                                    <span class="qt-plus">+</span>
+                                    
+                                    <h2 class="full-price">$<script>document.write(#{foodMenuItem.unitPrice * hotelStayManagedBean.foodMenuOrder.get(foodMenuItem.foodMenuItemID)}.toFixed(0));</script></h2>
+                                    <h2 class="price">$<script>document.write(#{foodMenuItem.unitPrice}.toFixed(0));</script></h2>
+                                </footer>
+                            </article>
+                        </ui:repeat>
 
-                            <footer class="summarycontent">
-                                <span class="qt-minus">-</span>
-                                <span class="qt">2</span>
-                                <span class="qt-plus">+</span>
-
-
-                                <h2 class="full-price">
-                                    $18.00
-                                </h2>
-
-                                <h2 class="price">
-                                    $18
-                                </h2>
-                            </footer>
-                        </article>
-
-                        <article class="product">
+<!--                        <article class="product">
                             <header>
                                 <a class="remove">
                                     <img src="./resources/images/LemonRicottaPancakes.jpg" alt="" />
@@ -184,34 +182,24 @@
                                     $60
                                 </h2>
                             </footer>
-                        </article>
-
+                        </article>-->
                     </section>
-
                 </div>
 
                 <footer id="site-footer">
                     <div class="container clearfix">
-
                         <div class="left checkout">
-                            <h2 class="subtotal">Subtotal: $<span>163.96</span></h2>
-                            <h3 class="tax">Taxes (5%): $<span>8.2</span></h3>
+                            <h2 class="subtotal">Subtotal: $<span><script>document.write(#{hotelStayManagedBean.totalPrice}.toFixed(2));</script></span></h2>
+                            <h3 class="tax">Taxes (7%): $<span><script>document.write(#{hotelStayManagedBean.taxes}.toFixed(2));</script></span></h3>
                         </div>
 
                         <div class="right">
-                            <h1 class="total">Total: $<span>177.16</span></h1>
+                            <h1 class="total">Total: $<span><script>document.write(#{hotelStayManagedBean.totalPriceWithTax}.toFixed(2));</script></span></h1>
                             <a class="btn cd-popup-trigger">Checkout</a>
                         </div>
-
                     </div>
                 </footer>
-
-
             </div>
-     
-
-
-
         </section>
 
         <!-- Bootstrap core JavaScript -->
@@ -219,25 +207,34 @@
         <script src="./resources/bootstrap/js/bootstrap.bundle.js"></script>
         <script src="./resources/js/ordersummary.js"></script>
         <script src="./resources/js/modal.js"></script>
-        <script src="./resources/notifications/dist/Notifications.js"></script>
+        <script src="./resources/notifications/demo/Notifications.js"></script>
 
-        <!--modal-->
+        <!--modal-->    
         <div id="modal" class="cd-popup" role="alert">
             <div class="cd-popup-container">
                 <p class="popup-content"> Would you like to place your room service order?</p>
-
-                <ul style="padding-inline-start: 0px
-
-
-                    " class="cd-buttons">
-                    <li><a onclick="" id="roomservice" class="cd-popup-confirm os-btn">Yes</a></li>
-                    <li><a href="#0"  class=" cd-popup-closemodal">No</a></li>
-                </ul>
-                <a href="#0" class="cd-popup-close img-replace">Close</a>
+                <ul style="padding-inline-start: 0px; padding: 0px" class="cd-buttons">
+                    <li>
+                        <h:form id="ordersummaryform">
+                            <h:commandButton id="checkoutorder" action="#{hotelStayManagedBean.checkOutOrder()}" style="display: none" >
+                                <f:ajax/>
+                            </h:commandButton>
+                            <h:commandLink class="cd-popup-confirm os-btn" id="yesbutton" value="Yes" onclick="clickYes()">
+                                <f:ajax execute="@form" render="@none" />
+                            </h:commandLink>
+                        </h:form>
+                    </li>
+                    <li><a href="#0" class="cd-popup-closemodal">No</a></li>
+                </ul>                 
             </div> <!-- cd-popup-container -->
         </div> <!-- cd-popup -->
-
-
+         
+        <script type="text/javascript">
+            function clickYes() {
+                console.log("CLICK YES");
+                var jsfCommandButton = document.getElementById("ordersummaryform:checkoutorder");
+                jsfCommandButton.click();
+            }
+        </script>
     </body>
-
 </html>

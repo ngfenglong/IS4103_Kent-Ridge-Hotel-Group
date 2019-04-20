@@ -21,7 +21,7 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
               integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous" />
 
-        <link rel="stylesheet" href="./resources/notifications/dist/Notifications.unmin.css" />
+        <link rel="stylesheet" href="./resources/notifications/demo/Notifications.css" />
         <link rel="stylesheet" href="./resources/styles/ordersummary.css" />
 
 
@@ -86,7 +86,6 @@
                 </div>
 
                 <div class="rowcontent" style="width:80%;">
-
                     <p style="color: #fff; text-align: center; font-size: 150%;">Press on food item to add it to your cart
                     </p>
                     <div id="accordian" style=" max-height:380px; overflow-y: scroll">
@@ -98,26 +97,25 @@
                                         <ul>
                                             <ui:repeat var="foodMenuItem" value="#{hotelStayManagedBean.breakfastItemList}" varStatus="status">
                                                 <li>
-                                                    <a >
+                                                    <a>
                                                         <div class="row">
-                                                            <div class="col-3"><img height="150px" width="150px" src="http://zetegral.website/krhgImages/#{foodMenuItem.foodImage}"   style="padding: 5px 0px" />
-                                                            </div>
-                                                            <div class="col-8" style="padding-left: 40px;"><span class="itemName">#{foodMenuItem.foodMenuItemName}</span> <span
-                                                                    style="font-weight: 500; font-size:13px">#{foodMenuItem.unitPrice}</span><br />
-                                                                <span
-                                                                    style="font-size: 12px; font-weight:lighter; font-style: italic">#{foodMenuItem.foodMenuItemDescription}</span><br/>
+                                                            <div class="col-3"><img height="150px" width="150px" src="http://zetegral.website/krhgImages/#{foodMenuItem.foodImage}" style="padding: 5px 0px" /></div>
+                                                            <div class="col-8" style="padding-left: 40px;">
+                                                                <span class="itemName">#{foodMenuItem.foodMenuItemName}</span>
+                                                                <span style="font-weight: 500; font-size:13px"><script>document.write(#{foodMenuItem.unitPrice}.toFixed(0));</script></span><br />
+                                                                <span style="font-size: 12px; font-weight:lighter; font-style: italic">#{foodMenuItem.foodMenuItemDescription}</span><br/>
                                                             </div>
 
-                                                        </div>
-                                                        
+                                                        </div>                     
                                                         <footer class="summarycontent">
-                                                            <span class="qt-minus">-</span>
-                                                            <!--<span class="qt">0</span>-->
-                                                            <input class="qt" type="number" id="qt" value="0" disabled="disabled" />
-                                                            <span class="qt-plus">+</span>
-                                                            <!--<button class="btn" onclick="">Add To Cart</button>-->
-                                                            <h:commandButton id="addToCartBtn" class="btn" value="Add To Cart" action="#{hotelStayManagedBean.bookHouseKeeping()}"></h:commandButton>
-                                                                <!--<f:ajax execute="@form" render="@none" />-->
+                                                            <h:form id='breakfastMenuForm'>
+                                                                <span class="qt-minus">-</span>
+                                                                <h:inputText class="qt" id="qty" value="#{hotelStayManagedBean.quantity}" readonly="true" />
+                                                                <span class="qt-plus">+</span>
+                                                                <h:commandButton id="addToCartBtn" class="btn" value="Add To Cart" action="#{hotelStayManagedBean.addToCart(foodMenuItem)}">
+                                                                    <f:ajax execute="qty" render="qty" />
+                                                                </h:commandButton>
+                                                            </h:form>
                                                         </footer>
                                                     </a>
                                                 </li>
@@ -132,19 +130,27 @@
                                     <li><a href="#"><span style="font-weight:bold;">Starters</span></a>
                                         <ul>
                                             <ui:repeat var="foodMenuItem" value="#{hotelStayManagedBean.startersItemList}" varStatus="status">
-                                                <li class="add-new">
+                                                <li>
                                                     <a>
                                                         <div class="row">
                                                             <div class="col-3"><img height="150px" width="150px" src="http://zetegral.website/krhgImages/#{foodMenuItem.foodImage}"   style="padding: 5px 0px" />
                                                             </div>
                                                             <div class="col-8" style="padding-left: 40px;"><span class="itemName">#{foodMenuItem.foodMenuItemName}</span> <span
-                                                                    style="font-weight: 500; font-size:13px">#{foodMenuItem.unitPrice}</span><br />
+                                                                    style="font-weight: 500; font-size:13px"><script>document.write(#{foodMenuItem.unitPrice}.toFixed(0));</script></span><br />
                                                                 <span
                                                                     style="font-size: 12px; font-weight:lighter; font-style: italic">#{foodMenuItem.foodMenuItemDescription}</span><br/>
                                                             </div>
-
                                                         </div>
-
+                                                        <footer class="summarycontent">
+                                                            <h:form id='startersMenuForm'>
+                                                                <span class="qt-minus">-</span>
+                                                                <h:inputText class="qt" id="qty" value="#{hotelStayManagedBean.quantity}" readonly="true" />
+                                                                <span class="qt-plus">+</span>
+                                                                <h:commandButton id="addToCartBtn" class="btn" value="Add To Cart" action="#{hotelStayManagedBean.addToCart(foodMenuItem)}">
+                                                                    <f:ajax execute="qty" render="qty" />
+                                                                </h:commandButton>
+                                                            </h:form>
+                                                        </footer>
                                                     </a>
                                                 </li>
                                             </ui:repeat>
@@ -154,19 +160,27 @@
                                     <li><a href="#"><span style="font-weight:bold;">Sandwiches and Burgers</span></a>
                                         <ul>
                                             <ui:repeat var="foodMenuItem" value="#{hotelStayManagedBean.sandwichesAndBurgersItemList}" varStatus="status">
-                                                <li class="add-new">
+                                                <li>
                                                     <a>
                                                         <div class="row">
                                                             <div class="col-3"><img height="150px" width="150px" src="http://zetegral.website/krhgImages/#{foodMenuItem.foodImage}"   style="padding: 5px 0px" />
                                                             </div>
                                                             <div class="col-8" style="padding-left: 40px;"><span class="itemName">#{foodMenuItem.foodMenuItemName}</span> <span
-                                                                    style="font-weight: 500; font-size:13px">#{foodMenuItem.unitPrice}</span><br />
+                                                                    style="font-weight: 500; font-size:13px"><script>document.write(#{foodMenuItem.unitPrice}.toFixed(0));</script></span><br />
                                                                 <span
                                                                     style="font-size: 12px; font-weight:lighter; font-style: italic">#{foodMenuItem.foodMenuItemDescription}</span><br/>
                                                             </div>
-
                                                         </div>
-
+                                                        <footer class="summarycontent">
+                                                            <h:form id='SandwichesMenuForm'>
+                                                                <span class="qt-minus">-</span>
+                                                                <h:inputText class="qt" id="qty" value="#{hotelStayManagedBean.quantity}" readonly="true" />
+                                                                <span class="qt-plus">+</span>
+                                                                <h:commandButton id="addToCartBtn" class="btn" value="Add To Cart" action="#{hotelStayManagedBean.addToCart(foodMenuItem)}">
+                                                                    <f:ajax execute="qty" render="qty" />
+                                                                </h:commandButton>     
+                                                            </h:form>
+                                                        </footer>
                                                     </a>
                                                 </li>
                                             </ui:repeat>
@@ -176,19 +190,27 @@
                                     <li><a href="#"><span style="font-weight:bold;">Flavours of Asia</span></a>
                                         <ul>
                                             <ui:repeat var="foodMenuItem" value="#{hotelStayManagedBean.asiaItemList}" varStatus="status">
-                                                <li class="add-new">
+                                                <li>
                                                     <a>
                                                         <div class="row">
                                                             <div class="col-3"><img height="150px" width="150px" src="http://zetegral.website/krhgImages/#{foodMenuItem.foodImage}"   style="padding: 5px 0px" />
                                                             </div>
                                                             <div class="col-8" style="padding-left: 40px;"><span class="itemName">#{foodMenuItem.foodMenuItemName}</span> <span
-                                                                    style="font-weight: 500; font-size:13px">#{foodMenuItem.unitPrice}</span><br />
+                                                                    style="font-weight: 500; font-size:13px"><script>document.write(#{foodMenuItem.unitPrice}.toFixed(0));</script></span><br />
                                                                 <span
                                                                     style="font-size: 12px; font-weight:lighter; font-style: italic">#{foodMenuItem.foodMenuItemDescription}</span><br/>
                                                             </div>
-
                                                         </div>
-
+                                                        <div class="summarycontent">
+                                                            <h:form id='asiaMenuForm'>
+                                                                <span class="qt-minus">-</span>
+                                                                <h:inputText class="qt" id="qty" value="#{hotelStayManagedBean.quantity}" readonly="true" />
+                                                                <span class="qt-plus">+</span>
+                                                                <h:commandButton id="addToCartBtn" class="btn" value="Add To Cart" action="#{hotelStayManagedBean.addToCart(foodMenuItem)}">
+                                                                    <f:ajax execute="qty" render="qty" />
+                                                                </h:commandButton>     
+                                                            </h:form>
+                                                        </div>
                                                     </a>
                                                 </li>
                                             </ui:repeat>
@@ -198,19 +220,27 @@
                                     <li><a href="#"><span style="font-weight:bold;">Mains</span></a>
                                         <ul>
                                             <ui:repeat var="foodMenuItem" value="#{hotelStayManagedBean.mainsItemList}" varStatus="status">
-                                                <li class="add-new">
+                                                <li>
                                                     <a>
                                                         <div class="row">
                                                             <div class="col-3"><img height="150px" width="150px" src="http://zetegral.website/krhgImages/#{foodMenuItem.foodImage}"   style="padding: 5px 0px" />
                                                             </div>
                                                             <div class="col-8" style="padding-left: 40px;"><span class="itemName">#{foodMenuItem.foodMenuItemName}</span> <span
-                                                                    style="font-weight: 500; font-size:13px">#{foodMenuItem.unitPrice}</span><br />
+                                                                    style="font-weight: 500; font-size:13px"><script>document.write(#{foodMenuItem.unitPrice}.toFixed(0));</script></span><br />
                                                                 <span
                                                                     style="font-size: 12px; font-weight:lighter; font-style: italic">#{foodMenuItem.foodMenuItemDescription}</span><br/>
                                                             </div>
-
                                                         </div>
-
+                                                        <footer class="summarycontent">
+                                                            <h:form id='mainsMenuForm'>
+                                                                <span class="qt-minus">-</span>
+                                                                <h:inputText class="qt" id="qty" value="#{hotelStayManagedBean.quantity}" readonly="true" />
+                                                                <span class="qt-plus">+</span>
+                                                                <h:commandButton id="addToCartBtn" class="btn" value="Add To Cart" action="#{hotelStayManagedBean.addToCart(foodMenuItem)}">
+                                                                    <f:ajax execute="qty" render="qty" />
+                                                                </h:commandButton>
+                                                            </h:form>
+                                                        </footer>
                                                     </a>
                                                 </li>
                                             </ui:repeat>
@@ -228,19 +258,27 @@
                                 <li><a href="#"><span style="font-weight:bold;">Beverages (Alcohol)</span></a>
                                     <ul>
                                         <ui:repeat var="foodMenuItem" value="#{hotelStayManagedBean.alcoholItemList}" varStatus="status">
-                                            <li class="add-new">
+                                            <li>
                                                 <a>
                                                     <div class="row">
                                                         <div class="col-3"><img height="150px" width="150px" src="http://zetegral.website/krhgImages/#{foodMenuItem.foodImage}"   style="padding: 5px 0px" />
                                                         </div>
                                                         <div class="col-8" style="padding-left: 40px;"><span class="itemName">#{foodMenuItem.foodMenuItemName}</span> <span
-                                                                style="font-weight: 500; font-size:13px">#{foodMenuItem.unitPrice}</span><br />
+                                                                style="font-weight: 500; font-size:13px"><script>document.write(#{foodMenuItem.unitPrice}.toFixed(0));</script></span><br />
                                                             <span
                                                                 style="font-size: 12px; font-weight:lighter; font-style: italic">#{foodMenuItem.foodMenuItemDescription}</span><br/>
                                                         </div>
-
                                                     </div>
-
+                                                    <footer class="summarycontent">
+                                                        <h:form id='alcoholMenuForm'>
+                                                            <span class="qt-minus">-</span>
+                                                            <h:inputText class="qt" id="qty" value="#{hotelStayManagedBean.quantity}" readonly="true" />
+                                                            <span class="qt-plus">+</span>
+                                                            <h:commandButton id="addToCartBtn" class="btn" value="Add To Cart" action="#{hotelStayManagedBean.addToCart(foodMenuItem)}">
+                                                                    <f:ajax execute="qty" render="qty" />
+                                                            </h:commandButton>  
+                                                        </h:form>
+                                                    </footer>
                                                 </a>
                                             </li>
                                         </ui:repeat>
@@ -250,19 +288,27 @@
                                 <li><a href="#"><span style="font-weight:bold;">Beverages (Chilled Juices)</span></a>
                                     <ul>
                                         <ui:repeat var="foodMenuItem" value="#{hotelStayManagedBean.juicesItemList}" varStatus="status">
-                                            <li class="add-new">
+                                            <li>
                                                 <a>
                                                     <div class="row">
                                                         <div class="col-3"><img height="150px" width="150px" src="http://zetegral.website/krhgImages/#{foodMenuItem.foodImage}"   style="padding: 5px 0px" />
                                                         </div>
                                                         <div class="col-8" style="padding-left: 40px;"><span class="itemName">#{foodMenuItem.foodMenuItemName}</span> <span
-                                                                style="font-weight: 500; font-size:13px">#{foodMenuItem.unitPrice}</span><br />
+                                                                style="font-weight: 500; font-size:13px"><script>document.write(#{foodMenuItem.unitPrice}.toFixed(0));</script></span><br />
                                                             <span
                                                                 style="font-size: 12px; font-weight:lighter; font-style: italic">#{foodMenuItem.foodMenuItemDescription}</span><br/>
                                                         </div>
-
                                                     </div>
-
+                                                    <footer class="summarycontent">
+                                                        <h:form id='juicesMenuForm'>
+                                                            <span class="qt-minus">-</span>
+                                                            <h:inputText class="qt" id="qty" value="#{hotelStayManagedBean.quantity}" readonly="true" />
+                                                            <span class="qt-plus">+</span>
+                                                            <h:commandButton id="addToCartBtn" class="btn" value="Add To Cart" action="#{hotelStayManagedBean.addToCart(foodMenuItem)}">
+                                                                    <f:ajax execute="qty" render="qty" />
+                                                            </h:commandButton>           
+                                                        </h:form>
+                                                    </footer>
                                                 </a>
                                             </li>
                                         </ui:repeat>
@@ -272,19 +318,27 @@
                                 <li><a href="#"><span style="font-weight:bold;">Soft Drinks</span></a>
                                     <ul>
                                         <ui:repeat var="foodMenuItem" value="#{hotelStayManagedBean.softDrinksItemList}" varStatus="status">
-                                            <li class="add-new">
+                                            <li>
                                                 <a>
                                                     <div class="row">
                                                         <div class="col-3"><img height="150px" width="150px" src="http://zetegral.website/krhgImages/#{foodMenuItem.foodImage}"   style="padding: 5px 0px" />
                                                         </div>
                                                         <div class="col-8" style="padding-left: 40px;"><span class="itemName">#{foodMenuItem.foodMenuItemName}</span> <span
-                                                                style="font-weight: 500; font-size:13px">#{foodMenuItem.unitPrice}</span><br />
+                                                                style="font-weight: 500; font-size:13px"><script>document.write(#{foodMenuItem.unitPrice}.toFixed(0));</script></span><br />
                                                             <span
                                                                 style="font-size: 12px; font-weight:lighter; font-style: italic">#{foodMenuItem.foodMenuItemDescription}</span><br/>
                                                         </div>
-
                                                     </div>
-
+                                                    <footer class="summarycontent">
+                                                        <h:form id='softDrinksMenuForm'>
+                                                            <span class="qt-minus">-</span>
+                                                            <h:inputText class="qt" id="qty" value="#{hotelStayManagedBean.quantity}" readonly="true" />
+                                                            <span class="qt-plus">+</span>
+                                                            <h:commandButton id="addToCartBtn" class="btn" value="Add To Cart" action="#{hotelStayManagedBean.addToCart(foodMenuItem)}">
+                                                                    <f:ajax execute="qty" render="qty" />
+                                                            </h:commandButton>  
+                                                        </h:form>
+                                                    </footer>
                                                 </a>
                                             </li>
                                         </ui:repeat>
@@ -294,19 +348,27 @@
                                 <li><a href="#"><span style="font-weight:bold;">Coffee</span></a>
                                     <ul>
                                         <ui:repeat var="foodMenuItem" value="#{hotelStayManagedBean.coffeeItemList}" varStatus="status">
-                                            <li class="add-new">
+                                            <li>
                                                 <a>
                                                     <div class="row">
                                                         <div class="col-3"><img height="150px" width="150px" src="http://zetegral.website/krhgImages/#{foodMenuItem.foodImage}"   style="padding: 5px 0px" />
                                                         </div>
                                                         <div class="col-8" style="padding-left: 40px;"><span class="itemName">#{foodMenuItem.foodMenuItemName}</span> <span
-                                                                style="font-weight: 500; font-size:13px">#{foodMenuItem.unitPrice}</span><br />
+                                                                style="font-weight: 500; font-size:13px"><script>document.write(#{foodMenuItem.unitPrice}.toFixed(0));</script></span><br />
                                                             <span
                                                                 style="font-size: 12px; font-weight:lighter; font-style: italic">#{foodMenuItem.foodMenuItemDescription}</span><br/>
                                                         </div>
-
                                                     </div>
-
+                                                    <footer class="summarycontent">
+                                                        <h:form id='coffeeMenuForm'>
+                                                            <span class="qt-minus">-</span>
+                                                            <h:inputText class="qt" id="qty" value="#{hotelStayManagedBean.quantity}" readonly="true" />
+                                                            <span class="qt-plus">+</span>
+                                                            <h:commandButton id="addToCartBtn" class="btn" value="Add To Cart" action="#{hotelStayManagedBean.addToCart(foodMenuItem)}">
+                                                                    <f:ajax execute="qty" render="qty" />
+                                                            </h:commandButton>
+                                                        </h:form>
+                                                    </footer>
                                                 </a>
                                             </li>
                                         </ui:repeat>
@@ -316,17 +378,27 @@
                                 <li><a href="#"><span style="font-weight:bold;">Tea</span></a>
                                     <ul>
                                         <ui:repeat var="foodMenuItem" value="#{hotelStayManagedBean.teaItemList}" varStatus="status">
-                                            <li class="add-new">
+                                            <li>
                                                 <a>
                                                     <div class="row">
                                                         <div class="col-3"><img height="150px" width="150px" src="http://zetegral.website/krhgImages/#{foodMenuItem.foodImage}"   style="padding: 5px 0px" />
                                                         </div>
                                                         <div class="col-8" style="padding-left: 40px;"><span class="itemName">#{foodMenuItem.foodMenuItemName}</span> <span
-                                                                style="font-weight: 500; font-size:13px">#{foodMenuItem.unitPrice}</span><br />
+                                                                style="font-weight: 500; font-size:13px"><script>document.write(#{foodMenuItem.unitPrice}.toFixed(0));</script></span><br />
                                                             <span
                                                                 style="font-size: 12px; font-weight:lighter; font-style: italic">#{foodMenuItem.foodMenuItemDescription}</span><br/>
                                                         </div>
                                                     </div>
+                                                    <footer class="summarycontent">
+                                                        <h:form id='teaMenuForm'>
+                                                            <span class="qt-minus">-</span>
+                                                            <h:inputText class="qt" id="qty" value="#{hotelStayManagedBean.quantity}" readonly="true" />
+                                                            <span class="qt-plus">+</span>
+                                                            <h:commandButton id="addToCartBtn" class="btn" value="Add To Cart" action="#{hotelStayManagedBean.addToCart(foodMenuItem)}">
+                                                                    <f:ajax execute="qty" render="qty" />
+                                                            </h:commandButton>
+                                                        </h:form>
+                                                    </footer>
                                                 </a>
                                             </li>
                                         </ui:repeat>
@@ -335,8 +407,9 @@
                             </ul>
                         </li>
                         </ul>
-                    </div>
-                    <button class="bigBtn" onclick="location.href = 'ordersummary.xhtml';">Go To Cart (<span><h:outputText value="#{hotelStayManagedBean.foodMenuOrder.size()}" /></span> items)</button>
+                    </div>                   
+                    <!--<h:commandButton class="bigBtn" action="ordersummary.xhtml" value="Go To Cart"><span><h:outputText value="" /></span> items</h:commandButton>-->
+                    <button class="bigBtn" onclick="location.href = 'ordersummary.xhtml';">Go To Cart (<span><h:outputText value="#{hotelStayManagedBean.totalQty}" /></span> items)</button>
                 </div>
             </div>
         </section>
@@ -345,7 +418,7 @@
         <script src="./resources/jquery/jquery.min.js"></script>
         <script src="./resources/bootstrap/js/bootstrap.bundle.js"></script>
         <script src="./resources/jquery/accordion.js"></script>
-        <script src="./resources/notifications/dist/Notifications.js"></script>
+        <script src="./resources/notifications/demo/Notifications.js"></script>
         <!--<script src="./resources/js/ordersummary.js"></script>-->
 
         <script type="text/javascript">

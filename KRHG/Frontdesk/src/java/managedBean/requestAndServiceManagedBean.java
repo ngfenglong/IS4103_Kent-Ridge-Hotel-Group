@@ -38,6 +38,62 @@ import sessionBeans.RoomSessionLocal;
 @SessionScoped
 public class requestAndServiceManagedBean implements Serializable {
 
+    /**
+     * @return the isResolved
+     */
+    public boolean isIsResolved() {
+        return isResolved;
+    }
+
+    /**
+     * @param isResolved the isResolved to set
+     */
+    public void setIsResolved(boolean isResolved) {
+        this.isResolved = isResolved;
+    }
+
+    /**
+     * @return the status
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    /**
+     * @return the editMo
+     */
+    public MaintainenceOrder getEditMo() {
+        return editMo;
+    }
+
+    /**
+     * @param editMo the editMo to set
+     */
+    public void setEditMo(MaintainenceOrder editMo) {
+        this.editMo = editMo;
+    }
+
+    /**
+     * @return the dateToCompleteLaundry
+     */
+    public Date getDateToCompleteLaundry() {
+        return dateToCompleteLaundry;
+    }
+
+    /**
+     * @param dateToCompleteLaundry the dateToCompleteLaundry to set
+     */
+    public void setDateToCompleteLaundry(Date dateToCompleteLaundry) {
+        this.dateToCompleteLaundry = dateToCompleteLaundry;
+    }
+
     @EJB
     private LaundrySessionLocal laundrySessionLocal;
     @EJB
@@ -59,6 +115,7 @@ public class requestAndServiceManagedBean implements Serializable {
     private List<LaundryOrder> allLaundryOrders;
     private String laundryRoomNumber;
     private String laundrySpecialRequest;
+    private Date dateToCompleteLaundry;
 
     //Lost and found
     private List<LostAndFoundReport> allLostAndFounds;
@@ -73,6 +130,9 @@ public class requestAndServiceManagedBean implements Serializable {
     private List<MaintainenceOrder> allMaintainenceOrders;
     private String mlocation;
     private String maintainDescription;
+    private MaintainenceOrder editMo;
+    private boolean isResolved;
+    private String status;
 
     //housekeeping
     private List<HouseKeepingOrder> allHousekeepingOrder;
@@ -207,7 +267,7 @@ public class requestAndServiceManagedBean implements Serializable {
         maintainence.setDateReported(new Date());
         maintainence.setDescription(maintainDescription);
         maintainence.setLocation(mlocation);
-        maintainence.setStatus("Unresolve");
+        maintainence.setStatus("Unresolved");
 
         maintainDescription = null;
         mlocation = null;
@@ -271,14 +331,19 @@ public class requestAndServiceManagedBean implements Serializable {
         PrintWriter out = response.getWriter();
 
         HouseKeepingOrder hkOrder = new HouseKeepingOrder();
-
-        hkOrder.setRoom(roomSessionLocal.getRoomByName(hkroom));
-        hkOrder.setSpecialRequest(hkSpecialRequest);
-        hkOrder.setSpecialRequest(hkRequestType);
-        hkOrder.setOrderDateTime(new Date());
-        hkOrder.setStatus("incomplete");
-
-        houseKeepingOrderSessionLocal.createHouseKeepingOrder(hkOrder);
+        try {
+            System.out.println("HKROOM: " + hkroom);
+            hkOrder.setRoom(roomSessionLocal.getRoomByRoomNumber(hkroom));
+            hkOrder.setSpecialRequest(hkSpecialRequest);
+            hkOrder.setRequestType(hkRequestType);
+            hkOrder.setOrderDateTime(new Date());
+            hkOrder.setStatus("Incomplete");
+            hkOrder.setIsSpecialRequest(true);
+            hkOrder.setLevel(getLevel(hkroom));
+            houseKeepingOrderSessionLocal.createHouseKeepingOrder(hkOrder);
+        } catch (Exception e) {
+            
+        }
 
         out.println("<script type=\"text/javascript\">");
         out.println("alert('Housekeeping request created Succesful!');");
@@ -317,7 +382,8 @@ public class requestAndServiceManagedBean implements Serializable {
         LO.setRoom(roomSessionLocal.getRoomByName(laundryRoomNumber));
         LO.setSpecialRequest(laundrySpecialRequest);
         LO.setStatus("Pending");
-
+        LO.setCompleteDateTime(dateToCompleteLaundry);
+        LO.setOrderDateTime(new Date());
         laundrySessionLocal.createLaundryOrder(LO);
 
         HouseKeepingOrder HKo = new HouseKeepingOrder();
@@ -344,7 +410,33 @@ public class requestAndServiceManagedBean implements Serializable {
             return Integer.parseInt(roomnumber.substring(0, 2));
         }
     }
+    
+    public String editMaintainenceOrder(MaintainenceOrder mo) {
+        setEditMo(mo);
+        setMlocation(mo.getLocation());
+        setMaintainDescription(mo.getDescription());
+        setIsResolved(mo.getIsResolved());
+        setStatus(mo.getStatus());
+        return "editMaintenanceOrder.xhtml?faces-redirect=true";
+    }
 
+    public String updateMaintainenceOrder() {
+        try {
+            editMo.setLocation(mlocation);
+            editMo.setDescription(maintainDescription);
+            editMo.setIsResolved(isResolved);
+            editMo.setStatus(status);
+            System.out.println("Status: " + editMo.getStatus());
+            System.out.println("Is resolved: " + editMo.getIsResolved());
+            
+            maintainenceOrderSessionLocal.updateMaintainenceOrder(editMo);
+        } catch (Exception e) {
+            
+        }
+        return "maintenance.xhtml?faces-redirect=true";
+    }
+            
+            
     public String editLostAndFound(LostAndFoundReport LF) {
         editLF = LF;
         setLfContactNumber(LF.getContactNum());
