@@ -17,11 +17,13 @@ import javax.faces.bean.SessionScoped;
 import javax.ejb.EJB;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Formatter;
 import java.util.List;
 import java.util.Properties;
@@ -66,6 +68,7 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
     private String regPassportNum;
 
     private String rpEmail;
+       private String testSt;
 
     //BookingHistory
     private List <RoomBooking> pastBookings;
@@ -196,34 +199,7 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
         return logout();
     }
 
-    public void forgetPassword() throws NoResultException, IOException {
-        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
-        PrintWriter out = response.getWriter();
-
-        Customer tempCust;
-        tempCust = customerSessionLocal.getCustomerByEmail(rpEmail);
-
-        if (tempCust == null) {
-            out.println("<script type=\"text/javascript\">");
-            out.println("alert('Wrong Email is input!');");
-            out.println("</script>");
-        } else {
-            String newPass = new RandomPassword().generateRandomPassword();
-            String emailToSent = tempCust.getEmail();
-
-            customerSessionLocal.changePasword(tempCust, encryptPassword(newPass));
-
-            String msg2 = "Dear User\n\n\n"
-                    + "We have received your password change request. Please click here to enter your new password. Access code: F$%f4syb\n\nSincerely\n\n\n"
-                    + "Kent Ridge Hotels Group";
-            //String msg = "Your password has been reset! Please login with the new password:\n\"" + newPass + "\"";
-            sendEmail(emailToSent, "Reset Password", msg2);
-
-            out.println("<script type=\"text/javascript\">");
-            out.println("alert('New password has been sent');");
-            out.println("</script>");
-        }
-    }
+    
 
     public String logout() {
         String tempName = name;
@@ -261,33 +237,6 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
             confirmPassword = null;
 
             return logout();
-        }
-    }
-
-    public void resetPassword() throws NoResultException, IOException {
-        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
-        PrintWriter out = response.getWriter();
-
-        Customer tempCust;
-
-        tempCust = customerSessionLocal.getCustomerByEmail(email);
-
-        if (tempCust == null) {
-            out.println("<script type=\"text/javascript\">");
-            out.println("alert('Wrong Email or Username is input!');");
-            out.println("</script>");
-        } else {
-            String newPass = new RandomPassword().generateRandomPassword();
-            String email = tempCust.getEmail();
-
-            customerSessionLocal.changePasword(tempCust, encryptPassword(newPass));
-
-            String msg = "Your password has been reset! Please login with the new password:\n\"" + newPass + "\"";
-            sendEmail(email, "Reset Password", msg);
-
-            out.println("<script type=\"text/javascript\">");
-            out.println("alert('New password has been sent');");
-            out.println("</script>");
         }
     }
 
@@ -349,6 +298,68 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
         return roomBookingsByTransaction;
     }
 
+
+    public void forgetPassword() throws NoResultException, IOException {
+        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        PrintWriter out = response.getWriter();
+
+        Customer tempCust;
+        tempCust = customerSessionLocal.getCustomerByEmail(rpEmail);
+
+        if (tempCust == null) {
+            out.println("<script type=\"text/javascript\">");
+            out.println("alert('Wrong Email is input!');");
+            out.println("</script>");
+        } else {
+            String newPass = new RandomPassword().generateRandomPassword();
+            String emailToSent = tempCust.getEmail();
+            String encodedID = URLEncoder.encode(tempCust.getCustomerID().toString(), "UTF-8");
+            String base64encodedString = Base64.getEncoder().encodeToString(
+                    tempCust.getCustomerID().toString().getBytes("utf-8"));
+            tempCust.setCanResetPassword(true);
+            customerSessionLocal.updateCustomer(tempCust);
+
+            String msg2 = "Dear User\n\n\n"
+                    + "We have received your password change request. Please click here to enter your new password. Access code: F$%f4syb\n\nSincerely\n\n\n"
+                    + "Kent Ridge Hotels Group";
+            //String msg = "Your password has been reset! Please login with the new password:\n\"" + newPass + "\"";
+            sendForgetPasswordEmail(emailToSent, "Reset Password", tempCust.getFirstName() + " " + tempCust.getLastName(), base64encodedString);
+
+            out.println("<script type=\"text/javascript\">");
+            out.println("alert('A reset password email has been sent to user!');");
+            out.println("</script>");
+        }
+    }
+	
+	 public void resetPassword() throws NoResultException, IOException {
+        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        PrintWriter out = response.getWriter();
+
+        Customer tempCust;
+
+        tempCust = customerSessionLocal.getCustomerByEmail(email);
+
+        if (tempCust == null) {
+            out.println("<script type=\"text/javascript\">");
+            out.println("alert('Wrong Email or Username is input!');");
+            out.println("</script>");
+        } else {
+            String newPass = new RandomPassword().generateRandomPassword();
+            String email = tempCust.getEmail();
+
+            customerSessionLocal.changePasword(tempCust, encryptPassword(newPass));
+
+            String msg = "Your password has been reset! Please login with the new password:\n\"" + newPass + "\"";
+            sendForgetPasswordEmail(email, "Reset Password", tempCust.getFirstName() + " " + tempCust.getLastName(), tempCust.getCustomerID().toString());
+
+            out.println("<script type=\"text/javascript\">");
+            out.println("alert('New password has been sent');");
+            out.println("</script>");
+        }
+    }
+	
+	
+	
     public static void sendEmail(String recipient, String subject, String msg) {
 
         String username = "automessage.kentridgehotelgroup@gmail.com";
@@ -375,161 +386,161 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
                     InternetAddress.parse(recipient));
             message.setSubject(subject);
             message.setText(msg);
-            message.setContent("<body>\n" +
-"\n" +
-"<div class=\"super_container\">\n" +
-"	\n" +
-"	<!-- Header -->\n" +
-"\n" +
-"	<header class=\"header\">\n" +
-"		<div class=\"header_content d-flex flex-row align-items-center justify-content-start\">\n" +
-"			<div class=\"logo\"><a href=\"#\">KRHG</a></div>\n" +
-"			<div class=\"ml-auto d-flex flex-row align-items-center justify-content-start\">\n" +
-"				<nav class=\"main_nav\">\n" +
-"					<ul class=\"d-flex flex-row align-items-start justify-content-start\">\n" +
-"						<li><a href=\"index.html\">Home</a></li>\n" +
-"						<li><a href=\"about.html\">About us</a></li>\n" +
-"						<li><a href=\"hotels.html\">Hotels</a></li>\n" +
-"						<li><a href=\"contact.html\">Contact us</a></li>\n" +
-"					</ul>\n" +
-"				</nav>\n" +
-"				<div class=\"book_button\"><a href=\"login.html\">Login/Signup</a></div>\n" +
-"\n" +
-"\n" +
-"				<!-- Hamburger Menu -->\n" +
-"				<div class=\"hamburger\"><i class=\"fa fa-bars\" aria-hidden=\"true\"></i></div>\n" +
-"			</div>\n" +
-"		</div>\n" +
-"	</header>\n" +
-"\n" +
-"	<!-- Menu -->\n" +
-"\n" +
-"	<div class=\"menu trans_400 d-flex flex-column align-items-end justify-content-start\">\n" +
-"		<div class=\"menu_close\"><i class=\"fa fa-times\" aria-hidden=\"true\"></i></div>\n" +
-"		<div class=\"menu_content\">\n" +
-"			<nav class=\"menu_nav text-right\">\n" +
-"				<ul>\n" +
-"					<li><a href=\"index.html\">Home</a></li>\n" +
-"					<li><a href=\"about.html\">About us</a></li>\n" +
-"					<li><a href=\"hotels.html\">Hotels</a></li>\n" +
-"					<li><a href=\"contact.html\">Contact us</a></li>\n" +
-"				</ul>\n" +
-"			</nav>\n" +
-"		</div>\n" +
-"		<div class=\"menu_extra\">\n" +
-"			<div class=\"menu_book text-right\"><a href=\"#\">Reserve Now</a></div>\n" +
-"			<div class=\"menu_phone d-flex flex-row align-items-center justify-content-center\">\n" +
-"				<img src=\"images/phone-2.png\" alt=\"\">\n" +
-"				<span>1234 5678</span>\n" +
-"			</div>\n" +
-"		</div>\n" +
-"	</div>\n" +
-"\n" +
-"	<!-- Home -->\n" +
-"\n" +
-"	<div class=\"home\">\n" +
-"		<div class=\"background_image\" style=\"background-image:url(images/about.jpg)\"></div>\n" +
-"		<div class=\"home_container\">\n" +
-"			<div class=\"container\">\n" +
-"				<div class=\"row\">\n" +
-"					<div class=\"col\">\n" +
-"						<div class=\"home_content text-center\">\n" +
-"							<div class=\"home_title\">About us</div>\n" +
-"\n" +
-"						</div>\n" +
-"					</div>\n" +
-"				</div>\n" +
-"			</div>\n" +
-"		</div>\n" +
-"	</div>\n" +
-"\n" +
-"	<!-- About -->\n" +
-"\n" +
-"	<div class=\"about\">\n" +
-"		<div class=\"container\">\n" +
-"			<div class=\"row\">\n" +
-"				<div class=\"col-lg-6\">\n" +
-"					<div class=\"about_title\"><h2>Welcome to Kent Ridge Hotel Group</h2></div>\n" +
-"				</div>\n" +
-"			</div>\n" +
-"			<div class=\"row about_row\">\n" +
-"				\n" +
-"				<!-- About Content -->\n" +
-"				<div class=\"col-lg-6\">\n" +
-"					<div class=\"about_content\">\n" +
-"						<div class=\"about_text\">\n" +
-"							Kent Ridge Hotels Group opened its first hotel, the now Kent Ridge Central in Ang Mo Kio in 2000. We have built a reputation over the years to provide premium service quality and affordable accommodation. Over the years, we have grown from strength to strength, opening more hotels islandwide, and opening the Group’s new flagship, Kent Ridge Grand in the heart of Singapore’s Shopping Belt, Orchard Road, in 2012. Today, the Group operates 10 hotels around Singapore and the Kent Ridge brand has become well established in the local hospitality industry.\n" +
-"									Most of our hotels are strategically located in the City, or in major regional centers of Singapore, and are easily accessible by road, buses or the MRT system. Our hotels are also located near major tourist attractions and convention centers. Equipped with good price, locations, service, cleanliness and a hassle-free booking experience, Kent Ridge Hotels will continue to be the ideal choice for travelers providing comfort to all.\n" +
-"									\n" +
-"						</div>\n" +
-"						<div class=\"about_sig\"><img src=\"images/sig.png\" alt=\"\"></div>\n" +
-"					</div>\n" +
-"				</div>\n" +
-"\n" +
-"				<!-- About Images -->\n" +
-"				<div class=\"col-lg-6\">\n" +
-"					<div class=\"about_images d-flex flex-row align-items-start justify-content-between flex-wrap\">\n" +
-"						<img src=\"images/about_1.png\" alt=\"\">\n" +
-"						<img src=\"images/about_2.png\" alt=\"\">\n" +
-"						<img src=\"images/about_3.png\" alt=\"\">\n" +
-"					</div>\n" +
-"				</div>\n" +
-"			</div>\n" +
-"		</div>\n" +
-"	</div>\n" +
-"\n" +
-"	<!-- Split Section Right -->\n" +
-"\n" +
-"	<div class=\"split_section_right container_custom\">\n" +
-"		<div class=\"container\">\n" +
-"			<div class=\"row row-xl-eq-height\">\n" +
-"				\n" +
-"				<div class=\"col-xl-6 order-xl-1 order-2\">\n" +
-"					<div class=\"split_section_image\">\n" +
-"						<div class=\"background_image\" style=\"background-image:url(images/milestones.jpg)\"></div>\n" +
-"					</div>\n" +
-"				</div>\n" +
-"\n" +
-"				<div class=\"col-xl-6 order-xl-2 order-1\">\n" +
-"					<div class=\"split_section_right_content\">\n" +
-"						<div class=\"split_section_title\"><h2>Mission</h2></div>\n" +
-"						<div class=\"split_section_text\">\n" +
-"							<p>The mission of Kent Ridge Hotels Group is to provide the highest level of hospitality services to make the stay of our guests enjoyable. We aim to make all KRHG hotels a pleasant place to stay.</p>\n" +
-"						</div>\n" +
-"\n" +
-"					</div>\n" +
-"				</div>\n" +
-"\n" +
-"			</div>\n" +
-"		</div>\n" +
-"	</div>\n" +
-"\n" +
-"	<!-- Split Section Left -->\n" +
-"\n" +
-"	<div class=\"split_section_left container_custom\">\n" +
-"		<div class=\"container\">\n" +
-"			<div class=\"row\">\n" +
-"				<div class=\"col-xl-6\">\n" +
-"					<div class=\"split_section_left_content\">\n" +
-"						<div class=\"split_section_title\"><h2>Vision</h2></div>\n" +
-"						<div class=\"split_section_text\">\n" +
-"							<p>Our vision is to apply and set the highest standards of service quality. We aim to use and constantly introduce technologically advanced processes to maintain our competitive advantage, whilst still remaining true to our core value of service quality. </p>\n" +
-"						</div>\n" +
-"\n" +
-"\n" +
-"					</div>\n" +
-"				</div>\n" +
-"\n" +
-"				<!-- Loaders Image -->\n" +
-"				<div class=\"col-xl-6\">\n" +
-"					<div class=\"split_section_image split_section_left_image\">\n" +
-"						<div class=\"background_image\" style=\"background-image:url(images/loaders.jpg)\"></div>\n" +
-"					</div>\n" +
-"				</div>\n" +
-"\n" +
-"			</div>\n" +
-"		</div>\n" +
-"	</div>","text/html");
+            message.setContent("<body>\n"
+                    + "\n"
+                    + "<div class=\"super_container\">\n"
+                    + "	\n"
+                    + "	<!-- Header -->\n"
+                    + "\n"
+                    + "	<header class=\"header\">\n"
+                    + "		<div class=\"header_content d-flex flex-row align-items-center justify-content-start\">\n"
+                    + "			<div class=\"logo\"><a href=\"#\">KRHG</a></div>\n"
+                    + "			<div class=\"ml-auto d-flex flex-row align-items-center justify-content-start\">\n"
+                    + "				<nav class=\"main_nav\">\n"
+                    + "					<ul class=\"d-flex flex-row align-items-start justify-content-start\">\n"
+                    + "						<li><a href=\"index.html\">Home</a></li>\n"
+                    + "						<li><a href=\"about.html\">About us</a></li>\n"
+                    + "						<li><a href=\"hotels.html\">Hotels</a></li>\n"
+                    + "						<li><a href=\"contact.html\">Contact us</a></li>\n"
+                    + "					</ul>\n"
+                    + "				</nav>\n"
+                    + "				<div class=\"book_button\"><a href=\"login.html\">Login/Signup</a></div>\n"
+                    + "\n"
+                    + "\n"
+                    + "				<!-- Hamburger Menu -->\n"
+                    + "				<div class=\"hamburger\"><i class=\"fa fa-bars\" aria-hidden=\"true\"></i></div>\n"
+                    + "			</div>\n"
+                    + "		</div>\n"
+                    + "	</header>\n"
+                    + "\n"
+                    + "	<!-- Menu -->\n"
+                    + "\n"
+                    + "	<div class=\"menu trans_400 d-flex flex-column align-items-end justify-content-start\">\n"
+                    + "		<div class=\"menu_close\"><i class=\"fa fa-times\" aria-hidden=\"true\"></i></div>\n"
+                    + "		<div class=\"menu_content\">\n"
+                    + "			<nav class=\"menu_nav text-right\">\n"
+                    + "				<ul>\n"
+                    + "					<li><a href=\"index.html\">Home</a></li>\n"
+                    + "					<li><a href=\"about.html\">About us</a></li>\n"
+                    + "					<li><a href=\"hotels.html\">Hotels</a></li>\n"
+                    + "					<li><a href=\"contact.html\">Contact us</a></li>\n"
+                    + "				</ul>\n"
+                    + "			</nav>\n"
+                    + "		</div>\n"
+                    + "		<div class=\"menu_extra\">\n"
+                    + "			<div class=\"menu_book text-right\"><a href=\"#\">Reserve Now</a></div>\n"
+                    + "			<div class=\"menu_phone d-flex flex-row align-items-center justify-content-center\">\n"
+                    + "				<img src=\"images/phone-2.png\" alt=\"\">\n"
+                    + "				<span>1234 5678</span>\n"
+                    + "			</div>\n"
+                    + "		</div>\n"
+                    + "	</div>\n"
+                    + "\n"
+                    + "	<!-- Home -->\n"
+                    + "\n"
+                    + "	<div class=\"home\">\n"
+                    + "		<div class=\"background_image\" style=\"background-image:url(images/about.jpg)\"></div>\n"
+                    + "		<div class=\"home_container\">\n"
+                    + "			<div class=\"container\">\n"
+                    + "				<div class=\"row\">\n"
+                    + "					<div class=\"col\">\n"
+                    + "						<div class=\"home_content text-center\">\n"
+                    + "							<div class=\"home_title\">About us</div>\n"
+                    + "\n"
+                    + "						</div>\n"
+                    + "					</div>\n"
+                    + "				</div>\n"
+                    + "			</div>\n"
+                    + "		</div>\n"
+                    + "	</div>\n"
+                    + "\n"
+                    + "	<!-- About -->\n"
+                    + "\n"
+                    + "	<div class=\"about\">\n"
+                    + "		<div class=\"container\">\n"
+                    + "			<div class=\"row\">\n"
+                    + "				<div class=\"col-lg-6\">\n"
+                    + "					<div class=\"about_title\"><h2>Welcome to Kent Ridge Hotel Group</h2></div>\n"
+                    + "				</div>\n"
+                    + "			</div>\n"
+                    + "			<div class=\"row about_row\">\n"
+                    + "				\n"
+                    + "				<!-- About Content -->\n"
+                    + "				<div class=\"col-lg-6\">\n"
+                    + "					<div class=\"about_content\">\n"
+                    + "						<div class=\"about_text\">\n"
+                    + "							Kent Ridge Hotels Group opened its first hotel, the now Kent Ridge Central in Ang Mo Kio in 2000. We have built a reputation over the years to provide premium service quality and affordable accommodation. Over the years, we have grown from strength to strength, opening more hotels islandwide, and opening the Group’s new flagship, Kent Ridge Grand in the heart of Singapore’s Shopping Belt, Orchard Road, in 2012. Today, the Group operates 10 hotels around Singapore and the Kent Ridge brand has become well established in the local hospitality industry.\n"
+                    + "									Most of our hotels are strategically located in the City, or in major regional centers of Singapore, and are easily accessible by road, buses or the MRT system. Our hotels are also located near major tourist attractions and convention centers. Equipped with good price, locations, service, cleanliness and a hassle-free booking experience, Kent Ridge Hotels will continue to be the ideal choice for travelers providing comfort to all.\n"
+                    + "									\n"
+                    + "						</div>\n"
+                    + "						<div class=\"about_sig\"><img src=\"images/sig.png\" alt=\"\"></div>\n"
+                    + "					</div>\n"
+                    + "				</div>\n"
+                    + "\n"
+                    + "				<!-- About Images -->\n"
+                    + "				<div class=\"col-lg-6\">\n"
+                    + "					<div class=\"about_images d-flex flex-row align-items-start justify-content-between flex-wrap\">\n"
+                    + "						<img src=\"images/about_1.png\" alt=\"\">\n"
+                    + "						<img src=\"images/about_2.png\" alt=\"\">\n"
+                    + "						<img src=\"images/about_3.png\" alt=\"\">\n"
+                    + "					</div>\n"
+                    + "				</div>\n"
+                    + "			</div>\n"
+                    + "		</div>\n"
+                    + "	</div>\n"
+                    + "\n"
+                    + "	<!-- Split Section Right -->\n"
+                    + "\n"
+                    + "	<div class=\"split_section_right container_custom\">\n"
+                    + "		<div class=\"container\">\n"
+                    + "			<div class=\"row row-xl-eq-height\">\n"
+                    + "				\n"
+                    + "				<div class=\"col-xl-6 order-xl-1 order-2\">\n"
+                    + "					<div class=\"split_section_image\">\n"
+                    + "						<div class=\"background_image\" style=\"background-image:url(images/milestones.jpg)\"></div>\n"
+                    + "					</div>\n"
+                    + "				</div>\n"
+                    + "\n"
+                    + "				<div class=\"col-xl-6 order-xl-2 order-1\">\n"
+                    + "					<div class=\"split_section_right_content\">\n"
+                    + "						<div class=\"split_section_title\"><h2>Mission</h2></div>\n"
+                    + "						<div class=\"split_section_text\">\n"
+                    + "							<p>The mission of Kent Ridge Hotels Group is to provide the highest level of hospitality services to make the stay of our guests enjoyable. We aim to make all KRHG hotels a pleasant place to stay.</p>\n"
+                    + "						</div>\n"
+                    + "\n"
+                    + "					</div>\n"
+                    + "				</div>\n"
+                    + "\n"
+                    + "			</div>\n"
+                    + "		</div>\n"
+                    + "	</div>\n"
+                    + "\n"
+                    + "	<!-- Split Section Left -->\n"
+                    + "\n"
+                    + "	<div class=\"split_section_left container_custom\">\n"
+                    + "		<div class=\"container\">\n"
+                    + "			<div class=\"row\">\n"
+                    + "				<div class=\"col-xl-6\">\n"
+                    + "					<div class=\"split_section_left_content\">\n"
+                    + "						<div class=\"split_section_title\"><h2>Vision</h2></div>\n"
+                    + "						<div class=\"split_section_text\">\n"
+                    + "							<p>Our vision is to apply and set the highest standards of service quality. We aim to use and constantly introduce technologically advanced processes to maintain our competitive advantage, whilst still remaining true to our core value of service quality. </p>\n"
+                    + "						</div>\n"
+                    + "\n"
+                    + "\n"
+                    + "					</div>\n"
+                    + "				</div>\n"
+                    + "\n"
+                    + "				<!-- Loaders Image -->\n"
+                    + "				<div class=\"col-xl-6\">\n"
+                    + "					<div class=\"split_section_image split_section_left_image\">\n"
+                    + "						<div class=\"background_image\" style=\"background-image:url(images/loaders.jpg)\"></div>\n"
+                    + "					</div>\n"
+                    + "				</div>\n"
+                    + "\n"
+                    + "			</div>\n"
+                    + "		</div>\n"
+                    + "	</div>", "text/html");
 
             Transport.send(message);
 
@@ -537,6 +548,280 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
             throw new RuntimeException(e);
         }
     }
+	
+	
+	 public static void sendForgetPasswordEmail(String recipient, String subject, String userName, String custID) {
+
+        String username = "automessage.kentridgehotelgroup@gmail.com";
+        String password = "krhg1234";
+
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+
+        Session session = Session.getInstance(props,
+                new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
+
+        try {
+
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("Do-not-reply@KentRidgeHotelGroup.com"));
+            message.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse(recipient));
+            message.setSubject(subject);
+            message.setContent("<!DOCTYPE html>\n"
+                    + "<html>\n"
+                    + "    <head>\n"
+                    + "  <title>Reset Password</title>\n"
+                    + "  <meta http-equiv=\"Content-Type\" content=\"text/html\"; charset=utf-8\">\n"
+                    + "  <meta name=\"viewport\" content=\"width=device-width\">\n"
+                    + "</head>\n"
+                    + "\n"
+                    + "<body style=\"margin: 0\">\n"
+                    + "  <style type=\"text/css\">\n"
+                    + "    body {\n"
+                    + "      margin: 0;\n"
+                    + "      }\n"
+                    + "      h1 a:hover {\n"
+                    + "      font-size: 30px; color: #333;\n"
+                    + "      }\n"
+                    + "      h1 a:active {\n"
+                    + "      font-size: 30px; color: #333;\n"
+                    + "      }\n"
+                    + "      h1 a:visited {\n"
+                    + "      font-size: 30px; color: #333;\n"
+                    + "      }\n"
+                    + "      a:hover {\n"
+                    + "      text-decoration: none;\n"
+                    + "      }\n"
+                    + "      a:active {\n"
+                    + "      text-decoration: none;\n"
+                    + "      }\n"
+                    + "      a:visited {\n"
+                    + "      text-decoration: none;\n"
+                    + "      }\n"
+                    + "      .button__text:hover {\n"
+                    + "      color: #fff; text-decoration: none;\n"
+                    + "      }\n"
+                    + "      .button__text:active {\n"
+                    + "      color: #fff; text-decoration: none;\n"
+                    + "      }\n"
+                    + "      .button__text:visited {\n"
+                    + "      color: #fff; text-decoration: none;\n"
+                    + "      }\n"
+                    + "      a:hover {\n"
+                    + "      color: #080e66;\n"
+                    + "      }\n"
+                    + "      a:active {\n"
+                    + "      color: #080e66;\n"
+                    + "      }\n"
+                    + "      a:visited {\n"
+                    + "      color: #080e66;\n"
+                    + "      }\n"
+                    + "      @media (max-width: 600px) {\n"
+                    + "        .container {\n"
+                    + "          width: 94% !important;\n"
+                    + "        }\n"
+                    + "        .main-action-cell {\n"
+                    + "          float: none !important; margin-right: 0 !important;\n"
+                    + "        }\n"
+                    + "        .secondary-action-cell {\n"
+                    + "          text-align: center; width: 100%;\n"
+                    + "        }\n"
+                    + "        .header {\n"
+                    + "          margin-top: 20px !important; margin-bottom: 2px !important;\n"
+                    + "        }\n"
+                    + "        .shop-name__cell {\n"
+                    + "          display: block;\n"
+                    + "        }\n"
+                    + "        .order-number__cell {\n"
+                    + "          display: block; text-align: left !important; margin-top: 20px;\n"
+                    + "        }\n"
+                    + "        .button {\n"
+                    + "          width: 100%;\n"
+                    + "        }\n"
+                    + "        .or {\n"
+                    + "          margin-right: 0 !important;\n"
+                    + "        }\n"
+                    + "        .apple-wallet-button {\n"
+                    + "          text-align: center;\n"
+                    + "        }\n"
+                    + "        .customer-info__item {\n"
+                    + "          display: block; width: 100% !important;\n"
+                    + "        }\n"
+                    + "        .spacer {\n"
+                    + "          display: none;\n"
+                    + "        }\n"
+                    + "        .subtotal-spacer {\n"
+                    + "          display: none;\n"
+                    + "        }\n"
+                    + "      }\n"
+                    + "      .button_a {\n"
+                    + "  background-color: #080e66;\n"
+                    + "  border: none;\n"
+                    + "  color: white;\n"
+                    + "  padding: 5px 10px;\n"
+                    + "  text-align: center;\n"
+                    + "  text-decoration: none;\n"
+                    + "  display: inline-block;\n"
+                    + "  font-size: 16px;\n"
+                    + "  margin: 4px 2px;\n"
+                    + "  cursor: pointer;\n"
+                    + "}\n"
+                    + ".button_a:hover {\n"
+                    + "      color: #080e66;\n"
+                    + "      }\n"
+                    + "      .button_a:active {\n"
+                    + "      color: #080e66;\n"
+                    + "      }\n"
+                    + "\n"
+                    + "  </style>\n"
+                    + "  <table class=\"body\" style=\"border-collapse: collapse; border-spacing: 0; height: 100% !important; width: 100% !important\">\n"
+                    + "    <tr>\n"
+                    + "      <td style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif\">\n"
+                    + "        <table class=\"header row\" style=\"border-collapse: collapse; border-spacing: 0; margin: 40px 0 20px; width: 100%\">\n"
+                    + "          <tr>\n"
+                    + "            <td class=\"header__cell\" style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif\">\n"
+                    + "              <center>\n"
+                    + "                <table class=\"container\" style=\"border-collapse: collapse; border-spacing: 0; margin: 0 auto; text-align: left; width: 560px\">\n"
+                    + "                  <tr>\n"
+                    + "                    <td style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif\">\n"
+                    + "                      <table class=\"row\" style=\"border-collapse: collapse; border-spacing: 0; width: 100%\">\n"
+                    + "                        <tr>\n"
+                    + "                          <td class=\"shop-name__cell\" style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; text-align: -webkit-center;\"\" >\n"
+                    + "                            <img src=\"http://zetegral.website/krhgImages/KRHGblack.png\" width=\"240px\">\n"
+                    + "                          </td>\n"
+                    + "                        </tr>\n"
+                    + "                      </table>\n"
+                    + "                    </td>\n"
+                    + "                  </tr>\n"
+                    + "                </table>\n"
+                    + "              </center>\n"
+                    + "            </td>\n"
+                    + "          </tr>\n"
+                    + "        </table>\n"
+                    + "\n"
+                    + "        <br><br>\n"
+                    + "        \n"
+                    + "        <table class=\"row content\" style=\"border-collapse: collapse; border-spacing: 0; width: 100%\">\n"
+                    + "          <tr>\n"
+                    + "            <td class=\"content__cell\" style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; padding-bottom: 40px\">\n"
+                    + "              <center>\n"
+                    + "                <table class=\"container\" style=\"border-collapse: collapse; border-spacing: 0; margin: 0 auto; text-align: left; width: 560px\">\n"
+                    + "                  <tr>\n"
+                    + "                    <td style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif\">\n"
+                    + "                      <h2 style=\"font-size: 24px; font-weight: normal; margin: 0 0 10px\">Dear " + userName + ",</h2>\n"
+                    + "\n"
+                    + "                      <p style=\"color: #777; font-size: 14px; line-height: 150%; margin: 0\">\n"
+                    + "                      We have sent you this email in response to your request to reset your password on Kent Ridge Hotel webpage.\n"
+                    + "                      After you reset your password, your old password will be out of use with immediate effect.\n"
+                    + "                      <br><br>\n"
+                    + "                      We recommend that you keep your password secure and not share it with anyone.\n"
+                    + "                      If you feel your password has been compromised, you can change it by going to our Kent Ridge Hotel webpage's MyProfile link.\n"
+                    + "                      <br><br>\n"
+                    + "                      Please click on the button to reset your password.</p>\n"
+                    + "                      <table class=\"row actions\" style=\"border-collapse: collapse; border-spacing: 0; margin-top: 20px; width: 100%\">\n"
+                    + "                        <tr>\n"
+                    + "                          <td class=\"actions__cell\" style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif\">\n"
+                    + "                            <table class=\"button main-action-cell\" style=\"border-collapse: collapse; border-spacing: 0; float: right; margin-right: 15px\">\n"
+                    + "                              <tr>\n"
+                    + "                                <td class=\"button__cell\" style=\"background: #080e66; border-radius: 4px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; padding: 12px 15px; text-align: center\"\n"
+                    + "                                  align=\"center\" bgcolor=\"#080e66\">\n"
+                    + "									<form action=\"http://localhost:38201/KRHG-war/resetPassword.xhtml?userID=" + custID + "\" method=\"post\" enctype=\"multipart/form-data\" id=\"MyUploadForm\">\n"
+                    + "										<input type=\"submit\" value=\"Reset my Password\" class=\"button_a\" />\n"
+                    + "								\n"
+                    + "									</form>\n"
+                    + "								  \n"
+                    + "                                </td>\n"
+                    + "                              </tr>\n"
+                    + "                            </table>\n"
+                    + "                          </td>\n"
+                    + "                        </tr>\n"
+                    + "                      </table>\n"
+                    + "                    </td>\n"
+                    + "                  </tr>\n"
+                    + "                </table>\n"
+                    + "              </center>\n"
+                    + "            </td>\n"
+                    + "          </tr>\n"
+                    + "        </table>\n"
+                    + "\n"
+                    + "        <table class=\"container\" style=\"border-collapse: collapse; border-spacing: 0; margin: 0 auto; text-align: left; width: 560px\">\n"
+                    + "            <tr>\n"
+                    + "              <td style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif\">\n"
+                    + "                <p class=\"disclaimer__subtext\" style=\"color: #999; font-size: 14px; line-height: 150%; margin: 0\">If you have any questions, feel free to contact us at\n"
+                    + "                  <a href=\"#\" style=\"color: #080e66; font-size: 14px; text-decoration: none\">contact@KRHG.com</a>\n"
+                    + "                </p>\n"
+                    + "              </td>\n"
+                    + "            </tr>\n"
+                    + "          </table>\n"
+                    + "       \n"
+                    + "		\n"
+                    + "		 <table class=\"row section\" style=\"border-collapse: collapse; border-spacing: 0; border-top-color: #e5e5e5; border-top-style: solid; border-top-width: 1px; width: 100%\">\n"
+                    + "          <tr>\n"
+                    + "            <td class=\"section__cell\" style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; padding: 40px 0\">\n"
+                    + "              <center>\n"
+                    + "\n"
+                    + "                <table class=\"container\" style=\"border-collapse: collapse; border-spacing: 0; margin: 0 auto; text-align: left; width: 560px\">\n"
+                    + "                  <tr>\n"
+                    + "                    <td style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif\">\n"
+                    + "                      <table class=\"row\" style=\"border-collapse: collapse; border-spacing: 0; width: 100%\">\n"
+                    + "                        <tr class=\"order-list__item order-list__item--single\" style=\"border-bottom-color: #e5e5e5; border-bottom-style: none !important; border-bottom-width: 1px; width: 100%\">\n"
+                    + "                          <td class=\"order-list__item__cell\" style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; padding: 0\">\n"
+                    + "                            <table style=\"border-collapse: collapse; border-spacing: 0\">\n"
+                    + "                              <td style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif\">\n"
+                    + "                                <img src=\"http://zetegral.website/krhgImages/KRHGblack.png\" align=\"left\" width=\"130\" height=\"100\" class=\"order-list__product-image\">\n"
+                    + "                              </td>\n"
+                    + "                              <td class=\"order-list__product-description-cell\" style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; width: 100%\"> \n"
+                    + "                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n"
+                    + "                                <span class=\"order-list__item-title\" style=\"color: rgb(0, 0, 0); font-size: 10px; font-weight: 600; line-height: 1.4\">Sincerely,</span>\n"
+                    + "                                <br>\n"
+                    + "                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n"
+                    + "                                <span class=\"order-list__item-title\" style=\"color: rgb(0, 0, 0); font-size: 10px; font-weight: 600; line-height: 1.4\">Kent Ridge Hotel Group</span>\n"
+                    + "                                <br>\n"
+                    + "                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n"
+                    + "                                <span class=\"order-list__item-title\" style=\"color: rgb(0, 0, 0); font-size: 10px; font-weight: 600; line-height: 1.4\">+65 62610 810</span>\n"
+                    + "                                <span class=\"order-list__item-title\" style=\"color: rgb(250, 0, 0); font-size: 10px; font-weight: 600; line-height: 1.4\">|</span>\n"
+                    + "                                <span class=\"order-list__item-title\" style=\"color: rgb(0, 0, 0); font-size: 10px; font-weight: 600; line-height: 1.4\">contact@krhg.com</span>\n"
+                    + "                                <br>\n"
+                    + "                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n"
+                    + "                                <span class=\"order-list__item-title\" style=\"color: rgb(0, 0, 0); font-size: 10px; font-weight: 600; line-height: 1.4\">Kent Ridge Grand</span>\n"
+                    + "                                <span class=\"order-list__item-title\" style=\"color: rgb(250, 0, 0); font-size: 10px; font-weight: 600; line-height: 1.4\">|</span>\n"
+                    + "                                <span class=\"order-list__item-title\" style=\"color: rgb(0, 0, 0); font-size: 10px; font-weight: 600; line-height: 1.4\">63 Somerset Road, Singapore 238163</span>\n"
+                    + "                                                               <br />\n"
+                    + "                              </td>\n"
+                    + "                            </table>\n"
+                    + "                          </td>\n"
+                    + "                        </tr>\n"
+                    + "                      </table>\n"
+                    + "					</td>	\n"
+                    + "					</tr>\n"
+                    + "			</table>\n"
+                    + "			</center>\n"
+                    + "			\n"
+                    + "		</td>\n"
+                    + "	</tr>\n"
+                    + "  </table>\n"
+                    + "        \n"
+                    + "      </td>\n"
+                    + "    </tr>\n"
+                    + "  </table>\n"
+                    + "</body>\n"
+                    + "</html>", "text/html");
+
+            Transport.send(message);
+
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+	
 
     private static String encryptPassword(String password) {
         String sha1 = "";
