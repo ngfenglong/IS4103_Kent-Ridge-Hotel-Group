@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <body>
 
@@ -123,25 +124,28 @@
                                                     </td>
                                                     <td>
                                                         <div class="form-group">
-                                                            <h:outputText value="#{frontDeskManagedBean.selectedRoom.roomNumber}">
-                                                            </h:outputText>
+                                                            <c:forEach items="#{frontDeskManagedBean.roomBookedOnWalkin}" var="room">
+                                                                <h:outputText value="#{room.roomType} Room - #{room.roomNumber} : $#{frontDeskManagedBean.getRoomPriceFromTransaction(room)}0">
+                                                                </h:outputText>
+                                                                <br />
+                                                            </c:forEach>
                                                         </div>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>
                                                         <label>
-                                                            Total Price:
+
+                                                            Total Price:#{frontDeskManagedBean.selectedPaymentTransaction.totalPrice}
                                                         </label>
                                                     </td>
                                                     <td>
                                                         <div class="form-group">
-                                                            <h:outputText value="#{frontDeskManagedBean.totalPrice}">
+                                                            <h:outputText value="#{frontDeskManagedBean.selectedPaymentTransaction.totalPrice}">
                                                             </h:outputText>
                                                         </div>
                                                     </td>
                                                 </tr>                                                
-
                                                 <!-- /.input group -->
                                             </table>
                                         </div>

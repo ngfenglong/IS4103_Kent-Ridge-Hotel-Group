@@ -15637,7 +15637,7 @@ public class DataInitializationSessionBean {
         CreditCard creditCard1 = new CreditCard();
         creditCard1.setCardNum(encryptPassword("1234123412341234"));
         creditCard1.setCvv(encryptPassword("123"));
-        creditCard1.setExpiryDate(format.parse("2021-04-01"));
+        creditCard1.setExpiryDate("2021-04-01");
 
         Date date = format.parse("2019-04-01");
 

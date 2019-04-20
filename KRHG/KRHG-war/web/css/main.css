@@ -58,7 +58,6 @@ a:focus {
 
 a:hover {
 	text-decoration: none;
-  color: #57b846;
 }
 
 /*---------------------------------------------*/
@@ -92,7 +91,7 @@ textarea {
 }
 
 textarea:focus, input:focus {
-  border-color: transparent !important;
+  border-color: initial !important;
 }
 
 input:focus::-webkit-input-placeholder { color:transparent; }
@@ -142,7 +141,6 @@ iframe {
   font-family: Raleway-SemiBold;
   font-size: 13px;
   color: #555555;
-  line-height: 1.4;
   text-transform: uppercase;
 }
 
@@ -224,6 +222,8 @@ iframe {
   background-color: #fff;
   border: 1px solid #e6e6e6;
   border-radius: 2px;
+  line-height:3;
+
 }
 
 

@@ -7,7 +7,9 @@ package managedBean;
 
 import entity.CreditCard;
 import entity.Customer;
+import entity.ExtraSurcharge;
 import entity.FunctionRoom;
+import entity.HolidaySurcharge;
 import entity.Hotel;
 import entity.PaymentTransaction;
 import entity.Room;
@@ -94,7 +96,6 @@ public class FrontDeskManagedBean implements Serializable {
     private List<RoomBooking> checkOutRoomResult;
 
     //Cusrtomer walk in
-    private String walkinRoomtype;
     private int walkinPax;
     private int walkinNumberOfday;
     private List<Room> walkinAvailableRoom;
@@ -139,107 +140,62 @@ public class FrontDeskManagedBean implements Serializable {
     //hotel code
     private String hotelCode = "KRG";
 
+    //Room Booked Page
     private int numOfStandardRooms;
     private int numOfDeluxeRooms;
     private int numOfPremiumRooms;
     private int numOfSuiteRooms;
     private int numOfPentHouseRooms;
+    private List<Room> walkInRoomsChecking;
+    private List<Room> roomBookedOnWalkin = new ArrayList<Room>();
+    private String walkinRoomtype;
+    private int roomAvailableToBook;
+    private boolean[] extraBedBox;
 
+    private String ccName;
+    private String ccCardNumber;
+    private String ccExpDate;
+    private String ccCVV;
+    private String ccMonth;
+    private String ccYear;
+
+    private boolean[] selectRoomCB;
     //reservation 
     private List<FunctionRoom> allFunctionrooms;
 
     //room pricing 
     private List<RoomPricing> listofPricing;
+    private List<HolidaySurcharge> hoidaySurchargesIncurred = new ArrayList<HolidaySurcharge>();
+    private List<Date> extraSurchargesIncurred = new ArrayList<Date>();
 
-    public FrontDeskManagedBean() {
+    private PaymentTransaction selectedPaymentTransaction;
+
+    public String checkRooms() throws NoResultException {
+        walkInRoomsChecking = getRoomsByHotelAndType();
+        if (roomBookedOnWalkin.size() > 0) {
+            for (Room r : roomBookedOnWalkin) {
+                for (Room w : walkInRoomsChecking) {
+                    if (r.getRoomName().equals(w.getRoomName())) {
+                        w.setStatus("Selected");
+                    }
+                }
+            }
+        }
+        setRoomAvailToBook();
+        return "walkinRooms.xhtml?faces-redirect=true";
     }
 
-    public String getPaymentNameOnCard() {
-        return paymentNameOnCard;
+    public double getRoomPriceFromTransaction(Room r) {
+        for (RoomBooking rb : selectedPaymentTransaction.getRoomsBooked()) {
+            if (rb.getBookedRoom().getRoomNumber() == r.getRoomNumber()) {
+                return rb.getPrice();
+            }
+        }
+        return 0;
     }
 
-    public void setPaymentNameOnCard(String paymentNameOnCard) {
-        this.paymentNameOnCard = paymentNameOnCard;
-    }
-
-    public Date getPaymentExpiryDate() {
-        return paymentExpiryDate;
-    }
-
-    public void setPaymentExpiryDate(Date paymentExpiryDate) {
-        this.paymentExpiryDate = paymentExpiryDate;
-    }
-
-    public String getPaymentDigits() {
-        return paymentDigits;
-    }
-
-    public void setPaymentDigits(String paymentDigits) {
-        this.paymentDigits = paymentDigits;
-    }
-
-    public String getPaymentCVV() {
-        return paymentCVV;
-    }
-
-    public Date getCheckinDate() {
-        return checkinDate;
-    }
-
-    public void setCheckinDate(Date checkinDate) {
-        this.checkinDate = checkinDate;
-    }
-
-    public Date getCheckoutDate() {
-        return checkoutDate;
-    }
-
-    public void setCheckoutDate(Date checkoutDate) {
-        this.checkoutDate = checkoutDate;
-    }
-
-    public void setPaymentCVV(String paymentCVV) {
-        this.paymentCVV = paymentCVV;
-    }
-
-    public String getCheckinName() {
-        return checkinName;
-    }
-
-    public void setCheckinName(String checkinName) {
-        this.checkinName = checkinName;
-    }
-
-    public String getCheckinEmail() {
-        return checkinEmail;
-    }
-
-    public void setCheckinEmail(String checkinEmail) {
-        this.checkinEmail = checkinEmail;
-    }
-
-    public String getPassportNumber() {
-        return checkinPassportNumber;
-    }
-
-    public void setPassportNumber(String passportNumber) {
-        this.checkinPassportNumber = passportNumber;
-    }
-
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerName(String CustomerName) {
-        this.customerName = CustomerName;
-    }
-
-    public String getCustomerRoom() {
-        return customerRoom;
-    }
-
-    public void setCustomerRoom(String customerRoom) {
-        this.customerRoom = customerRoom;
+    public boolean checkIfRoomIsBook(Room r) {
+        return !r.getStatus().equals("Available");
     }
 
     public void getFunctionRoomWithHotelCode() {
@@ -250,6 +206,136 @@ public class FrontDeskManagedBean implements Serializable {
             }
         }
         setAllFunctionrooms(functionrooms);
+    }
+
+    public void checkToBookRoom(int i) {
+        if (walkInRoomsChecking.get(i).getStatus().equals("Available") && (roomAvailableToBook > 0)) {
+            walkInRoomsChecking.get(i).setStatus("Selected");
+            roomAvailableToBook--;
+            Room tempR = walkInRoomsChecking.get(i);
+            roomBookedOnWalkin.add(tempR);
+            decreaseSelectedRoomNumber();
+        } else if (walkInRoomsChecking.get(i).getStatus().equals("Selected")) {
+            walkInRoomsChecking.get(i).setStatus("Available");
+            increaseSelectedRoomNumber();
+            Room tempR = walkInRoomsChecking.get(i);
+            roomBookedOnWalkin.remove(tempR);
+            roomAvailableToBook++;
+        } else {
+        }
+    }
+
+    public void increaseSelectedRoomNumber() {
+        if (walkinRoomtype.equals("Standard")) {
+            numOfStandardRooms++;
+        } else if (walkinRoomtype.equals("Deluxe")) {
+            numOfDeluxeRooms++;
+        } else if (walkinRoomtype.equals("Premium")) {
+            numOfPremiumRooms++;
+        } else if (walkinRoomtype.equals("Suite")) {
+            numOfSuiteRooms++;
+        } else {
+            numOfPentHouseRooms++;
+        }
+    }
+
+    public void decreaseSelectedRoomNumber() {
+        if (walkinRoomtype.equals("Standard")) {
+            numOfStandardRooms--;
+        } else if (walkinRoomtype.equals("Deluxe")) {
+            numOfDeluxeRooms--;
+        } else if (walkinRoomtype.equals("Premium")) {
+            numOfPremiumRooms--;
+        } else if (walkinRoomtype.equals("Suite")) {
+            numOfSuiteRooms--;
+        } else {
+            numOfPentHouseRooms--;
+        }
+    }
+    
+    public boolean checkForLineBreak(Room r) {
+        if (Integer.parseInt(r.getRoomNumber()) % 100 == 1) {
+            return true;
+        }
+        return false;
+    }
+    
+    public int getRoomLevel(Room r) {
+        return (Integer.parseInt(r.getRoomNumber()) / 100);
+    }
+    
+    public boolean checkForLineBreakForStandard(Room r) {
+        if (Integer.parseInt(r.getRoomNumber()) % 10 == 6 && r.getRoomType().equals("Standard")) {
+            return true;
+        }
+        return false;
+    }
+    public boolean checkForLineBreakForDeluxe(Room r) {
+        if (Integer.parseInt(r.getRoomNumber()) % 10 == 4 && r.getRoomType().equals("Deluxe")) {
+            return true;
+        }
+        return false;
+    }
+    public boolean checkForLineBreakForPremium(Room r) {
+        if (Integer.parseInt(r.getRoomNumber()) % 10 == 5 && r.getRoomType().equals("Premium")) {
+            return true;
+        }
+        return false;
+    }
+    public boolean checkForLineBreakForSuite(Room r) {
+        if (Integer.parseInt(r.getRoomNumber()) % 100 == 3 && r.getRoomType().equals("Suite")) {
+            return true;
+        }
+        return false;
+    }
+    
+      public boolean checkIsOdd(Room r) {
+        if (Integer.parseInt(r.getRoomNumber()) % 2 == 1) {
+            return true;
+        }
+        return false;
+    }
+
+    public String checkClassColor(int i) {
+        if (walkInRoomsChecking.get(i).getStatus().equals("Available")) {
+            return "green";
+        } else if (walkInRoomsChecking.get(i).getStatus().equals("Selected")) {
+            return "orange";
+        } else {
+            return "red";
+        }
+    }
+
+    public String addMoreRoomsToWalkIn() throws NoResultException {
+        return "walkinState.xhtml?faces-redirect=true";
+    }
+
+    public String directToCustomerDetails() {
+
+        return "walkinEnterCustDetails.xhtml?faces-rediret=true";
+    }
+
+    public void setRoomAvailToBook() {
+        if (walkinRoomtype.equals("Standard")) {
+            roomAvailableToBook = numOfStandardRooms;
+        } else if (walkinRoomtype.equals("Deluxe")) {
+            roomAvailableToBook = numOfDeluxeRooms;
+        } else if (walkinRoomtype.equals("Premium")) {
+            roomAvailableToBook = numOfPremiumRooms;
+        } else if (walkinRoomtype.equals("Suite")) {
+            roomAvailableToBook = numOfSuiteRooms;
+        } else {
+            roomAvailableToBook = numOfPentHouseRooms;
+        }
+    }
+
+    public String showWalkInSummary() {
+        extraBedBox = new boolean[roomBookedOnWalkin.size()];
+        for (int i = 0; i < roomBookedOnWalkin.size(); i++) {
+            extraBedBox[i] = false;
+        }
+
+        return "walkinSummary.xhtml?faces-redirect=true";
     }
 
     public List<FunctionRoom> getAllFunctionrooms() {
@@ -265,6 +351,7 @@ public class FrontDeskManagedBean implements Serializable {
         Date currentdate = java.util.Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
+        checkinDateString = getTodayDate();
         checkinDate = new SimpleDateFormat("yyyy-MM-dd").parse(dateFormat.format(currentdate));
         checkoutDate = new SimpleDateFormat("yyyy-MM-dd").parse(checkoutDateString);
         numOfStandardRooms = 0;
@@ -297,7 +384,7 @@ public class FrontDeskManagedBean implements Serializable {
 
     public int getNightStay() {
         long diff = checkoutDate.getTime() - checkinDate.getTime();
-        int daysDiff = (int) (diff / (1000 * 60 * 60 * 24)) - 1;
+        int daysDiff = (int) (diff / (1000 * 60 * 60 * 24));
 
         return daysDiff;
     }
@@ -357,7 +444,7 @@ public class FrontDeskManagedBean implements Serializable {
                 if (checkList.size() < roomSessionLocal.getRoomByHotelNameAndRoomType(roomType, hotelCode).size()) {
                     List<Room> filterList = roomSessionLocal.getRoomByHotelNameAndRoomType(roomType, tempHotel.getHotelCodeName());
                     for (Room r : filterList) {
-                        if (!r.getStatus().toLowerCase().equals("occupied") && !r.getStatus().toLowerCase().equals("unavailable")) {
+                        if (!r.getStatus().toLowerCase().equals("occupied") && !r.getStatus().toLowerCase().equals("unavailable") && !r.getStatus().equals("Selected")) {
                             Room tempRoom = r;
                             returnList.add(r);
                         }
@@ -412,11 +499,6 @@ public class FrontDeskManagedBean implements Serializable {
         return "checkinResult.xhtml?faces-redirect=true";
     }
 
-    public String checkRooms() {
-
-        return "walkinRooms.xhtml?faces-redirect=true";
-    }
-
     public String walkinSelectRoom(Room rm) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Calendar c = Calendar.getInstance();
@@ -431,8 +513,170 @@ public class FrontDeskManagedBean implements Serializable {
         return "walkinEnterCustDetails.xhtml?faces-redirect=true";
     }
 
-    public String confirmPage() {
+    public boolean checkEmailExist() throws NoResultException {
+        if (checkinEmail == null) {
+            return false;
+        } else {
+            if (customerSessionLocal.getCustomerByEmail(checkinEmail) == null) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    }
+
+    public String confirmPage() throws NoResultException {
+        Customer tempCust = new Customer();
+        if (!checkinEmail.equals("")) {
+            tempCust = customerSessionLocal.getCustomerByEmail(checkinEmail);
+            if (tempCust != null) {
+                customerFirstName = tempCust.getFirstName();
+                customerLastName = tempCust.getLastName();
+            }
+        }
+
+        List<RoomBooking> tempRoomBookingList = new ArrayList<RoomBooking>();
+        double transactionTotal = 0;
+        for (Room r : roomBookedOnWalkin) {
+
+            RoomBooking tempRB = new RoomBooking();
+            tempRB.setBookingDate(checkinDate);
+            tempRB.setBookInDate(checkinDate);
+            tempRB.setBookOutDate(checkoutDate);
+            tempRB.setStatus("checkedIn");
+            tempRB.setPrice(calculatePrice(r));
+            tempRB.setHasTransport(false);
+            double price = calculatePrice(r);
+            transactionTotal += price;
+            tempRB.setPrice(price);
+            Room tempRoom = r;
+            tempRoom.setStatus("Occupied");
+            roomSessionLocal.updateRoom(tempRoom);
+            tempRB.setBookedRoom(tempRoom);
+            if (tempCust != null) {
+                tempRB.setBookedBy(tempCust);
+            }
+            tempRB.setEmailAddress(checkinEmail);
+            tempRB.setPassportNum(checkinPassportNumber);
+            tempRB.setFirstName(customerFirstName);
+            tempRB.setFirstName(customerLastName);
+            tempRB.setRoomType(r.getRoomType());
+            bookSessionLocal.createRoomBooking(tempRB);
+            tempRB = bookSessionLocal.getLastRoomBooking();
+            tempRoomBookingList.add(tempRB);
+        }
+
+        selectedPaymentTransaction = new PaymentTransaction();
+        selectedPaymentTransaction.setFirstName(customerFirstName);
+        selectedPaymentTransaction.setLastName(customerLastName);
+        selectedPaymentTransaction.setEmail(checkinEmail);
+        if (tempCust != null) {
+            selectedPaymentTransaction.setPayer(tempCust);
+        }
+        selectedPaymentTransaction.setTransactionDateTime(java.util.Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()));
+        selectedPaymentTransaction.setRoomsBooked(tempRoomBookingList);
+        selectedPaymentTransaction.setTotalPrice(transactionTotal);
+        selectedPaymentTransaction.setTransportBooked(null);
+        selectedPaymentTransaction.setFunctionRoomBooked(null);
+
+        paymentTransactionSessionLocal.createPaymentTransaction(selectedPaymentTransaction);
+        selectedPaymentTransaction = paymentTransactionSessionLocal.getLastPaymentTransaction();
+
         return "walkinResultCustomerDetails.xhtml?faces-redirect=true";
+    }
+
+    public double calculatePrice(Room r) throws NoResultException {
+        double totalPrice = 0;
+        double perNightPrice = roomPricingSessionLocal.getRoomPricingByName(hotelCode + "_" + r.getRoomType()).getPrice();
+        int numberOfNight = getNightStay();
+
+        double subTotal = perNightPrice * numberOfNight;
+        totalPrice += subTotal;
+//        for(int i= 0; i <numberOfNights){
+//            if()
+//        }
+        List<Date> dateWithExtraSurcharges = new ArrayList<Date>();
+        for (ExtraSurcharge es : roomSessionLocal.getAllExtraSurcharge()) {
+            long diff = es.getSurchargeTo().getTime() - es.getSurchargeFrom().getTime();
+            int numOfDays = (int) (diff / 1000 / 60 / 60 / 24) + 1;
+            boolean checkMon = false;
+            boolean checkTue = false;
+            boolean checkWed = false;
+            boolean checkThurs = false;
+            boolean checkFri = false;
+            boolean checkSat = false;
+            boolean checkSun = false;
+
+            for (String check : es.getDaysToCharge()) {
+                if (check.equals("MON")) {
+                    checkMon = true;
+                }
+                if (check.equals("TUE")) {
+                    checkTue = true;
+                }
+                if (check.equals("WED")) {
+                    checkWed = true;
+                }
+                if (check.equals("THURS")) {
+                    checkThurs = true;
+                }
+                if (check.equals("FRI")) {
+                    checkFri = true;
+                }
+                if (check.equals("SAT")) {
+                    checkSat = true;
+                }
+                if (check.equals("SUN")) {
+                    checkSun = true;
+                }
+            }
+            for (int i = 0; i < numOfDays; i++) {
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(es.getSurchargeFrom());
+                cal.add(Calendar.DATE, i);
+                Date modifiedDate = cal.getTime();
+                if (modifiedDate.compareTo(checkinDate) >= 0 && modifiedDate.compareTo(checkoutDate) < 0) {
+                    if (cal.get(Calendar.DAY_OF_WEEK) == 1 && checkSun == true) {
+                        extraSurchargesIncurred.add(modifiedDate);
+                        totalPrice += es.getSurchargePrice();
+                    }
+                    if (cal.get(Calendar.DAY_OF_WEEK) == 2 && checkMon == true) {
+                        extraSurchargesIncurred.add(modifiedDate);
+                        totalPrice += es.getSurchargePrice();
+                    }
+                    if (cal.get(Calendar.DAY_OF_WEEK) == 3 && checkTue == true) {
+                        extraSurchargesIncurred.add(modifiedDate);
+                        totalPrice += es.getSurchargePrice();
+                    }
+                    if (cal.get(Calendar.DAY_OF_WEEK) == 4 && checkWed == true) {
+                        extraSurchargesIncurred.add(modifiedDate);
+                        totalPrice += es.getSurchargePrice();
+                    }
+                    if (cal.get(Calendar.DAY_OF_WEEK) == 5 && checkThurs == true) {
+                        extraSurchargesIncurred.add(modifiedDate);
+                        totalPrice += es.getSurchargePrice();
+                    }
+                    if (cal.get(Calendar.DAY_OF_WEEK) == 6 && checkFri == true) {
+                        extraSurchargesIncurred.add(modifiedDate);
+                        totalPrice += es.getSurchargePrice();
+                    }
+                    if (cal.get(Calendar.DAY_OF_WEEK) == 7 && checkSat == true) {
+                        extraSurchargesIncurred.add(modifiedDate);
+                        totalPrice += es.getSurchargePrice();
+                    }
+                }
+            }
+        }
+
+        for (HolidaySurcharge hs : roomSessionLocal.getAllHolidaySurcharge()) {
+            if (hs.getHolidayDate().compareTo(checkinDate) >= 0 && hs.getHolidayDate().compareTo(checkoutDate) < 0) {
+                HolidaySurcharge tempHs = hs;
+                hoidaySurchargesIncurred.add(tempHs);
+                totalPrice += tempHs.getHolidaySurchargePrice();
+            }
+        }
+
+        return totalPrice;
     }
 
     public String confirmCheckin() throws ParseException, java.text.ParseException, NoResultException {
@@ -472,45 +716,79 @@ public class FrontDeskManagedBean implements Serializable {
         return "index.xhtml?faces-redirect=true";
     }
 
-    public String makePayment() throws ParseException, java.text.ParseException, NoResultException {
+    public String makePayment() throws NoResultException {
         CreditCard cc = new CreditCard();
-        cc.setCardNum(encryptPassword(paymentDigits));
-        cc.setCvv(encryptPassword(paymentCVV));
-        cc.setExpiryDate(paymentExpiryDate);
+        cc.setCardNum(ccName);
+        cc.setCvv(ccCVV);
+        cc.setExpiryDate(ccMonth + "/" + ccYear);
+        cc.setCardNum(ccCardNumber);
         paymentTransactionSessionLocal.createCreditCard(cc);
+        cc = paymentTransactionSessionLocal.getLastCreditCard();
+        selectedPaymentTransaction.setCreditCard(cc);
+        paymentTransactionSessionLocal.updatePaymentTransaction(selectedPaymentTransaction);
+        numOfStandardRooms = 0;
+        numOfDeluxeRooms = 0;
+        numOfPremiumRooms = 0;
+        numOfSuiteRooms = 0;
+        numOfPentHouseRooms = 0;
+        walkInRoomsChecking = new ArrayList<Room>();
+        roomBookedOnWalkin = new ArrayList<Room>();
+        walkinRoomtype = null;
+        roomAvailableToBook = 0;
 
-        PaymentTransaction pt = new PaymentTransaction();
-        pt.setCreditCard(paymentTransactionSessionLocal.getLastCreditCard());
-        pt.setTotalPrice(totalPrice);
-        pt.setInitialPayment(totalPrice);
-        pt.setFinalPayment(totalPrice);
-        pt.setPaymentType("Credit Card");
-        pt.setTransactionDateTime(new Date());
+        ccName = null;
+        ccCardNumber = null;
+        ccExpDate = null;
+        ccCVV = null;
+        ccMonth = null;
+        ccYear = null;
 
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        RoomBooking rb1 = new RoomBooking();
-        rb1.setBookInDate(checkinDate);
-        rb1.setBookOutDate(checkoutDate);
-        rb1.setStatus("checkedIn");
-        rb1.setPrice(totalPrice);
-        rb1.setBookedRoom(selectedRoom);
-        rb1.setEmailAddress(checkinEmail);
-        rb1.setPassportNum(checkinPassportNumber);
-        rb1.setRoomType(selectedRoom.getRoomType());
-        rb1.setFirstName(customerFirstName);
-        rb1.setLastName(customerLastName);
-        rb1.setHasExtraBed(false);
-        bookSessionLocal.createRoomBooking(rb1);
-        Room rm = roomSessionLocal.getRoomByName(selectedRoom.getRoomName());
-        rm.setStatus("Occupied");
-        roomSessionLocal.updateRoom(rm);
+        checkinDate = null;
+        checkoutDate = null;
+        checkinDateString = null;
+        checkoutDateString = null;
 
-        mode = "online";
-        return "summary.xhtml?faces-redirect=true";
-        //payment complete and roombooking is done here
-
+        return "index.xhtml?faces-redirect=true";
     }
 
+//    public String makePayment() throws ParseException, java.text.ParseException, NoResultException {
+//        CreditCard cc = new CreditCard();
+//        cc.setCardNum(encryptPassword(paymentDigits));
+//        cc.setCvv(encryptPassword(paymentCVV));
+//        cc.setExpiryDate(paymentExpiryDate);
+//        paymentTransactionSessionLocal.createCreditCard(cc);
+//
+//        PaymentTransaction pt = new PaymentTransaction();
+//        pt.setCreditCard(paymentTransactionSessionLocal.getLastCreditCard());
+//        pt.setTotalPrice(totalPrice);
+//        pt.setInitialPayment(totalPrice);
+//        pt.setFinalPayment(totalPrice);
+//        pt.setPaymentType("Credit Card");
+//        pt.setTransactionDateTime(new Date());
+//
+//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//        RoomBooking rb1 = new RoomBooking();
+//        rb1.setBookInDate(checkinDate);
+//        rb1.setBookOutDate(checkoutDate);
+//        rb1.setStatus("checkedIn");
+//        rb1.setPrice(totalPrice);
+//        rb1.setBookedRoom(selectedRoom);
+//        rb1.setEmailAddress(checkinEmail);
+//        rb1.setPassportNum(checkinPassportNumber);
+//        rb1.setRoomType(selectedRoom.getRoomType());
+//        rb1.setFirstName(customerFirstName);
+//        rb1.setLastName(customerLastName);
+//        rb1.setHasExtraBed(false);
+//        bookSessionLocal.createRoomBooking(rb1);
+//        Room rm = roomSessionLocal.getRoomByName(selectedRoom.getRoomName());
+//        rm.setStatus("Occupied");
+//        roomSessionLocal.updateRoom(rm);
+//
+//        mode = "online";
+//        return "summary.xhtml?faces-redirect=true";
+//        //payment complete and roombooking is done here
+//
+//    }
     public String searchCheckout() {
         //bookSessionLocal.getRoombookingbyRoomNumber(String roomNumber,String status); check status, dont just anyhow get room. 
 
@@ -1112,6 +1390,222 @@ public class FrontDeskManagedBean implements Serializable {
 
     public void setNumOfPentHouseRooms(int numOfPentHouseRooms) {
         this.numOfPentHouseRooms = numOfPentHouseRooms;
+    }
+
+    public HotelSessionLocal getHotelSessionLocal() {
+        return hotelSessionLocal;
+    }
+
+    public void setHotelSessionLocal(HotelSessionLocal hotelSessionLocal) {
+        this.hotelSessionLocal = hotelSessionLocal;
+    }
+
+    public boolean[] getSelectRoomCB() {
+        return selectRoomCB;
+    }
+
+    public void setSelectRoomCB(boolean[] selectRoomCB) {
+        this.selectRoomCB = selectRoomCB;
+    }
+
+    public FrontDeskManagedBean() {
+    }
+
+    public String getPaymentNameOnCard() {
+        return paymentNameOnCard;
+    }
+
+    public List<Room> getRoomsByHotelAndType() throws NoResultException {
+
+        return roomSessionLocal.getRoomByHotelNameAndRoomType(walkinRoomtype, hotelCode);
+    }
+
+    public void setPaymentNameOnCard(String paymentNameOnCard) {
+        this.paymentNameOnCard = paymentNameOnCard;
+    }
+
+    public Date getPaymentExpiryDate() {
+        return paymentExpiryDate;
+    }
+
+    public void setPaymentExpiryDate(Date paymentExpiryDate) {
+        this.paymentExpiryDate = paymentExpiryDate;
+    }
+
+    public String getPaymentDigits() {
+        return paymentDigits;
+    }
+
+    public void setPaymentDigits(String paymentDigits) {
+        this.paymentDigits = paymentDigits;
+    }
+
+    public String getPaymentCVV() {
+        return paymentCVV;
+    }
+
+    public Date getCheckinDate() {
+        return checkinDate;
+    }
+
+    public void setCheckinDate(Date checkinDate) {
+        this.checkinDate = checkinDate;
+    }
+
+    public Date getCheckoutDate() {
+        return checkoutDate;
+    }
+
+    public void setCheckoutDate(Date checkoutDate) {
+        this.checkoutDate = checkoutDate;
+    }
+
+    public void setPaymentCVV(String paymentCVV) {
+        this.paymentCVV = paymentCVV;
+    }
+
+    public String getCheckinName() {
+        return checkinName;
+    }
+
+    public void setCheckinName(String checkinName) {
+        this.checkinName = checkinName;
+    }
+
+    public String getCheckinEmail() {
+        return checkinEmail;
+    }
+
+    public void setCheckinEmail(String checkinEmail) {
+        this.checkinEmail = checkinEmail;
+    }
+
+    public String getPassportNumber() {
+        return checkinPassportNumber;
+    }
+
+    public void setPassportNumber(String passportNumber) {
+        this.checkinPassportNumber = passportNumber;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String CustomerName) {
+        this.customerName = CustomerName;
+    }
+
+    public String getCustomerRoom() {
+        return customerRoom;
+    }
+
+    public void setCustomerRoom(String customerRoom) {
+        this.customerRoom = customerRoom;
+    }
+
+    public List<Room> getWalkInRoomsChecking() {
+        return walkInRoomsChecking;
+    }
+
+    public void setWalkInRoomsChecking(List<Room> walkInRoomsChecking) {
+        this.walkInRoomsChecking = walkInRoomsChecking;
+    }
+
+    public List<Room> getRoomBookedOnWalkin() {
+        return roomBookedOnWalkin;
+    }
+
+    public void setRoomBookedOnWalkin(List<Room> roomBookedOnWalkin) {
+        this.roomBookedOnWalkin = roomBookedOnWalkin;
+    }
+
+    public int getRoomAvailableToBook() {
+        return roomAvailableToBook;
+    }
+
+    public void setRoomAvailableToBook(int roomAvailableToBook) {
+        this.roomAvailableToBook = roomAvailableToBook;
+    }
+
+    public boolean[] getExtraBedBox() {
+        return extraBedBox;
+    }
+
+    public void setExtraBedBox(boolean[] extraBedBox) {
+        this.extraBedBox = extraBedBox;
+    }
+
+    public PaymentTransaction getSelectedPaymentTransaction() {
+        return selectedPaymentTransaction;
+    }
+
+    public void setSelectedPaymentTransaction(PaymentTransaction selectedPaymentTransaction) {
+        this.selectedPaymentTransaction = selectedPaymentTransaction;
+    }
+
+    public String getCcName() {
+        return ccName;
+    }
+
+    public void setCcName(String ccName) {
+        this.ccName = ccName;
+    }
+
+    public String getCcCardNumber() {
+        return ccCardNumber;
+    }
+
+    public void setCcCardNumber(String ccCardNumber) {
+        this.ccCardNumber = ccCardNumber;
+    }
+
+    public String getCcExpDate() {
+        return ccExpDate;
+    }
+
+    public void setCcExpDate(String ccExpDate) {
+        this.ccExpDate = ccExpDate;
+    }
+
+    public String getCcCVV() {
+        return ccCVV;
+    }
+
+    public void setCcCVV(String ccCVV) {
+        this.ccCVV = ccCVV;
+    }
+
+    public List<HolidaySurcharge> getHoidaySurchargesIncurred() {
+        return hoidaySurchargesIncurred;
+    }
+
+    public void setHoidaySurchargesIncurred(List<HolidaySurcharge> hoidaySurchargesIncurred) {
+        this.hoidaySurchargesIncurred = hoidaySurchargesIncurred;
+    }
+
+    public List<Date> getExtraSurchargesIncurred() {
+        return extraSurchargesIncurred;
+    }
+
+    public void setExtraSurchargesIncurred(List<Date> extraSurchargesIncurred) {
+        this.extraSurchargesIncurred = extraSurchargesIncurred;
+    }
+
+    public String getCcMonth() {
+        return ccMonth;
+    }
+
+    public void setCcMonth(String ccMonth) {
+        this.ccMonth = ccMonth;
+    }
+
+    public String getCcYear() {
+        return ccYear;
+    }
+
+    public void setCcYear(String ccYear) {
+        this.ccYear = ccYear;
     }
 
 }

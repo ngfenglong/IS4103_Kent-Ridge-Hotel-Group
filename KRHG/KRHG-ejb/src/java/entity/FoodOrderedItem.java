@@ -15,7 +15,7 @@ import javax.persistence.OneToOne;
 
 /**
  *
- * @author MC
+ * @author fengl
  */
 @Entity
 public class FoodOrderedItem implements Serializable {

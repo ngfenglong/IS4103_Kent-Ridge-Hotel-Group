@@ -8,22 +8,16 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <body>
-
         <ui:composition template="template.xhtml">
-
-
             <ui:define name="title">
                 KRHG front desk
             </ui:define>
-
             <ui:define name="content">
                 <!-- Content Header (Page header) -->
                 <div class="content-header">
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-
-
                             </div>
                             <!-- /.col -->
                             <div class="col-sm-6">
@@ -40,16 +34,10 @@
                     <!-- /.container-fluid -->
                 </div> 
                 <section class="content">
-
-
                     <div class="container-fluid">
                         <div class="row">
                             <!-- left column -->
                             <div class="col-md-10">
-
-
-
-
                                 <div class="card card-primary">
                                     <div class="card-header">
                                         <h3 class="card-title">Walk in Customer</h3>
@@ -61,31 +49,24 @@
 
                                             <table>
                                                 <tr>
+                                                    <td>Room Type</td>
                                                     <td>Selected Room</td>
-                                                    <td>Extra bed</td>
+                                                    <td>Extra Bed</td>
                                                     <td></td>
                                                 </tr>
-                                                <c:forEach>
+                                                <c:forEach items="#{frontDeskManagedBean.roomBookedOnWalkin}" varStatus="count" var="room">
                                                     <tr>
-                                                        <td>KRG201</td>
-                                                        <td>Checkbox</td>
-                                                        
+                                                        <td>#{room.roomType}</td>
+                                                        <td>#{room.roomNumber}</td>
                                                     </tr>
                                                 </c:forEach>
-                                                
                                             </table>
-
-
-
-
-
                                         </div>
                                         <!-- /.card-body -->
 
                                         <div class="card-footer">
-                                            <h:commandButton class="btn btn-primary" value="Add Room"      ></h:commandButton>
-
-                                            <h:commandButton class="btn btn-primary" value="confirm" ></h:commandButton>
+                                            <h:commandButton class="btn btn-primary" action="#{frontDeskManagedBean.addMoreRoomsToWalkIn()}" value="Add Room"></h:commandButton>
+                                            <h:commandButton class="btn btn-primary" action="#{frontDeskManagedBean.directToCustomerDetails()}" value="Confirm" ></h:commandButton>
                                         </div>
                                     </h:form>
                                 </div>

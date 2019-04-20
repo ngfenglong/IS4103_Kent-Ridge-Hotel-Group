@@ -75,11 +75,12 @@
                                                 <span class="product-description" style="font-size:calc((100% + 0.25vw)*0.8);">
                                                     Time of Order: #{fo.orderTime}
                                                 </span>
+                                                    
                                                 <span class="label label-warning pull-right" style="font-size: medium">
                                                     #{fo.status}</span>
                                            
                                                 
-                                                <h:commandLink actionListener="#{requestServicesManagedBean.selectFoodOrder2(fo.foodOrderID)}" style="font-size:calc((100% + 0.25vw)*0.8);" value="See Details>">
+                                                <h:commandLink actionListener="#{requestServicesManagedBean.selectFoodOrder2(fo.foodOrderID)}" style="color:paleblue; border-radius:2px; padding:5px " class="fas fa-search fa-2x">
                                                 </h:commandLink>
 
                                             </div>
