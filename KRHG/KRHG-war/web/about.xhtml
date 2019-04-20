@@ -33,14 +33,15 @@ and open the template in the editor.
 
             <!-- Header -->
             <h:form>
-                <header class="header">
+                               <header class="header">
                     <div class="header_content d-flex flex-row align-items-center justify-content-start">
-                        <div class="logo"><a href="index.xhtml">KRHG</a></div>
+                        <a href="index.xhtml"><img style="width:210px" src="./images/krhglogo.png"/></a>
+
                         <div class="ml-auto d-flex flex-row align-items-center justify-content-start">
                             <nav class="main_nav">
                                 <ul class="d-flex flex-row align-items-start justify-content-start">
-                                    <li class="active"><a href="index.xhtml">Home</a></li>
-                                    <li><a href="about.xhtml">About us</a></li>
+                                    <li ><a href="index.xhtml">Home</a></li>
+                                    <li class="active"><a href="about.xhtml">About us</a></li>
                                     <li><a href="hotels.xhtml">Hotels</a></li>
                                     <li><a href="contact.xhtml">Contact us</a></li>
                                     <c:if test="${websiteAuthenticationManagedBean.id gt -1}">
@@ -113,26 +114,42 @@ and open the template in the editor.
                     </div>
                 </div>
             </div>
+            <div class="about">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="about_title"><h2>Welcome to Kent Ridge Hotel Group</h2></div>
+				</div>
+			</div>
+			<div class="row about_row">
+				
+				<!-- About Content -->
+				<div class="col-lg-6">
+					<div class="about_content">
+						<div class="about_text">
+							Kent Ridge Hotels Group opened its first hotel, the now Kent Ridge Central in Ang Mo Kio in 2000. We have built a reputation over the years to provide premium service quality and affordable accommodation. Over the years, we have grown from strength to strength, opening more hotels islandwide, and opening the Group’s new flagship, Kent Ridge Grand in the heart of Singapore’s Shopping Belt, Orchard Road, in 2012. Today, the Group operates 10 hotels around Singapore and the Kent Ridge brand has become well established in the local hospitality industry.
+									Most of our hotels are strategically located in the City, or in major regional centers of Singapore, and are easily accessible by road, buses or the MRT system. Our hotels are also located near major tourist attractions and convention centers. Equipped with good price, locations, service, cleanliness and a hassle-free booking experience, Kent Ridge Hotels will continue to be the ideal choice for travelers providing comfort to all.
+									
+						</div>
+						<div class="about_sig"><img src="images/sig.png" alt=""/></div>
+					</div>
+				</div>
 
+				<!-- About Images -->
+				<div class="col-lg-6">
+					<div class="about_images d-flex flex-row align-items-start justify-content-between flex-wrap">
+						<img src="images/about_1.png" alt=""/>
+						<img src="images/about_2.png" alt=""/>
+						<img src="images/about_3.png" alt=""/>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+            
+    
             <!-- About Content -->
-            <div class="col-lg-6">
-                <div class="about_content">
-                    <div class="about_text">
-                        Kent Ridge Hotels Group opened its first hotel, the now Kent Ridge Central in Ang Mo Kio in 2000. We have built a reputation over the years to provide premium service quality and affordable accommodation. Over the years, we have grown from strength to strength, opening more hotels islandwide, and opening the Group’s new flagship, Kent Ridge Grand in the heart of Singapore’s Shopping Belt, Orchard Road, in 2012. Today, the Group operates 10 hotels around Singapore and the Kent Ridge brand has become well established in the local hospitality industry.
-                        Most of our hotels are strategically located in the City, or in major regional centers of Singapore, and are easily accessible by road, buses or the MRT system. Our hotels are also located near major tourist attractions and convention centers. Equipped with good price, locations, service, cleanliness and a hassle-free booking experience, Kent Ridge Hotels will continue to be the ideal choice for travelers providing comfort to all.
-                    </div>
-                    <div class="about_sig"><img src="images/sig.png" alt="" /></div>
-                </div>
-            </div>
-
-            <!-- About Images -->
-            <div class="col-lg-6">
-                <div class="about_images d-flex flex-row align-items-start justify-content-between flex-wrap">
-                    <img src="images/about_1.png" alt="" />
-                    <img src="images/about_2.png" alt="" />
-                    <img src="images/about_3.png" alt="" />
-                </div>
-            </div>
+           
 
 
             <!-- Split Section Right -->
@@ -150,8 +167,8 @@ and open the template in the editor.
                         <div class="col-xl-6 order-xl-2 order-1">
                             <div class="split_section_right_content">
                                 <div class="split_section_title"><h2>Mission</h2></div>
-                                <div class="split_section_text">
-                                    <p>The mission of Kent Ridge Hotels Group is to provide the highest level of hospitality services to make the stay of our guests enjoyable. We aim to make all KRHG hotels a pleasant place to stay.</p>
+                                <div class="split_section_text" >
+                                    <p style="color:black">The mission of Kent Ridge Hotels Group is to provide the highest level of hospitality services to make the stay of our guests enjoyable. We aim to make all KRHG hotels a pleasant place to stay.</p>
                                 </div>
 
                             </div>
@@ -170,7 +187,7 @@ and open the template in the editor.
                             <div class="split_section_left_content">
                                 <div class="split_section_title"><h2>Vision</h2></div>
                                 <div class="split_section_text">
-                                    <p>Our vision is to apply and set the highest standards of service quality. We aim to use and constantly introduce technologically advanced processes to maintain our competitive advantage, whilst still remaining true to our core value of service quality. </p>
+                                    <p style="color:black">Our vision is to apply and set the highest standards of service quality. We aim to use and constantly introduce technologically advanced processes to maintain our competitive advantage, whilst still remaining true to our core value of service quality. </p>
                                 </div>
 
 
@@ -190,16 +207,14 @@ and open the template in the editor.
 
             <!-- Footer -->
 
-            <footer class="footer">
+     <footer class="footer">
                 <div class="footer_content">
                     <div class="container">
                         <div class="row">
                             <div class="col">
                                 <div class="footer_logo_container text-center">
                                     <div class="footer_logo">
-                                        <a href="#"></a>
-                                        <div>KRHG</div>
-                                        <div>since 1993</div>
+                                        <img style="width:300px" src="./images/KRHGblack.png"/>
                                     </div>
                                 </div>
                             </div>
@@ -211,8 +226,8 @@ and open the template in the editor.
                                 <div class="footer_title">Our Address</div>
                                 <div class="footer_list">
                                     <ul>
-                                        <li>13 Computing Drive</li>
-                                        <li>1234 5678</li>
+                                        <li>63 Somerset Rd</li>
+                                        <li>238163</li>
                                         <li>KRHG@contact.com</li>
                                     </ul>
                                 </div>
@@ -223,7 +238,7 @@ and open the template in the editor.
                                 <div class="footer_title">Reservations</div>
                                 <div class="footer_list">
                                     <ul>
-                                        <li>Tel: 1234 5678</li>
+                                        <li>Tel: 6123 1000</li>
                                         <li>Fax; 9876 5432</li>
                                         <li>reservations@KRHG.com</li>
                                     </ul>
@@ -235,7 +250,7 @@ and open the template in the editor.
                                 <div class="footer_title">Newsletter</div>
                                 <div class="newsletter_container">
                                     <form action="#" class="newsletter_form" id="newsletter_form">
-                                        <input type="email" class="newsletter_input" placeholder="Your email address" required="required" />
+                                        <input type="email" class="newsletter_input" placeholder="Your email address" required="required"/>
                                         <button class="newsletter_button">Subscribe</button>
                                     </form>
                                 </div>

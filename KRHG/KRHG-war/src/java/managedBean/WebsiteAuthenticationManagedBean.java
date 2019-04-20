@@ -313,6 +313,7 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
         }
         
         pastTransactions = allCustomerTransactions;
+        System.out.println(pastTransactions);
     }
     
     public String getTypeOfFacilityBooked(PaymentTransaction t){
@@ -337,6 +338,7 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
     public void selectTransaction(Long transactionId)throws NoResultException{
         selectedTransactionID = transactionId;
         paymentTransactionSessionLocal.getPaymentTransactionByID(transactionId);
+        System.out.println("selected id:" + selectedTransactionID);
     }
     
     public List<RoomBooking> getAllRoomBookingFromTransaction(PaymentTransaction t)throws NoResultException{
