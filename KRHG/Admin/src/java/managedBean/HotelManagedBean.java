@@ -16,6 +16,7 @@ import entity.MailingList;
 import entity.MemberTier;
 import entity.MinibarItem;
 import entity.PaymentTransaction;
+import entity.PromoCode;
 import entity.Room;
 import entity.RoomFacility;
 import entity.RoomPricing;
@@ -31,7 +32,6 @@ import java.io.Serializable;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.DateFormat;
-import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -63,6 +63,7 @@ import sessionBeans.LogSessionLocal;
 import sessionBeans.MailingListSessionLocal;
 import sessionBeans.MemberTierSessionLocal;
 import sessionBeans.PaymentTransactionSessionLocal;
+import sessionBeans.PromoCodeSessionLocal;
 import sessionBeans.RoomFacilitySessionLocal;
 import sessionBeans.RoomPricingSessionLocal;
 import sessionBeans.RoomSessionLocal;
@@ -109,6 +110,8 @@ public class HotelManagedBean implements Serializable {
     ShiftSessionLocal shiftSessionLocal;
     @EJB
     PaymentTransactionSessionLocal paymentTransactionSessionLocal;
+    @EJB
+    PromoCodeSessionLocal promocodesessionlocal;
 
     private String loggedInUser;
 
@@ -222,6 +225,14 @@ public class HotelManagedBean implements Serializable {
     public String topGrossingHotel;
 
     public double topGrossingAmount = 0;
+    //promocode
+    public List<PromoCode> allPromoCode;
+    private String promocodeName;
+    private String promoStartDate;
+    private String promoEndDate;
+    private double promodiscount;
+    private String promoStatus;
+    private PromoCode editPromo;
 
     @ManagedProperty(value = "#{authenticationManagedBean}")
     private AuthenticationManagedBean authBean;
@@ -314,24 +325,24 @@ public class HotelManagedBean implements Serializable {
     public List<Customer> getAllCustomer() {
         return customerSessionLocal.getAllCustomers();
     }
-    
-    public String getTopGrossingHotel() throws Exception{
+
+    public String getTopGrossingHotel() throws Exception {
         double roundOff = getKrgTotalRevenue();
         if (roundOff > topGrossingAmount) {
             topGrossingAmount = roundOff;
             topGrossingHotel = "Kent Ridge Grand";
         }
-        
+
         double roundOff2 = getKrcTotalRevenue();
         if (roundOff2 > topGrossingAmount) {
             topGrossingAmount = roundOff;
             topGrossingHotel = "Kent Ridge Central";
-        }     
+        }
         double roundOff3 = getKrnTotalRevenue();
         if (roundOff3 > topGrossingAmount) {
             topGrossingAmount = roundOff;
             topGrossingHotel = "Kent Ridge North";
-        }        
+        }
         double roundOff4 = getKrsTotalRevenue();
         if (roundOff4 > topGrossingAmount) {
             topGrossingAmount = roundOff;
@@ -341,86 +352,85 @@ public class HotelManagedBean implements Serializable {
         if (roundOff5 > topGrossingAmount) {
             topGrossingAmount = roundOff;
             topGrossingHotel = "Kent Ridge East";
-        }        
-        
+        }
+
         double roundOff6 = getKrwTotalRevenue();
         if (roundOff6 > topGrossingAmount) {
             topGrossingAmount = roundOff;
             topGrossingHotel = "Kent Ridge West";
-        }        
+        }
         double roundOff7 = getKrneTotalRevenue();
         if (roundOff7 > topGrossingAmount) {
             topGrossingAmount = roundOff;
             topGrossingHotel = "Kent Ridge North East";
-        }        
-        
+        }
+
         double roundOff8 = getKrnwTotalRevenue();
         if (roundOff8 > topGrossingAmount) {
             topGrossingAmount = roundOff;
             topGrossingHotel = "Kent Ridge North West";
-        }        
-        
+        }
+
         double roundOff9 = getKrseTotalRevenue();
         if (roundOff9 > topGrossingAmount) {
             topGrossingAmount = roundOff;
             topGrossingHotel = "Kent Ridge South East";
-        }        
-        
+        }
+
         double roundOff10 = getKrswTotalRevenue();
         if (roundOff10 > topGrossingAmount) {
             topGrossingAmount = roundOff;
             topGrossingHotel = "Kent Ridge South West";
-        }        
+        }
         return topGrossingHotel;
     }
-    
-    public String getTopMonth() throws NoResultException, ParseException{
+
+    public String getTopMonth() throws NoResultException, ParseException {
         double highest = 0;
         String topMonth = "";
         double roundOff1 = getJanTotalRevenue();
-        if (roundOff1 > highest){
+        if (roundOff1 > highest) {
             highest = roundOff1;
             topMonth = "January";
         }
-        
+
         double roundOff2 = getFebTotalRevenue();
-        if (roundOff2 > highest){
+        if (roundOff2 > highest) {
             highest = roundOff2;
             topMonth = "February";
         }
 
         double roundOff3 = getMarTotalRevenue();
-        if (roundOff3 > highest){
+        if (roundOff3 > highest) {
             highest = roundOff3;
             topMonth = "March";
-        }        
-        
+        }
+
         double roundOff4 = getAprTotalRevenue();
-        if (roundOff4 > highest){
+        if (roundOff4 > highest) {
             highest = roundOff4;
             topMonth = "April";
-        }        
-        
-        
+        }
+
         return topMonth;
     }
-    
-    public String getTotalRevenue() throws NoResultException, ParseException{
-       double totalRevenue = 0;
-       totalRevenue = totalRevenue + getJanTotalRevenue();
-       totalRevenue = totalRevenue + getFebTotalRevenue();
-       totalRevenue = totalRevenue + getMarTotalRevenue();
-       totalRevenue = totalRevenue + getAprTotalRevenue();
-          
+
+    public String getTotalRevenue() throws NoResultException, ParseException {
+        double totalRevenue = 0;
+        totalRevenue = totalRevenue + getJanTotalRevenue();
+        totalRevenue = totalRevenue + getFebTotalRevenue();
+        totalRevenue = totalRevenue + getMarTotalRevenue();
+        totalRevenue = totalRevenue + getAprTotalRevenue();
+
         double roundOff = (double) Math.round(totalRevenue * 100) / 100;
         String roundOffString = "$" + String.format("%,.2f", roundOff);
-        return roundOffString;  
+        return roundOffString;
 
     }
 
     public void setTopGrossingHotel(String topGrossingHotel) {
         this.topGrossingHotel = topGrossingHotel;
-    }    
+    }
 
     public String convertDateFormat(Date date) {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -459,7 +469,7 @@ public class HotelManagedBean implements Serializable {
         String str1 = Double.toString(roundOff);
         return str1;
     }
-    
+
     public String getFeedbackRatePct() {
         List<Feedback> feedbacks = feedbackSessionLocal.getAllFeedbacks();
         int ratingTotal = 0;
@@ -473,7 +483,7 @@ public class HotelManagedBean implements Serializable {
         double roundOff = (double) Math.round(feedbackPct * 10) / 10.0;
         String str1 = Double.toString(roundOff);
         return str1;
-    }    
+    }
 
     public String getTopPerformingHotel() throws NoResultException {
         List<Hotel> hotels = hotelSessionLocal.getAllHotels();
@@ -604,7 +614,7 @@ public class HotelManagedBean implements Serializable {
         String str1 = Double.toString(roundOff);
         return str1;
     }
-    
+
     public String getHotelFeedbackRatePct() throws NoResultException {
         List<Feedback> feedbacks = feedbackSessionLocal.getAllFeedbacks();
         int ratingTotal = 0;
@@ -620,7 +630,7 @@ public class HotelManagedBean implements Serializable {
         double feedbackPct = feedbackRate * 20.0;
         double roundOff = (double) Math.round(feedbackPct * 10) / 10.0;
         String str1 = Double.toString(roundOff);
-        return str1;       
+        return str1;
     }
 
     public double getJanTotalRevenue() throws NoResultException, ParseException {
@@ -3123,4 +3133,83 @@ public class HotelManagedBean implements Serializable {
         this.selectedHotelID = selectedHotelID;
     }
 
+    public List<PromoCode> getAllPromoCode() {
+        return allPromoCode = promocodesessionlocal.getAllPromoCodes();
+    }
+
+    public void setAllPromoCode(List<PromoCode> allPromoCode) {
+        this.allPromoCode = allPromoCode;
+    }
+
+    public String getPromocodeName() {
+        return promocodeName;
+    }
+
+    public void setPromocodeName(String promocodeName) {
+        this.promocodeName = promocodeName;
+    }
+
+    public String getPromoStartDate() {
+        return promoStartDate;
+    }
+
+    public void setPromoStartDate(String promoStartDate) {
+        this.promoStartDate = promoStartDate;
+    }
+
+    public String getPromoEndDate() {
+        return promoEndDate;
+    }
+
+    public void setPromoEndDate(String promoEndDate) {
+        this.promoEndDate = promoEndDate;
+    }
+
+    public double getPromodiscount() {
+        return promodiscount;
+    }
+
+    public void setPromodiscount(double promodiscount) {
+        this.promodiscount = promodiscount;
+    }
+
+    public String createPromoCode() throws ParseException {
+        PromoCode pc = new PromoCode();
+        pc.setPromoCode(promocodeName);
+        pc.setDiscount(promodiscount);
+        pc.setStartDate(new SimpleDateFormat("yyyy-MM-dd").parse(promoStartDate));
+        pc.setEndDate(new SimpleDateFormat("yyyy-MM-dd").parse(promoEndDate));
+        pc.setStatus("Active");
+
+        promocodesessionlocal.createPromoCode(pc);
+        promocodeName = null;
+        promodiscount = 0.0;
+        promoStartDate = null;
+        promoEndDate = null;
+
+        return "promocode.xhtml?faces-redirect=true";
+    }
+
+    public String editPromo(PromoCode o) {
+        editPromo = o;
+        promocodeName = o.getPromoCode();
+        promodiscount = o.getDiscount() * 100;
+        promoStatus = o.getStatus();
+        promoStartDate = convertDateFormat(o.getStartDate());
+        promoEndDate = convertDateFormat(o.getEndDate());;
+
+        return "editPromoCode.xhtml?faces-redirect=true";
+    }
+
+    public String doupdatePromocode()throws ParseException,NoResultException {
+        editPromo.setPromoCode(promocodeName);
+        editPromo.setDiscount(promodiscount);
+        editPromo.setStartDate(new SimpleDateFormat("yyyy-MM-dd").parse(promoStartDate));
+        editPromo.setEndDate(new SimpleDateFormat("yyyy-MM-dd").parse(promoEndDate));
+        editPromo.setStatus(promoStatus);
+        
+        promocodesessionlocal.updatePromoCode(editPromo);
+        
+        return "promocode.xhtml?faces-redirect=true";
+    }
 }
