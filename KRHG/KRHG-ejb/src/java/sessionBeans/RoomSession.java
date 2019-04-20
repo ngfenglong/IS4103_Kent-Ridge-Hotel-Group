@@ -304,27 +304,9 @@ public class RoomSession implements RoomSessionLocal {
         }
     }
 
-    @Override
-    public void addCleaningSchedule(Long rID, CleaningSchedule cs) {
-        Room r = em.find(Room.class, rID);
-        try {
-            r.addCleaningSchedule(cs);
-            em.flush();
-        } catch (NoResultException ex) {
-            Logger.getLogger(RoomSession.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+   
 
-    @Override
-    public void removeCleaningSchedule(Long rID, CleaningSchedule cs) {
-        Room r = em.find(Room.class, rID);
-        try {
-            r.removeCleaningSchedule(cs);
-            em.flush();
-        } catch (NoResultException ex) {
-            Logger.getLogger(RoomSession.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+   
 
     @Override
     public void addMinibarItem(Long rID, MinibarItem mi) {
