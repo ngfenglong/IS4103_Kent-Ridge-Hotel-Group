@@ -44,10 +44,9 @@
                                 <span class="info-box-number">#{hotelManagedBean.occupancyRate}%</span>
                                 <!-- The progress section is optional -->
                                 <div class="progress">
-                                    <div class="progress-bar" style="width: 70%"></div>
+                                    <div class="progress-bar" style="width: #{hotelManagedBean.occupancyRate}%"></div>
                                 </div>
                                 <span class="progress-description">
-                                    #{hotelManagedBean.occupancyRate}% Increase in 30 Days
                                 </span>
                             </div>
                             <!-- /.info-box-content -->
@@ -59,13 +58,13 @@
                             <span class="info-box-icon"><i class="fas fa-star"></i></span>
                             <div class="info-box-content" style="margin-left:0px;">
                                 <span class="info-box-text">Overall Satisfaction Rating</span>
-                                <span class="info-box-number">4.5/5</span>
+                                <span class="info-box-number">#{hotelManagedBean.feedbackRate}/5</span>
                                 <!-- The progress section is optional -->
                                 <div class="progress">
-                                    <div class="progress-bar" style="width: 80%"></div>
+                                    <div class="progress-bar" style="width: #{hotelManagedBean.feedbackRatePct}%"></div>
                                 </div>
                                 <span class="progress-description">
-                                    70% Increase in 30 Days
+                                    
                                 </span>
                             </div>
                             <!-- /.info-box-content -->
@@ -77,9 +76,9 @@
                             <span class="info-box-icon"><i class="fas fa-trophy"></i></span>
                             <div class="info-box-content"  style="margin-left:0px;">
                                 <span class="info-box-text">Top Performing Hotel</span>
-                                <span class="info-box-number">Kent Ridge Grand</span>
+                                <span class="info-box-number">#{hotelManagedBean.topPerformingHotel}</span>
                                 <span class="progress-description">
-                                    70% Increase in 30 Days
+                                    #{hotelManagedBean.topOccupiedRate}% Occupancy Rate
                                 </span>
                             </div>
                             <!-- /.info-box-content -->

@@ -29,6 +29,8 @@ public class Feedback implements Serializable {
     private String feedBackTitle;
     private String feedBackFrom;
     private String feedBackMsg;
+    private int feedbackRating;
+
     @Temporal(TemporalType.DATE)
     private Date feedBackDate;
     @ManyToOne (fetch = FetchType.LAZY)
@@ -142,6 +144,14 @@ public class Feedback implements Serializable {
     public void setHotel(Hotel hotel) {
         this.hotel = hotel;
     }
+    
+    public int getFeedbackRating() {
+        return feedbackRating;
+    }
+
+    public void setFeedbackRating(int feedbackRating) {
+        this.feedbackRating = feedbackRating;
+    }    
     
     
 }

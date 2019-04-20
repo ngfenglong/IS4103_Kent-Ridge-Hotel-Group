@@ -227,7 +227,7 @@ public class RoomSession implements RoomSessionLocal {
     public List<Room> getRoomByHotel(String roomHotel) throws NoResultException {
         Query q;
         q = em.createQuery("SELECT r FROM Room r WHERE "
-                + "LOWER(r.roomHote) = :roomHotel");
+                + "LOWER(r.hotel.hotelCodeName) = :roomHotel");
         q.setParameter("roomHotel", roomHotel.toLowerCase());
 
         if (!q.getResultList().isEmpty()) {
@@ -236,6 +236,34 @@ public class RoomSession implements RoomSessionLocal {
             throw new NoResultException("Room not found.");
         }
     }
+    
+    @Override
+    public List<Room> getRoomByHotelCodeName(String hotelCodeName) throws NoResultException {
+        Query q;
+        q = em.createQuery("SELECT r FROM Room r"
+                + " WHERE LOWER(r.hotel.hotelCodeName) = :hotelCodeName");
+        q.setParameter("hotelCodeName", hotelCodeName.toLowerCase());
+        if (!q.getResultList().isEmpty()) {
+            return q.getResultList();
+        } else {
+            throw new NoResultException("Room not found.");
+        }
+    }
+
+    @Override
+    public List<Room> getRoomByHotelName(String hotelName) throws NoResultException {
+        Query q;
+        q = em.createQuery("SELECT r FROM Room r"
+                + " WHERE LOWER(r.hotel.hotelName) = :hotelName");
+        q.setParameter("hotelName", hotelName.toLowerCase());
+        if (!q.getResultList().isEmpty()) {
+            return q.getResultList();
+        } else {
+            throw new NoResultException("Room not found.");
+        }
+    }     
+    
+    
 
     @Override
     public void deleteRoom(Long rID) throws NoResultException {
@@ -289,27 +317,9 @@ public class RoomSession implements RoomSessionLocal {
         }
     }
 
-    @Override
-    public void addCleaningSchedule(Long rID, CleaningSchedule cs) {
-        Room r = em.find(Room.class, rID);
-        try {
-            r.addCleaningSchedule(cs);
-            em.flush();
-        } catch (NoResultException ex) {
-            Logger.getLogger(RoomSession.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+   
 
-    @Override
-    public void removeCleaningSchedule(Long rID, CleaningSchedule cs) {
-        Room r = em.find(Room.class, rID);
-        try {
-            r.removeCleaningSchedule(cs);
-            em.flush();
-        } catch (NoResultException ex) {
-            Logger.getLogger(RoomSession.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+   
 
     @Override
     public void addMinibarItem(Long rID, MinibarItem mi) {

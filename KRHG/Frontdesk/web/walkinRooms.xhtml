@@ -17,20 +17,18 @@
             </ui:define>
 
             <ui:define name="content">
-                <!-- Content Header (Page header) -->
                 <div class="content-header">
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-
-
+                                <h1 style="font-size: x-large; margin-bottom:20px">Room Selection</h1>
                             </div>
                             <!-- /.col -->
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item active">
-                                        <!--Add Btn-->
-                                    </li>
+                                    <li><a href="index.xhtml"> Home</a></li>
+                                    <li><a href="walkinRate.xhtml"> Walk-In Bookings</a></li>
+                                    <li class="active">Choose Rooms</li>
                                 </ol>
                             </div>
                             <!-- /.col -->
@@ -38,72 +36,133 @@
                         <!-- /.row -->
                     </div>
                     <!-- /.container-fluid -->
-                </div> 
+                </div>
                 <section class="content">
+                    <h:form id="form">
+                        <div class="box box-info">
+                         
 
-
-                    <div class="container-fluid">
-                        <div class="row">
-                            <!-- left column -->
-                            <div class="col-md-10">
-                                <div class="card card-primary">
-                                    <div class="card-header">
-                                        <h3 class="card-title">Walk in Customer</h3>
+                            <section id="seats">   
+                                <div class="row">
+                                    <div class='col-lg-4'>
+                                         <img height='300px' src='./img/booking_4.jpg'/>
                                     </div>
-                                    <!-- /.card-header -->
-                                    <!-- form start -->
-                                    <h:form id="form">
-                                        <div class="card-body">
-                                            Rooms Available For Booking : #{frontDeskManagedBean.roomAvailableToBook}
+                                    <div class='col-lg-4'>
+                                        <img height='300px' src='./img/room4.jpg'/>
+                                    </div>
+                                    <div class='col-lg-4'>
+                                          <img height='300px' src='./img/room2.jpg'/>
+                                    </div>
+                                    <div class="col-lg-12" style="text-align: center; margin:20px">
+                                        <span style="font-size:calc((100% + 0.25vw))">Rooms Available For Booking : #{frontDeskManagedBean.roomAvailableToBook}</span> 
+                                    </div>
+                                    
+                                    <c:forEach items="${frontDeskManagedBean.roomsByHotelAndType}" var="room" varStatus="count">
 
-                                            <section id="seats">   
-
-                                                <c:forEach items="${frontDeskManagedBean.roomsByHotelAndType}" var="room" varStatus="count">
-
-                                                    <c:if test="${frontDeskManagedBean.checkForLineBreak(room) eq true}">
-                                                        <br />
-                                                        <hr />
-                                                        Level #{frontDeskManagedBean.getRoomLevel(room)}
-                                                        <br />
-                                                    </c:if>
-
-
-                                                    <c:if test="${frontDeskManagedBean.checkForLineBreakForStandard(room) eq true}">
-                                                        <br />
-                                                    </c:if>
-
-                                                    <c:if test="${frontDeskManagedBean.checkForLineBreakForDeluxe(room) eq true}">
-                                                        <br />
-                                                    </c:if>
-
-                                                    <c:if test="${frontDeskManagedBean.checkForLineBreakForPremium(room) eq true}">
-                                                        <br />
-                                                    </c:if>
-
-                                                    <c:if test="${frontDeskManagedBean.checkForLineBreakForSuite(room) eq true}">
-                                                        <br />
-                                                    </c:if>
-
-                                                    <h:commandLink id="roomBtn${count.index}" action="#{frontDeskManagedBean.checkToBookRoom(count.index)}" value="#{room.roomNumber}" class="seats" style="background-color: #{frontDeskManagedBean.checkClassColor(count.index)};">
-                                                        <img style="height:20px; width:20px" src="#{request.contextPath}/images/roomimg.jpg"/>
-                                                        <f:ajax immediate="true" execute="roomBtn${count.index}" render=":form" />
-                                                    </h:commandLink>
-
-                                                </c:forEach>
-
-                                            </section>
-                                        </div>
+                                        <c:if test="${frontDeskManagedBean.checkForLineBreak(room) eq true}">
+                                            <div class="col-lg-12">
+                                          
+                                                <div style="text-align: center; margin:20px 0px">
+                                                    <span style="text-align: center; font-size:calc((100% + 0.25vw)*1.3)">Level #{frontDeskManagedBean.getRoomLevel(room)}</span>
+                                                </div>
+                                            </div>
+                                           
+                                        </c:if>
+                                        
+                                        <c:if test="#{frontDeskManagedBean.checkDeluxe(room)}">
+                                         <div class="col-lg-3"></div>
+                                        </c:if>
+                                        
+                                        <c:if test="#{frontDeskManagedBean.checkStandard(room)}">
+                                         <div class="col-lg-1"></div>
+                                        </c:if>
+                                        
+                                        <c:if test="#{frontDeskManagedBean.checkPremium(room)}">
+                                         <div class="col-lg-2"></div>
+                                        </c:if>
+                                        
+                                         <c:if test="#{frontDeskManagedBean.checkSuite(room)}">
+                                         <div class="col-lg-4"></div>
+                                        </c:if>
+                                         <c:if test="#{frontDeskManagedBean.checkPenthouse(room)}">
+                                         <div class="col-lg-4"></div>
+                                        </c:if>
 
 
-                                        <div class="card-footer">
-                                            <h:commandButton class="btn btn-primary" action="walkinState.xhtml?faces-redirect=true" value="Back" ></h:commandButton>
-                                            <h:commandButton class="btn btn-primary" action="#{frontDeskManagedBean.showWalkInSummary()}" value="Next"></h:commandButton>
-                                        </div>
-                                    </h:form>
+
+                                        <c:if test="${frontDeskManagedBean.checkForLineBreakForStandard(room) eq true}">
+                                            <div class="col-lg-1"></div>   
+                                            <div class="col-lg-1"></div>
+                                            <div class='col-lg-10' style='height:20px;'></div>
+                                             <div class="col-lg-1"></div>
+                                            <div class="col-lg-1"></div>
+                                        </c:if>
+                                        
+
+                                        <c:if test="${frontDeskManagedBean.checkForLineBreakForDeluxe(room) eq true}">
+                                            <div class="col-lg-3"></div>
+                                             <div class="col-lg-1"></div>
+                                            <div class='col-lg-10' style='height:20px; '></div>
+                                             <div class="col-lg-1"></div>
+                                              <div class="col-lg-3"></div>
+                                        </c:if>
+
+                                        <c:if test="${frontDeskManagedBean.checkForLineBreakForPremium(room) eq true}">
+                                            <div class="col-lg-2"></div>
+                                            <div class="col-lg-1"></div>
+                                            <div class='col-lg-10' style='height:20px;'></div>
+                                             <div class="col-lg-1"></div>
+                                              <div class="col-lg-2"></div>
+
+                                        </c:if>
+                                        
+                                        <c:if test="${frontDeskManagedBean.checkForLineBreakForSuite(room) eq true}">
+                                            <div class="col-lg-5"></div>
+                                            <div class="col-lg-1"></div>
+                                            <div class='col-lg-10' style='height:20px; '></div>
+                                             <div class="col-lg-1"></div>
+                                              <div class="col-lg-3"></div>
+
+                                        </c:if>
+
+                                        <c:if test="${frontDeskManagedBean.checkForLineBreakForPenthouse(room) eq true}">
+                                            <div class="col-lg-4"></div>
+                                            <div class="col-lg-1"></div>
+                                            <div class='col-lg-10' style='height:20px; '></div>
+                                             <div class="col-lg-1"></div>
+                                             <div class="col-lg-4"></div>
+                                        </c:if>
+                                        
+
+                                        
+                                            <h:commandLink id="roomBtn${count.index}" action="#{frontDeskManagedBean.checkToBookRoom(count.index)}" class="col-lg-1" 
+                                                           style="border: 1px solid lightgrey ;height:90px; margin-bottom:10px; margin:0px; padding:0px;  background-color: #{frontDeskManagedBean.checkClassColor(count.index)}; font-size:calc((100% + 0.25vw)*1.2); color:black">
+                                                <span style="position:absolute; top:25px; left:30px">#{room.roomNumber}</span>
+                                                <f:ajax immediate="true" execute="roomBtn${count.index}" render=":form" />
+                                            </h:commandLink>
+                                        <div class="col-lg-1" style='border: 1px solid lightgrey; margin:0px; padding:0px'></div>
+                                      
+
+                                    </c:forEach>
+                                    <div class='col-lg-11' style="margin:20px 0px; text-align:right">
+                                         <h:commandButton class="btn btn-primary" style="font-size: calc((100% + 0.25vw)*1.5); padding:10px; margin-right:20px" action="walkinState.xhtml?faces-redirect=true" value="Back" ></h:commandButton>
+                                          <h:commandButton class="btn btn-primary" style="font-size: calc((100% + 0.25vw)*1.5); padding:10px; " action="#{frontDeskManagedBean.showWalkInSummary()}" value="Next"></h:commandButton>
+                                    </div>
+                                    <div class="col-lg-1"></div>
+                                               
                                 </div>
-                            </div>
+
+
+                            </section>
                         </div>
-                    </div>
+
+
+                       
+                
+                     
+                    </h:form>
+
+
                     <!-- /.container-fluid -->
                 </section>
                 <!-- /.content-header -->

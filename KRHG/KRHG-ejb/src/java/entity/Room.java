@@ -34,13 +34,12 @@ public class Room implements Serializable {
     private List<RoomFacility> roomFacilities;
     @OneToMany
     private List<MinibarItem> miniBarItems;
-    @OneToMany(mappedBy = "room")
-    private List<CleaningSchedule> cleaningSchedules;
+  
 
     public Room() {
         this.roomFacilities = new ArrayList<RoomFacility>();
         this.miniBarItems = new ArrayList<MinibarItem>();
-        this.cleaningSchedules = new ArrayList<CleaningSchedule>();
+      
     }
 
     public Room(String roomName, String roomNumber, String roomType, int roomPax, String status, Hotel hotel) {
@@ -182,13 +181,7 @@ public class Room implements Serializable {
         this.miniBarItems = miniBarItems;
     }
 
-    public List<CleaningSchedule> getCleaningSchedules() {
-        return cleaningSchedules;
-    }
-
-    public void setCleaningSchedules(List<CleaningSchedule> cleaningSchedules) {
-        this.cleaningSchedules = cleaningSchedules;
-    }
+   
 
     public Hotel getHotel() {
         return hotel;
@@ -198,21 +191,8 @@ public class Room implements Serializable {
         this.hotel = hotel;
     }
 
-    public void addCleaningSchedule(CleaningSchedule cleaningSchedule) throws NoResultException {
-        if (cleaningSchedule != null && !this.getCleaningSchedules().contains(cleaningSchedule)) {
-            this.getCleaningSchedules().add(cleaningSchedule);
-        } else {
-            throw new NoResultException("Cleaning schedule already added to Room");
-        }
-    }
+   
 
-    public void removeCleaningSchedule(CleaningSchedule cleaningSchedule) throws NoResultException {
-        if (cleaningSchedule != null && this.getCleaningSchedules().contains(cleaningSchedule)) {
-            this.getCleaningSchedules().remove(cleaningSchedule);
-        } else {
-            throw new NoResultException("Cleaning schedule has not been added to Room");
-        }
-    }
 
     public void addMinibarItem(MinibarItem minibarItem) throws NoResultException {
         if (minibarItem != null && !this.getMiniBarItems().contains(minibarItem)) {

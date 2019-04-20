@@ -15,6 +15,8 @@ import entity.Logging;
 import entity.MailingList;
 import entity.MemberTier;
 import entity.MinibarItem;
+import entity.PaymentTransaction;
+import entity.PromoCode;
 import entity.Room;
 import entity.RoomFacility;
 import entity.RoomPricing;
@@ -60,6 +62,8 @@ import sessionBeans.HouseKeepingOrderSessionLocal;
 import sessionBeans.LogSessionLocal;
 import sessionBeans.MailingListSessionLocal;
 import sessionBeans.MemberTierSessionLocal;
+import sessionBeans.PaymentTransactionSessionLocal;
+import sessionBeans.PromoCodeSessionLocal;
 import sessionBeans.RoomFacilitySessionLocal;
 import sessionBeans.RoomPricingSessionLocal;
 import sessionBeans.RoomSessionLocal;
@@ -104,6 +108,10 @@ public class HotelManagedBean implements Serializable {
     WeeklyScheduleSessionLocal weeklyScheduleSessionLocal;
     @EJB
     ShiftSessionLocal shiftSessionLocal;
+    @EJB
+    PaymentTransactionSessionLocal paymentTransactionSessionLocal;
+    @EJB
+    PromoCodeSessionLocal promocodesessionlocal;
 
     private String loggedInUser;
 
@@ -214,6 +222,18 @@ public class HotelManagedBean implements Serializable {
 
     public String selectedDateDropDown;
 
+    public String topGrossingHotel;
+
+    public double topGrossingAmount = 0;
+    //promocode
+    public List<PromoCode> allPromoCode;
+    private String promocodeName;
+    private String promoStartDate;
+    private String promoEndDate;
+    private double promodiscount;
+    private String promoStatus;
+    private PromoCode editPromo;
+
     @ManagedProperty(value = "#{authenticationManagedBean}")
     private AuthenticationManagedBean authBean;
 
@@ -306,6 +326,112 @@ public class HotelManagedBean implements Serializable {
         return customerSessionLocal.getAllCustomers();
     }
 
+    public String getTopGrossingHotel() throws Exception {
+        double roundOff = getKrgTotalRevenue();
+        if (roundOff > topGrossingAmount) {
+            topGrossingAmount = roundOff;
+            topGrossingHotel = "Kent Ridge Grand";
+        }
+
+        double roundOff2 = getKrcTotalRevenue();
+        if (roundOff2 > topGrossingAmount) {
+            topGrossingAmount = roundOff;
+            topGrossingHotel = "Kent Ridge Central";
+        }
+        double roundOff3 = getKrnTotalRevenue();
+        if (roundOff3 > topGrossingAmount) {
+            topGrossingAmount = roundOff;
+            topGrossingHotel = "Kent Ridge North";
+        }
+        double roundOff4 = getKrsTotalRevenue();
+        if (roundOff4 > topGrossingAmount) {
+            topGrossingAmount = roundOff;
+            topGrossingHotel = "Kent Ridge South";
+        }
+        double roundOff5 = getKreTotalRevenue();
+        if (roundOff5 > topGrossingAmount) {
+            topGrossingAmount = roundOff;
+            topGrossingHotel = "Kent Ridge East";
+        }
+
+        double roundOff6 = getKrwTotalRevenue();
+        if (roundOff6 > topGrossingAmount) {
+            topGrossingAmount = roundOff;
+            topGrossingHotel = "Kent Ridge West";
+        }
+        double roundOff7 = getKrneTotalRevenue();
+        if (roundOff7 > topGrossingAmount) {
+            topGrossingAmount = roundOff;
+            topGrossingHotel = "Kent Ridge North East";
+        }
+
+        double roundOff8 = getKrnwTotalRevenue();
+        if (roundOff8 > topGrossingAmount) {
+            topGrossingAmount = roundOff;
+            topGrossingHotel = "Kent Ridge North West";
+        }
+
+        double roundOff9 = getKrseTotalRevenue();
+        if (roundOff9 > topGrossingAmount) {
+            topGrossingAmount = roundOff;
+            topGrossingHotel = "Kent Ridge South East";
+        }
+
+        double roundOff10 = getKrswTotalRevenue();
+        if (roundOff10 > topGrossingAmount) {
+            topGrossingAmount = roundOff;
+            topGrossingHotel = "Kent Ridge South West";
+        }
+        return topGrossingHotel;
+    }
+
+    public String getTopMonth() throws NoResultException, ParseException {
+        double highest = 0;
+        String topMonth = "";
+        double roundOff1 = getJanTotalRevenue();
+        if (roundOff1 > highest) {
+            highest = roundOff1;
+            topMonth = "January";
+        }
+
+        double roundOff2 = getFebTotalRevenue();
+        if (roundOff2 > highest) {
+            highest = roundOff2;
+            topMonth = "February";
+        }
+
+        double roundOff3 = getMarTotalRevenue();
+        if (roundOff3 > highest) {
+            highest = roundOff3;
+            topMonth = "March";
+        }
+
+        double roundOff4 = getAprTotalRevenue();
+        if (roundOff4 > highest) {
+            highest = roundOff4;
+            topMonth = "April";
+        }
+
+        return topMonth;
+    }
+
+    public String getTotalRevenue() throws NoResultException, ParseException {
+        double totalRevenue = 0;
+        totalRevenue = totalRevenue + getJanTotalRevenue();
+        totalRevenue = totalRevenue + getFebTotalRevenue();
+        totalRevenue = totalRevenue + getMarTotalRevenue();
+        totalRevenue = totalRevenue + getAprTotalRevenue();
+
+        double roundOff = (double) Math.round(totalRevenue * 100) / 100;
+        String roundOffString = "$" + String.format("%,.2f", roundOff);
+        return roundOffString;
+
+    }
+
+    public void setTopGrossingHotel(String topGrossingHotel) {
+        this.topGrossingHotel = topGrossingHotel;
+    }
+
     public String convertDateFormat(Date date) {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         return dateFormat.format(date);
@@ -315,13 +441,411 @@ public class HotelManagedBean implements Serializable {
         List<Room> rooms = roomSessionLocal.getAllRooms();
         List<Room> occupiedRooms = new ArrayList<Room>();
         for (Room r : rooms) {
-            if (r.getStatus().equals("occupied")) {
+            if (r.getStatus().equals("Occupied")) {
+                Room tempRoom = r;
+                occupiedRooms.add(tempRoom);
+            }
+        }
+        double ocr = occupiedRooms.size() * 1.0;
+        double rs = rooms.size() * 1.0;
+
+        double rate = ocr / rs;
+        double ratePercent = rate * 100;
+        double roundOff = (double) Math.round(ratePercent * 100) / 100;
+        String str1 = Double.toString(roundOff);
+        return str1;
+    }
+
+    public String getFeedbackRate() {
+        List<Feedback> feedbacks = feedbackSessionLocal.getAllFeedbacks();
+        int ratingTotal = 0;
+        for (Feedback f : feedbacks) {
+            ratingTotal = ratingTotal + f.getFeedbackRating();
+        }
+        double feedbackTotal = ratingTotal * 1.0;
+        double feedbackBase = feedbacks.size() * 1.0;
+        double feedbackRate = feedbackTotal / feedbackBase;
+        double roundOff = (double) Math.round(feedbackRate * 10) / 10.0;
+        String str1 = Double.toString(roundOff);
+        return str1;
+    }
+
+    public String getFeedbackRatePct() {
+        List<Feedback> feedbacks = feedbackSessionLocal.getAllFeedbacks();
+        int ratingTotal = 0;
+        for (Feedback f : feedbacks) {
+            ratingTotal = ratingTotal + f.getFeedbackRating();
+        }
+        double feedbackTotal = ratingTotal * 1.0;
+        double feedbackBase = feedbacks.size() * 1.0;
+        double feedbackRate = feedbackTotal / feedbackBase;
+        double feedbackPct = feedbackRate * 20.0;
+        double roundOff = (double) Math.round(feedbackPct * 10) / 10.0;
+        String str1 = Double.toString(roundOff);
+        return str1;
+    }
+
+    public String getTopPerformingHotel() throws NoResultException {
+        List<Hotel> hotels = hotelSessionLocal.getAllHotels();
+
+        int index = 0;
+        double highestOccRate = 0.0;
+        String highestHotelName = "";
+        List<Room> occupiedRooms = new ArrayList<Room>();
+        while (index < hotels.size()) {
+            List<Room> tempRoom = roomSessionLocal.getRoomByHotelCodeName(hotels.get(index).getHotelCodeName());
+            for (Room r : tempRoom) {
+                if (r.getStatus().equals("Occupied")) {
+                    Room temp = r;
+                    occupiedRooms.add(temp);
+                }
+            }
+
+            double ocr = occupiedRooms.size() * 1.0;
+            double rs = tempRoom.size() * 1.0;
+            double rate = ocr / rs;
+
+            if (rate > highestOccRate) {
+                highestOccRate = rate;
+                highestHotelName = hotels.get(index).getHotelName();
+            }
+            occupiedRooms.clear();
+
+            index++;
+        }//end of while-loop
+
+        return highestHotelName;
+    }
+
+    public String getTopOccupiedRate() throws NoResultException {
+        List<Hotel> hotels = hotelSessionLocal.getAllHotels();
+
+        int index = 0;
+        double highestOccRate = 0.0;
+        String highestHotelName = "";
+        List<Room> occupiedRooms = new ArrayList<Room>();
+        while (index < hotels.size()) {
+            List<Room> tempRoom = roomSessionLocal.getRoomByHotelCodeName(hotels.get(index).getHotelCodeName());
+            for (Room r : tempRoom) {
+                if (r.getStatus().equals("Occupied")) {
+                    Room temp = r;
+                    occupiedRooms.add(temp);
+                }
+            }
+
+            double ocr = occupiedRooms.size() * 1.0;
+            double rs = tempRoom.size() * 1.0;
+            double rate = ocr / rs;
+
+            if (rate > highestOccRate) {
+                highestOccRate = rate;
+                highestHotelName = hotels.get(index).getHotelName();
+            }
+            occupiedRooms.clear();
+            index++;
+        }//end of while-loop
+
+        double ratePercent = highestOccRate * 100;
+        double roundOff = (double) Math.round(ratePercent * 100) / 100;
+        String str1 = Double.toString(roundOff);
+        return str1;
+    }
+
+    public String getHotelOccupancyRate() throws NoResultException {
+        List<Room> rooms = roomSessionLocal.getRoomByHotelName(selectedHotel);
+        List<Room> occupiedRooms = new ArrayList<Room>();
+        for (Room r : rooms) {
+            if (r.getStatus().equals("Occupied")) {
+                Room tempRoom = r;
+                occupiedRooms.add(tempRoom);
+            }
+        }
+        double ocr = occupiedRooms.size() * 1.0;
+        double rs = rooms.size() * 1.0;
+
+        double rate = ocr / rs;
+        double ratePercent = rate * 100;
+        double roundOff = (double) Math.round(ratePercent * 100) / 100;
+        String str1 = Double.toString(roundOff);
+        return str1;
+    }
+
+    public String getHotelAvailableRoom() throws NoResultException {
+        List<Room> rooms = roomSessionLocal.getRoomByHotelName(selectedHotel);
+        List<Room> occupiedRooms = new ArrayList<Room>();
+        for (Room r : rooms) {
+            if (r.getStatus().equals("Available")) {
                 Room tempRoom = r;
                 occupiedRooms.add(tempRoom);
             }
         }
 
-        return ((occupiedRooms.size() / rooms.size()) * 100) + "";
+        String str1 = Integer.toString(occupiedRooms.size());
+        return str1;
+    }
+
+    public String getHotelUnavailableRoom() throws NoResultException {
+        List<Room> rooms = roomSessionLocal.getRoomByHotelName(selectedHotel);
+        List<Room> occupiedRooms = new ArrayList<Room>();
+        for (Room r : rooms) {
+            if (r.getStatus().equals("Unavailable")) {
+                Room tempRoom = r;
+                occupiedRooms.add(tempRoom);
+            }
+        }
+
+        String str1 = Integer.toString(occupiedRooms.size());
+        return str1;
+    }
+
+    public String getHotelFeedbackRate() throws NoResultException {
+        List<Feedback> feedbacks = feedbackSessionLocal.getAllFeedbacks();
+        int ratingTotal = 0;
+        int feedbackBase = 0;
+        for (Feedback f : feedbacks) {
+            if (f.getHotel().getHotelName().equals(selectedHotel)) {
+                ratingTotal = ratingTotal + f.getFeedbackRating();
+                feedbackBase = feedbackBase + 1;
+            }
+        }
+        double feedbackTotal = ratingTotal * 1.0;
+        double feedbackRate = feedbackTotal / feedbackBase;
+        double roundOff = (double) Math.round(feedbackRate * 10) / 10.0;
+        String str1 = Double.toString(roundOff);
+        return str1;
+    }
+
+    public String getHotelFeedbackRatePct() throws NoResultException {
+        List<Feedback> feedbacks = feedbackSessionLocal.getAllFeedbacks();
+        int ratingTotal = 0;
+        int feedbackBase = 0;
+        for (Feedback f : feedbacks) {
+            if (f.getHotel().getHotelName().equals(selectedHotel)) {
+                ratingTotal = ratingTotal + f.getFeedbackRating();
+                feedbackBase = feedbackBase + 1;
+            }
+        }
+        double feedbackTotal = ratingTotal * 1.0;
+        double feedbackRate = feedbackTotal / feedbackBase;
+        double feedbackPct = feedbackRate * 20.0;
+        double roundOff = (double) Math.round(feedbackPct * 10) / 10.0;
+        String str1 = Double.toString(roundOff);
+        return str1;
+    }
+
+    public double getJanTotalRevenue() throws NoResultException, ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        List<PaymentTransaction> pts = paymentTransactionSessionLocal.getAllPaymentTransaction();
+        double totalJan = 0;
+        for (PaymentTransaction pt : pts) {
+            if (pt.getTransactionDateTime().compareTo(format.parse("2018-12-31")) == 1 && pt.getTransactionDateTime().compareTo(format.parse("2019-02-01")) == -1) {
+                totalJan = totalJan + pt.getFinalPayment();
+            }
+        }
+
+        double roundOff = (double) Math.round(totalJan * 100) / 100;
+        return roundOff;
+    }
+
+    public double getFebTotalRevenue() throws NoResultException, ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        List<PaymentTransaction> pts = paymentTransactionSessionLocal.getAllPaymentTransaction();
+        double totalJan = 0;
+        for (PaymentTransaction pt : pts) {
+            if (pt.getTransactionDateTime().compareTo(format.parse("2019-01-31")) == 1 && pt.getTransactionDateTime().compareTo(format.parse("2019-03-01")) == -1) {
+                totalJan = totalJan + pt.getFinalPayment();
+            }
+        }
+        double roundOff = (double) Math.round(totalJan * 100) / 100;
+        return roundOff;
+    }
+
+    public double getMarTotalRevenue() throws NoResultException, ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        List<PaymentTransaction> pts = paymentTransactionSessionLocal.getAllPaymentTransaction();
+        double totalJan = 0;
+        for (PaymentTransaction pt : pts) {
+            if (pt.getTransactionDateTime().compareTo(format.parse("2019-02-28")) == 1 && pt.getTransactionDateTime().compareTo(format.parse("2019-04-01")) == -1) {
+                totalJan = totalJan + pt.getFinalPayment();
+            }
+        }
+        double roundOff = (double) Math.round(totalJan * 100) / 100;
+        return roundOff;
+    }
+
+    public double getAprTotalRevenue() throws NoResultException, ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        List<PaymentTransaction> pts = paymentTransactionSessionLocal.getAllPaymentTransaction();
+        double totalJan = 0;
+        for (PaymentTransaction pt : pts) {
+            if (pt.getTransactionDateTime().compareTo(format.parse("2019-03-31")) == 1 && pt.getTransactionDateTime().compareTo(format.parse("2019-05-01")) == -1) {
+                totalJan = totalJan + pt.getFinalPayment();
+            }
+        }
+        double roundOff = (double) Math.round(totalJan * 100) / 100;
+        return roundOff;
+    }
+
+    public double getKrgTotalRevenue() throws NoResultException {
+        List<PaymentTransaction> pts = paymentTransactionSessionLocal.getAllPaymentTransaction();
+        double totalKRG = 0;
+        for (PaymentTransaction pt : pts) {
+            if (pt.getRoomsBooked().get(0).getBookedRoom().getHotel().getHotelCodeName().equals("KRG")) {
+                totalKRG = totalKRG + pt.getFinalPayment();
+            }
+        }
+
+        double roundOff = (double) Math.round(totalKRG * 100) / 100;
+        if (roundOff > topGrossingAmount) {
+            topGrossingAmount = roundOff;
+            topGrossingHotel = "Kent Ridge Grand";
+        }
+        return roundOff;
+    }
+
+    public double getKrcTotalRevenue() throws NoResultException {
+        List<PaymentTransaction> pts = paymentTransactionSessionLocal.getAllPaymentTransaction();
+        double totalKRG = 0;
+        for (PaymentTransaction pt : pts) {
+            if (pt.getRoomsBooked().get(0).getBookedRoom().getHotel().getHotelCodeName().equals("KRC")) {
+                totalKRG = totalKRG + pt.getFinalPayment();
+            }
+        }
+        double roundOff = (double) Math.round(totalKRG * 100) / 100;
+        if (roundOff > topGrossingAmount) {
+            topGrossingAmount = roundOff;
+            topGrossingHotel = "Kent Ridge Central";
+        }
+        return roundOff;
+    }
+
+    public double getKrnTotalRevenue() throws NoResultException {
+        List<PaymentTransaction> pts = paymentTransactionSessionLocal.getAllPaymentTransaction();
+        double totalKRG = 0;
+        for (PaymentTransaction pt : pts) {
+            if (pt.getRoomsBooked().get(0).getBookedRoom().getHotel().getHotelCodeName().equals("KRN")) {
+                totalKRG = totalKRG + pt.getFinalPayment();
+            }
+        }
+        double roundOff = (double) Math.round(totalKRG * 100) / 100;
+        if (roundOff > topGrossingAmount) {
+            topGrossingAmount = roundOff;
+            topGrossingHotel = "Kent Ridge North";
+        }
+        return roundOff;
+    }
+
+    public double getKrsTotalRevenue() throws NoResultException {
+        List<PaymentTransaction> pts = paymentTransactionSessionLocal.getAllPaymentTransaction();
+        double totalKRG = 0;
+        for (PaymentTransaction pt : pts) {
+            if (pt.getRoomsBooked().get(0).getBookedRoom().getHotel().getHotelCodeName().equals("KRS")) {
+                totalKRG = totalKRG + pt.getFinalPayment();
+            }
+        }
+        double roundOff = (double) Math.round(totalKRG * 100) / 100;
+        if (roundOff > topGrossingAmount) {
+            topGrossingAmount = roundOff;
+            topGrossingHotel = "Kent Ridge South";
+        }
+        return roundOff;
+    }
+
+    public double getKreTotalRevenue() throws NoResultException {
+        List<PaymentTransaction> pts = paymentTransactionSessionLocal.getAllPaymentTransaction();
+        double totalKRG = 0;
+        for (PaymentTransaction pt : pts) {
+            if (pt.getRoomsBooked().get(0).getBookedRoom().getHotel().getHotelCodeName().equals("KRE")) {
+                totalKRG = totalKRG + pt.getFinalPayment();
+
+            }
+        }
+        double roundOff = (double) Math.round(totalKRG * 100) / 100;
+        if (roundOff > topGrossingAmount) {
+            topGrossingAmount = roundOff;
+            topGrossingHotel = "Kent Ridge East";
+        }
+        return roundOff;
+    }
+
+    public double getKrwTotalRevenue() throws NoResultException {
+        List<PaymentTransaction> pts = paymentTransactionSessionLocal.getAllPaymentTransaction();
+        double totalKRG = 0;
+        for (PaymentTransaction pt : pts) {
+            if (pt.getRoomsBooked().get(0).getBookedRoom().getHotel().getHotelCodeName().equals("KRW")) {
+                totalKRG = totalKRG + pt.getFinalPayment();
+            }
+        }
+        double roundOff = (double) Math.round(totalKRG * 100) / 100;
+        if (roundOff > topGrossingAmount) {
+            topGrossingAmount = roundOff;
+            topGrossingHotel = "Kent Ridge West";
+        }
+        return roundOff;
+    }
+
+    public double getKrneTotalRevenue() throws NoResultException {
+        List<PaymentTransaction> pts = paymentTransactionSessionLocal.getAllPaymentTransaction();
+        double totalKRG = 0;
+        for (PaymentTransaction pt : pts) {
+            if (pt.getRoomsBooked().get(0).getBookedRoom().getHotel().getHotelCodeName().equals("KRNE")) {
+                totalKRG = totalKRG + pt.getFinalPayment();
+            }
+        }
+        double roundOff = (double) Math.round(totalKRG * 100) / 100;
+        if (roundOff > topGrossingAmount) {
+            topGrossingAmount = roundOff;
+            topGrossingHotel = "Kent Ridge North East";
+        }
+        return roundOff;
+    }
+
+    public double getKrnwTotalRevenue() throws NoResultException {
+        List<PaymentTransaction> pts = paymentTransactionSessionLocal.getAllPaymentTransaction();
+        double totalKRG = 0;
+        for (PaymentTransaction pt : pts) {
+            if (pt.getRoomsBooked().get(0).getBookedRoom().getHotel().getHotelCodeName().equals("KRNW")) {
+                totalKRG = totalKRG + pt.getFinalPayment();
+            }
+        }
+        double roundOff = (double) Math.round(totalKRG * 100) / 100;
+        if (roundOff > topGrossingAmount) {
+            topGrossingAmount = roundOff;
+            topGrossingHotel = "Kent Ridge North West";
+        }
+        return roundOff;
+    }
+
+    public double getKrseTotalRevenue() throws NoResultException {
+        List<PaymentTransaction> pts = paymentTransactionSessionLocal.getAllPaymentTransaction();
+        double totalKRG = 0;
+        for (PaymentTransaction pt : pts) {
+            if (pt.getRoomsBooked().get(0).getBookedRoom().getHotel().getHotelCodeName().equals("KRSE")) {
+                totalKRG = totalKRG + pt.getFinalPayment();
+            }
+        }
+        double roundOff = (double) Math.round(totalKRG * 100) / 100;
+        if (roundOff > topGrossingAmount) {
+            topGrossingAmount = roundOff;
+            topGrossingHotel = "Kent Ridge South East";
+        }
+        return roundOff;
+    }
+
+    public double getKrswTotalRevenue() throws NoResultException {
+        List<PaymentTransaction> pts = paymentTransactionSessionLocal.getAllPaymentTransaction();
+        double totalKRG = 0;
+        for (PaymentTransaction pt : pts) {
+            if (pt.getRoomsBooked().get(0).getBookedRoom().getHotel().getHotelCodeName().equals("KRSW")) {
+                totalKRG = totalKRG + pt.getFinalPayment();
+            }
+        }
+        double roundOff = (double) Math.round(totalKRG * 100) / 100;
+        if (roundOff > topGrossingAmount) {
+            topGrossingAmount = roundOff;
+            topGrossingHotel = "Kent Ridge South West";
+        }
+        return roundOff;
     }
 
     public String selectMailingList(MailingList m) {
@@ -2609,4 +3133,83 @@ public class HotelManagedBean implements Serializable {
         this.selectedHotelID = selectedHotelID;
     }
 
+    public List<PromoCode> getAllPromoCode() {
+        return allPromoCode = promocodesessionlocal.getAllPromoCodes();
+    }
+
+    public void setAllPromoCode(List<PromoCode> allPromoCode) {
+        this.allPromoCode = allPromoCode;
+    }
+
+    public String getPromocodeName() {
+        return promocodeName;
+    }
+
+    public void setPromocodeName(String promocodeName) {
+        this.promocodeName = promocodeName;
+    }
+
+    public String getPromoStartDate() {
+        return promoStartDate;
+    }
+
+    public void setPromoStartDate(String promoStartDate) {
+        this.promoStartDate = promoStartDate;
+    }
+
+    public String getPromoEndDate() {
+        return promoEndDate;
+    }
+
+    public void setPromoEndDate(String promoEndDate) {
+        this.promoEndDate = promoEndDate;
+    }
+
+    public double getPromodiscount() {
+        return promodiscount;
+    }
+
+    public void setPromodiscount(double promodiscount) {
+        this.promodiscount = promodiscount;
+    }
+
+    public String createPromoCode() throws ParseException {
+        PromoCode pc = new PromoCode();
+        pc.setPromoCode(promocodeName);
+        pc.setDiscount(promodiscount);
+        pc.setStartDate(new SimpleDateFormat("yyyy-MM-dd").parse(promoStartDate));
+        pc.setEndDate(new SimpleDateFormat("yyyy-MM-dd").parse(promoEndDate));
+        pc.setStatus("Active");
+
+        promocodesessionlocal.createPromoCode(pc);
+        promocodeName = null;
+        promodiscount = 0.0;
+        promoStartDate = null;
+        promoEndDate = null;
+
+        return "promocode.xhtml?faces-redirect=true";
+    }
+
+    public String editPromo(PromoCode o) {
+        editPromo = o;
+        promocodeName = o.getPromoCode();
+        promodiscount = o.getDiscount() * 100;
+        promoStatus = o.getStatus();
+        promoStartDate = convertDateFormat(o.getStartDate());
+        promoEndDate = convertDateFormat(o.getEndDate());;
+
+        return "editPromoCode.xhtml?faces-redirect=true";
+    }
+
+    public String doupdatePromocode()throws ParseException,NoResultException {
+        editPromo.setPromoCode(promocodeName);
+        editPromo.setDiscount(promodiscount);
+        editPromo.setStartDate(new SimpleDateFormat("yyyy-MM-dd").parse(promoStartDate));
+        editPromo.setEndDate(new SimpleDateFormat("yyyy-MM-dd").parse(promoEndDate));
+        editPromo.setStatus(promoStatus);
+        
+        promocodesessionlocal.updatePromoCode(editPromo);
+        
+        return "promocode.xhtml?faces-redirect=true";
+    }
 }

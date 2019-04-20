@@ -27,7 +27,8 @@
         <!-- iCheck for checkboxes and radio inputs -->
         <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/plugins/iCheck/all.css"></link>
 
-
+        <!-- table scroll diancong burden -->
+        <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/select2/dist/css/diancong.css"/>
 
         <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -534,6 +535,26 @@
             $('.item').click(function () {
                 getFOList(this.id);
             });
+              function handleDrop(event, ui) {
+
+                console.log(event.target.id);
+                var droppedCar = ui.draggable;
+
+                var str = event.target.id;
+                var res = str.split(":");
+
+                //var test1 = document.getElementById("hidden" + res[1]).value = res[1];
+                //document.getElementById(ViewState).value = res[1];
+                //console.log(test1.values());
+
+                //droppedCar.fadeOut('fast');
+
+
+                let inputs = document.getElementsByTagName('inputHidden');
+                for (let input of inputs) {
+                    console.log(input.value);
+                }
+            }
         </script>
         
        
