@@ -108,62 +108,79 @@
             </div>
 
             <!-- Contact -->
-
+   <h:form>
             <div class="contact">
                 <div class="container">
                     <div class="row">
 
                         <!-- Contact Content -->
-                        <div class="col-lg-6">
+                        <div class="col-lg-12">
                             <div class="contact_content">
-                                <div class="contact_title"><h2>Feeback</h2></div>
+                                <div class="contact_title"><h2>Feedback</h2></div>
                                 <div class="contact_form_container">
-                                    <form action="#" class="contact_form" id="contact_form">
-                                        <div class="row">
-                                            <div class="col-md-6 input_container">
-                                                Hotel
-                                                <select>
-                                                    <option value="1">Kent Ridge Grand</option>
-                                                    <option value="2">Kent Ridge Central</option>
-                                                    <option value="3">Kent Ridge North</option>
-                                                    <option value="4">Kent Ridge North East</option>
-                                                    <option value="5">Kent Ridge East</option>
-                                                    <option value="6">Kent Ridge South East</option>
-                                                    <option value="7">Kent Ridge South</option>
-                                                    <option value="8">Kent Ridge South West</option>
-                                                    <option value="9">Kent Ridge West</option>
-                                                    <option value="10">Kent Ridge North West</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="input_container"><input type="text" class="contact_input" placeholder="Subject" /></div>
-                                        <div class="input_container"><textarea class="contact_input contact_textarea" placeholder="Message" required="required"></textarea></div>
-                                        <button class="contact_button">Send</button>
-                                    </form>
+                                
+									
+								<div class="row">
+										<div class="col-md-12">
+												<div class="form-group">
+													<span class="form-label">Overall Experience</span>
+													<div class="rowrow">
+													<fieldset class="rate">
+															<input id="rate1-star5" type="radio" name="rate1" value="5" />
+															<label for="rate1-star5" title="Excellent">5</label>
+														
+															<input id="rate1-star4" type="radio" name="rate1" value="4" />
+															<label for="rate1-star4" title="Good">4</label>
+														
+															<input id="rate1-star3" type="radio" name="rate1" value="3" />
+															<label for="rate1-star3" title="Satisfactory">3</label>
+														
+															<input id="rate1-star2" type="radio" name="rate1" value="2" />
+															<label for="rate1-star2" title="Bad">2</label>
+														
+															<input id="rate1-star1" type="radio" name="rate1" value="1" />
+															<label for="rate1-star1" title="Very bad">1</label>
+														  </fieldset>
+														  </div>
+														
+												</div>
+											</div>
+		
+								</div>
+								<div class="row">
+										<div class="col-md-6">
+												<div class="form-group">
+													<label for="name">Name</label>
+													<h:inputTextarea class="form-control" value="" id="name" a:placeholder="Enter Your Name" />
+												</div>
+											</div>
+									
+								</div>
+
+								<div class="row">
+										<div class="col-md-6">
+												<div class="form-group">
+													<label for="comments">Your Comments</label>
+													<h:inputTextarea class="form-control" value="" id="comments" a:placeholder="Enter Your Comments" />
+												</div>
+											</div>
+									
+								</div>					
+					
+								<div class="form-btn">
+									<h:commandButton class="submit-btn" value="Cancel" action="" style="margin-right:10px"></h:commandButton>
+                                    <h:commandButton class="submit-btn" value="Save" action=""></h:commandButton>
+								</div>
+		
+								
                                 </div>
-                            </div>
-                        </div>
-
-                        <!-- Google Map -->
-                        <div class="col-xl-5 col-lg-6 offset-xl-1">
-                            <div class="contact_map">
-
-                                <!-- Google Map -->
-
-                                <div class="map">
-                                    <div id="google_map" class="google_map">
-                                        <div class="map_container">
-                                            <div id="map"></div>
-                                        </div>
-                                    </div>
-                                </div>
-
                             </div>
                         </div>
 
                     </div>
                 </div>
             </div>
+       </h:form>
 
             <!-- Footer -->
 

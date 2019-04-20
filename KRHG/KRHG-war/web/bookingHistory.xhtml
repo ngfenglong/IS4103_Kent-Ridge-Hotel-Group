@@ -114,7 +114,6 @@
 
             <!-- Split Section Right 1 -->
             <h:form>
-               
             <div style="text-align: center;margin-top:130px">
                  <hr></hr>
                 <h:commandLink style="text-decoration: none; color:black; weight:lighter;  padding:0px 10px" action="Profile.xhtml?faces-redirect=true">VIEW PROFILE</h:commandLink>
@@ -131,48 +130,162 @@
                 <div class="container">
                     <div class="row row-xl-eq-height">
 
-                        <div class="col-md-6">
-                            <img src="images/hotels_3.jpg"/>
-                        </div>
+                        
 
-                        <div class="col-md-5 order-xl-2 order-1" style="margin-top:30px">
+                        <div class="col-md-6 " style="margin-top:30px">
                             <div class="home_content" style="margin-left: 30px;padding-left:90px">
-                                    <div class="home_title" style="color:black;font-size:40px">Edit Profile</div>
-                                    <div class="">Update your details for us to serve you better</div>
-                                    
-                                                                    <div class="log-form" style="margin-top:30px">
+                                    <div class="home_title" style="color:black;font-size:40px">Your Previous Bookings</div>
+                                    <div class="">Browse your previous stays</div>
+                                </div>
+                            <div class="split_section_right_content" style="padding-left:90px">
+                                <style>
+                                    table {
+                                        font-family: arial, sans-serif;
+                                        border-collapse: collapse;
+                                        width: 100%;
+                                        border:none;
+                                        color:black;
+                                    }
+
+                                    td, th {
+
+                                        text-align: left;
+                                        padding: 8px;
+                                    }
+
+                                </style>
                                 <h:form>
-                                    <table style="width:100%">
-                                        <tr>
-                                            <td colspan="2">First Name:  </td>
-                                            <td colspan="8" style="padding:10px"> <h:inputText class="form-control" value="#{websiteAuthenticationManagedBean.loggedInCustomer.firstName}" id="fName" a:placeholder="Enter First Name" required="true" /></td>
-                                        </tr>
+                                    <div style="margin:30px; max-height: 300px; overflow-y: scroll">
+                                     
+                                        <div class="row">
+                                             <h:commandLink class="col-md-12" style="border-top:1px solid lightgrey; padding:5px; height:100px">
+                                                <div style="text-align: center">
+                                                     Transaction ID: 5682
+                                                </div>
+                                                 
+                                                 
+                                                  <div class="row" style="margin:10px 0px">
+                                                     Facility Booked: Function Room
+                                                </div>
+                                                 <div class="row">
+                                                     <div  class="col-md-6">
+                                                     Date Booked: 25/8/2017
+                                                </div>
+                                                 <div class="col-md-6" style="text-align: right">
+                                                     Total Amount Paid: $98
+                                                </div>
+                                                 </div>
+                                               
+                                            </h:commandLink>
+                                            <h:commandLink class="col-md-12" style="border-top:1px solid lightgrey; padding:5px; height:100px">
+                                                <div style="text-align: center">
+                                                     Transaction ID: 5682
+                                                </div>
+                                                 
+                                                 
+                                                  <div class="row" style="margin:10px 0px">
+                                                     Facility Booked: Function Room
+                                                </div>
+                                                 <div class="row">
+                                                     <div  class="col-md-6">
+                                                     Date Booked: 25/8/2017
+                                                </div>
+                                                 <div class="col-md-6" style="text-align: right">
+                                                     Total Amount Paid: $98
+                                                </div>
+                                                 </div>
+                                               
+                                            </h:commandLink>
+                                            <h:commandLink class="col-md-12" style="border-top:1px solid lightgrey; padding:5px; height:100px">
+                                                <div style="text-align: center">
+                                                     Transaction ID: 5682
+                                                </div>
+                                                 
+                                                 
+                                                  <div class="row" style="margin:10px 0px">
+                                                     Facility Booked: Function Room
+                                                </div>
+                                                 <div class="row">
+                                                     <div  class="col-md-6">
+                                                     Date Booked: 25/8/2017
+                                                </div>
+                                                 <div class="col-md-6" style="text-align: right">
+                                                     Total Amount Paid: $98
+                                                </div>
+                                                 </div>
+                                               
+                                            </h:commandLink>
+                                        </div>
+                                      
+                                        <c:forEach items="#{websiteAuthenticationManagedBean.pastTransactions}" var="pastTransaction">
+                                            
+                                            <h:commandLink actionListener="#{websiteAuthenticationManagedBean.selectTransaction(pastTransaction.id)}" class="col-md-12" style="border-top:1px solid lightgrey; padding:5px; height:100px">
+                                                <div style="text-align: center">
+                                                    Transaction ID: #{pastTransaction.transactionID}
+                                                </div>
+                                                 
+                                                 
+                                                  <div class="row" style="margin:10px 0px">
+                                                      Facility Booked: #{websiteAuthenticationManagedBean.getTypeOfFacilityBooked(pastTransaction)}
+                                                </div>
+                                                 <div class="row">
+                                                     <div  class="col-md-6">
+                                                         Date Booked: #{pastTransaction.transactionDateTime}
+                                                </div>
+                                                 <div class="col-md-6" style="text-align: right">
+                                                     Total Amount Paid: $#{pastTransaction.finalPayment}
+                                                </div>
+                                                 </div>
+                                               
+                                            </h:commandLink>
+                                           
+                                            <hr></hr>
+                                        </c:forEach>
+                                    </div>
 
+                                </h:form>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 order-xl-2 order-1">
+                            <img src="images/hotels_3.jpg" style="display:none"/>
+                            <h:form id="bookingDetails">
+                                   <div class="home_content" style="margin-left: 30px;padding-left:90px">
+                                    <div class="home_title" style="color:black;font-size:40px">Your Previous Bookings</div>
+                                    <div class="">Browse your previous stays</div>
+                                </div>
+                                <div style="margin:30px">
+                                         <table>
                                         <tr>
-                                            <td colspan="2">Last Name:  </td>
-                                            <td colspan="8" style="padding:10px"> <h:inputText class="form-control" value="#{websiteAuthenticationManagedBean.loggedInCustomer.lastName}" id="lName" a:placeholder="Enter Last Name" required="true" /></td>
-                                        </tr>
+                                            <td colspan="2">Period of Stay:  </td>
+                                            <td colspan="8">#{websiteAuthenticationManagedBean.loggedInCustomer.firstName}</td>
 
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">Number of Rooms:  </td>
+                                            <td colspan="8">#{websiteAuthenticationManagedBean.loggedInCustomer.lastName}</td>
+
+                                        </tr>
                                         <tr>
                                             <td colspan="2">Email: </td>
-                                            <td colspan="8" style="padding:10px"><h:inputText class="form-control" value="#{websiteAuthenticationManagedBean.loggedInCustomer.email}" id="email" a:placeholder="Enter email" required="true" /></td>
+                                            <td colspan="8">#{websiteAuthenticationManagedBean.loggedInCustomer.email}</td>
 
                                         </tr>
+
 
                                         <tr>
                                             <td colspan="2">Contact Number: </td>
-                                            <td colspan="8" style="padding:10px"><h:inputText class="form-control" value="#{websiteAuthenticationManagedBean.loggedInCustomer.mobileNum}" id="mobileNumber" a:placeholder="Enter Contact Number" required="true" /></td>
+                                            <td colspan="8">#{websiteAuthenticationManagedBean.loggedInCustomer.mobileNum}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td colspan="2">Loyalty Points: </td>
+                                            <td colspan="8">#{websiteAuthenticationManagedBean.loggedInCustomer.points}</td>
                                         </tr>
                                     </table>
-                                    <br></br>
-                                    <div>
-                                        <h:commandButton id="saveBtn" class="book_button" style="color:white; font-size: medium; width:100%; margin:0px"  action="#{websiteAuthenticationManagedBean.updateProfile()}" value="Save" />
+                                    
                                     </div>
-                                </h:form>
-                                </div>
-                                </div>
-                                                           
-
+                            </h:form>
                         </div>
                     </div>
 
