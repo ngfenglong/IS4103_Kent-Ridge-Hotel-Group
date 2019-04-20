@@ -19,6 +19,7 @@ import javax.ejb.Local;
 @Local
 public interface RoomSessionLocal {
     public List<Room> getAllRooms();
+    public List<Room> getRoomByHotelCodeName(String hotelCodeName) throws NoResultException;
     public Room getRoomByID(Long cID) throws NoResultException;
     public Room getRoomByRoomNumber(String roomNumber) throws NoResultException;
     public List<Room> getRoomByStatus(String status, String hotelCodeName) throws NoResultException;
