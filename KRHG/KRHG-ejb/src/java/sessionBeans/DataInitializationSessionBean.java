@@ -15907,11 +15907,11 @@ public class DataInitializationSessionBean {
         RoomBooking rb1 = new RoomBooking();
         rb1.setBookInDate(format.parse("2019-03-10"));
         rb1.setBookOutDate(format.parse("2019-03-13"));
+        rb1.setBookingDate(formatTime.parse("2019-01-30 12:32:51"));
         rb1.setStatus("checkedOut");
         rb1.setPrice(450.0);
         rb1.setBookedRoom(roomSessionLocal.getRoomByName("KRG_202"));
         rb1.setHasTransport(false);
-//        rb1.setBookedBy(customerSessionLocal.getCustomerByEmail("neoguoh202@hotmail.com"));
         rb1.setBookedBy(customerSessionLocal.getCustomerByEmail("zell1502@hotmail.com"));
         rb1.setEmailAddress("zell1502@hotmail.com");
         rb1.setPassportNum("E2342213B");
@@ -15920,11 +15920,12 @@ public class DataInitializationSessionBean {
         rb1.setLastName("Tan");
         rb1.setHasExtraBed(false);
         bookingSessionLocal.createRoomBooking(rb1);
-        RoomBooking newrb1 = bookingSessionLocal.getLastRoomBooking();
+        RoomBooking newrb1 = bookingSessionLocal.getLastRoomBooking();        
 
         RoomBooking rb2 = new RoomBooking();
         rb2.setBookInDate(format.parse("2019-01-10"));
         rb2.setBookOutDate(format.parse("2019-01-13"));
+        rb2.setBookingDate(formatTime.parse("2018-12-12 09:27:23"));
         rb2.setStatus("checkedOut");
         rb2.setPrice(450.0);
         rb2.setBookedRoom(roomSessionLocal.getRoomByName("KRG_402"));
@@ -15955,6 +15956,17 @@ public class DataInitializationSessionBean {
         rb3.setHasExtraBed(true);
         bookingSessionLocal.createRoomBooking(rb3);
         RoomBooking newrb3 = bookingSessionLocal.getLastRoomBooking();
+        
+        PaymentTransaction PTC = new PaymentTransaction();
+        PTC.addRoomBooking(newrb3);
+        PTC.setTransactionDateTime(formatTime.parse("2019-04-30 12:32:51"));
+        PTC.setInitialPayment(450.0);
+        PTC.setFinalPayment(450.0);
+        PTC.setEmail("zell1502@hotmail.com");
+        PTC.setFirstName("Zell");
+        PTC.setLastName("Tan");
+        PTC.setPayer(customerSessionLocal.getCustomerByEmail("zell1502@hotmail.com"));
+        paymentTransactionSessionLocal.createPaymentTransaction(PTC);          
 
 //***************Laundry Order***************
         LaundryOrder lo1 = new LaundryOrder();
@@ -16155,6 +16167,16 @@ public class DataInitializationSessionBean {
 
         newmo1.setTotalPrice(89.0);
         newrb1.addMinibarOrder(newmo1);
+        
+        PaymentTransaction PTA = new PaymentTransaction();
+        PTA.addRoomBooking(newrb1);
+        PTA.setTransactionDateTime(formatTime.parse("2019-01-30 12:32:51"));
+        PTA.setFinalPayment(753.0);
+        PTA.setEmail("zell1502@hotmail.com");
+        PTA.setFirstName("Zell");
+        PTA.setLastName("Tan");
+        PTA.setPayer(customerSessionLocal.getCustomerByEmail("zell1502@hotmail.com"));
+        paymentTransactionSessionLocal.createPaymentTransaction(PTA);        
 
         MinibarOrder mo2 = new MinibarOrder();
         houseKeepingOrderSessionLocal.createMinibarOrder(mo2);
@@ -16168,56 +16190,66 @@ public class DataInitializationSessionBean {
 
         newmo2.setTotalPrice(14.0);
         newrb2.addMinibarOrder(newmo2);
+        
+        PaymentTransaction PTB = new PaymentTransaction();
+        PTB.addRoomBooking(newrb2);
+        PTB.setTransactionDateTime(formatTime.parse("2018-12-12 09:27:23"));
+        PTB.setFinalPayment(562.0);
+        PTB.setEmail("zell1502@hotmail.com");
+        PTB.setFirstName("Zell");
+        PTB.setLastName("Tan");
+        PTB.setPayer(customerSessionLocal.getCustomerByEmail("zell1502@hotmail.com"));
+        paymentTransactionSessionLocal.createPaymentTransaction(PTB);        
 
         em.flush();
 
-        RoomBooking rb10 = new RoomBooking();
-        rb10.setBookedRoom(roomSessionLocal.getRoomByName("KRG_202"));
-        rb10.setBookInDate(format.parse("2019-02-18"));
-        rb10.setBookedBy(customerSessionLocal.getCustomerByEmail("zell1502@hotmail.com"));
-        rb10.setStatus("checkedOut");
-        bookingSessionLocal.createRoomBooking(rb10);
-        PaymentTransaction PT2 = new PaymentTransaction();
-        PT2.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
-        PT2.setTransactionDateTime(format.parse("2019-01-30"));
-        PT2.setFinalPayment(753.0);
-        PT2.setEmail("zell1502@hotmail.com");
-        PT2.setFirstName("Zell");
-        PT2.setLastName("Tan");
-        PT2.setPayer(customerSessionLocal.getCustomerByEmail("zell1502@hotmail.com"));
-        paymentTransactionSessionLocal.createPaymentTransaction(PT2);
-
-        RoomBooking rb11 = new RoomBooking();
-        rb11.setBookedRoom(roomSessionLocal.getRoomByName("KRG_203"));
-        rb11.setBookInDate(format.parse("2019-02-10"));
-        rb11.setBookedBy(customerSessionLocal.getCustomerByEmail("zell1502@hotmail.com"));
-        rb11.setStatus("checkedOut");
-        bookingSessionLocal.createRoomBooking(rb11);
-        PaymentTransaction PT3 = new PaymentTransaction();
-        PT3.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
-        PT3.setTransactionDateTime(format.parse("2019-02-03"));
-        PT3.setFinalPayment(826.0);
-        PT3.setEmail("zell1502@hotmail.com");
-        PT3.setFirstName("Zell");
-        PT3.setLastName("Tan");
-        PT3.setPayer(customerSessionLocal.getCustomerByEmail("zell1502@hotmail.com"));
-        paymentTransactionSessionLocal.createPaymentTransaction(PT3);
-
-        RoomBooking rb12 = new RoomBooking();
-        rb12.setBookedRoom(roomSessionLocal.getRoomByName("KRN_205"));
-        rb12.setBookInDate(format.parse("2019-03-19"));
-        rb12.setBookedBy(customerSessionLocal.getCustomerByEmail("zell1502@hotmail.com"));
-        rb12.setStatus("checkedOut");
-        bookingSessionLocal.createRoomBooking(rb12);
-        PaymentTransaction PT4 = new PaymentTransaction();
-        PT4.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
-        PT4.setTransactionDateTime(format.parse("2019-03-10"));
-        PT4.setFinalPayment(241.0);
-        PT4.setEmail("zell1502@hotmail.com");
-        PT4.setFirstName("Zell");
-        PT4.setLastName("Tan");
-        PT4.setPayer(customerSessionLocal.getCustomerByEmail("zell1502@hotmail.com"));
-        paymentTransactionSessionLocal.createPaymentTransaction(PT4);
+//        RoomBooking rb10 = new RoomBooking();
+//        rb10.setBookedRoom(roomSessionLocal.getRoomByName("KRG_202"));
+//        rb10.setBookInDate(format.parse("2019-02-18"));
+//        rb10.setBookedBy(customerSessionLocal.getCustomerByEmail("zell1502@hotmail.com"));
+//        rb10.setStatus("checkedOut");
+//        bookingSessionLocal.createRoomBooking(rb10);
+//        PaymentTransaction PT2 = new PaymentTransaction();
+//        PT2.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+//        PT2.setTransactionDateTime(format.parse("2019-01-30"));
+//        PT2.setFinalPayment(753.0);
+//        PT2.setEmail("zell1502@hotmail.com");
+//        PT2.setFirstName("Zell");
+//        PT2.setLastName("Tan");
+//        PT2.setPayer(customerSessionLocal.getCustomerByEmail("zell1502@hotmail.com"));
+//        paymentTransactionSessionLocal.createPaymentTransaction(PT2);
+//
+//        RoomBooking rb11 = new RoomBooking();
+//        rb11.setBookedRoom(roomSessionLocal.getRoomByName("KRG_203"));
+//        rb11.setBookInDate(format.parse("2019-02-10"));
+//        rb11.setBookedBy(customerSessionLocal.getCustomerByEmail("zell1502@hotmail.com"));
+//        rb11.setStatus("checkedOut");
+//        bookingSessionLocal.createRoomBooking(rb11);
+//        PaymentTransaction PT3 = new PaymentTransaction();
+//        PT3.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+//        PT3.setTransactionDateTime(format.parse("2019-02-03"));
+//        PT3.setFinalPayment(826.0);
+//        PT3.setEmail("zell1502@hotmail.com");
+//        PT3.setFirstName("Zell");
+//        PT3.setLastName("Tan");
+//        PT3.setPayer(customerSessionLocal.getCustomerByEmail("zell1502@hotmail.com"));
+//        paymentTransactionSessionLocal.createPaymentTransaction(PT3);
+//
+//        RoomBooking rb12 = new RoomBooking();
+//        rb12.setBookedRoom(roomSessionLocal.getRoomByName("KRN_205"));
+//        rb12.setBookInDate(format.parse("2019-03-19"));
+//        rb12.setBookedBy(customerSessionLocal.getCustomerByEmail("zell1502@hotmail.com"));
+//        rb12.setStatus("checkedOut");
+//        bookingSessionLocal.createRoomBooking(rb12);
+//        PaymentTransaction PT4 = new PaymentTransaction();
+//        PT4.addRoomBooking(bookingSessionLocal.getLastRoomBooking());
+//        PT4.setTransactionDateTime(format.parse("2019-03-10"));
+//        PT4.setFinalPayment(241.0);
+//        PT4.setEmail("zell1502@hotmail.com");
+//        PT4.setFirstName("Zell");
+//        PT4.setLastName("Tan");
+//        PT4.setPayer(customerSessionLocal.getCustomerByEmail("zell1502@hotmail.com"));
+//        paymentTransactionSessionLocal.createPaymentTransaction(PT4);
 
         RoomBooking rb13 = new RoomBooking();
         rb13.setBookedRoom(roomSessionLocal.getRoomByName("KRN_205"));
