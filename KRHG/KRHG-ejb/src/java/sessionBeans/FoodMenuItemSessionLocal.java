@@ -41,4 +41,6 @@ public interface FoodMenuItemSessionLocal {
     public FoodOrderedItem getLastFoodOrderedItem() throws NoResultException;
    
 
+   
+           
 }

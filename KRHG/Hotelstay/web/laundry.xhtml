@@ -6,7 +6,7 @@
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
-<head>
+<h:head>
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -77,7 +77,7 @@
 
 
 
-</head>
+</h:head>
 
 <body>
     <div class="content">
@@ -85,7 +85,7 @@
         <div class="row"
             style="position:absolute; top:50px; left:50px; margin-bottom:50px; text-align: center; width:100%">
 
-            <a href="index.html"><img height="50px" width="50px" src="resources/images/krhglogo5.svg" />
+            <a href="index.xhtml"><img height="50px" width="50px" src="resources/images/krhglogo5.svg" />
                 <h1 style="color: #fff; font-family: 'Lora',serif; font-size:40px">
                     Laundry Request</h1>
             </a>
@@ -184,7 +184,17 @@
             <p class="popup-content">Submit Laundry Request?</p>
 
             <ul class="cd-buttons">
-                <li><a action="#{hotelStayManagedBean.bookLaundryService()}" onclick="" id="laundry" class="cd-popup-confirm">Yes</a></li>
+                <li>
+                    <h:form id="laundryform">
+                        <h:commandButton id="hidden-btn" action="#{hotelStayManagedBean.bookLaundryService()}" style="display: none" >
+                            <f:ajax/>
+                        </h:commandButton>
+                        <h:commandLink class="cd-popup-confirm" id="laundry" value="Yes">
+                            <f:ajax execute="@form" render="@none" />
+                        </h:commandLink>
+                    </h:form>
+                </li>
+                <!--<li><a action="" onclick="" id="laundry" class="cd-popup-confirm">Yes</a></li>-->
                 <li><a href="#0" class=" cd-popup-closemodal">No</a></li>
             </ul>
             <a href="#0" class="cd-popup-close img-replace">Close</a>
@@ -356,6 +366,9 @@
                 document.getElementById("section3").style.display = "initial";
                 loadTime();
                 loadDate();
+                console.log("Trying to simulate yes button click");
+                var jsfCommandButton = document.getElementById("laundryform:laundry");
+                jsfCommandButton.click();
             }
         }
 

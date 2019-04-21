@@ -16,6 +16,7 @@ import javax.persistence.Query;
 
 @Stateless
 public class FoodOrderSession implements FoodOrderSessionLocal {
+
     @PersistenceContext
     private EntityManager em;
 
@@ -63,5 +64,10 @@ public class FoodOrderSession implements FoodOrderSessionLocal {
     public void createFoodOrder(FoodOrder foodOrder) {
         em.persist(foodOrder);
     }
+
+    @Override
+    public FoodOrder getLastFoodOrdered() {
+        Query q = em.createQuery("SELECT f FROM FoodOrder f ORDER BY f.foodOrderID DESC");
+        return (FoodOrder) q.getResultList().get(0);
+    }
 }
- 

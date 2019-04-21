@@ -6,17 +6,23 @@
 package managedBean;
 
 import entity.FoodMenuItem;
+import entity.FoodOrder;
+import entity.FoodOrderedItem;
 import entity.HouseKeepingOrder;
 import entity.Room;
 import error.NoResultException;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
@@ -30,7 +36,10 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.component.UINamingContainer;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import sessionBeans.BookingSessionLocal;
 import sessionBeans.FoodMenuItemSessionLocal;
+import sessionBeans.FoodOrderSession;
+import sessionBeans.FoodOrderSessionLocal;
 import sessionBeans.HouseKeepingOrderSessionLocal;
 import sessionBeans.LogSessionLocal;
 import sessionBeans.RoomSessionLocal;
@@ -57,13 +66,18 @@ public class HotelStayManagedBean implements Serializable {
         this.roomNumber = roomNumber;
     }
 
-   
-
+    @EJB
+    private BookingSessionLocal bookingSessionLocal;
+    
     @EJB
     private LogSessionLocal logSessionLocal;
 
     @EJB
     private FoodMenuItemSessionLocal foodMenuItemSessionLocal;
+    
+
+    @EJB
+    private FoodOrderSessionLocal foodOrderSessionLocal;
 
     @EJB
     private RoomSessionLocal roomSessionLocal;
@@ -101,7 +115,7 @@ public class HotelStayManagedBean implements Serializable {
     private HashMap<Long, Integer> foodMenuOrder = new HashMap<>();
     private HouseKeepingOrder bookedHouseKeepingOrder;
     private HouseKeepingOrder bookedLaundryOrder;
-    private String roomNumber;  
+    private String roomNumber;
 
     public HotelStayManagedBean() {
     }
@@ -174,7 +188,7 @@ public class HotelStayManagedBean implements Serializable {
                 setCurrentRoom(roomSessionLocal.getRoomByName(username));
                 if (username.equals(getCurrentRoom().getRoomName()) && password.equals(getCurrentRoom().getRoomName())) {
                     setPassword("");
-                    if(Integer.valueOf(currentRoom.getRoomNumber()) < 1000) {
+                    if (Integer.valueOf(currentRoom.getRoomNumber()) < 1000) {
                         setRoomNumber("0" + currentRoom.getRoomNumber());
                     } else {
                         setRoomNumber(currentRoom.getRoomNumber());
@@ -188,6 +202,7 @@ public class HotelStayManagedBean implements Serializable {
                 //setCurrentRoom(null);
                 setUsername("");
                 setPassword("");
+                
                 return "login.xhtml";
             }
         } else {
@@ -197,12 +212,12 @@ public class HotelStayManagedBean implements Serializable {
         return "login.xhtml";
     }
 
-    public void addToCart(FoodMenuItem foodMenuItem) {      
+    public void addToCart(FoodMenuItem foodMenuItem) {
         System.out.println("-------------------------------------");
         System.out.println("ADD TO CART");
-        
+
         FacesContext ctx = FacesContext.getCurrentInstance();
-        Map<String,String> request = ctx.getExternalContext().getRequestParameterMap();
+        Map<String, String> request = ctx.getExternalContext().getRequestParameterMap();
         System.out.println("Request: " + request.toString());
         String data = request.toString();
         //String data = request.get("foodMenuForm" + UINamingContainer.getSeparatorChar(ctx) + "qty"); //the id for the form : id of the text
@@ -211,7 +226,7 @@ public class HotelStayManagedBean implements Serializable {
         String qtyKeyValue[] = fields[1].split("=");
         setQuantity(Integer.parseInt(qtyKeyValue[1]));
         System.out.println("Quantity: " + getQuantity());
-        
+
         if (getQuantity() != 0) {
             if (foodMenuOrder.containsKey(foodMenuItem.getFoodMenuItemID())) {
                 System.out.println("Existing Item");
@@ -251,10 +266,33 @@ public class HotelStayManagedBean implements Serializable {
         System.out.println("-------------------------------------");
     }
 
-    public void checkOutOrder() {
+    public void checkOutOrder() throws NoResultException {
         //ADD a total price to final payment! Send email receipt!
         System.out.println("-------------------------------------");
         System.out.println("CHECKOUT ORDER");
+        FoodOrder tempFO = new FoodOrder();
+        List<FoodOrderedItem> foList = new ArrayList<FoodOrderedItem>();
+        
+        for(FoodMenuItem f : foodMenuOrderList){
+            FoodMenuItem tempItem = f;
+            FoodOrderedItem tempFOI = new FoodOrderedItem();
+            tempFOI.setFood(tempItem);
+            tempFOI.setQty(foodMenuOrder.get(tempItem.getFoodMenuItemID()));
+            foodMenuItemSessionLocal.createFoodOrderedItem(tempFOI);
+            tempFOI = foodMenuItemSessionLocal.getLastFoodOrderedItem();
+            foList.add(tempFOI);
+        }
+         DateFormat dateFormat = new SimpleDateFormat("HH:mm");
+         
+        tempFO.setFoodOrdered(foList);
+        tempFO.setStatus("Preparing");
+        tempFO.setOrderTime(dateFormat.format(java.util.Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant())));
+        tempFO.setTotalPrice(totalPriceWithTax);
+        foodOrderSessionLocal.createFoodOrder(tempFO);
+        tempFO = foodOrderSessionLocal.getLastFoodOrdered();
+        bookingSessionLocal.getRoomBookingByRoomNumber(roomNumber, "Occupied", currentRoom.getHotel().getHotelCodeName());
+        
+
         foodMenuOrder.clear();
         foodMenuOrderList.clear();
         quantity = 0;
@@ -274,7 +312,7 @@ public class HotelStayManagedBean implements Serializable {
             return Integer.parseInt(roomnumber.substring(0, 2));
         }
     }
-    
+
     public void testingPurpose(ActionEvent event) {
         System.out.println("Testing purposes");
     }
@@ -284,18 +322,18 @@ public class HotelStayManagedBean implements Serializable {
         System.out.println("Book housekeeping: Setting Room to: " + currentRoom.getRoomNumber());
         System.out.println("Timing to book: " + houseKeepingCollectionTime.toString());
         System.out.println("Requests to book: " + houseKeepingRequestDetails);
-        
+
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
         SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         dateFormat.setTimeZone(TimeZone.getTimeZone("Asia/Singapore"));
         timeFormat.setTimeZone(TimeZone.getTimeZone("Asia/Singapore"));
-        dateTimeFormat.setTimeZone(TimeZone.getTimeZone("Asia/Singapore"));  
+        dateTimeFormat.setTimeZone(TimeZone.getTimeZone("Asia/Singapore"));
         String currentDate = dateFormat.format(new Date());
         String inputTime = timeFormat.format(houseKeepingCollectionTime);
         Date selectedDate = new Date();
-        
+
         try {
             cal.setTime(dateFormat.parse(currentDate));
             cal.add(Calendar.DAY_OF_MONTH, 4);
@@ -307,7 +345,7 @@ public class HotelStayManagedBean implements Serializable {
         } catch (ParseException ex) {
             Logger.getLogger(HotelStayManagedBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-              
+
         HouseKeepingOrder hkOrder = new HouseKeepingOrder();
         hkOrder.setOrderDateTime(new Date());
         hkOrder.setCompleteDateTime(selectedDate);
@@ -315,27 +353,26 @@ public class HotelStayManagedBean implements Serializable {
         hkOrder.setRoom(currentRoom);
         hkOrder.setLevel(getLevel(currentRoom.getRoomNumber())); //Need to set properly
         hkOrder.setStatus("incomplete");
-              
+
         if (houseKeepingRequestDetails.isEmpty()) {
             System.out.println("No Special Request!");
-            hkOrder.setIsSpecialRequest(false);          
+            hkOrder.setIsSpecialRequest(false);
         } else {
             System.out.println("Special Requests: " + houseKeepingRequestDetails);
             hkOrder.setIsSpecialRequest(true);
-            
+
             //Set boolean to extraTowels, extraShowerAmenities and restockMinibar
-            
             if (extraTowels == true || extraShowerAmenities == true) {
                 System.out.println("Toiletries Request");
                 hkOrder.setRequestType("toiletries");
             }
-            
+
             System.out.println("Housekeeping Request");
             hkOrder.setRequestType("housekeeping");
         }
-        
+
         houseKeepingSessionLocal.createHouseKeepingOrder(hkOrder);
-        setBookedHouseKeepingOrder(hkOrder);      
+        setBookedHouseKeepingOrder(hkOrder);
     }
 
     public void editHouseKeepingOrder(SimpleDateFormat HousekeepingTime) {
@@ -358,6 +395,7 @@ public class HotelStayManagedBean implements Serializable {
     }
 
     public void bookLaundryService() {
+        System.out.println("Book Laundry Service");
         HouseKeepingOrder hkOrder = new HouseKeepingOrder();
         hkOrder.setOrderDateTime(new Date());
         hkOrder.setSpecialRequest(houseKeepingRequestDetails);
@@ -724,8 +762,8 @@ public class HotelStayManagedBean implements Serializable {
     public void setBookedHouseKeepingOrder(HouseKeepingOrder bookedHouseKeepingOrder) {
         this.bookedHouseKeepingOrder = bookedHouseKeepingOrder;
     }
-    
-     /**
+
+    /**
      * @return the houseKeepingCollectionTime
      */
     public Date getHouseKeepingCollectionTime() {
