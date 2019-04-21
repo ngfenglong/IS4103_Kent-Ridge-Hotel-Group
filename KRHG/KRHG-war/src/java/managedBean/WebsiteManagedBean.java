@@ -163,9 +163,11 @@ public class WebsiteManagedBean implements Serializable {
             //Get roombooking by type & Status
             if (allBooking != null) {
                 for (RoomBooking rb : allBooking) {
+                    if(rb.getRoomType()!=null && rb.getStatus()!=null){
                     if (rb.getRoomType().equals(roomTypeTB) && !rb.getStatus().equals("checkedout")) {
                         RoomBooking tempRoomBooking = rb;
                         checkList.add(tempRoomBooking);
+                    }
                     }
                 }
 
