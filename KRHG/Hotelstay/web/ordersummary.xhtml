@@ -63,73 +63,68 @@
     </h:head>
 
     <h:body>
-        <h:form id="a">
-            <!-- Page Content -->
-            <section>
-                <div class="content">
-                    <div class="row" style="position:absolute; top:50px; left:50px; margin-bottom:50px; text-align: center; width:100%">
+        <!-- Page Content -->
+        <section>
+            <div class="content">
+                <div class="row" style="position:absolute; top:50px; left:50px; margin-bottom:50px; text-align: center; width:100%">
 
-                        <a href="index.xhtml"><img height="50px" width="50px" src="resources/images/krhglogo5.svg" />
-                            <h1 style="color: #fff; font-family: 'Lora',serif; font-size:40px">In-Room Dining</h1>
-                        </a>
-                        <div class="theTitle active" style="width:400px; top:50px; height:100px; left:48%">
-                            <span class="separator" style="height:100%; "></span>
-                            <div class="titleright" style="width:40%">
-                                <p style=" margin-top:12%; color:#C5B358"><div id="txt" style="text-align:left;color: #C5B358; font-size: 150%; font-weight: 500;"></div></p>
-                                <p style=" color:#C5B358; font-size:150%"><h:outputText value="#{hotelStayManagedBean.roomNumber}" /></p>
-                            </div>
-                            <button class="bigBtn" style="width:50%; font-size: 1.5em; position:absolute; margin:0px;  left:400px; bottom:10px" onclick="location.href = 'roomservice.xhtml';">Back to Menu</button>
+                    <a href="index.xhtml"><img height="50px" width="50px" src="resources/images/krhglogo5.svg" />
+                        <h1 style="color: #fff; font-family: 'Lora',serif; font-size:40px">In-Room Dining</h1>
+                    </a>
+                    <div class="theTitle active" style="width:400px; top:50px; height:100px; left:48%">
+                        <span class="separator" style="height:100%; "></span>
+                        <div class="titleright" style="width:40%">
+                            <p style=" margin-top:12%; color:#C5B358"><div id="txt" style="text-align:left;color: #C5B358; font-size: 150%; font-weight: 500;"></div></p>
+                            <p style=" color:#C5B358; font-size:150%"><h:outputText value="#{hotelStayManagedBean.roomNumber}" /></p>
                         </div>
+                        <button class="bigBtn" style="width:50%; font-size: 1.5em; position:absolute; margin:0px;  left:400px; bottom:10px" onclick="location.href = 'roomservice.xhtml';">Back to Menu</button>
                     </div>
                 </div>
-                <div class="rowcontent" style="height:580px;overflow-y: scroll;">
-                    <div class="container">
-                        <section id="cart">
-                            <ui:repeat var="foodMenuItem" value="#{hotelStayManagedBean.foodMenuOrderList}" varStatus="status">
-                                <article class="product">
-                                    <header>
-                                        <a class="remove">
-                                            <img src="http://zetegral.website/krhgImages/#{foodMenuItem.foodImage}" alt="" />
-                                            <h3>Remove</h3>
-                                        </a>
-                                    </header>
+            </div>
+            <div class="rowcontent" style="height:580px;overflow-y: scroll;">
+                <div class="container">
+                    <section id="cart">
+                        <ui:repeat var="foodMenuItem" value="#{hotelStayManagedBean.foodMenuOrderList}" varStatus="status">
+                            <article class="product">
+                                <header>
+                                    <a class="remove">
+                                        <img src="http://zetegral.website/krhgImages/#{foodMenuItem.foodImage}" alt="" />
+                                        <h3>Remove</h3>
+                                    </a>
+                                </header>
 
-                                    <div class="summarycontent">
-                                        <h1>#{foodMenuItem.foodMenuItemName}</h1>
-                                        #{foodMenuItem.foodMenuItemDescription}
-                                    </div>
+                                <div class="summarycontent">
+                                    <h1>#{foodMenuItem.foodMenuItemName}</h1>
+                                    #{foodMenuItem.foodMenuItemDescription}
+                                </div>
 
-                                    <footer class="summarycontent">
-                                        <span class="qt-minus">-</span>
-                                        <span class="qt">#{hotelStayManagedBean.foodMenuOrder.get(foodMenuItem.foodMenuItemID)}</span>
-                                        <span class="qt-plus">+</span>
-
-                                        <h2 class="full-price">$<script>document.write(#{foodMenuItem.unitPrice * hotelStayManagedBean.foodMenuOrder.get(foodMenuItem.foodMenuItemID)}.toFixed(0));</script></h2>
-                                        <h2 class="price">$<script>document.write(#{foodMenuItem.unitPrice}.toFixed(0));</script></h2>
-                                    </footer>
-                                </article>
-                            </ui:repeat>
-                        </section>
-                    </div>
-
-                    <footer id="site-footer">
-                        <div class="container clearfix">
-                            <div class="left checkout">
-                                <h2 class="subtotal">Subtotal: $<span><script>document.write(#{hotelStayManagedBean.totalPrice}.toFixed(2));</script></span></h2>
-                                <h3 class="tax">Taxes (7%): $<span><script>document.write(#{hotelStayManagedBean.totalPriceWithTax}.toFixed(2));</script></span></h3>
-                            </div>
-
-                            <div class="right">
-                                <h1 class="total">Total: $<span><script>document.write(#{hotelStayManagedBean.totalPriceWithTax}.toFixed(2));</script></span></h1>
-                                <!--<a class="btn cd-popup-trigger">Checkout</a>-->
-                                <h:commandLink class="btn" value="Checkout" action="#{hotelStayManagedBean.checkOutOrder()}"></h:commandLink>           
-
-                            </div>
-                        </div>
-                    </footer>
+                                <footer class="summarycontent">
+                                    <span class="qt-minus">-</span>
+                                    <span class="qt">#{hotelStayManagedBean.foodMenuOrder.get(foodMenuItem.foodMenuItemID)}</span>
+                                    <span class="qt-plus">+</span>
+                                    <h2 class="full-price">$#{foodMenuItem.unitPrice * hotelStayManagedBean.foodMenuOrder.get(foodMenuItem.foodMenuItemID)}</h2>
+                                    <h2 class="price">$#{foodMenuItem.unitPrice}</h2>
+                                </footer>
+                            </article>
+                        </ui:repeat>
+                    </section>
                 </div>
-            </section>
-        </h:form>
+
+                <footer id="site-footer">
+                    <div class="container clearfix">
+                        <div class="left checkout">
+                            <h2 class="subtotal">Subtotal: $<span>#{hotelStayManagedBean.totalPrice}</span></h2>
+                            <h3 class="tax">Taxes (7%): $<span>#{hotelStayManagedBean.totalPriceWithTax}</span></h3>
+                        </div>
+
+                        <div class="right">
+                            <h1 class="total">Total: $<span>#{hotelStayManagedBean.totalPriceWithTax}</span></h1>
+                            <a class="btn cd-popup-trigger">Checkout</a>          
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </section>
 
         <!-- Bootstrap core JavaScript -->
         <script src="./resources/jquery/jquery.min.js"></script>
@@ -145,8 +140,11 @@
                 <ul style="padding-inline-start: 0px; padding: 0px" class="cd-buttons">
                     <li>
                         <h:form id="ordersummaryform">
+                            <h:commandButton id="checkoutorder" action="#{hotelStayManagedBean.checkOutOrder()}" style="display: none" >
+                                <f:ajax/>
+                            </h:commandButton>
                             <h:commandLink class="cd-popup-confirm os-btn" id="yesbutton" value="Yes" onclick="clickYes()">
-                                <f:ajax execute="yesbutton" render="@none" />
+                                <f:ajax execute="@form" render="@none" />
                             </h:commandLink>
                         </h:form>
                     </li>
@@ -158,11 +156,11 @@
         <script type="text/javascript">
             function clickYes() {
                 console.log("CLICK YES");
-                var jsfCommandButton = document.getElementById("form:checkoutorder");
+                var jsfCommandButton = document.getElementById("ordersummaryform:checkoutorder");
                 jsfCommandButton.click();
             }
             
-            console.log(document.getElementById("a"));
+            console.log(document.getElementById("ordersummaryform"));
         </script>
     </h:body>
 </html>

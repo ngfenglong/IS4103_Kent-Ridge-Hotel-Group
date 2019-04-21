@@ -162,7 +162,7 @@
                         <h:form id="housekeepingform">
                             <h:inputHidden id="houseKeepingTime" value="#{hotelStayManagedBean.houseKeepingCollectionTime}" />
                             <h:inputHidden id="houseKeepingRequests" value="#{hotelStayManagedBean.houseKeepingRequestDetails}" />
-                            <h:commandButton id="hidden-btn" action="#{hotelStayManagedBean.bookHouseKeeping()}" style="display: none" >
+                            <h:commandButton id="bookhousekeeping" action="#{hotelStayManagedBean.bookHouseKeeping()}" style="display: none" >
                                 <f:ajax/>
                             </h:commandButton>
                             <h:commandLink class="cd-popup-confirm" id="yesbutton" value="Yes">
@@ -252,7 +252,7 @@
                     startTime();
                 }
 
-                console.log("hello", timepicked);
+                console.log("Time Picked: ", timepicked);
                 console.log(document.getElementById("printtime"));
             }
 
@@ -263,6 +263,7 @@
                 for (var i = 0; inputElements[i]; ++i) {
                     console.log("inhere");
                     if (inputElements[i].checked) {
+                        checkedValue = true;
                         if (i == 0){
                             document.getElementById("checkrequests1").innerHTML = inputElements[i].value;
                         } else if (i == 1){
@@ -327,7 +328,7 @@
                     console.log("Trying to simulate yes button click");        
                     loadtime();
                     loadrequests();
-                    var jsfCommandButton = document.getElementById("housekeepingform:hidden-btn");
+                    var jsfCommandButton = document.getElementById("housekeepingform:bookhousekeeping");
                     jsfCommandButton.click();
                     console.log("pg2", page);
                 }
