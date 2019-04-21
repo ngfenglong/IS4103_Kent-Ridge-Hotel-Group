@@ -24,6 +24,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Date;
 import java.util.Formatter;
 import java.util.List;
 import java.util.Properties;
@@ -68,13 +69,29 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
     private String regPassportNum;
 
     private String rpEmail;
-       private String testSt;
+    private String testSt;
 
     //BookingHistory
-    private List <RoomBooking> pastBookings;
-    private List <PaymentTransaction> pastTransactions;
+    private List<RoomBooking> pastBookings;
+    private List<PaymentTransaction> pastTransactions;
+    
+   //SelectedBooking Transactions
     private Long selectedTransactionID;
     private PaymentTransaction selectedTransaction;
+    private int pointsEarnedForSelectedTransaction;
+    private int noOfStandardRoom;
+    private int noOfPremiumRoom;
+    private int noOfDeluxeRoom;
+    private int noOfSuiteRoom;
+    private int noOfPenthouse;
+    private Date dateStart = new Date();
+    private Date dateEnd = new Date();
+    
+    //CurrentBooking
+    private List<RoomBooking> currentBookings;
+    private List<PaymentTransaction> currentTransactions;
+    
+    
     
     private Long id = -1L;
 
@@ -118,7 +135,7 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
                 logSessionLocal.createLogging(l);
                 getAllPastBookings();
                 out.println("<script type=\"text/javascript\">");
-                out.println("alert('Login Succesful!');");
+                out.println("alert('Login Succesfull!');");
                 out.println("</script>");
                 return "/index.xhtml?faces-redirect=true";
 
@@ -147,7 +164,7 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
             c.setEmail(regEmail);
             c.setMobileNum(regMobileNum);
             c.setMobileNum(regMobileNum);
-   
+
             c.setPassword(encryptPassword(regPassword));
             c.setAccountStatus(true);
             c.setPoints(0);
@@ -184,7 +201,7 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
     }
 
     public String deactivateAccount() throws NoResultException, IOException {
-        String logActivityName = loggedInCustomer.getLastName() + " " + loggedInCustomer.getFirstName() ;
+        String logActivityName = loggedInCustomer.getLastName() + " " + loggedInCustomer.getFirstName();
         customerSessionLocal.deactivateAccount(loggedInCustomer.getCustomerID());
 
         Logging l = new Logging("Customer", "Deactivate " + logActivityName + " account", logActivityName);
@@ -198,8 +215,6 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
 
         return logout();
     }
-
-    
 
     public String logout() {
         String tempName = name;
@@ -229,7 +244,7 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
             return "/changePassword.xhtml";
         } else {
             customerSessionLocal.changePasword(loggedInCustomer, encryptPassword(newPassword));
-            Logging l = new Logging("Profile", loggedInCustomer.getLastName() + " " + loggedInCustomer.getFirstName()+ " has just changed password", loggedInCustomer.getLastName() + " " + loggedInCustomer.getFirstName());
+            Logging l = new Logging("Profile", loggedInCustomer.getLastName() + " " + loggedInCustomer.getFirstName() + " has just changed password", loggedInCustomer.getLastName() + " " + loggedInCustomer.getFirstName());
             logSessionLocal.createLogging(l);
 
             oldPassword = null;
@@ -243,63 +258,173 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
     public String updateProfile() throws NoResultException {
         customerSessionLocal.updateCustomer(loggedInCustomer);
 
-        
-        
         return "Profile.xhtml?faces-redirect=true";
     }
-    
-    public void getAllPastBookings() throws NoResultException{
+
+    public void getAllPastBookings() throws NoResultException {
+        System.out.println("in past bookings");
         List<PaymentTransaction> allPaymentTransactions = paymentTransactionSessionLocal.getAllPaymentTransaction();
         List<PaymentTransaction> allCustomerTransactions = new ArrayList();
-        
-        for(PaymentTransaction p:allPaymentTransactions){
-            if(p.getEmail()!=null){
-             if(p.getEmail().equals(loggedInCustomer.getEmail())&& p.getRoomsBooked()!=null){
-                allCustomerTransactions.add(p);
+
+        for (PaymentTransaction p : allPaymentTransactions) {
+            if (p.getEmail() != null) {
+                if (p.getEmail().equals(loggedInCustomer.getEmail()) && p.getRoomsBooked() != null) {
+                    System.out.println("payment transaction:" + p.getTransactionID());
+                    for(RoomBooking r : p.getRoomsBooked()){ 
+                        System.out.println("room booking id and status:" + r.getRoomBookingID() + r.getStatus());
+                        if(r.getStatus().toUpperCase().equals("CHECKEDOUT")){
+                     allCustomerTransactions.add(p);
+                    }
+                    
+                }
             }
-            }
-           
         }
-        
+        }
+
         pastTransactions = allCustomerTransactions;
         System.out.println(pastTransactions);
+ 
     }
     
-    public String getTypeOfFacilityBooked(PaymentTransaction t){
+        public void getAllCurrentBookings() throws NoResultException {
+        System.out.println("in current bookings");
+        List<PaymentTransaction> allPaymentTransactions = paymentTransactionSessionLocal.getAllPaymentTransaction();
+        List<PaymentTransaction> allCustomerTransactions = new ArrayList();
+
+        for (PaymentTransaction p : allPaymentTransactions) {
+            if (p.getEmail() != null) {
+                if (p.getEmail().equals(loggedInCustomer.getEmail()) && p.getRoomsBooked() != null) {
+                    System.out.println("payment transaction:" + p.getTransactionID());
+                    for(RoomBooking r : p.getRoomsBooked()){ 
+                        System.out.println("room booking id and status:" + r.getRoomBookingID() + r.getStatus());
+                        if(r.getStatus().toUpperCase().equals("RESERVED") || r.getStatus().toUpperCase().equals("CHECKEDIN")){
+                     allCustomerTransactions.add(p);
+                    }
+                    
+                }
+            }
+        }
+        }
+
+        currentTransactions = allCustomerTransactions;
+        System.out.println(currentTransactions);
+ 
+    }
+    
+    
+    
+
+    public String getTypeOfFacilityBooked(PaymentTransaction t) {
         String facilitiesBooked = "";
-        if(t.getRoomsBooked() != null){
-            if(facilitiesBooked !=null){
-                facilitiesBooked = facilitiesBooked+", room";
+        if (t.getRoomsBooked() != null) {
+            if (facilitiesBooked != null) {
+                facilitiesBooked = facilitiesBooked + ", room";
             } else {
                 facilitiesBooked = "room";
             }
         }
-        if(t.getFunctionRoomBooked() !=null){
-            if(facilitiesBooked !=null){
-                facilitiesBooked = facilitiesBooked+", Function Room";
+        if (t.getFunctionRoomBooked() != null) {
+            if (facilitiesBooked != null) {
+                facilitiesBooked = facilitiesBooked + ", Function Room";
             } else {
                 facilitiesBooked = "Function Room";
             }
-        }      
+        }
         return facilitiesBooked;
     }
-    
-    public void selectTransaction(Long transactionId)throws NoResultException{
+
+    public void selectTransaction(Long transactionId) throws NoResultException {
         selectedTransactionID = transactionId;
-        paymentTransactionSessionLocal.getPaymentTransactionByID(transactionId);
-        System.out.println("selected id:" + selectedTransactionID);
-    }
-    
-    public List<RoomBooking> getAllRoomBookingFromTransaction(PaymentTransaction t)throws NoResultException{
-        List <RoomBooking> allBooking = t.getRoomsBooked();
-        List <RoomBooking> roomBookingsByTransaction = new ArrayList();
-        for(RoomBooking r: allBooking){
-            roomBookingsByTransaction.add(bookingSessionLocal.getRoomBookingByID(r.getRoomBookingID()));
-        }
-         
-        return roomBookingsByTransaction;
+        selectedTransaction = paymentTransactionSessionLocal.getPaymentTransactionByID(transactionId);
+        System.out.println("selected id:" + selectedTransaction);
+        setPointsEarnedForSelectedTransaction(0);
+        setNoOfDeluxeRoom(0);
+        setNoOfPenthouse(0);
+        setNoOfPremiumRoom(0);
+        setNoOfStandardRoom(0);
+        setNoOfSuiteRoom(0);
+        dateStart = new Date();
+        dateEnd = new Date();
+        calcuatePointsEarned();
+        countNumberOfRoomsByType();
+        getStayPeriod();
     }
 
+    public void calcuatePointsEarned() {
+        double amountSpent = selectedTransaction.getFinalPayment();
+        setPointsEarnedForSelectedTransaction((int) amountSpent);
+    }
+
+    public void countNumberOfRoomsByType() {
+        List<RoomBooking> listOfRoomBookingsInTransaction = selectedTransaction.getRoomsBooked();
+        for (RoomBooking r : listOfRoomBookingsInTransaction) {
+            if (r.getRoomType() != null) {
+                if (r.getRoomType().equals("Standard")) {
+                    setNoOfStandardRoom(getNoOfStandardRoom() + 1);
+                }
+                if (r.getRoomType().equals("Deluxe")) {
+                    setNoOfDeluxeRoom(getNoOfDeluxeRoom() + 1);
+                }
+                if (r.getRoomType().equals("Premium")) {
+                    setNoOfPremiumRoom(getNoOfPremiumRoom() + 1);
+                }
+                if (r.getRoomType().equals("Suite")) {
+                    setNoOfSuiteRoom(getNoOfSuiteRoom() + 1);
+                }
+                if (r.getRoomType().equals("Penthouse")) {
+                    setNoOfPenthouse(getNoOfPenthouse() + 1);
+                }
+            }
+
+        }
+    }
+
+    public boolean checkIfZero(String roomType) {
+        if (roomType.equals("Standard") && noOfStandardRoom == 0) {
+            return true;
+        }
+        if (roomType.equals("Deluxe") && noOfDeluxeRoom == 0) {
+            return true;
+        }
+        if (roomType.equals("Premium") && noOfPremiumRoom == 0) {
+            return true;
+        }
+        if (roomType.equals("Suite") && noOfSuiteRoom == 0) {
+            return true;
+        }
+        if (roomType.equals("Penthouse") && noOfPenthouse == 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public void getStayPeriod() {
+        List<RoomBooking> listOfRoomBookingsInTransaction = selectedTransaction.getRoomsBooked();
+        for (RoomBooking r : listOfRoomBookingsInTransaction) {
+            if(r.getBookInDate()!=null){
+                System.out.println(r.getBookInDate());
+            if (r.getBookInDate().compareTo(dateStart) < 0 || dateStart == null) {
+                dateStart = r.getBookInDate();
+            }
+            }
+            if(r.getBookOutDate() != null){
+             if (r.getBookOutDate().compareTo(dateEnd) > 0 || dateEnd == null) {
+                dateEnd = r.getBookOutDate();
+            }
+            }
+           
+        }
+    }
+
+    public List<RoomBooking> getAllRoomBookingFromTransaction(PaymentTransaction t) throws NoResultException {
+        List<RoomBooking> allBooking = t.getRoomsBooked();
+        List<RoomBooking> roomBookingsByTransaction = new ArrayList();
+        for (RoomBooking r : allBooking) {
+            roomBookingsByTransaction.add(bookingSessionLocal.getRoomBookingByID(r.getRoomBookingID()));
+        }
+
+        return roomBookingsByTransaction;
+    }
 
     public void forgetPassword() throws NoResultException, IOException {
         HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
@@ -332,8 +457,8 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
             out.println("</script>");
         }
     }
-	
-	 public void resetPassword() throws NoResultException, IOException {
+
+    public void resetPassword() throws NoResultException, IOException {
         HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
         PrintWriter out = response.getWriter();
 
@@ -359,9 +484,7 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
             out.println("</script>");
         }
     }
-	
-	
-	
+
     public static void sendEmail(String recipient, String subject, String msg) {
 
         String username = "automessage.kentridgehotelgroup@gmail.com";
@@ -375,10 +498,10 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
 
         Session session = Session.getInstance(props,
                 new javax.mail.Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(username, password);
-            }
-        });
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(username, password);
+                    }
+                });
 
         try {
 
@@ -550,9 +673,8 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
             throw new RuntimeException(e);
         }
     }
-	
-	
-	 public static void sendForgetPasswordEmail(String recipient, String subject, String userName, String custID) {
+
+    public static void sendForgetPasswordEmail(String recipient, String subject, String userName, String custID) {
 
         String username = "automessage.kentridgehotelgroup@gmail.com";
         String password = "krhg1234";
@@ -565,10 +687,10 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
 
         Session session = Session.getInstance(props,
                 new javax.mail.Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(username, password);
-            }
-        });
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(username, password);
+                    }
+                });
 
         try {
 
@@ -823,7 +945,6 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
             throw new RuntimeException(e);
         }
     }
-	
 
     private static String encryptPassword(String password) {
         String sha1 = "";
@@ -946,7 +1067,6 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
         this.regLName = regLName;
     }
 
- 
     public String getRegNric() {
         return regNric;
     }
@@ -1006,28 +1126,28 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
     /**
      * @return the pastBookings
      */
-    public List <RoomBooking> getPastBookings() {
+    public List<RoomBooking> getPastBookings() {
         return pastBookings;
     }
 
     /**
      * @param pastBookings the pastBookings to set
      */
-    public void setPastBookings(List <RoomBooking> pastBookings) {
+    public void setPastBookings(List<RoomBooking> pastBookings) {
         this.pastBookings = pastBookings;
     }
 
     /**
      * @return the pastTransactions
      */
-    public List <PaymentTransaction> getPastTransactions() {
+    public List<PaymentTransaction> getPastTransactions() {
         return pastTransactions;
     }
 
     /**
      * @param pastTransactions the pastTransactions to set
      */
-    public void setPastTransactions(List <PaymentTransaction> pastTransactions) {
+    public void setPastTransactions(List<PaymentTransaction> pastTransactions) {
         this.pastTransactions = pastTransactions;
     }
 
@@ -1057,6 +1177,147 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
      */
     public void setSelectedTransaction(PaymentTransaction selectedTransaction) {
         this.selectedTransaction = selectedTransaction;
+    }
+
+    /**
+     * @return the noOfPremiumRoom
+     */
+    public int getNoOfPremiumRoom() {
+        return noOfPremiumRoom;
+    }
+
+    /**
+     * @param noOfPremiumRoom the noOfPremiumRoom to set
+     */
+    public void setNoOfPremiumRoom(int noOfPremiumRoom) {
+        this.noOfPremiumRoom = noOfPremiumRoom;
+    }
+
+    /**
+     * @return the noOfDeluxeRoom
+     */
+    public int getNoOfDeluxeRoom() {
+        return noOfDeluxeRoom;
+    }
+
+    /**
+     * @param noOfDeluxeRoom the noOfDeluxeRoom to set
+     */
+    public void setNoOfDeluxeRoom(int noOfDeluxeRoom) {
+        this.noOfDeluxeRoom = noOfDeluxeRoom;
+    }
+
+    /**
+     * @return the noOfSuiteRoom
+     */
+    public int getNoOfSuiteRoom() {
+        return noOfSuiteRoom;
+    }
+
+    /**
+     * @param noOfSuiteRoom the noOfSuiteRoom to set
+     */
+    public void setNoOfSuiteRoom(int noOfSuiteRoom) {
+        this.noOfSuiteRoom = noOfSuiteRoom;
+    }
+
+    /**
+     * @return the noOfPenthouse
+     */
+    public int getNoOfPenthouse() {
+        return noOfPenthouse;
+    }
+
+    /**
+     * @param noOfPenthouse the noOfPenthouse to set
+     */
+    public void setNoOfPenthouse(int noOfPenthouse) {
+        this.noOfPenthouse = noOfPenthouse;
+    }
+
+    /**
+     * @return the dateStart
+     */
+    public Date getDateStart() {
+        return dateStart;
+    }
+
+    /**
+     * @param dateStart the dateStart to set
+     */
+    public void setDateStart(Date dateStart) {
+        this.dateStart = dateStart;
+    }
+
+    /**
+     * @return the dateEnd
+     */
+    public Date getDateEnd() {
+        return dateEnd;
+    }
+
+    /**
+     * @param dateEnd the dateEnd to set
+     */
+    public void setDateEnd(Date dateEnd) {
+        this.dateEnd = dateEnd;
+    }
+
+    /**
+     * @return the pointsEarnedForSelectedTransaction
+     */
+    public int getPointsEarnedForSelectedTransaction() {
+        return pointsEarnedForSelectedTransaction;
+    }
+
+    /**
+     * @param pointsEarnedForSelectedTransaction the
+     * pointsEarnedForSelectedTransaction to set
+     */
+    public void setPointsEarnedForSelectedTransaction(int pointsEarnedForSelectedTransaction) {
+        this.pointsEarnedForSelectedTransaction = pointsEarnedForSelectedTransaction;
+    }
+
+    /**
+     * @return the noOfStandardRoom
+     */
+    public int getNoOfStandardRoom() {
+        return noOfStandardRoom;
+    }
+
+    /**
+     * @param noOfStandardRoom the noOfStandardRoom to set
+     */
+    public void setNoOfStandardRoom(int noOfStandardRoom) {
+        this.noOfStandardRoom = noOfStandardRoom;
+    }
+
+    /**
+     * @return the currentBookings
+     */
+    public List<RoomBooking> getCurrentBookings() {
+        return currentBookings;
+    }
+
+    /**
+     * @param currentBookings the currentBookings to set
+     */
+    public void setCurrentBookings(List<RoomBooking> currentBookings) {
+        this.currentBookings = currentBookings;
+    }
+
+    /**
+     * @return the currentTransactions
+     */
+    public List<PaymentTransaction> getCurrentTransactions() {
+        return currentTransactions;
+    }
+
+    /**
+     * @param currentTransactions the currentTransactions to set
+     */
+    public void setCurrentTransactions(List<PaymentTransaction> currentTransactions) {
+        this.currentTransactions = currentTransactions;
     }
 
 }

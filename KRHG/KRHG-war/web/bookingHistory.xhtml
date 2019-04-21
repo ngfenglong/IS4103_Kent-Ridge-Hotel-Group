@@ -156,74 +156,13 @@
                                 </style>
                                 <h:form>
                                     <div style="margin:30px; max-height: 300px; overflow-y: scroll">
-                                     
-                                        <div class="row">
-                                             <h:commandLink class="col-md-12" style="border-top:1px solid lightgrey; padding:5px; height:100px">
-                                                <div style="text-align: center">
-                                                     Transaction ID: 5682
-                                                </div>
-                                                 
-                                                 
-                                                  <div class="row" style="margin:10px 0px">
-                                                     Facility Booked: Function Room
-                                                </div>
-                                                 <div class="row">
-                                                     <div  class="col-md-6">
-                                                     Date Booked: 25/8/2017
-                                                </div>
-                                                 <div class="col-md-6" style="text-align: right">
-                                                     Total Amount Paid: $98
-                                                </div>
-                                                 </div>
-                                               
-                                            </h:commandLink>
-                                            <h:commandLink class="col-md-12" style="border-top:1px solid lightgrey; padding:5px; height:100px">
-                                                <div style="text-align: center">
-                                                     Transaction ID: 5682
-                                                </div>
-                                                 
-                                                 
-                                                  <div class="row" style="margin:10px 0px">
-                                                     Facility Booked: Function Room
-                                                </div>
-                                                 <div class="row">
-                                                     <div  class="col-md-6">
-                                                     Date Booked: 25/8/2017
-                                                </div>
-                                                 <div class="col-md-6" style="text-align: right">
-                                                     Total Amount Paid: $98
-                                                </div>
-                                                 </div>
-                                               
-                                            </h:commandLink>
-                                            <h:commandLink class="col-md-12" style="border-top:1px solid lightgrey; padding:5px; height:100px" onclick="showDetails()"> 
-                                                <div style="text-align: center">
-                                                     Transaction ID: 5682
-                                                </div>
-                                                 
-                                                 
-                                                  <div class="row" style="margin:10px 0px">
-                                                     Facility Booked: Function Room
-                                                </div>
-                                                 <div class="row">
-                                                     <div  class="col-md-6">
-                                                     Date Booked: 25/8/2017
-                                                </div>
-                                                 <div class="col-md-6" style="text-align: right">
-                                                     Total Amount Paid: $98
-                                                </div>
-                                                 </div>
-                                               <f:ajax execute="transactionLink#{pastTransaction.transactionID}" render=":bookingDetails"></f:ajax>
-                                            </h:commandLink>
-                                        </div>
-                                      
+                   
                                         <c:forEach items="#{websiteAuthenticationManagedBean.pastTransactions}" var="pastTransaction">
                                             
-                                            <h:commandLink id="transactionLink#{pastTransaction.transactionID}" actionListener="#{websiteAuthenticationManagedBean.selectTransaction(pastTransaction.id)}" onclick="showDetails(0)" class="col-md-12" style="border-top:1px solid lightgrey; padding:5px; height:100px">
+                                            <h:commandLink id="transactionLink#{pastTransaction.transactionID}" actionListener="#{websiteAuthenticationManagedBean.selectTransaction(pastTransaction.transactionID)}" onclick="showDetails(0)" class="col-md-12" style="border-top:1px solid lightgrey; padding:5px; height:100px">
                                                 <div style="text-align: center">
                                                     Transaction ID: #{pastTransaction.transactionID}
                                                 </div>
-                                                 
                                                  
                                                   <div class="row" style="margin:10px 0px">
                                                       Facility Booked: #{websiteAuthenticationManagedBean.getTypeOfFacilityBooked(pastTransaction)}
@@ -257,17 +196,30 @@
                                          <table>
                                         <tr>
                                             <td colspan="2">Period of Stay:  </td>
-                                            <td colspan="8">#{websiteAuthenticationManagedBean.loggedInCustomer.firstName}</td>
+                                            <td colspan="8">#{websiteAuthenticationManagedBean.dateStart} - #{websiteAuthenticationManagedBean.dateEnd}</td>
 
                                         </tr>
                                         <tr>
                                             <td colspan="2">Number of Rooms:  </td>
-                                            <td colspan="8">#{websiteAuthenticationManagedBean.loggedInCustomer.lastName}</td>
-
+                                            <c:if test="#{!websiteAuthenticationManagedBean.checkIfZero('Standard')}">
+                                             <td colspan="8">#{websiteAuthenticationManagedBean.noOfStandardRoom} x Standard Room</td>
+                                            </c:if>
+                                            <c:if test="#{!websiteAuthenticationManagedBean.checkIfZero('Deluxe')}">
+                                                <td colspan="8">#{websiteAuthenticationManagedBean.noOfDeluxeRoom} x Deluxe Room</td>
+                                            </c:if>
+                                             <c:if test="#{!websiteAuthenticationManagedBean.checkIfZero('Premium')}">
+                                                 <td colspan="8">#{websiteAuthenticationManagedBean.noOfPremiumRoom} x Premium Room</td>
+                                            </c:if>
+                                            <c:if test="#{!websiteAuthenticationManagedBean.checkIfZero('Suite')}">
+                                             <td colspan="8">#{websiteAuthenticationManagedBean.noOfSuiteRoom} x Suite Room</td>
+                                            </c:if>
+                                            <c:if test="#{!websiteAuthenticationManagedBean.checkIfZero('Penthouse')}">
+                                             <td colspan="8">#{websiteAuthenticationManagedBean.noOfPenthouse} x Penthouse</td>
+                                            </c:if>
                                         </tr>
                                         <tr>
                                             <td colspan="2">Loyalty Points Earned: </td>
-                                            <td colspan="8">#{websiteAuthenticationManagedBean.loggedInCustomer.points}</td>
+                                            <td colspan="8">#{websiteAuthenticationManagedBean.pointsEarnedForSelectedTransaction}</td>
                                         </tr>
                                     </table>
                                     
