@@ -68,7 +68,7 @@ import sun.misc.IOUtils;
 @ManagedBean
 @SessionScoped
 public class requestServicesManagedBean implements Serializable {
-
+    
     @EJB
     private MaintainenceOrderSessionLocal maintenanceOrderSessionLocal;
     @EJB
@@ -166,18 +166,21 @@ public class requestServicesManagedBean implements Serializable {
     //Maintenance Order
     private MaintainenceOrder selectedMaintenanceOrder;
     private Long selectedMaintenanceOrderID;
-
     
-     //cleaning
+    private String mLocation;
+    private String mDescription;
+
+    //cleaning
     private List<List<Staff>> assginingStaffLevel;
     private int numberOfFloor;
     private List<Staff> staffAvail;
     private Integer staffLevel;
     private CleaningSchedule cs;
+    
     public requestServicesManagedBean() {
-
+        
     }
-
+    
     @PostConstruct
     public void getAllLaundryStaff() {
         List<Staff> allstaff = staffsession.getAllStaffs();
@@ -187,9 +190,9 @@ public class requestServicesManagedBean implements Serializable {
                 allLaundryStaffs.add(s);
             }
         }
-
+        
     }
-
+    
     public boolean isHousekeepingStaff() {
         boolean status = false;
         if (loggedInAccount != null) {
@@ -203,7 +206,7 @@ public class requestServicesManagedBean implements Serializable {
         }
         return status;
     }
-
+    
     public boolean isLaundryStaff() {
         boolean status = false;
         if (loggedInAccount != null) {
@@ -217,7 +220,7 @@ public class requestServicesManagedBean implements Serializable {
         }
         return status;
     }
-
+    
     public boolean isKitchenStaff() {
         boolean status = false;
         if (loggedInAccount != null) {
@@ -232,7 +235,7 @@ public class requestServicesManagedBean implements Serializable {
         }
         return status;
     }
-
+    
     public boolean isMaintenanceStaff() {
         boolean status = false;
         if (loggedInAccount != null) {
@@ -247,7 +250,7 @@ public class requestServicesManagedBean implements Serializable {
         }
         return status;
     }
-
+    
     public String login() throws NoResultException {
         if (username != null && password != null) {
             try {
@@ -275,51 +278,51 @@ public class requestServicesManagedBean implements Serializable {
         }
         return "return login.xhtml?faces-redirect=true";
     }
-
+    
     public String logout() {
         setUsername("");
         setPassword("");
         setLoggedInAccount(null);
         return "login.xhtml?faces-redirect=true";
     }
-
+    
     public String getStyleClass() {
         return styleCheck ? "cd-popup is-visible" : "cd-popup";
-
+        
     }
-
+    
     public String getStyleClass2() {
         return styleCheck2 ? "cd-popup is-visible" : "cd-popup";
     }
-
+    
     public String getStyleClass3() {
         return styleCheck3 ? "cd-popup is-visible" : "cd-popup";
     }
-
+    
     public boolean getTabIndex1() {
         return tabIndex1;
     }
-
+    
     public boolean getTabIndex2() {
         return tabIndex2;
     }
-
+    
     public boolean getTabIndex3() {
         return tabIndex3;
     }
-
+    
     public void selectTab1() {
         tabIndex1 = true;
         tabIndex2 = false;
         tabIndex3 = false;
     }
-
+    
     public void selectTab2() {
         tabIndex1 = false;
         tabIndex2 = true;
         tabIndex3 = false;
     }
-
+    
     public void selectTab3() {
         tabIndex1 = false;
         tabIndex2 = false;
@@ -333,19 +336,19 @@ public class requestServicesManagedBean implements Serializable {
         selectedFoodOrderID = id;
         styleCheck = true;
     }
-
+    
     public void modalTrigger() {
         styleCheck = true;
     }
-
+    
     public void modalTrigger2() {
         styleCheck2 = true;
     }
-
+    
     public void modalTrigger3() {
         styleCheck3 = true;
     }
-
+    
     public String getFoodOrderRoom(FoodOrder fo) throws NoResultException {
         List<RoomBooking> allRoomBookings = roomBookingSessionLocal.getAllRoomBooking();
         for (RoomBooking r : allRoomBookings) {
@@ -357,18 +360,18 @@ public class requestServicesManagedBean implements Serializable {
         }
         return "";
     }
-
+    
     public List<LaundryOrderedItem> getAllLaundryOrderedItem() {
         List<LaundryOrderedItem> allLOI = new ArrayList();
-
+        
         for (LaundryOrderedItem loi : selectedLaundryOrder.getLaundryOrderedItems()) {
             allLOI.add(loi);
         }
-
+        
         return allLOI;
-
+        
     }
-
+    
     public void updateLaundryOrder() throws NoResultException {
         System.out.println("TDW");
         System.out.println(TDWQty);
@@ -394,12 +397,12 @@ public class requestServicesManagedBean implements Serializable {
         System.out.println("BW");
         System.out.println(BWQty);
         System.out.println(BWDesc);
-
+        
         System.out.println("in updateLaundryOrder");
         List<LaundryOrderedItem> allItems = new ArrayList<LaundryOrderedItem>();
         double totalPrice = 0;
         if (getTDWQty() != 0) {
-
+            
             LaundryOrderedItem loi = new LaundryOrderedItem();
             loi.setQty(getTDWQty());
             loi.setDescription(getTDWDesc());
@@ -411,7 +414,7 @@ public class requestServicesManagedBean implements Serializable {
             totalPrice += (TDWQty * laundrySessionLocal.getLaundryTypeByName("Top (Dry-Wash)").getPrice());
         }
         if (getIWWQty() != 0) {
-
+            
             LaundryOrderedItem loi = new LaundryOrderedItem();
             loi.setQty(getIWWQty());
             loi.setDescription(getIWWDesc());
@@ -422,9 +425,9 @@ public class requestServicesManagedBean implements Serializable {
             allItems.add(loi);
             totalPrice += (IWWQty * laundrySessionLocal.getLaundryTypeByName("Inner Wear (Wash)").getPrice());
         }
-
+        
         if (getBDWQty() != 0) {
-
+            
             LaundryOrderedItem loi = new LaundryOrderedItem();
             loi.setQty(getBDWQty());
             loi.setDescription(getBDWDesc());
@@ -436,7 +439,7 @@ public class requestServicesManagedBean implements Serializable {
             totalPrice += (BDWQty * laundrySessionLocal.getLaundryTypeByName("Bottom (Dry-Wash)").getPrice());
         }
         if (getOWDWQty() != 0) {
-
+            
             LaundryOrderedItem loi = new LaundryOrderedItem();
             loi.setQty(getOWDWQty());
             loi.setDescription(getOWDWDesc());
@@ -447,9 +450,9 @@ public class requestServicesManagedBean implements Serializable {
             allItems.add(loi);
             totalPrice += (OWDWQty * laundrySessionLocal.getLaundryTypeByName("Outer Wear (Dry-Wash)").getPrice());
         }
-
+        
         if (getIWDWQty() != 0) {
-
+            
             LaundryOrderedItem loi = new LaundryOrderedItem();
             loi.setQty(getOWWQty());
             loi.setDescription(getIWDWDesc());
@@ -461,7 +464,7 @@ public class requestServicesManagedBean implements Serializable {
             totalPrice += (IWDWQty * laundrySessionLocal.getLaundryTypeByName("Inner Wear (Dry-Wash)").getPrice());
         }
         if (getTWQty() != 0) {
-
+            
             LaundryOrderedItem loi = new LaundryOrderedItem();
             loi.setQty(getTWQty());
             loi.setDescription(getTWDesc());
@@ -473,7 +476,7 @@ public class requestServicesManagedBean implements Serializable {
             totalPrice += (TWQty * laundrySessionLocal.getLaundryTypeByName("Top (Wash)").getPrice());
         }
         if (getOWWQty() != 0) {
-
+            
             LaundryOrderedItem loi = new LaundryOrderedItem();
             loi.setQty(getOWWQty());
             loi.setDescription(getOWWDesc());
@@ -485,7 +488,7 @@ public class requestServicesManagedBean implements Serializable {
             totalPrice += (OWWQty * laundrySessionLocal.getLaundryTypeByName("Outer Wear (Wash)").getPrice());
         }
         if (getBWQty() != 0) {
-
+            
             LaundryOrderedItem loi = new LaundryOrderedItem();
             loi.setQty(getBWQty());
             loi.setDescription(getBWDesc());
@@ -496,12 +499,12 @@ public class requestServicesManagedBean implements Serializable {
             allItems.add(loi);
             totalPrice += (BWQty * laundrySessionLocal.getLaundryTypeByName("Bottom (Wash)").getPrice());
         }
-
+        
         LaundryOrder currentLaundryOrder = laundrySessionLocal.getLaundryOrderByID(selectedLaundryOrderID);
         currentLaundryOrder.setLaundryOrderedItems(allItems);
         currentLaundryOrder.setTotalPrice(totalPrice);
         currentLaundryOrder.setStatus("IN PROGRESS");
-
+        
         TDWQty = 0;
         IWWQty = 0;
         BDWQty = 0;
@@ -510,7 +513,7 @@ public class requestServicesManagedBean implements Serializable {
         TWQty = 0;
         OWWQty = 0;
         BWQty = 0;
-
+        
         TDWDesc = null;
         IWWDesc = null;
         BDWDesc = null;
@@ -519,31 +522,31 @@ public class requestServicesManagedBean implements Serializable {
         TWDesc = null;
         OWWDesc = null;
         BWDesc = null;
-
+        
         currentLaundryOrder.setSpecialRequest(specialLaundryRequest);
         currentLaundryOrder.setHouseKeeper(staffsession.getStaffByNric(selectedLaundryStaffNRIC));
         styleCheck = false;
         laundrySessionLocal.updateLaundryOrder(currentLaundryOrder);
-
+        
     }
-
+    
     public boolean checkSpecialRequest() {
         if (selectedLaundryOrder == null || selectedLaundryOrder.getSpecialRequest() == null || selectedLaundryOrder.getSpecialRequest().equals("")) {
-
+            
             return false;
         }
         return true;
     }
-
+    
     public List<MaintainenceOrder> getAllMaintenanceOrders() throws NoResultException {
         return maintenanceOrderSessionLocal.getAllMaintainenceOrder();
     }
-
+    
     public String convertDateFormatDDMMYY(Date date) {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         return dateFormat.format(date);
     }
-
+    
     public List<MaintainenceOrder> getAllIncompleteMaintenanceOrders() throws NoResultException {
         List<MaintainenceOrder> allIncomepleteOrders = new ArrayList();
         List<MaintainenceOrder> allOrders = maintenanceOrderSessionLocal.getAllMaintainenceOrder();
@@ -552,14 +555,14 @@ public class requestServicesManagedBean implements Serializable {
                 allIncomepleteOrders.add(mo);
             }
         }
-
+        
         return allIncomepleteOrders;
     }
-
+    
     public List<LaundryType> getAllLaundryTypes() {
         return laundrySessionLocal.getAllLaundryTypes();
     }
-
+    
     public List<LaundryOrder> getAllLaundryOrdersByStatus(String status) {
         List<LaundryOrder> getLaundryOrders = laundrySessionLocal.getAllLaundryOrder();
         List<LaundryOrder> laundryOrdersWithStatus = new ArrayList();
@@ -570,53 +573,53 @@ public class requestServicesManagedBean implements Serializable {
         }
         return laundryOrdersWithStatus;
     }
-
+    
     public boolean checkDryClean(LaundryOrderedItem loi) {
-
+        
         if (loi.getLaundryType().getLaundryName().equals("Outer Wear (Dry-Wash)")) {
-
+            
             return true;
         }
         if (loi.getLaundryType().getLaundryName().equals("Inner Wear (Dry-Wash)")) {
-
+            
             return true;
         }
         if (loi.getLaundryType().getLaundryName().equals("Top (Dry-Wash)")) {
-
+            
             return true;
         }
         if (loi.getLaundryType().getLaundryName().equals("Bottom (Dry-Wash)")) {
-
+            
             return true;
         }
-
+        
         return false;
     }
-
+    
     public boolean checkWash(LaundryOrderedItem loi) {
-
+        
         if (loi.getLaundryType().getLaundryName().equals("Outer Wear (Wash)")) {
-
+            
             return true;
         }
         if (loi.getLaundryType().getLaundryName().equals("Inner Wear (Wash)")) {
-
+            
             return true;
         }
         if (loi.getLaundryType().getLaundryName().equals("Top (Wash)")) {
-
+            
             return true;
         }
         if (loi.getLaundryType().getLaundryName().equals("Bottom (Wash)")) {
-
+            
             return true;
         }
-
+        
         return false;
     }
-
+    
     public void minusqty(String variable) {
-
+        
         if (variable.equals("TDWQty") && TDWQty != 0) {
             TDWQty -= 1;
         } else if (variable.equals("IWWQty") && IWWQty != 0) {
@@ -635,9 +638,9 @@ public class requestServicesManagedBean implements Serializable {
             BWQty -= 1;
         }
     }
-
+    
     public void plusqty(String variable) {
-
+        
         if (variable.equals("TDWQty")) {
             TDWQty += 1;
             System.out.println("TDWQty" + TDWQty);
@@ -664,37 +667,37 @@ public class requestServicesManagedBean implements Serializable {
             System.out.println("BWQty" + BWQty);
         }
     }
-
+    
     public List<FoodOrder> getAllFoodOrders() {
-
+        
         List<FoodOrder> allFoodOrders = foodOrderSessionLocal.getAllFoodOrder();
         List<FoodOrder> AllOngoingFoodOrders = new ArrayList();
         for (FoodOrder f : allFoodOrders) {
             if (f.getStatus().equals("ORDERED")) {
-
+                
                 AllOngoingFoodOrders.add(f);
             }
         }
-
+        
         return AllOngoingFoodOrders;
-
+        
     }
-
+    
     public List<FoodOrder> getAllFoodDelivery() {
-
+        
         List<FoodOrder> allFoodDelivery = foodOrderSessionLocal.getAllFoodOrder();
         List<FoodOrder> AllFoodDeliveries = new ArrayList();
         for (FoodOrder f : allFoodDelivery) {
             if (f.getStatus().equals("COMPLETE")) {
-
+                
                 AllFoodDeliveries.add(f);
             }
         }
-
+        
         return AllFoodDeliveries;
-
+        
     }
-
+    
     public String markMaintenanceOrderComplete() throws NoResultException {
         MaintainenceOrder newMO = new MaintainenceOrder();
         try {
@@ -708,10 +711,10 @@ public class requestServicesManagedBean implements Serializable {
         selectedMaintenanceOrder = null;
         selectedMaintenanceOrderID = null;
         maintenanceOrderSessionLocal.updateMaintainenceOrder(newMO);
-
+        
         return "maintenance.xhtml?faces-redirect=true";
     }
-
+    
     public String markFoodOrderComplete() throws NoResultException {
         FoodOrder newFO = new FoodOrder();
         try {
@@ -720,14 +723,14 @@ public class requestServicesManagedBean implements Serializable {
         } catch (Exception e) {
             e.printStackTrace(System.out);
         }
-
+        
         styleCheck2 = false;
         selectedFoodOrderID = null;
         foodOrderSessionLocal.updateFoodOrder(newFO);
-
+        
         return "foodOrder.xhtml?faces-redirect=true";
     }
-
+    
     public String markFoodOrderDelivered() throws NoResultException {
         FoodOrder newFO = new FoodOrder();
         try {
@@ -736,16 +739,16 @@ public class requestServicesManagedBean implements Serializable {
         } catch (Exception e) {
             e.printStackTrace(System.out);
         }
-
+        
         styleCheck = false;
         selectedFoodOrderID = null;
         foodOrderSessionLocal.updateFoodOrder(newFO);
-
+        
         return "foodDelivered.xhtml?faces-redirect=true";
     }
-
+    
     public String markLaundryOrderComplete() throws NoResultException {
-
+        
         LaundryOrder newLaundryOrder = new LaundryOrder();
         try {
             newLaundryOrder = laundrySessionLocal.getLaundryOrderByID(selectedLaundryOrderID);
@@ -757,12 +760,12 @@ public class requestServicesManagedBean implements Serializable {
         selectedFoodOrderID = null;
         selectedFoodOrder = null;
         laundrySessionLocal.updateLaundryOrder(newLaundryOrder);
-
+        
         return "laundry.xhtml?face-redirect=true";
     }
-
+    
     public String markLaundryOrderDelivered() throws NoResultException {
-
+        
         LaundryOrder newLaundryOrder = new LaundryOrder();
         try {
             newLaundryOrder = laundrySessionLocal.getLaundryOrderByID(selectedLaundryOrderID);
@@ -770,12 +773,12 @@ public class requestServicesManagedBean implements Serializable {
         } catch (Exception e) {
             e.printStackTrace(System.out);
         }
-
+        
         styleCheck3 = false;
         selectedFoodOrderID = null;
         selectedFoodOrder = null;
         laundrySessionLocal.updateLaundryOrder(newLaundryOrder);
-
+        
         return "laundry.xhtml?face-redirect=true";
     }
 
@@ -784,9 +787,9 @@ public class requestServicesManagedBean implements Serializable {
      * @return @throws NoResultException
      */
     public List<FoodMenuItem> getAllFoodMenuItemsOrdered(FoodOrder fo) throws NoResultException {
-
+        
         List<FoodOrderedItem> foodOrdered = fo.getFoodOrdered();
-
+        
         List<FoodMenuItem> fmiOrdered = new ArrayList();
         for (FoodOrderedItem f : foodOrdered) {
             if (f != null) {
@@ -795,9 +798,9 @@ public class requestServicesManagedBean implements Serializable {
         }
         return fmiOrdered;
     }
-
+    
     public List<FoodMenuItem> getFoodItemsFromFoodOrderID() throws NoResultException {
-
+        
         FoodOrder fo = foodOrderSessionLocal.getAllFoodOrderByID(selectedFoodOrderID);
         List<FoodOrderedItem> foodOrdered = fo.getFoodOrdered();
         List<FoodMenuItem> fmiOrdered = new ArrayList();
@@ -808,9 +811,9 @@ public class requestServicesManagedBean implements Serializable {
         }
         return fmiOrdered;
     }
-
+    
     public List<FoodMenuItem> getAllDayBreakfastMenu() {
-
+        
         List<FoodMenuItem> fullMenu = kitchenSessionlocal.getAllFoodMenuItem();
         List<FoodMenuItem> AllDayBreakfastMenu = new ArrayList();
         for (FoodMenuItem f : fullMenu) {
@@ -819,13 +822,13 @@ public class requestServicesManagedBean implements Serializable {
                 AllDayBreakfastMenu.add(f);
             }
         }
-
+        
         return AllDayBreakfastMenu;
-
+        
     }
-
+    
     public List<FoodMenuItem> getStartersMenu() {
-
+        
         List<FoodMenuItem> fullMenu = kitchenSessionlocal.getAllFoodMenuItem();
         List<FoodMenuItem> startersMenu = new ArrayList();
         for (FoodMenuItem f : fullMenu) {
@@ -833,19 +836,19 @@ public class requestServicesManagedBean implements Serializable {
                 startersMenu.add(f);
             }
         }
-
+        
         return startersMenu;
-
+        
     }
-
+    
     public String getSpecialRequest() throws NoResultException {
         FoodOrder foodOrder = foodOrderSessionLocal.getAllFoodOrderByID(selectedFoodOrderID);
-
+        
         return foodOrder.getSpecialRequest();
     }
-
+    
     public List<FoodMenuItem> getMainsMenu() {
-
+        
         List<FoodMenuItem> fullMenu = kitchenSessionlocal.getAllFoodMenuItem();
         List<FoodMenuItem> mainsMenu = new ArrayList();
         for (FoodMenuItem f : fullMenu) {
@@ -853,13 +856,13 @@ public class requestServicesManagedBean implements Serializable {
                 mainsMenu.add(f);
             }
         }
-
+        
         return mainsMenu;
-
+        
     }
-
+    
     public List<FoodMenuItem> getFOAMenu() {
-
+        
         List<FoodMenuItem> fullMenu = kitchenSessionlocal.getAllFoodMenuItem();
         List<FoodMenuItem> FOAMenu = new ArrayList();
         for (FoodMenuItem f : fullMenu) {
@@ -867,13 +870,13 @@ public class requestServicesManagedBean implements Serializable {
                 FOAMenu.add(f);
             }
         }
-
+        
         return FOAMenu;
-
+        
     }
-
+    
     public List<FoodMenuItem> getSABMenu() {
-
+        
         List<FoodMenuItem> fullMenu = kitchenSessionlocal.getAllFoodMenuItem();
         List<FoodMenuItem> SABMenu = new ArrayList();
         for (FoodMenuItem f : fullMenu) {
@@ -881,13 +884,13 @@ public class requestServicesManagedBean implements Serializable {
                 SABMenu.add(f);
             }
         }
-
+        
         return SABMenu;
-
+        
     }
-
+    
     public List<FoodMenuItem> getAlcBeverageMenu() {
-
+        
         List<FoodMenuItem> fullMenu = kitchenSessionlocal.getAllFoodMenuItem();
         List<FoodMenuItem> alcBeverageMenu = new ArrayList();
         for (FoodMenuItem f : fullMenu) {
@@ -895,13 +898,13 @@ public class requestServicesManagedBean implements Serializable {
                 alcBeverageMenu.add(f);
             }
         }
-
+        
         return alcBeverageMenu;
-
+        
     }
-
+    
     public List<FoodMenuItem> getBeverageMenu() {
-
+        
         List<FoodMenuItem> fullMenu = kitchenSessionlocal.getAllFoodMenuItem();
         List<FoodMenuItem> BeverageMenu = new ArrayList();
         for (FoodMenuItem f : fullMenu) {
@@ -909,13 +912,13 @@ public class requestServicesManagedBean implements Serializable {
                 BeverageMenu.add(f);
             }
         }
-
+        
         return BeverageMenu;
-
+        
     }
-
+    
     public List<FoodMenuItem> getOOSMenu() {
-
+        
         List<FoodMenuItem> fullMenu = kitchenSessionlocal.getAllFoodMenuItem();
         List<FoodMenuItem> OOSMenu = new ArrayList();
         for (FoodMenuItem f : fullMenu) {
@@ -923,138 +926,138 @@ public class requestServicesManagedBean implements Serializable {
                 OOSMenu.add(f);
             }
         }
-
+        
         return OOSMenu;
-
+        
     }
-
+    
     public String setUnavailable(Long fmiID) throws NoResultException {
         selectedFoodItem = foodMenuItemSessionLocal.getFoodMenuItemByID(fmiID);
         selectedFoodItem.setAvailability(false);
         foodMenuItemSessionLocal.updateFoodMenuItem(selectedFoodItem);
         return "foodMenu.xhtml?faces-redirect=true";
     }
-
+    
     public String setAvailable(Long fmiID) throws NoResultException {
         selectedFoodItem = foodMenuItemSessionLocal.getFoodMenuItemByID(fmiID);
         selectedFoodItem.setAvailability(true);
         foodMenuItemSessionLocal.updateFoodMenuItem(selectedFoodItem);
-
+        
         return "foodMenu.xhtml?faces-redirect=true";
     }
-
+    
     public void selectMaintenanceOrder(Long moID) throws NoResultException {
         styleCheck = true;
         selectedMaintenanceOrder = maintenanceOrderSessionLocal.getMaintainenceOrderByID(moID);
         selectedMaintenanceOrderID = moID;
     }
-
+    
     public void selectFoodMenuItem(Long fmiID) throws NoResultException {
         styleCheck = true;
         selectedFoodItem = foodMenuItemSessionLocal.getFoodMenuItemByID(fmiID);
         System.out.println("Current Selection:" + selectedFoodItem.getFoodMenuItemName());
-
+        
         System.out.println("in selectFoodMenuItem:" + selectedFoodItem.getFoodMenuItemName());
     }
-
+    
     public void selectFoodMenuItem2(Long fmiID) throws NoResultException {
         styleCheck2 = true;
         selectedFoodItem = foodMenuItemSessionLocal.getFoodMenuItemByID(fmiID);
         System.out.println("Current Selection:" + selectedFoodItem.getFoodMenuItemName());
-
+        
         System.out.println("in selectFoodMenuItem:" + selectedFoodItem.getFoodMenuItemName());
     }
-
+    
     public void selectFoodOrder(Long foID) throws NoResultException {
         styleCheck = true;
         selectedFoodOrderID = foID;
         System.out.println("Current Selection:" + selectedFoodOrderID);
-
+        
     }
-
+    
     public void selectFoodOrder2(Long foID) throws NoResultException {
         selectedFoodOrderID = foID;
         System.out.println("Current Selection:" + selectedFoodOrderID);
     }
-
+    
     public void selectLaundryOrder(Long loID) throws NoResultException {
         selectedLaundryOrderID = loID;
         selectedLaundryOrder = laundrySessionLocal.getLaundryOrderByID(loID);
         System.out.println("laundryorderselected: " + selectedLaundryOrderID);
         System.out.println("HELLO:" + selectedLaundryOrder);
     }
-
+    
     public void addFoodMenuItemToggle1() throws NoResultException {
         newFoodCategory = "All Day Breakfast";
         styleCheck3 = true;
         System.out.println(newFoodCategory);
     }
-
+    
     public void addFoodMenuItemToggle2() throws NoResultException {
         newFoodCategory = "Starters";
         styleCheck3 = true;
     }
-
+    
     public void addFoodMenuItemToggle3() throws NoResultException {
         newFoodCategory = "Mains";
         styleCheck3 = true;
     }
-
+    
     public void addFoodMenuItemToggle4() throws NoResultException {
         newFoodCategory = "Flavours of Asia";
         styleCheck3 = true;
     }
-
+    
     public void addFoodMenuItemToggle5() throws NoResultException {
         newFoodCategory = "Sandwiches and Burgers";
         styleCheck3 = true;
     }
-
+    
     public void addFoodMenuItemToggle6() throws NoResultException {
         newFoodCategory = "Beverages (Alcohol)";
         styleCheck3 = true;
     }
-
+    
     public void addFoodMenuItemToggle7() throws NoResultException {
         newFoodCategory = "Beverages (Chilled Juices)";
         styleCheck3 = true;
     }
-
+    
     public String cancelMarkMOComplete() {
         styleCheck = false;
         return "maintenance.xhtml?faces-redirect=true";
     }
-
+    
     public String cancelingDeleteFoodItem() {
         styleCheck = false;
         return "foodMenu.xhtml?faces-redirect=true";
     }
-
+    
     public String cancemMarkFoodOrderComplete() {
         styleCheck = false;
         return "foodOrder.xhtml?faces-redirect=true";
     }
-
+    
     public String cancelUpdateLaundryOrder() {
         styleCheck2 = false;
         styleCheck = false;
         styleCheck3 = false;
         return "laundry.xhtml?faces-redirect=true";
     }
-
+    
     public String cancelingDeleteOrder() {
         styleCheck2 = false;
         styleCheck = false;
         return "foodOrder.xhtml?faces-redirect=true";
     }
-
+    
     public String cancelingDeleteFoodItem2() {
         styleCheck2 = false;
         return "foodMenu.xhtml?faces-redirect=true";
     }
-
+    
     public String cancelingAddFoodItem() {
-
+        
         styleCheck3 = false;
         newFoodName = null;
         newFoodCategory = null;
@@ -1063,9 +1066,9 @@ public class requestServicesManagedBean implements Serializable {
         System.out.println("styleCheck3");
         return "foodMenu.xhtml?faces-redirect=true";
     }
-
+    
     public String deleteFoodOrder() throws NoResultException {
-
+        
         FoodOrder fo = foodOrderSessionLocal.getAllFoodOrderByID(selectedFoodOrderID);
         fo.setStatus("CANCELLED");
         foodOrderSessionLocal.updateFoodOrder(fo);
@@ -1078,7 +1081,7 @@ public class requestServicesManagedBean implements Serializable {
 //        logSessionLocal.createLogging(l);
         return "foodOrder.xhtml?faces-redirect=true";
     }
-
+    
     public String deleteFoodItem() throws NoResultException {
         FoodMenuItem fmi = selectedFoodItem;
         System.out.println("Food menu item ID: " + fmi.getFoodMenuItemID());
@@ -1094,19 +1097,19 @@ public class requestServicesManagedBean implements Serializable {
         styleCheck = false;
         return "foodMenu.xhtml?faces-redirect=true";
     }
-
+    
     public FoodMenuItem getSelectedFoodItem() {
         return selectedFoodItem;
     }
-
+    
     public void setSelectedFoodItem(FoodMenuItem selectedFoodItem) {
         this.selectedFoodItem = selectedFoodItem;
     }
-
+    
     public String saveFoodMenuItem() throws NoResultException {
         if (foodImage != null) {
             try {
-
+                
                 InputStream bytes = foodImage.getInputStream();
                 //Files.copy(bytes, path, StandardCopyOption.REPLACE_EXISTING);
 
@@ -1118,7 +1121,7 @@ public class requestServicesManagedBean implements Serializable {
                 out.write(IOUtils.readFully(bytes, -1, false));
                 out.close();
                 selectedFoodItem.setFoodImage(foodImage.getSubmittedFileName());
-
+                
             } catch (Exception e) {
                 e.printStackTrace(System.out);
             }
@@ -1130,10 +1133,10 @@ public class requestServicesManagedBean implements Serializable {
 //        Logging l = new Logging("FoodMenuItem", "Update " + selectedFoodItem.getFoodMenuItemName()+ " details", loggedInName);
 //        logSessionLocal.createLogging(l);
         selectedFoodItem = null;
-
+        
         return "foodMenu.xhtml?faces-redirect=true";
     }
-
+    
     public String addFoodMenuItem() throws NoResultException {
         FoodMenuItem fmi = new FoodMenuItem();
         String imgFile = getNoImageStr();
@@ -1143,11 +1146,11 @@ public class requestServicesManagedBean implements Serializable {
         fmi.setStatus(Boolean.TRUE);
         fmi.setUnitPrice(newFoodPrice);
         fmi.setCategory(newFoodCategory);
-
+        
         if (foodImage != null) {
             imgFile = foodImage.getSubmittedFileName();
             try {
-
+                
                 InputStream bytes = foodImage.getInputStream();
                 //Files.copy(bytes, path, StandardCopyOption.REPLACE_EXISTING);
 
@@ -1158,14 +1161,14 @@ public class requestServicesManagedBean implements Serializable {
                 // Copy an InputStream to that OutputStream then
                 out.write(IOUtils.readFully(bytes, -1, false));
                 out.close();
-
+                
             } catch (Exception e) {
                 e.printStackTrace(System.out);
             }
         }
         fmi.setFoodImage(imgFile);
         foodMenuItemSessionLocal.createFoodMenuItem(fmi);
-
+        
         logActivityName = newFoodName;
 //        FacesContext context = FacesContext.getCurrentInstance();
 //        String loggedInName = context.getApplication().createValueBinding("#{authenticationManagedBean.name}").getValue(context).toString();
@@ -1177,14 +1180,14 @@ public class requestServicesManagedBean implements Serializable {
         newFoodName = null;
         newFoodPrice = 0;
         styleCheck3 = false;
-
+        
         return "foodMenu.xhtml?faces-redirect=true";
     }
-
+    
     public List<HouseKeepingOrder> getAllHousekeepingOrders() throws NoResultException {
         return housekeepingsessionlocal.getAllHouseKeepingOrder();
     }
-
+    
     public String hotelCodeToHotelGroup(String hotelCode) {
         for (Hotel h : hotelSessionlocal.getAllHotels()) {
             if (h.getHotelCodeName().equalsIgnoreCase(hotelCode)) {
@@ -1193,41 +1196,41 @@ public class requestServicesManagedBean implements Serializable {
         }
         return null;
     }
-
+    
     public List<HouseKeepingOrder> getIncompleteHousekeepingOrders() throws NoResultException {
         List<HouseKeepingOrder> newList = new ArrayList<>();
-
+        
         for (HouseKeepingOrder ho : housekeepingsessionlocal.getAllHouseKeepingOrder()) {
             if (ho.getStatus().equalsIgnoreCase("incomplete")) {
                 newList.add(ho);
-
+                
             }
         }
         return newList;
     }
-
+    
     public void setAllHousekeepingOrders(List<HouseKeepingOrder> allHousekeepingOrders) {
         this.allHousekeepingOrders = allHousekeepingOrders;
     }
-
+    
     public List<HouseKeepingOrder> getGetIncompleteHousekeepingOrders() throws NoResultException {
         return getIncompleteHousekeepingOrders = getIncompleteHousekeepingOrders();
     }
-
+    
     public void setGetIncompleteHousekeepingOrders(List<HouseKeepingOrder> getIncompleteHousekeepingOrders) {
         this.getIncompleteHousekeepingOrders = getIncompleteHousekeepingOrders;
     }
-
+    
     public List<Staff> getGetHousekeepingStaff() {
         getHousekeepingStaff = getStaffBasedOnDepartmentAndHotelCode("Housekeeping");
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("converter.StaffConverterv.staffs", getHousekeepingStaff);
         return getHousekeepingStaff;
     }
-
+    
     public void setGetHousekeepingStaff(List<Staff> getHousekeepingStaff) {
         this.getHousekeepingStaff = getHousekeepingStaff;
     }
-
+    
     public List<Staff> getStaffBasedOnDepartmentAndHotelCode(String department) {
         hotelGroup = hotelCodeToHotelGroup(hotelCode);
         List<Staff> newlist = new ArrayList<>();
@@ -1238,33 +1241,33 @@ public class requestServicesManagedBean implements Serializable {
         }
         return newlist;
     }
-
+    
     public void valueChangeMethod(ValueChangeEvent e) {
         System.out.println(e.getNewValue());
-
+        
         System.out.println("hello");
     }
-
+    
     public void update(HouseKeepingOrder housekeeping) throws NoResultException {
         System.err.println("house: " + housekeeping);
         System.out.println("weifughweuiguwebguwbegwe");
         if (assignedHouseKeeper != null) {
-
+            
             housekeeperName = assignedHouseKeeper.getName();
             //Staff staff = staffsession.getStaffByID(assignedHouseKeeper);
 
             housekeeping.setHouseKeeper(assignedHouseKeeper);
-
+            
             housekeepingsessionlocal.updateHouseKeepingOrder(housekeeping);
         }
         styleCheck = true;
     }
-
+    
     public String convertDateFormat(Date date) {
         DateFormat dateFormat = new SimpleDateFormat("hh:mmaa");
         return dateFormat.format(date);
     }
-
+    
     public String getLaundryDeliveryDate() {
         String laundryDeliveryDate = "";
         if (selectedLaundryOrder != null) {
@@ -1272,7 +1275,7 @@ public class requestServicesManagedBean implements Serializable {
         }
         return laundryDeliveryDate;
     }
-
+    
     public String getLaundryPickupTime() {
         String laundryPickupTime = "";
         if (selectedLaundryOrder != null) {
@@ -1280,15 +1283,15 @@ public class requestServicesManagedBean implements Serializable {
         }
         return laundryPickupTime;
     }
-
+    
     public Staff getAssignedHouseKeeper() {
         return assignedHouseKeeper;
     }
-
+    
     public void setAssignedHouseKeeper(Staff assignedHouseKeeper) {
         this.assignedHouseKeeper = assignedHouseKeeper;
     }
-
+    
     public void hello(Long staff, Long HKO) throws NoResultException {
         if (staff != null) {
             Staff staffy = staffsession.getStaffByID(staff);
@@ -1299,35 +1302,35 @@ public class requestServicesManagedBean implements Serializable {
             housekeepingsessionlocal.updateHouseKeepingOrder(hk);
         }
     }
-
+    
     public List<MinibarStock> getGetMiniBarItems() {
         return getMiniBarItems = getMinibarByHotelCode();
     }
-
+    
     public void setGetMiniBarItems(List<MinibarStock> getMiniBarItems) {
         this.getMiniBarItems = getMiniBarItems;
     }
-
+    
     public List<MinibarStock> getMinibarByHotelCode() {
         List<MinibarStock> newlist = new ArrayList<>();
-
+        
         minibarStockWithoutUpdate = new Integer[6];
         int count = 0;
         for (MinibarStock ms : housekeepingsessionlocal.getAllMinibarStock()) {
             if (ms.getHotelCodeName().equals(hotelCode)) {
                 newlist.add(ms);
-
+                
                 minibarStockWithoutUpdate[count] = 0;
                 count++;
             }
         }
         return newlist;
     }
-
+    
     public double calculation(int number) {
         Double change = new Double(number);
         double result = (change / 1000) * 10;
-
+        
         return result;
     }
 
@@ -1344,19 +1347,19 @@ public class requestServicesManagedBean implements Serializable {
     public void setLogActivityName(String logActivityName) {
         this.logActivityName = logActivityName;
     }
-
+    
     public boolean isStyleCheck() {
         return styleCheck;
     }
-
+    
     public void setStyleCheck(boolean styleCheck) {
         this.styleCheck = styleCheck;
     }
-
+    
     public boolean isStyleCheck2() {
         return styleCheck2;
     }
-
+    
     public void setStyleCheck2(boolean styleCheck2) {
         this.styleCheck2 = styleCheck2;
     }
@@ -1388,11 +1391,11 @@ public class requestServicesManagedBean implements Serializable {
     public void setNoImageStr(String noImageStr) {
         this.noImageStr = noImageStr;
     }
-
+    
     public String getHousekeeperName() {
         return housekeeperName;
     }
-
+    
     public void setHousekeeperName(String housekeeperName) {
         this.housekeeperName = housekeeperName;
     }
@@ -1493,7 +1496,7 @@ public class requestServicesManagedBean implements Serializable {
      */
     public void setSelectedFoodOrderID(Long selectedFoodOrderID) {
         this.selectedFoodOrderID = selectedFoodOrderID;
-
+        
     }
 
     /**
@@ -1817,25 +1820,25 @@ public class requestServicesManagedBean implements Serializable {
     public void setAllLaundryStaffs(List<Staff> allLaundryStaffs) {
         this.allLaundryStaffs = allLaundryStaffs;
     }
-
+    
     public double defineTheNumber(int alert, int stock) {
         Double alertChange = new Double(alert);
         Double stockChange = new Double(stock);
-
+        
         double stockDiff = (stockChange / alertChange) * 30;
         DecimalFormat decim = new DecimalFormat("0.00");
         return Double.parseDouble(decim.format(stockDiff));
     }
-
+    
     public Integer[] getMinibarStockWithoutUpdate() {
         return minibarStockWithoutUpdate;
     }
-
+    
     public String updateInventory() throws NoResultException {
         updateMsg = "There are no updates";
         for (int i = 0; i < 6; i++) {
             MinibarStock ms = getMiniBarItems.get(i);
-
+            
             Integer current = ms.getCurrentStock();
             ms.setCurrentStock(current + minibarStockWithoutUpdate[i]);
             if (minibarStockWithoutUpdate[i] != 0) {
@@ -1847,23 +1850,23 @@ public class requestServicesManagedBean implements Serializable {
         styleCheck = true;
         return "Inventory.xhtml";
     }
-
+    
     public String inventoryOK() {
         styleCheck = false;
-
+        
         return "Inventory.xhtml?faces-redirect=true";
     }
-
+    
     public String housekeepingOK() {
         styleCheck = false;
-
+        
         return "housekeeping.xhtml?faces-redirect=true";
     }
-
+    
     public String getUpdateMsg() {
         return updateMsg;
     }
-
+    
     public void setUpdateMsg(String updateMsg) {
         this.updateMsg = updateMsg;
     }
@@ -1993,7 +1996,7 @@ public class requestServicesManagedBean implements Serializable {
     public void setLoggedInAccount(Staff loggedInAccount) {
         this.loggedInAccount = loggedInAccount;
     }
-
+    
     private static String encryptPassword(String password) {
         String sha1 = "";
         try {
@@ -2008,7 +2011,7 @@ public class requestServicesManagedBean implements Serializable {
         }
         return sha1;
     }
-
+    
     private static String byteToHex(final byte[] hash) {
         Formatter formatter = new Formatter();
         for (byte b : hash) {
@@ -2018,25 +2021,9 @@ public class requestServicesManagedBean implements Serializable {
         formatter.close();
         return result;
     }
-       
-
-	  
-
-
-	
-	
-
-
-
-
-	
-	
-
-	
-	
-	
-	public void createDailyHousekeeping() {
-
+    
+    public void createDailyHousekeeping() {
+        
         for (Room rm : roomsessionlocal.getAllRooms()) {
             HouseKeepingOrder hk = new HouseKeepingOrder();
             hk.setSpecialRequest(null);
@@ -2046,13 +2033,13 @@ public class requestServicesManagedBean implements Serializable {
             hk.setStatus("incomplete");
             hk.setRoom(rm);
             hk.setLevel(getLevel(rm.getRoomNumber()));
-
+            
             housekeepingsessionlocal.createHouseKeepingOrder(hk);
-
+            
         }
-
+        
     }
-
+    
     public int getLevel(String roomnumber) {
         if (roomnumber.length() == 3) {
             return Integer.parseInt(roomnumber.substring(0, 1));
@@ -2060,16 +2047,16 @@ public class requestServicesManagedBean implements Serializable {
             return Integer.parseInt(roomnumber.substring(0, 2));
         }
     }
-
+    
     public List<List<Staff>> getAssginingStaff() {
         try {
-
+            
             if (cleaningScheduleSessionLocal.getCleaningScheduleByHotelCodeName(hotelCode).isEmpty()) {
                 numberOfFloor = getNumberOfFloor();
                 assginingStaffLevel = new ArrayList<>();
                 for (int i = 0; i < numberOfFloor; i++) {
                     assginingStaffLevel.add(new ArrayList<>());
-
+                    
                 }
                 return assginingStaffLevel;
             }
@@ -2083,25 +2070,25 @@ public class requestServicesManagedBean implements Serializable {
                 assginingStaffLevel = new ArrayList<>();
                 for (int i = 0; i < numberOfFloor; i++) {
                     assginingStaffLevel.add(new ArrayList<>());
-
+                    
                 }
                 return assginingStaffLevel;
             }
         }
-
+        
         return assginingStaffLevel;
     }
-
+    
     public void preparetherd() throws NoResultException {
-
+        
         numberOfFloor = getNumberOfFloor();
         assginingStaffLevel = new ArrayList<>();
         for (int i = 0; i < numberOfFloor; i++) {
             assginingStaffLevel.add(new ArrayList<>());
-
+            
         }
     }
-
+    
     public int getNumberOfFloor() {
         int highestFloor = 0;
         try {
@@ -2113,14 +2100,14 @@ public class requestServicesManagedBean implements Serializable {
         } catch (NoResultException e) {
             System.out.println("No room found");
         }
-
+        
         return highestFloor;
     }
-
+    
     public void setAssginingStaff(List<List<Staff>> assginingStaff) {
         this.assginingStaffLevel = assginingStaff;
     }
-
+    
     public List<Staff> getStaffAvail() {
         if (staffAvail == null) {
             return staffAvail = getGetHousekeepingStaff();
@@ -2128,11 +2115,11 @@ public class requestServicesManagedBean implements Serializable {
             return staffAvail;
         }
     }
-
+    
     public void setStaffAvail(List<Staff> staffAvail) {
         this.staffAvail = staffAvail;
     }
-
+    
     public void onStaffDrop(DragDropEvent ddEvent) {
         staffLevel = (Integer) ddEvent.getComponent().getAttributes().get("test");
         System.out.println(staffLevel);
@@ -2148,15 +2135,15 @@ public class requestServicesManagedBean implements Serializable {
         staffAvail.remove(car);
         printprint();
     }
-
+    
     public int convertStaffLevel(String staffLevel) {
         System.out.println("5");
-
+        
         String[] staffString = staffLevel.split("_");
         System.out.println("6");
         return Integer.parseInt(staffString[1]);
     }
-
+    
     public void printprint() {
         for (List<Staff> test : assginingStaffLevel) {
             System.out.println(test.size());
@@ -2164,22 +2151,22 @@ public class requestServicesManagedBean implements Serializable {
                 System.out.println(s.getName());
             }
         }
-
+        
     }
-
+    
     public void removefromlevel(Staff s, int level) {
-
+        
         assginingStaffLevel.get(level).remove(s);
         staffAvail.add(s);
-
+        
     }
-
+    
     public void printthis(int hellpo) {
         System.out.println(hellpo);
     }
-
+    
     public void updateCleaning() {
-
+        
         int counter = 0;
         for (List<Staff> s : assginingStaffLevel) {
             CleaningSchedule css = new CleaningSchedule();
@@ -2189,11 +2176,32 @@ public class requestServicesManagedBean implements Serializable {
             cleaningScheduleSessionLocal.createCleaningSchedule(css);
         }
     }
-
-	
-	
-	
-	
-	
-	
+    
+    public String createMaintenance() {
+        MaintainenceOrder mo = new MaintainenceOrder();
+        mo.setDescription(mDescription);
+        mo.setLocation(mLocation);
+        mo.setDateReported(new Date());
+        mo.setIsResolved(false);
+        maintenanceOrderSessionLocal.createMaintainenceOrder(mo);
+        
+        return "Maintenance.xhtml";
+    }
+    
+    public String getmLocation() {
+        return mLocation;
+    }
+    
+    public void setmLocation(String mLocation) {
+        this.mLocation = mLocation;
+    }
+    
+    public String getmDescription() {
+        return mDescription;
+    }
+    
+    public void setmDescription(String mDescription) {
+        this.mDescription = mDescription;
+    }
+    
 }
