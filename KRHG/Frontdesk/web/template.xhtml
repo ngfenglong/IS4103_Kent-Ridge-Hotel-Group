@@ -18,13 +18,14 @@
         <!-- Date Picker -->
         <link rel="stylesheet" href="#{request.contextPath}/plugins/datepicker/datepicker3.css" />
         <!-- DataTables -->
-        <link rel="stylesheet" href="#{request.contextPath}/plugins/datatables/dataTables.bootstrap4.css" />
+        <link rel="stylesheet" href="./plugins/datatables/dataTables.bootstrap4.css" />
+        
         <!-- Theme style (comes with Bootstrap) -->
         <link rel="stylesheet" href="#{request.contextPath}/css/adminlte.min.css" />
         <link rel="stylesheet" href="#{request.contextPath}/css/adminlte.css" />
         <link rel="stylesheet" href="#{request.contextPath}/css/style.css" />
         <link rel="stylesheet" href="./AdminLTE-2.4.10/AdminLTE-2.4.10/dist/css/AdminLTE.min.css" />
-             <link rel="stylesheet" href="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/bootstrap/dist/css/bootstrap.min.css"></link>
+             <link rel="stylesheet" href="./AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/bootstrap/dist/css/bootstrap.min.css"></link>
         <!-- Google Font: Source Sans Pro -->
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet" />
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous"></link>
@@ -47,7 +48,15 @@
             }
             
             p, span, td, input,a, button {
-                font-size:calc((100% + 0.25vw));
+                font-size:calc((100% + 0.25vw)) !important;
+            }
+            
+            .nav-header{
+                font-size:1.6em !important;
+            }
+            
+            .nav-item{
+                font-size:0.8em !important;
             }
             
             a{
@@ -119,7 +128,7 @@
                                 <li class="nav-item">
                                     <a href="manageAccount.xhtml" class="nav-link">
                                         <i class="fa nav-user fa-user"></i>
-                                        <p>Manage Customer Account</p>
+                                        <p>Manage Customer</p>
                                     </a>
                                 </li>
                         </li>
@@ -245,15 +254,28 @@
         </script>
         <!-- page script -->
         <script>
+            $(document).ready(function(){
+    $('#myTable').dataTable();
+});
+
+            
+                 $('#example5').DataTable({
+            "paging": true,
+                    "lengthChange": true,
+                    "searching": true,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": true
+            });
             $(function () {
             $("#example1").DataTable();
             $('#example2').DataTable({
-            "paging": true,
-                    "lengthChange": false,
-                    "searching": false,
+           "paging": true,
+                    "lengthChange": true,
+                    "searching": true,
                     "ordering": true,
                     "info": true,
-                    "autoWidth": false
+                    "autoWidth": true
             });
             $('#example3').DataTable({
             "paging": true,
@@ -326,7 +348,7 @@
                     }
                     })
                     .on('core.element.validated', function (e) {
-                    if (e.field === 'cc' &amp; &amp; !e.valid) {
+                    if (e.field === 'cc' &amp;&amp; !e.valid) {
                     const iconEle = e.element.nextSibling;
                     iconEle.setAttribute('class', 'fv-plugins-icon fa fa-times');
                     }

@@ -35,6 +35,8 @@ public class RoomSession implements RoomSessionLocal {
         q = em.createQuery("SELECT r FROM Room r");
         return q.getResultList();
     }
+    
+
 
     @Override
     public Room getRoomByID(Long rID) throws NoResultException {
@@ -236,6 +238,7 @@ public class RoomSession implements RoomSessionLocal {
             throw new NoResultException("Room not found.");
         }
     }
+    
 
     @Override
     public List<Room> getRoomByHotelName(String hotelName) throws NoResultException {

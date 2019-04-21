@@ -55,6 +55,13 @@
                                     </div>
                                     <div class="col-lg-12" style="text-align: center; margin:20px">
                                         <span style="font-size:calc((100% + 0.25vw))">Rooms Available For Booking : #{frontDeskManagedBean.roomAvailableToBook}</span> 
+                                       
+                                    </div>
+                                    
+                                    <div class="col-lg-12">
+                                         <span style="background-color: turquoise; color:black; padding:10px">Available</span>
+                                         <span style="background-color: lightgrey; color:black; padding:10px">Unavailable</span>
+                                          <span style="background-color: orange; color:black; padding:10px">Selected</span>
                                     </div>
                                     
                                     <c:forEach items="${frontDeskManagedBean.roomsByHotelAndType}" var="room" varStatus="count">

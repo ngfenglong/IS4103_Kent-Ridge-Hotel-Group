@@ -2,7 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+           xmlns:f="http://xmlns.jcp.org/jsf/core">
+>
 
     <body>
 
@@ -40,33 +42,56 @@
 
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h3 class="card-title">
-                                            <i class="fa fa-text-width"></i>
-                                            #{hotelManagedBean.selectedCustomer.lastName} #{hotelManagedBean.selectedCustomer.firstName}'s Profile
-                                        </h3>
-                                    </div>
-                                    <!-- /.card-header -->
-                                    <div class="card-body">
-                                        <dl>
-                                            <dt style="padding-left: 1rem;">First Name:</dt>
-                                            <dd style="padding-left:1rem;">#{hotelManagedBean.selectedCustomer.firstName}</dd>
-                                            <dt style="padding-left: 1rem;">Last Name: </dt>
-                                            <dd style="padding-left:1rem;">#{hotelManagedBean.selectedCustomer.lastName}</dd>
-                                            <dt style="padding-left: 1rem;">Email: </dt>
-                                            <dd style="padding-left:1rem;">#{hotelManagedBean.selectedCustomer.email}</dd>
-                                            <dt style="padding-left: 1rem;">Contact Number: </dt>
-                                            <dd style="padding-left:1rem;">#{hotelManagedBean.selectedCustomer.mobileNum}</dd>
-                                            <dt style="padding-left: 1rem;">Points: </dt>
-                                            <dd style="padding-left:1rem;">#{hotelManagedBean.selectedCustomer.points}</dd>
-                                            <dt style="padding-left: 1rem;">Date Joined:</dt>
-                                            <dd style="padding-left:1rem;">#{hotelManagedBean.selectedCustomer.displayDateJoined()}</dd>
-                                        </dl>
-                                    </div>
-                                    <!-- /.card-body -->
+                                
+                                <div class="box box-success">
+                                <div class="box-header with-border" style="text-align: center">
+                                    <h3 class="box-title" style="text-align: center; font-size:xx-large">
+                                        #{hotelManagedBean.selectedCustomer.lastName} #{hotelManagedBean.selectedCustomer.firstName}'s Profile</h3>
                                 </div>
-                                <!-- /.card -->
+
+                                <div class="box-body no-padding" style="color:black">
+                                    <div class="row" style="margin-bottom:20px; padding:0px 5px">
+                                        <div class="col-md-4 box" ></div>
+                                        <div class="col-md-4 box">
+                                                <div class="box-header with-border" style="text-align: center">
+                                                        <h3 class="box-title" style="text-align: center; color:green; font-size: x-large">
+                                                           Personal Details </h3>
+                                                        </div>
+                                            <div class="description-block margin-bottom">
+                                                <span class="description-text">Name</span>
+                                                <h5 class="description-header">
+                                                   #{hotelManagedBean.selectedCustomer.firstName} #{hotelManagedBean.selectedCustomer.lastName}</h5>
+                                            </div>
+                                            <div class="description-block margin-bottom">
+                                                <span class="description-text">Date Joined</span>
+                                                <h5 class="description-header">
+                                                    #{hotelManagedBean.selectedCustomer.displayDateJoined()}</h5>
+                                            </div>
+                                            <div class="description-block margin-bottom">
+                                                <span class="description-text">Mobile Number</span>
+                                                <h5 class="description-header">
+                                                  #{hotelManagedBean.selectedCustomer.mobileNum}</h5>
+                                            </div>
+                                            <div class="description-block margin-bottom">
+                                                <span class="description-text">email</span>
+                                                <h5 class="description-header">
+                                                    #{hotelManagedBean.selectedCustomer.email}</h5>
+                                            </div>
+                                            <div class="description-block margin-bottom">
+                                                <span class="description-text">Loyalty Points</span>
+                                                <h5 class="description-header">
+                                                   #{hotelManagedBean.selectedCustomer.points}</h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 box" ></div>
+                                    </div>
+                                </div>
+                            </div>
+                                
+                                
+                                
+                                
+                             
                             </div>
                         </div>
                     </section>

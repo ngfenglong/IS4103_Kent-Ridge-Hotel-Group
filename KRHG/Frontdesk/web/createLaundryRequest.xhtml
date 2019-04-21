@@ -11,7 +11,7 @@
 
 
         <ui:define name="title">
-            KRHG front desk
+            KRHG Front Desk
         </ui:define>
 
         <ui:define name="content">
@@ -99,8 +99,7 @@
                                                 </td>
                                                 <td>
                                                     <div class="form-group">
-                                                        <h:inputText id="time" class="datepicker">
-                                                        </h:inputText>
+                                                        <h:inputText value="#{frontDeskManagedBean.checkoutDateString}" a:type="date" a:min="#{requestAndServiceManagedBean.dateToCompleteLaundry}" required = "true" ></h:inputText>
                                                     </div>
                                                 </td>
                                             </tr>

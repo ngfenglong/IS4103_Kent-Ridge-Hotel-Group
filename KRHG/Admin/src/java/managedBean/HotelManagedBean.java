@@ -493,6 +493,8 @@ public class HotelManagedBean implements Serializable {
         String highestHotelName = "";
         List<Room> occupiedRooms = new ArrayList<Room>();
         while (index < hotels.size()) {
+            if(hotels.get(index).getRooms()!=null || !hotels.get(index).getRooms().isEmpty() ){
+                System.out.println("in here");
             List<Room> tempRoom = roomSessionLocal.getRoomByHotelCodeName(hotels.get(index).getHotelCodeName());
             for (Room r : tempRoom) {
                 if (r.getStatus().equals("Occupied")) {
@@ -512,6 +514,8 @@ public class HotelManagedBean implements Serializable {
             occupiedRooms.clear();
 
             index++;
+            }
+            
         }//end of while-loop
 
         return highestHotelName;

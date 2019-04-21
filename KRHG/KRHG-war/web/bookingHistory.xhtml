@@ -5,7 +5,7 @@
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
-    <head>
+    <h:head>
         <title>Register Account</title>
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -39,8 +39,8 @@
         <link rel="stylesheet" type="text/css" href="css/util.css"/>
         <link rel="stylesheet" type="text/css" href="css/main.css"/>
         <!--===============================================================================================-->
-    </head>
-    <body>
+    </h:head>
+    <body onload="init()">
 
         <div class="super_container">
 
@@ -196,7 +196,7 @@
                                                  </div>
                                                
                                             </h:commandLink>
-                                            <h:commandLink class="col-md-12" style="border-top:1px solid lightgrey; padding:5px; height:100px">
+                                            <h:commandLink class="col-md-12" style="border-top:1px solid lightgrey; padding:5px; height:100px" onclick="showDetails()"> 
                                                 <div style="text-align: center">
                                                      Transaction ID: 5682
                                                 </div>
@@ -213,13 +213,13 @@
                                                      Total Amount Paid: $98
                                                 </div>
                                                  </div>
-                                               
+                                               <f:ajax execute="transactionLink#{pastTransaction.transactionID}" render=":bookingDetails"></f:ajax>
                                             </h:commandLink>
                                         </div>
                                       
                                         <c:forEach items="#{websiteAuthenticationManagedBean.pastTransactions}" var="pastTransaction">
                                             
-                                            <h:commandLink actionListener="#{websiteAuthenticationManagedBean.selectTransaction(pastTransaction.id)}" class="col-md-12" style="border-top:1px solid lightgrey; padding:5px; height:100px">
+                                            <h:commandLink id="transactionLink#{pastTransaction.transactionID}" actionListener="#{websiteAuthenticationManagedBean.selectTransaction(pastTransaction.id)}" onclick="showDetails(0)" class="col-md-12" style="border-top:1px solid lightgrey; padding:5px; height:100px">
                                                 <div style="text-align: center">
                                                     Transaction ID: #{pastTransaction.transactionID}
                                                 </div>
@@ -236,7 +236,7 @@
                                                      Total Amount Paid: $#{pastTransaction.finalPayment}
                                                 </div>
                                                  </div>
-                                               
+                                               <f:ajax execute="transactionLink#{pastTransaction.transactionID}" render=":bookingDetails"></f:ajax>
                                             </h:commandLink>
                                            
                                             <hr></hr>
@@ -247,12 +247,11 @@
                             </div>
                         </div>
                         
-                        <div class="col-md-6 order-xl-2 order-1">
-                            <img src="images/hotels_3.jpg" style="display:none"/>
+                        <div class="col-md-6 order-xl-2 order-1" style="margin-top:30px">
+                            <img src="images/hotels_3.jpg" id="image" style="display:none"/>
                             <h:form id="bookingDetails">
                                    <div class="home_content" style="margin-left: 30px;padding-left:90px">
-                                    <div class="home_title" style="color:black;font-size:40px">Your Previous Bookings</div>
-                                    <div class="">Browse your previous stays</div>
+                                    <div class="home_title" style="color:black;font-size:40px">Booking Details</div>
                                 </div>
                                 <div style="margin:30px">
                                          <table>
@@ -267,19 +266,7 @@
 
                                         </tr>
                                         <tr>
-                                            <td colspan="2">Email: </td>
-                                            <td colspan="8">#{websiteAuthenticationManagedBean.loggedInCustomer.email}</td>
-
-                                        </tr>
-
-
-                                        <tr>
-                                            <td colspan="2">Contact Number: </td>
-                                            <td colspan="8">#{websiteAuthenticationManagedBean.loggedInCustomer.mobileNum}</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td colspan="2">Loyalty Points: </td>
+                                            <td colspan="2">Loyalty Points Earned: </td>
                                             <td colspan="8">#{websiteAuthenticationManagedBean.loggedInCustomer.points}</td>
                                         </tr>
                                     </table>
@@ -315,6 +302,22 @@
         <script src="vendor/countdowntime/countdowntime.js"></script>
         <!--===============================================================================================-->
         <script src="js/main.js"></script>
+    <script>
+            function init () {
+                    console.log("init");
+                        document.getElementById("bookingDetails").style.display = "none";
+                        document.getElementById("image").style.display = "block";
+                    };
+                    
+            function showDetails() {
+                 document.getElementById("image").style.display = "none";
+                 console.log(document.getElementById("image"));
+                document.getElementById("bookingDetails").style.display = "block";
+               
+
+            event.preventDefault();
+        }
+        </script>
 
     </body>
 </html>

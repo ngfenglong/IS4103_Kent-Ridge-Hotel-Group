@@ -32,17 +32,17 @@ import javax.persistence.Query;
  */
 @Stateless
 public class CustomerSession implements CustomerSessionLocal {
-
+    
     @PersistenceContext
     private EntityManager em;
-
+    
     @Override
     public List<Customer> getAllCustomers() {
         Query q;
         q = em.createQuery("SELECT c FROM Customer c");
         return q.getResultList();
     }
-
+    
     @Override
     public Customer getCustomerByID(Long cID) throws NoResultException {
         Customer c = em.find(Customer.class, cID);
@@ -52,7 +52,8 @@ public class CustomerSession implements CustomerSessionLocal {
             throw new NoResultException("Customer not found.");
         }
     }
-/*
+
+    /*
     @Override
     public Customer getCustomerByNric(String nric) throws NoResultException {
         Query q;
@@ -66,37 +67,35 @@ public class CustomerSession implements CustomerSessionLocal {
             throw new NoResultException("Customer not found.");
         }
     }
-*/
+     */
     @Override
     public Customer getCustomerByEmail(String email) throws NoResultException {
         Query q;
         q = em.createQuery("SELECT c FROM Customer c WHERE "
                 + "LOWER(c.email) = :email");
         q.setParameter("email", email.toLowerCase());
-
+        
         if (!q.getResultList().isEmpty()) {
             return (Customer) q.getResultList().get(0);
         } else {
             throw new NoResultException("Customer not found.");
         }
     }
-
+    
     @Override
     public Customer getCustomerByMobileNum(String mobileNum) throws NoResultException {
         Query q;
         q = em.createQuery("SELECT c FROM Customer c WHERE "
                 + "LOWER(c.mobileNum) = :mobileNum");
         q.setParameter("mobileNum", mobileNum.toLowerCase());
-
+        
         if (!q.getResultList().isEmpty()) {
             return (Customer) q.getResultList().get(0);
         } else {
             throw new NoResultException("Customer not found.");
         }
     }
-
-
-
+    
     @Override
     public void deleteCustomer(Long cID) throws NoResultException {
         Customer c = em.find(Customer.class, cID);
@@ -106,12 +105,12 @@ public class CustomerSession implements CustomerSessionLocal {
             throw new NoResultException("Customer not found");
         }
     }
-
+    
     @Override
     public void createCustomer(Customer c) {
         em.persist(c);
     }
-
+    
     @Override
     public void updateCustomer(Customer c) throws NoResultException {
         Customer oldC = em.find(Customer.class, c.getCustomerID());
@@ -126,6 +125,7 @@ public class CustomerSession implements CustomerSessionLocal {
             oldC.setGender(c.getGender());
             oldC.setAccountStatus(c.getAccountStatus());
             oldC.setMember(c.getMember());
+            oldC.setCanResetPassword(c.isCanResetPassword());
         } else {
             throw new NoResultException("Customer Not found");
         }
@@ -146,7 +146,7 @@ public class CustomerSession implements CustomerSessionLocal {
         }
         return sha1;
     }
-
+    
     private static String byteToHex(final byte[] hash) {
         Formatter formatter = new Formatter();
         for (byte b : hash) {
@@ -156,13 +156,13 @@ public class CustomerSession implements CustomerSessionLocal {
         formatter.close();
         return result;
     }
-
+    
     @Override
     public boolean Login(Customer c) {
         Query q = em.createQuery("SELECT c FROM Customer c WHERE "
                 + "LOWER(c.email) = :email");
         q.setParameter("email", c.getEmail().toLowerCase());
-
+        
         if (!q.getResultList().isEmpty()) {
             Customer checkC = (Customer) q.getResultList().get(0);
             if (checkC.getPassword().equals(c.getPassword())) {
@@ -173,14 +173,15 @@ public class CustomerSession implements CustomerSessionLocal {
             return false;
         }
     }
-
+    
     @Override
     public void changePasword(Customer c, String newPass) {
         Customer customer = em.find(Customer.class, c.getCustomerID());
         customer.setPassword(newPass);
+        customer.setCanResetPassword(false);
         em.flush();
     }
-
+    
     @Override
     public boolean forgetPassword(Customer c) {
         Customer cust = em.find(Customer.class, c.getCustomerID());
@@ -188,61 +189,60 @@ public class CustomerSession implements CustomerSessionLocal {
         String newPassword = new RandomPassword().generateRandomPassword();
         cust.setPassword(encryptPassword(newPassword));
         em.flush();
-
+        
         String msg = "Your password has been reset! Please login with the new password:\n\"" + newPassword + "\"";
         sendEmail(recipientEmail, "Reset Password", msg);
-
+        
         return true;
     }
-
+    
     @Override
     public void deactivateAccount(Long cId) {
         Customer customer = em.find(Customer.class, cId);
         customer.setAccountStatus(false);
         em.flush();
     }
-
+    
     @Override
     public void activateAccount(Long cId) {
         Customer customer = em.find(Customer.class, cId);
         customer.setAccountStatus(true);
         em.flush();
     }
-
-      public static void sendEmail(String recipient, String subject, String msg) {
-
+    
+    public static void sendEmail(String recipient, String subject, String msg) {
+        
         String username = "automessage.kentridgehotelgroup@gmail.com";
         String password = "krhg1234";
-
+        
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "587");
-
+        
         Session session = Session.getInstance(props,
                 new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(username, password);
             }
         });
-
+        
         try {
-
+            
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("Do-not-reply@KentRidgeHotelGroup.com"));
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(recipient));
             message.setSubject(subject);
             message.setText(msg);
-
+            
             Transport.send(message);
-
+            
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
     }
-
     
     public void checkProfile(Customer c) {
         c.getPoints();
@@ -251,50 +251,39 @@ public class CustomerSession implements CustomerSessionLocal {
         c.getMobileNum();
         c.getDateJoined();
     }
-
     
     public void updateProfile(Customer c) {
-            c.setPoints(c.getPoints());
-            c.setBookingHistories(c.getBookingHistories());
-            c.setEmail(c.getEmail());
-            c.setMobileNum(c.getMobileNum());
+        c.setPoints(c.getPoints());
+        c.setBookingHistories(c.getBookingHistories());
+        c.setEmail(c.getEmail());
+        c.setMobileNum(c.getMobileNum());
     }
-
     
     public void checkPoints(Customer c) {
         c.getPoints();
     }
-
     
-    public void checkPastBookings(Customer c) throws NoResultException{
+    public void checkPastBookings(Customer c) throws NoResultException {
         if (!c.getBookingHistories().isEmpty()) {
-        c.getBookingHistories();
-        }
-        
-        else {
+            c.getBookingHistories();
+        } else {
             throw new NoResultException("No prior bookings were made.");
         }
     }
-
     
-    public void viewCurrentBookings(Customer c) throws NoResultException{
+    public void viewCurrentBookings(Customer c) throws NoResultException {
         if (!c.getCurrentBookings().isEmpty()) {
-        c.getCurrentBookings();
-        }
-
-        else {
+            c.getCurrentBookings();
+        } else {
             throw new NoResultException("No bookings have been made.");
         }
-        }
-
+    }
     
-    public void cancelBookings(Customer c) throws NoResultException{
+    public void cancelBookings(Customer c) throws NoResultException {
         if (!c.getCurrentBookings().isEmpty()) {
-        c.getCurrentBookings();
-        //modify currentbookings to remove selected bookings
-        }
-        
-        else {
+            c.getCurrentBookings();
+            //modify currentbookings to remove selected bookings
+        } else {
             throw new NoResultException("No bookings found.");
         }
         
@@ -309,20 +298,17 @@ public class CustomerSession implements CustomerSessionLocal {
     public void submitFeedback(Customer c) {
         
     }
-
+    
     public String getTierByPoints(Long cID) {
         Customer latestC = em.find(Customer.class, cID);
         int cPoints = latestC.getPoints();
-        if(cPoints >= 100000) {
+        if (cPoints >= 100000) {
             return "Platinum";
-        }
-        else if (cPoints >= 20000) {
+        } else if (cPoints >= 20000) {
             return "Gold";
-        }
-        else if (cPoints >= 5000) {
+        } else if (cPoints >= 5000) {
             return "Silver";
-        }
-        else {
+        } else {
             return "Member";
         }
     }

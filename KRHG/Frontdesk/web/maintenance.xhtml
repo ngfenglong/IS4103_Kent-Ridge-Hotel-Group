@@ -11,7 +11,7 @@
 
 
             <ui:define name="title">
-                KRHG front desk
+                KRHG Front Desk
             </ui:define>
 
             <ui:define name="content">
@@ -47,6 +47,7 @@
                         </h:form>
                         <!-- /.card-header -->
                         <div class="card-body">
+                            <h:form>
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
@@ -66,24 +67,15 @@
                                             <td>#{o.description}</td>
                                             <td>#{requestAndServiceManagedBean.convertDateFormat(o.dateReported)}</td>
                                             <td>#{o.isResolved==true? 'Completed':'Incomplete'}</td>
-
+                                            <td colspan="3"><h:commandLink  action="#{requestAndServiceManagedBean.editMaintainenceOrder(o)}" > <i style="color:gray" class="fa fa-edit" ></i></h:commandLink></td>
 
                                         </tr>
 
                                     </ui:repeat>
 
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>Location</th>
-
-                                        <th>Description</th>
-                                        <th>Date</th>
-                                        <th>Status</th>
-
-                                    </tr>
-                                </tfoot>
                             </table>
+                            </h:form>
                         </div>
                         <!-- /.card-body -->
 
