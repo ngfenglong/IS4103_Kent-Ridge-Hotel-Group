@@ -18,4 +18,5 @@ public interface FoodOrderSessionLocal {
     public void updateFoodOrder (FoodOrder foodOrder) throws NoResultException;
     public void deleteFoodOrder (Long foodOrderID) throws NoResultException;
     public void createFoodOrder (FoodOrder foodOrder);
+     public FoodOrder getLastFoodOrdered() throws NoResultException; 
 }

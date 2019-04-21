@@ -324,11 +324,11 @@
                     console.log("Page 2");
                     document.getElementById("section2").style.display = "none";
                     document.getElementById("section3").style.display = "initial";
-                    console.log("Trying to simulate yes button click");
-                    var jsfCommandButton = document.getElementById("housekeepingform:hidden-btn");
-                    jsfCommandButton.click();
+                    console.log("Trying to simulate yes button click");        
                     loadtime();
                     loadrequests();
+                    var jsfCommandButton = document.getElementById("housekeepingform:hidden-btn");
+                    jsfCommandButton.click();
                     console.log("pg2", page);
                 }
             }

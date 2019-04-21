@@ -3,7 +3,8 @@ var check = false;
 function changeVal(el) {
     var qt = parseFloat(el.parent().children(".qt").html());
     console.log(qt);
-    var singleprice = el.parent().children(".price").html();
+    var data = el.parent().children(".price").html();
+    var singleprice = data.split("</script>")[1];
     var price = parseFloat(singleprice.trim().substring(1,singleprice.length));
 
     console.log(singleprice.trim().substring(1,singleprice.length));
