@@ -814,6 +814,7 @@ public class requestServicesManagedBean implements Serializable {
         List<FoodMenuItem> fullMenu = kitchenSessionlocal.getAllFoodMenuItem();
         List<FoodMenuItem> AllDayBreakfastMenu = new ArrayList();
         for (FoodMenuItem f : fullMenu) {
+            
             if (f.getCategory().equalsIgnoreCase("All Day Breakfast") && f.getStatus() == true && f.getAvailability() == true) {
                 AllDayBreakfastMenu.add(f);
             }
