@@ -94,33 +94,35 @@ $(document).ready(function(){
         $(".remove").click();
     });
     
-    $(".full-price").change(function(){
-        var fullPrice = parseFloat($(this).html());
-        var formattedFullPrice = fullPrice.toFixed(0);
-        $(this).html = formattedFullPrice;
-    });
-    
-    $(".price").change(function(){
-        var price = parseFloat($(this).html());
-        var formattedPrice = price.toFixed(0);
-        $(this).html = formattedPrice;
-    });
-    
-    $(".subtotal").change(function(){
-        var subtotal = parseFloat($(this).html());
-        var formattedSubtotal = subtotal.toFixed(2);
-        $(this).html = formattedSubtotal;
-    });
-    
-    $(".tax").change(function(){
-        var tax = parseFloat($(this).html());
-        var formattedTax = tax.toFixed(2);
-        $(this).html = formattedTax;
-    });
-    
-    $(".total").change(function(){
-        var total = parseFloat($(this).html());
-        var formattedTotal = total.toFixed(2);
-        $(this).html = formattedTotal;
-    });
+//    $(".full-price").change(function(){
+//        console.log("CHANGE FULL PRICE");
+//        var fullPrice = parseFloat($(this).html());
+//        var formattedFullPrice = fullPrice.toFixed(0);
+//        $(this).html = formattedFullPrice;
+//    });
+//    
+//    $(".price").change(function(){
+//        var price = parseFloat($(this).html());
+//        var formattedPrice = price.toFixed(0);
+//        $(this).html = formattedPrice;
+//    });
+//    
+//    $(".subtotal").change(function(){
+//        console.log("CHANGE SUBTOTAL");
+//        var subtotal = parseFloat($(this).html());
+//        var formattedSubtotal = subtotal.toFixed(2);
+//        $(this).html = formattedSubtotal;
+//    });
+//    
+//    $(".tax").change(function(){
+//        var tax = parseFloat($(this).html());
+//        var formattedTax = tax.toFixed(2);
+//        $(this).html = formattedTax;
+//    });
+//    
+//    $(".total").change(function(){
+//        var total = parseFloat($(this).html());
+//        var formattedTotal = total.toFixed(2);
+//        $(this).html = formattedTotal;
+//    });
 });
