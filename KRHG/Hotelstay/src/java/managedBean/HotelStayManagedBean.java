@@ -9,6 +9,7 @@ import entity.FoodMenuItem;
 import entity.FoodOrder;
 import entity.FoodOrderedItem;
 import entity.HouseKeepingOrder;
+import entity.LaundryOrder;
 import entity.Room;
 import error.NoResultException;
 import javax.inject.Named;
@@ -41,6 +42,7 @@ import sessionBeans.FoodMenuItemSessionLocal;
 import sessionBeans.FoodOrderSession;
 import sessionBeans.FoodOrderSessionLocal;
 import sessionBeans.HouseKeepingOrderSessionLocal;
+import sessionBeans.LaundrySessionLocal;
 import sessionBeans.LogSessionLocal;
 import sessionBeans.RoomSessionLocal;
 
@@ -84,6 +86,7 @@ public class HotelStayManagedBean implements Serializable {
 
     @EJB
     private HouseKeepingOrderSessionLocal houseKeepingSessionLocal;
+    private LaundrySessionLocal laundrySessionLocal;
 
     private Room currentRoom = null;
     private String username = null;
@@ -111,10 +114,10 @@ public class HotelStayManagedBean implements Serializable {
     private List<FoodMenuItem> softDrinksItemList = new ArrayList();
     private List<FoodMenuItem> coffeeItemList = new ArrayList();
     private List<FoodMenuItem> teaItemList = new ArrayList();
-    private List<FoodMenuItem> foodMenuOrderList = new ArrayList();
-    private HashMap<Long, Integer> foodMenuOrder = new HashMap<>();
+    private List<FoodMenuItem> foodMenuOrderList = new ArrayList(); //All the food that has been added to the cart without the quantity
+    private HashMap<Long, Integer> foodMenuOrder = new HashMap<>(); //Key: FoodMenuItemID; Value: Quantity
     private HouseKeepingOrder bookedHouseKeepingOrder;
-    private HouseKeepingOrder bookedLaundryOrder;
+    private LaundryOrder bookedLaundryOrder;
     private String roomNumber;
 
     public HotelStayManagedBean() {
@@ -270,8 +273,9 @@ public class HotelStayManagedBean implements Serializable {
         //ADD a total price to final payment! Send email receipt!
         System.out.println("-------------------------------------");
         System.out.println("CHECKOUT ORDER");
+        
         FoodOrder tempFO = new FoodOrder();
-        List<FoodOrderedItem> foList = new ArrayList<FoodOrderedItem>();
+        List<FoodOrderedItem> foList = new ArrayList<>();
         
         for(FoodMenuItem f : foodMenuOrderList){
             FoodMenuItem tempItem = f;
@@ -282,7 +286,8 @@ public class HotelStayManagedBean implements Serializable {
             tempFOI = foodMenuItemSessionLocal.getLastFoodOrderedItem();
             foList.add(tempFOI);
         }
-         DateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        
+        DateFormat dateFormat = new SimpleDateFormat("HH:mm");
          
         tempFO.setFoodOrdered(foList);
         tempFO.setStatus("Preparing");
@@ -290,9 +295,10 @@ public class HotelStayManagedBean implements Serializable {
         tempFO.setTotalPrice(totalPriceWithTax);
         foodOrderSessionLocal.createFoodOrder(tempFO);
         tempFO = foodOrderSessionLocal.getLastFoodOrdered();
-        bookingSessionLocal.getRoomBookingByRoomNumber(roomNumber, "Occupied", currentRoom.getHotel().getHotelCodeName());
         
-
+        //TODO: Uncomment this when there are room bookings
+        //bookingSessionLocal.getRoomBookingByRoomNumber(roomNumber, "Occupied", currentRoom.getHotel().getHotelCodeName());
+        
         foodMenuOrder.clear();
         foodMenuOrderList.clear();
         quantity = 0;
@@ -318,8 +324,8 @@ public class HotelStayManagedBean implements Serializable {
     }
 
     public void bookHouseKeeping() {
-        System.out.println("Trying to book house keeping ");
-        System.out.println("Book housekeeping: Setting Room to: " + currentRoom.getRoomNumber());
+        System.out.println("Book HouseKeeping!");
+        System.out.println("Setting Room to: " + currentRoom.getRoomNumber());
         System.out.println("Timing to book: " + houseKeepingCollectionTime.toString());
         System.out.println("Requests to book: " + houseKeepingRequestDetails);
 
@@ -361,7 +367,10 @@ public class HotelStayManagedBean implements Serializable {
             System.out.println("Special Requests: " + houseKeepingRequestDetails);
             hkOrder.setIsSpecialRequest(true);
 
-            //Set boolean to extraTowels, extraShowerAmenities and restockMinibar
+            //TODO: Depending on how "houseKeepingRequestDetails" store the details, check what are the special requests and set the boolean for extraTowels, extraShowerAmenities and restockMinibar
+            
+            
+            //Set House Keeping Request Type to extraTowels, extraShowerAmenities and restockMinibar
             if (extraTowels == true || extraShowerAmenities == true) {
                 System.out.println("Toiletries Request");
                 hkOrder.setRequestType("toiletries");
@@ -381,48 +390,47 @@ public class HotelStayManagedBean implements Serializable {
             getBookedHouseKeepingOrder().setSpecialRequest(houseKeepingRequestDetails);
             houseKeepingSessionLocal.updateHouseKeepingOrder(getBookedHouseKeepingOrder());
             setBookedHouseKeepingOrder(getBookedHouseKeepingOrder());
-        } catch (Exception e) {
-
-        }
+        } catch (NoResultException ex) {
+            Logger.getLogger(HotelStayManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+        }   
     }
 
     public void cancelBookHouseKeeping() {
         try {
             houseKeepingSessionLocal.deleteHouseKeepingOrder(getBookedHouseKeepingOrder().getHouseKeepingOrderID());
-        } catch (Exception e) {
-
+        } catch (NoResultException ex) {
+            Logger.getLogger(HotelStayManagedBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     public void bookLaundryService() {
         System.out.println("Book Laundry Service");
-        HouseKeepingOrder hkOrder = new HouseKeepingOrder();
-        hkOrder.setOrderDateTime(new Date());
-        hkOrder.setSpecialRequest(houseKeepingRequestDetails);
-        hkOrder.setRoom(currentRoom);
-        hkOrder.setLevel(0); //Need to set properly
-        hkOrder.setStatus("incomplete");
-        hkOrder.setRequestType("laundry");
-        houseKeepingSessionLocal.createHouseKeepingOrder(hkOrder);
-        setBookedHouseKeepingOrder(hkOrder);
+        LaundryOrder laundryOrder = new LaundryOrder();
+        laundryOrder.setOrderDateTime(new Date());
+        laundryOrder.setCompleteDateTime(new Date()); //TODO: Set the correct datetime
+        laundryOrder.setRoom(currentRoom);
+        laundryOrder.setStatus("incomplete");
+        laundrySessionLocal.createLaundryOrder(laundryOrder);
+        setBookedLaundryOrder(laundryOrder);
     }
 
     public void cancelLaundryService() {
-        try {
-            houseKeepingSessionLocal.deleteHouseKeepingOrder(getBookedLaundryOrder().getHouseKeepingOrderID());
-        } catch (Exception e) {
 
+        try {
+            laundrySessionLocal.deleteLaundryOrder(getBookedLaundryOrder());
+        } catch (NoResultException ex) {
+            Logger.getLogger(HotelStayManagedBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public void editLaundryService(SimpleDateFormat HousekeepingTime) {
+    public void editLaundryService(SimpleDateFormat HousekeepingTime) {        
         try {
             getBookedHouseKeepingOrder().setOrderDateTime(new Date());
             getBookedHouseKeepingOrder().setSpecialRequest(houseKeepingRequestDetails);
             houseKeepingSessionLocal.updateHouseKeepingOrder(getBookedHouseKeepingOrder());
             setBookedHouseKeepingOrder(getBookedHouseKeepingOrder());
-        } catch (Exception e) {
-
+        } catch (NoResultException ex) {
+            Logger.getLogger(HotelStayManagedBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -738,14 +746,14 @@ public class HotelStayManagedBean implements Serializable {
     /**
      * @return the bookedLaundryOrder
      */
-    public HouseKeepingOrder getBookedLaundryOrder() {
+    public LaundryOrder getBookedLaundryOrder() {
         return bookedLaundryOrder;
     }
 
     /**
      * @param bookedLaundryOrder the bookedLaundryOrder to set
      */
-    public void setBookedLaundryOrder(HouseKeepingOrder bookedLaundryOrder) {
+    public void setBookedLaundryOrder(LaundryOrder bookedLaundryOrder) {
         this.bookedLaundryOrder = bookedLaundryOrder;
     }
 
