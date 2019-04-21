@@ -5,7 +5,7 @@
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
-    <head>
+    <h:head>
         <title>Register Account</title>
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -39,7 +39,7 @@
         <link rel="stylesheet" type="text/css" href="css/util.css"/>
         <link rel="stylesheet" type="text/css" href="css/main.css"/>
         <!--===============================================================================================-->
-    </head>
+    </h:head>
     <body onload="init()">
 
         <div class="super_container">
@@ -47,7 +47,7 @@
             <!-- Header -->
 
             <!-- Header -->
-            <h:form>
+             <h:form>
                 <header class="header">
                     <div class="header_content d-flex flex-row align-items-center justify-content-start">
                         <a href="index.xhtml"><img style="width:210px" src="./images/krhglogo.png"/></a>
@@ -55,12 +55,12 @@
                         <div class="ml-auto d-flex flex-row align-items-center justify-content-start">
                             <nav class="main_nav">
                                 <ul class="d-flex flex-row align-items-start justify-content-start">
-                                    <li class="active"><a href="index.xhtml">Home</a></li>
+                                    <li><a href="index.xhtml">Home</a></li>
                                     <li><a href="about.xhtml">About us</a></li>
                                     <li><a href="hotels.xhtml">Hotels</a></li>
                                     <li><a href="contact.xhtml">Contact us</a></li>
                                     <c:if test="${websiteAuthenticationManagedBean.id gt -1}">
-                                        <li><a href="Profile.xhtml">Profile</a></li>
+                                        <li class="active"><a href="Profile.xhtml">Profile</a></li>
                                     </c:if> 
                                 </ul>
                             </nav>
@@ -77,41 +77,6 @@
                 </header>
             </h:form>
             <!-- Menu -->
-
-            <div class="menu trans_400 d-flex flex-column align-items-end justify-content-start">
-                <h:form>
-                    <div class="menu_close"><i class="fa fa-times" aria-hidden="true"></i></div>
-                    <div class="menu_content">
-                        <nav class="menu_nav text-right">
-                            <ul>
-                                <li><a href="index.xhtml">Home</a></li>
-                                <li><a href="about.xhtml">About us</a></li>
-                                <li><a href="hotels.xhtml">Hotels</a></li>
-                                <li><a href="blog.xhtml">Events</a></li>
-                                <li><a href="contact.xhtml">Contact us</a></li>
-                                <c:if test="${websiteAuthenticationManagedBean.id gt -1}">
-                                    <li><a href="Profile.xhtml">Profile</a></li>
-                                </c:if>
-                            </ul>
-                        </nav>
-                    </div>
-                    <div class="menu_extra">
-                        <div class="menu_book text-right"><a href="hotels.xhtml">Reserve Now</a></div>
-                        <c:if test="${websiteAuthenticationManagedBean.id le -1}">
-                            <div class="book_button"><h:commandLink action="login.xhtml?faces-redirect=true"> Login/Signup</h:commandLink></div>  
-                        </c:if>
-                        <c:if test="${websiteAuthenticationManagedBean.id gt -1}">
-                            <div class="book_button"><h:commandLink action="#{websiteAuthenticationManagedBean.logout()}"> Logout</h:commandLink></div>  
-                        </c:if>
-
-                        <div class="menu_phone d-flex flex-row align-items-center justify-content-center">
-                            <img src="images/phone-2.png" alt="" />
-                            <span>1234 5678</span>
-                        </div>
-                    </div>
-                </h:form>
-            </div>
-
             <!-- Split Section Right 1 -->
             <h:form>
             <div style="text-align: center;margin-top:130px">
@@ -135,7 +100,7 @@
                         <div class="col-md-6 " style="margin-top:30px">
                             <div class="home_content" style="margin-left: 30px;padding-left:90px">
                                     <div class="home_title" style="color:black;font-size:40px">Your Current Bookings</div>
-                                    <div class="">Browse your previous stays</div>
+                                    <div class="">Browse your upcoming stays</div>
                                 </div>
                             <div class="split_section_right_content" style="padding-left:90px">
                                 <style>
@@ -156,87 +121,26 @@
                                 </style>
                                 <h:form>
                                     <div style="margin:30px; max-height: 300px; overflow-y: scroll">
-                                     
-                                        <div class="row">
-                                             <h:commandLink class="col-md-12" style="border-top:1px solid lightgrey; padding:5px; height:100px">
-                                                <div style="text-align: center">
-                                                     Transaction ID: 5682
-                                                </div>
-                                                 
-                                                 
-                                                  <div class="row" style="margin:10px 0px">
-                                                     Facility Booked: Function Room
-                                                </div>
-                                                 <div class="row">
-                                                     <div  class="col-md-6">
-                                                     Date Booked: 25/8/2017
-                                                </div>
-                                                 <div class="col-md-6" style="text-align: right">
-                                                     Total Amount Paid: $98
-                                                </div>
-                                                 </div>
-                                               
-                                            </h:commandLink>
-                                            <h:commandLink class="col-md-12" style="border-top:1px solid lightgrey; padding:5px; height:100px">
-                                                <div style="text-align: center">
-                                                     Transaction ID: 5682
-                                                </div>
-                                                 
-                                                 
-                                                  <div class="row" style="margin:10px 0px">
-                                                     Facility Booked: Function Room
-                                                </div>
-                                                 <div class="row">
-                                                     <div  class="col-md-6">
-                                                     Date Booked: 25/8/2017
-                                                </div>
-                                                 <div class="col-md-6" style="text-align: right">
-                                                     Total Amount Paid: $98
-                                                </div>
-                                                 </div>
-                                               
-                                            </h:commandLink>
-                                            <h:commandLink class="col-md-12" style="border-top:1px solid lightgrey; padding:5px; height:100px">
-                                                <div style="text-align: center">
-                                                     Transaction ID: 5682
-                                                </div>
-                                                 
-                                                 
-                                                  <div class="row" style="margin:10px 0px">
-                                                     Facility Booked: Function Room
-                                                </div>
-                                                 <div class="row">
-                                                     <div  class="col-md-6">
-                                                     Date Booked: 25/8/2017
-                                                </div>
-                                                 <div class="col-md-6" style="text-align: right">
-                                                     Total Amount Paid: $98
-                                                </div>
-                                                 </div>
-                                               
-                                            </h:commandLink>
-                                        </div>
-                                      
-                                        <c:forEach items="#{websiteAuthenticationManagedBean.pastTransactions}" var="pastTransaction">
+                                        <c:forEach items="#{websiteAuthenticationManagedBean.currentTransactions}" var="currTransaction">
                                             
-                                            <h:commandLink actionListener="#{websiteAuthenticationManagedBean.selectTransaction(pastTransaction.id)}" class="col-md-12" style="border-top:1px solid lightgrey; padding:5px; height:100px">
+                                            <h:commandLink actionListener="#{websiteAuthenticationManagedBean.selectTransaction(currTransaction.transactionID)}" onclick="showDetails(0)" class="col-md-12" style="border-top:1px solid lightgrey; padding:5px; height:100px">
                                                 <div style="text-align: center">
-                                                    Transaction ID: #{pastTransaction.transactionID}
+                                                    Transaction ID: #{currTransaction.transactionID}
                                                 </div>
                                                  
                                                  
                                                   <div class="row" style="margin:10px 0px">
-                                                      Facility Booked: #{websiteAuthenticationManagedBean.getTypeOfFacilityBooked(pastTransaction)}
+                                                      Facility Booked: #{websiteAuthenticationManagedBean.getTypeOfFacilityBooked(currTransaction)}
                                                 </div>
                                                  <div class="row">
                                                      <div  class="col-md-6">
-                                                         Date Booked: #{pastTransaction.transactionDateTime}
+                                                         Date Booked: #{websiteAuthenticationManagedBean.convertDateFormatDDMMYY(currTransaction.transactionDateTime)}
                                                 </div>
                                                  <div class="col-md-6" style="text-align: right">
-                                                     Total Amount Paid: $#{pastTransaction.finalPayment}
+                                                     Total Amount Paid: $#{currTransaction.finalPayment}
                                                 </div>
                                                  </div>
-                                               
+                                               <f:ajax execute="transactionLink#{currTransaction.transactionID}" render=":bookingDetails"></f:ajax>
                                             </h:commandLink>
                                            
                                             <hr></hr>
@@ -257,17 +161,30 @@
                                          <table>
                                         <tr>
                                             <td colspan="2">Period of Stay:  </td>
-                                            <td colspan="8">#{websiteAuthenticationManagedBean.loggedInCustomer.firstName}</td>
+                                            <td colspan="8">#{websiteAuthenticationManagedBean.sDateStart} - #{websiteAuthenticationManagedBean.sDateEnd}</td>
 
                                         </tr>
                                         <tr>
                                             <td colspan="2">Number of Rooms:  </td>
-                                            <td colspan="8">#{websiteAuthenticationManagedBean.loggedInCustomer.lastName}</td>
-
+                                            <c:if test="#{!websiteAuthenticationManagedBean.checkIfZero('Standard')}">
+                                             <td colspan="8">#{websiteAuthenticationManagedBean.noOfStandardRoom} x Standard Room</td>
+                                            </c:if>
+                                            <c:if test="#{!websiteAuthenticationManagedBean.checkIfZero('Deluxe')}">
+                                                <td colspan="8">#{websiteAuthenticationManagedBean.noOfDeluxeRoom} x Deluxe Room</td>
+                                            </c:if>
+                                             <c:if test="#{!websiteAuthenticationManagedBean.checkIfZero('Premium')}">
+                                                 <td colspan="8">#{websiteAuthenticationManagedBean.noOfPremiumRoom} x Premium Room</td>
+                                            </c:if>
+                                            <c:if test="#{!websiteAuthenticationManagedBean.checkIfZero('Suite')}">
+                                             <td colspan="8">#{websiteAuthenticationManagedBean.noOfSuiteRoom} x Suite Room</td>
+                                            </c:if>
+                                            <c:if test="#{!websiteAuthenticationManagedBean.checkIfZero('Penthouse')}">
+                                             <td colspan="8">#{websiteAuthenticationManagedBean.noOfPenthouse} x Penthouse</td>
+                                            </c:if>
                                         </tr>
                                         <tr>
                                             <td colspan="2">Loyalty Points Earned: </td>
-                                            <td colspan="8">#{websiteAuthenticationManagedBean.loggedInCustomer.points}</td>
+                                            <td colspan="8">#{websiteAuthenticationManagedBean.pointsEarnedForSelectedTransaction}</td>
                                         </tr>
                                     </table>
                                     
@@ -303,23 +220,19 @@
         <!--===============================================================================================-->
         <script src="js/main.js"></script>
         <script>
-            function init () {
-                   
+          function init () {
+                    console.log("init");
                         document.getElementById("bookingDetails").style.display = "none";
                         document.getElementById("image").style.display = "block";
-
-
-
                     };
                     
-            function showDetails(a) {
-  
-            if (a == 0) {
-                 console.log(a);
+            function showDetails() {
                  document.getElementById("image").style.display = "none";
+                 console.log(document.getElementById("image"));
                 document.getElementById("bookingDetails").style.display = "block";
                
-            }
+
+            event.preventDefault();
         }
         </script>
 

@@ -239,6 +239,7 @@ public class WebsiteManagedBean implements Serializable {
             }
             if (!pickUpLocationTB.equals("-")) {
                 rb.setHasTransport(true);
+                System.out.println(pickUpTimeTB);
                 rb.setTransportTime(new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(pickUpDateTB + " " + pickUpTimeTB));
             } else {
                 rb.setHasTransport(false);

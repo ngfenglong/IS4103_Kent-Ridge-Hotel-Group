@@ -20,6 +20,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -84,8 +86,10 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
     private int noOfDeluxeRoom;
     private int noOfSuiteRoom;
     private int noOfPenthouse;
-    private Date dateStart = new Date();
-    private Date dateEnd = new Date();
+    private Date dateStart ;
+    private Date dateEnd ;
+    private String sDateStart;
+    private String sDateEnd;
     
     //CurrentBooking
     private List<RoomBooking> currentBookings;
@@ -134,6 +138,7 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
                 Logging l = new Logging("Customer", "Login Successfuly as " + name, name);
                 logSessionLocal.createLogging(l);
                 getAllPastBookings();
+                getAllCurrentBookings();
                 out.println("<script type=\"text/javascript\">");
                 out.println("alert('Login Succesfull!');");
                 out.println("</script>");
@@ -343,8 +348,10 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
         setNoOfPremiumRoom(0);
         setNoOfStandardRoom(0);
         setNoOfSuiteRoom(0);
-        dateStart = new Date();
-        dateEnd = new Date();
+        dateStart = null;
+        dateEnd = null;
+        sDateStart = null;
+        sDateEnd = null;
         calcuatePointsEarned();
         countNumberOfRoomsByType();
         getStayPeriod();
@@ -402,14 +409,29 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
         List<RoomBooking> listOfRoomBookingsInTransaction = selectedTransaction.getRoomsBooked();
         for (RoomBooking r : listOfRoomBookingsInTransaction) {
             if(r.getBookInDate()!=null){
-                System.out.println(r.getBookInDate());
-            if (r.getBookInDate().compareTo(dateStart) < 0 || dateStart == null) {
+                System.out.println("Bookin date is not null: " + r.getBookInDate());
+            if (dateStart == null) {
+                System.out.println("compare passed");
                 dateStart = r.getBookInDate();
+                sDateStart = convertDateFormatDDMMYY(dateStart);
+            } else if ( r.getBookInDate().compareTo(dateStart) < 0 ){
+               System.out.println("compare passed");
+                dateStart = r.getBookInDate();
+                sDateStart = convertDateFormatDDMMYY(dateStart);
+            
             }
             }
             if(r.getBookOutDate() != null){
-             if (r.getBookOutDate().compareTo(dateEnd) > 0 || dateEnd == null) {
+                System.out.println("bookoutdate is not null: " + r.getBookOutDate());
+             if ( dateEnd == null) {
+                  System.out.println("compare passed2");
                 dateEnd = r.getBookOutDate();
+                sDateEnd = convertDateFormatDDMMYY(dateEnd);
+            } else if (r.getBookOutDate().compareTo(dateEnd) > 0){
+                   System.out.println("compare passed2");
+                dateEnd = r.getBookOutDate();
+                sDateEnd = convertDateFormatDDMMYY(dateEnd);
+                
             }
             }
            
@@ -945,6 +967,11 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
             throw new RuntimeException(e);
         }
     }
+    
+        public String convertDateFormatDDMMYY(Date date) {
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        return dateFormat.format(date);
+    }
 
     private static String encryptPassword(String password) {
         String sha1 = "";
@@ -1318,6 +1345,34 @@ public class WebsiteAuthenticationManagedBean implements Serializable {
      */
     public void setCurrentTransactions(List<PaymentTransaction> currentTransactions) {
         this.currentTransactions = currentTransactions;
+    }
+
+    /**
+     * @return the sDateStart
+     */
+    public String getsDateStart() {
+        return sDateStart;
+    }
+
+    /**
+     * @param sDateStart the sDateStart to set
+     */
+    public void setsDateStart(String sDateStart) {
+        this.sDateStart = sDateStart;
+    }
+
+    /**
+     * @return the sDateEnd
+     */
+    public String getsDateEnd() {
+        return sDateEnd;
+    }
+
+    /**
+     * @param sDateEnd the sDateEnd to set
+     */
+    public void setsDateEnd(String sDateEnd) {
+        this.sDateEnd = sDateEnd;
     }
 
 }

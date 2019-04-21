@@ -35,13 +35,14 @@ and open the template in the editor.
 
 
             <h:form>
-                <header class="header">
+  <header class="header">
                     <div class="header_content d-flex flex-row align-items-center justify-content-start">
-                        <div class="logo"><a href="index.xhtml">KRHG</a></div>
+                        <a href="index.xhtml"><img style="width:210px" src="./images/krhglogo.png"/></a>
+
                         <div class="ml-auto d-flex flex-row align-items-center justify-content-start">
                             <nav class="main_nav">
                                 <ul class="d-flex flex-row align-items-start justify-content-start">
-                                    <li class="active"><a href="index.xhtml">Home</a></li>
+                                    <li><a href="index.xhtml">Home</a></li>
                                     <li><a href="about.xhtml">About us</a></li>
                                     <li><a href="hotels.xhtml">Hotels</a></li>
                                     <li><a href="contact.xhtml">Contact us</a></li>
@@ -165,23 +166,11 @@ and open the template in the editor.
                                         </div>
 
                                     </div>
+                                  
                                     <div class="row">
-                                        
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <img src = "images/master.jpg" style="width:80px;height:70px;"/>
-                                               
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <img src = "images/visa.png" style="width:80px;height:70px;"/>
-                                                   
-                                                </div>
-                                            </div>
-                                          
-                                    </div>
-                                    <div class="row">
+                                        <div class="col-md-12" style="text-align: center; margin-bottom: 10px">
+                                            <h3>Credit Card Details</h3>
+                                        </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <span class="form-label">Credit Card Number</span>
@@ -205,6 +194,23 @@ and open the template in the editor.
                                         </div>
 
                                     </div>
+                                      <div class="row">
+                                          <div class="col-md-8"></div>
+                                        
+                                            <div class="col-md-2" style="padding:0px">
+                                                <div class="form-group">
+                                                    <img src = "images/master.jpg" style="width:80px;height:70px;"/>
+                                               
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2" style="padding:0px">
+                                                <div class="form-group">
+                                                    <img src = "images/visa.png" style="width:80px;height:70px;"/>
+                                                   
+                                                </div>
+                                            </div>
+                                          
+                                    </div>
 
                                     <div class="form-btn">
                                         <h:commandButton action="#{websiteManagedBean.makePayment()}" value="Submit"  style="float:right;" class="submit-btn"/>>
@@ -220,17 +226,14 @@ and open the template in the editor.
 
 
             <!-- Footer -->
-
-            <footer class="footer">
+     <footer class="footer">
                 <div class="footer_content">
                     <div class="container">
                         <div class="row">
                             <div class="col">
                                 <div class="footer_logo_container text-center">
                                     <div class="footer_logo">
-                                        <a href="#"></a>
-                                        <div>KRHG</div>
-                                        <div>since 1993</div>
+                                        <img style="width:300px" src="./images/KRHGblack.png"/>
                                     </div>
                                 </div>
                             </div>
@@ -242,8 +245,8 @@ and open the template in the editor.
                                 <div class="footer_title">Our Address</div>
                                 <div class="footer_list">
                                     <ul>
-                                        <li>13 Computing Drive</li>
-                                        <li>1234 5678</li>
+                                        <li>63 Somerset Rd</li>
+                                        <li>238163</li>
                                         <li>KRHG@contact.com</li>
                                     </ul>
                                 </div>
@@ -254,7 +257,7 @@ and open the template in the editor.
                                 <div class="footer_title">Reservations</div>
                                 <div class="footer_list">
                                     <ul>
-                                        <li>Tel: 1234 5678</li>
+                                        <li>Tel: 6123 1000</li>
                                         <li>Fax; 9876 5432</li>
                                         <li>reservations@KRHG.com</li>
                                     </ul>
@@ -266,7 +269,7 @@ and open the template in the editor.
                                 <div class="footer_title">Newsletter</div>
                                 <div class="newsletter_container">
                                     <form action="#" class="newsletter_form" id="newsletter_form">
-                                        <input type="email" class="newsletter_input" placeholder="Your email address" required="required" />
+                                        <input type="email" class="newsletter_input" placeholder="Your email address" required="required"/>
                                         <button class="newsletter_button">Subscribe</button>
                                     </form>
                                 </div>
@@ -276,7 +279,7 @@ and open the template in the editor.
                             <div class="col-lg-3">
                                 <div class="certificates d-flex flex-row align-items-start justify-content-lg-between justify-content-start flex-lg-nowrap flex-wrap">
                                     <div class="cert"><img src="images/cert_1.png" alt="" /></div>
-                                    <div class="cert"><img src="images/cert_2.png" alt=""/></div>
+                                    <div class="cert"><img src="images/cert_2.png" alt="" /></div>
                                 </div>
                             </div>
                         </div>

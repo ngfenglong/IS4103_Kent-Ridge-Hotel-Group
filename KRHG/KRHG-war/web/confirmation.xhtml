@@ -32,13 +32,14 @@
 
             <!-- Header -->
             <h:form>
-                <header class="header">
+  <header class="header">
                     <div class="header_content d-flex flex-row align-items-center justify-content-start">
-                        <div class="logo"><a href="index.xhtml">KRHG</a></div>
+                        <a href="index.xhtml"><img style="width:210px" src="./images/krhglogo.png"/></a>
+
                         <div class="ml-auto d-flex flex-row align-items-center justify-content-start">
                             <nav class="main_nav">
-                                <ul class="d-flex flex-row align-items-start justify-content-start" style="background-color: transparent!important">
-                                    <li class="active"><a href="index.xhtml">Home</a></li>
+                                <ul class="d-flex flex-row align-items-start justify-content-start">
+                                    <li><a href="index.xhtml">Home</a></li>
                                     <li><a href="about.xhtml">About us</a></li>
                                     <li><a href="hotels.xhtml">Hotels</a></li>
                                     <li><a href="contact.xhtml">Contact us</a></li>
@@ -61,40 +62,6 @@
             </h:form>
 
             <!-- Menu -->
-
-            <div class="menu trans_400 d-flex flex-column align-items-end justify-content-start">
-                <h:form>
-                    <div class="menu_close"><i class="fa fa-times" aria-hidden="true"></i></div>
-                    <div class="menu_content">
-                        <nav class="menu_nav text-right">
-                            <ul>
-                                <li><a href="index.xhtml">Home</a></li>
-                                <li><a href="about.xhtml">About us</a></li>
-                                <li><a href="hotels.xhtml">Hotels</a></li>
-                                <li><a href="blog.xhtml">Events</a></li>
-                                <li><a href="contact.xhtml">Contact us</a></li>
-                                <c:if test="${websiteAuthenticationManagedBean.id gt -1}">
-                                    <li><a href="Profile.xhtml">Profile</a></li>
-                                </c:if>
-                            </ul>
-                        </nav>
-                    </div>
-                    <div class="menu_extra">
-                        <div class="menu_book text-right"><a href="hotels.xhtml">Reserve Now</a></div>
-                        <c:if test="${websiteAuthenticationManagedBean.id le -1}">
-                            <div class="book_button"><h:commandLink action="login.xhtml?faces-redirect=true"> Login/Signup</h:commandLink></div>  
-                        </c:if>
-                        <c:if test="${websiteAuthenticationManagedBean.id gt -1}">
-                            <div class="book_button"><h:commandLink action="#{websiteAuthenticationManagedBean.logout()}"> Logout</h:commandLink></div>  
-                        </c:if>
-
-                        <div class="menu_phone d-flex flex-row align-items-center justify-content-center">
-                            <img src="images/phone-2.png" alt="" />
-                            <span>1234 5678</span>
-                        </div>
-                    </div>
-                </h:form>
-            </div>
 
             <!-- Home -->
 
@@ -202,7 +169,19 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <span class="form-label">Time</span>
-                                                <h:inputText id="time" class="form-control timepicker" value="#{websiteManagedBean.pickUpTimeTB}" /> 
+                                                <h:selectOneMenu class="form-control" value="#{websiteManagedBean.pickUpTimeTB}">
+                                                    <f:selectItem class="dropdown-item" itemValue="0" itemLabel="-" />
+                                                    <f:selectItem class="dropdown-item" itemValue="12:00" itemLabel="12:00" />
+                                                    <f:selectItem class="dropdown-item" itemValue="1:00" itemLabel="1:00" />
+                                                    <f:selectItem class="dropdown-item" itemValue="2:00" itemLabel="2:00" />
+                                                    <f:selectItem class="dropdown-item" itemValue="3:00" itemLabel="3:00" />
+                                                    <f:selectItem class="dropdown-item" itemValue="4:00" itemLabel="4:00" />
+                                                    <f:selectItem class="dropdown-item" itemValue="5:00" itemLabel="5:00" />
+                                                     <f:selectItem class="dropdown-item" itemValue="6:00" itemLabel="6:00" />
+                                                      <f:selectItem class="dropdown-item" itemValue="7:00" itemLabel="7:00" />
+                                                       <f:selectItem class="dropdown-item" itemValue="8:00" itemLabel="8:00" />
+                                                </h:selectOneMenu>
+                                                <span class="select-arrow"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -231,9 +210,7 @@
                             <div class="col">
                                 <div class="footer_logo_container text-center">
                                     <div class="footer_logo">
-                                        <a href="#"></a>
-                                        <div>KRHG</div>
-                                        <div>since 1993</div>
+                                        <img style="width:300px" src="./images/KRHGblack.png"/>
                                     </div>
                                 </div>
                             </div>
@@ -245,8 +222,8 @@
                                 <div class="footer_title">Our Address</div>
                                 <div class="footer_list">
                                     <ul>
-                                        <li>13 Computing Drive</li>
-                                        <li>1234 5678</li>
+                                        <li>63 Somerset Rd</li>
+                                        <li>238163</li>
                                         <li>KRHG@contact.com</li>
                                     </ul>
                                 </div>
@@ -257,7 +234,7 @@
                                 <div class="footer_title">Reservations</div>
                                 <div class="footer_list">
                                     <ul>
-                                        <li>Tel: 1234 5678</li>
+                                        <li>Tel: 6123 1000</li>
                                         <li>Fax; 9876 5432</li>
                                         <li>reservations@KRHG.com</li>
                                     </ul>
