@@ -62,11 +62,44 @@
                                                     <div class="form-group">
                                                         <td>
                                                             <label>
-                                                                Room:
+                                                                Room
                                                             </label>
                                                         </td>
                                                         <td>
-                                                            <h:outputText value="#{requestAndServiceManagedBean.editHK.room.roomNumber}"></h:outputText>
+                                                            <h:outputText class="form-control" value="#{requestAndServiceManagedBean.editHK.room.roomNumber}"></h:outputText>
+                                                        </td>
+                                                    </div>
+                                                </tr>
+                                                <tr>
+                                                <div class="form-group">
+                                                    <td>
+                                                        <label>
+                                                            Request Type
+                                                        </label>
+                                                    </td>
+                                                    <td>
+
+                                                        <h:selectOneMenu class="form-control" value="#{requestAndServiceManagedBean.hkRequestType}">
+                                                            <f:selectItem itemValue="housekeeping" itemLabel="Housekeeping" />
+                                                            <f:selectItem itemValue="toiletries" itemLabel="Toiletries" />
+                                                        </h:selectOneMenu>
+                                                    </td>
+                                                </div>
+                                                </tr>
+                                                <tr>
+                                                    <div class="form-group">
+                                                        <td>
+                                                            <label>
+                                                                Status
+                                                            </label>
+                                                        </td>
+                                                        <td>
+
+                                                            <h:selectOneMenu class="form-control" value="#{requestAndServiceManagedBean.hkRequestStatus}">
+                                                                <f:selectItem itemValue="Complete" itemLabel="Complete" />
+                                                                <f:selectItem itemValue="Incomplete" itemLabel="Incomplete" />
+
+                                                            </h:selectOneMenu>                                                         
                                                         </td>
                                                     </div>
                                                 </tr>
@@ -75,30 +108,16 @@
                                                     <div class="form-group">
 
                                                         <td>
-                                                            <label>Special request</label>
+                                                            <label>Details</label>
                                                         </td>
                                                         <td>  
-                                                            <h:inputTextarea rows="10" cols="50" value="#{requestAndServiceManagedBean.hkSpecialRequest}" a:placeholder="Item description" ></h:inputTextarea>
+                                                            <h:inputTextarea class="form-control" rows="10" cols="50" value="#{requestAndServiceManagedBean.hkSpecialRequest}" a:placeholder="Item description" ></h:inputTextarea>
 
                                                         </td>
                                                     </div>
                                                 </tr>
-                                               
-                                                <tr>
-                                                    <td>
-                                                        <label>
-                                                            Status:
-                                                        </label>
-                                                    </td>
-                                                    <td>
-                                                        <div class="form-group">
-                                                            <h:selectOneMenu value="#{requestAndServiceManagedBean.hkRequestStatus}">
-                                                                <f:selectItem itemValue="Complete" itemLabel="Complete" />
-                                                                <f:selectItem itemValue="Incomplete" itemLabel="Incomplete" />
 
-                                                            </h:selectOneMenu>                                                         </div>
-                                                    </td>
-                                                </tr>
+
 
 
 

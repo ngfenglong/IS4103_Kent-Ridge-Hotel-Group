@@ -101,6 +101,7 @@ public class HouseKeepingOrderSession implements HouseKeepingOrderSessionLocal {
         if (oldHouseKeepingOrder != null) {
             oldHouseKeepingOrder.setRoom(houseKeepingOrder.getRoom());
             oldHouseKeepingOrder.setStatus(houseKeepingOrder.getStatus());
+            oldHouseKeepingOrder.setRequestType(houseKeepingOrder.getRequestType());
             oldHouseKeepingOrder.setOrderDateTime(houseKeepingOrder.getOrderDateTime());
             oldHouseKeepingOrder.setCompleteDateTime(houseKeepingOrder.getCompleteDateTime());
             oldHouseKeepingOrder.setHouseKeeper(houseKeepingOrder.getHouseKeeper());
