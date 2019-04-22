@@ -442,7 +442,7 @@ public class AuthenticationManagedBean implements Serializable {
                     + "                              <tr>\n"
                     + "                                <td class=\"button__cell\" style=\"background: #080e66; border-radius: 4px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; padding: 12px 15px; text-align: center\"\n"
                     + "                                  align=\"center\" bgcolor=\"#080e66\">\n"
-                    + "                                  <a href=\"http://localhost:38201/Admin/resetPassword.xhtml?userID=" + base64encodedString + "\" class=\"button__text\" style=\"color: #fff; font-size: 14px; text-decoration: none\">Reset Password</a>\n"
+                    + "                                  <a href=\"http://localhost:8080/Admin/resetPassword.xhtml?userID=" + base64encodedString + "\" class=\"button__text\" style=\"color: #fff; font-size: 14px; text-decoration: none\">Reset Password</a>\n"
                     + "                                </td>\n"
                     + "                              </tr>\n"
                     + "                            </table>\n"

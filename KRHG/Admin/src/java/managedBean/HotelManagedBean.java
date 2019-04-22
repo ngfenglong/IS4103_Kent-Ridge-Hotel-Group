@@ -2990,6 +2990,118 @@ public class HotelManagedBean implements Serializable {
         return rpPriceTb;
     }
 
+    public WeeklyScheduleSessionLocal getWeeklyScheduleSessionLocal() {
+        return weeklyScheduleSessionLocal;
+    }
+
+    public void setWeeklyScheduleSessionLocal(WeeklyScheduleSessionLocal weeklyScheduleSessionLocal) {
+        this.weeklyScheduleSessionLocal = weeklyScheduleSessionLocal;
+    }
+
+    public ShiftSessionLocal getShiftSessionLocal() {
+        return shiftSessionLocal;
+    }
+
+    public void setShiftSessionLocal(ShiftSessionLocal shiftSessionLocal) {
+        this.shiftSessionLocal = shiftSessionLocal;
+    }
+
+    public PaymentTransactionSessionLocal getPaymentTransactionSessionLocal() {
+        return paymentTransactionSessionLocal;
+    }
+
+    public void setPaymentTransactionSessionLocal(PaymentTransactionSessionLocal paymentTransactionSessionLocal) {
+        this.paymentTransactionSessionLocal = paymentTransactionSessionLocal;
+    }
+
+    public PromoCodeSessionLocal getPromocodesessionlocal() {
+        return promocodesessionlocal;
+    }
+
+    public void setPromocodesessionlocal(PromoCodeSessionLocal promocodesessionlocal) {
+        this.promocodesessionlocal = promocodesessionlocal;
+    }
+
+    public String getEmailText() {
+        return emailText;
+    }
+
+    public void setEmailText(String emailText) {
+        this.emailText = emailText;
+    }
+
+    public String getSubjectTB() {
+        return subjectTB;
+    }
+
+    public void setSubjectTB(String subjectTB) {
+        this.subjectTB = subjectTB;
+    }
+
+    public String getEmailMsg() {
+        return emailMsg;
+    }
+
+    public void setEmailMsg(String emailMsg) {
+        this.emailMsg = emailMsg;
+    }
+
+    public String[] getMailingListToSend() {
+        return mailingListToSend;
+    }
+
+    public void setMailingListToSend(String[] mailingListToSend) {
+        this.mailingListToSend = mailingListToSend;
+    }
+
+    public String[][] getHqSchedule() {
+        return hqSchedule;
+    }
+
+    public void setHqSchedule(String[][] hqSchedule) {
+        this.hqSchedule = hqSchedule;
+    }
+
+    public String getScheduleDate() {
+        return scheduleDate;
+    }
+
+    public void setScheduleDate(String scheduleDate) {
+        this.scheduleDate = scheduleDate;
+    }
+
+    public String getSelectedDateDropDown() {
+        return selectedDateDropDown;
+    }
+
+    public void setSelectedDateDropDown(String selectedDateDropDown) {
+        this.selectedDateDropDown = selectedDateDropDown;
+    }
+
+    public double getTopGrossingAmount() {
+        return topGrossingAmount;
+    }
+
+    public void setTopGrossingAmount(double topGrossingAmount) {
+        this.topGrossingAmount = topGrossingAmount;
+    }
+
+    public String getPromoStatus() {
+        return promoStatus;
+    }
+
+    public void setPromoStatus(String promoStatus) {
+        this.promoStatus = promoStatus;
+    }
+
+    public PromoCode getEditPromo() {
+        return editPromo;
+    }
+
+    public void setEditPromo(PromoCode editPromo) {
+        this.editPromo = editPromo;
+    }
+
     public void setRpPriceTb(double rpPriceTb) {
         this.rpPriceTb = rpPriceTb;
     }

@@ -262,7 +262,12 @@ public class WebsiteManagedBean implements Serializable {
         p.setEmail(emailAddressTB);
         p.setPaymentType(paymentMethod);
         p.setRoomsBooked(roomsBooked);
-        p.setPayer(customerSessionLocal.getCustomerByEmail(emailAddressTB));
+        String mobileNum = "+6591321876";
+        if(customerSessionLocal.getCustomerByEmail(emailAddressTB)!=null){
+              p.setPayer(customerSessionLocal.getCustomerByEmail(emailAddressTB));
+              mobileNum = customerSessionLocal.getCustomerByEmail(emailAddressTB).getMobileNum();
+        }
+      
         paymentTransactionSessionLocal.createPaymentTransaction(p);
         p = paymentTransactionSessionLocal.getLastPaymentTransaction();
 
@@ -464,9 +469,7 @@ public class WebsiteManagedBean implements Serializable {
                 + "                          </td>\n"
                 + "                          <td class=\"customer-info__item\" style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; padding-bottom: 40px; width: 50%\">\n"
                 + "                            <h4 style=\"color: #555; font-size: 16px; font-weight: 500; margin: 0 0 5px\">Standard Room</h4>\n"
-                + "                            <p style=\"color: #555; font-size: 16px; font-weight: 500; margin: 0 0 5px\">2 Nights</p>\n"
-                + "                            <p style=\"color: #555; font-size: 16px; font-weight: 500; margin: 0 0 5px\">1 Guest</p>\n"
-                + "                            <p style=\"color: #555; font-size: 16px; font-weight: 500; margin: 0 0 5px\">Standard Rate</p>\n"
+                + "                            <p style=\"color: #555; font-size: 16px; font-weight: 500; margin: 0 0 5px\">"+ guestTB +" Guest</p>\n"
                 + "\n"
                 + "                          </td>\n"
                 + "                        </tr>\n"
@@ -489,8 +492,8 @@ public class WebsiteManagedBean implements Serializable {
                 + "                             \n"
                 + "                            </td>\n"
                 + "                            <td class=\"customer-info__item\" style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; padding-bottom: 40px; width: 50%\">\n"
-                + "                              <h4 style=\"color: #555; font-size: 16px; font-weight: 500; margin: 0 0 5px\">May 15, 2019<br> \n"
-                + "                              14:54</h4> \n"
+                + "                              <h4 style=\"color: #555; font-size: 16px; font-weight: 500; margin: 0 0 5px\"> " +  checkInTB +"<br> \n"
+                + "                              </h4> \n"
                 + "  \n"
                 + "                            </td>\n"
                 + "                          </tr>\n"
@@ -513,8 +516,8 @@ public class WebsiteManagedBean implements Serializable {
                 + "                             \n"
                 + "                            </td>\n"
                 + "                            <td class=\"customer-info__item\" style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; padding-bottom: 40px; width: 50%\">\n"
-                + "                              <h4 style=\"color: #555; font-size: 16px; font-weight: 500; margin: 0 0 5px\">May 17, 2019 <br> \n"
-                + "                              11:24</h4> \n"
+                + "                              <h4 style=\"color: #555; font-size: 16px; font-weight: 500; margin: 0 0 5px\">" + checkOutTB+" <br> \n"
+                + "                              </h4> \n"
                 + "  \n"
                 + "                            </td>\n"
                 + "                          </tr>\n"
@@ -537,8 +540,8 @@ public class WebsiteManagedBean implements Serializable {
                 + "                             \n"
                 + "                            </td>\n"
                 + "                            <td class=\"customer-info__item\" style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; padding-bottom: 40px; width: 50%\">\n"
-                + "                              <h4 style=\"color: #555; font-size: 16px; font-weight: 500; margin: 0 0 5px\">Neo Guohui Zack</h4>\n"
-                + "                              <p style=\"color: #555; font-size: 16px; font-weight: 500; margin: 0 0 5px\">+65 91321876</p> \n"
+                + "                              <h4 style=\"color: #555; font-size: 16px; font-weight: 500; margin: 0 0 5px\">" +fNameTB + " "+ lNameTB +"</h4>\n"
+                + "                              <p style=\"color: #555; font-size: 16px; font-weight: 500; margin: 0 0 5px\">+65 "+ mobileNum +"</p> \n"
                 + "  \n"
                 + "                            </td>\n"
                 + "                          </tr>\n"

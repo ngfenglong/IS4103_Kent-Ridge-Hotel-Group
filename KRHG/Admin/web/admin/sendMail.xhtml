@@ -33,52 +33,32 @@
                     <!-- /.container-fluid -->
                 </div>
                 <!-- form start -->
-                <h:form role="form">
-                    <!-- Content Header (Page header) -->
-                    <section class="content-header">
-
-                              <!-- quick email widget -->
-          <div class="box box-info">
-                <div class="box-header">
-                  <i class="fa fa-envelope"></i>
-    
-                  <h3 class="box-title">Quick Email</h3>
-                  <!-- tools box -->
-                  <div class="pull-right box-tools">
-
-                     
-                  </div>
-                  <!-- /. tools -->
-                </div>
-                <div class="box-body">
-                  <form action="#" method="post">
+                <h:form>
+                    <div class="box-body">
                         <div class="form-group">
-                                <label for="esDaysToCharge">Surcharge Days</label> <br />
-                                <h:selectManyListbox id="esDaysToCharge" a:multiple="multiple" class="select2-multiple-input-lg" value = "#{hotelManagedBean.esDaysToCharge}" >
-                                    <f:selectItem itemValue = "SUN" itemLabel = "SUN" /> 
-                                    <f:selectItem itemValue = "MON" itemLabel = "MON" /> 
-                                    <f:selectItem itemValue = "TUE" itemLabel = "TUE" /> 
-                                    <f:selectItem itemValue = "WED" itemLabel = "WED" /> 
-                                    <f:selectItem itemValue = "THURS" itemLabel = "THURS" /> 
-                                    <f:selectItem itemValue = "FRT" itemLabel = "FRI" /> 
-                                    <f:selectItem itemValue = "SAT" itemLabel = "SAT" /> 
-                                </h:selectManyListbox>
-                            </div> 
-                    <div class="form-group">
-                      <input type="text" class="form-control" name="subject" placeholder="Subject"/>
+                            <label for="esDaysToCharge">Mailing</label> <br />
+                            <h:selectManyListbox id="esDaysToCharge" a:multiple="multiple" class="select2-multiple-input-lg" value = "#{hotelManagedBean.mailingListToSend}" >
+                                <c:forEach items="${hotelManagedBean.allMemberTier}" var="m">
+                                    <f:selectItem itemValue = "#{m.tierName}" itemLabel = "#{m.tierName}" /> 
+                                </c:forEach>
+                                <c:forEach items="${hotelManagedBean.allCustomer}" var="c">
+                                    <f:selectItem itemValue = "#{c.email}" itemLabel = "#{c.email}" /> 
+                                </c:forEach>
+                            </h:selectManyListbox>
+                        </div> 
+                        <div class="form-group">
+                            <h:inputText class="form-control" a:name="subject" a:placeholder="Subject" value="#{hotelManagedBean.subjectTB}" />                                        
+                        </div>
+                        <div>
+                            <h:inputTextarea class="textarea" a:placeholder="Message" value="#{hotelManagedBean.emailMsg}"
+                                             style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></h:inputTextarea>
+                        </div>
+
                     </div>
-                    <div>
-                      <textarea class="textarea" placeholder="Message"
-                                style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                    <div class="box-footer clearfix">
+                        <h:commandLink class="pull-right btn btn-default" action="#{hotelManagedBean.sendMailingList()}" value="Send" id="sendEmail">
+                            <i class="fa fa-arrow-circle-right"></i></h:commandLink>
                     </div>
-                  </form>
-                </div>
-                <div class="box-footer clearfix">
-                  <button type="button" class="pull-right btn btn-default" id="sendEmail">Send
-                    <i class="fa fa-arrow-circle-right"></i></button>
-                </div>
-              </div>
-                    </section>
                 </h:form>
 
                 <div id="modalVH" class="cd-popup" role="alert">
