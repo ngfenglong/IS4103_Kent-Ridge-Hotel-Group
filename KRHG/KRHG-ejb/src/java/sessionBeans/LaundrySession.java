@@ -237,5 +237,11 @@ public class LaundrySession implements LaundrySessionLocal {
             throw new NoResultException("Laundry Type not found.");
         }
     }    
+
+    @Override
+    public LaundryOrder getLastLaudryOrder() {
+          Query q = em.createQuery("SELECT l FROM LaundryOrder l ORDER BY l.laundryOrderID DESC");
+        return (LaundryOrder) q.getResultList().get(0);
+    }
     
 }

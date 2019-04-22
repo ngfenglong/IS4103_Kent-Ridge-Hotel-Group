@@ -71,8 +71,8 @@
                                                 <td>#{o.bookedRoom.roomNumber}</td>
                                                 <td>#{o.bookedBy.firstName} #{o.bookedBy.lastName}</td>
                                                 <td>#{o.passportNum}</td>
-                                                <td>#{o.bookOutDate}</td>
-                                                <td>#{o.price}</td>
+                                                <td>#{frontDeskManagedBean.convertDateFormat(o.bookOutDate)}</td>
+                                                <td>$#{o.price}0</td>
                                                 <td colspan="3"><h:commandLink action="#{frontDeskManagedBean.displayCheckoutOrders(o)}" > <i class="fa fa-arrow-circle-down" style="color:gray" ></i></h:commandLink></td>                                            
 
                                             </tr>

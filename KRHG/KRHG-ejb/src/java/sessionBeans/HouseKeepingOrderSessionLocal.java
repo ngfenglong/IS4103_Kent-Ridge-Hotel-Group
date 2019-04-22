@@ -29,7 +29,7 @@ public interface HouseKeepingOrderSessionLocal {
     public void updateHouseKeepingOrder (HouseKeepingOrder houseKeepingOrder) throws NoResultException;
     public void deleteHouseKeepingOrder (Long houseKeepingOrderID) throws NoResultException;
     public void createHouseKeepingOrder (HouseKeepingOrder houseKeepingOrder);
-    
+    public HouseKeepingOrder getLastHouseKeepingOrder();
     
     //Minibar Item
     public List<MinibarItem> getAllMinibarItem();

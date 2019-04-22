@@ -33,7 +33,7 @@ public class HouseKeepingOrderSession implements HouseKeepingOrderSessionLocal {
         q = em.createQuery("SELECT ho FROM HouseKeepingOrder ho");
         return q.getResultList();
     }
-    
+
     @Override
     public List<HouseKeepingOrder> getHouseKeepingOrderByLevel(int level) throws NoResultException {
         Query q;
@@ -47,7 +47,7 @@ public class HouseKeepingOrderSession implements HouseKeepingOrderSessionLocal {
             throw new NoResultException("House Keeping Order not found.");
         }
     }
-    
+
     @Override
     public List<HouseKeepingOrder> getHouseKeepingOrderByLevelAndHotelCodeName(int level, String hotelCodeName) throws NoResultException {
         Query q;
@@ -63,7 +63,7 @@ public class HouseKeepingOrderSession implements HouseKeepingOrderSessionLocal {
             throw new NoResultException("House Keeping Order not found.");
         }
     }
-    
+
     @Override
     public List<HouseKeepingOrder> getHouseKeepingOrderByLevelAndHotelCodeNameAndStatus(int level, String hotelCodeName, String status, boolean isSpecialRequest) throws NoResultException {
         Query q;
@@ -130,7 +130,7 @@ public class HouseKeepingOrderSession implements HouseKeepingOrderSessionLocal {
     }
 
     @Override
-    public List<MinibarItem> getAllMinibarItem(){
+    public List<MinibarItem> getAllMinibarItem() {
         Query q;
         q = em.createQuery("SELECT m FROM MinibarItem m ");
         return q.getResultList();
@@ -187,43 +187,43 @@ public class HouseKeepingOrderSession implements HouseKeepingOrderSessionLocal {
     public void createMinibarItem(MinibarItem m) {
         em.persist(m);
     }
-    
-    @Override 
+
+    @Override
     public void createMinibarOrder(MinibarOrder mo) {
         em.persist(mo);
     }
-    
+
     @Override
-    public void createMinibarOrderedItem (MinibarOrderedItem moi) {
+    public void createMinibarOrderedItem(MinibarOrderedItem moi) {
         em.persist(moi);
     }
-    
-    @Override 
+
+    @Override
     public MinibarOrder getLastMinibarOrder() throws NoResultException {
         Query q = em.createQuery("SELECT mo FROM MinibarOrder mo ORDER BY mo.minibarOrderID DESC");
         return (MinibarOrder) q.getResultList().get(0);
     }
-    
+
     @Override
     public MinibarOrderedItem getLastMinibarOrderedItem() throws NoResultException {
         Query q = em.createQuery("SELECT moi FROM MinibarOrderedItem moi ORDER BY moi.minibarOrderedItemID DESC");
         return (MinibarOrderedItem) q.getResultList().get(0);
     }
-    
+
     @Override
     public void createMinibarStock(MinibarStock ms) {
         em.persist(ms);
     }
-    
+
     @Override
     public List<MinibarStock> getAllMinibarStock() {
         Query q;
         q = em.createQuery("SELECT ms FROM MinibarStock ms");
         return q.getResultList();
     }
-    
+
     @Override
-    public MinibarStock getMinibarStockByNameAndHotelCode(String minibarItemName, String hotelCodeName) throws NoResultException{
+    public MinibarStock getMinibarStockByNameAndHotelCode(String minibarItemName, String hotelCodeName) throws NoResultException {
         Query q;
         q = em.createQuery("SELECT ms FROM MinibarStock ms WHERE "
                 + "LOWER(ms.minibarItemName) = :minibarItemName AND LOWER(ms.hotelCodeName) = :hotelCodeName");
@@ -236,9 +236,9 @@ public class HouseKeepingOrderSession implements HouseKeepingOrderSessionLocal {
             throw new NoResultException("MinibarStock not found.");
         }
     }
-    
+
     @Override
-    public void updateMinibarStock(MinibarStock ms) throws NoResultException{
+    public void updateMinibarStock(MinibarStock ms) throws NoResultException {
         MinibarStock oldMinibarStock = em.find(MinibarStock.class, ms.getMinibarStockID());
         if (oldMinibarStock != null) {
             oldMinibarStock.setMinibarItemName(ms.getMinibarItemName());
@@ -250,7 +250,7 @@ public class HouseKeepingOrderSession implements HouseKeepingOrderSessionLocal {
             throw new NoResultException("MinibarStock not found");
         }
     }
-    
+
     @Override
     public void deleteMinibarStock(Long msID) throws NoResultException {
         MinibarStock ms = em.find(MinibarStock.class, msID);
@@ -259,6 +259,12 @@ public class HouseKeepingOrderSession implements HouseKeepingOrderSessionLocal {
         } else {
             throw new NoResultException("MinibarStock not found");
         }
-    }    
+    }
+
+    @Override
+    public HouseKeepingOrder getLastHouseKeepingOrder() {
+        Query q = em.createQuery("SELECT h FROM HouseKeepingOrder h ORDER BY h.houseKeepingOrderID DESC");
+        return (HouseKeepingOrder) q.getResultList().get(0);
+    }
 
 }

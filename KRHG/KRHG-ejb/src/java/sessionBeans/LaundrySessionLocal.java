@@ -62,4 +62,5 @@ public interface LaundrySessionLocal {
 
     public List<LaundryOrderedItem> getAllLaundryOrderedItemByLaundryOrderID(Long loID) throws NoResultException;
     
+    public LaundryOrder getLastLaudryOrder();
 }

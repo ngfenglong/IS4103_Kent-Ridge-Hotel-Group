@@ -19,13 +19,13 @@
         <link rel="stylesheet" href="#{request.contextPath}/plugins/datepicker/datepicker3.css" />
         <!-- DataTables -->
         <link rel="stylesheet" href="./plugins/datatables/dataTables.bootstrap4.css" />
-        
+
         <!-- Theme style (comes with Bootstrap) -->
         <link rel="stylesheet" href="#{request.contextPath}/css/adminlte.min.css" />
         <link rel="stylesheet" href="#{request.contextPath}/css/adminlte.css" />
         <link rel="stylesheet" href="#{request.contextPath}/css/style.css" />
         <link rel="stylesheet" href="./AdminLTE-2.4.10/AdminLTE-2.4.10/dist/css/AdminLTE.min.css" />
-             <link rel="stylesheet" href="./AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/bootstrap/dist/css/bootstrap.min.css"></link>
+        <link rel="stylesheet" href="./AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/bootstrap/dist/css/bootstrap.min.css"></link>
         <!-- Google Font: Source Sans Pro -->
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet" />
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous"></link>
@@ -46,24 +46,24 @@
             input[type="number"] {
                 -moz-appearance: textfield;
             }
-            
+
             p, span, td, input,a, button {
                 font-size:calc((100% + 0.25vw)) !important;
             }
-            
+
             .nav-header{
                 font-size:1.6em !important;
             }
-            
+
             .nav-item{
                 font-size:0.8em !important;
             }
-            
+
             a{
                 text-decoration: none;
                 color:#337ab7;
             }
-            
+
         </style>
     </h:head>
     <h:body class="hold-transition sidebar-mini">
@@ -90,10 +90,10 @@
             <!-- Main Sidebar Container -->
             <aside class="main-sidebar sidebar-dark-primary elevation-4" style="padding:0px">
                 <!-- Brand Logo -->
-                     <a href="#{request.contextPath}" class="brand-link">
+                <a href="#{request.contextPath}" class="brand-link">
                     <img src="./img/logo3.png" style="width:200px; margin-left:10px; margin-top:10px"/>
                 </a>
-               
+
                 <!-- Sidebar -->
                 <div class="sidebar">
                     <!-- Sidebar Menu -->
@@ -131,63 +131,74 @@
                                         <p>Manage Customer</p>
                                     </a>
                                 </li>
-                        </li>
+                            </li>
+                            <li class="nav-item">
 
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="fa fa-concierge-bell"></i>
-                                <p>
-                                    Requests and Services
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="lostAndFound.xhtml" class="nav-link">
-                                        <i class="fa fa-box-open nav-icon"></i>
-                                        <p> Lost and Found</p>
+                                    <a href="manageRoom.xhtml" class="nav-link">
+                                        <i class="fa nav-user fa-user"></i>
+                                        <p>Manage Rooms</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href=" housekeeping.xhtml" class="nav-link">
-                                        <i class="fa fa-toilet-paper nav-icon"></i>
-                                        <p>  Housekeeping </p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href=" maintenance.xhtml" class="nav-link">
-                                        <i class="fa fa-tools nav-icon"></i>
-                                        <p>  Maintenance </p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="fas fa-bookmark nav-icon"></i>
-                                <p>
-                                    Reservation 
-                                </p>
-                            </a>`
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item has-treeview">
-                                    <a href="makeReservation.xhtml" class="nav-link">
-                                        <i class="fa fa-plus nav-icon"></i>
-                                        <p>Make Reservation</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="cancelReservation.xhtml" class="nav-link">
-                                        <i class="nav-icon fa fa-ban"></i>
-                                        <p>Cancel Reservation</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item" >
-                            <h:form class="nav-link">
-                                <h:commandButton class="btn btn-danger" action="#{authenticationManagedBean.logout()}" value="Logout" />
-                            </h:form>
-                        </li>
+                            </li>
+
+                            <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link">
+                                    <i class="fa fa-concierge-bell"></i>
+                                    <p>
+                                        Requests and Services
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                  
+                                    <li class="nav-item">
+                                        <a href="lostAndFound.xhtml" class="nav-link">
+                                            <i class="fa fa-box-open nav-icon"></i>
+                                            <p> Lost and Found</p>
+                                        </a>
+                                    </li>
+                              
+                                    <li class="nav-item">
+                                        <a href=" housekeeping.xhtml" class="nav-link">
+                                            <i class="fa fa-toilet-paper nav-icon"></i>
+                                            <p>  Housekeeping </p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href=" maintenance.xhtml" class="nav-link">
+                                            <i class="fa fa-tools nav-icon"></i>
+                                            <p>  Maintenance </p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link">
+                                    <i class="fas fa-bookmark nav-icon"></i>
+                                    <p>
+                                        Reservation 
+                                    </p>
+                                </a>`
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item has-treeview">
+                                        <a href="makeReservation.xhtml" class="nav-link">
+                                            <i class="fa fa-plus nav-icon"></i>
+                                            <p>Make Reservation</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="cancelReservation.xhtml" class="nav-link">
+                                            <i class="nav-icon fa fa-ban"></i>
+                                            <p>Cancel Reservation</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item" >
+                                <h:form class="nav-link">
+                                    <h:commandButton class="btn btn-danger" action="#{authenticationManagedBean.logout()}" value="Logout" />
+                                </h:form>
+                            </li>
                         </ul>
 
 
@@ -212,7 +223,7 @@
         <!-- jQuery UI 1.11.4 -->
         <script src="https://code.jquery.com/ui/1.12.1/jqueryui.min.js"></script>
         <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-       
+
         <!-- Bootstrap 4 -->
         <script src="#{request.contextPath}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
         <!-- datepicker -->
@@ -243,11 +254,9 @@
         <!-- page script -->
         <script>
             $(document).ready(function(){
-    $('#myTable').dataTable();
-});
-
-            
-                 $('#example5').DataTable({
+            $('#myTable').dataTable();
+            });
+            $('#example5').DataTable({
             "paging": true,
                     "lengthChange": true,
                     "searching": true,
@@ -255,10 +264,12 @@
                     "info": true,
                     "autoWidth": true
             });
+            
             $(function () {
             $("#example1").DataTable();
+            
             $('#example2').DataTable({
-           "paging": true,
+            "paging": true,
                     "lengthChange": true,
                     "searching": true,
                     "ordering": true,
@@ -306,7 +317,7 @@
             }
             )
                     .on('core.validator.validated', function (e) {
-                    if (e.field === 'cc' &amp;&amp; e.validator === 'creditCard' &amp;&amp;e.result.valid) {
+                    if (e.field === 'cc' &amp; &amp; e.validator === 'creditCard' &amp; &amp; e.result.valid) {
                     let icon = '';
                     // e.result.meta.type can be one of
                     // AMERICAN_EXPRESS, DINERS_CLUB, DINERS_CLUB_US, DISCOVER, JCB, LASER,
@@ -336,7 +347,7 @@
                     }
                     })
                     .on('core.element.validated', function (e) {
-                    if (e.field === 'cc' &amp;&amp; !e.valid) {
+                    if (e.field === 'cc' &amp; &amp; !e.valid) {
                     const iconEle = e.element.nextSibling;
                     iconEle.setAttribute('class', 'fv-plugins-icon fa fa-times');
                     }
