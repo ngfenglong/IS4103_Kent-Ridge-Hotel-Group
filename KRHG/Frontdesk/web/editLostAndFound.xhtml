@@ -12,7 +12,7 @@
 
 
             <ui:define name="title">
-                KRHG front desk
+                KRHG Front Desk
             </ui:define>
 
             <ui:define name="content">
@@ -62,11 +62,11 @@
                                                     <div class="form-group">
                                                         <td>
                                                             <label>
-                                                                Report type:
+                                                                Report Type
                                                             </label>
                                                         </td>
                                                         <td>
-                                                            <h:selectOneMenu value="#{requestAndServiceManagedBean.lfreportType}">
+                                                            <h:selectOneMenu class="form-control" value="#{requestAndServiceManagedBean.lfreportType}">
                                                                 <f:selectItem itemValue="Found" itemLabel="Found" />
                                                                 <f:selectItem itemValue="Lost" itemLabel="Lost" />
 
@@ -79,7 +79,7 @@
                                                     <div class="form-group">
 
                                                         <td>
-                                                            <label>Item name:</label>
+                                                            <label>Item Name</label>
                                                         </td>
                                                         <td>  
                                                             <h:inputText class="form-control" value="#{requestAndServiceManagedBean.lfItemName}" a:placeholder="Item name" required="true"></h:inputText>
@@ -90,7 +90,7 @@
                                                 <tr>
                                                     <td>
                                                         <label>
-                                                            Mobile number:
+                                                            Mobile No
                                                         </label>
                                                     </td>
                                                     <td>
@@ -102,24 +102,24 @@
                                                 <tr>
                                                     <td>
                                                         <label>
-                                                            Desription:
+                                                            Description
                                                         </label>
                                                     </td>
                                                     <td>
                                                         <div class="form-group">
-                                                            <h:inputTextarea rows="10" cols="50" value="#{requestAndServiceManagedBean.lfDescription}" a:placeholder="Item description" ></h:inputTextarea>
+                                                            <h:inputTextarea class="form-control" rows="10" cols="50" value="#{requestAndServiceManagedBean.lfDescription}" a:placeholder="Item description" ></h:inputTextarea>
                                                         </div>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>
                                                         <label>
-                                                            Status:
+                                                            Status
                                                         </label>
                                                     </td>
                                                     <td>
                                                         <div class="form-group">
-                                                            <h:selectOneMenu value="#{requestAndServiceManagedBean.lfStatus}">
+                                                            <h:selectOneMenu class="form-control" value="#{requestAndServiceManagedBean.lfStatus}">
                                                                 <f:selectItem itemValue="#{false}" itemLabel="Unresolved" />
                                                                 <f:selectItem itemValue="#{true}" itemLabel="Solved" />
 

@@ -299,4 +299,6 @@ public class RoomBooking implements Serializable {
             throw new NoResultException("Minibar Order has not been added to Room Booking");
         }
     }
+    
+    
 }

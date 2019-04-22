@@ -51,7 +51,7 @@
         <!-- Google Font: Source Sans Pro -->
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet" />
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous"></link>
-        <link rel="stylesheet" href="#{request.contextPath}/styles/modal.css"/>
+        <link rel="stylesheet" href="styles/modal.css"/>
         <!-- Bootstrap 4.0 -->
         <!--<link rel="stylesheet" href="#{request.contextPath}/plugins/bootstrap/css/bootstrap.min.css" />-->
         <!--<link rel="stylesheet" href="#{request.contextPath}/dist/js/plugins/bootstrap/css/bootstrap.min.css" />-->
@@ -167,14 +167,7 @@
                                     </p>
                                 </a>
                             </li>
-                            <li class="nav-item" >
-                                <a href="Inventory.xhtml" class="nav-link" >
-                                    <i class="fa fa-credit-card"></i>
-                                    <p>
-                                        Inventory
-                                    </p>
-                                </a>
-                            </li>
+                           
                             </c:if>
                             <c:if test="#{requestServicesManagedBean.kitchenStaff eq true}">
                             <li class="nav-header">Food</li>
@@ -255,7 +248,7 @@
 
         <!-- jQuery -->
         <script src="#{request.contextPath}/plugins/jquery/jquery.min.js"></script>
-        <script src="#{request.contextPath}/js/modal.js"></script>
+        <script src="js/modal.js"></script>
         <!-- Bootstrap 4 -->
         <script src="#{request.contextPath}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
         <!-- datepicker -->
@@ -274,7 +267,7 @@
         <!-- FastClick -->
         <script src="#{request.contextPath}/plugins/fastclick/fastclick.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/select2/dist/js/select2.full.js"></script>
+       
         <!-- ChartJS -->
         <script src="#{request.contextPath}/AdminLTE-2.4.10/AdminLTE-2.4.10/bower_components/chart.js/Chart.js"></script>
         <!-- iCheck 1.0.1 -->
@@ -519,7 +512,7 @@
             });
             function update(o) {
 
-
+       
 
                 document.getElementById("formy:housekeeper").value = o;
             }

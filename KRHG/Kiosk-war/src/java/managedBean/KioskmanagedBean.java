@@ -5,6 +5,7 @@ package managedBean;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import entity.Customer;
 import entity.FoodOrder;
 import entity.Hotel;
 import entity.HouseKeepingOrder;
@@ -34,6 +35,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletResponse;
 import sessionBeans.BookingSessionLocal;
+import sessionBeans.CustomerSessionLocal;
 import sessionBeans.HotelSessionLocal;
 import sessionBeans.HouseKeepingOrderSessionLocal;
 import sessionBeans.PaymentTransactionSessionLocal;
@@ -60,6 +62,8 @@ public class KioskmanagedBean implements Serializable {
     private HouseKeepingOrderSessionLocal housekeepingOrderSessionlocal;
     @EJB
     private HotelSessionLocal hotelsessionlocal;
+    @EJB
+    private CustomerSessionLocal customersession;
 
     //login
     private String loginHotelCode;
@@ -84,7 +88,7 @@ public class KioskmanagedBean implements Serializable {
 
     private List<String> allocatedRoomNumbers;
 
-    private String hotelCode = "KRN";
+    private String hotelCode = "KRG";
 // cahnge back hotelcode
     //check out
     private String checkoutRoomNumber;
@@ -109,18 +113,22 @@ public class KioskmanagedBean implements Serializable {
     public String login() throws IOException {
         HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
         PrintWriter out = response.getWriter();
+        loadData();
         if (loginHotelCode.equals(loginPassword)) {
             if (getHotel() == null) {
+                  System.out.println("456");
                 out.println("<script type=\"text/javascript\">");
                 out.println("alert('Invalid credetial');");
                 out.println("</script>");
                 return "login.xhtml?faces-redirect=true";
             } else {
+                System.out.println("123");
                 hotelCode = getHotel().getHotelCodeName();
-                return "";
+                return "checkin.html?faces-redirect=true";
             }
 
         } else {
+              System.out.println("789");
             out.println("<script type=\"text/javascript\">");
             out.println("alert('Invalid credetial');");
             out.println("</script>");
@@ -132,6 +140,7 @@ public class KioskmanagedBean implements Serializable {
     public Hotel getHotel() {
         for (Hotel h : hotelsessionlocal.getAllHotels()) {
             if (h.getHotelCodeName().equals(loginHotelCode)) {
+                System.out.println(h);
                 return h;
             }
         }
@@ -143,36 +152,55 @@ public class KioskmanagedBean implements Serializable {
         PrintWriter out = response.getWriter();
         try {
             checkinPayment = getPaymentTransactionWithbookingID();
-
+            System.out.println("2");
             if (checkinPayment == null) {
+                System.out.println("3");
                 checkinBookingID = null;
                 checkinLastName = null;
                 out.println("<script type=\"text/javascript\">");
                 out.println("alert('No result found');");
                 out.println("</script>");
                 return "checkin.xhtml";
-            }
+            }System.out.println("4");
             if (nevercheckCheckinBefore() == true) {
-                checkinNumberOfRoomBooking = checkinPayment.getRoomsBooked().size();
-                checkinPassport = hidepassport(checkinPayment.getRoomsBooked().get(0).getPassportNum());
-                checkinEmail = checkinPayment.getPayer().getEmail();
-                checkinContact = checkinPayment.getPayer().getMobileNum();
-                CheckinName = checkinLastName + " " + checkinLastName;
-                for (RoomBooking rb : checkinPayment.getRoomsBooked()) {
-                    if (rb.getRoomType().equalsIgnoreCase("standard")) {
-                        checkinStandard++;
-                    } else if (rb.getRoomType().equalsIgnoreCase("Premium")) {
-                        checkinPremium++;
-                    } else if (rb.getRoomType().equalsIgnoreCase("Deluxe")) {
-                        checkinDeluxe++;
-                    } else if (rb.getRoomType().equalsIgnoreCase("Suite")) {
-                        checkinSuite++;
-                    } else if (rb.getRoomType().equalsIgnoreCase("Penthouse")) {
-                        checkinPenthouse++;
+                System.out.println("5");
+                if (checkinPayment.getRoomsBooked() != null || checkinPayment.getEmail() != null || checkinPayment.getPayer() != null) {
+                    System.out.println("6");
+                    checkinNumberOfRoomBooking = checkinPayment.getRoomsBooked().size();
+                    System.out.println("7");
+                    checkinPassport = hidepassport(checkinPayment.getRoomsBooked().get(0).getPassportNum());
+                    System.out.println("8");
+                    checkinEmail = checkinPayment.getEmail();
+                    System.out.println("9");
+                    checkinContact = checkinPayment.getPayer().getMobileNum();
+                    System.out.println("10");
+                    CheckinName = checkinLastName + " " + checkinLastName;
+                    System.out.println("11");
+                    for (RoomBooking rb : checkinPayment.getRoomsBooked()) {
+                        if (rb.getRoomType().equalsIgnoreCase("standard")) {
+                            checkinStandard++;
+                        } else if (rb.getRoomType().equalsIgnoreCase("Premium")) {
+                            checkinPremium++;
+                        } else if (rb.getRoomType().equalsIgnoreCase("Deluxe")) {
+                            checkinDeluxe++;
+                        } else if (rb.getRoomType().equalsIgnoreCase("Suite")) {
+                            checkinSuite++;
+                        } else if (rb.getRoomType().equalsIgnoreCase("Penthouse")) {
+                            checkinPenthouse++;
+                        }
                     }
+                    System.out.println("12");
+                    return "checkinResult.xhtml?faces-redirect=true";
                 }
-                return "checkinResult.xhtml?faces-redirect=true";
+                System.out.println("13");
+                checkinBookingID = null;
+                checkinLastName = null;
+                out.println("<script type=\"text/javascript\">");
+                out.println("alert('please proceed towards front desk');");
+                out.println("</script>");
+                return "checkin.xhtml";
             } else {
+                System.out.println("14");
                 checkinBookingID = null;
                 checkinLastName = null;
                 out.println("<script type=\"text/javascript\">");
@@ -181,6 +209,7 @@ public class KioskmanagedBean implements Serializable {
                 return "checkin.xhtml";
             }
         } catch (NoResultException e) {
+            System.out.println("15");
             checkinBookingID = null;
             checkinLastName = null;
             out.println("<script type=\"text/javascript\">");
@@ -199,8 +228,11 @@ public class KioskmanagedBean implements Serializable {
 
     public PaymentTransaction getPaymentTransactionWithbookingID() throws NoResultException {
         for (PaymentTransaction pt : paymentTransactionSessionLocal.getAllPaymentTransaction()) {
-            if (pt.getPayer().getLastName().equalsIgnoreCase(checkinLastName)) {
-                return pt;
+            if (pt.getLastName() != null) {
+                if (pt.getLastName().equalsIgnoreCase(checkinLastName)) {
+                    System.out.println("1");
+                    return pt;
+                }
             }
         }
         return null;
@@ -657,9 +689,41 @@ public class KioskmanagedBean implements Serializable {
         TAX = tax;
         return "$" + tax;
     }
-    
-    public String totaltotaltotalPrice(){
-       totaltotalPrice = totaltotalPrice + TAX + GST;
-       return "$"+totaltotalPrice;
+
+    public String totaltotaltotalPrice() {
+        totaltotalPrice = totaltotalPrice + TAX + GST;
+        return "$" + totaltotalPrice;
+    }
+
+    public void loadData() {
+        Customer cs = new Customer();
+        cs.setEmail("congcong@email.com");
+        cs.setFirstName("CHUN");
+        cs.setGender("female");
+        cs.setLastName("Song");
+        cs.setMobileNum("9876543");
+        customersession.createCustomer(cs);
+
+        RoomBooking rm = new RoomBooking();
+        rm.setBookInDate(new Date());
+        rm.setBookOutDate(new Date());
+        rm.setBookedBy(cs);
+        rm.setPassportNum("A0168452Y");
+        rm.setRoomType("standard");
+        List<RoomBooking> rmm = new ArrayList<RoomBooking>();
+        rmm.add(rm);
+   
+        bookSessionLocal.createRoomBooking(rm);
+
+        PaymentTransaction ts = new PaymentTransaction();
+        ts.setEmail("congcong@email.com");
+        ts.setFirstName("CHUN");
+        ts.setLastName("Song");
+        ts.setPayer(cs);
+        ts.setRoomsBooked(rmm);
+        
+        
+        paymentTransactionSessionLocal.createPaymentTransaction(ts);
+
     }
 }

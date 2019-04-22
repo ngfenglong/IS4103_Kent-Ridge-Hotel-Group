@@ -8,15 +8,19 @@ package managedBean;
 import entity.CreditCard;
 import entity.Customer;
 import entity.ExtraSurcharge;
+import entity.Feedback;
 import entity.FoodOrder;
 import entity.FunctionRoom;
 import entity.HolidaySurcharge;
 import entity.Hotel;
 import entity.LaundryOrder;
+import entity.Logging;
+import entity.MinibarItem;
 import entity.MinibarOrder;
 import entity.PaymentTransaction;
 import entity.Room;
 import entity.RoomBooking;
+import entity.RoomFacility;
 import entity.RoomPricing;
 import error.NoResultException;
 import java.io.IOException;
@@ -41,10 +45,14 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletResponse;
 import sessionBeans.BookingSessionLocal;
 import sessionBeans.CustomerSessionLocal;
+import sessionBeans.FeedbackSessionLocal;
 import sessionBeans.FunctionRoomBookingSessionLocal;
 import sessionBeans.FunctionRoomSessionLocal;
 import sessionBeans.HotelSessionLocal;
+import sessionBeans.HouseKeepingOrderSessionLocal;
+import sessionBeans.LogSessionLocal;
 import sessionBeans.PaymentTransactionSessionLocal;
+import sessionBeans.RoomFacilitySessionLocal;
 import sessionBeans.RoomPricingSessionLocal;
 import sessionBeans.RoomSessionLocal;
 
@@ -55,62 +63,6 @@ import sessionBeans.RoomSessionLocal;
 @ManagedBean
 @SessionScoped
 public class FrontDeskManagedBean implements Serializable {
-
-    public RoomBooking getCheckoutRoomBooking() {
-        return checkoutRoomBooking;
-    }
-
-    public void setCheckoutRoomBooking(RoomBooking checkoutRoomBooking) {
-        this.checkoutRoomBooking = checkoutRoomBooking;
-    }
-
-    public List<LaundryOrder> getListOfLaundryOrders() {
-        return listOfLaundryOrders;
-    }
-
-    public void setListOfLaundryOrders(List<LaundryOrder> listOfLaundryOrders) {
-        this.listOfLaundryOrders = listOfLaundryOrders;
-    }
-
-    public List<FoodOrder> getListOfFoodOrders() {
-        return listOfFoodOrders;
-    }
-
-    public void setListOfFoodOrders(List<FoodOrder> listOfFoodOrders) {
-        this.listOfFoodOrders = listOfFoodOrders;
-    }
-
-    public List<MinibarOrder> getListOfMinibarOrders() {
-        return listOfMinibarOrders;
-    }
-
-    public void setListOfMinibarOrders(List<MinibarOrder> listOfMinibarOrders) {
-        this.listOfMinibarOrders = listOfMinibarOrders;
-    }
-
-    public String getCheckoutRoomNumber() {
-        return checkoutRoomNumber;
-    }
-
-    public void setCheckoutRoomNumber(String checkoutRoomNumber) {
-        this.checkoutRoomNumber = checkoutRoomNumber;
-    }
-
-    public String getTransactionID() {
-        return transactionID;
-    }
-
-    public void setTransactionID(String transactionID) {
-        this.transactionID = transactionID;
-    }
-
-    public RoomBooking getRoomBookingToDisplay() {
-        return roomBookingToDisplay;
-    }
-
-    public void setRoomBookingToDisplay(RoomBooking roomBookingToDisplay) {
-        this.roomBookingToDisplay = roomBookingToDisplay;
-    }
 
     /**
      * Creates a new instance of FrontDeskManagedBean
@@ -124,6 +76,10 @@ public class FrontDeskManagedBean implements Serializable {
     @EJB
     private PaymentTransactionSessionLocal paymentTransactionSessionLocal;
     @EJB
+    private HouseKeepingOrderSessionLocal houseKeepingOrderSessionLocal;
+    @EJB
+    private LogSessionLocal logSessionLocal;
+    @EJB
     private FunctionRoomBookingSessionLocal functionRoomBookingSessionLocal;
     @EJB
     private FunctionRoomSessionLocal functionroomSessionlocal;
@@ -131,6 +87,10 @@ public class FrontDeskManagedBean implements Serializable {
     private RoomPricingSessionLocal roomPricingSessionLocal;
     @EJB
     private HotelSessionLocal hotelSessionLocal;
+    @EJB
+    private FeedbackSessionLocal feedbackSessionLocal;
+    @EJB
+    private RoomFacilitySessionLocal roomFacilitySessionLocal;
 
     private String mode;
 
@@ -149,6 +109,21 @@ public class FrontDeskManagedBean implements Serializable {
     private String checkinDateString;
     private String checkoutDateString;
 
+    public Room selectedRoom;
+    public Long selectedRoomID;
+
+    //Create Room\
+    public String tempHotelNameTB;
+    public String roomName;
+    public String roomNumber;
+    public String roomType;
+    public int roomPax;
+    public String[] minibarItems;
+    public String[] roomFacilities;
+    public String addRoomHotelName;
+
+    private String logActivityName;
+
     private String transactionID;
     private RoomBooking roomBookingToDisplay;
     private String checkoutRoomNumber;
@@ -166,7 +141,6 @@ public class FrontDeskManagedBean implements Serializable {
     private int walkinNumberOfday;
     private List<Room> walkinAvailableRoom;
     private double roomPrice;
-    private Room selectedRoom;
     private int numOfNights;
     private double totalPrice;
     private boolean hasExtraBed;
@@ -248,6 +222,229 @@ public class FrontDeskManagedBean implements Serializable {
             return true;
         }
         return false;
+    }
+
+    public String saveRoom() throws NoResultException {
+        ArrayList<RoomFacility> tempRoomFacilities = new ArrayList<RoomFacility>();
+        if (roomFacilities != null) {
+            for (int i = 0; i < roomFacilities.length; i++) {
+                tempRoomFacilities.add(roomFacilitySessionLocal.getRoomFacilityByName(roomFacilities[i].toString()));
+            }
+        }
+        selectedRoom.setRoomFacilities(tempRoomFacilities);
+        ArrayList<MinibarItem> tempMinibarItem = new ArrayList<MinibarItem>();
+        if (minibarItems != null) {
+            for (int i = 0; i < minibarItems.length; i++) {
+                tempMinibarItem.add(roomSessionLocal.getMinibarItemByName(minibarItems[i].toString()));
+            }
+        }
+        selectedRoom.setMiniBarItems(tempMinibarItem);
+        roomSessionLocal.updateRoom(selectedRoom);
+
+//        FacesContext context = FacesContext.getCurrentInstance();
+//        String loggedInName = context.getApplication().createValueBinding("#{authenticationManagedBean.name}").getValue(context).toString();
+//        Logging l = new Logging("Room", "Update " + selectedRoom.getRoomName() + " details", loggedInName);
+//        logSessionLocal.createLogging(l);
+        selectedRoom = null;
+        minibarItems = null;
+        roomFacilities = null;
+
+        return "manageRoom.xhtml?faces-redirect=true";
+    }
+
+    public String viewRoom(Long rID) throws NoResultException {
+        System.out.println("in view Room");
+        System.out.println("ID: " + rID);
+        selectedRoom = roomSessionLocal.getRoomByID(rID);
+        selectedRoomID = rID;
+
+        String selectedRoomTxt = selectedRoom.getRoomName();
+        return "viewRoom.xhtml?faces-redirect=true";
+    }
+
+    public String deleteRoom() throws NoResultException {
+        List<Hotel> hotels = hotelSessionLocal.getAllHotels();
+        Room r = selectedRoom;
+        String tempHotelName = "";
+        for (Hotel h : hotels) {
+            if (h.getRooms().contains(r)) {
+                hotelSessionLocal.removeRoom(h.getHotelID(), r);
+                tempHotelName = h.getHotelName();
+            }
+        }
+        logActivityName = r.getRoomName();
+//        FacesContext context = FacesContext.getCurrentInstance();
+//        String loggedInName = context.getApplication().createValueBinding("#{authenticationManagedBean.name}").getValue(context).toString();
+        roomSessionLocal.deleteRoom(r.getRoomID());
+        selectedRoom = null;
+//        Logging l = new Logging("Room", "Delete " + logActivityName + " from " + tempHotelName, loggedInName);
+//        logSessionLocal.createLogging(l);
+
+        return "manageRoom.xhtml?faces-redirect=true";
+    }
+
+    public String editRoom() throws NoResultException {
+        selectedRoom = roomSessionLocal.getRoomByID(selectedRoomID);
+        List<RoomFacility> tempRoomFacilities = selectedRoom.getRoomFacilities();
+        List<MinibarItem> tempMinibarItems = selectedRoom.getMiniBarItems();
+        if (!tempRoomFacilities.isEmpty()) {
+            roomFacilities = new String[tempRoomFacilities.size()];
+            for (int i = 0; i < tempRoomFacilities.size(); i++) {
+                roomFacilities[i] = tempRoomFacilities.get(i).getRoomFacilityName();
+            }
+        }
+
+        if (!tempMinibarItems.isEmpty()) {
+            minibarItems = new String[tempMinibarItems.size()];
+            for (int i = 0; i < tempMinibarItems.size(); i++) {
+                minibarItems[i] = tempMinibarItems.get(i).getItemName();
+            }
+        }
+        tempHotelNameTB = selectedRoom.getHotel().getHotelName();
+        return "editRoom.xhtml?faces-redirect=true";
+    }
+
+    public List<MinibarItem> getMinibarItemList() {
+        return houseKeepingOrderSessionLocal.getAllMinibarItem();
+    }
+
+    public String getSelectedHotelName() throws NoResultException {
+        Hotel tempHotel = hotelSessionLocal.getHotelByCode(hotelCode);
+        return tempHotel.getHotelName();
+
+    }
+
+    public String addRoom() throws NoResultException {
+        Room r = new Room();
+        Hotel h = hotelSessionLocal.getHotelByCode(hotelCode);
+        roomName = h.getHotelCodeName() + "_" + roomNumber;
+        r.setRoomName(roomName);
+        r.setRoomNumber(roomNumber);
+        r.setRoomType(roomType);
+        r.setRoomPax(roomPax);
+        r.setStatus("Available");
+        ArrayList<MinibarItem> mbList = new ArrayList<MinibarItem>();
+        ArrayList<RoomFacility> rfList = new ArrayList<RoomFacility>();
+
+        if (minibarItems != null) {
+            for (int i = 0; i < minibarItems.length; i++) {
+                mbList.add(houseKeepingOrderSessionLocal.getMinibarItemByItemName(minibarItems[i]));
+            }
+        }
+
+        if (roomFacilities != null) {
+            for (int i = 0; i < roomFacilities.length; i++) {
+                rfList.add(roomFacilitySessionLocal.getRoomFacilityByName(roomFacilities[i]));
+            }
+        }
+        r.setMiniBarItems(mbList);
+        r.setRoomFacilities(rfList);
+        roomSessionLocal.createRoom(r);
+        r = roomSessionLocal.getRoomByName(roomName);
+
+        logActivityName = roomName;
+        FacesContext context = FacesContext.getCurrentInstance();
+//        String loggedInName = context.getApplication().createValueBinding("#{authenticationManagedBean.name}").getValue(context).toString();
+        hotelSessionLocal.addRoom(h.getHotelID(), r);
+//        Logging l = new Logging("Room", "Add " + logActivityName + " to " + addRoomHotelName, loggedInName);
+//        logSessionLocal.createLogging(l);
+
+        roomName = null;
+        roomNumber = null;
+        roomType = null;
+        roomPax = 1;
+        minibarItems = null;
+        roomFacilities = null;
+
+        return "manageRoom.xhtml?faces-redirect=true";
+    }
+
+    public String getHotelFeedbackRatePct() throws NoResultException {
+        List<Feedback> feedbacks = feedbackSessionLocal.getAllFeedbacks();
+        int ratingTotal = 0;
+        int feedbackBase = 0;
+        for (Feedback f : feedbacks) {
+            if (f.getHotel().getHotelName().equals(getSelectedHotelName())) {
+                ratingTotal = ratingTotal + f.getFeedbackRating();
+                feedbackBase = feedbackBase + 1;
+            }
+        }
+        double feedbackTotal = ratingTotal * 1.0;
+        double feedbackRate = feedbackTotal / feedbackBase;
+        double feedbackPct = feedbackRate * 20.0;
+        double roundOff = (double) Math.round(feedbackPct * 10) / 10.0;
+        String str1 = Double.toString(roundOff);
+        return str1;
+    }
+
+    public String getHotelAvailableRoom() throws NoResultException {
+        List<Room> rooms = roomSessionLocal.getRoomByHotelName(getSelectedHotelName());
+        List<Room> occupiedRooms = new ArrayList<Room>();
+        for (Room r : rooms) {
+            if (r.getStatus().equals("Available")) {
+                Room tempRoom = r;
+                occupiedRooms.add(tempRoom);
+            }
+        }
+
+        String str1 = Integer.toString(occupiedRooms.size());
+        return str1;
+    }
+
+    public String getHotelUnavailableRoom() throws NoResultException {
+        List<Room> rooms = roomSessionLocal.getRoomByHotelName(getSelectedHotelName());
+        List<Room> occupiedRooms = new ArrayList<Room>();
+        for (Room r : rooms) {
+            if (r.getStatus().equals("Unavailable")) {
+                Room tempRoom = r;
+                occupiedRooms.add(tempRoom);
+            }
+        }
+
+        String str1 = Integer.toString(occupiedRooms.size());
+        return str1;
+    }
+
+    public List<Room> getHotelRooms() throws NoResultException {
+        Hotel hotel = hotelSessionLocal.getHotelByName(getSelectedHotelName());
+        return hotel.getRooms();
+    }
+
+    public String getHotelFeedbackRate() throws NoResultException {
+        List<Feedback> feedbacks = feedbackSessionLocal.getAllFeedbacks();
+        int ratingTotal = 0;
+        int feedbackBase = 0;
+        for (Feedback f : feedbacks) {
+            if (f.getHotel().getHotelName().equals(getSelectedHotelName())) {
+                ratingTotal = ratingTotal + f.getFeedbackRating();
+                feedbackBase = feedbackBase + 1;
+            }
+        }
+        double feedbackTotal = ratingTotal * 1.0;
+        double feedbackRate = feedbackTotal / feedbackBase;
+        double roundOff = (double) Math.round(feedbackRate * 10) / 10.0;
+        String str1 = Double.toString(roundOff);
+        return str1;
+    }
+
+    public String getHotelOccupancyRate() throws NoResultException {
+
+        List<Room> rooms = roomSessionLocal.getRoomByHotelName(getSelectedHotelName());
+        List<Room> occupiedRooms = new ArrayList<Room>();
+        for (Room r : rooms) {
+            if (r.getStatus().equals("Occupied")) {
+                Room tempRoom = r;
+                occupiedRooms.add(tempRoom);
+            }
+        }
+        double ocr = occupiedRooms.size() * 1.0;
+        double rs = rooms.size() * 1.0;
+
+        double rate = ocr / rs;
+        double ratePercent = rate * 100;
+        double roundOff = (double) Math.round(ratePercent * 100) / 100;
+        String str1 = Double.toString(roundOff);
+        return str1;
     }
 
     public boolean checkStandard(Room room) {
@@ -1183,6 +1380,8 @@ public class FrontDeskManagedBean implements Serializable {
         this.checkinPassportNumber = checkinPassportNumber;
     }
 
+   
+
     public List<RoomBooking> getTodayCheckOutRoom() throws NoResultException {
 
         return bookSessionLocal.getAllRoomBookingByStatus("checkedIn", null);
@@ -1190,6 +1389,14 @@ public class FrontDeskManagedBean implements Serializable {
 
     public void setTodayCheckOutRoom(List<RoomBooking> todayCheckOutRoom) {
         this.todayCheckOutRoom = todayCheckOutRoom;
+    }
+
+    public List<Hotel> getAllHotels() {
+        return hotelSessionLocal.getAllHotels();
+    }
+
+    public List<RoomFacility> getRoomFacilityList() {
+        return roomFacilitySessionLocal.getAllRoomFacilities();
     }
 
     public String searchRoomAvailable() throws NoResultException {
@@ -1765,6 +1972,78 @@ public class FrontDeskManagedBean implements Serializable {
         this.extraSurchargesIncurred = extraSurchargesIncurred;
     }
 
+    public RoomBooking getCheckoutRoomBooking() {
+        return checkoutRoomBooking;
+    }
+
+    public void setCheckoutRoomBooking(RoomBooking checkoutRoomBooking) {
+        this.checkoutRoomBooking = checkoutRoomBooking;
+    }
+
+    public List<LaundryOrder> getListOfLaundryOrders() {
+        return listOfLaundryOrders;
+    }
+
+    public void setListOfLaundryOrders(List<LaundryOrder> listOfLaundryOrders) {
+        this.listOfLaundryOrders = listOfLaundryOrders;
+    }
+
+    public List<FoodOrder> getListOfFoodOrders() {
+        return listOfFoodOrders;
+    }
+
+    public void setListOfFoodOrders(List<FoodOrder> listOfFoodOrders) {
+        this.listOfFoodOrders = listOfFoodOrders;
+    }
+
+    public List<MinibarOrder> getListOfMinibarOrders() {
+        return listOfMinibarOrders;
+    }
+
+    public void setListOfMinibarOrders(List<MinibarOrder> listOfMinibarOrders) {
+        this.listOfMinibarOrders = listOfMinibarOrders;
+    }
+
+    public String getCheckoutRoomNumber() {
+        return checkoutRoomNumber;
+    }
+
+    public void setCheckoutRoomNumber(String checkoutRoomNumber) {
+        this.checkoutRoomNumber = checkoutRoomNumber;
+    }
+
+    public String getTransactionID() {
+        return transactionID;
+    }
+
+    public void setTransactionID(String transactionID) {
+        this.transactionID = transactionID;
+    }
+
+    public FeedbackSessionLocal getFeedbackSessionLocal() {
+        return feedbackSessionLocal;
+    }
+
+    public void setFeedbackSessionLocal(FeedbackSessionLocal feedbackSessionLocal) {
+        this.feedbackSessionLocal = feedbackSessionLocal;
+    }
+
+    public Long getSelectedRoomID() {
+        return selectedRoomID;
+    }
+
+    public void setSelectedRoomID(Long selectedRoomID) {
+        this.selectedRoomID = selectedRoomID;
+    }
+
+    public RoomBooking getRoomBookingToDisplay() {
+        return roomBookingToDisplay;
+    }
+
+    public void setRoomBookingToDisplay(RoomBooking roomBookingToDisplay) {
+        this.roomBookingToDisplay = roomBookingToDisplay;
+    }
+
     public String getCcMonth() {
         return ccMonth;
     }
@@ -1779,6 +2058,70 @@ public class FrontDeskManagedBean implements Serializable {
 
     public void setCcYear(String ccYear) {
         this.ccYear = ccYear;
+    }
+
+    public String getTempHotelNameTB() {
+        return tempHotelNameTB;
+    }
+
+    public void setTempHotelNameTB(String tempHotelNameTB) {
+        this.tempHotelNameTB = tempHotelNameTB;
+    }
+
+    public String getRoomName() {
+        return roomName;
+    }
+
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
+    }
+
+    public String getRoomNumber() {
+        return roomNumber;
+    }
+
+    public void setRoomNumber(String roomNumber) {
+        this.roomNumber = roomNumber;
+    }
+
+    public String getRoomType() {
+        return roomType;
+    }
+
+    public void setRoomType(String roomType) {
+        this.roomType = roomType;
+    }
+
+    public int getRoomPax() {
+        return roomPax;
+    }
+
+    public void setRoomPax(int roomPax) {
+        this.roomPax = roomPax;
+    }
+
+    public String[] getMinibarItems() {
+        return minibarItems;
+    }
+
+    public void setMinibarItems(String[] minibarItems) {
+        this.minibarItems = minibarItems;
+    }
+
+    public String[] getRoomFacilities() {
+        return roomFacilities;
+    }
+
+    public void setRoomFacilities(String[] roomFacilities) {
+        this.roomFacilities = roomFacilities;
+    }
+
+    public String getAddRoomHotelName() {
+        return addRoomHotelName;
+    }
+
+    public void setAddRoomHotelName(String addRoomHotelName) {
+        this.addRoomHotelName = addRoomHotelName;
     }
 
 }

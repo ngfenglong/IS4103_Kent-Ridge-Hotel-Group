@@ -41,7 +41,7 @@
                 <section class="content">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">New housekeeping Report</h3>
+                            <h3 class="card-title">New Housekeeping Request</h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
@@ -53,23 +53,39 @@
                                         <div class="form-group">
                                             <td>
                                                 <label>
-                                                    Room:
+                                                    Room
                                                 </label>
                                             </td>
                                             <td>
 
-                                                <h:selectOneMenu value="#{requestAndServiceManagedBean.hkroom}">
+                                                <h:selectOneMenu class="form-control" value="#{requestAndServiceManagedBean.hkroom}">
                                                     <f:selectItems value="#{requestAndServiceManagedBean.allOccupiedRooms}" var="c"
                                                                    itemLabel="#{c.roomNumber}" itemValue="#{c.roomNumber}" />
                                                 </h:selectOneMenu>
                                             </td>
                                         </div>
                                     </tr>
+                                    <tr>
 
+                                        <div class="form-group">
+                                            <td>
+                                                <label>
+                                                    Request Type
+                                                </label>
+                                            </td>
+                                            <td>
+
+                                                <h:selectOneMenu class="form-control" value="#{requestAndServiceManagedBean.hkRequestType}">
+                                                    <f:selectItem itemValue="housekeeping" itemLabel="Housekeeping" />
+                                                    <f:selectItem itemValue="toiletries" itemLabel="Toiletries" />
+                                                </h:selectOneMenu>
+                                            </td>
+                                        </div>
+                                    </tr>
                                     <tr>
                                         <td>
                                             <label>
-                                                Details:
+                                                Details
                                             </label>
                                         </td>
                                         <td>
@@ -79,23 +95,7 @@
                                         </td>
                                     </tr>
 
-                                    <tr>
-
-                                        <div class="form-group">
-                                            <td>
-                                                <label>
-                                                    Request type:
-                                                </label>
-                                            </td>
-                                            <td>
-
-                                                <h:selectOneMenu value="#{requestAndServiceManagedBean.hkRequestType}">
-                                                    <f:selectItem itemValue="housekeeping" itemLabel="Housekeeping" />
-                                                    <f:selectItem itemValue="toiletries" itemLabel="Toiletries" />
-                                                </h:selectOneMenu>
-                                            </td>
-                                        </div>
-                                    </tr>
+                                    
 
                                     <!-- /.input group -->
                                 </table>
@@ -103,7 +103,7 @@
                             <!-- /.card-body -->
 
                             <div class="card-footer">
-                                <h:commandButton class="btn btn-primary" value="Create housekeeping request"  action="#{requestAndServiceManagedBean.createHouseKeeping()}" ></h:commandButton>
+                                <h:commandButton class="btn btn-primary" value="Create Request"  action="#{requestAndServiceManagedBean.createHouseKeeping()}" ></h:commandButton>
                             </div>
                         </h:form>
                     </div>

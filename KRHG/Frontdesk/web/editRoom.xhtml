@@ -1,0 +1,160 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <body>
+
+        <ui:composition template="./template.xhtml">
+
+            <ui:define name="title">
+                title
+            </ui:define>
+
+            <ui:define name="content">
+                <!-- Content Header (Page header) -->
+                <div class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <h1 style="font-size: x-large; margin-bottom:20px">Edit Room</h1>
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li><a href="adminIndex.xhtml"> Home</a></li>
+                                    <li><a href="viewRoom.xhtml"> View Room - #{hotelManagedBean.selectedRoom.roomName}</a></li>
+                                    <li class="active">Edit Room Details</li>
+                                </ol>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </div>
+                <section class="content">
+                    <div class="container-fluid">
+                        <h:form enctype="multipart/form-data">
+                            <div class="box box-primary">
+                                <div class="box-header with-border" style="text-align: center">
+                                    <h3 class="box-title"  style="font-size:xx-large">Edit Room #{frontDeskManagedBean.selectedRoom.roomName}</h3>
+                                </div>
+                                <!-- /.box-header -->
+                                <!-- form start -->
+                                <div class="box-body">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label for="selectHotel">#{frontDeskManagedBean.selectedHotelName}</label><br />
+                                               
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="roomNumber">Room Number</label>
+                                                <h:inputText class="form-control"
+                                                             value="#{frontDeskManagedBean.selectedRoom.roomNumber}" id="roomNumber"
+                                                             a:placeholder="enter room number" required="true"></h:inputText>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <label for="selectRoomPax">Room Pax</label><br />
+                                                <h:selectOneMenu value="#{frontDeskManagedBean.selectedRoom.roomPax}"
+                                                                 class="select2-selection--single" id="selectRoomPax">
+                                                    <f:selectItem itemValue="1" itemLabel="1" />
+                                                    <f:selectItem itemValue="2" itemLabel="2" />
+                                                    <f:selectItem itemValue="3" itemLabel="3" />
+                                                    <f:selectItem itemValue="4" itemLabel="4" />
+                                                    <f:selectItem itemValue="5" itemLabel="5" />
+                                                    <f:selectItem itemValue="6" itemLabel="6" />
+                                                    <f:selectItem itemValue="7" itemLabel="7" />
+                                                    <f:selectItem itemValue="8" itemLabel="8" />
+                                                    <f:selectItem itemValue="9" itemLabel="9" />
+                                                    <f:selectItem itemValue="10" itemLabel="10" />
+                                                </h:selectOneMenu><br />
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label for="roomType">Room Type</label><br />
+                                                <h:selectOneMenu id="roomType"
+                                                                 value="#{frontDeskManagedBean.selectedRoom.roomType}"
+                                                                 class="select2-selection--single">
+                                                    <f:selectItem itemValue="Standard" itemLabel="Standard" />
+                                                    <f:selectItem itemValue="Deluxe" itemLabel="Deluxe" />
+                                                    <f:selectItem itemValue="Premium" itemLabel="Premium" />
+                                                    <f:selectItem itemValue="Suite" itemLabel="Suite" />
+                                                    <f:selectItem itemValue="Penthouse" itemLabel="Penthouse" />
+                                                </h:selectOneMenu><br />
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="roomFacilities">Room Facilities</label> <br />
+                                                <h:selectManyListbox id="roomFacilities" size="10" a:multiple="multiple"
+                                                                     class="select2-multiple-input-lg"
+                                                                     value="#{frontDeskManagedBean.roomFacilities}">
+                                                    <c:forEach items="${frontDeskManagedBean.roomFacilityList}" var="r">
+                                                        <f:selectItem itemValue="#{r.roomFacilityName}"
+                                                                      itemLabel="#{r.roomFacilityName}" />
+                                                    </c:forEach>
+                                                </h:selectManyListbox>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for=".select2-multiple-input-lg">Minibar Items</label> <br />
+                                                <h:selectManyListbox id="select2-multiple-input-lg" size="5" a:multiple="multiple"
+                                                                     class="select2-multiple-input-lg"
+                                                                     value="#{frontDeskManagedBean.minibarItems}">
+                                                    <c:forEach items="${frontDeskManagedBean.minibarItemList}" var="m">
+                                                        <f:selectItem itemValue="#{m.itemName}" itemLabel="#{m.itemName}" />
+                                                    </c:forEach>
+                                                </h:selectManyListbox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="box-footer" style="text-align: right">
+                                    <a class="btn btn-danger" href="manageRoom.xhtml" style="margin-right:10px">Cancel</a>
+                                    <h:commandButton class="btn btn-primary" value="Save"
+                                                     action="#{frontDeskManagedBean.saveRoom()}"></h:commandButton>
+                                </div>
+                            </div>
+                        </h:form>
+                    </div>
+                    <!-- /.container-fluid -->
+                </section>
+                <!-- /.content-header -->
+                <!-- Main content -->
+
+            </ui:define>
+
+            <ui:define name="script">
+                <script>
+                    $('option').mousedown(function (e) {
+                        e.preventDefault();
+                        var originalScrollTop = $(this).parent().scrollTop();
+                        console.log(originalScrollTop);
+                        $(this).prop('selected', $(this).prop('selected') ? false : true);
+                        var self = this;
+                        $(this).parent().focus();
+                        setTimeout(function () {
+                            $(self).parent().scrollTop(originalScrollTop);
+                        }, 0);
+
+                        return false;
+                    });
+                </script>
+            </ui:define>
+
+            <ui:define name="script">
+                script
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

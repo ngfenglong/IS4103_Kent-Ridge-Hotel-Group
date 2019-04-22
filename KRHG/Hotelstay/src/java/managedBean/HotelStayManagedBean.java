@@ -11,6 +11,7 @@ import entity.FoodOrderedItem;
 import entity.HouseKeepingOrder;
 import entity.LaundryOrder;
 import entity.Room;
+import entity.RoomBooking;
 import error.NoResultException;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -54,29 +55,14 @@ import sessionBeans.RoomSessionLocal;
 @SessionScoped
 public class HotelStayManagedBean implements Serializable {
 
-    /**
-     * @return the roomNumber
-     */
-    public String getRoomNumber() {
-        return roomNumber;
-    }
-
-    /**
-     * @param roomNumber the roomNumber to set
-     */
-    public void setRoomNumber(String roomNumber) {
-        this.roomNumber = roomNumber;
-    }
-
     @EJB
     private BookingSessionLocal bookingSessionLocal;
-    
+
     @EJB
     private LogSessionLocal logSessionLocal;
 
     @EJB
     private FoodMenuItemSessionLocal foodMenuItemSessionLocal;
-    
 
     @EJB
     private FoodOrderSessionLocal foodOrderSessionLocal;
@@ -86,6 +72,8 @@ public class HotelStayManagedBean implements Serializable {
 
     @EJB
     private HouseKeepingOrderSessionLocal houseKeepingSessionLocal;
+
+    @EJB
     private LaundrySessionLocal laundrySessionLocal;
 
     private Room currentRoom = null;
@@ -205,7 +193,7 @@ public class HotelStayManagedBean implements Serializable {
                 //setCurrentRoom(null);
                 setUsername("");
                 setPassword("");
-                
+
                 return "login.xhtml";
             }
         } else {
@@ -273,11 +261,11 @@ public class HotelStayManagedBean implements Serializable {
         //ADD a total price to final payment! Send email receipt!
         System.out.println("-------------------------------------");
         System.out.println("CHECKOUT ORDER");
-        
+
         FoodOrder tempFO = new FoodOrder();
         List<FoodOrderedItem> foList = new ArrayList<>();
-        
-        for(FoodMenuItem f : foodMenuOrderList){
+
+        for (FoodMenuItem f : foodMenuOrderList) {
             FoodMenuItem tempItem = f;
             FoodOrderedItem tempFOI = new FoodOrderedItem();
             tempFOI.setFood(tempItem);
@@ -286,19 +274,23 @@ public class HotelStayManagedBean implements Serializable {
             tempFOI = foodMenuItemSessionLocal.getLastFoodOrderedItem();
             foList.add(tempFOI);
         }
-        
+
         DateFormat dateFormat = new SimpleDateFormat("HH:mm");
-         
+
         tempFO.setFoodOrdered(foList);
         tempFO.setStatus("Preparing");
         tempFO.setOrderTime(dateFormat.format(java.util.Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant())));
         tempFO.setTotalPrice(totalPriceWithTax);
         foodOrderSessionLocal.createFoodOrder(tempFO);
         tempFO = foodOrderSessionLocal.getLastFoodOrdered();
-        
+
         //TODO: Uncomment this when there are room bookings
-        //bookingSessionLocal.getRoomBookingByRoomNumber(roomNumber, "Occupied", currentRoom.getHotel().getHotelCodeName());
-        
+        List<RoomBooking> roomBookings = bookingSessionLocal.getRoomBookingByRoomNumber(roomNumber, "Occupied", currentRoom.getHotel().getHotelCodeName());
+        if (roomBookings.size() > 0) {
+            RoomBooking tempRoomBooking = roomBookings.get(0);
+            tempRoomBooking.addFoodOrder(tempFO);
+        }
+
         foodMenuOrder.clear();
         foodMenuOrderList.clear();
         quantity = 0;
@@ -323,7 +315,7 @@ public class HotelStayManagedBean implements Serializable {
         System.out.println("Testing purposes");
     }
 
-    public void bookHouseKeeping() {
+    public void bookHouseKeeping() throws NoResultException {
         System.out.println("Book HouseKeeping!");
         System.out.println("Setting Room to: " + currentRoom.getRoomNumber());
         System.out.println("Timing to book: " + houseKeepingCollectionTime.toString());
@@ -353,12 +345,13 @@ public class HotelStayManagedBean implements Serializable {
         }
 
         HouseKeepingOrder hkOrder = new HouseKeepingOrder();
-        hkOrder.setOrderDateTime(new Date());
+        hkOrder.setOrderDateTime(java.util.Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()));
         hkOrder.setCompleteDateTime(selectedDate);
         hkOrder.setSpecialRequest(houseKeepingRequestDetails);
         hkOrder.setRoom(currentRoom);
         hkOrder.setLevel(getLevel(currentRoom.getRoomNumber())); //Need to set properly
-        hkOrder.setStatus("incomplete");
+        hkOrder.setStatus("Incomplete");
+        hkOrder.setRequestType("housekeeping");
 
         if (houseKeepingRequestDetails.isEmpty()) {
             System.out.println("No Special Request!");
@@ -368,8 +361,6 @@ public class HotelStayManagedBean implements Serializable {
             hkOrder.setIsSpecialRequest(true);
 
             //TODO: Depending on how "houseKeepingRequestDetails" store the details, check what are the special requests and set the boolean for extraTowels, extraShowerAmenities and restockMinibar
-            
-            
             //Set House Keeping Request Type to extraTowels, extraShowerAmenities and restockMinibar
             if (extraTowels == true || extraShowerAmenities == true) {
                 System.out.println("Toiletries Request");
@@ -381,6 +372,7 @@ public class HotelStayManagedBean implements Serializable {
         }
 
         houseKeepingSessionLocal.createHouseKeepingOrder(hkOrder);
+        hkOrder = houseKeepingSessionLocal.getLastHouseKeepingOrder();
         setBookedHouseKeepingOrder(hkOrder);
     }
 
@@ -392,7 +384,7 @@ public class HotelStayManagedBean implements Serializable {
             setBookedHouseKeepingOrder(getBookedHouseKeepingOrder());
         } catch (NoResultException ex) {
             Logger.getLogger(HotelStayManagedBean.class.getName()).log(Level.SEVERE, null, ex);
-        }   
+        }
     }
 
     public void cancelBookHouseKeeping() {
@@ -406,11 +398,17 @@ public class HotelStayManagedBean implements Serializable {
     public void bookLaundryService() {
         System.out.println("Book Laundry Service");
         LaundryOrder laundryOrder = new LaundryOrder();
-        laundryOrder.setOrderDateTime(new Date());
-        laundryOrder.setCompleteDateTime(new Date()); //TODO: Set the correct datetime
+        laundryOrder.setOrderDateTime(java.util.Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()));
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(java.util.Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()));
+        cal.add(Calendar.DATE, 4);
+        Date modifiedDate = cal.getTime();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        laundryOrder.setCompleteDateTime(modifiedDate);
         laundryOrder.setRoom(currentRoom);
-        laundryOrder.setStatus("incomplete");
+        laundryOrder.setStatus("Pending");
         laundrySessionLocal.createLaundryOrder(laundryOrder);
+        laundryOrder = laundrySessionLocal.getLastLaudryOrder();
         setBookedLaundryOrder(laundryOrder);
     }
 
@@ -423,7 +421,7 @@ public class HotelStayManagedBean implements Serializable {
         }
     }
 
-    public void editLaundryService(SimpleDateFormat HousekeepingTime) {        
+    public void editLaundryService(SimpleDateFormat HousekeepingTime) {
         try {
             getBookedHouseKeepingOrder().setOrderDateTime(new Date());
             getBookedHouseKeepingOrder().setSpecialRequest(houseKeepingRequestDetails);
@@ -854,4 +852,19 @@ public class HotelStayManagedBean implements Serializable {
     public void setTotalQty(int totalQty) {
         this.totalQty = totalQty;
     }
+
+    /**
+     * @return the roomNumber
+     */
+    public String getRoomNumber() {
+        return roomNumber;
+    }
+
+    /**
+     * @param roomNumber the roomNumber to set
+     */
+    public void setRoomNumber(String roomNumber) {
+        this.roomNumber = roomNumber;
+    }
+
 }

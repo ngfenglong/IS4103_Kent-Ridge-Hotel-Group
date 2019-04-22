@@ -20,15 +20,14 @@
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-
-
+                                <h1 style="font-size: x-large; margin-bottom:20px">Create New Maintenance request</h1>
                             </div>
                             <!-- /.col -->
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item active">
-                                        <!--Add Btn-->
-                                    </li>
+                                    <li><a href="index.xhtml">Home</a></li>
+                                    <li><a href="Maintenance.xhtml">Manage Maintenance Orders</a></li>
+                                    <li class="active">create new maintenance</li>
                                 </ol>
                             </div>
                             <!-- /.col -->
@@ -38,24 +37,63 @@
                     <!-- /.container-fluid -->
                 </div> 
                 <section class="content">
-                    <div class="form-container" >
+                    <div class="container-fluid">
+                        <h:form id="form">
+                            <div class="row">
+                                <!-- left column -->
+                                <div class="col-lg-12">
 
-                        <h:form>
-                            <h2>New Maintenance request  </h2>
-                            <div class="form-group">
-                                <h:inputText class="form-control" value="" id="hfName" a:placeholder="Location" required="true" />
+                                    <!-- general form elements -->
+                                    <div class="box box-primary" style="padding:20px 50px;">
+                                        <div class="box-header with-border" style="text-align: center; font-size:xx-large">
+                                            <h3 class="box-title"  style="font-size:xx-large">Maintenance request</h3>
+                                        </div>
+                                        <!-- /.box-header -->
+                                        <!-- form start -->
+                                        <div class="box-body">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+
+                                                    <div class="form-group">
+                                                        <label for="Location">Location</label>
+                                                        <h:inputText class="form-control"
+                                                                     value="#{requestServicesManagedBean.mLocation}" id="Location"
+                                                                     a:placeholder="Enter Location" required="true">
+                                                        </h:inputText>
+                                                        <h:message for="Location" style="color:red" />
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="description">Description</label>
+                                                        <h:inputTextarea rows="6" class="form-control"
+                                                                     value="#{requestServicesManagedBean.mDescription}" id="price"
+                                                                     a:placeholder="Enter Description" required="true"></h:inputTextarea>
+                                                   
+                                                        <h:message for="price" style="color:red" />
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <!-- /.box-body -->
+
+                                        <div class="box-footer" style="text-align: right">
+                                            <h:commandButton class="btn btn-danger" style="margin-right:10px" value="Cancel"
+                                                             action="Maintenance.xhtml?faces-redirect=true"></h:commandButton>
+                                            <h:commandButton class="btn btn-primary" value="Create"
+                                                             action="#{requestServicesManagedBean.createMaintenance()}">
+                                            </h:commandButton>
+                                        </div>
+                                    </div>
+                                    <!-- /.box -->
+                                    <!-- general form elements -->
+                                </div>
+                                <!-- /.col -->
                             </div>
-                           
-                            <div class="form-group">
-                                <h:inputTextarea class="form-control"  cols="30" rows="5" value="" id="description" a:placeholder="Description" required="true" />
-                            </div>
-                            
-                           
-                            <div class="form-group">
-                                <h:commandButton class="custom-button" value="Create"></h:commandButton>
-                            </div>
+                            <!-- /.row -->
                         </h:form>
-
                     </div>
                     <!-- /.container-fluid -->
                 </section>

@@ -226,7 +226,8 @@ public class requestAndServiceManagedBean implements Serializable {
         lf.setReportedDate(new Date());
 
         lostAndFoundSessionLocal.createLostAndFoundReport(lf);
-        return "lostAndFoundDetails.xhtml?faces-redirect=true";
+        return "lostAndFound.xhtml?faces-redirect=true";
+//        return "lostAndFoundDetails.xhtml?faces-redirect=true";
     }
 
     public List<MaintainenceOrder> getAllMaintainenceOrders() {

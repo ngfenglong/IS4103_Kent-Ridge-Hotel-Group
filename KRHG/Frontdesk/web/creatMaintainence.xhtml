@@ -11,7 +11,7 @@
 
 
             <ui:define name="title">
-                KRHG front desk
+                KRHG Front Desk
             </ui:define>
 
             <ui:define name="content">
@@ -51,19 +51,18 @@
 
                                 <div class="card card-primary">
                                     <div class="card-header">
-                                        <h3 class="card-title">New Maintenance Report</h3>
+                                        <h3 class="card-title">New Maintenance Order</h3>
                                     </div>
                                     <!-- /.card-header -->
                                     <!-- form start -->
                                     <h:form role="form">
                                         <div class="card-body">
                                             <div class="form-group">
-                                                <h:inputText class="form-control" value="#{requestAndServiceManagedBean.mlocation}" a:placeholder="location" required="true"></h:inputText>
-
+                                                <h:inputText id="mLocation" class="form-control" value="#{requestAndServiceManagedBean.mlocation}" a:placeholder="E.g Room 506 Toilet" required="true" requiredMessage="Required field."></h:inputText>
+                                                <h:message for="mLocation" style="color:red" />
                                             </div>
                                             <div class="form-group">
-                                                <h:inputTextarea rows="10" cols="50" value="#{requestAndServiceManagedBean.maintainDescription}" a:placeholder="Report Description" ></h:inputTextarea>
-
+                                                <h:inputTextarea id="mDescription" class="form-control"  rows="10" cols="50" value="#{requestAndServiceManagedBean.maintainDescription}" a:placeholder="E.g Water leaking from ceiling" ></h:inputTextarea>
                                             </div>
 
 
@@ -74,7 +73,7 @@
                                         <!-- /.card-body -->
 
                                         <div class="card-footer">
-                                            <h:commandButton class="btn btn-primary" value="Create Maintainence request" action="#{requestAndServiceManagedBean.createMaintainence()}" ></h:commandButton>
+                                            <h:commandButton class="btn btn-primary" value="Create Order" action="#{requestAndServiceManagedBean.createMaintainence()}" ></h:commandButton>
                                         </div>
                                     </h:form>
                                 </div>

@@ -44,7 +44,7 @@
                             <div class="card-header">
                                 <h:commandLink class="btn btn-primary float-sm-right" action="createHouseKeepingRequest.xhtml?faces-redirect=true"> <i class="fa fa-plus" ></i></h:commandLink>
 
-                                <h3 class="card-title">List of Housekeeping Requests</h3>
+                                <h3 class="card-title">Housekeeping Requests</h3>
                             </div>
                         </h:form>
 
@@ -55,10 +55,11 @@
                                     <thead>
                                         <tr>
                                             <th>Room</th>
+                                            <th>Request Type</th>
 
                                             <th>Status</th>
 
-                                            <th>DateTime Requested</th>
+                                            <th>Requested On</th>
 
                                             <th></th>
                                         </tr>
@@ -69,7 +70,7 @@
 
                                             <tr>
                                                 <td>#{o.room.roomNumber}</td>
-
+                                                <td>#{o.requestType}</td>
                                                 <td>#{o.status}</td>
                                                 <td>#{requestAndServiceManagedBean.convertDateFormat(o.orderDateTime)}</td>
                                                 <td colspan="3"><h:commandLink  action="#{requestAndServiceManagedBean.editHousekeeping(o)}" > <i style="color:gray" class="fa fa-edit" ></i></h:commandLink></td>
