@@ -2185,6 +2185,8 @@ public class requestServicesManagedBean implements Serializable {
         mo.setIsResolved(false);
         maintenanceOrderSessionLocal.createMaintainenceOrder(mo);
         
+        mLocation = null;
+        mDescription = null;
         return "Maintenance.xhtml";
     }
     
