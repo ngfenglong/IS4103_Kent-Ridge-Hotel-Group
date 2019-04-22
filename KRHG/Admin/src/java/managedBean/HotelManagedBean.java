@@ -929,7 +929,7 @@ public class HotelManagedBean implements Serializable {
         selectedHoliday = null;
         holDate = null;
 
-        return "manageHolidaySurcharge.xhtml?faces-redirect=true";
+        return "manageRoomPriceSurcharge.xhtml?faces-redirect=true";
     }
 
     public String saveHotel() throws NoResultException {
@@ -1181,7 +1181,7 @@ public class HotelManagedBean implements Serializable {
         selectedSurcharge = null;
         esDaysToCharge = null;
 
-        return "manageSucharge.xhtml?faces-redirect=true";
+        return "manageRoomPrice.xhtml?faces-redirect=true";
     }
 
     public String saveRoomPricing() throws NoResultException {
@@ -1309,8 +1309,7 @@ public class HotelManagedBean implements Serializable {
     }
 
     public String editMemberTier(Long mbID) throws NoResultException {
-        memberTierSessionLocal.deleteMemberTier(mbID);
-
+        selectedMemberTier = memberTierSessionLocal.getMemberTierByID(mbID);
         return "editMemberTier.xhtml?faces-redirect=true";
     }
 

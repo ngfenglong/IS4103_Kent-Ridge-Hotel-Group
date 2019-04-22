@@ -52,7 +52,7 @@
                             </h:form>
                         </div>
                         
-                            <table id="2" class="table table-bordered table-striped">
+                            <table id="myTable" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                             <th>Staff Name</th>
@@ -72,7 +72,7 @@
                                                 <td>#{s.jobTitle}</td>
                                                 <td>#{s.email}</td>
                                                 <td>#{s.phoneNumber}</td>
-                                                <td><h:commandLink value="#{s.accountStatus eq true ? 'Activate' : 'Deactivate'}" id="statusBtn" action="#{hotelManagedBean.changeStatus(s.staffID)}" class="#{s.accountStatus eq true ? 'btn btn-info' : 'btn btn-danger'}" ></h:commandLink></td>
+                                                <td><h:commandLink value="#{s.accountStatus eq true ? 'Active' : 'Disabled'}" id="statusBtn" action="#{hotelManagedBean.changeStatus(s.staffID)}" class="#{s.accountStatus eq true ? 'btn btn-info' : 'btn btn-danger'}" ></h:commandLink></td>
                                                 <td><h:commandLink id="viewBtn" value="View" action="#{hotelManagedBean.viewStaffDetail(s.staffID)}" class="btn btn-primary"  /></td>
                                             </tr>
                                         </c:forEach>

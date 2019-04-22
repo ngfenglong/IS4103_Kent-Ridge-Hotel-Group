@@ -17,90 +17,119 @@
             <ui:define name="content">
                 <!-- Content Header (Page header) -->
                 <div class="content-header">
-                        <div class="container-fluid">
-                                <div class="row mb-2">
-                                        <div class="col-sm-6">
-                                            <h1 style="font-size: x-large; margin-bottom:20px">Manage Feedback</h1>
-                                        </div>
-                                        <!-- /.col -->
-                                        <div class="col-sm-6">
-                                            <ol class="breadcrumb float-sm-right">
-                                                    <li><a href="adminIndex.xhtml"> Home</a></li>
-                                                    <li class="active">Manage Feedback</li>
-                                            </ol>
-                                        </div>
-                                        <!-- /.col -->
-                                    </div>
-                                    <!-- /.row -->
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <h1 style="font-size: x-large; margin-bottom:20px">Manage Feedback</h1>
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li><a href="adminIndex.xhtml"> Home</a></li>
+                                    <li class="active">Manage Feedback</li>
+                                </ol>
+                            </div>
+                            <!-- /.col -->
                         </div>
-                        <!-- /.container-fluid -->
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.container-fluid -->
                 </div>
                 <!-- /.content-header -->
                 <!-- Main content -->
                 <section class="content">
-                        <div class="box box-primary" style="padding:20px 50px; margin:14px; width:98% ">
-               
-                                <h3 class="box-title" style="margin-bottom:10px; text-align: center; font-size:x-large">All Feedbacks</h3>
-                                <div class="box-tools pull-right">
-                             <!--Add Btn-->
-                        
+
+  <div class="box box-warning" style="padding:10px 10px;">
+                            <div class="row">
+                                <h3 class="box-title col-md-12" style="margin-bottom:10px; text-align: center; width:50%">
+                                    All Feedback
+                                </h3>
+                   
+                        <div class="box-body col-md-12" style="max-height:500px; overflow-y: scroll; width:100%">
+                             <h:form>
+                            <ul class="products-list product-list-in-box" style="padding:20px">
+                                <c:forEach items="${hotelManagedBean.allFeedbacks}" var="f" varStatus="count">
+                                      
+                                      <li class="item">
+                                          <div class="product-info" style="margin-left:0px">
+
+                                              <a href="javascript:void(0)" class="product-title">#{f.feedBackTitle}
+                                            </a>
+                                            <h:commandLink style="float:right" id="deleteBtn" class="cd-popup-trigger"
+                                                           value="X"
+                                                           action="#{hotelManagedBean.selectFeedback(f)}">
+                                                <f:ajax execute="@form" render='@none'/>
+                                            </h:commandLink>
+                                            <span class="product-description" style="white-space:pre-line">
+                                                <td>#{f.feedBackMsg}</td>
+                                            </span>
+                                            <span class="product-description">
+                                                #{hotelManagedBean.convertDateFormat(f.feedBackDate)}
+                                            </span>
+                                            
+                                            <span name="#{f.feedbackRating}" id="stars#{count.index}"></span>
+                                            
+                                            <span class="label label-warning pull-right" style="font-size: medium">
+                                                #{f.feedBackFrom}</span>
+
+
+                                        </div>
+                                    </li>
+                                    <script>
+                           //<![CDATA[  
+                    
+                  document.getElementById("stars#{count.index}").innerHTML = getStars(document.getElementById("stars#{count.index}").getAttribute('name'));
+                  console.log( document.getElementById("stars#{count.index}"));
+
+                function getStars(rating) {
+                console.log("in get stars")
+                // Round to nearest half
+                rating = Math.round(rating * 2) / 2;
+                let output = [];
+
+                // Append all the filled whole stars
+                for (var i = rating; i >= 1; i--)
+                  output.push('<i class="fa fa-star" aria-hidden="true" style="color: gold;"></i>&nbsp;');
+
+                // Fill the empty stars
+                for (let i = (5 - rating); i >= 1; i--)
+                  output.push('<i class="far fa-star" aria-hidden="true" style="color: gold;"></i>&nbsp;');
+
+                return output.join('');
+                }   //]]>  
+                                      </script>
+                                </c:forEach>
+                            </ul>
+                                 </h:form>
                         </div>
-                        <h:form>
-                            <table id="example1" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                            <th>Title</th>
-                                            <th>Feedback</th>
-                                            <th>Date</th>
-                                            <th>From</th>
-                                            <th>View</th>
-                                            <th>Delete</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                        <c:forEach items="${hotelManagedBean.allFeedbacks}" var="f">
-                                            <tr>
-                                                <td>#{f.feedBackTitle}</td>
-                                                <td>#{f.feedBackMsg.length() gt 30 ? f.feedBackMsg.substring(0, 30): f.feedBackMsg }</td>
-                                                <td>#{f.feedBackDate}</td>
-                                                <td>#{f.feedBackFrom}</td>
-                                                <td style="text-align: center"><h:commandLink id="viewBtn" action="#{hotelManagedBean.viewFeedback(f.feedBackID)}" ><i class="fas fa-search"></i></h:commandLink></td>
-                                                <td style="text-align: center"><h:commandLink class="cd-popup-trigger" action="#{hotelManagedBean.selectFeedback(f)}"  ><i class="fas fa-trash-alt"></i>
-                                                    <f:ajax execute="@form" render='@none'/>
-                                                </h:commandLink></td>
-                                            </tr>
-                                        </c:forEach>
-                                </tbody>
-                            </table>
-                        </h:form>
-                    </div>
+                           
+                        <!-- /.box-body -->
+                            </div>
+      </div>
+
+                 
 
                 </section>
                 <!-- /.content -->
 
                 <!-- Modal -->
                 <h:form>
-                        <div id="modal" class="cd-popup" role="alert">
-                                <div class="cd-popup-container">
-                                    <p class="popup-content">Delete Feedback?</p>
-                
-                                    <ul class="cd-buttons" style="padding-inline-start: unset; padding:0px">
-                                            <li><h:commandLink id="deleteFeedback" action="#{hotelManagedBean.deleteFeedback()}" class="cd-popup-confirm" value="Yes">
-                                                    <f:ajax execute="@form" render='@none'/>
-                                            </h:commandLink></li>
-                                        <li style="background-color:lightslategray"><a onclick="" class=" cd-popup-closemodal">No</a></li>
-                                    </ul>
-                                </div> <!-- cd-popup-container -->
-                            </div> <!-- cd-popup -->
+                    <div id="modal" class="cd-popup" role="alert">
+                        <div class="cd-popup-container">
+                            <p class="popup-content">Delete Feedback?</p>
+
+                            <ul class="cd-buttons" style="padding-inline-start: unset; padding:0px">
+                                <li><h:commandLink id="deleteFeedback" action="#{hotelManagedBean.deleteFeedback()}" class="cd-popup-confirm" value="Yes">
+                                        <f:ajax execute="@form" render='@none'/>
+                                    </h:commandLink></li>
+                                <li style="background-color:lightslategray"><a onclick="" class=" cd-popup-closemodal">No</a></li>
+                            </ul>
+                        </div> <!-- cd-popup-container -->
+                    </div> <!-- cd-popup -->
                 </h:form>
-              
-               
-                <script>
-                function clickclick(){
-                    window.alert("boooo");
-                    document.getElementById('formy:buttony').click();
-                }
-                </script>
+
+
+                
             </ui:define>
 
             <ui:define name="script">

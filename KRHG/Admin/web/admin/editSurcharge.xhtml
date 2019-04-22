@@ -41,13 +41,14 @@
                                 <div class="row">
                                     <!-- left column -->
                                     <div class="col-md-12">
+                                          <h:form role="form">
                                             <div class="box box-primary" style="padding:20px 50px; margin:14px; width:98% ">
                        
                                                     <h3 class="box-title" style="margin-bottom:10px; text-align: center; font-size:xx-large">Add Extra Surcharge</h3>
                                                     <div class="box-tools pull-right">
                                                  <!--Add Btn-->
                                             </div>
-                                            <h:form role="form">
+                                          
                                                     <div class="card-body">
                                                             <div class="form-group">
                                                                     <label for="esName">Surcharge Name</label>
@@ -75,7 +76,7 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="esDaysToCharge">Surcharge Days</label> <br />
-                                                                <h:selectManyListbox id="esDaysToCharge" a:multiple="multiple" class="select2-selection--multiple" value = "#{hotelManagedBean.esDaysToCharge}" >
+                                                                <h:selectManyListbox id="esDaysToCharge" a:multiple="multiple" class="select2-multiple-input-lg" value = "#{hotelManagedBean.esDaysToCharge}" >
                                                                     <f:selectItem itemValue = "SUN" itemLabel = "SUN" /> 
                                                                     <f:selectItem itemValue = "MON" itemLabel = "MON" /> 
                                                                     <f:selectItem itemValue = "TUE" itemLabel = "TUE" /> 
@@ -85,22 +86,21 @@
                                                                     <f:selectItem itemValue = "SAT" itemLabel = "SAT" /> 
                                                                 </h:selectManyListbox>
                                                             </div> 
+                                                    <div class="card-footer" style="text-align: right; background-color: white; margin-right:10px" >
+                                                            <a class="btn btn-danger"  style="margin-right:20px" href="manageRoomPrice.xhtml?faces-redirect=true">Cancel</a>
+                                                        <h:commandButton class="btn btn-primary" value="Save" action="#{hotelManagedBean.saveSurcharge()}"></h:commandButton>
+                                                    </div>
                                                     </div>
                                                     <!-- /.card-body -->
             
-                                                    <div class="card-footer"style="text-align: right; background-color: white" style="margin-right:10px">
-                                                            <h:commandButton class="btn btn-danger" value="Cancel"
-                                                            action="manageSurcharge.xhtml?faces-redirect=true"></h:commandButton>
-                                                        <h:commandButton class="btn btn-primary" value="Save" action="#{hotelManagedBean.saveSurcharge()}"></h:commandButton>
-                                                    </div>
+                                                    
                                                 </h:form>
                                             </div>
                                     </div>
                                     <!-- /.col -->
                                 </div>
                                 <!-- /.row -->
-                            </div>
-                            <!-- /.container-fluid -->
+                          
                 </section>
                 <!-- /.content-header -->
                 <!-- Main content -->

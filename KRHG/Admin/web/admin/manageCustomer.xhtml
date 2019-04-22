@@ -40,7 +40,7 @@
          
                     <div class="box box-primary" style="padding:20px 50px; margin:14px; width:98% ">
 
-                        <h3 class="box-title" style="margin-bottom:10px; text-align: center; font-size:x-large">KRHG Hotels</h3>
+                        <h3 class="box-title" style="margin-bottom:10px; text-align: center; font-size:x-large">KRHG Members</h3>
                         <div class="box-tools pull-right">
                             <!--Add Btn-->
                         </div>
@@ -67,9 +67,9 @@
                                             <td>#{cust.mobileNum}</td>
                                             <td>#{cust.displayDateJoined()}</td>
                                             <td>
-                                                <h:commandButton id="viewDetailBtn"
-                                                                 action="#{hotelManagedBean.viewCustomer(cust.customerID)}" value="View Customer"
-                                                                 class="btn btn-primary" />
+                                                <h:commandLink id="viewDetailBtn"
+                                                                 action="#{hotelManagedBean.viewCustomer(cust.customerID)}" 
+                                                                 class="fas fa-search" />
                                             </td>
                                         </tr>
                                     </c:forEach>

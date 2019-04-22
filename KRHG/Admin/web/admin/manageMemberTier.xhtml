@@ -64,14 +64,14 @@
                                             <td>#{memberTier.tierName}</td>
                                             <td>#{memberTier.tierPoints} points</td>
                                             <td>
-                                                <h:commandButton id="viewDetailBtn"
-                                                                 action="#{hotelManagedBean.editMemberTier(memberTier.tierID)}" value="Edit"
-                                                                 class="btn btn-primary" />
+                                                <h:commandLink id="viewDetailBtn"
+                                                                 action="#{hotelManagedBean.editMemberTier(memberTier.tierID)}" 
+                                                                 class="fas fa-edit"/>
                                             </td>
                                             <td>
-                                                <h:commandButton id="viewDetailBtn"
-                                                                 action="#{hotelManagedBean.deleteMemberTier(memberTier.tierID)}" value="Delete"
-                                                                 class="btn btn-primary" />
+                                                <h:commandLink id="viewDetailBtn"
+                                                                 action="#{hotelManagedBean.deleteMemberTier(memberTier.tierID)}" 
+                                                                 class="fas fa-trash-alt" />
                                             </td>
                                         </tr>
                                     </c:forEach>
