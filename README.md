@@ -1,4 +1,4 @@
-#KentRidge Hotel Group (Capstone Project)
+# KentRidge Hotel Group (Capstone Project)
 IS4103 Capstone Project
 
 Recommended IDE: Netbeans 8.2
